@@ -1,0 +1,10 @@
+query GetMostFavoriteCharacters($page: Int) {
+    Page(page: $page, perPage: 30) {
+        pageInfo {
+            hasNextPage
+        }
+        characters(sort: [FAVOURITES_DESC]) {
+            ...CharacterShort
+        }
+    }
+}

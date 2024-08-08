@@ -1,0 +1,177 @@
+name: otaku_world
+description: A new Flutter project.
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.4 <4.0.0'
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.2
+
+  # Bloc
+  bloc: ^8.1.4
+  flutter_bloc: ^8.1.6
+  bloc_concurrency: ^0.2.5
+  equatable: ^2.0.5
+
+  # UI
+  flutter_svg: ^2.0.10+1
+  cached_network_image: ^3.4.0
+  flutter_hooks: ^0.20.5
+  shimmer_animation: ^2.2.1
+  custom_refresh_indicator: ^4.0.1
+  flutter_animate: ^4.5.0
+  carousel_slider: ^4.2.1
+  intl: ^0.19.0
+  table_calendar: ^3.1.2
+  markdown: ^7.2.2
+  markdown_widget: ^2.3.2+6
+  html: ^0.15.4
+  swipe_to: ^1.0.6
+  media_kit: ^1.1.10+1
+#  media_kit_libs_video:
+  flutter_native_splash: ^2.4.1
+  media_kit_video: ^1.2.4
+  expandable_text: ^2.3.0
+  youtube_player_flutter: ^9.0.1
+
+  # Navigation
+  go_router: ^14.2.2
+
+  double_back_to_close: ^2.0.0
+  double_back_to_close_app: ^2.1.0
+
+  #Url
+  url_launcher: ^6.3.0
+  uni_links2: ^0.6.0+2
+  share_plus: ^10.0.0
+
+  # Persistence
+  shared_preferences: ^2.3.1
+  flutter_cache_manager: ^3.4.0
+
+  # GraphQL
+  graphql_flutter: ^5.1.2
+
+  # Firebase
+  firebase_core: ^3.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^4.0.0
+  build_runner: ^2.4.11
+  graphql_codegen: ^0.14.0
+  build_web_compilers: ^4.0.10
+  flutter_launcher_icons: ^0.13.1
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/
+    - assets/icons/
+    - assets/images/
+    - assets/images/on_boarding/
+    - assets/images/discover/
+    - assets/images/discover/anime/
+    - assets/images/discover/manga/
+    - assets/images/discover/staff/
+    - assets/images/discover/studios/
+    - assets/images/discover/characters/
+    - assets/images/characters/
+    - assets/my_refresh_indicator/
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+
+    - family: Poppins-Medium
+      fonts:
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+
+    - family: Poppins-Semi-Bold
+      fonts:
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+
+    - family: Roboto-Condensed
+      fonts:
+        - asset: assets/fonts/RobotoCondensed-Regular.ttf
+
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+
+    - family: Roboto-Medium
+      fonts:
+        - asset: assets/fonts/Roboto-Medium.ttf
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
+flutter_native_splash:
+  color: "#151515"
+  image: "assets/logos/app_logo.png"
+
+  android_12:
+    image: assets/logos/app_logo.png
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logos/app_logo_500.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  background_color: "#151515"

@@ -1,0 +1,10 @@
+query GetMostFavoriteStaff($page: Int) {
+    Page(page: $page, perPage: 30) {
+        pageInfo {
+            hasNextPage
+        }
+        staff(sort: [FAVOURITES_DESC]) {
+            ...StaffShort
+        }
+    }
+}

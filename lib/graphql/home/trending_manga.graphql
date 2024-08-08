@@ -1,0 +1,10 @@
+query GetTrendingManga($page: Int) {
+    Page(perPage: 30, page: $page) {
+        pageInfo {
+            hasNextPage
+        }
+        media(sort: [TRENDING_DESC], type: MANGA, isAdult: false) {
+            ...MediaShort
+        }
+    }
+}

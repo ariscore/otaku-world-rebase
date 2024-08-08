@@ -1,0 +1,10 @@
+query GetPopularManhwa($page: Int) {
+    Page(page: $page, perPage: 30) {
+        pageInfo {
+            hasNextPage
+        }
+        media(sort: [POPULARITY_DESC], type: MANGA, isAdult: false, countryOfOrigin: "KR") {
+            ...MediaShort
+        }
+    }
+}

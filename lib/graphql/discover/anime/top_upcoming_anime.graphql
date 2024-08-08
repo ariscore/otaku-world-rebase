@@ -1,0 +1,10 @@
+query GetTopUpcomingAnime($page: Int) {
+    Page(page: $page, perPage: 30) {
+        pageInfo {
+            hasNextPage
+        }
+        media(sort: [POPULARITY_DESC], type: ANIME, isAdult: false, status: NOT_YET_RELEASED) {
+            ...MediaShort
+        }
+    }
+}

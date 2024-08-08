@@ -1,0 +1,18 @@
+query  GetRecommendation($id : Int,$page : Int){
+    Media(id: $id){
+        recommendations(page: $page,perPage: 15,sort: [RATING_DESC]){
+            pageInfo {
+                hasNextPage
+            }
+            edges {
+                node {
+                    mediaRecommendation{
+                        ...MediaShort
+
+                    }
+                }
+            }
+        }
+    }
+
+}

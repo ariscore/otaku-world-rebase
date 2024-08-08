@@ -1,0 +1,10 @@
+query SearchStaff($search: String, $page: Int) {
+    Page(page: $page, perPage: 30) {
+        pageInfo {
+            hasNextPage
+        }
+        staff(search: $search, sort: [FAVOURITES_DESC]) {
+            ...StaffShort
+        }
+    }
+}

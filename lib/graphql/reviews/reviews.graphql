@@ -1,0 +1,10 @@
+query GetReviews($page:Int){
+    Page(perPage: 20, page:$page){
+        pageInfo{
+            hasNextPage
+        }
+        reviews(sort: [CREATED_AT_DESC]){
+          ...Review
+        }
+    }
+}

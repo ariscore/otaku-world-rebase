@@ -1,0 +1,10 @@
+query SearchMedia($page: Int, $type: MediaType, $search: String) {
+    Page(page: $page, perPage: 50) {
+        pageInfo {
+            hasNextPage
+        }
+        media(search: $search, type: $type, sort: [SEARCH_MATCH, TRENDING_DESC], isAdult: false) {
+            ...SearchResultMedia
+        }
+    }
+}

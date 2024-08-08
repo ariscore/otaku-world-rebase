@@ -1,0 +1,6 @@
+query GetStreamingPlatforms {
+    ExternalLinkSourceCollection(type: STREAMING, mediaType: ANIME) {
+        id
+        site
+    }
+}

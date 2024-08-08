@@ -1,0 +1,10 @@
+query SearchStudios($page: Int, $search: String) {
+    Page(page: $page, perPage: 50) {
+        pageInfo {
+            hasNextPage
+        }
+        studios(search: $search, sort: [SEARCH_MATCH, FAVOURITES_DESC]) {
+            ...SearchResultStudio
+        }
+    }
+}

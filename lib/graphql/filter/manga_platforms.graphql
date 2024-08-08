@@ -1,0 +1,7 @@
+query GetMangaPlatforms {
+    ExternalLinkSourceCollection(type: STREAMING, mediaType: MANGA) {
+        id
+        site
+        language
+    }
+}

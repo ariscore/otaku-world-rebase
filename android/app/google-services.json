@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1010946051169",
+    "project_id": "otaku-world-8a7f4",
+    "storage_bucket": "otaku-world-8a7f4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1010946051169:android:4eb7b37f1341ec083d6e20",
+        "android_client_info": {
+          "package_name": "com.ternaryminds.otaku_world"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLN-YiDIBcAaUV3xX0tM5_rkFARPHEQmk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

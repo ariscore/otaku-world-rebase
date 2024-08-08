@@ -1,0 +1,10 @@
+query SearchUsers($page: Int, $search: String) {
+    Page(page: $page, perPage: 50) {
+        pageInfo {
+            hasNextPage
+        }
+        users(search: $search, sort: [SEARCH_MATCH]) {
+            ...SearchResultUser
+        }
+    }
+}

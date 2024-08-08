@@ -1,0 +1,10 @@
+query GetTop100Manga($page: Int) {
+    Page(page: $page, perPage: 30) {
+        pageInfo {
+            hasNextPage
+        }
+        media(sort: [SCORE_DESC], type: MANGA, isAdult: false,) {
+            ...MediaShort
+        }
+    }
+}

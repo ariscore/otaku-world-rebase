@@ -1,0 +1,288 @@
+fragment MediaDetailed on Media{
+    averageScore
+    bannerImage
+
+    popularity
+    nextAiringEpisode {
+        episode
+    }
+    description
+    trailer {
+        id
+        site
+        thumbnail
+    }
+    synonyms
+    episodes
+    duration
+    volumes
+    chapters
+    source
+
+    externalLinks {
+        id
+        color
+        icon
+        isDisabled
+        url
+        site
+
+    }
+    studios{
+        edges {
+            node {
+                id
+                name
+                isAnimationStudio
+            }
+            id
+            isMain
+        }
+
+    }
+    #Relations
+    relations {
+        edges {
+            node {
+                id
+                title {
+                    userPreferred
+                }
+                type
+                format
+                coverImage {
+                    extraLarge
+                    large
+                }
+                status
+
+            }
+            relationType(version: 2)
+        }
+    }
+    recommendations{
+        nodes {
+            id
+        }
+    }
+
+    #tags
+    tags {
+        id
+        name
+        category
+        isMediaSpoiler
+        description
+        rank
+    }
+    modNotes
+    isFavourite
+    ...MediaShort
+
+}
+
+fragment MediaShort on Media {
+    id
+    title {
+        userPreferred
+        english
+        romaji
+        native
+    }
+    coverImage {
+        medium
+        large
+        extraLarge
+    }
+    meanScore
+    favourites
+    format
+    type
+    episodes
+    chapters
+    status
+    airingSchedule(notYetAired: true, perPage: 1) {
+        nodes {
+            timeUntilAiring
+            episode
+        }
+    }
+    genres
+    season
+    seasonYear
+    startDate {
+       ...FuzzyDate
+    }
+    endDate {
+       ...FuzzyDate
+    }
+    mediaListEntry {
+        id
+    }
+}
+
+fragment SearchResultMedia on Media {
+    id
+    coverImage {
+        large
+    }
+    title {
+        userPreferred
+    }
+    type
+    startDate {
+        year
+    }
+    format
+    meanScore
+}
+
+fragment Review on Review{
+    id
+    summary
+    userRating
+    rating
+    score
+    createdAt
+    updatedAt
+    body
+    user {
+        name
+        avatar {
+            medium
+        }
+    }
+    media {
+        bannerImage
+        title {
+            userPreferred
+        }
+    }
+}
+
+fragment ReviewDetail on Review {
+    id
+    summary
+    userRating
+    rating
+    ratingAmount
+    body
+    score
+    mediaId
+    mediaType
+    createdAt
+    updatedAt
+
+    user {
+        name
+        avatar {
+            medium
+        }
+    }
+    media {
+        title {
+            userPreferred
+        }
+        coverImage {
+            extraLarge
+        }
+    }
+}
+
+fragment SearchResultCharacter on Character {
+    id
+    name {
+        userPreferred
+    }
+    image {
+        large
+    }
+    favourites
+}
+
+fragment SearchResultStaff on Staff {
+    id
+    name {
+        userPreferred
+    }
+    image {
+        large
+    }
+    favourites
+}
+
+fragment SearchResultStudio on Studio {
+    id
+    name
+    favourites
+    media(perPage: 1, sort: [TRENDING_DESC, POPULARITY_DESC]) {
+        nodes {
+            isAdult
+            coverImage {
+                large
+            }
+        }
+    }
+}
+
+fragment SearchResultUser on User {
+    id
+    name
+    avatar {
+        large
+    }
+}
+
+fragment CalendarAiringSchedule on AiringSchedule {
+    id
+    media {
+        id
+        title {
+            userPreferred
+            english
+        }
+        bannerImage
+        mediaListEntry {
+            status
+        }
+    }
+    airingAt
+    timeUntilAiring
+    episode
+}
+
+fragment MediaTag on MediaTag {
+    id
+    name
+    category
+    description
+    isAdult
+}
+
+fragment FuzzyDate on FuzzyDate {
+    day
+    month
+    year
+}
+
+fragment CharacterShort on Character {
+    id
+    name {
+        userPreferred
+    }
+    image {
+        large
+    }
+    favourites
+}
+
+fragment StaffShort on Staff {
+    id
+    name {
+        userPreferred
+    }
+    image {
+        large
+    }
+    favourites
+}

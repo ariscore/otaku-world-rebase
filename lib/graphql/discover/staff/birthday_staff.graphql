@@ -1,0 +1,10 @@
+query GetBirthdayStaff($page: Int) {
+    Page(page: $page, perPage: 30) {
+        pageInfo {
+            hasNextPage
+        }
+        staff(isBirthday: true, sort: [FAVOURITES_DESC]) {
+            ...StaffShort
+        }
+    }
+}

@@ -1,0 +1,5 @@
+query GetReviewDetail($id: Int) {
+    Review(id: $id) {
+        ...ReviewDetail
+    }
+}

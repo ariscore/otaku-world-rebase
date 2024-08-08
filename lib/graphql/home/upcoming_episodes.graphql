@@ -1,0 +1,24 @@
+    query GetUpcomingEpisodes($page: Int) {
+    Page(perPage: 10, page: $page) {
+        pageInfo {
+            hasNextPage
+        }
+        media(status: RELEASING, sort: [POPULARITY_DESC], type: ANIME, isAdult: false) {
+            id
+            title {
+                romaji
+                english
+                native
+            }
+            coverImage {
+                large
+            }
+            airingSchedule(notYetAired: true, perPage: 1) {
+                nodes {
+                    timeUntilAiring
+                    episode
+                }
+            }
+        }
+    }
+}

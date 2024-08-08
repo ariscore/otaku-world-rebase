@@ -1,0 +1,10 @@
+query GetMostFavoriteStudios($page: Int) {
+    Page(page: $page, perPage: 30) {
+        pageInfo {
+            hasNextPage
+        }
+        studios(sort: [FAVOURITES_DESC]) {
+            ...SearchResultStudio
+        }
+    }
+}

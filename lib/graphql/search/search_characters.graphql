@@ -1,0 +1,10 @@
+query SearchCharacters($page: Int, $search: String) {
+    Page(page: $page, perPage: 50) {
+        pageInfo {
+            hasNextPage
+        }
+        characters(search: $search, sort: [SEARCH_MATCH, FAVOURITES_DESC]) {
+            ...SearchResultCharacter
+        }
+    }
+}

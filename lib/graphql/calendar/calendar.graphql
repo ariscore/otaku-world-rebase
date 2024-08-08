@@ -1,0 +1,10 @@
+query GetCalendarDay($page: Int, $airingAt_greater: Int, $airingAt_lesser: Int) {
+    Page(page: $page, perPage: 10) {
+        pageInfo {
+            hasNextPage
+        }
+        airingSchedules(sort: TIME, airingAt_greater: $airingAt_greater, airingAt_lesser: $airingAt_lesser) {
+            ...CalendarAiringSchedule
+        }
+    }
+}

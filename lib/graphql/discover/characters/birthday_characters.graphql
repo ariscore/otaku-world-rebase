@@ -1,0 +1,10 @@
+query GetBirthdayCharacters($page: Int) {
+    Page(page: $page, perPage: 30) {
+        pageInfo {
+            hasNextPage
+        }
+        characters(isBirthday: true, sort: [FAVOURITES_DESC]) {
+            ...CharacterShort
+        }
+    }
+}

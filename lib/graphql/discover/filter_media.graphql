@@ -1,0 +1,67 @@
+query FilterMedia(
+    $page: Int,
+    $search: String,
+    $type: MediaType,
+    $sort: [MediaSort],
+    $genre: [String],
+    $startDate_greater: FuzzyDateInt,
+    $startDate_lesser: FuzzyDateInt,
+    $isLicensed: Boolean,
+    $season: MediaSeason,
+    $seasonYear: Int,
+    $format_in: [MediaFormat],
+    $status_in: [MediaStatus],
+    $licensedBy_in: [String],
+    $countryOfOrigin: CountryCode,
+    $source_in: [MediaSource],
+    $episodes_greater: Int,
+    $episodes_lesser: Int,
+    $duration_greater: Int,
+    $duration_lesser: Int,
+    $minimumTagRank: Int,
+    $tagCategory_in: [String],
+    $tag_in: [String],
+    $isAdult: Boolean,
+    $onList: Boolean,
+    $chapters_greater: Int,
+    $chapters_lesser: Int,
+    $volumes_greater: Int,
+    $volumes_lesser: Int,
+) {
+    Page(page: $page, perPage: 50) {
+        pageInfo {
+            hasNextPage
+        }
+        media(
+            type: $type,
+            search: $search,
+            sort: $sort,
+            genre_in: $genre,
+            startDate_greater: $startDate_greater,
+            startDate_lesser: $startDate_lesser,
+            isLicensed: $isLicensed,
+            season: $season,
+            seasonYear: $seasonYear,
+            format_in: $format_in,
+            status_in: $status_in,
+            licensedBy_in: $licensedBy_in,
+            countryOfOrigin: $countryOfOrigin,
+            source_in: $source_in,
+            episodes_greater: $episodes_greater,
+            episodes_lesser: $episodes_lesser,
+            duration_greater: $duration_greater,
+            duration_lesser: $duration_lesser,
+            isAdult: $isAdult,
+            minimumTagRank: $minimumTagRank,
+            tagCategory_in: $tagCategory_in,
+            tag_in: $tag_in,
+            onList: $onList,
+            chapters_greater: $chapters_greater,
+            chapters_lesser: $chapters_lesser,
+            volumes_greater: $volumes_greater,
+            volumes_lesser: $volumes_lesser,
+        ) {
+            ...MediaShort
+        }
+    }
+}
