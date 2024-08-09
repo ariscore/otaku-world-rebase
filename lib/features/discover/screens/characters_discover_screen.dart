@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:otaku_world/core/ui/custom_search_bar.dart';
 
+import '../../../bloc/filter/search/search_media_cubit.dart';
 import '../../../core/ui/appbars/simple_app_bar.dart';
 import '../../../core/ui/discover_header.dart';
 
@@ -30,8 +31,9 @@ class CharactersDiscoverScreen extends StatelessWidget {
               clearSearch: () {},
               onSubmitted: (value) {},
               onChanged: (p0) {
-
               },
+              searchCubit: SearchMediaCubit(),
+              hint: "HINT",
             ),
             const SizedBox(
               height: 15,
