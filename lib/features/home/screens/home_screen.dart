@@ -51,117 +51,114 @@ class HomeScreen extends HookWidget {
       return null;
     }, const []);
 
-    return PopScope(
-      canPop: false,
-      child: MyRefreshIndicator(
-        onRefresh: () async {
-          return _refreshPage(context);
-        },
-        child: SingleChildScrollView(
-          controller: scaffoldController,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 10,
+    return MyRefreshIndicator(
+      onRefresh: () async {
+        return _refreshPage(context);
+      },
+      child: SingleChildScrollView(
+        controller: scaffoldController,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            // Search Option
+            _buildSearchOption(context),
+            const SizedBox(
+              height: 15,
+            ),
+            const UpcomingEpisodesSection(),
+            const SizedBox(
+              height: 15,
+            ),
+            // Reviews feature card
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 15,
               ),
-              // Search Option
-              _buildSearchOption(context),
-              const SizedBox(
-                height: 15,
-              ),
-              const UpcomingEpisodesSection(),
-              const SizedBox(
-                height: 15,
-              ),
-              // Reviews feature card
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                ),
-                child: FeatureCard(
-                  onTap: () {
-                    context.push(RouteConstants.reviews);
-                  },
-                  heading: HomeConstants.reviewsHeading,
-                  subheading: HomeConstants.reviewsSubheading,
-                  icon: Assets.iconsChatBubble,
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              // Calendar feature card
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                ),
-                child: FeatureCard(
-                  onTap: () {
-                    context.push(RouteConstants.calendar);
-                  },
-                  heading: HomeConstants.calendarHeading,
-                  subheading: HomeConstants.calendarSubheading,
-                  icon: Assets.iconsCalendar,
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              MediaSection<TrendingAnimeBloc>(
-                label: 'Trending Anime',
-                onMorePressed: () {
-                  context.push(RouteConstants.trendingAnime);
+              child: FeatureCard(
+                onTap: () {
+                  context.push(RouteConstants.reviews);
                 },
-                onSliderPressed: () {
-                  context.push(RouteConstants.trendingAnimeSlider);
+                heading: HomeConstants.reviewsHeading,
+                subheading: HomeConstants.reviewsSubheading,
+                icon: Assets.iconsChatBubble,
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            // Calendar feature card
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 15,
+              ),
+              child: FeatureCard(
+                onTap: () {
+                  context.push(RouteConstants.calendar);
                 },
-                heroTag: 'trending_anime',
+                heading: HomeConstants.calendarHeading,
+                subheading: HomeConstants.calendarSubheading,
+                icon: Assets.iconsCalendar,
               ),
-              const SizedBox(
-                height: 15,
-              ),
-              MediaSection<RecommendedAnimeBloc>(
-                label: 'Recommended Anime',
-                onMorePressed: () {
-                  context.push(RouteConstants.recommendedAnime);
-                },
-                onSliderPressed: () {
-                  context.push(RouteConstants.recommendedAnimeSlider);
-                },
-                heroTag: 'recommended_anime',
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              MediaSection<TrendingMangaBloc>(
-                label: 'Trending Manga',
-                onMorePressed: () {
-                  context.push(RouteConstants.trendingManga);
-                },
-                onSliderPressed: () {
-                  context.push(RouteConstants.trendingMangaSlider);
-                },
-                heroTag: 'trending_manga',
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              MediaSection<RecommendedMangaBloc>(
-                label: 'Recommended Manga',
-                onMorePressed: () {
-                  context.push(RouteConstants.recommendedManga);
-                },
-                onSliderPressed: () {
-                  context.push(RouteConstants.recommendedMangaSlider);
-                },
-                heroTag: 'recommended_manga',
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            MediaSection<TrendingAnimeBloc>(
+              label: 'Trending Anime',
+              onMorePressed: () {
+                context.push(RouteConstants.trendingAnime);
+              },
+              onSliderPressed: () {
+                context.push(RouteConstants.trendingAnimeSlider);
+              },
+              heroTag: 'trending_anime',
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            MediaSection<RecommendedAnimeBloc>(
+              label: 'Recommended Anime',
+              onMorePressed: () {
+                context.push(RouteConstants.recommendedAnime);
+              },
+              onSliderPressed: () {
+                context.push(RouteConstants.recommendedAnimeSlider);
+              },
+              heroTag: 'recommended_anime',
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            MediaSection<TrendingMangaBloc>(
+              label: 'Trending Manga',
+              onMorePressed: () {
+                context.push(RouteConstants.trendingManga);
+              },
+              onSliderPressed: () {
+                context.push(RouteConstants.trendingMangaSlider);
+              },
+              heroTag: 'trending_manga',
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            MediaSection<RecommendedMangaBloc>(
+              label: 'Recommended Manga',
+              onMorePressed: () {
+                context.push(RouteConstants.recommendedManga);
+              },
+              onSliderPressed: () {
+                context.push(RouteConstants.recommendedMangaSlider);
+              },
+              heroTag: 'recommended_manga',
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+          ],
         ),
       ),
     );

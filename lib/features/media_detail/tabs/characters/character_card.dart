@@ -68,6 +68,8 @@ class CharacterCard extends StatelessWidget {
           ),
           if (voiceActor != null)
             Positioned(
+              top: 0,
+              bottom: 0,
               right: 0,
               child: SubStaffCharacter(
                 character: CharacterParameters(

@@ -20,14 +20,14 @@ class AppScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MainAppBar(),
-      body: DoubleBackToCloseApp(
-        snackBar: const SnackBar(
-          content: Text('Press back again to exit!'),
-        ),
-        child: navigationShell,
+    appBar: const MainAppBar(),
+    body: DoubleBackToCloseApp(
+      snackBar: const SnackBar(
+        content: Text('Press back again to exit!'),
       ),
-      bottomNavigationBar: _BottomNavBar(navigationShell),
+      child: navigationShell,
+    ),
+    bottomNavigationBar: _BottomNavBar(navigationShell),
     );
   }
 }
