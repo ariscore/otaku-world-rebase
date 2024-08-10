@@ -37,9 +37,7 @@ class DiscoverScreen extends HookWidget {
                   " Anime, Fascinating Mangas, and Iconic Characters.",
             ),
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 10),
           DiscoverCard(
             onTap: () {
               context.push(RouteConstants.discoverAnime);
@@ -56,9 +54,7 @@ class DiscoverScreen extends HookWidget {
               type: 'Anime',
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
           DiscoverCard(
             onTap: () {
               context.push(RouteConstants.discoverManga);
@@ -75,9 +71,7 @@ class DiscoverScreen extends HookWidget {
               type: 'Manga',
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
           DiscoverCard(
             onTap: () {
               context.push(RouteConstants.discoverCharacters);
@@ -87,9 +81,7 @@ class DiscoverScreen extends HookWidget {
             endColors: ColorConstants.discoverColors[2],
             child: const DiscoverCharacterPosters(),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
           DiscoverCard(
             onTap: () {
               context.push(RouteConstants.discoverStaff);
@@ -106,9 +98,7 @@ class DiscoverScreen extends HookWidget {
               type: 'Staff',
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
           DiscoverCard(
             onTap: () {
               context.push(RouteConstants.discoverStudios);
@@ -118,9 +108,7 @@ class DiscoverScreen extends HookWidget {
             endColors: ColorConstants.discoverColors[4],
             child: const DiscoverStudiosPosters(),
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 10),
         ],
       ),
     );
