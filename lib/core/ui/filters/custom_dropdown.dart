@@ -6,18 +6,20 @@ import '../../../theme/colors.dart';
 class CustomDropdown extends StatefulWidget {
   const CustomDropdown({
     super.key,
-    required this.title,
+    this.title,
     required this.dropdownItems,
     this.titleStyle,
     required this.initialValue,
     required this.onChange,
+    this.borderRadius = 10,
   });
 
-  final String title;
+  final String? title;
   final TextStyle? titleStyle;
   final List<String> dropdownItems;
   final String initialValue;
   final Function(String) onChange;
+  final double borderRadius;
 
   @override
   State<CustomDropdown> createState() => _CustomDropdownState();
@@ -33,17 +35,19 @@ class _CustomDropdownState extends State<CustomDropdown> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.title,
-          style: (widget.titleStyle == null)
-              ? Theme.of(context).textTheme.displayMedium!.copyWith(
-                    fontWeight: FontWeight.w600,
-                  )
-              : widget.titleStyle,
-        ),
-        const SizedBox(
-          height: 15,
-        ),
+        if (widget.title != null)
+          Text(
+            widget.title!,
+            style: (widget.titleStyle == null)
+                ? Theme.of(context).textTheme.displayMedium!.copyWith(
+                      fontWeight: FontWeight.w600,
+                    )
+                : widget.titleStyle,
+          ),
+        if (widget.title != null)
+          const SizedBox(
+            height: 15,
+          ),
         DropdownButtonFormField(
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(
@@ -51,7 +55,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
               vertical: 0,
             ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(widget.borderRadius),
             ),
             enabled: false,
             fillColor: AppColors.jet,
@@ -67,7 +71,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
           },
           icon: SvgPicture.asset(Assets.iconsArrowDown),
           alignment: Alignment.topCenter,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(widget.borderRadius),
           value: selectedValue,
           dropdownColor: AppColors.jet,
           isExpanded: true,
