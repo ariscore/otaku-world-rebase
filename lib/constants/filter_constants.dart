@@ -41,4 +41,11 @@ class FilterConstants {
 
   static const double minVolumes = 1;
   static const double maxVolumes = 50;
+
+  static const activitiesOptions = [
+    'All',
+    'Text',
+    'Message',
+    'List Progress',
+  ];
 }

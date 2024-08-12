@@ -8,9 +8,9 @@ class AppTexts {
   );
   static const TextStyle displayMedium = TextStyle(
     fontSize: 20,
-      color: AppColors.white,
-      fontWeight: FontWeight.w500,
-      fontFamily: 'Poppins',
+    color: AppColors.white,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Poppins',
   );
   static const TextStyle displaySmall = TextStyle(
     fontSize: 18,

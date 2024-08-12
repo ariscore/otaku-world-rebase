@@ -286,3 +286,76 @@ fragment StaffShort on Staff {
     }
     favourites
 }
+
+fragment TextActivity on TextActivity {
+    id
+    user {
+        id
+        avatar {
+            medium
+        }
+        name
+    }
+    likeCount
+    replyCount
+    createdAt
+    isLiked
+    isSubscribed
+    siteUrl
+    text
+}
+
+fragment MessageActivity on MessageActivity {
+    id
+    messenger {
+        id
+        avatar {
+            medium
+        }
+        name
+    }
+    recipient {
+        id
+        avatar {
+            medium
+        }
+        name
+    }
+    likeCount
+    replyCount
+    createdAt
+    isLiked
+    isSubscribed
+    siteUrl
+    message
+}
+
+fragment ListActivity on ListActivity {
+    id
+    user {
+        id
+        avatar {
+            medium
+        }
+        name
+    }
+    likeCount
+    replyCount
+    createdAt
+    isLiked
+    isSubscribed
+    siteUrl
+    progress
+    status
+    media {
+        id
+        coverImage {
+            medium
+        }
+        title {
+            userPreferred
+        }
+        type
+        format
+    }
+}
