@@ -1,5 +1,10 @@
 class StringConstants {
   static const String nullStringConstant = ' - - ';
+
+  static const socialHeading = 'Connect, Share, and \nDiscover';
+  static const socialSubheading =
+      'Stay Updated with Global Anime Activities and'
+      ' \nInteractions';
 }
 
 class LoginConstants {

@@ -29,7 +29,7 @@ import '../widgets/info_col.dart';
 import '../widgets/status_row.dart';
 
 class MediaDetailScreen extends HookWidget {
-  const MediaDetailScreen({Key? key, required this.mediaId}) : super(key: key);
+  const MediaDetailScreen({super.key, required this.mediaId});
   final int mediaId;
   static final tabs = [
     'Overview',
