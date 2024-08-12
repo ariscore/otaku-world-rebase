@@ -11,7 +11,10 @@ import '../../widgets/simple_loading.dart';
 import 'character_card.dart';
 
 class Characters extends StatelessWidget {
-  const Characters({super.key});
+  Characters({super.key});
+
+  List<String> availableLanguages = [];
+  String selectedLanguage = "English";
 
   @override
   Widget build(BuildContext context) {
@@ -41,15 +44,16 @@ class Characters extends StatelessWidget {
       builder: (context, state) {
         if (state is PaginatedDataInitial) {
           final client = (context.read<GraphqlClientCubit>().state
-          as GraphqlClientInitialized)
+                  as GraphqlClientInitialized)
               .client;
           context.read<CharactersBloc>().add(LoadData(client));
           return const SimpleLoading();
         } else if (state is PaginatedDataLoading) {
           return const SimpleLoading();
         } else if (state is PaginatedDataLoaded) {
-          final List<Query$Characters$Media$characters$edges?> characters =
-          state.list as List<Query$Characters$Media$characters$edges?>;
+          List<Query$Characters$Media$characters$edges?> characters =
+              state.list as List<Query$Characters$Media$characters$edges?>;
+          loadLanguages(characters);
           return NotificationListener<ScrollNotification>(
             onNotification: (scrollInfo) {
               if (scrollInfo.metrics.pixels ==
@@ -59,7 +63,7 @@ class Characters extends StatelessWidget {
                     (characterBloc.state as PaginatedDataLoaded).hasNextPage;
                 if (hasNextPage) {
                   final client = (context.read<GraphqlClientCubit>().state
-                  as GraphqlClientInitialized)
+                          as GraphqlClientInitialized)
                       .client;
                   characterBloc.add(LoadData(client));
                 }
@@ -68,6 +72,27 @@ class Characters extends StatelessWidget {
             },
             child: CustomScrollView(
               slivers: [
+                if (availableLanguages.isNotEmpty)
+                  SliverPadding(
+                    padding: const EdgeInsets.all(8.0),
+                    sliver: SliverToBoxAdapter(
+                      child: DropdownButton<String>(
+                        items: availableLanguages.map(
+                          (String item) {
+                            return DropdownMenuItem<String>(
+                              value: item,
+                              child: Text(item),
+                            );
+                          },
+                        ).toList(),
+                        onChanged: (value) {
+                          if(value != null && value.isNotEmpty){
+                            selectedLanguage = value;
+                          }
+                        }
+                      ),
+                    ),
+                  ),
                 SliverPadding(
                   padding: const EdgeInsets.all(10),
                   sliver: SliverList.separated(
@@ -76,18 +101,23 @@ class Characters extends StatelessWidget {
                       height: 10,
                     ),
                     itemBuilder: (context, index) {
+                      final character = characters[index]!.node!;
+                      final voiceActor = characters[index]!
+                          .voiceActorRoles!
+                          .where((voiceActorRole) =>
+                              voiceActorRole!.voiceActor!.languageV2 ==
+                              selectedLanguage)
+                          .toList();
+
                       return CharacterCard(
-                        animeCharacter: characters[index]!.node!,
+                        animeCharacter: character,
                         characterRole: toJson$Enum$CharacterRole(
                           characters[index]?.role ??
                               Enum$CharacterRole.$unknown,
                         ).toString().capitalize(),
-                        voiceActor: characters[index]!.voiceActorRoles!.isEmpty
+                        voiceActor: voiceActor.isEmpty
                             ? null
-                            : characters[index]!
-                            .voiceActorRoles!
-                            .first!
-                            .voiceActor,
+                            : voiceActor.first?.voiceActor,
                       );
                     },
                   ),
@@ -160,5 +190,18 @@ class Characters extends StatelessWidget {
         );
       },
     );
+  }
+
+  loadLanguages(List<Query$Characters$Media$characters$edges?> characters) {
+    characters.firstOrNull?.voiceActorRoles?.forEach(
+      (voiceActor) {
+        var language = voiceActor!.voiceActor!.languageV2!;
+        if (!availableLanguages.contains(language)) {
+          availableLanguages.add(language);
+        }
+      },
+    );
+
+    availableLanguages.sort();
   }
 }

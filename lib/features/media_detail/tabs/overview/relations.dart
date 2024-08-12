@@ -20,6 +20,7 @@ class Relations extends StatelessWidget {
             .relations!
             .edges;
     return ListView.separated(
+      clipBehavior: Clip.none,
       shrinkWrap: true,
       physics: const ClampingScrollPhysics(),
       scrollDirection: Axis.horizontal,

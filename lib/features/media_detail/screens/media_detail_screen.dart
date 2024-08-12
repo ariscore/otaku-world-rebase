@@ -181,7 +181,7 @@ class MediaDetailScreen extends HookWidget {
                     BlocProvider(
                       create: (context) =>
                       CharactersBloc(mediaId: mediaId)..loadData(client),
-                      child: const ch.Characters(),
+                      child:  ch.Characters(),
                     ),
                     const Staff(),
                     const Stats(),

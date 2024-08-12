@@ -51,6 +51,8 @@ class Assets {
   static const String iconsTrendUp = 'assets/icons/trend-up.svg';
   static const String iconsUserGroup = 'assets/icons/user-group.svg';
   static const String iconsViewSlider = 'assets/icons/view-slider.svg';
+  static const String logosAppLogo = 'assets/logos/app_logo.png';
+  static const String logosAppLogo500 = 'assets/logos/app_logo_500.png';
   static const String mangaHorimiya = 'assets/images/discover/manga/horimiya.png';
   static const String mangaOnePunchMan = 'assets/images/discover/manga/one-punch-man.jpg';
   static const String mangaSpyxfamily = 'assets/images/discover/manga/spyxfamily.jpg';
