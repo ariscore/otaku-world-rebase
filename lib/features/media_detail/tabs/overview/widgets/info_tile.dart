@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../utils/app_texts.dart';
+import '../../../../../utils/app_texts.dart';
 
 class InfoTile extends StatelessWidget {
   const InfoTile({

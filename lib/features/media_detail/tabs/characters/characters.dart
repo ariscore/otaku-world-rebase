@@ -2,19 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/characters/characters_bloc.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
+import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
 import 'package:otaku_world/graphql/__generated/graphql/details/characters.graphql.dart';
 import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../../graphql/__generated/graphql/schema.graphql.dart';
 import '../../widgets/simple_loading.dart';
-import 'character_card.dart';
+import 'widgets/character_card.dart';
 
-class Characters extends StatelessWidget {
-  Characters({super.key});
+class Characters extends StatefulWidget {
+  const Characters({super.key});
 
+  @override
+  State<Characters> createState() => _CharactersState();
+}
+
+class _CharactersState extends State<Characters> {
   List<String> availableLanguages = [];
-  String selectedLanguage = "English";
+
+  String selectedLanguage = "Japanese";
 
   @override
   Widget build(BuildContext context) {
@@ -76,20 +83,14 @@ class Characters extends StatelessWidget {
                   SliverPadding(
                     padding: const EdgeInsets.all(8.0),
                     sliver: SliverToBoxAdapter(
-                      child: DropdownButton<String>(
-                        items: availableLanguages.map(
-                          (String item) {
-                            return DropdownMenuItem<String>(
-                              value: item,
-                              child: Text(item),
-                            );
-                          },
-                        ).toList(),
-                        onChanged: (value) {
-                          if(value != null && value.isNotEmpty){
-                            selectedLanguage = value;
-                          }
-                        }
+                      child: CustomDropdown(
+                        dropdownItems: availableLanguages,
+                        initialValue: selectedLanguage,
+                        onChange: (language) {
+                          setState(() {
+                            selectedLanguage = language;
+                          });
+                        },
                       ),
                     ),
                   ),

@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:otaku_world/bloc/media_detail/staff/staff_bloc.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 
@@ -30,6 +31,7 @@ import '../widgets/status_row.dart';
 
 class MediaDetailScreen extends HookWidget {
   const MediaDetailScreen({super.key, required this.mediaId});
+
   final int mediaId;
   static final tabs = [
     'Overview',
@@ -145,11 +147,11 @@ class MediaDetailScreen extends HookWidget {
           builder: (context, state) {
             if (state is MediaDetailInitial) {
               context.read<MediaDetailBloc>().add(
-                LoadMediaDetail(
-                  id: mediaId,
-                  client: client,
-                ),
-              );
+                    LoadMediaDetail(
+                      id: mediaId,
+                      client: client,
+                    ),
+                  );
             } else if (state is MediaDetailLoading) {
               return _buildLoading(context);
             } else if (state is MediaDetailLoaded) {
@@ -180,10 +182,14 @@ class MediaDetailScreen extends HookWidget {
                     const Overview(),
                     BlocProvider(
                       create: (context) =>
-                      CharactersBloc(mediaId: mediaId)..loadData(client),
-                      child:  ch.Characters(),
+                          CharactersBloc(mediaId: mediaId)..loadData(client),
+                      child: const ch.Characters(),
                     ),
-                    const Staff(),
+                    BlocProvider(
+                      create: (context) =>
+                          StaffBloc(mediaId: mediaId)..loadData(client),
+                      child: const Staff(),
+                    ),
                     const Stats(),
                     const Social(),
                     const Reviews(),
@@ -206,21 +212,19 @@ class MediaDetailScreen extends HookWidget {
   }
 }
 
-Widget buildAppBar(
-    BuildContext context,
+Widget buildAppBar(BuildContext context,
     TabController tabController,
     Fragment$MediaDetailed media,
     double height,
     double width,
     List<String> tabs,
-    bool innerBoxScrolled,
-    ) {
+    bool innerBoxScrolled,) {
   return SliverAppBar(
     shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
-          bottomRight: Radius.circular(20),
-          bottomLeft: Radius.circular(20),
-        )),
+      bottomRight: Radius.circular(20),
+      bottomLeft: Radius.circular(20),
+    )),
     pinned: true,
     expandedHeight: UIUtils.getWidgetHeight(
       targetWidgetHeight: 515,
@@ -265,14 +269,12 @@ Widget buildAppBar(
   );
 }
 
-Widget buildPosterContent(
-    BuildContext context,
+Widget buildPosterContent(BuildContext context,
     Fragment$MediaDetailed media,
     double height,
     double width,
     TabController tabController,
-    List<String> tabs,
-    ) {
+    List<String> tabs,) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -300,11 +302,13 @@ Widget buildPosterContent(
                 ),
                 width: width,
                 child: GestureDetector(
-                  onTap: () => media.bannerImage != null ? showImage(
-                    context,
-                    media.bannerImage.toString(),
-                    tag: media.bannerImage.toString(),
-                  ): null ,
+                  onTap: () => media.bannerImage != null
+                      ? showImage(
+                          context,
+                          media.bannerImage.toString(),
+                          tag: media.bannerImage.toString(),
+                        )
+                      : null,
                   child: Hero(
                     tag: media.bannerImage.toString(),
                     child: CoverImage(
@@ -335,13 +339,15 @@ Widget buildPosterContent(
                         screenWidth: width,
                       ),
                       child: GestureDetector(
-                        onTap: () =>  media.coverImage?.extraLarge != null ? showImage(
-                          context,
-                          media.coverImage!.extraLarge.toString(),
-                          tag: media.coverImage!.extraLarge.toString(),
-                        ) : null,
+                        onTap: () => media.coverImage?.extraLarge != null
+                            ? showImage(
+                                context,
+                                media.coverImage!.extraLarge.toString(),
+                                tag: media.coverImage!.extraLarge.toString(),
+                              )
+                            : null,
                         child: Hero(
-                          tag:media.coverImage!.extraLarge.toString(),
+                          tag: media.coverImage!.extraLarge.toString(),
                           child: CoverImage(
                             imageUrl: media.coverImage!.extraLarge.toString(),
                             type: media.type!,
