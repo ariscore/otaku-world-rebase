@@ -376,6 +376,13 @@ const documentNodeQueryCharacters = DocumentNode(definitions: [
                     selectionSet: null,
                   ),
                   FieldNode(
+                    name: NameNode(value: 'perPage'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
                     name: NameNode(value: '__typename'),
                     alias: null,
                     arguments: [],
@@ -1161,6 +1168,7 @@ class Query$Characters$Media$characters$pageInfo {
   Query$Characters$Media$characters$pageInfo({
     this.currentPage,
     this.hasNextPage,
+    this.perPage,
     this.$__typename = 'PageInfo',
   });
 
@@ -1168,10 +1176,12 @@ class Query$Characters$Media$characters$pageInfo {
       Map<String, dynamic> json) {
     final l$currentPage = json['currentPage'];
     final l$hasNextPage = json['hasNextPage'];
+    final l$perPage = json['perPage'];
     final l$$__typename = json['__typename'];
     return Query$Characters$Media$characters$pageInfo(
       currentPage: (l$currentPage as int?),
       hasNextPage: (l$hasNextPage as bool?),
+      perPage: (l$perPage as int?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1179,6 +1189,8 @@ class Query$Characters$Media$characters$pageInfo {
   final int? currentPage;
 
   final bool? hasNextPage;
+
+  final int? perPage;
 
   final String $__typename;
 
@@ -1188,6 +1200,8 @@ class Query$Characters$Media$characters$pageInfo {
     _resultData['currentPage'] = l$currentPage;
     final l$hasNextPage = hasNextPage;
     _resultData['hasNextPage'] = l$hasNextPage;
+    final l$perPage = perPage;
+    _resultData['perPage'] = l$perPage;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1197,10 +1211,12 @@ class Query$Characters$Media$characters$pageInfo {
   int get hashCode {
     final l$currentPage = currentPage;
     final l$hasNextPage = hasNextPage;
+    final l$perPage = perPage;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$currentPage,
       l$hasNextPage,
+      l$perPage,
       l$$__typename,
     ]);
   }
@@ -1222,6 +1238,11 @@ class Query$Characters$Media$characters$pageInfo {
     final l$hasNextPage = hasNextPage;
     final lOther$hasNextPage = other.hasNextPage;
     if (l$hasNextPage != lOther$hasNextPage) {
+      return false;
+    }
+    final l$perPage = perPage;
+    final lOther$perPage = other.perPage;
+    if (l$perPage != lOther$perPage) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -1255,6 +1276,7 @@ abstract class CopyWith$Query$Characters$Media$characters$pageInfo<TRes> {
   TRes call({
     int? currentPage,
     bool? hasNextPage,
+    int? perPage,
     String? $__typename,
   });
 }
@@ -1275,6 +1297,7 @@ class _CopyWithImpl$Query$Characters$Media$characters$pageInfo<TRes>
   TRes call({
     Object? currentPage = _undefined,
     Object? hasNextPage = _undefined,
+    Object? perPage = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$Characters$Media$characters$pageInfo(
@@ -1284,6 +1307,7 @@ class _CopyWithImpl$Query$Characters$Media$characters$pageInfo<TRes>
         hasNextPage: hasNextPage == _undefined
             ? _instance.hasNextPage
             : (hasNextPage as bool?),
+        perPage: perPage == _undefined ? _instance.perPage : (perPage as int?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -1299,6 +1323,7 @@ class _CopyWithStubImpl$Query$Characters$Media$characters$pageInfo<TRes>
   call({
     int? currentPage,
     bool? hasNextPage,
+    int? perPage,
     String? $__typename,
   }) =>
       _res;

@@ -25,7 +25,7 @@ class CustomTabBar extends StatelessWidget implements PreferredSizeWidget {
       child: Container(
         // height: 50,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(20),
           gradient: const LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,

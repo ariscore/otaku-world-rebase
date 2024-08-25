@@ -6,7 +6,7 @@ class ImageCacheManager {
     Config(
       key,
       stalePeriod: const Duration(days: 1),
-      maxNrOfCacheObjects: 100,
+      maxNrOfCacheObjects: 200,
     ),
   );
 }

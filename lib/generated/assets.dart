@@ -30,12 +30,14 @@ class Assets {
   static const String iconsCalendar = 'assets/icons/calendar.svg';
   static const String iconsChatBubble = 'assets/icons/chat-bubble.svg';
   static const String iconsClose = 'assets/icons/close.svg';
+  static const String iconsComment = 'assets/icons/comment.svg';
   static const String iconsCopyLink = 'assets/icons/copy-link.svg';
   static const String iconsDiscoverFilter = 'assets/icons/discover_filter.svg';
   static const String iconsDoubleArrowRight = 'assets/icons/double-arrow-right.svg';
   static const String iconsFavourite = 'assets/icons/favourite.svg';
   static const String iconsFilterVertical = 'assets/icons/filter-vertical.svg';
   static const String iconsHome = 'assets/icons/home.svg';
+  static const String iconsLike = 'assets/icons/like.svg';
   static const String iconsLineVertical = 'assets/icons/line_vertical.svg';
   static const String iconsLinkSquare = 'assets/icons/link-square.svg';
   static const String iconsMoreHorizontal = 'assets/icons/more-horizontal.svg';
@@ -51,6 +53,8 @@ class Assets {
   static const String iconsTrendUp = 'assets/icons/trend-up.svg';
   static const String iconsUserGroup = 'assets/icons/user-group.svg';
   static const String iconsViewSlider = 'assets/icons/view-slider.svg';
+  static const String logosAppLogo = 'assets/logos/app_logo.png';
+  static const String logosAppLogo500 = 'assets/logos/app_logo_500.png';
   static const String mangaHorimiya = 'assets/images/discover/manga/horimiya.png';
   static const String mangaOnePunchMan = 'assets/images/discover/manga/one-punch-man.jpg';
   static const String mangaSpyxfamily = 'assets/images/discover/manga/spyxfamily.jpg';

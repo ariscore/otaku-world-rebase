@@ -12,6 +12,7 @@ import 'package:otaku_world/bloc/discover/studios/most_favorite_studios_bloc.dar
 import 'package:otaku_world/bloc/recommendations/recommendation_anime_bloc.dart';
 import 'package:otaku_world/bloc/routes/redirect_route_cubit.dart';
 import 'package:otaku_world/bloc/search/search_studios/search_studios_bloc.dart';
+import 'package:otaku_world/bloc/social/activities/activities_bloc.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/routes/slide_transition_route.dart';
 import 'package:otaku_world/core/routes/slide_transition_shell_route.dart';
