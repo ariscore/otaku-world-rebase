@@ -377,5 +377,6 @@ fragment ListActivity on ListActivity {
         }
         type
         format
+        isAdult
     }
 }

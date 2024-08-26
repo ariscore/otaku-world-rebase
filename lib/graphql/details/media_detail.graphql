@@ -1,5 +1,5 @@
 query GetMediaDetail($id :Int){
-    Media(id:$id){
+    Media(id:$id) {
         ...MediaDetailed
 
     }

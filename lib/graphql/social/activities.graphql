@@ -1,9 +1,10 @@
-query GetActivities($page: Int, $type: ActivityType) {
+query GetActivities($page: Int, $type_in: [ActivityType], $isFollowing: Boolean) {
     Page(page: $page, perPage: 30) {
         pageInfo {
             hasNextPage
         }
-        activities(sort: [ID_DESC], type: $type, type_in: [ANIME_LIST, TEXT]) {
+        activities(sort: [ID_DESC], type_in: $type_in, isFollowing: $isFollowing) {
+            __typename
             ...TextActivity
             ...MessageActivity
             ...ListActivity

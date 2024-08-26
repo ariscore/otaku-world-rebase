@@ -38,8 +38,11 @@ final bottomNavRoutes = StatefulShellRoute.indexedStack(
         GoRoute(
           path: RouteConstants.social,
           pageBuilder: (context, state) {
-            return const NoTransitionPage(
-              child: SocialScreen(),
+            return NoTransitionPage(
+              child: BlocProvider(
+                create: (context) => ActivitiesBloc(),
+                child: const SocialScreen(),
+              ),
             );
           },
         ),

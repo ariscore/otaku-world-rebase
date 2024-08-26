@@ -52,10 +52,7 @@ class IdentityCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
-                width: UIUtils.getWidgetWidth(
-                  targetWidgetWidth: 225,
-                  screenWidth: size.width,
-                ),
+                width: size.width - 45 - 90,
                 child: Text(
                   name,
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -95,7 +92,7 @@ class IdentityCard extends StatelessWidget {
             cacheManager: ImageCacheManager.instance,
             imageUrl: imageUrl,
             width: UIUtils.getWidgetWidth(
-              targetWidgetWidth: 91,
+              targetWidgetWidth: 90,
               screenWidth: size.width,
             ),
             fit: BoxFit.cover,

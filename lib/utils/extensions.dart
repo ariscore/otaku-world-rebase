@@ -25,6 +25,11 @@ extension StringExtension on String {
     return this == 'null' ? StringConstants.nullStringConstant : this;
   }
 
+  String? checkIfEmpty() {
+    final currentString = trim();
+    return currentString.isEmpty ? null : currentString;
+  }
+
   String checkIfNullReturnsEmpty() {
     return this == 'null' ? "" : this;
   }

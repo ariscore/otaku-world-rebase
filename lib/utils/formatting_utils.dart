@@ -78,7 +78,7 @@ class FormattingUtils {
   }
 
   static String getCountryCode(String country) {
-    switch(country) {
+    switch (country) {
       case 'Japan':
         return 'JP';
       case 'South Korea':
@@ -93,7 +93,7 @@ class FormattingUtils {
   }
 
   static String getCountry(String? countryCode) {
-    switch(countryCode) {
+    switch (countryCode) {
       case 'JP':
         return 'Japan';
       case 'KR':
@@ -211,7 +211,7 @@ class FormattingUtils {
   }
 
   static Enum$MediaStatus getMediaStatus(String status) {
-    switch(status) {
+    switch (status) {
       case 'Airing':
         return Enum$MediaStatus.RELEASING;
       case 'Not Yet Aired':
@@ -265,7 +265,7 @@ class FormattingUtils {
   }
 
   static Enum$MediaSource getMediaSource(String source) {
-    switch(source) {
+    switch (source) {
       case 'Anime':
         return Enum$MediaSource.ANIME;
       case 'Comic':
