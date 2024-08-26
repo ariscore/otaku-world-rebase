@@ -6,5 +6,8 @@ class RecommendationsParameters {
 
   final Enum$MediaType mediaType;
 
-  RecommendationsParameters({required this.bloc, required this.mediaType});
+  RecommendationsParameters({
+    required this.bloc,
+    required this.mediaType,
+  });
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:otaku_world/core/ui/markdown/markdown.dart';
+import 'package:otaku_world/utils/extensions.dart';
 
 class Description extends StatelessWidget {
   const Description({
@@ -37,7 +38,7 @@ class Description extends StatelessWidget {
         ],
       ),
       child: Markdown(
-        data: description ?? '*No Description*',
+        data: description?.checkIfEmpty() ?? '*No Description*',
       ),
     );
   }

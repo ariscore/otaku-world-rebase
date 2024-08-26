@@ -16,6 +16,11 @@ extension StringExtension on String {
   String checkIfNull() {
     return this == 'null' ? StringConstants.nullStringConstant : this;
   }
+
+  String? checkIfEmpty() {
+    final currentString = trim();
+    return currentString.isEmpty ? null : currentString;
+  }
 }
 
 extension FuzzyToDate on Fragment$FuzzyDate {

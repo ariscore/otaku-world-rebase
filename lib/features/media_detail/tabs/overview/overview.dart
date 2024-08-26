@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
+import 'package:otaku_world/core/ui/texts/genre_text.dart';
 
 import 'package:otaku_world/features/media_detail/models/recommendations_parameters.dart';
 import 'package:otaku_world/features/media_detail/tabs/overview/description.dart';
@@ -58,7 +59,6 @@ class _OverviewState extends State<Overview> {
     youtubePlayerController = YoutubePlayerController(
       initialVideoId: youtubeId,
       flags: const YoutubePlayerFlags(
-
         autoPlay: false,
         showLiveFullscreenButton: false,
       ),
@@ -68,9 +68,18 @@ class _OverviewState extends State<Overview> {
         horizontal: 10,
       ),
       children: [
-        _buildGenres(
-          context,
-          media.genres,
+        GenreText(
+          genres: media.genres,
+          genreStyle: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            color: AppColors.white,
+            fontWeight: FontWeight.w500,
+            fontFamily: 'Poppins',
+          ),
+          indicatorStyle: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            color: AppColors.sunsetOrange,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Poppins',
+          ),
         ),
         const Text(
           'Description',
@@ -90,30 +99,30 @@ class _OverviewState extends State<Overview> {
         youtubeId == ""
             ? const SizedBox()
             : const Text(
-          "Trailer",
-          style: AppTextStyles.titleSectionStyle,
-        ),
+                "Trailer",
+                style: AppTextStyles.titleSectionStyle,
+              ),
         SizedBox(
           height: youtubeId == "" ? 0 : 5,
         ),
         youtubeId == ""
             ? const SizedBox()
             : YoutubePlayer(
-          aspectRatio: 16 / 9,
-          bottomActions: [
-            CurrentPosition(),
-            ProgressBar(
-              controller: youtubePlayerController,
-              colors: const ProgressBarColors(
-                handleColor: AppColors.sunsetOrange,
-                playedColor: AppColors.sunsetOrange,
+                aspectRatio: 16 / 9,
+                bottomActions: [
+                  CurrentPosition(),
+                  ProgressBar(
+                    controller: youtubePlayerController,
+                    colors: const ProgressBarColors(
+                      handleColor: AppColors.sunsetOrange,
+                      playedColor: AppColors.sunsetOrange,
+                    ),
+                    isExpanded: true,
+                  ),
+                  RemainingDuration(),
+                ],
+                controller: youtubePlayerController,
               ),
-              isExpanded: true,
-            ),
-            RemainingDuration(),
-          ],
-          controller: youtubePlayerController,
-        ),
         const SizedBox(
           height: 20,
         ),
@@ -208,10 +217,10 @@ class _OverviewState extends State<Overview> {
         TextSpan(
           text: genre,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            color: AppColors.white,
-            fontWeight: FontWeight.w500,
-            fontFamily: 'Poppins',
-          ),
+                color: AppColors.white,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Poppins',
+              ),
         ),
       );
 
@@ -220,10 +229,10 @@ class _OverviewState extends State<Overview> {
           TextSpan(
             text: ' · ',
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              color: AppColors.sunsetOrange,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Poppins',
-            ),
+                  color: AppColors.sunsetOrange,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Poppins',
+                ),
           ),
         );
       }

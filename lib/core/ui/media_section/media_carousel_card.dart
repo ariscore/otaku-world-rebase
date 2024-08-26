@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
+import 'package:otaku_world/core/ui/texts/genre_text.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 
 import '../../../generated/assets.dart';
@@ -37,7 +38,9 @@ class MediaCarouselCard extends StatelessWidget {
       // height: 650,
       decoration: ShapeDecoration(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: media!.type == Enum$MediaType.ANIME
+              ? BorderRadius.circular(20)
+              : BorderRadius.circular(15),
         ),
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -49,11 +52,11 @@ class MediaCarouselCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  vertical: 13,
+                  vertical: 15,
                   horizontal: 20,
                 ),
                 child: _buildMediaPoster(
@@ -63,7 +66,7 @@ class MediaCarouselCard extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 11,
+                  horizontal: 10,
                 ),
                 child: Column(
                   children: [
@@ -77,9 +80,9 @@ class MediaCarouselCard extends StatelessWidget {
                       textAlign: TextAlign.left,
                       maxLines: 3,
                     ),
-                    const SizedBox(
-                      height: 50,
-                    ),
+                    // const SizedBox(
+                    //   height: 50,
+                    // ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -101,29 +104,37 @@ class MediaCarouselCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 15,
-                    ),
+                    // const SizedBox(
+                    //   height: 15,
+                    // ),
                     _buildStatusRow(context, media!),
-                    const SizedBox(
-                      height: 15,
+                    // const SizedBox(
+                    //   height: 15,
+                    // ),
+                    GenreText(
+                      genres: media!.genres,
+                      genreStyle:
+                          Theme.of(context).textTheme.titleLarge?.copyWith(
+                                color: AppColors.white.withOpacity(0.7),
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Poppins',
+                              ),
+                      indicatorStyle:
+                          Theme.of(context).textTheme.titleLarge?.copyWith(
+                                color: AppColors.sunsetOrange,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Poppins',
+                              ),
                     ),
-                    _buildGenres(context, media!),
-                    const SizedBox(
-                      height: 15,
-                    ),
+                    // const SizedBox(
+                    //   height: 15,
+                    // ),
                     _buildMediaDetails(context, media!),
                   ],
                 ),
               ),
             ],
           ),
-          // Positioned(
-          //   bottom: 20,
-          //   left: 12,
-          //   right: 12,
-          //   child: _buildButtonOptions(screenWidth),
-          // ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
             child: _buildButtonOptions(
@@ -244,51 +255,6 @@ class MediaCarouselCard extends StatelessWidget {
     );
   }
 
-  Widget _buildGenres(BuildContext context, Fragment$MediaShort media) {
-    if (media.genres == null) return const Text('No genre');
-
-    List<String?> genres = media.genres!;
-    List<InlineSpan> textSpans = [];
-
-    for (int i = 0; i < genres.length; i++) {
-      if (textSpans.length >= 5) {
-        break;
-      }
-
-      String genre = genres[i].toString();
-      textSpans.add(TextSpan(
-        text: genre,
-        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: AppColors.white.withOpacity(0.7),
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Poppins',
-            ),
-      ));
-
-      if (i < 2) {
-        textSpans.add(
-          TextSpan(
-            text: ' · ',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: AppColors.sunsetOrange,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Poppins',
-                ),
-          ),
-        );
-      }
-    }
-
-    return RichText(
-      text: TextSpan(
-        children: textSpans,
-      ),
-      maxLines: 2,
-      overflow: TextOverflow.clip,
-      textAlign: TextAlign.center,
-    );
-  }
-
   Widget _buildStatusRow(BuildContext context, Fragment$MediaShort media) {
     if (media.airingSchedule?.nodes == null) {
       return getStatus(context, media.status);
@@ -299,9 +265,7 @@ class MediaCarouselCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           getStatus(context, media.status),
-          const SizedBox(
-            width: 20,
-          ),
+          const SizedBox(width: 20),
           Text(
             "Ep. ${media.airingSchedule!.nodes![0]!.episode}: ${FormattingUtils.formatDurationFromSeconds(media.airingSchedule!.nodes![0]!.timeUntilAiring)}",
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -387,8 +351,8 @@ class MediaCarouselCard extends StatelessWidget {
               imageBuilder: (context, imageProvider) {
                 return ClipRRect(
                   borderRadius: (type == Enum$MediaType.ANIME)
-                      ? BorderRadius.circular(15)
-                      : BorderRadius.circular(0),
+                      ? BorderRadius.circular(12)
+                      : BorderRadius.circular(5),
                   child: Image(
                     image: imageProvider,
                     fit: BoxFit.fill,
