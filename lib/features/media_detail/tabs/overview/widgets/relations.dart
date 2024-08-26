@@ -6,8 +6,8 @@ import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/utils/extensions.dart';
 
-import '../../../../bloc/media_detail/media_detail_bloc.dart';
-import '../../../../theme/colors.dart';
+import '../../../../../bloc/media_detail/media_detail_bloc.dart';
+import '../../../../../theme/colors.dart';
 
 class Relations extends StatelessWidget {
   const Relations({super.key});
@@ -20,6 +20,7 @@ class Relations extends StatelessWidget {
             .relations!
             .edges;
     return ListView.separated(
+      clipBehavior: Clip.none,
       shrinkWrap: true,
       physics: const ClampingScrollPhysics(),
       scrollDirection: Axis.horizontal,

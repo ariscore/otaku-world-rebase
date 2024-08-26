@@ -20,6 +20,7 @@ class AppColors {
   static const Color chineseWhite = Color(0xFFE0E0E0);
   static const Color black = Color(0xFF000000);
   static const Color chineseBlack = Color(0xFF151515);
+  static const Color blackShadow = Color(0x3F000000);
   static const Color transparent = Colors.transparent;
   static const Color lightSilver = Color(0xFFD9D9D9);
   static const Color darkMagenta = Color(0xFF8E009A);

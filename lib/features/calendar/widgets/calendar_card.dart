@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:otaku_world/core/ui/placeholders/poster_placeholder.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
+import 'package:otaku_world/utils/extensions.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
 
@@ -20,8 +21,8 @@ class CalendarCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return GestureDetector(
-
-      onTap: () => context.push('${RouteConstants.mediaDetail}?id=${airingSchedule.media!.id}'),
+      onTap: () => context
+          .push('${RouteConstants.mediaDetail}?id=${airingSchedule.media!.id}'),
       child: Container(
         margin: const EdgeInsets.symmetric(
           horizontal: 10,
@@ -79,10 +80,11 @@ class CalendarCard extends StatelessWidget {
                       FormattingUtils.formatTimeFromMilliseconds(
                         airingSchedule.airingAt,
                       ),
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w600,
-                          ),
+                      style:
+                          Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w600,
+                              ),
                     ),
                     const SizedBox(
                       width: 10,
@@ -113,8 +115,11 @@ class CalendarCard extends StatelessWidget {
                               const SizedBox(
                                 height: 2,
                               ),
-                              _buildStatus(context,
-                                  airingSchedule.media!.mediaListEntry!.status!),
+                              _buildStatus(
+                                context,
+                                airingSchedule.media!.mediaListEntry!.status!,
+                                airingSchedule.media!.type!,
+                              ),
                             ],
                           ),
                         const SizedBox(
@@ -122,14 +127,16 @@ class CalendarCard extends StatelessWidget {
                         ),
                         Text(
                           (airingSchedule.airingAt <
-                                  (DateTime.now().millisecondsSinceEpoch / 1000))
+                                  (DateTime.now().millisecondsSinceEpoch /
+                                      1000))
                               ? 'Ep. ${airingSchedule.episode}, ${FormattingUtils.formatDurationFromSecondsBefore(airingSchedule.timeUntilAiring)} since aired'
                               : 'Ep. ${airingSchedule.episode} in ${FormattingUtils.formatDurationFromSeconds(airingSchedule.timeUntilAiring)}',
-                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                fontWeight: FontWeight.w400,
-                                fontFamily: 'Poppins',
-                                color: AppColors.white.withOpacity(0.8),
-                              ),
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Poppins',
+                                    color: AppColors.white.withOpacity(0.8),
+                                  ),
                         ),
                       ],
                     ),
@@ -143,7 +150,8 @@ class CalendarCard extends StatelessWidget {
     );
   }
 
-  Widget _buildStatus(BuildContext context, Enum$MediaListStatus status) {
+  Widget _buildStatus(
+      BuildContext context, Enum$MediaListStatus status, Enum$MediaType type) {
     return Row(
       children: [
         Container(
@@ -151,58 +159,20 @@ class CalendarCard extends StatelessWidget {
           height: 14,
           decoration: ShapeDecoration(
             shape: const OvalBorder(),
-            color: getMediaListStatusColor(status),
+            color: status.toColor,
           ),
         ),
         const SizedBox(
           width: 6,
         ),
         Text(
-          getMediaListStatus(status),
+          status.displayTitle(type),
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontFamily: 'Poppins',
               ),
         ),
       ],
     );
-  }
-
-  String getMediaListStatus(Enum$MediaListStatus status) {
-    switch (status) {
-      case Enum$MediaListStatus.CURRENT:
-        return 'Watching';
-      case Enum$MediaListStatus.COMPLETED:
-        return 'Completed';
-      case Enum$MediaListStatus.REPEATING:
-        return 'Re-watching';
-      case Enum$MediaListStatus.PAUSED:
-        return 'On Hold';
-      case Enum$MediaListStatus.PLANNING:
-        return 'Plan to Watch';
-      case Enum$MediaListStatus.DROPPED:
-        return 'Dropped';
-      default:
-        return 'Unknown';
-    }
-  }
-
-  Color getMediaListStatusColor(Enum$MediaListStatus status) {
-    switch (status) {
-      case Enum$MediaListStatus.CURRENT:
-        return AppColors.toolBox;
-      case Enum$MediaListStatus.COMPLETED:
-        return AppColors.americanGreen;
-      case Enum$MediaListStatus.REPEATING:
-        return AppColors.pantonePink;
-      case Enum$MediaListStatus.PAUSED:
-        return AppColors.deepLemon;
-      case Enum$MediaListStatus.PLANNING:
-        return AppColors.quickSilver;
-      case Enum$MediaListStatus.DROPPED:
-        return AppColors.mangoTango;
-      default:
-        return AppColors.white;
-    }
   }
 
   Widget _buildBannerImage(BuildContext context, String? imageUrl) {

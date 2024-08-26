@@ -1,15 +1,13 @@
-import 'dart:developer' as dev;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/media_detail_bloc.dart';
 import 'package:otaku_world/constants/string_constants.dart';
-import 'package:otaku_world/features/media_detail/tabs/overview/info_tile.dart';
+import 'package:otaku_world/features/media_detail/tabs/overview/widgets/info_tile.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/utils/extensions.dart';
 
-import '../../../../theme/colors.dart';
+import '../../../../../theme/colors.dart';
 
 class OverallInfo extends StatelessWidget {
   const OverallInfo({super.key});

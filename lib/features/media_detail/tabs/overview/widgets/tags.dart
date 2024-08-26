@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:otaku_world/features/media_detail/tabs/overview/tag.dart';
+import 'package:otaku_world/features/media_detail/tabs/overview/widgets/tag.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/utils/app_texts.dart';
 
-import '../../../../theme/colors.dart';
+import '../../../../../theme/colors.dart';
 
 class Tags extends StatefulWidget {
   const Tags({super.key, required this.tags});
@@ -32,7 +32,9 @@ class _TagsState extends State<Tags> {
               "Tags",
               style: AppTextStyles.titleSectionStyle,
             ),
-            const SizedBox(width: 10,),
+            const SizedBox(
+              width: 10,
+            ),
             const Tooltip(
               triggerMode: TooltipTriggerMode.tap,
               message: 'Press and hold on tags for information',

@@ -29,12 +29,13 @@ class SubStaffCharacter extends StatelessWidget {
             const SizedBox(
               height: 5,
             ),
-            Text(
-              character.characterName,
-              style: CharacterCard.nameTextStyle,
-            ),
-            const SizedBox(
-              height: 8,
+            SizedBox(
+              width: MediaQuery.of(context).size.width - 200,
+              child: Text(
+                textAlign: TextAlign.end,
+                character.characterName,
+                style: CharacterCard.nameTextStyle,
+              ),
             ),
           ],
         ),
@@ -42,7 +43,7 @@ class SubStaffCharacter extends StatelessWidget {
           width: 5,
         ),
         Container(
-          width: 78,
+          width: 80,
           height: 120,
           clipBehavior: Clip.antiAlias,
           decoration: ShapeDecoration(
@@ -50,7 +51,7 @@ class SubStaffCharacter extends StatelessWidget {
               image: CachedNetworkImageProvider(
                 character.imageUrl,
               ),
-              fit: BoxFit.fill,
+              fit: BoxFit.cover,
             ),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),

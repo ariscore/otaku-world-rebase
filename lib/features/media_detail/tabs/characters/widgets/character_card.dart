@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:otaku_world/features/media_detail/tabs/characters/character_parameters.dart';
-import 'package:otaku_world/features/media_detail/tabs/characters/sub_anime_character.dart';
-import 'package:otaku_world/features/media_detail/tabs/characters/sub_staff_character.dart';
+import 'package:otaku_world/features/media_detail/tabs/characters/widgets/character_parameters.dart';
+import 'package:otaku_world/features/media_detail/tabs/characters/widgets/sub_anime_character.dart';
+import 'package:otaku_world/features/media_detail/tabs/characters/widgets/sub_staff_character.dart';
 import 'package:otaku_world/graphql/__generated/graphql/details/characters.graphql.dart';
 
-import '../../../../theme/colors.dart';
+import '../../../../../theme/colors.dart';
 
 class CharacterCard extends StatelessWidget {
   const CharacterCard({
@@ -23,6 +23,7 @@ class CharacterCard extends StatelessWidget {
     fontSize: 14,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w600,
+    overflow: TextOverflow.ellipsis,
   );
 
   static final roleTextStyle = TextStyle(
@@ -30,19 +31,24 @@ class CharacterCard extends StatelessWidget {
     fontSize: 12,
     fontFamily: 'Roboto Condensed',
     fontWeight: FontWeight.w400,
-    height: 0.12,
   );
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 130,
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 8,
+        vertical: 8,
+      ),
       decoration: ShapeDecoration(
         gradient: const LinearGradient(
           begin: Alignment(-1.00, 0.00),
           end: Alignment(1, 0),
-          colors: [Color(0xFF303030), Color(0xFF263749)],
+          colors: [
+            AppColors.darkCharcoal,
+            AppColors.japaneseIndigo,
+          ],
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
