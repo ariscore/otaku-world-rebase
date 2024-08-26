@@ -75,6 +75,25 @@ fragment MediaDetailed on Media{
         description
         rank
     }
+    rankings {
+        id
+        allTime
+        type
+        context
+        rank
+        year
+
+    }
+    stats {
+        scoreDistribution {
+            amount
+            score
+        }
+        statusDistribution {
+            amount
+            status
+        }
+    }
     modNotes
     isFavourite
     ...MediaShort
@@ -111,10 +130,10 @@ fragment MediaShort on Media {
     season
     seasonYear
     startDate {
-       ...FuzzyDate
+        ...FuzzyDate
     }
     endDate {
-       ...FuzzyDate
+        ...FuzzyDate
     }
     mediaListEntry {
         id
@@ -245,6 +264,7 @@ fragment CalendarAiringSchedule on AiringSchedule {
         mediaListEntry {
             status
         }
+        type
     }
     airingAt
     timeUntilAiring

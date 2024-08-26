@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:otaku_world/features/media_detail/tabs/characters/widgets/character_parameters.dart';
@@ -18,7 +16,6 @@ class SubAnimeCharacter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log(character.characterRole, name: "Staff Role");
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
