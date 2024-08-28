@@ -78,6 +78,7 @@ class _CharactersState extends State<Characters> {
               return false;
             },
             child: CustomScrollView(
+              key: const PageStorageKey<String>('Characters'),
               slivers: [
                 if (availableLanguages.isNotEmpty)
                   SliverPadding(
