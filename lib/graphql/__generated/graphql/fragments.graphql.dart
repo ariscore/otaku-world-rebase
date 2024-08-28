@@ -17955,3 +17955,682 @@ class _CopyWithStubImpl$Fragment$ListActivity$media$title<TRes>
   }) =>
       _res;
 }
+
+class Fragment$ActivityReply {
+  Fragment$ActivityReply({
+    required this.id,
+    this.user,
+    this.text,
+    this.isLiked,
+    required this.likeCount,
+    required this.createdAt,
+    this.$__typename = 'ActivityReply',
+  });
+
+  factory Fragment$ActivityReply.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$user = json['user'];
+    final l$text = json['text'];
+    final l$isLiked = json['isLiked'];
+    final l$likeCount = json['likeCount'];
+    final l$createdAt = json['createdAt'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityReply(
+      id: (l$id as int),
+      user: l$user == null
+          ? null
+          : Fragment$ActivityReply$user.fromJson(
+              (l$user as Map<String, dynamic>)),
+      text: (l$text as String?),
+      isLiked: (l$isLiked as bool?),
+      likeCount: (l$likeCount as int),
+      createdAt: (l$createdAt as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Fragment$ActivityReply$user? user;
+
+  final String? text;
+
+  final bool? isLiked;
+
+  final int likeCount;
+
+  final int createdAt;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$text = text;
+    _resultData['text'] = l$text;
+    final l$isLiked = isLiked;
+    _resultData['isLiked'] = l$isLiked;
+    final l$likeCount = likeCount;
+    _resultData['likeCount'] = l$likeCount;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$user = user;
+    final l$text = text;
+    final l$isLiked = isLiked;
+    final l$likeCount = likeCount;
+    final l$createdAt = createdAt;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$user,
+      l$text,
+      l$isLiked,
+      l$likeCount,
+      l$createdAt,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityReply) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$text = text;
+    final lOther$text = other.text;
+    if (l$text != lOther$text) {
+      return false;
+    }
+    final l$isLiked = isLiked;
+    final lOther$isLiked = other.isLiked;
+    if (l$isLiked != lOther$isLiked) {
+      return false;
+    }
+    final l$likeCount = likeCount;
+    final lOther$likeCount = other.likeCount;
+    if (l$likeCount != lOther$likeCount) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityReply on Fragment$ActivityReply {
+  CopyWith$Fragment$ActivityReply<Fragment$ActivityReply> get copyWith =>
+      CopyWith$Fragment$ActivityReply(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Fragment$ActivityReply<TRes> {
+  factory CopyWith$Fragment$ActivityReply(
+    Fragment$ActivityReply instance,
+    TRes Function(Fragment$ActivityReply) then,
+  ) = _CopyWithImpl$Fragment$ActivityReply;
+
+  factory CopyWith$Fragment$ActivityReply.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityReply;
+
+  TRes call({
+    int? id,
+    Fragment$ActivityReply$user? user,
+    String? text,
+    bool? isLiked,
+    int? likeCount,
+    int? createdAt,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ActivityReply$user<TRes> get user;
+}
+
+class _CopyWithImpl$Fragment$ActivityReply<TRes>
+    implements CopyWith$Fragment$ActivityReply<TRes> {
+  _CopyWithImpl$Fragment$ActivityReply(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityReply _instance;
+
+  final TRes Function(Fragment$ActivityReply) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? user = _undefined,
+    Object? text = _undefined,
+    Object? isLiked = _undefined,
+    Object? likeCount = _undefined,
+    Object? createdAt = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityReply(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$ActivityReply$user?),
+        text: text == _undefined ? _instance.text : (text as String?),
+        isLiked: isLiked == _undefined ? _instance.isLiked : (isLiked as bool?),
+        likeCount: likeCount == _undefined || likeCount == null
+            ? _instance.likeCount
+            : (likeCount as int),
+        createdAt: createdAt == _undefined || createdAt == null
+            ? _instance.createdAt
+            : (createdAt as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ActivityReply$user<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith$Fragment$ActivityReply$user.stub(_then(_instance))
+        : CopyWith$Fragment$ActivityReply$user(
+            local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ActivityReply<TRes>
+    implements CopyWith$Fragment$ActivityReply<TRes> {
+  _CopyWithStubImpl$Fragment$ActivityReply(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Fragment$ActivityReply$user? user,
+    String? text,
+    bool? isLiked,
+    int? likeCount,
+    int? createdAt,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ActivityReply$user<TRes> get user =>
+      CopyWith$Fragment$ActivityReply$user.stub(_res);
+}
+
+const fragmentDefinitionActivityReply = FragmentDefinitionNode(
+  name: NameNode(value: 'ActivityReply'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'ActivityReply'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'user'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'avatar'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'medium'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: 'name'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'text'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isLiked'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'likeCount'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentActivityReply = DocumentNode(definitions: [
+  fragmentDefinitionActivityReply,
+]);
+
+extension ClientExtension$Fragment$ActivityReply on graphql.GraphQLClient {
+  void writeFragment$ActivityReply({
+    required Fragment$ActivityReply data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'ActivityReply',
+            document: documentNodeFragmentActivityReply,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$ActivityReply? readFragment$ActivityReply({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'ActivityReply',
+          document: documentNodeFragmentActivityReply,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Fragment$ActivityReply.fromJson(result);
+  }
+}
+
+class Fragment$ActivityReply$user {
+  Fragment$ActivityReply$user({
+    required this.id,
+    this.avatar,
+    required this.name,
+    this.$__typename = 'User',
+  });
+
+  factory Fragment$ActivityReply$user.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$avatar = json['avatar'];
+    final l$name = json['name'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityReply$user(
+      id: (l$id as int),
+      avatar: l$avatar == null
+          ? null
+          : Fragment$ActivityReply$user$avatar.fromJson(
+              (l$avatar as Map<String, dynamic>)),
+      name: (l$name as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Fragment$ActivityReply$user$avatar? avatar;
+
+  final String name;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$avatar = avatar;
+    _resultData['avatar'] = l$avatar?.toJson();
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$avatar = avatar;
+    final l$name = name;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$avatar,
+      l$name,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityReply$user) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$avatar = avatar;
+    final lOther$avatar = other.avatar;
+    if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityReply$user
+    on Fragment$ActivityReply$user {
+  CopyWith$Fragment$ActivityReply$user<Fragment$ActivityReply$user>
+      get copyWith => CopyWith$Fragment$ActivityReply$user(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ActivityReply$user<TRes> {
+  factory CopyWith$Fragment$ActivityReply$user(
+    Fragment$ActivityReply$user instance,
+    TRes Function(Fragment$ActivityReply$user) then,
+  ) = _CopyWithImpl$Fragment$ActivityReply$user;
+
+  factory CopyWith$Fragment$ActivityReply$user.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityReply$user;
+
+  TRes call({
+    int? id,
+    Fragment$ActivityReply$user$avatar? avatar,
+    String? name,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ActivityReply$user$avatar<TRes> get avatar;
+}
+
+class _CopyWithImpl$Fragment$ActivityReply$user<TRes>
+    implements CopyWith$Fragment$ActivityReply$user<TRes> {
+  _CopyWithImpl$Fragment$ActivityReply$user(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityReply$user _instance;
+
+  final TRes Function(Fragment$ActivityReply$user) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? avatar = _undefined,
+    Object? name = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityReply$user(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        avatar: avatar == _undefined
+            ? _instance.avatar
+            : (avatar as Fragment$ActivityReply$user$avatar?),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ActivityReply$user$avatar<TRes> get avatar {
+    final local$avatar = _instance.avatar;
+    return local$avatar == null
+        ? CopyWith$Fragment$ActivityReply$user$avatar.stub(_then(_instance))
+        : CopyWith$Fragment$ActivityReply$user$avatar(
+            local$avatar, (e) => call(avatar: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ActivityReply$user<TRes>
+    implements CopyWith$Fragment$ActivityReply$user<TRes> {
+  _CopyWithStubImpl$Fragment$ActivityReply$user(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Fragment$ActivityReply$user$avatar? avatar,
+    String? name,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ActivityReply$user$avatar<TRes> get avatar =>
+      CopyWith$Fragment$ActivityReply$user$avatar.stub(_res);
+}
+
+class Fragment$ActivityReply$user$avatar {
+  Fragment$ActivityReply$user$avatar({
+    this.medium,
+    this.$__typename = 'UserAvatar',
+  });
+
+  factory Fragment$ActivityReply$user$avatar.fromJson(
+      Map<String, dynamic> json) {
+    final l$medium = json['medium'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityReply$user$avatar(
+      medium: (l$medium as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? medium;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$medium = medium;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$medium,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityReply$user$avatar) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityReply$user$avatar
+    on Fragment$ActivityReply$user$avatar {
+  CopyWith$Fragment$ActivityReply$user$avatar<
+          Fragment$ActivityReply$user$avatar>
+      get copyWith => CopyWith$Fragment$ActivityReply$user$avatar(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ActivityReply$user$avatar<TRes> {
+  factory CopyWith$Fragment$ActivityReply$user$avatar(
+    Fragment$ActivityReply$user$avatar instance,
+    TRes Function(Fragment$ActivityReply$user$avatar) then,
+  ) = _CopyWithImpl$Fragment$ActivityReply$user$avatar;
+
+  factory CopyWith$Fragment$ActivityReply$user$avatar.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityReply$user$avatar;
+
+  TRes call({
+    String? medium,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ActivityReply$user$avatar<TRes>
+    implements CopyWith$Fragment$ActivityReply$user$avatar<TRes> {
+  _CopyWithImpl$Fragment$ActivityReply$user$avatar(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityReply$user$avatar _instance;
+
+  final TRes Function(Fragment$ActivityReply$user$avatar) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? medium = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityReply$user$avatar(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ActivityReply$user$avatar<TRes>
+    implements CopyWith$Fragment$ActivityReply$user$avatar<TRes> {
+  _CopyWithStubImpl$Fragment$ActivityReply$user$avatar(this._res);
+
+  TRes _res;
+
+  call({
+    String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}

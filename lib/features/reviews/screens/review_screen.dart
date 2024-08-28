@@ -65,7 +65,6 @@ class ReviewScreen<B extends PaginatedDataBloc> extends HookWidget {
                 backgroundColor: AppColors.raisinBlack,
                 onRefresh: () => _refreshPage(context),
                 child: CustomScrollView(
-                  scrollDirection: Axis.vertical,
                   clipBehavior: Clip.none,
                   controller: reviewsScrollController,
                   slivers: [

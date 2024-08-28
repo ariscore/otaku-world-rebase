@@ -1,0 +1,10 @@
+query GetActivityReplies($page: Int, $activityId: Int) {
+    Page(page: $page, perPage: 30) {
+        pageInfo {
+            hasNextPage
+        }
+        activityReplies(activityId: $activityId) {
+            ...ActivityReply
+        }
+    }
+}

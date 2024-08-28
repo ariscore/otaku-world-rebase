@@ -13,6 +13,7 @@ import 'package:otaku_world/bloc/recommendations/recommendation_anime_bloc.dart'
 import 'package:otaku_world/bloc/routes/redirect_route_cubit.dart';
 import 'package:otaku_world/bloc/search/search_studios/search_studios_bloc.dart';
 import 'package:otaku_world/bloc/social/activities/activities_bloc.dart';
+import 'package:otaku_world/bloc/social/activity_replies/activity_replies_bloc.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/routes/slide_transition_route.dart';
 import 'package:otaku_world/core/routes/slide_transition_shell_route.dart';
@@ -67,6 +68,7 @@ import '../../features/anime_lists/view_more_lists/trending_manga_screen.dart';
 import '../../features/discover/screens/discover_screen.dart';
 import '../../features/my_list/screens/my_list_screen.dart';
 import '../../features/onboarding/screens/onboarding_screen.dart';
+import '../../features/social/screens/activity_replies_screen.dart';
 import '../../features/social/screens/social_screen.dart';
 
 part 'bottom_nav_routes.dart';
@@ -74,6 +76,8 @@ part 'bottom_nav_routes.dart';
 part 'discover_routes.dart';
 
 part 'home_routes.dart';
+
+part 'social_routes.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorHomeKey = GlobalKey<NavigatorState>();
@@ -96,6 +100,7 @@ final router = GoRouter(
     bottomNavRoutes,
     ...homeRoutes,
     ...discoverRoutes,
+    ...socialRoutes,
     GoRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: RouteConstants.mediaDetail,

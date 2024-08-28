@@ -360,3 +360,18 @@ fragment ListActivity on ListActivity {
         isAdult
     }
 }
+
+fragment ActivityReply on ActivityReply {
+    id
+    user {
+        id
+        avatar {
+            medium
+        }
+        name
+    }
+    text
+    isLiked
+    likeCount
+    createdAt
+}

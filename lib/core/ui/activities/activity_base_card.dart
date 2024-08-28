@@ -1,8 +1,8 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
@@ -10,6 +10,7 @@ import 'package:otaku_world/utils/formatting_utils.dart';
 class ActivityBaseCard extends StatelessWidget {
   const ActivityBaseCard({
     super.key,
+    required this.id,
     required this.child,
     required this.avatarUrl,
     required this.userName,
@@ -21,6 +22,7 @@ class ActivityBaseCard extends StatelessWidget {
   });
 
   final Widget child;
+  final int id;
   final String? avatarUrl;
   final String? userName;
   final String? receiverAvatarUrl;
@@ -53,13 +55,33 @@ class ActivityBaseCard extends StatelessWidget {
             // Name and Avatar
             Row(
               children: [
-                _buildUser(context, avatarUrl: avatarUrl, userName: userName),
-                const SizedBox(width: 10),
-                _buildUser(
-                  context,
-                  avatarUrl: receiverAvatarUrl,
-                  userName: receiverUserName,
-                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width - 40,
+                  child: Wrap(
+                    runSpacing: 5,
+                    children: [
+                      _buildUser(
+                        context,
+                        avatarUrl: avatarUrl,
+                        userName: userName,
+                      ),
+                      if (receiverAvatarUrl != null)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 8,
+                            horizontal: 10,
+                          ),
+                          child: SvgPicture.asset(Assets.iconsArrowRight),
+                        ),
+                      if (receiverAvatarUrl != null)
+                        _buildUser(
+                          context,
+                          avatarUrl: receiverAvatarUrl,
+                          userName: receiverUserName,
+                        ),
+                    ],
+                  ),
+                )
               ],
             ),
             const SizedBox(height: 10),
@@ -75,12 +97,18 @@ class ActivityBaseCard extends StatelessWidget {
                       context,
                       asset: Assets.iconsLike,
                       count: likeCount,
+                      onTap: () {},
                     ),
                     const SizedBox(width: 10),
                     _buildOption(
                       context,
                       asset: Assets.iconsComment,
                       count: replyCount,
+                      onTap: () {
+                        context.push(
+                          '${RouteConstants.activityReplies}?id=$id',
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -109,6 +137,7 @@ class ActivityBaseCard extends StatelessWidget {
     required String? userName,
   }) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           width: 35,
@@ -136,11 +165,14 @@ class ActivityBaseCard extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 10),
-        Text(
-          userName ?? '',
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontFamily: 'Poppins',
-              ),
+        Flexible(
+          child: Text(
+            userName ?? '',
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontFamily: 'Poppins',
+                ),
+          ),
         ),
       ],
     );
@@ -150,11 +182,10 @@ class ActivityBaseCard extends StatelessWidget {
     BuildContext context, {
     required String asset,
     required int count,
+    required VoidCallback onTap,
   }) {
     return InkWell(
-      onTap: () {
-        log('Option clicked!');
-      },
+      onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.all(5),
         child: Row(
