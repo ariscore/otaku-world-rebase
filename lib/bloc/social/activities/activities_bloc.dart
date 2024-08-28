@@ -141,6 +141,8 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
   ) async {
     return await client.query$GetActivities(
       Options$Query$GetActivities(
+        cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
+        fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$GetActivities(
           type_in: types.where((e) => e != Enum$ActivityType.$unknown).toList(),
           isFollowing: isFollowing,
