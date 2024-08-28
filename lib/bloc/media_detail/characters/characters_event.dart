@@ -10,8 +10,13 @@ sealed class CharactersEvent extends Equatable {
 class LoadCharacters extends CharactersEvent {
   final int id;
   final GraphQLClient client;
+  final String language;
 
-  const LoadCharacters({required this.id, required this.client});
+  const LoadCharacters({
+    required this.id,
+    required this.client,
+    required this.language,
+  });
+  @override
+  List<Object?> get props => [id, client,language];
 }
-
-

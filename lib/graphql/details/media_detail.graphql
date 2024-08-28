@@ -1,6 +1,7 @@
 query GetMediaDetail($id :Int){
     Media(id:$id) {
         ...MediaDetailed
+
     }
 }
 #154587

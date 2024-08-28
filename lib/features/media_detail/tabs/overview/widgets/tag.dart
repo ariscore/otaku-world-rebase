@@ -3,7 +3,7 @@ import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/utils/app_texts.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
 
-import '../../../../theme/colors.dart';
+import '../../../../../theme/colors.dart';
 
 class Tag extends StatelessWidget {
   const Tag({super.key, required this.tag});
