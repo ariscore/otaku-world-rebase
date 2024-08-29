@@ -6,4 +6,4 @@ This [Flutter](https://flutter.dev/)-based mobile app brings AniList to your poc
 
 ## Preview
 
-![App Screenshot](https://github.com/ternaryminds1970/otaku-world-rebase/blob/social-feature/github_assets/demo.gif?raw=true)
+![App Screenshot](github_assets/demo.gif)
