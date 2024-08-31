@@ -84,3 +84,7 @@ class DiscoverConstants {
   static const mangaDiscoverSubheading = 'Dive into a Universe of Captivating'
       'Narratives and Artistry';
 }
+
+class UiConstants {
+  static const noImageUrl = '';
+}

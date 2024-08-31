@@ -749,14 +749,12 @@ abstract class CopyWith$Fragment$MediaDetailed<TRes> {
                   CopyWith$Fragment$MediaDetailed$tags<
                       Fragment$MediaDetailed$tags>?>?)
           _fn);
-
   TRes rankings(
       Iterable<Fragment$MediaDetailed$rankings?>? Function(
               Iterable<
                   CopyWith$Fragment$MediaDetailed$rankings<
                       Fragment$MediaDetailed$rankings>?>?)
           _fn);
-
   CopyWith$Fragment$MediaDetailed$stats<TRes> get stats;
   CopyWith$Fragment$MediaDetailed$title<TRes> get title;
   CopyWith$Fragment$MediaDetailed$coverImage<TRes> get coverImage;
@@ -4619,14 +4617,12 @@ abstract class CopyWith$Fragment$MediaDetailed$stats<TRes> {
     List<Fragment$MediaDetailed$stats$statusDistribution?>? statusDistribution,
     String? $__typename,
   });
-
   TRes scoreDistribution(
       Iterable<Fragment$MediaDetailed$stats$scoreDistribution?>? Function(
               Iterable<
                   CopyWith$Fragment$MediaDetailed$stats$scoreDistribution<
                       Fragment$MediaDetailed$stats$scoreDistribution>?>?)
           _fn);
-
   TRes statusDistribution(
       Iterable<Fragment$MediaDetailed$stats$statusDistribution?>? Function(
               Iterable<
@@ -18084,6 +18080,13 @@ const fragmentDefinitionListActivity = FragmentDefinitionNode(
           selectionSet: null,
         ),
         FieldNode(
+          name: NameNode(value: 'isAdult'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
           name: NameNode(value: '__typename'),
           alias: null,
           arguments: [],
@@ -18449,6 +18452,7 @@ class Fragment$ListActivity$media {
     this.title,
     this.type,
     this.format,
+    this.isAdult,
     this.$__typename = 'Media',
   });
 
@@ -18458,6 +18462,7 @@ class Fragment$ListActivity$media {
     final l$title = json['title'];
     final l$type = json['type'];
     final l$format = json['format'];
+    final l$isAdult = json['isAdult'];
     final l$$__typename = json['__typename'];
     return Fragment$ListActivity$media(
       id: (l$id as int),
@@ -18473,6 +18478,7 @@ class Fragment$ListActivity$media {
       format: l$format == null
           ? null
           : fromJson$Enum$MediaFormat((l$format as String)),
+      isAdult: (l$isAdult as bool?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -18486,6 +18492,8 @@ class Fragment$ListActivity$media {
   final Enum$MediaType? type;
 
   final Enum$MediaFormat? format;
+
+  final bool? isAdult;
 
   final String $__typename;
 
@@ -18502,6 +18510,8 @@ class Fragment$ListActivity$media {
     final l$format = format;
     _resultData['format'] =
         l$format == null ? null : toJson$Enum$MediaFormat(l$format);
+    final l$isAdult = isAdult;
+    _resultData['isAdult'] = l$isAdult;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -18514,6 +18524,7 @@ class Fragment$ListActivity$media {
     final l$title = title;
     final l$type = type;
     final l$format = format;
+    final l$isAdult = isAdult;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
@@ -18521,6 +18532,7 @@ class Fragment$ListActivity$media {
       l$title,
       l$type,
       l$format,
+      l$isAdult,
       l$$__typename,
     ]);
   }
@@ -18559,6 +18571,11 @@ class Fragment$ListActivity$media {
     if (l$format != lOther$format) {
       return false;
     }
+    final l$isAdult = isAdult;
+    final lOther$isAdult = other.isAdult;
+    if (l$isAdult != lOther$isAdult) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -18592,6 +18609,7 @@ abstract class CopyWith$Fragment$ListActivity$media<TRes> {
     Fragment$ListActivity$media$title? title,
     Enum$MediaType? type,
     Enum$MediaFormat? format,
+    bool? isAdult,
     String? $__typename,
   });
   CopyWith$Fragment$ListActivity$media$coverImage<TRes> get coverImage;
@@ -18617,6 +18635,7 @@ class _CopyWithImpl$Fragment$ListActivity$media<TRes>
     Object? title = _undefined,
     Object? type = _undefined,
     Object? format = _undefined,
+    Object? isAdult = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$ListActivity$media(
@@ -18631,6 +18650,7 @@ class _CopyWithImpl$Fragment$ListActivity$media<TRes>
         format: format == _undefined
             ? _instance.format
             : (format as Enum$MediaFormat?),
+        isAdult: isAdult == _undefined ? _instance.isAdult : (isAdult as bool?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -18665,6 +18685,7 @@ class _CopyWithStubImpl$Fragment$ListActivity$media<TRes>
     Fragment$ListActivity$media$title? title,
     Enum$MediaType? type,
     Enum$MediaFormat? format,
+    bool? isAdult,
     String? $__typename,
   }) =>
       _res;
