@@ -1,4 +1,3 @@
-import 'package:double_back_to_close/double_back_to_close.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,11 +16,11 @@ import 'package:otaku_world/features/home/widgets/upcoming_episodes_section.dart
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/theme/colors.dart';
 
+import '../../../../config/router/router_constants.dart';
 import '../../../bloc/bottom_nav_bar/bottom_nav_bar_cubit.dart';
 import '../../../bloc/upcoming_episodes/upcoming_episodes_bloc.dart';
 import '../../../constants/string_constants.dart';
 import '../widgets/feature_card.dart';
-import '../../../../config/router/router_constants.dart';
 
 class HomeScreen extends HookWidget {
   const HomeScreen({super.key});

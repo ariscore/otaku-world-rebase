@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:otaku_world/core/ui/activities/activity_actions.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
@@ -66,29 +65,9 @@ class ActivityBaseCard extends StatelessWidget {
             // Main content
             child,
             // Other details
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    _buildOption(
-                      context,
-                      asset: Assets.iconsLike,
-                      count: likeCount,
-                    ),
-                    const SizedBox(width: 10),
-                    _buildOption(
-                      context,
-                      asset: Assets.iconsComment,
-                      count: replyCount,
-                    ),
-                  ],
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: SvgPicture.asset(Assets.iconsMoreHorizontal),
-                ),
-              ],
+            ActivityActions(
+              likeCount: likeCount,
+              replyCount: replyCount,
             ),
             const SizedBox(height: 5),
             Text(
@@ -143,31 +122,6 @@ class ActivityBaseCard extends StatelessWidget {
               ),
         ),
       ],
-    );
-  }
-
-  Widget _buildOption(
-    BuildContext context, {
-    required String asset,
-    required int count,
-  }) {
-    return InkWell(
-      onTap: () {
-        log('Option clicked!');
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(5),
-        child: Row(
-          children: [
-            SvgPicture.asset(asset),
-            const SizedBox(width: 5),
-            Text(
-              count.toString(),
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-          ],
-        ),
-      ),
     );
   }
 

@@ -1,5 +1,6 @@
 // Developed by CHAT GPT (ab to job gai)
 import 'package:flutter/material.dart';
+import 'package:otaku_world/theme/decorations.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../../../constants/duration_constants.dart';
@@ -37,19 +38,7 @@ class _ScoreDistributionWidgetState extends State<ScoreDistributionWidget> {
     return Container(
       width: MediaQuery.of(context).size.width - 20,
       height: 270,
-      decoration: ShapeDecoration(
-        color: AppColors.japaneseIndigo,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        shadows: const [
-          BoxShadow(
-            color: AppColors.blackShadow,
-            blurRadius: 4,
-            offset: Offset(0, 4),
-          )
-        ],
-      ),
+      decoration: Decorations.simpleContainer,
       child: SfCartesianChart(
         tooltipBehavior: _tooltip,
         plotAreaBorderWidth: 0,

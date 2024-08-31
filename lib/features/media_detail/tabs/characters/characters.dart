@@ -25,28 +25,6 @@ class _CharactersState extends State<Characters> {
 
   @override
   Widget build(BuildContext context) {
-    // final characterScrollController = useScrollController();
-    // useEffect(() {
-    //   characterScrollController.addListener(() {
-    //     final maxScroll = characterScrollController.position.maxScrollExtent;
-    //     final currentScroll = characterScrollController.position.pixels;
-    //
-    //     if (currentScroll == maxScroll) {
-    //       dev.log("Max Scrolled in Characters ", name: "Media Detail Screen");
-    //       final characterBloc = context.read<CharactersBloc>();
-    //
-    //       final hasNextPage =
-    //           (characterBloc.state as PaginatedDataLoaded).hasNextPage;
-    //       if (hasNextPage) {
-    //         final client = (context.read<GraphqlClientCubit>().state
-    //                 as GraphqlClientInitialized)
-    //             .client;
-    //         characterBloc.add(LoadData(client));
-    //       }
-    //     }
-    //   });
-    //   return null;
-    // });
     return BlocBuilder<CharactersBloc, PaginatedDataState>(
       builder: (context, state) {
         if (state is PaginatedDataInitial) {

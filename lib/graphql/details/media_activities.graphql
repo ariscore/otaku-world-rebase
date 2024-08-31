@@ -1,0 +1,23 @@
+query MediaActivityQuery(
+    $mediaId: Int,
+    $page: Int,
+    $isFollowing: Boolean
+) {
+    Page(page: $page) {
+        pageInfo {
+            total
+            perPage
+            currentPage
+            lastPage
+            hasNextPage
+        }
+        activities(
+            mediaId: $mediaId,
+            sort: [ID_DESC],
+            isFollowing: $isFollowing,
+        ) {
+            ...ListActivity
+        }
+    }
+}
+
