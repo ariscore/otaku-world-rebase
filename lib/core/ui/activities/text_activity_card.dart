@@ -12,6 +12,7 @@ class TextActivityCard extends StatelessWidget {
     if (activity.text == null) return const SizedBox();
 
     return ActivityBaseCard(
+      id: activity.id,
       avatarUrl: activity.user?.avatar?.medium,
       userName: activity.user?.name,
       likeCount: activity.likeCount,

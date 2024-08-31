@@ -11,10 +11,12 @@ class MessageActivityCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ActivityBaseCard(
+      id: activity.id,
       avatarUrl: activity.messenger?.avatar?.medium,
       userName: activity.messenger?.name,
       receiverAvatarUrl: activity.recipient?.avatar?.medium,
       receiverUserName: activity.recipient?.name,
+      // receiverUserName: 'sldjfdl'*5,
       likeCount: activity.likeCount,
       replyCount: activity.replyCount,
       timestamp: activity.createdAt,

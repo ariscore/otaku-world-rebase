@@ -8,6 +8,7 @@ class RouteConstants {
   static const home = '/home';
   static const discover = '/discover';
   static const social = '/social';
+  static const activityReplies = '/activity-replies';
   static const myList = '/my-list';
   static const discoverAnime = '/discover-anime';
   static const animeFilters = '/anime-filters';

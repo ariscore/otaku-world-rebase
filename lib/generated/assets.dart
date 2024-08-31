@@ -9,6 +9,7 @@ class Assets {
   static const String assetsAppLogoHorizontal = 'assets/app_logo_horizontal.svg';
   static const String assetsLogoBw = 'assets/logo_bw.svg';
   static const String charactersCharacters = 'assets/images/discover/characters/characters.png';
+  static const String charactersCigaretteGirl = 'assets/images/characters/cigarette_girl.png';
   static const String charactersErenYeager = 'assets/images/characters/eren_yeager.png';
   static const String charactersGirl1 = 'assets/images/discover/characters/girl_1.svg';
   static const String charactersSasuke1 = 'assets/images/discover/characters/sasuke_1.svg';
@@ -22,6 +23,7 @@ class Assets {
   static const String fontsRobotoMedium = 'assets/fonts/Roboto-Medium.ttf';
   static const String fontsRobotoRegular = 'assets/fonts/Roboto-Regular.ttf';
   static const String iconsAdd = 'assets/icons/add.svg';
+  static const String iconsAlert = 'assets/icons/alert.svg';
   static const String iconsArrowDown = 'assets/icons/arrow_down.svg';
   static const String iconsArrowLeft = 'assets/icons/arrow-left.svg';
   static const String iconsArrowRight = 'assets/icons/arrow-right.svg';
@@ -34,6 +36,7 @@ class Assets {
   static const String iconsCopyLink = 'assets/icons/copy-link.svg';
   static const String iconsDiscoverFilter = 'assets/icons/discover_filter.svg';
   static const String iconsDoubleArrowRight = 'assets/icons/double-arrow-right.svg';
+  static const String iconsEdit = 'assets/icons/edit.svg';
   static const String iconsFavourite = 'assets/icons/favourite.svg';
   static const String iconsFilterVertical = 'assets/icons/filter-vertical.svg';
   static const String iconsHome = 'assets/icons/home.svg';
