@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/staff/staff_bloc.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
@@ -197,7 +198,11 @@ class MediaDetailScreen extends HookWidget {
                           SocialBloc(mediaId: mediaId)..loadData(client),
                       child: const Social(),
                     ),
-                    const Reviews(),
+                    BlocProvider(
+                      create: (context) =>
+                          MediaReviewBloc(mediaId: mediaId)..loadData(client),
+                      child: const Reviews(),
+                    ),
                   ],
                 ),
               );
