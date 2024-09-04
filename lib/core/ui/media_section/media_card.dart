@@ -1,16 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:otaku_world/core/ui/mean_score.dart';
 import 'package:otaku_world/core/ui/placeholders/poster_placeholder.dart';
 import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
 
-import '../../../config/router/router_constants.dart';
 import '../../../graphql/__generated/graphql/fragments.graphql.dart';
 import '../../../graphql/__generated/graphql/schema.graphql.dart';
 import '../../../services/caching/image_cache_manager.dart';
+import '../../../utils/navigation_helper.dart';
 
 class MediaCard extends StatelessWidget {
   const MediaCard({
@@ -53,8 +52,10 @@ class MediaCard extends StatelessWidget {
         //https://stackoverflow.com/questions/45424621/inkwell-not-showing-ripple-effect
         color: AppColors.transparent,
         child: InkWell(
-          onTap: () =>
-              context.push('${RouteConstants.mediaDetail}?id=${media?.id}'),
+          onTap: () => NavigationHelper.goToMediaDetailScreen(
+            context: context,
+            mediaId: media!.id,
+          ),
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 10,
@@ -89,9 +90,9 @@ class MediaCard extends StatelessWidget {
                                   .textTheme
                                   .displayMedium
                                   ?.copyWith(
-                                fontFamily: 'Roboto-Condensed',
-                                fontWeight: FontWeight.w700,
-                              ),
+                                    fontFamily: 'Roboto-Condensed',
+                                    fontWeight: FontWeight.w700,
+                                  ),
                             ),
                           ),
                           Text(
@@ -100,10 +101,10 @@ class MediaCard extends StatelessWidget {
                                 .textTheme
                                 .displayMedium!
                                 .copyWith(
-                              fontFamily: 'Roboto-Condensed',
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.japaneseIndigo,
-                            ),
+                                  fontFamily: 'Roboto-Condensed',
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.japaneseIndigo,
+                                ),
                           ),
                         ],
                       ),
@@ -153,31 +154,31 @@ class MediaPoster extends StatelessWidget {
   Widget build(BuildContext context) {
     return (imageUrl != null)
         ? AspectRatio(
-      aspectRatio: 0.69767,
-      child: CachedNetworkImage(
-        cacheManager: ImageCacheManager.instance,
-        imageUrl: imageUrl!,
-        height: 172,
-        fit: BoxFit.cover,
-        imageBuilder: (context, imageProvider) {
-          return ClipRRect(
-            borderRadius: (type == Enum$MediaType.ANIME)
-                ? BorderRadius.circular(15)
-                : BorderRadius.circular(5),
-            child: Image(
-              image: imageProvider,
+            aspectRatio: 0.69767,
+            child: CachedNetworkImage(
+              cacheManager: ImageCacheManager.instance,
+              imageUrl: imageUrl!,
+              height: 172,
               fit: BoxFit.cover,
+              imageBuilder: (context, imageProvider) {
+                return ClipRRect(
+                  borderRadius: (type == Enum$MediaType.ANIME)
+                      ? BorderRadius.circular(15)
+                      : BorderRadius.circular(5),
+                  child: Image(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
+                );
+              },
+              placeholder: (context, url) {
+                return _buildPlaceholderImage(type);
+              },
+              errorWidget: (context, url, error) {
+                return _buildPlaceholderImage(type);
+              },
             ),
-          );
-        },
-        placeholder: (context, url) {
-          return _buildPlaceholderImage(type);
-        },
-        errorWidget: (context, url, error) {
-          return _buildPlaceholderImage(type);
-        },
-      ),
-    )
+          )
         : _buildPlaceholderImage(type);
   }
 
@@ -217,10 +218,10 @@ class Genres extends StatelessWidget {
       textSpans.add(TextSpan(
         text: genre,
         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-          color: AppColors.white.withOpacity(0.7),
-          fontWeight: FontWeight.w500,
-          fontFamily: 'Poppins',
-        ),
+              color: AppColors.white.withOpacity(0.7),
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Poppins',
+            ),
       ));
 
       if (i < 2) {
@@ -228,10 +229,10 @@ class Genres extends StatelessWidget {
           TextSpan(
             text: ' | ',
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: AppColors.white.withOpacity(0.7),
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Poppins',
-            ),
+                  color: AppColors.white.withOpacity(0.7),
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Poppins',
+                ),
           ),
         );
       }
@@ -270,22 +271,22 @@ class SummaryText extends StatelessWidget {
           media.format ?? Enum$MediaFormat.$unknown,
         )}, Episodes ${media.episodes}, ",
         style: Theme.of(context).textTheme.titleMedium?.copyWith(
-          color: AppColors.white,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'Poppins',
-        ),
+              color: AppColors.white,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Poppins',
+            ),
       ),
     );
     textSpans.add(
       TextSpan(
         text:
-        "${FormattingUtils.getSeasonString(media.season)} ${media.seasonYear},"
+            "${FormattingUtils.getSeasonString(media.season)} ${media.seasonYear},"
             " ${getStatus(media.status)}",
         style: Theme.of(context).textTheme.titleMedium?.copyWith(
-          color: AppColors.white,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'Poppins',
-        ),
+              color: AppColors.white,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Poppins',
+            ),
       ),
     );
 

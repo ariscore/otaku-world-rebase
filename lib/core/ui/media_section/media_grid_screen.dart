@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
-import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/appbars/simple_sliver_app_bar.dart';
 import 'package:otaku_world/core/ui/images/cover_image.dart';
@@ -20,6 +18,7 @@ import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/paginated_data/paginated_data_bloc.dart';
 import '../../../generated/assets.dart';
 import '../../../graphql/__generated/graphql/schema.graphql.dart';
+import '../../../utils/navigation_helper.dart';
 import '../error_text.dart';
 
 class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
@@ -55,7 +54,7 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
           final hasNextPage = (bloc.state as PaginatedDataLoaded).hasNextPage;
           if (hasNextPage) {
             final client = (context.read<GraphqlClientCubit>().state
-            as GraphqlClientInitialized)
+                    as GraphqlClientInitialized)
                 .client;
             bloc.add(LoadData(client));
           }
@@ -88,7 +87,7 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   sliver: SliverGrid(
                     gridDelegate:
-                    const SliverGridDelegateWithMaxCrossAxisExtent(
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 150,
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 0.001,
@@ -96,7 +95,7 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
                     ),
                     delegate: SliverChildBuilderDelegate(
                       childCount: state.list.length,
-                          (context, index) {
+                      (context, index) {
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,14 +111,17 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
                                     ),
                                     child: ClipRRect(
                                       borderRadius:
-                                      (mediaType == Enum$MediaType.ANIME)
-                                          ? BorderRadius.circular(15)
-                                          : BorderRadius.circular(5),
+                                          (mediaType == Enum$MediaType.ANIME)
+                                              ? BorderRadius.circular(15)
+                                              : BorderRadius.circular(5),
                                       child: Stack(
                                         children: [
                                           GestureDetector(
-                                            onTap: () => context.push(
-                                                '${RouteConstants.mediaDetail}?id=${state.list[index].id}'),
+                                            onTap: () => NavigationHelper
+                                                .goToMediaDetailScreen(
+                                              context: context,
+                                              mediaId: state.list[index].id,
+                                            ),
                                             child: _buildMediaPoster(
                                               state.list[index]?.coverImage
                                                   ?.large,
@@ -151,9 +153,9 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
                                         decoration: BoxDecoration(
                                             color: FormattingUtils
                                                 .getSelectMediaCardColors(
-                                                index: index),
+                                                    index: index),
                                             borderRadius:
-                                            BorderRadius.circular(5.0)),
+                                                BorderRadius.circular(5.0)),
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 5.0),
@@ -164,8 +166,8 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
                                                   .textTheme
                                                   .titleLarge!
                                                   .copyWith(
-                                                color: AppColors.black,
-                                              ),
+                                                    color: AppColors.black,
+                                                  ),
                                             ),
                                           ),
                                         ),
@@ -187,8 +189,8 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
                                     .textTheme
                                     .titleLarge
                                     ?.copyWith(
-                                  fontFamily: 'Roboto-Condensed',
-                                ),
+                                      fontFamily: 'Roboto-Condensed',
+                                    ),
                               ),
                             ),
                           ],
@@ -214,11 +216,11 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
                 message: state.message,
                 onTryAgain: () {
                   final client = (context.read<GraphqlClientCubit>().state
-                  as GraphqlClientInitialized)
+                          as GraphqlClientInitialized)
                       .client;
                   context.read<B>().add(
-                    LoadData(client),
-                  );
+                        LoadData(client),
+                      );
                 },
               ),
             );
@@ -257,8 +259,8 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
           Text(
             (meanScore == null) ? '0' : meanScore.toString(),
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontFamily: 'Roboto-Condensed',
-            ),
+                  fontFamily: 'Roboto-Condensed',
+                ),
           ),
         ],
       ),
@@ -269,13 +271,13 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
       String? imageUrl, Enum$MediaType type, Size size, int id) {
     return (imageUrl != null)
         ? AspectRatio(
-      aspectRatio: 0.70005,
-      //
-      child: CoverImage(
-        imageUrl: imageUrl,
-        type: type,
-      ),
-    )
+            aspectRatio: 0.70005,
+            //
+            child: CoverImage(
+              imageUrl: imageUrl,
+              type: type,
+            ),
+          )
         : _buildPlaceholderImage110x162(type);
   }
 

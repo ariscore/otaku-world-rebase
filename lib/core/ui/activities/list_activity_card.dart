@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:otaku_world/core/ui/images/cover_image.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/social/activities.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
+import 'package:otaku_world/utils/navigation_helper.dart';
 
-import '../../../config/router/router_constants.dart';
 import 'activity_base_card.dart';
 
 class ListActivityCard extends StatelessWidget {
@@ -28,8 +27,10 @@ class ListActivityCard extends StatelessWidget {
       replyCount: activity.replyCount,
       timestamp: activity.createdAt,
       child: InkWell(
-        onTap: () => context
-            .push('${RouteConstants.mediaDetail}?id=${activity.media?.id}'),
+        onTap: () => NavigationHelper.goToMediaDetailScreen(
+          context: context,
+          mediaId: activity.media!.id,
+        ),
         child: Row(
           children: [
             SizedBox(
