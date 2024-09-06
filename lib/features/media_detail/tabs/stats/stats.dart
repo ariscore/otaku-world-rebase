@@ -24,6 +24,7 @@ class Stats extends StatelessWidget {
     final media =
         (context.read<MediaDetailBloc>().state as MediaDetailLoaded).media;
     return ListView(
+      key: const PageStorageKey<String>('Stats'),
       padding: const EdgeInsets.symmetric(
         horizontal: 10,
       ),
