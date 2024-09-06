@@ -1,7 +1,14 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:like_button/like_button.dart';
+import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
+import 'package:otaku_world/bloc/social/like_activity/like_activity_cubit.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/theme/colors.dart';
@@ -17,6 +24,7 @@ class ActivityBaseCard extends StatelessWidget {
     this.receiverAvatarUrl,
     this.receiverUserName,
     required this.likeCount,
+    required this.isLiked,
     required this.replyCount,
     required this.timestamp,
   });
@@ -28,11 +36,16 @@ class ActivityBaseCard extends StatelessWidget {
   final String? receiverAvatarUrl;
   final String? receiverUserName;
   final int likeCount;
+  final bool isLiked;
   final int replyCount;
   final int timestamp;
 
   @override
   Widget build(BuildContext context) {
+    final client =
+        (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
+            .client;
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Container(
@@ -93,22 +106,47 @@ class ActivityBaseCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    _buildOption(
-                      context,
-                      asset: Assets.iconsLike,
-                      count: likeCount,
-                      onTap: () {},
+                    const SizedBox(width: 5),
+                    LikeButton(
+                      isLiked: isLiked,
+                      likeCount: likeCount,
+                      size: 25,
+                      likeCountPadding: const EdgeInsets.only(left: 5),
+                      likeBuilder: (isLiked) {
+                        return SvgPicture.asset(
+                          isLiked ? Assets.iconsFavourite : Assets.iconsLike,
+                        );
+                      },
+                      countBuilder: (likeCount, isLiked, text) {
+                        return Text(
+                          likeCount.toString(),
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        );
+                      },
+                      onTap: (isLiked) {
+                        return likeActivity(context, client, isLiked);
+                      },
                     ),
-                    const SizedBox(width: 10),
-                    _buildOption(
-                      context,
-                      asset: Assets.iconsComment,
-                      count: replyCount,
+                    const SizedBox(width: 15),
+                    InkWell(
                       onTap: () {
                         context.push(
                           '${RouteConstants.activityReplies}?id=$id',
                         );
                       },
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(
+                            Assets.iconsComment,
+                            width: 25,
+                          ),
+                          const SizedBox(width: 5),
+                          Text(
+                            replyCount.toString(),
+                            style: Theme.of(context).textTheme.headlineMedium,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -178,35 +216,34 @@ class ActivityBaseCard extends StatelessWidget {
     );
   }
 
-  Widget _buildOption(
-    BuildContext context, {
-    required String asset,
-    required int count,
-    required VoidCallback onTap,
-  }) {
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.all(5),
-        child: Row(
-          children: [
-            SvgPicture.asset(asset),
-            const SizedBox(width: 5),
-            Text(
-              count.toString(),
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget _buildPlaceholderProfile() {
     return Container(
       padding: const EdgeInsets.all(3),
       color: AppColors.darkGray,
       child: SvgPicture.asset(Assets.assetsLogoBw),
     );
+  }
+
+  Future<bool?> likeActivity(
+    BuildContext context,
+    GraphQLClient client,
+    bool isLiked,
+  ) async {
+    final result = await LikeActivityCubit().toggleLike(client, activityId: id);
+    return result.fold(
+      (error) {
+        log('Got error: $error', name: 'ActivityLike');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(error),
+          ),
+        );
+        return null;
+      },
+      (isLiked) {
+        return isLiked;
+      },
+    );
+    // return await LikeActivityCubit().toggleLike(client, activityId: id);
   }
 }
