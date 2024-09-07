@@ -13,7 +13,7 @@ class SocialBloc extends PaginatedDataBloc<Query$MediaActivityQuery, dynamic> {
     bool isFollowing,
     GraphQLClient client,
   ) {
-    this.isFollowing = !isFollowing;
+    this.isFollowing = isFollowing;
     add(RefreshData(client));
   }
 

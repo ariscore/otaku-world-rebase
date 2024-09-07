@@ -65,7 +65,7 @@ class Reviews extends StatelessWidget {
                     key: const PageStorageKey<String>('Reviews'),
                     slivers: [
                       SliverPadding(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
                         sliver: SliverList.separated(
                           itemCount: reviews.length,
                           separatorBuilder: (context, index) => const SizedBox(

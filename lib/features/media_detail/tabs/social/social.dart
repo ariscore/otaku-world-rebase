@@ -5,6 +5,7 @@ import 'package:otaku_world/features/media_detail/tabs/social/widgets/social_car
 
 import '../../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../../bloc/paginated_data/paginated_data_bloc.dart';
+import '../../../../theme/colors.dart';
 import '../../widgets/simple_loading.dart';
 
 class Social extends StatelessWidget {
@@ -12,6 +13,10 @@ class Social extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final socialBloc = context.read<SocialBloc>();
+    final client =
+        (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
+            .client;
     return BlocBuilder<SocialBloc, PaginatedDataState>(
       builder: (context, state) {
         if (state is PaginatedDataInitial) {
@@ -28,13 +33,9 @@ class Social extends StatelessWidget {
             onNotification: (scrollInfo) {
               if (scrollInfo.metrics.pixels ==
                   scrollInfo.metrics.maxScrollExtent) {
-                final socialBloc = context.read<SocialBloc>();
                 final hasNextPage =
                     (socialBloc.state as PaginatedDataLoaded).hasNextPage;
                 if (hasNextPage) {
-                  final client = (context.read<GraphqlClientCubit>().state
-                          as GraphqlClientInitialized)
-                      .client;
                   socialBloc.add(LoadData(client));
                 }
               }
@@ -43,21 +44,31 @@ class Social extends StatelessWidget {
             child: CustomScrollView(
               key: const PageStorageKey<String>('Social'),
               slivers: [
-                // if (false)
-                //   SliverPadding(
-                //     padding: const EdgeInsets.all(8.0),
-                //     sliver: SliverToBoxAdapter(
-                //       child: CustomDropdown(
-                //         dropdownItems: availableLanguages,
-                //         initialValue: selectedLanguage,
-                //         onChange: (language) {
-                //           setState(() {
-                //             selectedLanguage = language;
-                //           });
-                //         },
-                //       ),
-                //     ),
-                //   ),
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  sliver: SliverToBoxAdapter(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Show Friend's List",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Switch(
+                          activeColor: AppColors.sunsetOrange,
+                          value: socialBloc.isFollowing,
+                          onChanged: (value) =>
+                              socialBloc.toggleIsFollowing(value, client),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 SliverPadding(
                   padding: const EdgeInsets.all(10),
                   sliver: SliverList.separated(
