@@ -41,7 +41,7 @@ class Social extends StatelessWidget {
               return false;
             },
             child: CustomScrollView(
-              key: const PageStorageKey<String>('Characters'),
+              key: const PageStorageKey<String>('Social'),
               slivers: [
                 // if (false)
                 //   SliverPadding(

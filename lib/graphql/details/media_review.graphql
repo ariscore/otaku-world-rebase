@@ -1,7 +1,7 @@
-query MediaReviews($mediaId: Int, $page: Int) {
+query MediaReviews($mediaId: Int, $page: Int , $reviewSort : ReviewSort) {
     Media(id: $mediaId) {
         id
-        reviews(page: $page, sort: [RATING_DESC, ID ]) {
+        reviews(page: $page, sort: [$reviewSort]) {
             pageInfo {
                 ...PageInfo
             }

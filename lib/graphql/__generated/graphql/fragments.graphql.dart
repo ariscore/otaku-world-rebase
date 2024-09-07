@@ -19823,7 +19823,6 @@ extension ClientExtension$Fragment$PageInfo on graphql.GraphQLClient {
         data: data.toJson(),
         broadcast: broadcast,
       );
-
   Fragment$PageInfo? readFragment$PageInfo({
     required Map<String, dynamic> idFields,
     bool optimistic = true,
