@@ -13,6 +13,7 @@ class SocialBloc extends PaginatedDataBloc<Query$MediaActivityQuery, dynamic> {
     return client.query$MediaActivityQuery(
       Options$Query$MediaActivityQuery(
         cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
+        fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$MediaActivityQuery(
           mediaId: mediaId,
           page: page,

@@ -77,7 +77,7 @@ class _StatusDistributionWidgetState extends State<StatusDistributionWidget> {
               data: widget.statusDistribution![index]!.amount!,
               type: widget.type,
             ),
-            separatorBuilder: (context, index) => SizedBox(
+            separatorBuilder: (context, index) => const SizedBox(
               height: 5,
             ),
             itemCount: widget.statusDistribution!.length,

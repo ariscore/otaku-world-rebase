@@ -70,6 +70,8 @@ class SocialCard extends StatelessWidget {
             ],
           ),
           ActivityActions(
+            activityId: activity.id,
+            isLiked: activity.isLiked ?? false,
             likeCount: activity.likeCount,
             replyCount: activity.replyCount,
           ),

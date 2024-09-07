@@ -39,7 +39,7 @@ class Markdown extends StatelessWidget {
       child: mw.MarkdownWidget(
         data: markdown,
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         selectable: selectable,
         markdownGenerator: mw.MarkdownGenerator(
           generators: [

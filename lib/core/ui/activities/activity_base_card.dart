@@ -10,6 +10,7 @@ import 'package:like_button/like_button.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/social/like_activity/like_activity_cubit.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
+import 'package:otaku_world/core/ui/activities/activity_actions.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
@@ -42,10 +43,6 @@ class ActivityBaseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final client =
-        (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
-            .client;
-
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Container(
@@ -101,60 +98,11 @@ class ActivityBaseCard extends StatelessWidget {
             // Main content
             child,
             // Other details
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    const SizedBox(width: 5),
-                    LikeButton(
-                      isLiked: isLiked,
-                      likeCount: likeCount,
-                      size: 25,
-                      likeCountPadding: const EdgeInsets.only(left: 5),
-                      likeBuilder: (isLiked) {
-                        return SvgPicture.asset(
-                          isLiked ? Assets.iconsFavourite : Assets.iconsLike,
-                        );
-                      },
-                      countBuilder: (likeCount, isLiked, text) {
-                        return Text(
-                          likeCount.toString(),
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        );
-                      },
-                      onTap: (isLiked) {
-                        return likeActivity(context, client, isLiked);
-                      },
-                    ),
-                    const SizedBox(width: 15),
-                    InkWell(
-                      onTap: () {
-                        context.push(
-                          '${RouteConstants.activityReplies}?id=$id',
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          SvgPicture.asset(
-                            Assets.iconsComment,
-                            width: 25,
-                          ),
-                          const SizedBox(width: 5),
-                          Text(
-                            replyCount.toString(),
-                            style: Theme.of(context).textTheme.headlineMedium,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: SvgPicture.asset(Assets.iconsMoreHorizontal),
-                ),
-              ],
+            ActivityActions(
+              likeCount: likeCount,
+              replyCount: replyCount,
+              activityId: id,
+              isLiked: isLiked,
             ),
             const SizedBox(height: 5),
             Text(
@@ -222,28 +170,5 @@ class ActivityBaseCard extends StatelessWidget {
       color: AppColors.darkGray,
       child: SvgPicture.asset(Assets.assetsLogoBw),
     );
-  }
-
-  Future<bool?> likeActivity(
-    BuildContext context,
-    GraphQLClient client,
-    bool isLiked,
-  ) async {
-    final result = await LikeActivityCubit().toggleLike(client, activityId: id);
-    return result.fold(
-      (error) {
-        log('Got error: $error', name: 'ActivityLike');
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(error),
-          ),
-        );
-        return null;
-      },
-      (isLiked) {
-        return isLiked;
-      },
-    );
-    // return await LikeActivityCubit().toggleLike(client, activityId: id);
   }
 }
