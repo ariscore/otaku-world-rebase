@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
-import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/appbars/simple_sliver_app_bar.dart';
 import 'package:otaku_world/core/ui/images/cover_image.dart';
@@ -20,6 +18,7 @@ import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/paginated_data/paginated_data_bloc.dart';
 import '../../../generated/assets.dart';
 import '../../../graphql/__generated/graphql/schema.graphql.dart';
+import '../../../utils/navigation_helper.dart';
 import '../error_text.dart';
 
 class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {

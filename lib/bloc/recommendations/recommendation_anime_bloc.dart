@@ -39,7 +39,11 @@ class RecommendationAnimeBloc
     hasNextPage = data.Media!.recommendations!.pageInfo!.hasNextPage!;
     dev.log('Page: $page', name: 'Recommendation Anime Bloc');
     page++;
+
     list.addAll(data.Media!.recommendations!.edges!
+        .where(
+          (element) => element?.node?.mediaRecommendation != null,
+        )
         .map((e) => e!.node!.mediaRecommendation)
         .toList());
     dev.log('Episodes list size: ${list.length}',

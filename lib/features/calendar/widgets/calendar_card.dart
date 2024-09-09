@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:otaku_world/core/ui/placeholders/poster_placeholder.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
@@ -8,8 +7,8 @@ import 'package:otaku_world/utils/extensions.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
 
-import '../../../config/router/router_constants.dart';
 import '../../../graphql/__generated/graphql/schema.graphql.dart';
+import '../../../utils/navigation_helper.dart';
 
 class CalendarCard extends StatelessWidget {
   const CalendarCard({super.key, required this.airingSchedule});
@@ -21,8 +20,10 @@ class CalendarCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return GestureDetector(
-      onTap: () => context
-          .push('${RouteConstants.mediaDetail}?id=${airingSchedule.media!.id}'),
+      onTap: () => NavigationHelper.goToMediaDetailScreen(
+        context: context,
+        mediaId: airingSchedule.media!.id,
+      ),
       child: Container(
         margin: const EdgeInsets.symmetric(
           horizontal: 10,

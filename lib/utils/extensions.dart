@@ -99,3 +99,33 @@ extension MediaStatsExtension on Enum$MediaListStatus {
     }
   }
 }
+
+extension ReviewSort on Enum$ReviewSort {
+  String displayTitle() {
+    switch (this) {
+      case Enum$ReviewSort.CREATED_AT:
+        return "Oldest";
+      case Enum$ReviewSort.CREATED_AT_DESC:
+        return "Newest";
+      case Enum$ReviewSort.ID:
+        return "Id";
+      case Enum$ReviewSort.ID_DESC:
+        return "Id Descending";
+      case Enum$ReviewSort.RATING:
+        return "Few Upvote";
+      case Enum$ReviewSort.RATING_DESC:
+        return "Most Upvote";
+      case Enum$ReviewSort.SCORE:
+        return "Lowest Rating";
+      case Enum$ReviewSort.SCORE_DESC:
+        return "Highest Rating";
+      case Enum$ReviewSort.UPDATED_AT:
+        return "Modified";
+      case Enum$ReviewSort.UPDATED_AT_DESC:
+        return "Latest Modified";
+      case Enum$ReviewSort.$unknown:
+      default:
+        return "Unknown";
+    }
+  }
+}

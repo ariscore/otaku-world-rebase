@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
-import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/texts/genre_text.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 
@@ -11,6 +9,7 @@ import '../../../graphql/__generated/graphql/schema.graphql.dart';
 import '../../../services/caching/image_cache_manager.dart';
 import '../../../theme/colors.dart';
 import '../../../utils/formatting_utils.dart';
+import '../../../utils/navigation_helper.dart';
 import '../../../utils/ui_utils.dart';
 import '../buttons/primary_button.dart';
 import '../placeholders/poster_placeholder.dart';
@@ -166,7 +165,10 @@ class MediaCarouselCard extends StatelessWidget {
           radius: 8,
         ),
         PrimaryButton(
-          onTap: () => context.push('${RouteConstants.mediaDetail}?id=$id'),
+          onTap: () => NavigationHelper.goToMediaDetailScreen(
+            context: context,
+            mediaId: id,
+          ),
           label: 'View more',
           width: UIUtils.getWidgetWidth(
             targetWidgetWidth: 100,

@@ -4,12 +4,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/paginated_data/paginated_data_bloc.dart';
 import '../../../bloc/upcoming_episodes/upcoming_episodes_bloc.dart';
-import '../../../config/router/router_constants.dart';
 import '../../../core/ui/error_text.dart';
 import '../../../core/ui/media_section/scroll_to_left_button.dart';
 import '../../../core/ui/placeholders/poster_placeholder.dart';
@@ -18,6 +16,7 @@ import '../../../graphql/__generated/graphql/home/upcoming_episodes.graphql.dart
 import '../../../services/caching/image_cache_manager.dart';
 import '../../../theme/colors.dart';
 import '../../../utils/formatting_utils.dart';
+import '../../../utils/navigation_helper.dart';
 import '../../../utils/ui_utils.dart';
 
 class UpcomingEpisodesSection extends HookWidget {
@@ -198,8 +197,10 @@ class UpcomingEpisodesSection extends HookWidget {
 
     try {
       return GestureDetector(
-        onTap: () =>
-            context.push('${RouteConstants.mediaDetail}?id=${media.id}'),
+        onTap: () => NavigationHelper.goToMediaDetailScreen(
+          context: context,
+          mediaId: media.id,
+        ),
         child: Container(
           width: 215,
           margin: const EdgeInsets.only(right: 15),
