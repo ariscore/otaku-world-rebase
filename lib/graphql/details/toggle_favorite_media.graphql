@@ -1,0 +1,5 @@
+mutation ToggleFavoriteMedia($animeId: Int, $mangaId: Int) {
+    ToggleFavourite(animeId: $animeId, mangaId: $mangaId) {
+        __typename
+    }
+}

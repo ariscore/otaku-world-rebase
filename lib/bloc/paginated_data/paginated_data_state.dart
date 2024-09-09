@@ -19,7 +19,7 @@ class PaginatedDataLoaded<E> extends PaginatedDataState {
     required this.hasNextPage,
   });
 
-  final List<E?> list;
+  final List<E> list;
   final bool hasNextPage;
 
   @override

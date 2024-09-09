@@ -11,6 +11,7 @@ import 'package:otaku_world/graphql/__generated/graphql/details/media_detail.gra
 import '../../graphql/__generated/graphql/fragments.graphql.dart';
 
 part 'media_detail_event.dart';
+
 part 'media_detail_state.dart';
 
 class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
@@ -19,7 +20,7 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
     on<ResetMediaData>(_onResetMedia);
   }
 
-  late  RecommendationAnimeBloc recommendationAnimeBloc;
+  late RecommendationAnimeBloc recommendationAnimeBloc;
 
   FutureOr<void> _onLoadMediaDetail(
     LoadMediaDetail event,
@@ -33,9 +34,11 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
 
     final response = await event.client.query$GetMediaDetail(
       Options$Query$GetMediaDetail(
+        fetchPolicy: FetchPolicy.networkOnly, // TODO: Change it later
         variables: Variables$Query$GetMediaDetail(id: event.id),
       ),
     );
+    // dev.log('Response: $response', name: 'MediaDetail');
 
     if (response.hasException) {
       emit(MediaDetailError(response.exception.toString()));

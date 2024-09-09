@@ -96,104 +96,11 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
                     delegate: SliverChildBuilderDelegate(
                       childCount: state.list.length,
                       (context, index) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            AspectRatio(
-                              aspectRatio: 0.70005,
-                              child: Stack(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      top: isTop100 ? 4 : 0,
-                                      right: isTop100 ? 4 : 0,
-                                    ),
-                                    child: ClipRRect(
-                                      borderRadius:
-                                          (mediaType == Enum$MediaType.ANIME)
-                                              ? BorderRadius.circular(15)
-                                              : BorderRadius.circular(5),
-                                      child: Stack(
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () => NavigationHelper
-                                                .goToMediaDetailScreen(
-                                              context: context,
-                                              mediaId: state.list[index].id,
-                                            ),
-                                            child: _buildMediaPoster(
-                                              state.list[index]?.coverImage
-                                                  ?.large,
-                                              state.list[index]?.type ??
-                                                  Enum$MediaType.$unknown,
-                                              size,
-                                              state.list[index].id,
-                                            ),
-                                          ),
-                                          // Mean score
-                                          Positioned(
-                                            bottom: 0,
-                                            right: 0,
-                                            child: _buildMeanScore(
-                                              context,
-                                              state.list[index]?.meanScore,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  if (isTop100)
-                                    Positioned(
-                                      top: 0,
-                                      right: 0,
-                                      child: Container(
-                                        height: 19,
-                                        decoration: BoxDecoration(
-                                            color: FormattingUtils
-                                                .getSelectMediaCardColors(
-                                                    index: index),
-                                            borderRadius:
-                                                BorderRadius.circular(5.0)),
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 5.0),
-                                          child: Center(
-                                            child: Text(
-                                              "#${index + 1}",
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleLarge!
-                                                  .copyWith(
-                                                    color: AppColors.black,
-                                                  ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            // Manga title
-                            SizedBox(
-                              child: Text(
-                                getTitle(state.list[index]?.title) ?? '',
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    ?.copyWith(
-                                      fontFamily: 'Roboto-Condensed',
-                                    ),
-                              ),
-                            ),
-                          ],
+                        return _buildMediaCard(
+                          context,
+                          state.list[index],
+                          size,
+                          index,
                         );
                       },
                     ),
@@ -232,6 +139,96 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
     );
   }
 
+  Widget _buildMediaCard(
+      BuildContext context, dynamic media, Size size, int index) {
+    if (media == null) return const SizedBox();
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AspectRatio(
+          aspectRatio: 0.70005,
+          child: Stack(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  top: isTop100 ? 4 : 0,
+                  right: isTop100 ? 4 : 0,
+                ),
+                child: ClipRRect(
+                  borderRadius: (mediaType == Enum$MediaType.ANIME)
+                      ? BorderRadius.circular(15)
+                      : BorderRadius.circular(5),
+                  child: Stack(
+                    children: [
+                      GestureDetector(
+                        onTap: () => context.push(
+                            '${RouteConstants.mediaDetail}?id=${media.id}'),
+                        child: _buildMediaPoster(
+                          media.coverImage?.large,
+                          media?.type ?? Enum$MediaType.$unknown,
+                          size,
+                        ),
+                      ),
+                      // Mean score
+                      Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: _buildMeanScore(
+                          context,
+                          media.meanScore,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              if (isTop100)
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: Container(
+                    height: 19,
+                    decoration: BoxDecoration(
+                        color: FormattingUtils.getSelectMediaCardColors(
+                            index: index),
+                        borderRadius: BorderRadius.circular(5.0)),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      child: Center(
+                        child: Text(
+                          "#${index + 1}",
+                          style:
+                              Theme.of(context).textTheme.titleLarge!.copyWith(
+                                    color: AppColors.black,
+                                  ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        // Manga title
+        SizedBox(
+          child: Text(
+            getTitle(media.title) ?? '',
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontFamily: 'Roboto-Condensed',
+                ),
+          ),
+        ),
+      ],
+    );
+  }
+
   String? getTitle(Fragment$MediaShort$title? title) {
     return title?.english ?? title?.romaji ?? title?.native;
   }
@@ -267,12 +264,10 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
     );
   }
 
-  Widget _buildMediaPoster(
-      String? imageUrl, Enum$MediaType type, Size size, int id) {
+  Widget _buildMediaPoster(String? imageUrl, Enum$MediaType type, Size size) {
     return (imageUrl != null)
         ? AspectRatio(
             aspectRatio: 0.70005,
-            //
             child: CoverImage(
               imageUrl: imageUrl,
               type: type,

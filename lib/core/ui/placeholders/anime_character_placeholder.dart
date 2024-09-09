@@ -17,7 +17,6 @@ class AnimeCharacterPlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -41,9 +40,9 @@ class AnimeCharacterPlaceholder extends StatelessWidget {
               subheading,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontFamily: 'Poppins',
-                color: AppColors.white.withOpacity(0.8),
-              ),
+                    fontFamily: 'Poppins',
+                    color: AppColors.white.withOpacity(0.8),
+                  ),
             ),
           ),
         ],

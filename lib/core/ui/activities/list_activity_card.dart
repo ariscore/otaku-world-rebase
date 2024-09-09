@@ -24,6 +24,7 @@ class ListActivityCard extends StatelessWidget {
       avatarUrl: activity.user?.avatar?.medium,
       userName: activity.user?.name,
       likeCount: activity.likeCount,
+      isLiked: activity.isLiked ?? false,
       replyCount: activity.replyCount,
       timestamp: activity.createdAt,
       child: InkWell(
