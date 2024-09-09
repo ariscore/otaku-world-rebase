@@ -10,7 +10,10 @@ part 'like_activity_state.dart';
 class LikeActivityCubit extends Cubit<LikeActivityState> {
   LikeActivityCubit() : super(LikeActivityInitial());
 
-  Future<Either<String, bool>> toggleLike(GraphQLClient client, {required int activityId,}) async {
+  Future<Either<String, bool>> toggleLike(
+    GraphQLClient client, {
+    required int activityId,
+  }) async {
     final response = await client.mutate$ToggleActivityLike(
       Options$Mutation$ToggleActivityLike(
         variables: Variables$Mutation$ToggleActivityLike(
@@ -25,7 +28,7 @@ class LikeActivityCubit extends Cubit<LikeActivityState> {
       log(exception.toString());
       if (exception.linkException != null) {
         return left('Please check your internet connection!');
-      }else {
+      } else {
         return left('Something went wrong!');
       }
     } else {
@@ -33,12 +36,14 @@ class LikeActivityCubit extends Cubit<LikeActivityState> {
       if (data == null) {
         log('Data is null');
         return left('Something went wrong!');
-      }else {
+      } else {
         if (data is Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity) {
           return right(data.isLiked ?? false);
-        } else if (data is Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity) {
+        } else if (data
+            is Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity) {
           return right(data.isLiked ?? false);
-        } else if (data is Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity) {
+        } else if (data
+            is Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity) {
           return right(data.isLiked ?? false);
         }
       }

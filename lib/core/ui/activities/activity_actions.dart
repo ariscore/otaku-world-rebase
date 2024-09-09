@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:like_button/like_button.dart';
+import 'package:otaku_world/utils/ui_utils.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/social/like_activity/like_activity_cubit.dart';
@@ -55,7 +56,7 @@ class ActivityActions extends StatelessWidget {
                 );
               },
               onTap: (isLiked) {
-                return likeActivity(context, client, isLiked);
+                return likeActivity(context, client);
               },
             ),
             const SizedBox(width: 15),
@@ -92,7 +93,6 @@ class ActivityActions extends StatelessWidget {
   Future<bool?> likeActivity(
     BuildContext context,
     GraphQLClient client,
-    bool isLiked,
   ) async {
     final result = await LikeActivityCubit().toggleLike(
       client,
@@ -101,11 +101,7 @@ class ActivityActions extends StatelessWidget {
     return result.fold(
       (error) {
         log('Got error: $error', name: 'ActivityLike');
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(error),
-          ),
-        );
+        UIUtils.showSnackBar(context, error);
         return null;
       },
       (isLiked) {

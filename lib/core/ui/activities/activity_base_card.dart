@@ -1,15 +1,6 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:like_button/like_button.dart';
-import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
-import 'package:otaku_world/bloc/social/like_activity/like_activity_cubit.dart';
-import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/activities/activity_actions.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/theme/colors.dart';

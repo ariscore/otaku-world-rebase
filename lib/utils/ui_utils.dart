@@ -44,7 +44,11 @@ class UIUtils {
     return Color(int.parse(hexColor.substring(1, 7), radix: 16) + 0xFF000000);
   }
 
-  static void showInfoDialog(BuildContext context, String title, String description) {
+  static void showInfoDialog(
+    BuildContext context,
+    String title,
+    String description,
+  ) {
     showDialog(
       context: context,
       builder: (context) {
@@ -52,8 +56,8 @@ class UIUtils {
           title: Text(
             title,
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
+                  fontWeight: FontWeight.w600,
+                ),
           ),
           content: Text(
             description,
@@ -74,4 +78,3 @@ class UIUtils {
     );
   }
 }
-
