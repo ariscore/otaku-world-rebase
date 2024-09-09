@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/core/ui/error_text.dart';
@@ -15,7 +14,7 @@ import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
 
-import '../../../config/router/router_constants.dart';
+import '../../../utils/navigation_helper.dart';
 
 class MediaSection<B extends PaginatedDataBloc> extends HookWidget {
   const MediaSection({
@@ -213,7 +212,10 @@ class MediaSection<B extends PaginatedDataBloc> extends HookWidget {
     if (media == null) return const SizedBox();
 
     return GestureDetector(
-      onTap: () => context.push('${RouteConstants.mediaDetail}?id=${media.id}'),
+      onTap: () => NavigationHelper.goToMediaDetailScreen(
+        context: context,
+        mediaId: media.id,
+      ),
       child: Container(
         margin: const EdgeInsets.only(
           right: 15,

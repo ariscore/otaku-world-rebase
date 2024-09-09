@@ -87,4 +87,5 @@ class DiscoverConstants {
 
 class UiConstants {
   static const noImageUrl = '';
+  static const noName = '';
 }

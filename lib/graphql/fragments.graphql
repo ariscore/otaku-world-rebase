@@ -395,3 +395,7 @@ fragment ActivityReply on ActivityReply {
     likeCount
     createdAt
 }
+fragment PageInfo on PageInfo {
+    currentPage
+    hasNextPage
+}

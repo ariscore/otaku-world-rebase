@@ -18,14 +18,17 @@ class Characters extends StatefulWidget {
   State<Characters> createState() => _CharactersState();
 }
 
-class _CharactersState extends State<Characters> {
+class _CharactersState extends State<Characters>
+    with AutomaticKeepAliveClientMixin<Characters> {
   List<String> availableLanguages = [];
 
   String selectedLanguage = "Japanese";
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocBuilder<CharactersBloc, PaginatedDataState>(
+      key: const PageStorageKey<String>('Characters'),
       builder: (context, state) {
         if (state is PaginatedDataInitial) {
           final client = (context.read<GraphqlClientCubit>().state
@@ -56,7 +59,6 @@ class _CharactersState extends State<Characters> {
               return false;
             },
             child: CustomScrollView(
-              key: const PageStorageKey<String>('Characters'),
               slivers: [
                 if (availableLanguages.isNotEmpty)
                   SliverPadding(
@@ -184,4 +186,7 @@ class _CharactersState extends State<Characters> {
 
     availableLanguages.sort();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
