@@ -9,8 +9,10 @@ import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/staff/staff_bloc.dart';
+import 'package:otaku_world/features/media_detail/widgets/main_tab_view.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/media_detail/characters/characters_bloc.dart';
@@ -163,7 +165,60 @@ class MediaDetailScreen extends HookWidget {
                 "query Id : $mediaId ---> State Id : ${media.id}  Key Id : ---> $key ",
                 name: "MediaDetailScreenMatched",
               );
-
+              return Scaffold(
+                  extendBodyBehindAppBar: true,
+                  appBar: AppBar(
+                    leading: CustomBackButton(
+                      onPressed: () {
+                        _onPopInvoked(context);
+                      },
+                    ),
+                    backgroundColor: AppColors.transparent,
+                    surfaceTintColor: AppColors.raisinBlack,
+                    actions: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: SvgPicture.asset(
+                          Assets.iconsFavourite,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: SvgPicture.asset(
+                          Assets.iconsMoreVertical,
+                        ),
+                      ),
+                    ],
+                  ),
+                  body: Stack(
+                    children: <Widget>[
+                      buildPosterContent(
+                        context,
+                        media,
+                        height,
+                        width,
+                        tabController,
+                        tabs,
+                      ),
+                      SlidingUpPanel(
+                        controller: PanelController(),
+                        minHeight: 290,
+                        maxHeight: MediaQuery.of(context).size.height - 100,
+                        panel: MainTabView(
+                          tabs: [
+                            MainTabData(
+                              label: tabs[1],
+                              child: const Overview(),
+                            ),
+                            MainTabData(
+                              label: tabs[2],
+                              child: const Overview(),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ));
               return NestedScrollView(
                 headerSliverBuilder: (context, innerBoxIsScrolled) {
                   return [
