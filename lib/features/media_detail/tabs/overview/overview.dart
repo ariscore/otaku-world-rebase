@@ -26,7 +26,10 @@ class Overview extends StatefulHookWidget {
   State<Overview> createState() => _OverviewState();
 }
 
-class _OverviewState extends State<Overview> {
+class _OverviewState extends State<Overview>
+    with AutomaticKeepAliveClientMixin<Overview> {
+  @override
+  bool get wantKeepAlive => true;
   late YoutubePlayerController youtubePlayerController;
   late String youtubeId;
 
@@ -38,12 +41,8 @@ class _OverviewState extends State<Overview> {
   }
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    super.build(context);
     final media =
         (context.read<MediaDetailBloc>().state as MediaDetailLoaded).media;
     youtubeId = media.trailer == null ? "" : media.trailer!.id.toString();
@@ -57,7 +56,6 @@ class _OverviewState extends State<Overview> {
     youtubePlayerController = YoutubePlayerController(
       initialVideoId: youtubeId,
       flags: const YoutubePlayerFlags(
-
         autoPlay: false,
         showLiveFullscreenButton: false,
       ),
@@ -90,30 +88,30 @@ class _OverviewState extends State<Overview> {
         youtubeId == ""
             ? const SizedBox()
             : const Text(
-          "Trailer",
-          style: AppTextStyles.titleSectionStyle,
-        ),
+                "Trailer",
+                style: AppTextStyles.titleSectionStyle,
+              ),
         SizedBox(
           height: youtubeId == "" ? 0 : 5,
         ),
         youtubeId == ""
             ? const SizedBox()
             : YoutubePlayer(
-          aspectRatio: 16 / 9,
-          bottomActions: [
-            CurrentPosition(),
-            ProgressBar(
-              controller: youtubePlayerController,
-              colors: const ProgressBarColors(
-                handleColor: AppColors.sunsetOrange,
-                playedColor: AppColors.sunsetOrange,
+                aspectRatio: 16 / 9,
+                bottomActions: [
+                  CurrentPosition(),
+                  ProgressBar(
+                    controller: youtubePlayerController,
+                    colors: const ProgressBarColors(
+                      handleColor: AppColors.sunsetOrange,
+                      playedColor: AppColors.sunsetOrange,
+                    ),
+                    isExpanded: true,
+                  ),
+                  RemainingDuration(),
+                ],
+                controller: youtubePlayerController,
               ),
-              isExpanded: true,
-            ),
-            RemainingDuration(),
-          ],
-          controller: youtubePlayerController,
-        ),
         const SizedBox(
           height: 20,
         ),
@@ -208,10 +206,10 @@ class _OverviewState extends State<Overview> {
         TextSpan(
           text: genre,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            color: AppColors.white,
-            fontWeight: FontWeight.w500,
-            fontFamily: 'Poppins',
-          ),
+                color: AppColors.white,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Poppins',
+              ),
         ),
       );
 
@@ -220,10 +218,10 @@ class _OverviewState extends State<Overview> {
           TextSpan(
             text: ' · ',
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              color: AppColors.sunsetOrange,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Poppins',
-            ),
+                  color: AppColors.sunsetOrange,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Poppins',
+                ),
           ),
         );
       }

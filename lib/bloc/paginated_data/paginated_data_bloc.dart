@@ -66,8 +66,8 @@ abstract class PaginatedDataBloc<Q, E>
     } else {
       processData(response);
 
-      emit(PaginatedDataLoaded<E?>(
-        list: List.from(list),
+      emit(PaginatedDataLoaded<E>(
+        list: List.from(list.where((e) => e != null)),
         hasNextPage: hasNextPage,
       ));
     }

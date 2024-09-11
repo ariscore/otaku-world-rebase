@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:otaku_world/generated/assets.dart';
+
 import '../../../theme/colors.dart';
 
-class CustomDropdown extends StatefulWidget {
+class CustomDropdown<T extends Object> extends StatefulWidget {
   const CustomDropdown({
     super.key,
     this.title,
+    this.dropdownItemsValues,
     required this.dropdownItems,
     this.titleStyle,
     required this.initialValue,
@@ -16,21 +18,30 @@ class CustomDropdown extends StatefulWidget {
 
   final String? title;
   final TextStyle? titleStyle;
-  final List<String> dropdownItems;
-  final String initialValue;
-  final Function(String) onChange;
+  final List<T>?
+      dropdownItemsValues; // List of enum or other type values (optional)
+  final List<String> dropdownItems; // List of strings for display
+  final T initialValue;
+  final Function(T) onChange;
   final double borderRadius;
 
   @override
-  State<CustomDropdown> createState() => _CustomDropdownState();
+  State<CustomDropdown> createState() => _CustomDropdownState<T>();
 }
 
-class _CustomDropdownState extends State<CustomDropdown> {
-  late String selectedValue;
+class _CustomDropdownState<T extends Object> extends State<CustomDropdown<T>> {
+  late T selectedValue;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedValue = widget.initialValue;
+  }
 
   @override
   Widget build(BuildContext context) {
-    selectedValue = widget.initialValue;
+    final dropdownItemsValues =
+        widget.dropdownItemsValues ?? widget.dropdownItems.cast<T>();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +59,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
           const SizedBox(
             height: 15,
           ),
-        DropdownButtonFormField(
+        DropdownButtonFormField<T>(
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 10,
@@ -76,14 +87,15 @@ class _CustomDropdownState extends State<CustomDropdown> {
           dropdownColor: AppColors.jet,
           isExpanded: true,
           style: Theme.of(context).textTheme.headlineSmall,
-          items: widget.dropdownItems
-              .map(
-                (field) => DropdownMenuItem(
-                  value: field,
-                  child: Text(field),
-                ),
-              )
-              .toList(),
+          items: List<DropdownMenuItem<T>>.generate(
+            dropdownItemsValues.length,
+            (index) => DropdownMenuItem<T>(
+              value: dropdownItemsValues[index],
+              child: Text(
+                widget.dropdownItems[index],
+              ), // Display string
+            ),
+          ),
         ),
       ],
     );

@@ -1,16 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
 
-import '../../../config/router/router_constants.dart';
 import '../../../core/ui/placeholders/poster_placeholder.dart';
 import '../../../generated/assets.dart';
 import '../../../graphql/__generated/graphql/fragments.graphql.dart';
 import '../../../services/caching/image_cache_manager.dart';
 import '../../../theme/colors.dart';
+import '../../../utils/navigation_helper.dart';
 
 class ResultMediaCard extends StatelessWidget {
   const ResultMediaCard({super.key, this.media});
@@ -24,7 +23,10 @@ class ResultMediaCard extends StatelessWidget {
     if (media == null) return const SizedBox();
 
     return GestureDetector(
-      onTap: () => context.push('${RouteConstants.mediaDetail}?id=${media!.id}'),
+      onTap: () => NavigationHelper.goToMediaDetailScreen(
+        context: context,
+        mediaId: media!.id,
+      ),
       child: Container(
         height: UIUtils.getWidgetHeight(targetWidgetHeight: 150, screenHeight: size.height,),
         margin: const EdgeInsets.symmetric(

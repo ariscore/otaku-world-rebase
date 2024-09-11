@@ -16,8 +16,8 @@ class MessageActivityCard extends StatelessWidget {
       userName: activity.messenger?.name,
       receiverAvatarUrl: activity.recipient?.avatar?.medium,
       receiverUserName: activity.recipient?.name,
-      // receiverUserName: 'sldjfdl'*5,
       likeCount: activity.likeCount,
+      isLiked: activity.isLiked ?? false,
       replyCount: activity.replyCount,
       timestamp: activity.createdAt,
       child: Text(

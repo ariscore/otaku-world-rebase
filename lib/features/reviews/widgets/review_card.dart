@@ -1,12 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:otaku_world/features/reviews/widgets/review_by_user.dart';
 import 'package:otaku_world/features/reviews/widgets/review_profile_photo.dart';
 import 'package:otaku_world/features/reviews/widgets/review_rating.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
+import 'package:otaku_world/utils/navigation_helper.dart';
+
 import '../../../core/ui/placeholders/poster_placeholder.dart';
 
 class ReviewCard extends StatelessWidget {
@@ -16,8 +17,11 @@ class ReviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => context.push('/review-detail?id=${review.id}'),
+    return InkWell(
+      onTap: () => NavigationHelper.goToReviewDetailScreen(
+        context: context,
+        reviewId: review.id,
+      ),
       child: Container(
         margin: const EdgeInsets.symmetric(
           horizontal: 10,

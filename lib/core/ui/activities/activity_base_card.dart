@@ -2,8 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:otaku_world/core/ui/activities/activity_actions.dart';
-import 'package:go_router/go_router.dart';
-import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
@@ -18,6 +16,7 @@ class ActivityBaseCard extends StatelessWidget {
     this.receiverAvatarUrl,
     this.receiverUserName,
     required this.likeCount,
+    required this.isLiked,
     required this.replyCount,
     required this.timestamp,
   });
@@ -29,6 +28,7 @@ class ActivityBaseCard extends StatelessWidget {
   final String? receiverAvatarUrl;
   final String? receiverUserName;
   final int likeCount;
+  final bool isLiked;
   final int replyCount;
   final int timestamp;
 
@@ -92,7 +92,8 @@ class ActivityBaseCard extends StatelessWidget {
             ActivityActions(
               likeCount: likeCount,
               replyCount: replyCount,
-
+              activityId: id,
+              isLiked: isLiked,
             ),
             const SizedBox(height: 5),
             Text(

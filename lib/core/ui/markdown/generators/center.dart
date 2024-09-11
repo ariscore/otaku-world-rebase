@@ -28,7 +28,7 @@ class CenterNode extends SpanNode {
   InlineSpan build() {
     return WidgetSpan(
       child: Container(
-        color: Colors.red,
+        color: Colors.blue,
         height: 50,
         width: 50,
       ),
