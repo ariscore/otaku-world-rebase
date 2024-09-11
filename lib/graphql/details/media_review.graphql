@@ -1,0 +1,13 @@
+query MediaReviews($mediaId: Int, $page: Int , $reviewSort : ReviewSort) {
+    Media(id: $mediaId) {
+        id
+        reviews(page: $page, sort: [$reviewSort]) {
+            pageInfo {
+                ...PageInfo
+            }
+            nodes {
+                ...Review
+            }
+        }
+    }
+}
