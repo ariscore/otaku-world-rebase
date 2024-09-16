@@ -8258,6 +8258,7 @@ class Fragment$Review {
     this.summary,
     this.userRating,
     this.rating,
+    this.ratingAmount,
     this.score,
     required this.createdAt,
     required this.updatedAt,
@@ -8272,6 +8273,7 @@ class Fragment$Review {
     final l$summary = json['summary'];
     final l$userRating = json['userRating'];
     final l$rating = json['rating'];
+    final l$ratingAmount = json['ratingAmount'];
     final l$score = json['score'];
     final l$createdAt = json['createdAt'];
     final l$updatedAt = json['updatedAt'];
@@ -8286,6 +8288,7 @@ class Fragment$Review {
           ? null
           : fromJson$Enum$ReviewRating((l$userRating as String)),
       rating: (l$rating as int?),
+      ratingAmount: (l$ratingAmount as int?),
       score: (l$score as int?),
       createdAt: (l$createdAt as int),
       updatedAt: (l$updatedAt as int),
@@ -8307,6 +8310,8 @@ class Fragment$Review {
   final Enum$ReviewRating? userRating;
 
   final int? rating;
+
+  final int? ratingAmount;
 
   final int? score;
 
@@ -8333,6 +8338,8 @@ class Fragment$Review {
         l$userRating == null ? null : toJson$Enum$ReviewRating(l$userRating);
     final l$rating = rating;
     _resultData['rating'] = l$rating;
+    final l$ratingAmount = ratingAmount;
+    _resultData['ratingAmount'] = l$ratingAmount;
     final l$score = score;
     _resultData['score'] = l$score;
     final l$createdAt = createdAt;
@@ -8356,6 +8363,7 @@ class Fragment$Review {
     final l$summary = summary;
     final l$userRating = userRating;
     final l$rating = rating;
+    final l$ratingAmount = ratingAmount;
     final l$score = score;
     final l$createdAt = createdAt;
     final l$updatedAt = updatedAt;
@@ -8368,6 +8376,7 @@ class Fragment$Review {
       l$summary,
       l$userRating,
       l$rating,
+      l$ratingAmount,
       l$score,
       l$createdAt,
       l$updatedAt,
@@ -8404,6 +8413,11 @@ class Fragment$Review {
     final l$rating = rating;
     final lOther$rating = other.rating;
     if (l$rating != lOther$rating) {
+      return false;
+    }
+    final l$ratingAmount = ratingAmount;
+    final lOther$ratingAmount = other.ratingAmount;
+    if (l$ratingAmount != lOther$ratingAmount) {
       return false;
     }
     final l$score = score;
@@ -8467,6 +8481,7 @@ abstract class CopyWith$Fragment$Review<TRes> {
     String? summary,
     Enum$ReviewRating? userRating,
     int? rating,
+    int? ratingAmount,
     int? score,
     int? createdAt,
     int? updatedAt,
@@ -8497,6 +8512,7 @@ class _CopyWithImpl$Fragment$Review<TRes>
     Object? summary = _undefined,
     Object? userRating = _undefined,
     Object? rating = _undefined,
+    Object? ratingAmount = _undefined,
     Object? score = _undefined,
     Object? createdAt = _undefined,
     Object? updatedAt = _undefined,
@@ -8513,6 +8529,9 @@ class _CopyWithImpl$Fragment$Review<TRes>
             ? _instance.userRating
             : (userRating as Enum$ReviewRating?),
         rating: rating == _undefined ? _instance.rating : (rating as int?),
+        ratingAmount: ratingAmount == _undefined
+            ? _instance.ratingAmount
+            : (ratingAmount as int?),
         score: score == _undefined ? _instance.score : (score as int?),
         createdAt: createdAt == _undefined || createdAt == null
             ? _instance.createdAt
@@ -8558,6 +8577,7 @@ class _CopyWithStubImpl$Fragment$Review<TRes>
     String? summary,
     Enum$ReviewRating? userRating,
     int? rating,
+    int? ratingAmount,
     int? score,
     int? createdAt,
     int? updatedAt,
@@ -8607,6 +8627,13 @@ const fragmentDefinitionReview = FragmentDefinitionNode(
     ),
     FieldNode(
       name: NameNode(value: 'rating'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'ratingAmount'),
       alias: null,
       arguments: [],
       directives: [],

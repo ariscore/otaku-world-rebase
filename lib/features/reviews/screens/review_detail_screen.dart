@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/reviews/review_detail/review_detail_bloc.dart';
+import 'package:otaku_world/bloc/reviews/reviews/review_bloc.dart';
 import 'package:otaku_world/core/ui/error_text.dart';
 import 'package:otaku_world/core/ui/markdown/markdown.dart';
 import 'package:otaku_world/core/ui/shimmers/review_detail_shimmer.dart';
@@ -27,14 +28,19 @@ import '../../../theme/colors.dart';
 import '../../../utils/formatting_utils.dart';
 import '../../../utils/navigation_helper.dart';
 
-class ReviewDetailScreen extends StatelessWidget {
-  const ReviewDetailScreen({super.key, required this.reviewId});
+class ReviewDetailScreen extends StatefulWidget {
+  const ReviewDetailScreen({super.key});
 
-  // final Fragment$Review review;
-  final int reviewId;
+  @override
+  State<ReviewDetailScreen> createState() => _ReviewDetailScreenState();
+}
+
+class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
+  late int reviewId;
 
   @override
   Widget build(BuildContext context) {
+    context.read<ReviewsBloc>();
     final client =
         (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
             .client;
@@ -56,40 +62,50 @@ class ReviewDetailScreen extends StatelessWidget {
               if (state is ReviewDetailInitial) {
                 context
                     .read<ReviewDetailBloc>()
-                    .add(LoadReviewDetail(id: reviewId, client: client));
+                    .add(LoadReviewDetail(client: client));
                 return const ReviewDetailShimmer();
               } else if (state is ReviewDetailLoading) {
                 return const ReviewDetailShimmer();
               } else if (state is ReviewDetailLoaded) {
                 final review = state.review;
-                if (review.id != reviewId) {
-                  context
-                      .read<ReviewDetailBloc>()
-                      .add(LoadReviewDetail(id: reviewId, client: client));
-                }
+                reviewId = review.id;
 
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // cover image
-                    Container(
-                      foregroundDecoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment(0.00, -1.00),
-                          end: Alignment(0, 1),
-                          colors: [Color(0x001F1F1F), Color(0xFF202020)],
+                    Stack(
+                      children: [
+                        SizedBox(
+                          height: UIUtils.getWidgetHeight(
+                            targetWidgetHeight: 340,
+                            screenHeight: height,
+                          ),
+                          width: width,
+                          child: BannerImage(
+                            url: review.media!.coverImage!.extraLarge.toString(),
+                            // placeHolderName: Assets.placeholders340x72,
+                          ),
                         ),
-                      ),
-                      height: UIUtils.getWidgetHeight(
-                        targetWidgetHeight: 340,
-                        screenHeight: height,
-                      ),
-                      width: width,
-                      child: BannerImage(
-                        url: review.media!.coverImage!.extraLarge.toString(),
-                        // placeHolderName: Assets.placeholders340x72,
-                      ),
+                        Positioned(
+                          bottom: -0.5,
+                          child: Container(
+                            height: UIUtils.getWidgetHeight(
+                              targetWidgetHeight: 340,
+                              screenHeight: height,
+                            ),
+                            width: width,
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [Colors.transparent, AppColors.raisinBlack,],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 15, bottom: 10),
@@ -170,11 +186,10 @@ class ReviewDetailScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(
                         left: 15,
                         right: 15,
-                        bottom: 10,
+                        bottom: 30,
                       ),
                       child: ReviewRating(
-                        rating: review.rating.toString(),
-                        averageScore: review.score.toString(),
+                        review: review,
                       ),
                     ),
                   ],
@@ -185,7 +200,7 @@ class ReviewDetailScreen extends StatelessWidget {
                   onTryAgain: () {
                     context
                         .read<ReviewDetailBloc>()
-                        .add(LoadReviewDetail(id: reviewId, client: client));
+                        .add(LoadReviewDetail(client: client));
                   },
                 );
               } else {
@@ -331,7 +346,9 @@ class ReviewDetailScreen extends StatelessWidget {
               BottomSheetComponent(
                 onTap: () {
                   Share.share(
-                      "Check out this anime review: https://otaku-world-8a7f4.firebaseapp.com/review-detail?id=$reviewId");
+                    "Check out this anime review: https://otaku-world-8a7f4.firebaseapp.com/"
+                    "review-detail?id=$reviewId",
+                  );
                   context.pop();
                 },
                 iconName: Assets.iconsShare,

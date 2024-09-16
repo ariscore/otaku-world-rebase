@@ -52,7 +52,10 @@ class Assets {
   static const String iconsSearchSmall = 'assets/icons/search-small.svg';
   static const String iconsShare = 'assets/icons/share.svg';
   static const String iconsStar = 'assets/icons/star.svg';
+  static const String iconsThumbsDown = 'assets/icons/thumbs-down.svg';
+  static const String iconsThumbsDownFilled = 'assets/icons/thumbs-down-filled.svg';
   static const String iconsThumbsUp = 'assets/icons/thumbs-up.svg';
+  static const String iconsThumbsUpFilled = 'assets/icons/thumbs-up-filled.svg';
   static const String iconsTrendUp = 'assets/icons/trend-up.svg';
   static const String iconsUserGroup = 'assets/icons/user-group.svg';
   static const String iconsViewSlider = 'assets/icons/view-slider.svg';

@@ -10,7 +10,7 @@ part '../reviews/review_event.dart';
 
 part '../reviews/review_state.dart';
 
-class ReviewBloc
+class ReviewsBloc
     extends PaginatedDataBloc<Query$GetReviews, Fragment$Review> {
   @override
   Future<QueryResult<Query$GetReviews>> loadData(GraphQLClient client) {

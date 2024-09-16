@@ -3,7 +3,7 @@ query GetReviews($page:Int){
         pageInfo{
             hasNextPage
         }
-        reviews(sort: [CREATED_AT_DESC]){
+        reviews(sort: [CREATED_AT_DESC]) {
           ...Review
         }
     }
