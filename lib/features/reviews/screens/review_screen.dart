@@ -33,7 +33,7 @@ class ReviewScreen<B extends PaginatedDataBloc> extends HookWidget {
         if (currentScroll == maxScroll) {
           dev.log('Max scrolled', name: 'Reviews Screen');
 
-          final reviewBloc = context.read<ReviewBloc>();
+          final reviewBloc = context.read<ReviewsBloc>();
 
           final hasNextPage =
               (reviewBloc.state as PaginatedDataLoaded).hasNextPage;
@@ -48,13 +48,13 @@ class ReviewScreen<B extends PaginatedDataBloc> extends HookWidget {
       return null;
     });
 
-    return BlocBuilder<ReviewBloc, PaginatedDataState>(
+    return BlocBuilder<ReviewsBloc, PaginatedDataState>(
       builder: (context, state) {
         if (state is PaginatedDataInitial) {
           final client = (context.read<GraphqlClientCubit>().state
                   as GraphqlClientInitialized)
               .client;
-          context.read<ReviewBloc>().add(LoadData(client));
+          context.read<ReviewsBloc>().add(LoadData(client));
           return _buildLoadingScaffold();
         } else if (state is PaginatedDataLoading) {
           return _buildLoadingScaffold();
@@ -118,7 +118,7 @@ class ReviewScreen<B extends PaginatedDataBloc> extends HookWidget {
             final client = (context.read<GraphqlClientCubit>().state
                     as GraphqlClientInitialized)
                 .client;
-            context.read<ReviewBloc>().add(LoadData(client));
+            context.read<ReviewsBloc>().add(LoadData(client));
           });
         } else {
           return const Text('Unknown State');
@@ -131,7 +131,7 @@ class ReviewScreen<B extends PaginatedDataBloc> extends HookWidget {
     final client =
         (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
             .client;
-    context.read<ReviewBloc>().add(RefreshData(client));
+    context.read<ReviewsBloc>().add(RefreshData(client));
   }
 
   Widget _buildErrorScaffold(String message, VoidCallback onTryAgain) {

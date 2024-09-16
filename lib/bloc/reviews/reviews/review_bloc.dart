@@ -5,11 +5,12 @@ import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
-
+import 'dart:developer' as dev;
 import '../../../graphql/__generated/graphql/reviews/reviews.graphql.dart';
 import '../../../graphql/__generated/graphql/schema.graphql.dart';
 
 part '../reviews/review_event.dart';
+
 part '../reviews/review_state.dart';
 
 class ReviewBloc extends PaginatedDataBloc<Query$GetReviews, Fragment$Review> {
@@ -24,6 +25,8 @@ class ReviewBloc extends PaginatedDataBloc<Query$GetReviews, Fragment$Review> {
     add(LoadData(client));
   }
 
+class ReviewsBloc
+    extends PaginatedDataBloc<Query$GetReviews, Fragment$Review> {
   @override
   Future<QueryResult<Query$GetReviews>> loadData(GraphQLClient client) {
     return client.query$GetReviews(

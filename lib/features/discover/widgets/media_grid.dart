@@ -57,7 +57,7 @@ class MediaGrid extends StatelessWidget {
     if (media == null) return const SizedBox();
 
     return GestureDetector(
-      onTap: () => context.go('/media-detail?id=${media.id}'),
+      onTap: () => context.push('/media-detail?id=${media.id}'),
       child: Container(
         margin: const EdgeInsets.symmetric(
           horizontal: 7.5,

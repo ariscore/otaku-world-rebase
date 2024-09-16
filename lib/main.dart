@@ -15,7 +15,6 @@ import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 
 import 'package:otaku_world/bloc/recommended_anime/recommended_anime_bloc.dart';
 import 'package:otaku_world/bloc/recommended_manga/recommended_manga_bloc.dart';
-import 'package:otaku_world/bloc/reviews/review_detail/review_detail_bloc.dart';
 import 'package:otaku_world/bloc/reviews/reviews/review_bloc.dart';
 import 'package:otaku_world/bloc/routes/redirect_route_cubit.dart';
 // import 'package:otaku_world/bloc/text_field/clear_text_cubit.dart';
@@ -78,13 +77,7 @@ class MyApp extends StatelessWidget {
           create: (context) => RecommendedMangaBloc(),
         ),
         BlocProvider(
-          create: (context) => ReviewBloc(),
-        ),
-        BlocProvider(
           create: (context) => WeekCalendarBloc()..add(InitializeCalendar()),
-        ),
-        BlocProvider(
-          create: (context) => ReviewDetailBloc(),
         ),
         BlocProvider(
           create: (context) => RecommendationAnimeBloc(),
@@ -143,7 +136,7 @@ class MyApp extends StatelessWidget {
                     .initializeGraphqlClient(state.token);
               } else if (state is UnAuthenticated) {
                 context.read<UpcomingEpisodesBloc>().add(ResetData());
-                context.read<ReviewBloc>().add(ResetData());
+                context.read<ReviewsBloc>().add(ResetData());
                 context.read<TrendingAnimeBloc>().add(ResetData());
                 context.read<RecommendedAnimeBloc>().add(ResetData());
                 context.read<TrendingMangaBloc>().add(ResetData());

@@ -106,10 +106,7 @@ class ReviewCard extends StatelessWidget {
                       right: 5.0,
                       bottom: 15.0,
                     ),
-                    child: ReviewRating(
-                      averageScore: review.score.toString(),
-                      rating: review.rating.toString(),
-                    ),
+                    child: ReviewCardRating(review: review),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 5),

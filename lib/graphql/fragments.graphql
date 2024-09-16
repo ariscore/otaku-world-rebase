@@ -156,11 +156,12 @@ fragment SearchResultMedia on Media {
     meanScore
 }
 
-fragment Review on Review{
+fragment Review on Review {
     id
     summary
     userRating
     rating
+    ratingAmount
     score
     createdAt
     updatedAt

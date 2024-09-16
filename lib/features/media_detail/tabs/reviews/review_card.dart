@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:otaku_world/features/reviews/widgets/review_profile_photo.dart';
-import 'package:otaku_world/features/reviews/widgets/review_rating.dart';
+import 'package:otaku_world/features/reviews/widgets/review_card_rating.dart';
 import 'package:otaku_world/theme/decorations.dart';
 
 import '../../../../constants/string_constants.dart';
@@ -71,10 +71,7 @@ class ReviewCard extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            ReviewRating(
-              rating: review.rating.toString(),
-              averageScore: review.score.toString(),
-            ),
+            ReviewCardRating(review: review),
             const SizedBox(
               height: 5,
             ),
