@@ -18,26 +18,27 @@ class ReviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      splashColor: AppColors.blackShadow,
+      borderRadius: const BorderRadius.all(
+        Radius.circular(15),
+      ),
       onTap: () => NavigationHelper.goToReviewDetailScreen(
         context: context,
         reviewId: review.id,
       ),
-      child: Container(
-        margin: const EdgeInsets.symmetric(
-          horizontal: 10,
-          vertical: 7.5,
-        ),
+      child: Ink(
         decoration: ShapeDecoration(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            shadows: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.25),
-                blurRadius: 4,
-                offset: const Offset(0, 4),
-              )
-            ]),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          shadows: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.25),
+              blurRadius: 4,
+              offset: const Offset(0, 4),
+            )
+          ],
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -51,9 +52,8 @@ class ReviewCard extends StatelessWidget {
             Container(
               decoration: const ShapeDecoration(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(15),
-                    bottomRight: Radius.circular(15),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(15),
                   ),
                 ),
                 gradient: LinearGradient(

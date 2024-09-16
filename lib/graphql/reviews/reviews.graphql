@@ -1,10 +1,10 @@
-query GetReviews($page:Int){
+query GetReviews($page:Int, $mediaSort : ReviewSort , $type : MediaType){
     Page(perPage: 20, page:$page){
         pageInfo{
             hasNextPage
         }
-        reviews(sort: [CREATED_AT_DESC]){
-          ...Review
+        reviews(sort: [$mediaSort],mediaType: $type){
+            ...Review
         }
     }
 }

@@ -1,17 +1,20 @@
+import 'dart:developer' as dev;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'dart:developer' as dev;
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/bloc/reviews/reviews/review_bloc.dart';
-import 'package:otaku_world/core/ui/error_text.dart';
-import 'package:otaku_world/core/ui/shimmers/reviews_shimmer_list.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/appbars/simple_sliver_app_bar.dart';
+import 'package:otaku_world/core/ui/error_text.dart';
+import 'package:otaku_world/core/ui/shimmers/reviews_shimmer_list.dart';
 import 'package:otaku_world/features/reviews/widgets/review_card.dart';
 import 'package:otaku_world/features/reviews/widgets/scroll_to_top_fab.dart';
 
+import '../../../generated/assets.dart';
 import '../../../theme/colors.dart';
 
 class ReviewScreen<B extends PaginatedDataBloc> extends HookWidget {
@@ -57,44 +60,59 @@ class ReviewScreen<B extends PaginatedDataBloc> extends HookWidget {
           return _buildLoadingScaffold();
         } else if (state is PaginatedDataLoaded) {
           return Scaffold(
-              floatingActionButton: ScrollToTopFAB(
+            floatingActionButton: ScrollToTopFAB(
+              controller: reviewsScrollController,
+              tag: 'review_fab',
+            ),
+            body: RefreshIndicator(
+              backgroundColor: AppColors.raisinBlack,
+              onRefresh: () => _refreshPage(context),
+              child: CustomScrollView(
+                clipBehavior: Clip.none,
                 controller: reviewsScrollController,
-                tag: 'review_fab',
-              ),
-              body: RefreshIndicator(
-                backgroundColor: AppColors.raisinBlack,
-                onRefresh: () => _refreshPage(context),
-                child: CustomScrollView(
-                  clipBehavior: Clip.none,
-                  controller: reviewsScrollController,
-                  slivers: [
-                    const SimpleSliverAppBar(
-                      title: 'Reviews',
-                      floating: true,
-                      isPinned: false,
-                    ),
-                    SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        (context, index) {
-                          return ReviewCard(
-                            review: state.list[index]!,
-                          );
-                        },
-                        childCount: state.list.length,
-                      ),
-                    ),
-                    if (state.hasNextPage)
-                      const SliverToBoxAdapter(
-                        child: Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: CircularProgressIndicator(),
-                          ),
+                slivers: [
+                  SimpleSliverAppBar(
+                    title: 'Reviews',
+                    floating: true,
+                    isPinned: false,
+                    actions: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: SvgPicture.asset(
+                          Assets.iconsFilterVertical,
                         ),
                       ),
-                  ],
-                ),
-              ));
+                    ],
+                  ),
+                  SliverPadding(
+                    padding: const EdgeInsets.all(10.0),
+                    sliver: SliverList.separated(
+                      itemBuilder: (context, index) {
+                        return const SizedBox(
+                          height: 10,
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return ReviewCard(
+                          review: state.list[index]!,
+                        );
+                      },
+                      itemCount: state.list.length,
+                    ),
+                  ),
+                  if (state.hasNextPage)
+                    const SliverToBoxAdapter(
+                      child: Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          );
         } else if (state is PaginatedDataError) {
           return _buildErrorScaffold(state.message, () {
             final client = (context.read<GraphqlClientCubit>().state

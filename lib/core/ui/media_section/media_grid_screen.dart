@@ -163,8 +163,10 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
                   child: Stack(
                     children: [
                       GestureDetector(
-                        onTap: () => context.push(
-                            '${RouteConstants.mediaDetail}?id=${media.id}'),
+                        onTap: () => NavigationHelper.goToMediaDetailScreen(
+                          context: context,
+                          mediaId: media.id,
+                        ),
                         child: _buildMediaPoster(
                           media.coverImage?.large,
                           media?.type ?? Enum$MediaType.$unknown,
