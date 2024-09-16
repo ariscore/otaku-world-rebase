@@ -8,8 +8,7 @@ abstract class ReviewDetailEvent extends Equatable {
 }
 
 class LoadReviewDetail extends ReviewDetailEvent {
-  const LoadReviewDetail({required this.id, required this.client});
+  const LoadReviewDetail({required this.client});
 
-  final int id;
   final GraphQLClient client;
 }
