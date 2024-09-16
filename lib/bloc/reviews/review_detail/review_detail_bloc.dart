@@ -11,9 +11,11 @@ part 'review_detail_event.dart';
 part 'review_detail_state.dart';
 
 class ReviewDetailBloc extends Bloc<ReviewDetailEvent, ReviewDetailState> {
-  ReviewDetailBloc() : super(ReviewDetailInitial()) {
+  ReviewDetailBloc({required this.reviewId}) : super(ReviewDetailInitial()) {
     on<LoadReviewDetail>(_onLoadReviewDetail);
   }
+
+  final int reviewId;
 
   Future<void> _onLoadReviewDetail(
     LoadReviewDetail event,
@@ -22,8 +24,9 @@ class ReviewDetailBloc extends Bloc<ReviewDetailEvent, ReviewDetailState> {
     emit(ReviewDetailLoading());
     final response = await event.client.query$GetReviewDetail(
       Options$Query$GetReviewDetail(
+        fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$GetReviewDetail(
-          id: event.id,
+          id: reviewId,
         ),
       ),
     );

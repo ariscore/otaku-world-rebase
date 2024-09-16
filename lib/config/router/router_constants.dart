@@ -41,11 +41,11 @@ class RouteConstants {
   static const birthdayStaff = '$discoverStaff/$birthdayStaffPath';
   static const mostFavoriteStaffPath = 'most-favorite-staff';
   static const mostFavoriteStaff = '$discoverStaff/$mostFavoriteStaffPath';
-
   static const discoverStudios = '/discover-studios';
 
   static const reviews = '/reviews';
-  static const reviewDetail = '/review-detail';
+  static const reviewDetailPath = 'review-detail';
+  static const reviewDetail = '$reviews/$reviewDetailPath';
   static const calendar = '/calendar';
   static const search = '/search';
   static const trendingAnime = '/trending-anime';
