@@ -11,7 +11,6 @@ import 'package:otaku_world/bloc/discover/staff/most_favorite_staff_bloc.dart';
 import 'package:otaku_world/bloc/discover/studios/most_favorite_studios_bloc.dart';
 import 'package:otaku_world/bloc/recommendations/recommendation_anime_bloc.dart';
 import 'package:otaku_world/bloc/reviews/review_detail/review_detail_bloc.dart';
-import 'package:otaku_world/bloc/reviews/reviews/review_bloc.dart';
 import 'package:otaku_world/bloc/routes/redirect_route_cubit.dart';
 import 'package:otaku_world/bloc/search/search_studios/search_studios_bloc.dart';
 import 'package:otaku_world/bloc/social/activities/activities_bloc.dart';
@@ -59,6 +58,7 @@ import 'package:otaku_world/observers/go_route_observer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../bloc/media_detail/media_detail_bloc.dart';
+import '../../bloc/reviews/reviews/reviews_bloc.dart';
 import '../../bloc/search/search_bloc/search_bloc.dart';
 import '../../core/ui/app_scaffold.dart';
 import '../../features/anime_lists/slider_lists/recommended_manga_slider.dart';

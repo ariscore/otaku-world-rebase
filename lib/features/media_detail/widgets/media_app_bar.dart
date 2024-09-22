@@ -75,7 +75,7 @@ class _MediaAppBarState extends State<MediaAppBar> {
       surfaceTintColor: AppColors.raisinBlack,
       actions: [
         LikeButton(
-          isLiked: widget.media.isFavourite,
+          isLiked: isLiked,
           size: 25,
           likeBuilder: (isLiked) {
             return SvgPicture.asset(
