@@ -11,6 +11,7 @@ import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/appbars/simple_sliver_app_bar.dart';
 import 'package:otaku_world/core/ui/error_text.dart';
 import 'package:otaku_world/core/ui/shimmers/reviews_shimmer_list.dart';
+import 'package:otaku_world/features/reviews/widgets/review_bottom_sheet.dart';
 import 'package:otaku_world/features/reviews/widgets/review_card.dart';
 import 'package:otaku_world/features/reviews/widgets/scroll_to_top_fab.dart';
 
@@ -24,7 +25,7 @@ class ReviewScreen<B extends PaginatedDataBloc> extends HookWidget {
   Widget build(BuildContext context) {
     dev.log('Rebuilding Some screen', name: 'ReviewScreen');
     final reviewsScrollController = useScrollController();
-
+    final reviewBloc = context.read<ReviewsBloc>();
     useEffect(() {
       reviewsScrollController.addListener(() {
         final maxScroll = reviewsScrollController.position.maxScrollExtent;
@@ -32,8 +33,6 @@ class ReviewScreen<B extends PaginatedDataBloc> extends HookWidget {
 
         if (currentScroll == maxScroll) {
           dev.log('Max scrolled', name: 'Reviews Screen');
-
-          final reviewBloc = context.read<ReviewsBloc>();
 
           final hasNextPage =
               (reviewBloc.state as PaginatedDataLoaded).hasNextPage;
@@ -77,7 +76,17 @@ class ReviewScreen<B extends PaginatedDataBloc> extends HookWidget {
                     isPinned: false,
                     actions: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          showModalBottomSheet(
+                            backgroundColor: AppColors.darkCharcoal,
+                            context: context,
+                            builder: (context) {
+                              return ReviewBottomSheet(
+                                reviewsBloc: reviewBloc,
+                              );
+                            },
+                          );
+                        },
                         icon: SvgPicture.asset(
                           Assets.iconsFilterVertical,
                         ),

@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:otaku_world/features/reviews/widgets/review_by_user.dart';
+import 'package:otaku_world/features/reviews/widgets/review_card_rating.dart';
 import 'package:otaku_world/features/reviews/widgets/review_profile_photo.dart';
-import 'package:otaku_world/features/reviews/widgets/review_rating.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
