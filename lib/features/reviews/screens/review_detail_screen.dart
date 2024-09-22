@@ -6,7 +6,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/reviews/review_detail/review_detail_bloc.dart';
-import 'package:otaku_world/bloc/reviews/reviews/review_bloc.dart';
 import 'package:otaku_world/core/ui/error_text.dart';
 import 'package:otaku_world/core/ui/markdown/markdown.dart';
 import 'package:otaku_world/core/ui/shimmers/review_detail_shimmer.dart';
@@ -40,7 +39,6 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    context.read<ReviewsBloc>();
     final client =
         (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
             .client;

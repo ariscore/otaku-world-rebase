@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:developer' as dev;
-
 import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
