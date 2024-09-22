@@ -14,7 +14,7 @@ import 'package:otaku_world/features/reviews/widgets/scroll_to_top_fab.dart';
 import '../../../bloc/reviews/reviews/reviews_bloc.dart';
 import '../../../theme/colors.dart';
 
-class ReviewScreen<B extends PaginatedDataBloc> extends HookWidget {
+class ReviewScreen extends HookWidget {
   const ReviewScreen({super.key});
 
   @override
@@ -46,7 +46,9 @@ class ReviewScreen<B extends PaginatedDataBloc> extends HookWidget {
     });
 
     return BlocBuilder<ReviewsBloc, PaginatedDataState>(
+      buildWhen: (previous, current) => true,
       builder: (context, state) {
+        dev.log('Rebuilding review list');
         if (state is PaginatedDataInitial) {
           final client = (context.read<GraphqlClientCubit>().state
                   as GraphqlClientInitialized)

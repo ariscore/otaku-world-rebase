@@ -7,6 +7,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:like_button/like_button.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/reviews/rate_review/rate_review_cubit.dart';
+import 'package:otaku_world/bloc/reviews/reviews/reviews_bloc.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
@@ -15,9 +16,14 @@ import '../../../generated/assets.dart';
 import '../../../utils/ui_utils.dart';
 
 class ReviewRating extends StatefulWidget {
-  const ReviewRating({super.key, required this.review});
+  const ReviewRating({
+    super.key,
+    required this.review,
+    required this.onRatingUpdated,
+  });
 
   final Fragment$ReviewDetail review;
+  final Function(Enum$ReviewRating userRating) onRatingUpdated;
 
   @override
   State<ReviewRating> createState() => _ReviewRatingState();
@@ -49,26 +55,24 @@ class _ReviewRatingState extends State<ReviewRating> {
       children: [
         Row(
           children: [
-            _buildRatingOption(
-              context,
+            _RatingOption(
               isLiked: isUpVote,
               count: upVoteCount,
+              showColors: true,
               asset: Assets.iconsThumbsUp,
               likedAsset: Assets.iconsThumbsUpFilled,
-              showColors: true,
               onPressed: (isLiked) {
                 return toggleUpVote(context, client, isUpVote: isUpVote);
               },
             ),
             const SizedBox(width: 20),
-            _buildRatingOption(
-              context,
+            _RatingOption(
               isLiked: isDownVote,
               count: downVoteCount,
+              showColors: false,
               asset: Assets.iconsThumbsDown,
               likedAsset: Assets.iconsThumbsDownFilled,
-              showColors: false,
-              onPressed: (isLiked) async {
+              onPressed: (isLiked) {
                 return toggleDownVote(context, client, isDownVote: isDownVote);
               },
             ),
@@ -89,55 +93,6 @@ class _ReviewRatingState extends State<ReviewRating> {
                   ?.copyWith(fontFamily: 'Poppins'),
             ),
           ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildRatingOption(
-    BuildContext context, {
-    required bool isLiked,
-    required int count,
-    required String asset,
-    required String likedAsset,
-    required bool showColors,
-    required Future<bool?> Function(bool isLiked) onPressed,
-  }) {
-    return Row(
-      children: [
-        LikeButton(
-          isLiked: isLiked,
-          likeCount: count,
-          likeCountPadding: const EdgeInsets.only(left: 5),
-          size: 35,
-          circleColor: showColors
-              ? const CircleColor(
-                  start: AppColors.kiwi,
-                  end: Colors.green,
-                )
-              : const CircleColor(
-                  start: AppColors.maxRed,
-                  end: AppColors.sunsetOrange,
-                ),
-          bubblesColor: showColors
-              ? const BubblesColor(
-                  dotPrimaryColor: AppColors.kiwi,
-                  dotSecondaryColor: Colors.green,
-                )
-              : const BubblesColor(
-                  dotPrimaryColor: AppColors.raisinBlack,
-                  dotSecondaryColor: AppColors.raisinBlack,
-                ),
-          likeBuilder: (isLiked) {
-            return SvgPicture.asset(isLiked ? likedAsset : asset);
-          },
-          countBuilder: (likeCount, isLiked, text) {
-            return Text(
-              likeCount.toString(),
-              style: Theme.of(context).textTheme.headlineMedium,
-            );
-          },
-          onTap: onPressed,
         ),
       ],
     );
@@ -170,6 +125,9 @@ class _ReviewRatingState extends State<ReviewRating> {
             downVoteCount--;
           });
         }
+        widget.onRatingUpdated(
+          this.isUpVote ? Enum$ReviewRating.UP_VOTE : Enum$ReviewRating.NO_VOTE,
+        );
         return isLiked;
       },
     );
@@ -202,8 +160,69 @@ class _ReviewRatingState extends State<ReviewRating> {
             upVoteCount--;
           });
         }
+
+        widget.onRatingUpdated(
+          this.isDownVote
+              ? Enum$ReviewRating.DOWN_VOTE
+              : Enum$ReviewRating.NO_VOTE,
+        );
+
         return isLiked;
       },
+    );
+  }
+}
+
+class _RatingOption extends StatelessWidget {
+  const _RatingOption({
+    required this.isLiked,
+    required this.count,
+    required this.showColors,
+    required this.asset,
+    required this.likedAsset,
+    required this.onPressed,
+  });
+
+  final bool isLiked;
+  final int count;
+  final bool showColors;
+  final String asset;
+  final String likedAsset;
+  final Future<bool?> Function(bool isLiked) onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        LikeButton(
+          isLiked: isLiked,
+          likeCount: count,
+          likeCountPadding: const EdgeInsets.only(left: 5),
+          size: 35,
+          circleColor: showColors
+              ? const CircleColor(
+                  start: AppColors.kiwi,
+                  end: Colors.green,
+                )
+              : const CircleColor(
+                  start: AppColors.maxRed,
+                  end: AppColors.sunsetOrange,
+                ),
+          bubblesColor: showColors
+              ? const BubblesColor(
+                  dotPrimaryColor: AppColors.kiwi,
+                  dotSecondaryColor: Colors.green,
+                )
+              : const BubblesColor(
+                  dotPrimaryColor: AppColors.raisinBlack,
+                  dotSecondaryColor: AppColors.raisinBlack,
+                ),
+          likeBuilder: (isLiked) {
+            return SvgPicture.asset(isLiked ? likedAsset : asset);
+          },
+          onTap: onPressed,
+        ),
+      ],
     );
   }
 }

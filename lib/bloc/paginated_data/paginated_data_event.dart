@@ -20,3 +20,9 @@ class LoadData extends PaginatedDataEvent {
 
   final GraphQLClient client;
 }
+
+class UpdateData<E> extends PaginatedDataEvent {
+  const UpdateData({required this.list});
+
+  final List<E?> list;
+}

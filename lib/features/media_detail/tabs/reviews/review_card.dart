@@ -31,7 +31,7 @@ class ReviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () => NavigationHelper.goToReviewDetailScreen(
         context: context,
         reviewId: review.id,
