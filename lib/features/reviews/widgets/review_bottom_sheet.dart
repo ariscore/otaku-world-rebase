@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:otaku_world/bloc/reviews/reviews/review_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
 import 'package:otaku_world/utils/extensions.dart';
+import 'package:otaku_world/utils/ui_utils.dart';
 
+import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/paginated_data/paginated_data_bloc.dart';
+import '../../../bloc/reviews/reviews/reviews_bloc.dart';
 import '../../../core/ui/buttons/primary_button.dart';
 import '../../../graphql/__generated/graphql/schema.graphql.dart';
 import '../../../theme/colors.dart';
@@ -16,18 +19,6 @@ class ReviewBottomSheet extends StatelessWidget {
   });
 
   final ReviewsBloc reviewsBloc;
-  static const List<Enum$ReviewSort> reviewSort = [
-    Enum$ReviewSort.CREATED_AT_DESC,
-    Enum$ReviewSort.CREATED_AT,
-    Enum$ReviewSort.SCORE_DESC,
-    Enum$ReviewSort.SCORE,
-    Enum$ReviewSort.RATING_DESC,
-    Enum$ReviewSort.RATING,
-    Enum$ReviewSort.UPDATED_AT_DESC,
-    Enum$ReviewSort.UPDATED_AT
-  ];
-
-  static const List<String> mediaSort = ['All', 'Anime', 'Manga'];
 
   final TextStyle bottomSheetHeaderStyle = const TextStyle(
     color: AppColors.white,
@@ -46,11 +37,13 @@ class ReviewBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final reviewBloc = context.read<ReviewsBloc>();
     return BlocProvider.value(
-      value: reviewBloc,
+      value: reviewsBloc,
       child: Container(
-        height: 300,
+        height: UIUtils.getWidgetHeight(
+          targetWidgetHeight: 350,
+          screenHeight: MediaQuery.of(context).size.height,
+        ),
         width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
           color: AppColors.darkCharcoal,
@@ -59,10 +52,7 @@ class ReviewBottomSheet extends StatelessWidget {
             topRight: Radius.circular(15),
           ),
         ),
-        padding: const EdgeInsets.only(
-          top: 10,
-          left: 15,
-        ),
+        padding: const EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -92,16 +82,11 @@ class ReviewBottomSheet extends StatelessWidget {
             BlocBuilder<ReviewsBloc, PaginatedDataState>(
               builder: (context, state) {
                 return CustomDropdown(
-                  dropdownItems: mediaSort,
-                  initialValue: reviewBloc.mediaType?.displayTitle ?? 'All',
+                  dropdownItemsValues: reviewsBloc.mediaSort,
+                  dropdownItems: reviewsBloc.mediaSort,
+                  initialValue: reviewsBloc.mediaType,
                   onChange: (value) {
-                    if (value == 'Manga') {
-                      reviewBloc.mediaType = Enum$MediaType.MANGA;
-                    } else if (value == 'Anime') {
-                      reviewBloc.mediaType = Enum$MediaType.ANIME;
-                    } else {
-                      reviewBloc.mediaType = null;
-                    }
+                    reviewsBloc.mediaType = value;
                   },
                 );
               },
@@ -111,18 +96,47 @@ class ReviewBottomSheet extends StatelessWidget {
               style: bottomSheetHeaderStyle,
             ),
             const SizedBox(
+              height: 5,
+            ),
+            BlocBuilder<ReviewsBloc, PaginatedDataState>(
+              builder: (context, state) {
+                return CustomDropdown<Enum$ReviewSort>(
+                  dropdownItems: reviewsBloc.reviewSortList
+                      .map((e) => e.displayTitle())
+                      .toList(),
+                  dropdownItemsValues: reviewsBloc.reviewSortList,
+                  initialValue: reviewsBloc.reviewSort,
+                  onChange: (value) {
+                    reviewsBloc.reviewSort = value;
+                  },
+                );
+              },
+            ),
+            const SizedBox(
               height: 20,
             ),
             PrimaryButton(
               color: AppColors.silver,
-              onTap: () {},
+              onTap: () {
+                reviewsBloc.resetFilters();
+                final client = (context.read<GraphqlClientCubit>().state
+                        as GraphqlClientInitialized)
+                    .client;
+                reviewsBloc.applyFilters(client);
+              },
               label: 'Remove All',
             ),
             const SizedBox(
               height: 10,
             ),
             PrimaryButton(
-              onTap: () {},
+              onTap: () {
+                final client = (context.read<GraphqlClientCubit>().state
+                        as GraphqlClientInitialized)
+                    .client;
+                reviewsBloc.applyFilters(client);
+                context.pop();
+              },
               label: 'Apply Filters',
             )
           ],
