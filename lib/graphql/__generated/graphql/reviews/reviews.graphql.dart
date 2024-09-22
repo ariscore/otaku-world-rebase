@@ -2,6 +2,7 @@
 // DO NOT MODIFY
 // ignore_for_file: type=lint
 import '../fragments.graphql.dart';
+import '../schema.graphql.dart';
 import 'dart:async';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
@@ -9,9 +10,15 @@ import 'package:graphql/client.dart' as graphql;
 import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
 
 class Variables$Query$GetReviews {
-  factory Variables$Query$GetReviews({int? page}) =>
+  factory Variables$Query$GetReviews({
+    int? page,
+    Enum$ReviewSort? mediaSort,
+    Enum$MediaType? type,
+  }) =>
       Variables$Query$GetReviews._({
         if (page != null) r'page': page,
+        if (mediaSort != null) r'mediaSort': mediaSort,
+        if (type != null) r'type': type,
       });
 
   Variables$Query$GetReviews._(this._$data);
@@ -22,6 +29,17 @@ class Variables$Query$GetReviews {
       final l$page = data['page'];
       result$data['page'] = (l$page as int?);
     }
+    if (data.containsKey('mediaSort')) {
+      final l$mediaSort = data['mediaSort'];
+      result$data['mediaSort'] = l$mediaSort == null
+          ? null
+          : fromJson$Enum$ReviewSort((l$mediaSort as String));
+    }
+    if (data.containsKey('type')) {
+      final l$type = data['type'];
+      result$data['type'] =
+          l$type == null ? null : fromJson$Enum$MediaType((l$type as String));
+    }
     return Variables$Query$GetReviews._(result$data);
   }
 
@@ -29,11 +47,25 @@ class Variables$Query$GetReviews {
 
   int? get page => (_$data['page'] as int?);
 
+  Enum$ReviewSort? get mediaSort => (_$data['mediaSort'] as Enum$ReviewSort?);
+
+  Enum$MediaType? get type => (_$data['type'] as Enum$MediaType?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('page')) {
       final l$page = page;
       result$data['page'] = l$page;
+    }
+    if (_$data.containsKey('mediaSort')) {
+      final l$mediaSort = mediaSort;
+      result$data['mediaSort'] =
+          l$mediaSort == null ? null : toJson$Enum$ReviewSort(l$mediaSort);
+    }
+    if (_$data.containsKey('type')) {
+      final l$type = type;
+      result$data['type'] =
+          l$type == null ? null : toJson$Enum$MediaType(l$type);
     }
     return result$data;
   }
@@ -61,13 +93,36 @@ class Variables$Query$GetReviews {
     if (l$page != lOther$page) {
       return false;
     }
+    final l$mediaSort = mediaSort;
+    final lOther$mediaSort = other.mediaSort;
+    if (_$data.containsKey('mediaSort') !=
+        other._$data.containsKey('mediaSort')) {
+      return false;
+    }
+    if (l$mediaSort != lOther$mediaSort) {
+      return false;
+    }
+    final l$type = type;
+    final lOther$type = other.type;
+    if (_$data.containsKey('type') != other._$data.containsKey('type')) {
+      return false;
+    }
+    if (l$type != lOther$type) {
+      return false;
+    }
     return true;
   }
 
   @override
   int get hashCode {
     final l$page = page;
-    return Object.hashAll([_$data.containsKey('page') ? l$page : const {}]);
+    final l$mediaSort = mediaSort;
+    final l$type = type;
+    return Object.hashAll([
+      _$data.containsKey('page') ? l$page : const {},
+      _$data.containsKey('mediaSort') ? l$mediaSort : const {},
+      _$data.containsKey('type') ? l$type : const {},
+    ]);
   }
 }
 
@@ -80,7 +135,11 @@ abstract class CopyWith$Variables$Query$GetReviews<TRes> {
   factory CopyWith$Variables$Query$GetReviews.stub(TRes res) =
       _CopyWithStubImpl$Variables$Query$GetReviews;
 
-  TRes call({int? page});
+  TRes call({
+    int? page,
+    Enum$ReviewSort? mediaSort,
+    Enum$MediaType? type,
+  });
 }
 
 class _CopyWithImpl$Variables$Query$GetReviews<TRes>
@@ -96,9 +155,17 @@ class _CopyWithImpl$Variables$Query$GetReviews<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? page = _undefined}) => _then(Variables$Query$GetReviews._({
+  TRes call({
+    Object? page = _undefined,
+    Object? mediaSort = _undefined,
+    Object? type = _undefined,
+  }) =>
+      _then(Variables$Query$GetReviews._({
         ..._instance._$data,
         if (page != _undefined) 'page': (page as int?),
+        if (mediaSort != _undefined)
+          'mediaSort': (mediaSort as Enum$ReviewSort?),
+        if (type != _undefined) 'type': (type as Enum$MediaType?),
       }));
 }
 
@@ -108,7 +175,12 @@ class _CopyWithStubImpl$Variables$Query$GetReviews<TRes>
 
   TRes _res;
 
-  call({int? page}) => _res;
+  call({
+    int? page,
+    Enum$ReviewSort? mediaSort,
+    Enum$MediaType? type,
+  }) =>
+      _res;
 }
 
 class Query$GetReviews {
@@ -260,7 +332,25 @@ const documentNodeQueryGetReviews = DocumentNode(definitions: [
         ),
         defaultValue: DefaultValueNode(value: null),
         directives: [],
-      )
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'mediaSort')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ReviewSort'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'type')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'MediaType'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
     ],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
@@ -307,10 +397,13 @@ const documentNodeQueryGetReviews = DocumentNode(definitions: [
             arguments: [
               ArgumentNode(
                 name: NameNode(value: 'sort'),
-                value: ListValueNode(values: [
-                  EnumValueNode(name: NameNode(value: 'CREATED_AT_DESC'))
-                ]),
-              )
+                value: ListValueNode(
+                    values: [VariableNode(name: NameNode(value: 'mediaSort'))]),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'mediaType'),
+                value: VariableNode(name: NameNode(value: 'type')),
+              ),
             ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
