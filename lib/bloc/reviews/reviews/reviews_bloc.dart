@@ -34,9 +34,10 @@ class ReviewsBloc extends PaginatedDataBloc<Query$GetReviews, Fragment$Review> {
     add(LoadData(client));
   }
 
-  void resetFilters() {
+  void resetFilters(GraphQLClient client) {
     reviewSort = Enum$ReviewSort.CREATED_AT_DESC;
     mediaType = 'All';
+    applyFilters(client);
   }
 
   @override
@@ -118,7 +119,6 @@ class ReviewsBloc extends PaginatedDataBloc<Query$GetReviews, Fragment$Review> {
         userRating: userRating,
       );
       dev.log('Updated review: ${list[reviewIndex]}');
-
       add(UpdateData<Fragment$Review>(list: list));
     }
   }

@@ -44,8 +44,7 @@ class RouteConstants {
   static const discoverStudios = '/discover-studios';
 
   static const reviews = '/reviews';
-  static const reviewDetailPath = 'review-detail';
-  static const reviewDetail = '$reviews/$reviewDetailPath';
+  static const reviewDetail = '/review-detail';
   static const calendar = '/calendar';
   static const search = '/search';
   static const trendingAnime = '/trending-anime';

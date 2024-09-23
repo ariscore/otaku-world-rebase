@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:otaku_world/bloc/reviews/reviews/reviews_bloc.dart';
 import 'package:otaku_world/features/reviews/widgets/review_by_user.dart';
 import 'package:otaku_world/features/reviews/widgets/review_card_rating.dart';
 import 'package:otaku_world/features/reviews/widgets/review_profile_photo.dart';
@@ -17,21 +19,16 @@ class ReviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: AppColors.blackShadow,
-      borderRadius: const BorderRadius.all(
-        Radius.circular(15),
-      ),
+    return GestureDetector(
       onTap: () => NavigationHelper.goToReviewDetailScreen(
         context: context,
         reviewId: review.id,
+        bloc: context.read<ReviewsBloc>(),
       ),
-      child: Ink(
-        decoration: ShapeDecoration(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-          shadows: [
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 15),
+        decoration: BoxDecoration(
+          boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.25),
               blurRadius: 4,
@@ -52,8 +49,9 @@ class ReviewCard extends StatelessWidget {
             Container(
               decoration: const ShapeDecoration(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(15),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
                   ),
                 ),
                 gradient: LinearGradient(

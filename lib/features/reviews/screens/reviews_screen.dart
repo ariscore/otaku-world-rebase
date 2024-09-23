@@ -57,7 +57,7 @@ class ReviewScreen extends HookWidget {
           final client = (context.read<GraphqlClientCubit>().state
                   as GraphqlClientInitialized)
               .client;
-          context.read<ReviewsBloc>().add(LoadData(client));
+          reviewBloc.add(LoadData(client));
           return _buildLoadingScaffold();
         } else if (state is PaginatedDataLoading) {
           return _buildLoadingScaffold();
@@ -84,6 +84,7 @@ class ReviewScreen extends HookWidget {
                           showModalBottomSheet(
                             backgroundColor: AppColors.darkCharcoal,
                             context: context,
+                            isScrollControlled: true,
                             builder: (context) {
                               return ReviewBottomSheet(
                                 reviewsBloc: reviewBloc,
@@ -99,13 +100,13 @@ class ReviewScreen extends HookWidget {
                   ),
                   SliverPadding(
                     padding: const EdgeInsets.all(10.0),
-                    sliver: SliverList.separated(
+                    sliver: SliverList.builder(
+                      // itemBuilder: (context, index) {
+                      //   return const SizedBox(
+                      //     height: 10,
+                      //   );
+                      // },
                       itemBuilder: (context, index) {
-                        return const SizedBox(
-                          height: 10,
-                        );
-                      },
-                      separatorBuilder: (context, index) {
                         return ReviewCard(
                           review: state.list[index]!,
                         );

@@ -7,7 +7,6 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:like_button/like_button.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/reviews/rate_review/rate_review_cubit.dart';
-import 'package:otaku_world/bloc/reviews/reviews/reviews_bloc.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
@@ -120,10 +119,12 @@ class _ReviewRatingState extends State<ReviewRating> {
         upVoteCount += isLiked ? 1 : -1;
 
         if (isDownVote) {
-          setState(() {
-            isDownVote = false;
-            downVoteCount--;
-          });
+          Future.delayed(const Duration(milliseconds: 500), () {
+            setState(() {
+              isDownVote = false;
+              downVoteCount--;
+            });
+          },);
         }
         widget.onRatingUpdated(
           this.isUpVote ? Enum$ReviewRating.UP_VOTE : Enum$ReviewRating.NO_VOTE,
@@ -155,10 +156,12 @@ class _ReviewRatingState extends State<ReviewRating> {
         downVoteCount += isLiked ? 1 : -1;
 
         if (isUpVote) {
-          setState(() {
-            isUpVote = false;
-            upVoteCount--;
-          });
+          Future.delayed(const Duration(milliseconds: 500), () {
+            setState(() {
+              isUpVote = false;
+              upVoteCount--;
+            });
+          },);
         }
 
         widget.onRatingUpdated(

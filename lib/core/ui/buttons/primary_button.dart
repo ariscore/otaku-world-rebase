@@ -12,6 +12,7 @@ class PrimaryButton extends StatelessWidget {
     this.color = AppColors.sunsetOrange,
     this.fontSize,
     this.radius,
+    this.fontColor = AppColors.white,
   });
 
   final double horizontalPadding;
@@ -22,6 +23,7 @@ class PrimaryButton extends StatelessWidget {
   final double? fontSize;
   final double? radius;
   final double verticalPadding;
+  final Color fontColor;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +57,7 @@ class PrimaryButton extends StatelessWidget {
                 label,
                 style: Theme.of(context).textTheme.displayMedium?.copyWith(
                       fontSize: fontSize,
-                      color: AppColors.white,
+                      color: fontColor,
                       fontFamily: 'Poppins',
                     ),
               ),

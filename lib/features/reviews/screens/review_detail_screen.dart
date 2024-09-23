@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
+import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/bloc/reviews/review_detail/review_detail_bloc.dart';
 import 'package:otaku_world/bloc/reviews/reviews/reviews_bloc.dart';
 import 'package:otaku_world/core/ui/error_text.dart';
@@ -42,7 +43,6 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    widget.bloc;
     final client =
         (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
             .client;
@@ -239,6 +239,11 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
           reviewId: id,
           userRating: rating,
         );
+      } else if (widget.bloc is MediaReviewBloc) {
+        (widget.bloc as MediaReviewBloc).updateReviewRating(
+          reviewId: id,
+          userRating: rating,
+        );
       }
     }
   }
@@ -386,7 +391,7 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                   // TODO: Repair this
                   Share.share(
                     "Check out this anime review: https://otaku-world-8a7f4.firebaseapp.com/"
-                    "reviews/review-detail?id=$reviewId",
+                    "review-detail?id=$reviewId",
                   );
                   context.pop();
                 },
