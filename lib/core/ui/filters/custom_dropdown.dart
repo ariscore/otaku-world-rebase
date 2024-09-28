@@ -4,6 +4,7 @@ import 'package:otaku_world/generated/assets.dart';
 
 import '../../../theme/colors.dart';
 
+// If we are giving custom Type T value then we must provide dropdownItemsValues otherwise it does not work
 class CustomDropdown<T extends Object> extends StatefulWidget {
   const CustomDropdown({
     super.key,
@@ -14,16 +15,19 @@ class CustomDropdown<T extends Object> extends StatefulWidget {
     required this.initialValue,
     required this.onChange,
     this.borderRadius = 10,
+    this.selectedValueNotifier,
   });
 
   final String? title;
   final TextStyle? titleStyle;
+
   final List<T>?
       dropdownItemsValues; // List of enum or other type values (optional)
   final List<String> dropdownItems; // List of strings for display
   final T initialValue;
   final Function(T) onChange;
   final double borderRadius;
+  final ValueNotifier<T>? selectedValueNotifier;
 
   @override
   State<CustomDropdown> createState() => _CustomDropdownState<T>();
@@ -36,6 +40,15 @@ class _CustomDropdownState<T extends Object> extends State<CustomDropdown<T>> {
   void initState() {
     super.initState();
     selectedValue = widget.initialValue;
+    widget.selectedValueNotifier?.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    widget.selectedValueNotifier?.removeListener(() {});
+    super.dispose();
   }
 
   @override
@@ -75,6 +88,7 @@ class _CustomDropdownState<T extends Object> extends State<CustomDropdown<T>> {
           onChanged: (value) {
             setState(() {
               if (value != null) {
+                widget.selectedValueNotifier?.value = value;
                 widget.onChange(value);
                 selectedValue = value;
               }
@@ -83,18 +97,29 @@ class _CustomDropdownState<T extends Object> extends State<CustomDropdown<T>> {
           icon: SvgPicture.asset(Assets.iconsArrowDown),
           alignment: Alignment.topCenter,
           borderRadius: BorderRadius.circular(widget.borderRadius),
-          value: selectedValue,
+          value: widget.selectedValueNotifier?.value ?? selectedValue,
           dropdownColor: AppColors.jet,
           isExpanded: true,
           style: Theme.of(context).textTheme.headlineSmall,
           items: List<DropdownMenuItem<T>>.generate(
             dropdownItemsValues.length,
-            (index) => DropdownMenuItem<T>(
-              value: dropdownItemsValues[index],
-              child: Text(
-                widget.dropdownItems[index],
-              ), // Display string
-            ),
+            (index) {
+              final value =
+                  widget.selectedValueNotifier?.value ?? selectedValue;
+              final listItem = widget.dropdownItemsValues?[index] ??
+                  widget.dropdownItems[index];
+              return DropdownMenuItem<T>(
+                value: dropdownItemsValues[index],
+                child: Text(
+                  widget.dropdownItems[index],
+                  style: TextStyle(
+                    color: value == listItem
+                        ? AppColors.sunsetOrange
+                        : AppColors.white,
+                  ),
+                ), // Display string
+              );
+            },
           ),
         ),
       ],
