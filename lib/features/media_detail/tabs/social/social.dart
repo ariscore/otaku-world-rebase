@@ -13,94 +13,114 @@ class Social extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final client =
+        (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
+            .client;
+
+    return Column(
+      children: [
+        const SwitchWidget(),
+        Expanded(
+          child: BlocBuilder<SocialBloc, PaginatedDataState>(
+            builder: (context, state) {
+              if (state is PaginatedDataInitial) {
+                context.read<SocialBloc>().add(LoadData(client));
+                return const SimpleLoading();
+              } else if (state is PaginatedDataLoading) {
+                return const SimpleLoading();
+              } else if (state is PaginatedDataLoaded) {
+                final activities = state.list;
+                return NotificationListener<ScrollNotification>(
+                  onNotification: (scrollInfo) {
+                    if (scrollInfo.metrics.pixels ==
+                        scrollInfo.metrics.maxScrollExtent) {
+                      final hasNextPage = (context.read<SocialBloc>().state
+                              as PaginatedDataLoaded)
+                          .hasNextPage;
+                      if (hasNextPage) {
+                        context.read<SocialBloc>().add(LoadData(client));
+                      }
+                    }
+                    return false;
+                  },
+                  child: CustomScrollView(
+                    key: const PageStorageKey<String>('Social'),
+                    slivers: [
+                      SliverPadding(
+                        padding: const EdgeInsets.all(10),
+                        sliver: SliverList.separated(
+                          itemCount: activities.length,
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(height: 10),
+                          itemBuilder: (context, index) {
+                            return SocialCard(
+                              activity: activities[index]!,
+                            );
+                          },
+                        ),
+                      ),
+                      if (state.hasNextPage)
+                        const SliverToBoxAdapter(
+                          child: Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(5.0),
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                );
+              }
+              return const Text(
+                'Unknown State',
+                style: TextStyle(color: Colors.white),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class SwitchWidget extends StatelessWidget {
+  const SwitchWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     final socialBloc = context.read<SocialBloc>();
     final client =
         (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
             .client;
-    return BlocBuilder<SocialBloc, PaginatedDataState>(
-      builder: (context, state) {
-        if (state is PaginatedDataInitial) {
-          final client = (context.read<GraphqlClientCubit>().state
-                  as GraphqlClientInitialized)
-              .client;
-          context.read<SocialBloc>().add(LoadData(client));
-          return const SimpleLoading();
-        } else if (state is PaginatedDataLoading) {
-          return const SimpleLoading();
-        } else if (state is PaginatedDataLoaded) {
-          final activities = state.list;
-          return NotificationListener<ScrollNotification>(
-            onNotification: (scrollInfo) {
-              if (scrollInfo.metrics.pixels ==
-                  scrollInfo.metrics.maxScrollExtent) {
-                final hasNextPage =
-                    (socialBloc.state as PaginatedDataLoaded).hasNextPage;
-                if (hasNextPage) {
-                  socialBloc.add(LoadData(client));
-                }
-              }
-              return false;
-            },
-            child: CustomScrollView(
-              key: const PageStorageKey<String>('Social'),
-              slivers: [
-                SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  sliver: SliverToBoxAdapter(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "Show Friend's List",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Switch(
-                          activeColor: AppColors.sunsetOrange,
-                          value: socialBloc.isFollowing,
-                          onChanged: (value) =>
-                              socialBloc.toggleIsFollowing(value, client),
-                        ),
-                      ],
-                    ),
-                  ),
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: BlocBuilder<SocialBloc, PaginatedDataState>(
+        builder: (context, state) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                "Show Friend's List",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
                 ),
-                SliverPadding(
-                  padding: const EdgeInsets.all(10),
-                  sliver: SliverList.separated(
-                    itemCount: activities.length,
-                    separatorBuilder: (context, index) => const SizedBox(
-                      height: 10,
-                    ),
-                    itemBuilder: (context, index) {
-                      return SocialCard(
-                        activity: activities[index]!,
-                      );
-                    },
-                  ),
-                ),
-                if (state.hasNextPage)
-                  const SliverToBoxAdapter(
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: CircularProgressIndicator(),
-                      ),
-                    ),
-                  ),
-              ],
-            ),
+              ),
+              Switch(
+                activeColor: AppColors.sunsetOrange,
+                value: socialBloc.isFollowing,
+                onChanged: (value) {
+                  socialBloc.toggleIsFollowing(value, client);
+                },
+              ),
+            ],
           );
-        }
-        return const Text(
-          'Unknown State',
-          style: TextStyle(color: Colors.white),
-        );
-      },
+        },
+      ),
     );
   }
 }

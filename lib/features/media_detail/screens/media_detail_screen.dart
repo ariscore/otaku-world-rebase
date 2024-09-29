@@ -8,6 +8,7 @@ import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/staff/staff_bloc.dart';
 import 'package:otaku_world/features/media_detail/widgets/media_app_bar.dart';
+
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/media_detail/characters/characters_bloc.dart';
 import '../../../bloc/media_detail/media_detail_bloc.dart';
