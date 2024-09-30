@@ -1,4 +1,4 @@
-part of '../reviews/review_bloc.dart';
+part of '../reviews/reviews_bloc.dart';
 
 abstract class ReviewEvent extends Equatable {
   const ReviewEvent();

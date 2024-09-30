@@ -129,3 +129,17 @@ extension ReviewSort on Enum$ReviewSort {
     }
   }
 }
+
+extension MediaType on Enum$MediaType {
+  String displayTitle() {
+    switch (this) {
+      case Enum$MediaType.ANIME:
+        return 'Anime';
+      case Enum$MediaType.MANGA:
+        return 'Manga';
+      case Enum$MediaType.$unknown:
+      default:
+        return 'Unknown';
+    }
+  }
+}

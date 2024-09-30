@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/features/reviews/widgets/review_profile_photo.dart';
 import 'package:otaku_world/features/reviews/widgets/review_card_rating.dart';
 import 'package:otaku_world/theme/decorations.dart';
@@ -31,10 +33,11 @@ class ReviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () => NavigationHelper.goToReviewDetailScreen(
         context: context,
         reviewId: review.id,
+        bloc: context.read<MediaReviewBloc>(),
       ),
       child: Container(
         padding: const EdgeInsets.all(10),

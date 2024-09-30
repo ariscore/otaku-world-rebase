@@ -19,11 +19,12 @@ final homeRoutes = [
     path: RouteConstants.reviewDetail,
     builder: (state) {
       return BlocProvider(
-        create: (context) =>
-            ReviewDetailBloc(
-              reviewId: int.parse(state.uri.queryParameters['id']!),
-            ),
-        child: const ReviewDetailScreen(),
+        create: (context) => ReviewDetailBloc(
+          reviewId: int.parse(state.uri.queryParameters['id']!),
+        ),
+        child: ReviewDetailScreen(
+          bloc: state.extra != null ? state.extra as Bloc : null,
+        ),
       );
     },
     directionTween: SlideTransitionRoute.leftToRightTween,
@@ -39,11 +40,10 @@ final homeRoutes = [
   GoRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.search,
-    builder: (context, state) =>
-        BlocProvider(
-          create: (context) => SearchBloc(),
-          child: const SearchScreen(),
-        ),
+    builder: (context, state) => BlocProvider(
+      create: (context) => SearchBloc(),
+      child: const SearchScreen(),
+    ),
   ),
   // Trending Anime
   SlideTransitionRoute(

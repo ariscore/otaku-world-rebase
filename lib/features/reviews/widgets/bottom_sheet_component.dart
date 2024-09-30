@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class BottomSheetComponent extends StatelessWidget {
-  const BottomSheetComponent(
-      {super.key, required this.iconName, required this.text,required this.onTap});
-
+  const BottomSheetComponent({
+    super.key,
+    required this.iconName,
+    required this.text,
+    required this.onTap,
+  });
 
   final String iconName;
   final String text;

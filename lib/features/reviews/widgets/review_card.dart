@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:otaku_world/bloc/reviews/reviews/reviews_bloc.dart';
 import 'package:otaku_world/features/reviews/widgets/review_by_user.dart';
-import 'package:otaku_world/features/reviews/widgets/review_profile_photo.dart';
 import 'package:otaku_world/features/reviews/widgets/review_card_rating.dart';
+import 'package:otaku_world/features/reviews/widgets/review_profile_photo.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
@@ -21,23 +23,19 @@ class ReviewCard extends StatelessWidget {
       onTap: () => NavigationHelper.goToReviewDetailScreen(
         context: context,
         reviewId: review.id,
+        bloc: context.read<ReviewsBloc>(),
       ),
       child: Container(
-        margin: const EdgeInsets.symmetric(
-          horizontal: 10,
-          vertical: 7.5,
+        margin: const EdgeInsets.only(bottom: 15),
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.25),
+              blurRadius: 4,
+              offset: const Offset(0, 4),
+            )
+          ],
         ),
-        decoration: ShapeDecoration(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            shadows: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.25),
-                blurRadius: 4,
-                offset: const Offset(0, 4),
-              )
-            ]),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

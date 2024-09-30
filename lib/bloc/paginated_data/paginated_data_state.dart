@@ -7,9 +7,7 @@ abstract class PaginatedDataState extends Equatable {
   List<Object> get props => [];
 }
 
-class PaginatedDataInitial extends PaginatedDataState {
-
-}
+class PaginatedDataInitial extends PaginatedDataState {}
 
 class PaginatedDataLoading extends PaginatedDataState {}
 

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/graphql/__generated/graphql/details/media_review.graphql.dart';
@@ -38,5 +40,54 @@ class MediaReviewBloc
     hasNextPage = data.Media!.reviews!.pageInfo!.hasNextPage!;
     page++;
     list.addAll(data.Media!.reviews!.nodes!);
+  }
+
+  void updateReviewRating({
+    required int reviewId,
+    required Enum$ReviewRating userRating,
+  }) {
+    log('Updating review $userRating');
+    final reviewIndex = list.indexWhere((review) => review?.id == reviewId);
+    if (reviewIndex != -1) {
+      log('Review index: $reviewIndex');
+      final review = list[reviewIndex]!;
+
+      int ratingDelta = 0;
+      int ratingAmountDelta = 0;
+
+      // Handle the old rating
+      switch (review.userRating) {
+        case Enum$ReviewRating.UP_VOTE:
+          ratingDelta--;
+          ratingAmountDelta--;
+          break;
+        case Enum$ReviewRating.DOWN_VOTE:
+          ratingAmountDelta--;
+          break;
+        default:
+          break;
+      }
+
+      // Handle the new rating
+      switch (userRating) {
+        case Enum$ReviewRating.UP_VOTE:
+          ratingDelta++;
+          ratingAmountDelta++;
+          break;
+        case Enum$ReviewRating.DOWN_VOTE:
+          ratingAmountDelta++;
+          break;
+        default:
+          break;
+      }
+
+      list[reviewIndex] = review.copyWith(
+        rating: (review.rating ?? 0) + ratingDelta,
+        ratingAmount: (review.ratingAmount ?? 0) + ratingAmountDelta,
+        userRating: userRating,
+      );
+      log('Updated review: ${list[reviewIndex]}');
+      add(UpdateData<Fragment$Review>(list: list));
+    }
   }
 }

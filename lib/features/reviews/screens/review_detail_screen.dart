@@ -5,8 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
+import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/bloc/reviews/review_detail/review_detail_bloc.dart';
-import 'package:otaku_world/bloc/reviews/reviews/review_bloc.dart';
+import 'package:otaku_world/bloc/reviews/reviews/reviews_bloc.dart';
 import 'package:otaku_world/core/ui/error_text.dart';
 import 'package:otaku_world/core/ui/markdown/markdown.dart';
 import 'package:otaku_world/core/ui/shimmers/review_detail_shimmer.dart';
@@ -29,7 +30,9 @@ import '../../../utils/formatting_utils.dart';
 import '../../../utils/navigation_helper.dart';
 
 class ReviewDetailScreen extends StatefulWidget {
-  const ReviewDetailScreen({super.key});
+  const ReviewDetailScreen({super.key, this.bloc});
+
+  final Bloc? bloc;
 
   @override
   State<ReviewDetailScreen> createState() => _ReviewDetailScreenState();
@@ -40,7 +43,6 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    context.read<ReviewsBloc>();
     final client =
         (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
             .client;
@@ -49,168 +51,201 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
 
     return PopScope(
       canPop: false,
-      onPopInvoked: (didPop) => _onPopInvoked(context),
-      child: Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: const SimpleAppBar(
-          title: '',
-          bgColor: AppColors.transparent,
-        ),
-        body: SingleChildScrollView(
-          child: BlocBuilder<ReviewDetailBloc, ReviewDetailState>(
-            builder: (context, state) {
-              if (state is ReviewDetailInitial) {
-                context
-                    .read<ReviewDetailBloc>()
-                    .add(LoadReviewDetail(client: client));
-                return const ReviewDetailShimmer();
-              } else if (state is ReviewDetailLoading) {
-                return const ReviewDetailShimmer();
-              } else if (state is ReviewDetailLoaded) {
-                final review = state.review;
-                reviewId = review.id;
+      onPopInvoked: (didPop) {
+        if (!didPop) {
+          _onPopInvoked(context);
+        }
+      },
+      child: SafeArea(
+        child: Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: const SimpleAppBar(
+            title: '',
+            bgColor: AppColors.transparent,
+          ),
+          body: SingleChildScrollView(
+            child: BlocBuilder<ReviewDetailBloc, ReviewDetailState>(
+              builder: (context, state) {
+                if (state is ReviewDetailInitial) {
+                  context
+                      .read<ReviewDetailBloc>()
+                      .add(LoadReviewDetail(client: client));
+                  return const ReviewDetailShimmer();
+                } else if (state is ReviewDetailLoading) {
+                  return const ReviewDetailShimmer();
+                } else if (state is ReviewDetailLoaded) {
+                  final review = state.review;
+                  reviewId = review.id;
 
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // cover image
-                    Stack(
-                      children: [
-                        SizedBox(
-                          height: UIUtils.getWidgetHeight(
-                            targetWidgetHeight: 340,
-                            screenHeight: height,
-                          ),
-                          width: width,
-                          child: BannerImage(
-                            url: review.media!.coverImage!.extraLarge.toString(),
-                            // placeHolderName: Assets.placeholders340x72,
-                          ),
-                        ),
-                        Positioned(
-                          bottom: -0.5,
-                          child: Container(
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // cover image
+                      Stack(
+                        children: [
+                          SizedBox(
                             height: UIUtils.getWidgetHeight(
                               targetWidgetHeight: 340,
                               screenHeight: height,
                             ),
                             width: width,
-                            decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [Colors.transparent, AppColors.raisinBlack,],
+                            child: BannerImage(
+                              url: review.media!.coverImage!.extraLarge
+                                  .toString(),
+                              // placeHolderName: Assets.placeholders340x72,
+                            ),
+                          ),
+                          Positioned(
+                            bottom: -0.5,
+                            child: Container(
+                              height: UIUtils.getWidgetHeight(
+                                targetWidgetHeight: 340,
+                                screenHeight: height,
+                              ),
+                              width: width,
+                              decoration: const BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Colors.transparent,
+                                    AppColors.raisinBlack,
+                                  ],
+                                ),
                               ),
                             ),
                           ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15, bottom: 10),
+                        child: Text(
+                          '${_getMediaType(review.mediaType!)} Review',
+                          style:
+                              Theme.of(context).textTheme.titleMedium!.copyWith(
+                                    fontFamily: 'Roboto',
+                                  ),
                         ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15, bottom: 10),
-                      child: Text(
-                        '${_getMediaType(review.mediaType!)} Review',
-                        style:
-                            Theme.of(context).textTheme.titleMedium!.copyWith(
-                                  fontFamily: 'Roboto',
-                                ),
                       ),
-                    ),
-                    _buildTitleSection(
-                      width,
-                      review,
-                      context,
-                      review.mediaId,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15.0),
-                      child: buildSummaryText(
-                        summary: review.summary.toString(),
-                        context: context,
+                      _buildTitleSection(
+                        width,
+                        review,
+                        context,
+                        review.mediaId,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15.0),
-                      child: _buildProfileSection(context, review),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15),
-                      child: Text(
-                        FormattingUtils.formatUnixTimestamp(review.createdAt)
-                            .toString(),
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontFamily: 'Roboto',
-                                  color: AppColors.white.withOpacity(0.8),
-                                ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15.0),
+                        child: buildSummaryText(
+                          summary: review.summary.toString(),
+                          context: context,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15, bottom: 10),
-                      child: Text(
-                        "(Last Updated on ${FormattingUtils.formatUnixTimestamp(review.createdAt).toString()})",
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontFamily: 'Roboto',
-                                  color: AppColors.white.withOpacity(0.8),
-                                ),
+                      const SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 15.0,
-                        right: 15,
-                        bottom: 10,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15.0),
+                        child: _buildProfileSection(context, review),
                       ),
-                      child: Markdown(data: review.body.toString()),
-                    ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(
-                    //     left: 15.0,
-                    //     right: 15,
-                    //     bottom: 10,
-                    //   ),
-                    //   child: Text(
-                    //     review.body.toString(),
-                    //     style: Theme.of(context).textTheme.titleLarge,
-                    //   ),
-                    // ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 15,
-                        right: 15,
-                        bottom: 30,
+                      const SizedBox(
+                        height: 10,
                       ),
-                      child: ReviewRating(
-                        review: review,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15),
+                        child: Text(
+                          FormattingUtils.formatUnixTimestamp(review.createdAt)
+                              .toString(),
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    fontFamily: 'Roboto',
+                                    color: AppColors.white.withOpacity(0.8),
+                                  ),
+                        ),
                       ),
-                    ),
-                  ],
-                );
-              } else if (state is ReviewDetailError) {
-                return ErrorText(
-                  message: state.message,
-                  onTryAgain: () {
-                    context
-                        .read<ReviewDetailBloc>()
-                        .add(LoadReviewDetail(client: client));
-                  },
-                );
-              } else {
-                return const Text('Unknown State');
-              }
-            },
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15, bottom: 10),
+                        child: Text(
+                          "(Last Updated on ${FormattingUtils.formatUnixTimestamp(review.createdAt).toString()})",
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    fontFamily: 'Roboto',
+                                    color: AppColors.white.withOpacity(0.8),
+                                  ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 15.0,
+                          right: 15,
+                          bottom: 10,
+                        ),
+                        child: Markdown(data: review.body.toString()),
+                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(
+                      //     left: 15.0,
+                      //     right: 15,
+                      //     bottom: 10,
+                      //   ),
+                      //   child: Text(
+                      //     review.body.toString(),
+                      //     style: Theme.of(context).textTheme.titleLarge,
+                      //   ),
+                      // ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 15,
+                          right: 15,
+                          bottom: 30,
+                        ),
+                        child: ReviewRating(
+                          review: review,
+                          onRatingUpdated: (userRating) {
+                            _updateReview(
+                              rating: userRating,
+                              id: state.review.id,
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  );
+                } else if (state is ReviewDetailError) {
+                  return ErrorText(
+                    message: state.message,
+                    onTryAgain: () {
+                      context
+                          .read<ReviewDetailBloc>()
+                          .add(LoadReviewDetail(client: client));
+                    },
+                  );
+                } else {
+                  return const Text('Unknown State');
+                }
+              },
+            ),
           ),
         ),
       ),
     );
+  }
+
+  void _updateReview({required Enum$ReviewRating rating, required int id}) {
+    if (widget.bloc != null) {
+      dev.log('Updating rating');
+      if (widget.bloc is ReviewsBloc) {
+        (widget.bloc as ReviewsBloc).updateReviewRating(
+          reviewId: id,
+          userRating: rating,
+        );
+      } else if (widget.bloc is MediaReviewBloc) {
+        (widget.bloc as MediaReviewBloc).updateReviewRating(
+          reviewId: id,
+          userRating: rating,
+        );
+      }
+    }
   }
 
   void _onPopInvoked(BuildContext context) {
@@ -226,8 +261,12 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
     return type == Enum$MediaType.ANIME ? 'Anime' : 'Manga';
   }
 
-  Widget _buildTitleSection(double screenWidth, Fragment$ReviewDetail review,
-      BuildContext context, int id) {
+  Widget _buildTitleSection(
+    double screenWidth,
+    Fragment$ReviewDetail review,
+    BuildContext context,
+    int id,
+  ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -235,7 +274,9 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
         Container(
           padding: const EdgeInsets.only(left: 15),
           width: UIUtils.getWidgetWidth(
-              targetWidgetWidth: 280, screenWidth: screenWidth),
+            targetWidgetWidth: 280,
+            screenWidth: screenWidth,
+          ),
           child: ReviewByUser(
             mediaTitle: review.media!.title!.userPreferred.toString(),
             userName: review.user!.name.toString(),
@@ -255,7 +296,9 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
   }
 
   Widget _buildProfileSection(
-      BuildContext context, Fragment$ReviewDetail review) {
+    BuildContext context,
+    Fragment$ReviewDetail review,
+  ) {
     return Row(
       children: [
         ReviewProfilePhoto(
@@ -345,6 +388,7 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
               ),
               BottomSheetComponent(
                 onTap: () {
+                  // TODO: Repair this
                   Share.share(
                     "Check out this anime review: https://otaku-world-8a7f4.firebaseapp.com/"
                     "review-detail?id=$reviewId",

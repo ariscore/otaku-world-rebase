@@ -15,9 +15,14 @@ import '../../../generated/assets.dart';
 import '../../../utils/ui_utils.dart';
 
 class ReviewRating extends StatefulWidget {
-  const ReviewRating({super.key, required this.review});
+  const ReviewRating({
+    super.key,
+    required this.review,
+    required this.onRatingUpdated,
+  });
 
   final Fragment$ReviewDetail review;
+  final Function(Enum$ReviewRating userRating) onRatingUpdated;
 
   @override
   State<ReviewRating> createState() => _ReviewRatingState();
@@ -49,26 +54,24 @@ class _ReviewRatingState extends State<ReviewRating> {
       children: [
         Row(
           children: [
-            _buildRatingOption(
-              context,
+            _RatingOption(
               isLiked: isUpVote,
               count: upVoteCount,
+              showColors: true,
               asset: Assets.iconsThumbsUp,
               likedAsset: Assets.iconsThumbsUpFilled,
-              showColors: true,
               onPressed: (isLiked) {
                 return toggleUpVote(context, client, isUpVote: isUpVote);
               },
             ),
             const SizedBox(width: 20),
-            _buildRatingOption(
-              context,
+            _RatingOption(
               isLiked: isDownVote,
               count: downVoteCount,
+              showColors: false,
               asset: Assets.iconsThumbsDown,
               likedAsset: Assets.iconsThumbsDownFilled,
-              showColors: false,
-              onPressed: (isLiked) async {
+              onPressed: (isLiked) {
                 return toggleDownVote(context, client, isDownVote: isDownVote);
               },
             ),
@@ -94,15 +97,104 @@ class _ReviewRatingState extends State<ReviewRating> {
     );
   }
 
-  Widget _buildRatingOption(
-    BuildContext context, {
-    required bool isLiked,
-    required int count,
-    required String asset,
-    required String likedAsset,
-    required bool showColors,
-    required Future<bool?> Function(bool isLiked) onPressed,
-  }) {
+  Future<bool?> toggleUpVote(
+    BuildContext context,
+    GraphQLClient client, {
+    required bool isUpVote,
+  }) async {
+    log('Is upvote: $isUpVote', name: 'ReviewRating');
+    final result = await RateReviewCubit().toggleUpVote(
+      client,
+      reviewId: widget.review.id,
+      isUpVote: isUpVote,
+    );
+    return result.fold(
+      (error) {
+        log('Got error: $error', name: 'ReviewRating');
+        UIUtils.showSnackBar(context, error);
+        return null;
+      },
+      (isLiked) {
+        this.isUpVote = isLiked;
+        upVoteCount += isLiked ? 1 : -1;
+
+        if (isDownVote) {
+          Future.delayed(const Duration(milliseconds: 500), () {
+            setState(() {
+              isDownVote = false;
+              downVoteCount--;
+            });
+          },);
+        }
+        widget.onRatingUpdated(
+          this.isUpVote ? Enum$ReviewRating.UP_VOTE : Enum$ReviewRating.NO_VOTE,
+        );
+        return isLiked;
+      },
+    );
+  }
+
+  Future<bool?> toggleDownVote(
+    BuildContext context,
+    GraphQLClient client, {
+    required bool isDownVote,
+  }) async {
+    log('Is downvote: $isDownVote', name: 'ReviewRating');
+    final result = await RateReviewCubit().toggleDownVote(
+      client,
+      reviewId: widget.review.id,
+      isDownVote: isDownVote,
+    );
+    return result.fold(
+      (error) {
+        log('Got error: $error', name: 'ReviewRating');
+        UIUtils.showSnackBar(context, error);
+        return null;
+      },
+      (isLiked) {
+        this.isDownVote = isLiked;
+        downVoteCount += isLiked ? 1 : -1;
+
+        if (isUpVote) {
+          Future.delayed(const Duration(milliseconds: 500), () {
+            setState(() {
+              isUpVote = false;
+              upVoteCount--;
+            });
+          },);
+        }
+
+        widget.onRatingUpdated(
+          this.isDownVote
+              ? Enum$ReviewRating.DOWN_VOTE
+              : Enum$ReviewRating.NO_VOTE,
+        );
+
+        return isLiked;
+      },
+    );
+  }
+}
+
+class _RatingOption extends StatelessWidget {
+  const _RatingOption({
+    required this.isLiked,
+    required this.count,
+    required this.showColors,
+    required this.asset,
+    required this.likedAsset,
+    required this.onPressed,
+  });
+
+  final bool isLiked;
+  final int count;
+  final bool showColors;
+  final String asset;
+  final String likedAsset;
+  final Future<bool?> Function(bool isLiked) onPressed;
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       children: [
         LikeButton(
@@ -131,79 +223,9 @@ class _ReviewRatingState extends State<ReviewRating> {
           likeBuilder: (isLiked) {
             return SvgPicture.asset(isLiked ? likedAsset : asset);
           },
-          countBuilder: (likeCount, isLiked, text) {
-            return Text(
-              likeCount.toString(),
-              style: Theme.of(context).textTheme.headlineMedium,
-            );
-          },
           onTap: onPressed,
         ),
       ],
-    );
-  }
-
-  Future<bool?> toggleUpVote(
-    BuildContext context,
-    GraphQLClient client, {
-    required bool isUpVote,
-  }) async {
-    log('Is upvote: $isUpVote', name: 'ReviewRating');
-    final result = await RateReviewCubit().toggleUpVote(
-      client,
-      reviewId: widget.review.id,
-      isUpVote: isUpVote,
-    );
-    return result.fold(
-      (error) {
-        log('Got error: $error', name: 'ReviewRating');
-        UIUtils.showSnackBar(context, error);
-        return null;
-      },
-      (isLiked) {
-        this.isUpVote = isLiked;
-        upVoteCount += isLiked ? 1 : -1;
-
-        if (isDownVote) {
-          setState(() {
-            isDownVote = false;
-            downVoteCount--;
-          });
-        }
-        return isLiked;
-      },
-    );
-  }
-
-  Future<bool?> toggleDownVote(
-    BuildContext context,
-    GraphQLClient client, {
-    required bool isDownVote,
-  }) async {
-    log('Is downvote: $isDownVote', name: 'ReviewRating');
-    final result = await RateReviewCubit().toggleDownVote(
-      client,
-      reviewId: widget.review.id,
-      isDownVote: isDownVote,
-    );
-    return result.fold(
-      (error) {
-        log('Got error: $error', name: 'ReviewRating');
-        UIUtils.showSnackBar(context, error);
-        return null;
-      },
-      (isLiked) {
-        this.isDownVote = isLiked;
-        downVoteCount += isLiked ? 1 : -1;
-
-        if (isUpVote) {
-          setState(() {
-            isUpVote = false;
-            upVoteCount--;
-          });
-        }
-        return isLiked;
-      },
     );
   }
 }

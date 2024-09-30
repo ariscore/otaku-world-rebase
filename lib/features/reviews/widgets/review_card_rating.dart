@@ -57,9 +57,9 @@ class ReviewCardRating extends StatelessWidget {
   Widget _buildRating(
     BuildContext context, {
     required int count,
-        required bool isLiked,
+    required bool isLiked,
     required String asset,
-        required String likedAsset,
+    required String likedAsset,
   }) {
     return Row(
       children: [
