@@ -5,7 +5,6 @@ import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
 import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
-import '../../../bloc/paginated_data/paginated_data_bloc.dart';
 import '../../../bloc/reviews/reviews/reviews_bloc.dart';
 import '../../../core/ui/buttons/primary_button.dart';
 import '../../../graphql/__generated/graphql/schema.graphql.dart';
@@ -36,9 +35,9 @@ class ReviewBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final client = (context.read<GraphqlClientCubit>().state
-    as GraphqlClientInitialized)
-        .client;
+    final client =
+        (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
+            .client;
 
     return BlocProvider.value(
       value: reviewsBloc,
@@ -83,16 +82,13 @@ class ReviewBottomSheet extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              BlocBuilder<ReviewsBloc, PaginatedDataState>(
-                builder: (context, state) {
-                  return CustomDropdown(
-                    dropdownItemsValues: reviewsBloc.mediaSort,
-                    dropdownItems: reviewsBloc.mediaSort,
-                    initialValue: reviewsBloc.mediaType,
-                    onChange: (value) {
-                      reviewsBloc.mediaType = value;
-                    },
-                  );
+              CustomDropdown<String>(
+                selectedValueNotifier: reviewsBloc.mediaType,
+                dropdownItemsValues: reviewsBloc.mediaSort,
+                dropdownItems: reviewsBloc.mediaSort,
+                initialValue: reviewsBloc.mediaType.toString(),
+                onChange: (value) {
+                  reviewsBloc.mediaType.value = value;
                 },
               ),
               Text(
@@ -102,30 +98,17 @@ class ReviewBottomSheet extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              BlocBuilder<ReviewsBloc, PaginatedDataState>(
-                builder: (context, state) {
-                  return CustomDropdown<Enum$ReviewSort>(
-                    dropdownItems: reviewsBloc.reviewSortList
-                        .map((e) => e.displayTitle())
-                        .toList(),
-                    dropdownItemsValues: reviewsBloc.reviewSortList,
-                    initialValue: reviewsBloc.reviewSort,
-                    onChange: (value) {
-                      reviewsBloc.reviewSort = value;
-                    },
-                  );
+              CustomDropdown<Enum$ReviewSort>(
+                selectedValueNotifier: reviewsBloc.reviewSort,
+                dropdownItems: reviewsBloc.reviewSortList
+                    .map((e) => e.displayTitle())
+                    .toList(),
+                dropdownItemsValues: reviewsBloc.reviewSortList,
+                initialValue: reviewsBloc.reviewSort.value,
+                onChange: (value) {
+                  reviewsBloc.reviewSort.value = value;
                 },
               ),
-              // CustomDropdown<Enum$ReviewSort>(
-              //   dropdownItems: reviewsBloc.reviewSortList
-              //       .map((e) => e.displayTitle())
-              //       .toList(),
-              //   dropdownItemsValues: reviewsBloc.reviewSortList,
-              //   initialValue: reviewsBloc.reviewSort,
-              //   onChange: (value) {
-              //     reviewsBloc.reviewSort = value;
-              //   },
-              // ),
               const SizedBox(
                 height: 20,
               ),

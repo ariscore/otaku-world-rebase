@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer' as dev;
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
@@ -26,17 +27,26 @@ class ReviewsBloc extends PaginatedDataBloc<Query$GetReviews, Fragment$Review> {
 
   final List<String> mediaSort = ['All', 'Anime', 'Manga'];
 
-  Enum$ReviewSort reviewSort = Enum$ReviewSort.CREATED_AT_DESC;
-  String mediaType = 'All';
+  final ValueNotifier<Enum$ReviewSort> reviewSort =
+      ValueNotifier<Enum$ReviewSort>(Enum$ReviewSort.CREATED_AT_DESC);
+  final ValueNotifier<String> mediaType = ValueNotifier<String>('All');
 
   void applyFilters(GraphQLClient client) {
     add(ResetData());
     add(LoadData(client));
   }
 
+  bool isNeedForReset() {
+    return (reviewSort.value != Enum$ReviewSort.CREATED_AT_DESC ||
+        mediaType.value != 'All');
+  }
+
   void resetFilters(GraphQLClient client) {
-    reviewSort = Enum$ReviewSort.CREATED_AT_DESC;
-    mediaType = 'All';
+    if (!isNeedForReset()) {
+      return;
+    }
+    reviewSort.value = Enum$ReviewSort.CREATED_AT_DESC;
+    mediaType.value = 'All';
     applyFilters(client);
   }
 
@@ -47,8 +57,8 @@ class ReviewsBloc extends PaginatedDataBloc<Query$GetReviews, Fragment$Review> {
         fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$GetReviews(
           page: page,
-          mediaSort: reviewSort,
-          type: getReviewMediaTypeSort(mediaType),
+          mediaSort: reviewSort.value,
+          type: getReviewMediaTypeSort(mediaType.value),
         ),
       ),
     );

@@ -5667,20 +5667,27 @@ class Fragment$MediaDetailed$mediaListEntry
     implements Fragment$MediaShort$mediaListEntry {
   Fragment$MediaDetailed$mediaListEntry({
     required this.id,
+    this.status,
     this.$__typename = 'MediaList',
   });
 
   factory Fragment$MediaDetailed$mediaListEntry.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
+    final l$status = json['status'];
     final l$$__typename = json['__typename'];
     return Fragment$MediaDetailed$mediaListEntry(
       id: (l$id as int),
+      status: l$status == null
+          ? null
+          : fromJson$Enum$MediaListStatus((l$status as String)),
       $__typename: (l$$__typename as String),
     );
   }
 
   final int id;
+
+  final Enum$MediaListStatus? status;
 
   final String $__typename;
 
@@ -5688,6 +5695,9 @@ class Fragment$MediaDetailed$mediaListEntry
     final _resultData = <String, dynamic>{};
     final l$id = id;
     _resultData['id'] = l$id;
+    final l$status = status;
+    _resultData['status'] =
+        l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -5696,9 +5706,11 @@ class Fragment$MediaDetailed$mediaListEntry
   @override
   int get hashCode {
     final l$id = id;
+    final l$status = status;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
+      l$status,
       l$$__typename,
     ]);
   }
@@ -5715,6 +5727,11 @@ class Fragment$MediaDetailed$mediaListEntry
     final l$id = id;
     final lOther$id = other.id;
     if (l$id != lOther$id) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -5747,6 +5764,7 @@ abstract class CopyWith$Fragment$MediaDetailed$mediaListEntry<TRes> {
 
   TRes call({
     int? id,
+    Enum$MediaListStatus? status,
     String? $__typename,
   });
 }
@@ -5766,10 +5784,14 @@ class _CopyWithImpl$Fragment$MediaDetailed$mediaListEntry<TRes>
 
   TRes call({
     Object? id = _undefined,
+    Object? status = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$MediaDetailed$mediaListEntry(
         id: id == _undefined || id == null ? _instance.id : (id as int),
+        status: status == _undefined
+            ? _instance.status
+            : (status as Enum$MediaListStatus?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -5784,6 +5806,7 @@ class _CopyWithStubImpl$Fragment$MediaDetailed$mediaListEntry<TRes>
 
   call({
     int? id,
+    Enum$MediaListStatus? status,
     String? $__typename,
   }) =>
       _res;
@@ -6602,6 +6625,13 @@ const fragmentDefinitionMediaShort = FragmentDefinitionNode(
           selectionSet: null,
         ),
         FieldNode(
+          name: NameNode(value: 'status'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
           name: NameNode(value: '__typename'),
           alias: null,
           arguments: [],
@@ -7316,20 +7346,27 @@ class _CopyWithStubImpl$Fragment$MediaShort$airingSchedule$nodes<TRes>
 class Fragment$MediaShort$mediaListEntry {
   Fragment$MediaShort$mediaListEntry({
     required this.id,
+    this.status,
     this.$__typename = 'MediaList',
   });
 
   factory Fragment$MediaShort$mediaListEntry.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
+    final l$status = json['status'];
     final l$$__typename = json['__typename'];
     return Fragment$MediaShort$mediaListEntry(
       id: (l$id as int),
+      status: l$status == null
+          ? null
+          : fromJson$Enum$MediaListStatus((l$status as String)),
       $__typename: (l$$__typename as String),
     );
   }
 
   final int id;
+
+  final Enum$MediaListStatus? status;
 
   final String $__typename;
 
@@ -7337,6 +7374,9 @@ class Fragment$MediaShort$mediaListEntry {
     final _resultData = <String, dynamic>{};
     final l$id = id;
     _resultData['id'] = l$id;
+    final l$status = status;
+    _resultData['status'] =
+        l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -7345,9 +7385,11 @@ class Fragment$MediaShort$mediaListEntry {
   @override
   int get hashCode {
     final l$id = id;
+    final l$status = status;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
+      l$status,
       l$$__typename,
     ]);
   }
@@ -7364,6 +7406,11 @@ class Fragment$MediaShort$mediaListEntry {
     final l$id = id;
     final lOther$id = other.id;
     if (l$id != lOther$id) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -7396,6 +7443,7 @@ abstract class CopyWith$Fragment$MediaShort$mediaListEntry<TRes> {
 
   TRes call({
     int? id,
+    Enum$MediaListStatus? status,
     String? $__typename,
   });
 }
@@ -7415,10 +7463,14 @@ class _CopyWithImpl$Fragment$MediaShort$mediaListEntry<TRes>
 
   TRes call({
     Object? id = _undefined,
+    Object? status = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$MediaShort$mediaListEntry(
         id: id == _undefined || id == null ? _instance.id : (id as int),
+        status: status == _undefined
+            ? _instance.status
+            : (status as Enum$MediaListStatus?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -7433,6 +7485,7 @@ class _CopyWithStubImpl$Fragment$MediaShort$mediaListEntry<TRes>
 
   call({
     int? id,
+    Enum$MediaListStatus? status,
     String? $__typename,
   }) =>
       _res;

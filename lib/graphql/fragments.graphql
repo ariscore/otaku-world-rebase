@@ -137,6 +137,8 @@ fragment MediaShort on Media {
     }
     mediaListEntry {
         id
+        status
+
     }
 }
 
