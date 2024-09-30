@@ -3,6 +3,7 @@ import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/ui/activities/activity_actions.dart';
 import 'package:otaku_world/features/reviews/widgets/review_profile_photo.dart';
 import 'package:otaku_world/graphql/__generated/graphql/details/media_activities.graphql.dart';
+import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../../../theme/colors.dart';
@@ -71,9 +72,11 @@ class SocialCard extends StatelessWidget {
           ),
           ActivityActions(
             activityId: activity.id,
+            userId: activity.user?.id ?? 0,
             isLiked: activity.isLiked ?? false,
             likeCount: activity.likeCount,
             replyCount: activity.replyCount,
+            type: Fragment$ListActivity,
           ),
           Text(
             FormattingUtils.formatUnixTimestamp(activity.createdAt),

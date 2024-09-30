@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:otaku_world/core/ui/images/cover_image.dart';
+import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/social/activities.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
@@ -22,11 +23,13 @@ class ListActivityCard extends StatelessWidget {
     return ActivityBaseCard(
       id: activity.id,
       avatarUrl: activity.user?.avatar?.medium,
+      userId: activity.user?.id ?? 0,
       userName: activity.user?.name,
       likeCount: activity.likeCount,
       isLiked: activity.isLiked ?? false,
       replyCount: activity.replyCount,
       timestamp: activity.createdAt,
+      type: Fragment$ListActivity,
       child: InkWell(
         onTap: () => NavigationHelper.goToMediaDetailScreen(
           context: context,

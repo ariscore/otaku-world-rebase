@@ -402,3 +402,11 @@ fragment PageInfo on PageInfo {
     currentPage
     hasNextPage
 }
+
+fragment User on User {
+    id
+    name
+    avatar {
+        medium
+    }
+}

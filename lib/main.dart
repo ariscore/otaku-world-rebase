@@ -21,6 +21,7 @@ import 'package:otaku_world/bloc/routes/redirect_route_cubit.dart';
 import 'package:otaku_world/bloc/trending_anime/trending_anime_bloc.dart';
 import 'package:otaku_world/bloc/trending_manga/trending_manga_bloc.dart';
 import 'package:otaku_world/bloc/upcoming_episodes/upcoming_episodes_bloc.dart';
+import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
 import 'package:otaku_world/theme/app_theme.dart';
 
 import 'bloc/discover/anime/all_time_popular_anime/all_time_popular_anime_bloc.dart';
@@ -123,6 +124,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => FilterMangaBloc(),
         ),
+        BlocProvider(
+          create: (context) => ViewerBloc(),
+        ),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -151,17 +155,19 @@ class MyApp extends StatelessWidget {
           BlocListener<GraphqlClientCubit, GraphqlClientState>(
             listener: (context, state) {
               if (state is GraphqlClientInitialized) {
-                context
-                    .read<UpcomingEpisodesBloc>()
-                    .add(LoadData(state.client));
-                context.read<TrendingAnimeBloc>().add(LoadData(state.client));
-                context
-                    .read<RecommendedAnimeBloc>()
-                    .add(LoadData(state.client));
-                context.read<TrendingMangaBloc>().add(LoadData(state.client));
-                context
-                    .read<RecommendedMangaBloc>()
-                    .add(LoadData(state.client));
+                // context
+                //     .read<UpcomingEpisodesBloc>()
+                //     .add(LoadData(state.client));
+                // context.read<TrendingAnimeBloc>().add(LoadData(state.client));
+                // context
+                //     .read<RecommendedAnimeBloc>()
+                //     .add(LoadData(state.client));
+                // context.read<TrendingMangaBloc>().add(LoadData(state.client));
+                // context
+                //     .read<RecommendedMangaBloc>()
+                //     .add(LoadData(state.client));
+
+                context.read<ViewerBloc>().add(LoadViewer(state.client));
               }
             },
           ),

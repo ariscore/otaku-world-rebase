@@ -52,12 +52,10 @@ import 'package:otaku_world/features/media_detail/screens/recommendations_grid_s
 import 'package:otaku_world/features/media_detail/screens/recommendations_slider_screen.dart';
 import 'package:otaku_world/features/reviews/screens/review_detail_screen.dart';
 import 'package:otaku_world/features/reviews/screens/reviews_screen.dart';
-import 'package:otaku_world/features/reviews/screens/reviews_wrapper.dart';
 import 'package:otaku_world/features/search/screens/search_screen.dart';
 import 'package:otaku_world/features/splash/screens/splash_screen.dart';
 import 'package:otaku_world/observers/go_route_observer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../bloc/media_detail/media_detail_bloc.dart';
 import '../../bloc/reviews/reviews/reviews_bloc.dart';
 import '../../bloc/search/search_bloc/search_bloc.dart';
