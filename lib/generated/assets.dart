@@ -34,6 +34,7 @@ class Assets {
   static const String iconsClose = 'assets/icons/close.svg';
   static const String iconsComment = 'assets/icons/comment.svg';
   static const String iconsCopyLink = 'assets/icons/copy-link.svg';
+  static const String iconsDelete = 'assets/icons/delete.svg';
   static const String iconsDiscoverFilter = 'assets/icons/discover_filter.svg';
   static const String iconsDoubleArrowRight = 'assets/icons/double-arrow-right.svg';
   static const String iconsEdit = 'assets/icons/edit.svg';
@@ -46,6 +47,8 @@ class Assets {
   static const String iconsMoreHorizontal = 'assets/icons/more-horizontal.svg';
   static const String iconsMoreVertical = 'assets/icons/more-vertical.svg';
   static const String iconsNextButton = 'assets/icons/next-button.svg';
+  static const String iconsNotification = 'assets/icons/notification.svg';
+  static const String iconsNotificationOff = 'assets/icons/notification-off.svg';
   static const String iconsOpenLink2 = 'assets/icons/open-link2.svg';
   static const String iconsRemove = 'assets/icons/remove.svg';
   static const String iconsSearch = 'assets/icons/search.svg';

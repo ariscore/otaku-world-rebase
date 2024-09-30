@@ -33,7 +33,7 @@ class SocialScreen extends HookWidget {
     final activitiesBloc = context.read<ActivitiesBloc>();
 
     useEffect(() {
-     scrollController.addListener(() {
+      scrollController.addListener(() {
         if (scrollController.position.pixels <=
                 scrollController.position.minScrollExtent &&
             bottomBarBloc.state is BottomNavBarNotVisible) {
@@ -60,8 +60,7 @@ class SocialScreen extends HookWidget {
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             SliverOverlapAbsorber(
-              handle:
-                  NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
               sliver: const SliverAppBar(
                 collapsedHeight: 90,
                 expandedHeight: 90,
@@ -106,8 +105,7 @@ class SocialScreen extends HookWidget {
                           const SizedBox(width: 100),
                           Expanded(
                             child: CustomDropdown(
-                              dropdownItems:
-                                  FilterConstants.activitiesOptions,
+                              dropdownItems: FilterConstants.activitiesOptions,
                               initialValue:
                                   FilterConstants.activitiesOptions[0],
                               borderRadius: 20,

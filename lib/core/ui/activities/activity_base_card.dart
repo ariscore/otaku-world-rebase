@@ -12,6 +12,7 @@ class ActivityBaseCard extends StatelessWidget {
     required this.id,
     required this.child,
     required this.avatarUrl,
+    required this.userId,
     required this.userName,
     this.receiverAvatarUrl,
     this.receiverUserName,
@@ -19,11 +20,14 @@ class ActivityBaseCard extends StatelessWidget {
     required this.isLiked,
     required this.replyCount,
     required this.timestamp,
+    required this.type,
+    this.isCurrentUserMessage = false,
   });
 
   final Widget child;
   final int id;
   final String? avatarUrl;
+  final int userId;
   final String? userName;
   final String? receiverAvatarUrl;
   final String? receiverUserName;
@@ -31,6 +35,8 @@ class ActivityBaseCard extends StatelessWidget {
   final bool isLiked;
   final int replyCount;
   final int timestamp;
+  final Object type;
+  final bool isCurrentUserMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -90,10 +96,13 @@ class ActivityBaseCard extends StatelessWidget {
             child,
             // Other details
             ActivityActions(
+              userId: userId,
               likeCount: likeCount,
               replyCount: replyCount,
               activityId: id,
               isLiked: isLiked,
+              type: type,
+              isCurrentUserMessage: isCurrentUserMessage,
             ),
             const SizedBox(height: 5),
             Text(

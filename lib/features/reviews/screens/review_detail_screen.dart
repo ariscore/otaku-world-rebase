@@ -323,6 +323,7 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
     showModalBottomSheet(
       backgroundColor: AppColors.darkCharcoal,
       context: context,
+      isScrollControlled: true,
       builder: (context) {
         return Container(
           decoration: const BoxDecoration(
@@ -332,73 +333,69 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
               topRight: Radius.circular(15),
             ),
           ),
-          padding: const EdgeInsets.only(
-            top: 10,
-            left: 15,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 15,
+            vertical: 10,
           ),
-          height: 180,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                height: 5,
-                width: 50,
-                decoration: ShapeDecoration(
-                  color: AppColors.lightSilver,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
+          // height: 180,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  height: 5,
+                  width: 50,
+                  decoration: ShapeDecoration(
+                    color: AppColors.lightSilver,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              BottomSheetComponent(
-                onTap: () {
-                  context.pop(); //to close the bottom sheet
-                  NavigationHelper.goToMediaDetailScreen(
-                    context: context,
-                    mediaId: id,
-                  );
-                },
-                iconName: Assets.iconsOpenLink2,
-                text: 'Open Media Page',
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              BottomSheetComponent(
-                onTap: () async {
-                  final Uri reviewUri = Uri(
-                    scheme: 'https',
-                    host: 'anilist.co',
-                    path: 'review/$reviewId',
-                  );
-                  context.pop();
-                  await launchUrl(
-                    reviewUri,
-                    mode: LaunchMode.externalApplication,
-                  );
-                },
-                iconName: Assets.iconsLinkSquare,
-                text: 'View on AniList',
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              BottomSheetComponent(
-                onTap: () {
-                  // TODO: Repair this
-                  Share.share(
-                    "Check out this anime review: https://otaku-world-8a7f4.firebaseapp.com/"
-                    "review-detail?id=$reviewId",
-                  );
-                  context.pop();
-                },
-                iconName: Assets.iconsShare,
-                text: 'Share',
-              ),
-            ],
+                const SizedBox(
+                  height: 20,
+                ),
+                BottomSheetComponent(
+                  onTap: () {
+                    context.pop(); //to close the bottom sheet
+                    NavigationHelper.goToMediaDetailScreen(
+                      context: context,
+                      mediaId: id,
+                    );
+                  },
+                  iconName: Assets.iconsOpenLink2,
+                  text: 'Open Media Page',
+                ),
+                BottomSheetComponent(
+                  onTap: () async {
+                    final Uri reviewUri = Uri(
+                      scheme: 'https',
+                      host: 'anilist.co',
+                      path: 'review/$reviewId',
+                    );
+                    context.pop();
+                    await launchUrl(
+                      reviewUri,
+                      mode: LaunchMode.externalApplication,
+                    );
+                  },
+                  iconName: Assets.iconsLinkSquare,
+                  text: 'View on AniList',
+                ),
+                BottomSheetComponent(
+                  onTap: () {
+                    // TODO: Repair this
+                    Share.share(
+                      "Check out this anime review: https://otaku-world-8a7f4.firebaseapp.com/"
+                      "review-detail?id=$reviewId",
+                    );
+                    context.pop();
+                  },
+                  iconName: Assets.iconsShare,
+                  text: 'Share',
+                ),
+              ],
+            ),
           ),
         );
       },

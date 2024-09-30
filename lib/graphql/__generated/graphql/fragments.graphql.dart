@@ -19867,3 +19867,390 @@ extension ClientExtension$Fragment$PageInfo on graphql.GraphQLClient {
     return result == null ? null : Fragment$PageInfo.fromJson(result);
   }
 }
+
+class Fragment$User {
+  Fragment$User({
+    required this.id,
+    required this.name,
+    this.avatar,
+    this.$__typename = 'User',
+  });
+
+  factory Fragment$User.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$avatar = json['avatar'];
+    final l$$__typename = json['__typename'];
+    return Fragment$User(
+      id: (l$id as int),
+      name: (l$name as String),
+      avatar: l$avatar == null
+          ? null
+          : Fragment$User$avatar.fromJson((l$avatar as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String name;
+
+  final Fragment$User$avatar? avatar;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$avatar = avatar;
+    _resultData['avatar'] = l$avatar?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$avatar = avatar;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$avatar,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$User) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$avatar = avatar;
+    final lOther$avatar = other.avatar;
+    if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$User on Fragment$User {
+  CopyWith$Fragment$User<Fragment$User> get copyWith => CopyWith$Fragment$User(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Fragment$User<TRes> {
+  factory CopyWith$Fragment$User(
+    Fragment$User instance,
+    TRes Function(Fragment$User) then,
+  ) = _CopyWithImpl$Fragment$User;
+
+  factory CopyWith$Fragment$User.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$User;
+
+  TRes call({
+    int? id,
+    String? name,
+    Fragment$User$avatar? avatar,
+    String? $__typename,
+  });
+  CopyWith$Fragment$User$avatar<TRes> get avatar;
+}
+
+class _CopyWithImpl$Fragment$User<TRes>
+    implements CopyWith$Fragment$User<TRes> {
+  _CopyWithImpl$Fragment$User(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$User _instance;
+
+  final TRes Function(Fragment$User) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? avatar = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$User(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        avatar: avatar == _undefined
+            ? _instance.avatar
+            : (avatar as Fragment$User$avatar?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$User$avatar<TRes> get avatar {
+    final local$avatar = _instance.avatar;
+    return local$avatar == null
+        ? CopyWith$Fragment$User$avatar.stub(_then(_instance))
+        : CopyWith$Fragment$User$avatar(local$avatar, (e) => call(avatar: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$User<TRes>
+    implements CopyWith$Fragment$User<TRes> {
+  _CopyWithStubImpl$Fragment$User(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? name,
+    Fragment$User$avatar? avatar,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$User$avatar<TRes> get avatar =>
+      CopyWith$Fragment$User$avatar.stub(_res);
+}
+
+const fragmentDefinitionUser = FragmentDefinitionNode(
+  name: NameNode(value: 'User'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'User'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'name'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'avatar'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'medium'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentUser = DocumentNode(definitions: [
+  fragmentDefinitionUser,
+]);
+
+extension ClientExtension$Fragment$User on graphql.GraphQLClient {
+  void writeFragment$User({
+    required Fragment$User data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'User',
+            document: documentNodeFragmentUser,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$User? readFragment$User({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'User',
+          document: documentNodeFragmentUser,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Fragment$User.fromJson(result);
+  }
+}
+
+class Fragment$User$avatar {
+  Fragment$User$avatar({
+    this.medium,
+    this.$__typename = 'UserAvatar',
+  });
+
+  factory Fragment$User$avatar.fromJson(Map<String, dynamic> json) {
+    final l$medium = json['medium'];
+    final l$$__typename = json['__typename'];
+    return Fragment$User$avatar(
+      medium: (l$medium as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? medium;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$medium = medium;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$medium,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$User$avatar) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$User$avatar on Fragment$User$avatar {
+  CopyWith$Fragment$User$avatar<Fragment$User$avatar> get copyWith =>
+      CopyWith$Fragment$User$avatar(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Fragment$User$avatar<TRes> {
+  factory CopyWith$Fragment$User$avatar(
+    Fragment$User$avatar instance,
+    TRes Function(Fragment$User$avatar) then,
+  ) = _CopyWithImpl$Fragment$User$avatar;
+
+  factory CopyWith$Fragment$User$avatar.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$User$avatar;
+
+  TRes call({
+    String? medium,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$User$avatar<TRes>
+    implements CopyWith$Fragment$User$avatar<TRes> {
+  _CopyWithImpl$Fragment$User$avatar(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$User$avatar _instance;
+
+  final TRes Function(Fragment$User$avatar) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? medium = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$User$avatar(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$User$avatar<TRes>
+    implements CopyWith$Fragment$User$avatar<TRes> {
+  _CopyWithStubImpl$Fragment$User$avatar(this._res);
+
+  TRes _res;
+
+  call({
+    String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}

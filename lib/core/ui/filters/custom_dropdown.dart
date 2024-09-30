@@ -74,7 +74,7 @@ class _CustomDropdownState<T extends Object> extends State<CustomDropdown<T>> {
           ),
           onChanged: (value) {
             setState(() {
-              if (value != null) {
+              if (value != null && selectedValue != value) {
                 widget.onChange(value);
                 selectedValue = value;
               }

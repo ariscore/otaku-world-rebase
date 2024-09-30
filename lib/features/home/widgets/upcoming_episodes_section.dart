@@ -64,36 +64,14 @@ class UpcomingEpisodesSection extends HookWidget {
       padding: const EdgeInsets.only(left: 15),
       child: BlocBuilder<UpcomingEpisodesBloc, PaginatedDataState>(
         builder: (context, state) {
-          if (state is PaginatedDataLoading || state is PaginatedDataInitial) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Upcoming Episodes',
-                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                        fontFamily: 'Roboto-Condensed',
-                        fontWeight: FontWeight.w500,
-                      ),
-                ),
-                const SizedBox(height: 10),
-                ShimmerLoaderList(
-                  direction: Axis.horizontal,
-                  height: UIUtils.getWidgetHeight(
-                    targetWidgetHeight: 134,
-                    screenHeight: screenHeight,
-                  ),
-                  widgetBorder: 15,
-                  widgetHeight: UIUtils.getWidgetHeight(
-                    targetWidgetHeight: 134,
-                    screenHeight: screenHeight,
-                  ),
-                  widgetWidth: UIUtils.getWidgetWidth(
-                    targetWidgetWidth: 215,
-                    screenWidth: screenWidth,
-                  ),
-                ),
-              ],
-            );
+          if (state is PaginatedDataInitial) {
+            final client = (context.read<GraphqlClientCubit>().state
+                    as GraphqlClientInitialized)
+                .client;
+            context.read<UpcomingEpisodesBloc>().add(LoadData(client));
+            return _buildShimmer(context, screenWidth, screenHeight);
+          } else if (state is PaginatedDataLoading) {
+            return _buildShimmer(context, screenWidth, screenHeight);
           } else if (state is PaginatedDataLoaded) {
             dev.log('Rebuilding the episodes list');
             return Column(
@@ -297,6 +275,42 @@ class UpcomingEpisodesSection extends HookWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(15),
       child: const PosterPlaceholder(),
+    );
+  }
+
+  Widget _buildShimmer(
+    BuildContext context,
+    double screenWidth,
+    double screenHeight,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Upcoming Episodes',
+          style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                fontFamily: 'Roboto-Condensed',
+                fontWeight: FontWeight.w500,
+              ),
+        ),
+        const SizedBox(height: 10),
+        ShimmerLoaderList(
+          direction: Axis.horizontal,
+          height: UIUtils.getWidgetHeight(
+            targetWidgetHeight: 134,
+            screenHeight: screenHeight,
+          ),
+          widgetBorder: 15,
+          widgetHeight: UIUtils.getWidgetHeight(
+            targetWidgetHeight: 134,
+            screenHeight: screenHeight,
+          ),
+          widgetWidth: UIUtils.getWidgetWidth(
+            targetWidgetWidth: 215,
+            screenWidth: screenWidth,
+          ),
+        ),
+      ],
     );
   }
 }
