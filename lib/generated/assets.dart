@@ -67,6 +67,9 @@ class Assets {
   static const String mangaHorimiya = 'assets/images/discover/manga/horimiya.png';
   static const String mangaOnePunchMan = 'assets/images/discover/manga/one-punch-man.jpg';
   static const String mangaSpyxfamily = 'assets/images/discover/manga/spyxfamily.jpg';
+  static const String mediaEditorMediaAdd = 'assets/icons/media_editor/media-add.svg';
+  static const String mediaEditorMediaEdit = 'assets/icons/media_editor/media-edit.svg';
+  static const String mediaEditorReviewAdd = 'assets/icons/media_editor/review-add.svg';
   static const String myRefreshIndicatorForest = 'assets/my_refresh_indicator/forest.png';
   static const String myRefreshIndicatorFullMoon = 'assets/my_refresh_indicator/full_moon.svg';
   static const String myRefreshIndicatorMeteorite1 = 'assets/my_refresh_indicator/meteorite1.svg';
