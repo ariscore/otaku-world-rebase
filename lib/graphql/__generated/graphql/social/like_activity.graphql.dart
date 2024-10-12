@@ -39,12 +39,11 @@ class Variables$Mutation$ToggleActivityLike {
   }
 
   CopyWith$Variables$Mutation$ToggleActivityLike<
-      Variables$Mutation$ToggleActivityLike>
-  get copyWith =>
-      CopyWith$Variables$Mutation$ToggleActivityLike(
-        this,
+          Variables$Mutation$ToggleActivityLike>
+      get copyWith => CopyWith$Variables$Mutation$ToggleActivityLike(
+            this,
             (i) => i,
-      );
+          );
 
   @override
   bool operator ==(Object other) {
@@ -75,19 +74,22 @@ class Variables$Mutation$ToggleActivityLike {
 
 abstract class CopyWith$Variables$Mutation$ToggleActivityLike<TRes> {
   factory CopyWith$Variables$Mutation$ToggleActivityLike(
-      Variables$Mutation$ToggleActivityLike instance,
-      TRes Function(Variables$Mutation$ToggleActivityLike) then,) = _CopyWithImpl$Variables$Mutation$ToggleActivityLike;
+    Variables$Mutation$ToggleActivityLike instance,
+    TRes Function(Variables$Mutation$ToggleActivityLike) then,
+  ) = _CopyWithImpl$Variables$Mutation$ToggleActivityLike;
 
   factory CopyWith$Variables$Mutation$ToggleActivityLike.stub(TRes res) =
-  _CopyWithStubImpl$Variables$Mutation$ToggleActivityLike;
+      _CopyWithStubImpl$Variables$Mutation$ToggleActivityLike;
 
   TRes call({int? id});
 }
 
 class _CopyWithImpl$Variables$Mutation$ToggleActivityLike<TRes>
     implements CopyWith$Variables$Mutation$ToggleActivityLike<TRes> {
-  _CopyWithImpl$Variables$Mutation$ToggleActivityLike(this._instance,
-      this._then,);
+  _CopyWithImpl$Variables$Mutation$ToggleActivityLike(
+    this._instance,
+    this._then,
+  );
 
   final Variables$Mutation$ToggleActivityLike _instance;
 
@@ -124,7 +126,7 @@ class Mutation$ToggleActivityLike {
       ToggleLikeV2: l$ToggleLikeV2 == null
           ? null
           : Mutation$ToggleActivityLike$ToggleLikeV2.fromJson(
-          (l$ToggleLikeV2 as Map<String, dynamic>)),
+              (l$ToggleLikeV2 as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -176,35 +178,36 @@ class Mutation$ToggleActivityLike {
 }
 
 extension UtilityExtension$Mutation$ToggleActivityLike
-on Mutation$ToggleActivityLike {
+    on Mutation$ToggleActivityLike {
   CopyWith$Mutation$ToggleActivityLike<Mutation$ToggleActivityLike>
-  get copyWith =>
-      CopyWith$Mutation$ToggleActivityLike(
-        this,
+      get copyWith => CopyWith$Mutation$ToggleActivityLike(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Mutation$ToggleActivityLike<TRes> {
   factory CopyWith$Mutation$ToggleActivityLike(
-      Mutation$ToggleActivityLike instance,
-      TRes Function(Mutation$ToggleActivityLike) then,) = _CopyWithImpl$Mutation$ToggleActivityLike;
+    Mutation$ToggleActivityLike instance,
+    TRes Function(Mutation$ToggleActivityLike) then,
+  ) = _CopyWithImpl$Mutation$ToggleActivityLike;
 
   factory CopyWith$Mutation$ToggleActivityLike.stub(TRes res) =
-  _CopyWithStubImpl$Mutation$ToggleActivityLike;
+      _CopyWithStubImpl$Mutation$ToggleActivityLike;
 
   TRes call({
     Mutation$ToggleActivityLike$ToggleLikeV2? ToggleLikeV2,
     String? $__typename,
   });
-
   CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2<TRes> get ToggleLikeV2;
 }
 
 class _CopyWithImpl$Mutation$ToggleActivityLike<TRes>
     implements CopyWith$Mutation$ToggleActivityLike<TRes> {
-  _CopyWithImpl$Mutation$ToggleActivityLike(this._instance,
-      this._then,);
+  _CopyWithImpl$Mutation$ToggleActivityLike(
+    this._instance,
+    this._then,
+  );
 
   final Mutation$ToggleActivityLike _instance;
 
@@ -229,9 +232,9 @@ class _CopyWithImpl$Mutation$ToggleActivityLike<TRes>
     final local$ToggleLikeV2 = _instance.ToggleLikeV2;
     return local$ToggleLikeV2 == null
         ? CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2.stub(
-        _then(_instance))
+            _then(_instance))
         : CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2(
-        local$ToggleLikeV2, (e) => call(ToggleLikeV2: e));
+            local$ToggleLikeV2, (e) => call(ToggleLikeV2: e));
   }
 }
 
@@ -286,9 +289,9 @@ const documentNodeMutationToggleActivityLike = DocumentNode(definitions: [
           InlineFragmentNode(
             typeCondition: TypeConditionNode(
                 on: NamedTypeNode(
-                  name: NameNode(value: 'ListActivity'),
-                  isNonNull: false,
-                )),
+              name: NameNode(value: 'ListActivity'),
+              isNonNull: false,
+            )),
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
@@ -310,9 +313,9 @@ const documentNodeMutationToggleActivityLike = DocumentNode(definitions: [
           InlineFragmentNode(
             typeCondition: TypeConditionNode(
                 on: NamedTypeNode(
-                  name: NameNode(value: 'MessageActivity'),
-                  isNonNull: false,
-                )),
+              name: NameNode(value: 'MessageActivity'),
+              isNonNull: false,
+            )),
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
@@ -334,9 +337,9 @@ const documentNodeMutationToggleActivityLike = DocumentNode(definitions: [
           InlineFragmentNode(
             typeCondition: TypeConditionNode(
                 on: NamedTypeNode(
-                  name: NameNode(value: 'TextActivity'),
-                  isNonNull: false,
-                )),
+              name: NameNode(value: 'TextActivity'),
+              isNonNull: false,
+            )),
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
@@ -374,16 +377,14 @@ const documentNodeMutationToggleActivityLike = DocumentNode(definitions: [
     ]),
   ),
 ]);
-
 Mutation$ToggleActivityLike _parserFn$Mutation$ToggleActivityLike(
-    Map<String, dynamic> data) =>
+        Map<String, dynamic> data) =>
     Mutation$ToggleActivityLike.fromJson(data);
-
 typedef OnMutationCompleted$Mutation$ToggleActivityLike = FutureOr<void>
-Function(
-    Map<String, dynamic>?,
-    Mutation$ToggleActivityLike?,
-    );
+    Function(
+  Map<String, dynamic>?,
+  Mutation$ToggleActivityLike?,
+);
 
 class Options$Mutation$ToggleActivityLike
     extends graphql.MutationOptions<Mutation$ToggleActivityLike> {
@@ -399,36 +400,33 @@ class Options$Mutation$ToggleActivityLike
     OnMutationCompleted$Mutation$ToggleActivityLike? onCompleted,
     graphql.OnMutationUpdate<Mutation$ToggleActivityLike>? update,
     graphql.OnError? onError,
-  })
-      : onCompletedWithParsed = onCompleted,
+  })  : onCompletedWithParsed = onCompleted,
         super(
-        variables: variables?.toJson() ?? {},
-        operationName: operationName,
-        fetchPolicy: fetchPolicy,
-        errorPolicy: errorPolicy,
-        cacheRereadPolicy: cacheRereadPolicy,
-        optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-        context: context,
-        onCompleted: onCompleted == null
-            ? null
-            : (data) =>
-            onCompleted(
-              data,
-              data == null
-                  ? null
-                  : _parserFn$Mutation$ToggleActivityLike(data),
-            ),
-        update: update,
-        onError: onError,
-        document: documentNodeMutationToggleActivityLike,
-        parserFn: _parserFn$Mutation$ToggleActivityLike,
-      );
+          variables: variables?.toJson() ?? {},
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Mutation$ToggleActivityLike(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationToggleActivityLike,
+          parserFn: _parserFn$Mutation$ToggleActivityLike,
+        );
 
   final OnMutationCompleted$Mutation$ToggleActivityLike? onCompletedWithParsed;
 
   @override
-  List<Object?> get properties =>
-      [
+  List<Object?> get properties => [
         ...super.onCompleted == null
             ? super.properties
             : super.properties.where((property) => property != onCompleted),
@@ -452,37 +450,38 @@ class WatchOptions$Mutation$ToggleActivityLike
     bool carryForwardDataOnException = true,
     bool fetchResults = false,
   }) : super(
-    variables: variables?.toJson() ?? {},
-    operationName: operationName,
-    fetchPolicy: fetchPolicy,
-    errorPolicy: errorPolicy,
-    cacheRereadPolicy: cacheRereadPolicy,
-    optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-    context: context,
-    document: documentNodeMutationToggleActivityLike,
-    pollInterval: pollInterval,
-    eagerlyFetchResults: eagerlyFetchResults,
-    carryForwardDataOnException: carryForwardDataOnException,
-    fetchResults: fetchResults,
-    parserFn: _parserFn$Mutation$ToggleActivityLike,
-  );
+          variables: variables?.toJson() ?? {},
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeMutationToggleActivityLike,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Mutation$ToggleActivityLike,
+        );
 }
 
 extension ClientExtension$Mutation$ToggleActivityLike on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$ToggleActivityLike>>
-  mutate$ToggleActivityLike(
-      [Options$Mutation$ToggleActivityLike? options]) async =>
-      await this.mutate(options ?? Options$Mutation$ToggleActivityLike());
-
+      mutate$ToggleActivityLike(
+              [Options$Mutation$ToggleActivityLike? options]) async =>
+          await this.mutate(options ?? Options$Mutation$ToggleActivityLike());
   graphql.ObservableQuery<
       Mutation$ToggleActivityLike> watchMutation$ToggleActivityLike(
-      [WatchOptions$Mutation$ToggleActivityLike? options]) =>
+          [WatchOptions$Mutation$ToggleActivityLike? options]) =>
       this.watchMutation(options ?? WatchOptions$Mutation$ToggleActivityLike());
 }
 
 class Mutation$ToggleActivityLike$HookResult {
-  Mutation$ToggleActivityLike$HookResult(this.runMutation,
-      this.result,);
+  Mutation$ToggleActivityLike$HookResult(
+    this.runMutation,
+    this.result,
+  );
 
   final RunMutation$Mutation$ToggleActivityLike runMutation;
 
@@ -494,20 +493,20 @@ Mutation$ToggleActivityLike$HookResult useMutation$ToggleActivityLike(
   final result = graphql_flutter
       .useMutation(options ?? WidgetOptions$Mutation$ToggleActivityLike());
   return Mutation$ToggleActivityLike$HookResult(
-        ({variables, optimisticResult, typedOptimisticResult}) =>
+    ({variables, optimisticResult, typedOptimisticResult}) =>
         result.runMutation(
-          variables?.toJson() ?? const {},
-          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-        ),
+      variables?.toJson() ?? const {},
+      optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+    ),
     result.result,
   );
 }
 
 graphql.ObservableQuery<Mutation$ToggleActivityLike>
-useWatchMutation$ToggleActivityLike(
-    [WatchOptions$Mutation$ToggleActivityLike? options]) =>
-    graphql_flutter.useWatchMutation(
-        options ?? WatchOptions$Mutation$ToggleActivityLike());
+    useWatchMutation$ToggleActivityLike(
+            [WatchOptions$Mutation$ToggleActivityLike? options]) =>
+        graphql_flutter.useWatchMutation(
+            options ?? WatchOptions$Mutation$ToggleActivityLike());
 
 class WidgetOptions$Mutation$ToggleActivityLike
     extends graphql.MutationOptions<Mutation$ToggleActivityLike> {
@@ -522,35 +521,32 @@ class WidgetOptions$Mutation$ToggleActivityLike
     OnMutationCompleted$Mutation$ToggleActivityLike? onCompleted,
     graphql.OnMutationUpdate<Mutation$ToggleActivityLike>? update,
     graphql.OnError? onError,
-  })
-      : onCompletedWithParsed = onCompleted,
+  })  : onCompletedWithParsed = onCompleted,
         super(
-        operationName: operationName,
-        fetchPolicy: fetchPolicy,
-        errorPolicy: errorPolicy,
-        cacheRereadPolicy: cacheRereadPolicy,
-        optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-        context: context,
-        onCompleted: onCompleted == null
-            ? null
-            : (data) =>
-            onCompleted(
-              data,
-              data == null
-                  ? null
-                  : _parserFn$Mutation$ToggleActivityLike(data),
-            ),
-        update: update,
-        onError: onError,
-        document: documentNodeMutationToggleActivityLike,
-        parserFn: _parserFn$Mutation$ToggleActivityLike,
-      );
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Mutation$ToggleActivityLike(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationToggleActivityLike,
+          parserFn: _parserFn$Mutation$ToggleActivityLike,
+        );
 
   final OnMutationCompleted$Mutation$ToggleActivityLike? onCompletedWithParsed;
 
   @override
-  List<Object?> get properties =>
-      [
+  List<Object?> get properties => [
         ...super.onCompleted == null
             ? super.properties
             : super.properties.where((property) => property != onCompleted),
@@ -559,15 +555,15 @@ class WidgetOptions$Mutation$ToggleActivityLike
 }
 
 typedef RunMutation$Mutation$ToggleActivityLike
-= graphql.MultiSourceResult<Mutation$ToggleActivityLike> Function({
-Variables$Mutation$ToggleActivityLike? variables,
-Object? optimisticResult,
-Mutation$ToggleActivityLike? typedOptimisticResult,
+    = graphql.MultiSourceResult<Mutation$ToggleActivityLike> Function({
+  Variables$Mutation$ToggleActivityLike? variables,
+  Object? optimisticResult,
+  Mutation$ToggleActivityLike? typedOptimisticResult,
 });
 typedef Builder$Mutation$ToggleActivityLike = widgets.Widget Function(
-    RunMutation$Mutation$ToggleActivityLike,
-    graphql.QueryResult<Mutation$ToggleActivityLike>?,
-    );
+  RunMutation$Mutation$ToggleActivityLike,
+  graphql.QueryResult<Mutation$ToggleActivityLike>?,
+);
 
 class Mutation$ToggleActivityLike$Widget
     extends graphql_flutter.Mutation<Mutation$ToggleActivityLike> {
@@ -576,24 +572,26 @@ class Mutation$ToggleActivityLike$Widget
     WidgetOptions$Mutation$ToggleActivityLike? options,
     required Builder$Mutation$ToggleActivityLike builder,
   }) : super(
-    key: key,
-    options: options ?? WidgetOptions$Mutation$ToggleActivityLike(),
-    builder: (run,
-        result,) =>
-        builder(
-              ({
-            variables,
-            optimisticResult,
-            typedOptimisticResult,
-          }) =>
-              run(
-                variables?.toJson() ?? const {},
-                optimisticResult:
-                optimisticResult ?? typedOptimisticResult?.toJson(),
-              ),
-          result,
-        ),
-  );
+          key: key,
+          options: options ?? WidgetOptions$Mutation$ToggleActivityLike(),
+          builder: (
+            run,
+            result,
+          ) =>
+              builder(
+            ({
+              variables,
+              optimisticResult,
+              typedOptimisticResult,
+            }) =>
+                run(
+              variables?.toJson() ?? const {},
+              optimisticResult:
+                  optimisticResult ?? typedOptimisticResult?.toJson(),
+            ),
+            result,
+          ),
+        );
 }
 
 class Mutation$ToggleActivityLike$ToggleLikeV2 {
@@ -666,31 +664,29 @@ class Mutation$ToggleActivityLike$ToggleLikeV2 {
 }
 
 extension UtilityExtension$Mutation$ToggleActivityLike$ToggleLikeV2
-on Mutation$ToggleActivityLike$ToggleLikeV2 {
+    on Mutation$ToggleActivityLike$ToggleLikeV2 {
   CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2<
-      Mutation$ToggleActivityLike$ToggleLikeV2>
-  get copyWith =>
-      CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2(
-        this,
+          Mutation$ToggleActivityLike$ToggleLikeV2>
+      get copyWith => CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2(
+            this,
             (i) => i,
-      );
-
+          );
   _T when<_T>({
     required _T Function(Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity)
-    listActivity,
+        listActivity,
     required _T Function(
-        Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity)
-    messageActivity,
+            Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity)
+        messageActivity,
     required _T Function(Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity)
-    textActivity,
+        textActivity,
     required _T Function(
-        Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply)
-    activityReply,
+            Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply)
+        activityReply,
     required _T Function(Mutation$ToggleActivityLike$ToggleLikeV2$$Thread)
-    thread,
+        thread,
     required _T Function(
-        Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment)
-    threadComment,
+            Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment)
+        threadComment,
     required _T Function() orElse,
   }) {
     switch ($__typename) {
@@ -724,16 +720,16 @@ on Mutation$ToggleActivityLike$ToggleLikeV2 {
 
   _T maybeWhen<_T>({
     _T Function(Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity)?
-    listActivity,
+        listActivity,
     _T Function(Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity)?
-    messageActivity,
+        messageActivity,
     _T Function(Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity)?
-    textActivity,
+        textActivity,
     _T Function(Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply)?
-    activityReply,
+        activityReply,
     _T Function(Mutation$ToggleActivityLike$ToggleLikeV2$$Thread)? thread,
     _T Function(Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment)?
-    threadComment,
+        threadComment,
     required _T Function() orElse,
   }) {
     switch ($__typename) {
@@ -748,7 +744,7 @@ on Mutation$ToggleActivityLike$ToggleLikeV2 {
       case "MessageActivity":
         if (messageActivity != null) {
           return messageActivity(this
-          as Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity);
+              as Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity);
         } else {
           return orElse();
         }
@@ -793,19 +789,22 @@ on Mutation$ToggleActivityLike$ToggleLikeV2 {
 
 abstract class CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2<TRes> {
   factory CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2(
-      Mutation$ToggleActivityLike$ToggleLikeV2 instance,
-      TRes Function(Mutation$ToggleActivityLike$ToggleLikeV2) then,) = _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2;
+    Mutation$ToggleActivityLike$ToggleLikeV2 instance,
+    TRes Function(Mutation$ToggleActivityLike$ToggleLikeV2) then,
+  ) = _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2;
 
   factory CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2.stub(TRes res) =
-  _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2;
+      _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2;
 
   TRes call({String? $__typename});
 }
 
 class _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2<TRes>
     implements CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2<TRes> {
-  _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2(this._instance,
-      this._then,);
+  _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2(
+    this._instance,
+    this._then,
+  );
 
   final Mutation$ToggleActivityLike$ToggleLikeV2 _instance;
 
@@ -893,25 +892,26 @@ class Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity
 }
 
 extension UtilityExtension$Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity
-on Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity {
+    on Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity {
   CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity<
-      Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity>
-  get copyWith =>
-      CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity(
-        this,
+          Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity>
+      get copyWith =>
+          CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity<
-TRes> {
+    TRes> {
   factory CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity(
-      Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity instance,
-      TRes Function(Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity) then,) = _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity;
+    Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity instance,
+    TRes Function(Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity) then,
+  ) = _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity;
 
   factory CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity.stub(
-      TRes res) =
-  _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity;
+          TRes res) =
+      _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity;
 
   TRes call({
     bool? isLiked,
@@ -923,13 +923,14 @@ class _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity<TRes>
     implements
         CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity<TRes> {
   _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity(
-      this._instance,
-      this._then,);
+    this._instance,
+    this._then,
+  );
 
   final Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity _instance;
 
   final TRes Function(Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity)
-  _then;
+      _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -946,7 +947,7 @@ class _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity<TRes>
 }
 
 class _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity<
-TRes>
+        TRes>
     implements
         CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity<TRes> {
   _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ListActivity(
@@ -1025,26 +1026,27 @@ class Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity
 }
 
 extension UtilityExtension$Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity
-on Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity {
+    on Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity {
   CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity<
-      Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity>
-  get copyWith =>
-      CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity(
-        this,
+          Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity>
+      get copyWith =>
+          CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity<
-TRes> {
+    TRes> {
   factory CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity(
-      Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity instance,
-      TRes Function(Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity)
-      then,) = _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity;
+    Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity instance,
+    TRes Function(Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity)
+        then,
+  ) = _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity;
 
   factory CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity.stub(
-      TRes res) =
-  _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity;
+          TRes res) =
+      _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity;
 
   TRes call({
     bool? isLiked,
@@ -1053,18 +1055,19 @@ TRes> {
 }
 
 class _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity<
-TRes>
+        TRes>
     implements
         CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity<
             TRes> {
   _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity(
-      this._instance,
-      this._then,);
+    this._instance,
+    this._then,
+  );
 
   final Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity _instance;
 
   final TRes Function(Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity)
-  _then;
+      _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1081,7 +1084,7 @@ TRes>
 }
 
 class _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity<
-TRes>
+        TRes>
     implements
         CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$MessageActivity<
             TRes> {
@@ -1161,25 +1164,26 @@ class Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity
 }
 
 extension UtilityExtension$Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity
-on Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity {
+    on Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity {
   CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity<
-      Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity>
-  get copyWith =>
-      CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity(
-        this,
+          Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity>
+      get copyWith =>
+          CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity<
-TRes> {
+    TRes> {
   factory CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity(
-      Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity instance,
-      TRes Function(Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity) then,) = _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity;
+    Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity instance,
+    TRes Function(Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity) then,
+  ) = _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity;
 
   factory CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity.stub(
-      TRes res) =
-  _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity;
+          TRes res) =
+      _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity;
 
   TRes call({
     bool? isLiked,
@@ -1191,13 +1195,14 @@ class _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity<TRes>
     implements
         CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity<TRes> {
   _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity(
-      this._instance,
-      this._then,);
+    this._instance,
+    this._then,
+  );
 
   final Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity _instance;
 
   final TRes Function(Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity)
-  _then;
+      _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1214,7 +1219,7 @@ class _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity<TRes>
 }
 
 class _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity<
-TRes>
+        TRes>
     implements
         CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity<TRes> {
   _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$TextActivity(
@@ -1275,41 +1280,43 @@ class Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply
 }
 
 extension UtilityExtension$Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply
-on Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply {
+    on Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply {
   CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply<
-      Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply>
-  get copyWith =>
-      CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply(
-        this,
+          Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply>
+      get copyWith =>
+          CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply<
-TRes> {
+    TRes> {
   factory CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply(
-      Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply instance,
-      TRes Function(Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply) then,) = _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply;
+    Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply instance,
+    TRes Function(Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply) then,
+  ) = _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply;
 
   factory CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply.stub(
-      TRes res) =
-  _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply;
+          TRes res) =
+      _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply;
 
   TRes call({String? $__typename});
 }
 
 class _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply<
-TRes>
+        TRes>
     implements
         CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply<TRes> {
   _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply(
-      this._instance,
-      this._then,);
+    this._instance,
+    this._then,
+  );
 
   final Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply _instance;
 
   final TRes Function(Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply)
-  _then;
+      _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1321,7 +1328,7 @@ TRes>
 }
 
 class _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply<
-TRes>
+        TRes>
     implements
         CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply<TRes> {
   _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ActivityReply(
@@ -1378,32 +1385,34 @@ class Mutation$ToggleActivityLike$ToggleLikeV2$$Thread
 }
 
 extension UtilityExtension$Mutation$ToggleActivityLike$ToggleLikeV2$$Thread
-on Mutation$ToggleActivityLike$ToggleLikeV2$$Thread {
+    on Mutation$ToggleActivityLike$ToggleLikeV2$$Thread {
   CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$Thread<
-      Mutation$ToggleActivityLike$ToggleLikeV2$$Thread>
-  get copyWith =>
-      CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$Thread(
-        this,
+          Mutation$ToggleActivityLike$ToggleLikeV2$$Thread>
+      get copyWith => CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$Thread(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$Thread<TRes> {
   factory CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$Thread(
-      Mutation$ToggleActivityLike$ToggleLikeV2$$Thread instance,
-      TRes Function(Mutation$ToggleActivityLike$ToggleLikeV2$$Thread) then,) = _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$Thread;
+    Mutation$ToggleActivityLike$ToggleLikeV2$$Thread instance,
+    TRes Function(Mutation$ToggleActivityLike$ToggleLikeV2$$Thread) then,
+  ) = _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$Thread;
 
   factory CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$Thread.stub(
-      TRes res) =
-  _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$Thread;
+          TRes res) =
+      _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$Thread;
 
   TRes call({String? $__typename});
 }
 
 class _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$Thread<TRes>
     implements CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$Thread<TRes> {
-  _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$Thread(this._instance,
-      this._then,);
+  _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$Thread(
+    this._instance,
+    this._then,
+  );
 
   final Mutation$ToggleActivityLike$ToggleLikeV2$$Thread _instance;
 
@@ -1473,41 +1482,43 @@ class Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment
 }
 
 extension UtilityExtension$Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment
-on Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment {
+    on Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment {
   CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment<
-      Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment>
-  get copyWith =>
-      CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment(
-        this,
+          Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment>
+      get copyWith =>
+          CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment<
-TRes> {
+    TRes> {
   factory CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment(
-      Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment instance,
-      TRes Function(Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment) then,) = _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment;
+    Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment instance,
+    TRes Function(Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment) then,
+  ) = _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment;
 
   factory CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment.stub(
-      TRes res) =
-  _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment;
+          TRes res) =
+      _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment;
 
   TRes call({String? $__typename});
 }
 
 class _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment<
-TRes>
+        TRes>
     implements
         CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment<TRes> {
   _CopyWithImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment(
-      this._instance,
-      this._then,);
+    this._instance,
+    this._then,
+  );
 
   final Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment _instance;
 
   final TRes Function(Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment)
-  _then;
+      _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1519,7 +1530,7 @@ TRes>
 }
 
 class _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment<
-TRes>
+        TRes>
     implements
         CopyWith$Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment<TRes> {
   _CopyWithStubImpl$Mutation$ToggleActivityLike$ToggleLikeV2$$ThreadComment(

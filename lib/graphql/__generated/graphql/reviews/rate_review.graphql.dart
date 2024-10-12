@@ -50,17 +50,16 @@ class Variables$Mutation$RateReview {
     if (_$data.containsKey('rating')) {
       final l$rating = rating;
       result$data['rating'] =
-      l$rating == null ? null : toJson$Enum$ReviewRating(l$rating);
+          l$rating == null ? null : toJson$Enum$ReviewRating(l$rating);
     }
     return result$data;
   }
 
   CopyWith$Variables$Mutation$RateReview<Variables$Mutation$RateReview>
-  get copyWith =>
-      CopyWith$Variables$Mutation$RateReview(
-        this,
+      get copyWith => CopyWith$Variables$Mutation$RateReview(
+            this,
             (i) => i,
-      );
+          );
 
   @override
   bool operator ==(Object other) {
@@ -104,11 +103,12 @@ class Variables$Mutation$RateReview {
 
 abstract class CopyWith$Variables$Mutation$RateReview<TRes> {
   factory CopyWith$Variables$Mutation$RateReview(
-      Variables$Mutation$RateReview instance,
-      TRes Function(Variables$Mutation$RateReview) then,) = _CopyWithImpl$Variables$Mutation$RateReview;
+    Variables$Mutation$RateReview instance,
+    TRes Function(Variables$Mutation$RateReview) then,
+  ) = _CopyWithImpl$Variables$Mutation$RateReview;
 
   factory CopyWith$Variables$Mutation$RateReview.stub(TRes res) =
-  _CopyWithStubImpl$Variables$Mutation$RateReview;
+      _CopyWithStubImpl$Variables$Mutation$RateReview;
 
   TRes call({
     int? reviewId,
@@ -118,8 +118,10 @@ abstract class CopyWith$Variables$Mutation$RateReview<TRes> {
 
 class _CopyWithImpl$Variables$Mutation$RateReview<TRes>
     implements CopyWith$Variables$Mutation$RateReview<TRes> {
-  _CopyWithImpl$Variables$Mutation$RateReview(this._instance,
-      this._then,);
+  _CopyWithImpl$Variables$Mutation$RateReview(
+    this._instance,
+    this._then,
+  );
 
   final Variables$Mutation$RateReview _instance;
 
@@ -164,7 +166,7 @@ class Mutation$RateReview {
       RateReview: l$RateReview == null
           ? null
           : Mutation$RateReview$RateReview.fromJson(
-          (l$RateReview as Map<String, dynamic>)),
+              (l$RateReview as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -218,29 +220,32 @@ extension UtilityExtension$Mutation$RateReview on Mutation$RateReview {
   CopyWith$Mutation$RateReview<Mutation$RateReview> get copyWith =>
       CopyWith$Mutation$RateReview(
         this,
-            (i) => i,
+        (i) => i,
       );
 }
 
 abstract class CopyWith$Mutation$RateReview<TRes> {
-  factory CopyWith$Mutation$RateReview(Mutation$RateReview instance,
-      TRes Function(Mutation$RateReview) then,) = _CopyWithImpl$Mutation$RateReview;
+  factory CopyWith$Mutation$RateReview(
+    Mutation$RateReview instance,
+    TRes Function(Mutation$RateReview) then,
+  ) = _CopyWithImpl$Mutation$RateReview;
 
   factory CopyWith$Mutation$RateReview.stub(TRes res) =
-  _CopyWithStubImpl$Mutation$RateReview;
+      _CopyWithStubImpl$Mutation$RateReview;
 
   TRes call({
     Mutation$RateReview$RateReview? RateReview,
     String? $__typename,
   });
-
   CopyWith$Mutation$RateReview$RateReview<TRes> get RateReview;
 }
 
 class _CopyWithImpl$Mutation$RateReview<TRes>
     implements CopyWith$Mutation$RateReview<TRes> {
-  _CopyWithImpl$Mutation$RateReview(this._instance,
-      this._then,);
+  _CopyWithImpl$Mutation$RateReview(
+    this._instance,
+    this._then,
+  );
 
   final Mutation$RateReview _instance;
 
@@ -266,7 +271,7 @@ class _CopyWithImpl$Mutation$RateReview<TRes>
     return local$RateReview == null
         ? CopyWith$Mutation$RateReview$RateReview.stub(_then(_instance))
         : CopyWith$Mutation$RateReview$RateReview(
-        local$RateReview, (e) => call(RateReview: e));
+            local$RateReview, (e) => call(RateReview: e));
   }
 }
 
@@ -353,14 +358,12 @@ const documentNodeMutationRateReview = DocumentNode(definitions: [
     ]),
   ),
 ]);
-
 Mutation$RateReview _parserFn$Mutation$RateReview(Map<String, dynamic> data) =>
     Mutation$RateReview.fromJson(data);
-
 typedef OnMutationCompleted$Mutation$RateReview = FutureOr<void> Function(
-    Map<String, dynamic>?,
-    Mutation$RateReview?,
-    );
+  Map<String, dynamic>?,
+  Mutation$RateReview?,
+);
 
 class Options$Mutation$RateReview
     extends graphql.MutationOptions<Mutation$RateReview> {
@@ -376,34 +379,31 @@ class Options$Mutation$RateReview
     OnMutationCompleted$Mutation$RateReview? onCompleted,
     graphql.OnMutationUpdate<Mutation$RateReview>? update,
     graphql.OnError? onError,
-  })
-      : onCompletedWithParsed = onCompleted,
+  })  : onCompletedWithParsed = onCompleted,
         super(
-        variables: variables?.toJson() ?? {},
-        operationName: operationName,
-        fetchPolicy: fetchPolicy,
-        errorPolicy: errorPolicy,
-        cacheRereadPolicy: cacheRereadPolicy,
-        optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-        context: context,
-        onCompleted: onCompleted == null
-            ? null
-            : (data) =>
-            onCompleted(
-              data,
-              data == null ? null : _parserFn$Mutation$RateReview(data),
-            ),
-        update: update,
-        onError: onError,
-        document: documentNodeMutationRateReview,
-        parserFn: _parserFn$Mutation$RateReview,
-      );
+          variables: variables?.toJson() ?? {},
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null ? null : _parserFn$Mutation$RateReview(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationRateReview,
+          parserFn: _parserFn$Mutation$RateReview,
+        );
 
   final OnMutationCompleted$Mutation$RateReview? onCompletedWithParsed;
 
   @override
-  List<Object?> get properties =>
-      [
+  List<Object?> get properties => [
         ...super.onCompleted == null
             ? super.properties
             : super.properties.where((property) => property != onCompleted),
@@ -427,35 +427,36 @@ class WatchOptions$Mutation$RateReview
     bool carryForwardDataOnException = true,
     bool fetchResults = false,
   }) : super(
-    variables: variables?.toJson() ?? {},
-    operationName: operationName,
-    fetchPolicy: fetchPolicy,
-    errorPolicy: errorPolicy,
-    cacheRereadPolicy: cacheRereadPolicy,
-    optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-    context: context,
-    document: documentNodeMutationRateReview,
-    pollInterval: pollInterval,
-    eagerlyFetchResults: eagerlyFetchResults,
-    carryForwardDataOnException: carryForwardDataOnException,
-    fetchResults: fetchResults,
-    parserFn: _parserFn$Mutation$RateReview,
-  );
+          variables: variables?.toJson() ?? {},
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeMutationRateReview,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Mutation$RateReview,
+        );
 }
 
 extension ClientExtension$Mutation$RateReview on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$RateReview>> mutate$RateReview(
-      [Options$Mutation$RateReview? options]) async =>
+          [Options$Mutation$RateReview? options]) async =>
       await this.mutate(options ?? Options$Mutation$RateReview());
-
   graphql.ObservableQuery<Mutation$RateReview> watchMutation$RateReview(
-      [WatchOptions$Mutation$RateReview? options]) =>
+          [WatchOptions$Mutation$RateReview? options]) =>
       this.watchMutation(options ?? WatchOptions$Mutation$RateReview());
 }
 
 class Mutation$RateReview$HookResult {
-  Mutation$RateReview$HookResult(this.runMutation,
-      this.result,);
+  Mutation$RateReview$HookResult(
+    this.runMutation,
+    this.result,
+  );
 
   final RunMutation$Mutation$RateReview runMutation;
 
@@ -467,17 +468,17 @@ Mutation$RateReview$HookResult useMutation$RateReview(
   final result = graphql_flutter
       .useMutation(options ?? WidgetOptions$Mutation$RateReview());
   return Mutation$RateReview$HookResult(
-        ({variables, optimisticResult, typedOptimisticResult}) =>
+    ({variables, optimisticResult, typedOptimisticResult}) =>
         result.runMutation(
-          variables?.toJson() ?? const {},
-          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-        ),
+      variables?.toJson() ?? const {},
+      optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+    ),
     result.result,
   );
 }
 
 graphql.ObservableQuery<Mutation$RateReview> useWatchMutation$RateReview(
-    [WatchOptions$Mutation$RateReview? options]) =>
+        [WatchOptions$Mutation$RateReview? options]) =>
     graphql_flutter
         .useWatchMutation(options ?? WatchOptions$Mutation$RateReview());
 
@@ -494,33 +495,30 @@ class WidgetOptions$Mutation$RateReview
     OnMutationCompleted$Mutation$RateReview? onCompleted,
     graphql.OnMutationUpdate<Mutation$RateReview>? update,
     graphql.OnError? onError,
-  })
-      : onCompletedWithParsed = onCompleted,
+  })  : onCompletedWithParsed = onCompleted,
         super(
-        operationName: operationName,
-        fetchPolicy: fetchPolicy,
-        errorPolicy: errorPolicy,
-        cacheRereadPolicy: cacheRereadPolicy,
-        optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-        context: context,
-        onCompleted: onCompleted == null
-            ? null
-            : (data) =>
-            onCompleted(
-              data,
-              data == null ? null : _parserFn$Mutation$RateReview(data),
-            ),
-        update: update,
-        onError: onError,
-        document: documentNodeMutationRateReview,
-        parserFn: _parserFn$Mutation$RateReview,
-      );
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null ? null : _parserFn$Mutation$RateReview(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationRateReview,
+          parserFn: _parserFn$Mutation$RateReview,
+        );
 
   final OnMutationCompleted$Mutation$RateReview? onCompletedWithParsed;
 
   @override
-  List<Object?> get properties =>
-      [
+  List<Object?> get properties => [
         ...super.onCompleted == null
             ? super.properties
             : super.properties.where((property) => property != onCompleted),
@@ -529,15 +527,15 @@ class WidgetOptions$Mutation$RateReview
 }
 
 typedef RunMutation$Mutation$RateReview
-= graphql.MultiSourceResult<Mutation$RateReview> Function({
-Variables$Mutation$RateReview? variables,
-Object? optimisticResult,
-Mutation$RateReview? typedOptimisticResult,
+    = graphql.MultiSourceResult<Mutation$RateReview> Function({
+  Variables$Mutation$RateReview? variables,
+  Object? optimisticResult,
+  Mutation$RateReview? typedOptimisticResult,
 });
 typedef Builder$Mutation$RateReview = widgets.Widget Function(
-    RunMutation$Mutation$RateReview,
-    graphql.QueryResult<Mutation$RateReview>?,
-    );
+  RunMutation$Mutation$RateReview,
+  graphql.QueryResult<Mutation$RateReview>?,
+);
 
 class Mutation$RateReview$Widget
     extends graphql_flutter.Mutation<Mutation$RateReview> {
@@ -546,24 +544,26 @@ class Mutation$RateReview$Widget
     WidgetOptions$Mutation$RateReview? options,
     required Builder$Mutation$RateReview builder,
   }) : super(
-    key: key,
-    options: options ?? WidgetOptions$Mutation$RateReview(),
-    builder: (run,
-        result,) =>
-        builder(
-              ({
-            variables,
-            optimisticResult,
-            typedOptimisticResult,
-          }) =>
-              run(
-                variables?.toJson() ?? const {},
-                optimisticResult:
-                optimisticResult ?? typedOptimisticResult?.toJson(),
-              ),
-          result,
-        ),
-  );
+          key: key,
+          options: options ?? WidgetOptions$Mutation$RateReview(),
+          builder: (
+            run,
+            result,
+          ) =>
+              builder(
+            ({
+              variables,
+              optimisticResult,
+              typedOptimisticResult,
+            }) =>
+                run(
+              variables?.toJson() ?? const {},
+              optimisticResult:
+                  optimisticResult ?? typedOptimisticResult?.toJson(),
+            ),
+            result,
+          ),
+        );
 }
 
 class Mutation$RateReview$RateReview {
@@ -591,7 +591,7 @@ class Mutation$RateReview$RateReview {
     final _resultData = <String, dynamic>{};
     final l$userRating = userRating;
     _resultData['userRating'] =
-    l$userRating == null ? null : toJson$Enum$ReviewRating(l$userRating);
+        l$userRating == null ? null : toJson$Enum$ReviewRating(l$userRating);
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -631,22 +631,22 @@ class Mutation$RateReview$RateReview {
 }
 
 extension UtilityExtension$Mutation$RateReview$RateReview
-on Mutation$RateReview$RateReview {
+    on Mutation$RateReview$RateReview {
   CopyWith$Mutation$RateReview$RateReview<Mutation$RateReview$RateReview>
-  get copyWith =>
-      CopyWith$Mutation$RateReview$RateReview(
-        this,
+      get copyWith => CopyWith$Mutation$RateReview$RateReview(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Mutation$RateReview$RateReview<TRes> {
   factory CopyWith$Mutation$RateReview$RateReview(
-      Mutation$RateReview$RateReview instance,
-      TRes Function(Mutation$RateReview$RateReview) then,) = _CopyWithImpl$Mutation$RateReview$RateReview;
+    Mutation$RateReview$RateReview instance,
+    TRes Function(Mutation$RateReview$RateReview) then,
+  ) = _CopyWithImpl$Mutation$RateReview$RateReview;
 
   factory CopyWith$Mutation$RateReview$RateReview.stub(TRes res) =
-  _CopyWithStubImpl$Mutation$RateReview$RateReview;
+      _CopyWithStubImpl$Mutation$RateReview$RateReview;
 
   TRes call({
     Enum$ReviewRating? userRating,
@@ -656,8 +656,10 @@ abstract class CopyWith$Mutation$RateReview$RateReview<TRes> {
 
 class _CopyWithImpl$Mutation$RateReview$RateReview<TRes>
     implements CopyWith$Mutation$RateReview$RateReview<TRes> {
-  _CopyWithImpl$Mutation$RateReview$RateReview(this._instance,
-      this._then,);
+  _CopyWithImpl$Mutation$RateReview$RateReview(
+    this._instance,
+    this._then,
+  );
 
   final Mutation$RateReview$RateReview _instance;
 

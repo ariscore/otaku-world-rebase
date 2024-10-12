@@ -70,11 +70,11 @@ class Fragment$MediaListEntry {
       completedAt: l$completedAt == null
           ? null
           : Fragment$FuzzyDate.fromJson(
-          (l$completedAt as Map<String, dynamic>)),
+              (l$completedAt as Map<String, dynamic>)),
       media: l$media == null
           ? null
           : Fragment$MediaListEntry$media.fromJson(
-          (l$media as Map<String, dynamic>)),
+              (l$media as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -121,7 +121,7 @@ class Fragment$MediaListEntry {
     _resultData['mediaId'] = l$mediaId;
     final l$status = status;
     _resultData['status'] =
-    l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
+        l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
     final l$updatedAt = updatedAt;
     _resultData['updatedAt'] = l$updatedAt;
     final l$progress = progress;
@@ -295,16 +295,18 @@ extension UtilityExtension$Fragment$MediaListEntry on Fragment$MediaListEntry {
   CopyWith$Fragment$MediaListEntry<Fragment$MediaListEntry> get copyWith =>
       CopyWith$Fragment$MediaListEntry(
         this,
-            (i) => i,
+        (i) => i,
       );
 }
 
 abstract class CopyWith$Fragment$MediaListEntry<TRes> {
-  factory CopyWith$Fragment$MediaListEntry(Fragment$MediaListEntry instance,
-      TRes Function(Fragment$MediaListEntry) then,) = _CopyWithImpl$Fragment$MediaListEntry;
+  factory CopyWith$Fragment$MediaListEntry(
+    Fragment$MediaListEntry instance,
+    TRes Function(Fragment$MediaListEntry) then,
+  ) = _CopyWithImpl$Fragment$MediaListEntry;
 
   factory CopyWith$Fragment$MediaListEntry.stub(TRes res) =
-  _CopyWithStubImpl$Fragment$MediaListEntry;
+      _CopyWithStubImpl$Fragment$MediaListEntry;
 
   TRes call({
     int? id,
@@ -325,18 +327,17 @@ abstract class CopyWith$Fragment$MediaListEntry<TRes> {
     Fragment$MediaListEntry$media? media,
     String? $__typename,
   });
-
   CopyWith$Fragment$FuzzyDate<TRes> get startedAt;
-
   CopyWith$Fragment$FuzzyDate<TRes> get completedAt;
-
   CopyWith$Fragment$MediaListEntry$media<TRes> get media;
 }
 
 class _CopyWithImpl$Fragment$MediaListEntry<TRes>
     implements CopyWith$Fragment$MediaListEntry<TRes> {
-  _CopyWithImpl$Fragment$MediaListEntry(this._instance,
-      this._then,);
+  _CopyWithImpl$Fragment$MediaListEntry(
+    this._instance,
+    this._then,
+  );
 
   final Fragment$MediaListEntry _instance;
 
@@ -372,14 +373,14 @@ class _CopyWithImpl$Fragment$MediaListEntry<TRes>
             ? _instance.status
             : (status as Enum$MediaListStatus?),
         updatedAt:
-        updatedAt == _undefined ? _instance.updatedAt : (updatedAt as int?),
+            updatedAt == _undefined ? _instance.updatedAt : (updatedAt as int?),
         progress:
-        progress == _undefined ? _instance.progress : (progress as int?),
+            progress == _undefined ? _instance.progress : (progress as int?),
         progressVolumes: progressVolumes == _undefined
             ? _instance.progressVolumes
             : (progressVolumes as int?),
         priority:
-        priority == _undefined ? _instance.priority : (priority as int?),
+            priority == _undefined ? _instance.priority : (priority as int?),
         notes: notes == _undefined ? _instance.notes : (notes as String?),
         hiddenFromStatusLists: hiddenFromStatusLists == _undefined
             ? _instance.hiddenFromStatusLists
@@ -409,7 +410,7 @@ class _CopyWithImpl$Fragment$MediaListEntry<TRes>
     return local$startedAt == null
         ? CopyWith$Fragment$FuzzyDate.stub(_then(_instance))
         : CopyWith$Fragment$FuzzyDate(
-        local$startedAt, (e) => call(startedAt: e));
+            local$startedAt, (e) => call(startedAt: e));
   }
 
   CopyWith$Fragment$FuzzyDate<TRes> get completedAt {
@@ -417,7 +418,7 @@ class _CopyWithImpl$Fragment$MediaListEntry<TRes>
     return local$completedAt == null
         ? CopyWith$Fragment$FuzzyDate.stub(_then(_instance))
         : CopyWith$Fragment$FuzzyDate(
-        local$completedAt, (e) => call(completedAt: e));
+            local$completedAt, (e) => call(completedAt: e));
   }
 
   CopyWith$Fragment$MediaListEntry$media<TRes> get media {
@@ -425,7 +426,7 @@ class _CopyWithImpl$Fragment$MediaListEntry<TRes>
     return local$media == null
         ? CopyWith$Fragment$MediaListEntry$media.stub(_then(_instance))
         : CopyWith$Fragment$MediaListEntry$media(
-        local$media, (e) => call(media: e));
+            local$media, (e) => call(media: e));
   }
 }
 
@@ -470,9 +471,9 @@ const fragmentDefinitionMediaListEntry = FragmentDefinitionNode(
   name: NameNode(value: 'MediaListEntry'),
   typeCondition: TypeConditionNode(
       on: NamedTypeNode(
-        name: NameNode(value: 'MediaList'),
-        isNonNull: false,
-      )),
+    name: NameNode(value: 'MediaList'),
+    isNonNull: false,
+  )),
   directives: [],
   selectionSet: SelectionSetNode(selections: [
     FieldNode(
@@ -726,7 +727,6 @@ extension ClientExtension$Fragment$MediaListEntry on graphql.GraphQLClient {
         data: data.toJson(),
         broadcast: broadcast,
       );
-
   Fragment$MediaListEntry? readFragment$MediaListEntry({
     required Map<String, dynamic> idFields,
     bool optimistic = true,
@@ -792,11 +792,11 @@ class Fragment$MediaListEntry$media implements Fragment$MediaFragment {
       title: l$title == null
           ? null
           : Fragment$MediaListEntry$media$title.fromJson(
-          (l$title as Map<String, dynamic>)),
+              (l$title as Map<String, dynamic>)),
       coverImage: l$coverImage == null
           ? null
           : Fragment$MediaListEntry$media$coverImage.fromJson(
-          (l$coverImage as Map<String, dynamic>)),
+              (l$coverImage as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
       episodes: (l$episodes as int?),
       chapters: (l$chapters as int?),
@@ -853,7 +853,7 @@ class Fragment$MediaListEntry$media implements Fragment$MediaFragment {
     _resultData['genres'] = l$genres?.map((e) => e).toList();
     final l$format = format;
     _resultData['format'] =
-    l$format == null ? null : toJson$Enum$MediaFormat(l$format);
+        l$format == null ? null : toJson$Enum$MediaFormat(l$format);
     final l$description = description;
     _resultData['description'] = l$description;
     final l$title = title;
@@ -868,7 +868,7 @@ class Fragment$MediaListEntry$media implements Fragment$MediaFragment {
     _resultData['chapters'] = l$chapters;
     final l$status = status;
     _resultData['status'] =
-    l$status == null ? null : toJson$Enum$MediaStatus(l$status);
+        l$status == null ? null : toJson$Enum$MediaStatus(l$status);
     final l$averageScore = averageScore;
     _resultData['averageScore'] = l$averageScore;
     final l$popularity = popularity;
@@ -1014,22 +1014,22 @@ class Fragment$MediaListEntry$media implements Fragment$MediaFragment {
 }
 
 extension UtilityExtension$Fragment$MediaListEntry$media
-on Fragment$MediaListEntry$media {
+    on Fragment$MediaListEntry$media {
   CopyWith$Fragment$MediaListEntry$media<Fragment$MediaListEntry$media>
-  get copyWith =>
-      CopyWith$Fragment$MediaListEntry$media(
-        this,
+      get copyWith => CopyWith$Fragment$MediaListEntry$media(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Fragment$MediaListEntry$media<TRes> {
   factory CopyWith$Fragment$MediaListEntry$media(
-      Fragment$MediaListEntry$media instance,
-      TRes Function(Fragment$MediaListEntry$media) then,) = _CopyWithImpl$Fragment$MediaListEntry$media;
+    Fragment$MediaListEntry$media instance,
+    TRes Function(Fragment$MediaListEntry$media) then,
+  ) = _CopyWithImpl$Fragment$MediaListEntry$media;
 
   factory CopyWith$Fragment$MediaListEntry$media.stub(TRes res) =
-  _CopyWithStubImpl$Fragment$MediaListEntry$media;
+      _CopyWithStubImpl$Fragment$MediaListEntry$media;
 
   TRes call({
     int? id,
@@ -1048,18 +1048,17 @@ abstract class CopyWith$Fragment$MediaListEntry$media<TRes> {
     int? popularity,
     Fragment$FuzzyDate? startDate,
   });
-
   CopyWith$Fragment$MediaListEntry$media$title<TRes> get title;
-
   CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> get coverImage;
-
   CopyWith$Fragment$FuzzyDate<TRes> get startDate;
 }
 
 class _CopyWithImpl$Fragment$MediaListEntry$media<TRes>
     implements CopyWith$Fragment$MediaListEntry$media<TRes> {
-  _CopyWithImpl$Fragment$MediaListEntry$media(this._instance,
-      this._then,);
+  _CopyWithImpl$Fragment$MediaListEntry$media(
+    this._instance,
+    this._then,
+  );
 
   final Fragment$MediaListEntry$media _instance;
 
@@ -1107,9 +1106,9 @@ class _CopyWithImpl$Fragment$MediaListEntry$media<TRes>
             ? _instance.$__typename
             : ($__typename as String),
         episodes:
-        episodes == _undefined ? _instance.episodes : (episodes as int?),
+            episodes == _undefined ? _instance.episodes : (episodes as int?),
         chapters:
-        chapters == _undefined ? _instance.chapters : (chapters as int?),
+            chapters == _undefined ? _instance.chapters : (chapters as int?),
         status: status == _undefined
             ? _instance.status
             : (status as Enum$MediaStatus?),
@@ -1129,16 +1128,16 @@ class _CopyWithImpl$Fragment$MediaListEntry$media<TRes>
     return local$title == null
         ? CopyWith$Fragment$MediaListEntry$media$title.stub(_then(_instance))
         : CopyWith$Fragment$MediaListEntry$media$title(
-        local$title, (e) => call(title: e));
+            local$title, (e) => call(title: e));
   }
 
   CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> get coverImage {
     final local$coverImage = _instance.coverImage;
     return local$coverImage == null
         ? CopyWith$Fragment$MediaListEntry$media$coverImage.stub(
-        _then(_instance))
+            _then(_instance))
         : CopyWith$Fragment$MediaListEntry$media$coverImage(
-        local$coverImage, (e) => call(coverImage: e));
+            local$coverImage, (e) => call(coverImage: e));
   }
 
   CopyWith$Fragment$FuzzyDate<TRes> get startDate {
@@ -1146,7 +1145,7 @@ class _CopyWithImpl$Fragment$MediaListEntry$media<TRes>
     return local$startDate == null
         ? CopyWith$Fragment$FuzzyDate.stub(_then(_instance))
         : CopyWith$Fragment$FuzzyDate(
-        local$startDate, (e) => call(startDate: e));
+            local$startDate, (e) => call(startDate: e));
   }
 }
 
@@ -1249,23 +1248,23 @@ class Fragment$MediaListEntry$media$title
 }
 
 extension UtilityExtension$Fragment$MediaListEntry$media$title
-on Fragment$MediaListEntry$media$title {
+    on Fragment$MediaListEntry$media$title {
   CopyWith$Fragment$MediaListEntry$media$title<
-      Fragment$MediaListEntry$media$title>
-  get copyWith =>
-      CopyWith$Fragment$MediaListEntry$media$title(
-        this,
+          Fragment$MediaListEntry$media$title>
+      get copyWith => CopyWith$Fragment$MediaListEntry$media$title(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Fragment$MediaListEntry$media$title<TRes> {
   factory CopyWith$Fragment$MediaListEntry$media$title(
-      Fragment$MediaListEntry$media$title instance,
-      TRes Function(Fragment$MediaListEntry$media$title) then,) = _CopyWithImpl$Fragment$MediaListEntry$media$title;
+    Fragment$MediaListEntry$media$title instance,
+    TRes Function(Fragment$MediaListEntry$media$title) then,
+  ) = _CopyWithImpl$Fragment$MediaListEntry$media$title;
 
   factory CopyWith$Fragment$MediaListEntry$media$title.stub(TRes res) =
-  _CopyWithStubImpl$Fragment$MediaListEntry$media$title;
+      _CopyWithStubImpl$Fragment$MediaListEntry$media$title;
 
   TRes call({
     String? userPreferred,
@@ -1275,8 +1274,10 @@ abstract class CopyWith$Fragment$MediaListEntry$media$title<TRes> {
 
 class _CopyWithImpl$Fragment$MediaListEntry$media$title<TRes>
     implements CopyWith$Fragment$MediaListEntry$media$title<TRes> {
-  _CopyWithImpl$Fragment$MediaListEntry$media$title(this._instance,
-      this._then,);
+  _CopyWithImpl$Fragment$MediaListEntry$media$title(
+    this._instance,
+    this._then,
+  );
 
   final Fragment$MediaListEntry$media$title _instance;
 
@@ -1375,23 +1376,23 @@ class Fragment$MediaListEntry$media$coverImage
 }
 
 extension UtilityExtension$Fragment$MediaListEntry$media$coverImage
-on Fragment$MediaListEntry$media$coverImage {
+    on Fragment$MediaListEntry$media$coverImage {
   CopyWith$Fragment$MediaListEntry$media$coverImage<
-      Fragment$MediaListEntry$media$coverImage>
-  get copyWith =>
-      CopyWith$Fragment$MediaListEntry$media$coverImage(
-        this,
+          Fragment$MediaListEntry$media$coverImage>
+      get copyWith => CopyWith$Fragment$MediaListEntry$media$coverImage(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> {
   factory CopyWith$Fragment$MediaListEntry$media$coverImage(
-      Fragment$MediaListEntry$media$coverImage instance,
-      TRes Function(Fragment$MediaListEntry$media$coverImage) then,) = _CopyWithImpl$Fragment$MediaListEntry$media$coverImage;
+    Fragment$MediaListEntry$media$coverImage instance,
+    TRes Function(Fragment$MediaListEntry$media$coverImage) then,
+  ) = _CopyWithImpl$Fragment$MediaListEntry$media$coverImage;
 
   factory CopyWith$Fragment$MediaListEntry$media$coverImage.stub(TRes res) =
-  _CopyWithStubImpl$Fragment$MediaListEntry$media$coverImage;
+      _CopyWithStubImpl$Fragment$MediaListEntry$media$coverImage;
 
   TRes call({
     String? extraLarge,
@@ -1401,8 +1402,10 @@ abstract class CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> {
 
 class _CopyWithImpl$Fragment$MediaListEntry$media$coverImage<TRes>
     implements CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> {
-  _CopyWithImpl$Fragment$MediaListEntry$media$coverImage(this._instance,
-      this._then,);
+  _CopyWithImpl$Fragment$MediaListEntry$media$coverImage(
+    this._instance,
+    this._then,
+  );
 
   final Fragment$MediaListEntry$media$coverImage _instance;
 
@@ -1472,11 +1475,11 @@ class Fragment$MediaFragment {
       title: l$title == null
           ? null
           : Fragment$MediaFragment$title.fromJson(
-          (l$title as Map<String, dynamic>)),
+              (l$title as Map<String, dynamic>)),
       coverImage: l$coverImage == null
           ? null
           : Fragment$MediaFragment$coverImage.fromJson(
-          (l$coverImage as Map<String, dynamic>)),
+              (l$coverImage as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1511,7 +1514,7 @@ class Fragment$MediaFragment {
     _resultData['genres'] = l$genres?.map((e) => e).toList();
     final l$format = format;
     _resultData['format'] =
-    l$format == null ? null : toJson$Enum$MediaFormat(l$format);
+        l$format == null ? null : toJson$Enum$MediaFormat(l$format);
     final l$description = description;
     _resultData['description'] = l$description;
     final l$title = title;
@@ -1620,16 +1623,18 @@ extension UtilityExtension$Fragment$MediaFragment on Fragment$MediaFragment {
   CopyWith$Fragment$MediaFragment<Fragment$MediaFragment> get copyWith =>
       CopyWith$Fragment$MediaFragment(
         this,
-            (i) => i,
+        (i) => i,
       );
 }
 
 abstract class CopyWith$Fragment$MediaFragment<TRes> {
-  factory CopyWith$Fragment$MediaFragment(Fragment$MediaFragment instance,
-      TRes Function(Fragment$MediaFragment) then,) = _CopyWithImpl$Fragment$MediaFragment;
+  factory CopyWith$Fragment$MediaFragment(
+    Fragment$MediaFragment instance,
+    TRes Function(Fragment$MediaFragment) then,
+  ) = _CopyWithImpl$Fragment$MediaFragment;
 
   factory CopyWith$Fragment$MediaFragment.stub(TRes res) =
-  _CopyWithStubImpl$Fragment$MediaFragment;
+      _CopyWithStubImpl$Fragment$MediaFragment;
 
   TRes call({
     int? id,
@@ -1642,16 +1647,16 @@ abstract class CopyWith$Fragment$MediaFragment<TRes> {
     Fragment$MediaFragment$coverImage? coverImage,
     String? $__typename,
   });
-
   CopyWith$Fragment$MediaFragment$title<TRes> get title;
-
   CopyWith$Fragment$MediaFragment$coverImage<TRes> get coverImage;
 }
 
 class _CopyWithImpl$Fragment$MediaFragment<TRes>
     implements CopyWith$Fragment$MediaFragment<TRes> {
-  _CopyWithImpl$Fragment$MediaFragment(this._instance,
-      this._then,);
+  _CopyWithImpl$Fragment$MediaFragment(
+    this._instance,
+    this._then,
+  );
 
   final Fragment$MediaFragment _instance;
 
@@ -1699,7 +1704,7 @@ class _CopyWithImpl$Fragment$MediaFragment<TRes>
     return local$title == null
         ? CopyWith$Fragment$MediaFragment$title.stub(_then(_instance))
         : CopyWith$Fragment$MediaFragment$title(
-        local$title, (e) => call(title: e));
+            local$title, (e) => call(title: e));
   }
 
   CopyWith$Fragment$MediaFragment$coverImage<TRes> get coverImage {
@@ -1707,7 +1712,7 @@ class _CopyWithImpl$Fragment$MediaFragment<TRes>
     return local$coverImage == null
         ? CopyWith$Fragment$MediaFragment$coverImage.stub(_then(_instance))
         : CopyWith$Fragment$MediaFragment$coverImage(
-        local$coverImage, (e) => call(coverImage: e));
+            local$coverImage, (e) => call(coverImage: e));
   }
 }
 
@@ -1741,9 +1746,9 @@ const fragmentDefinitionMediaFragment = FragmentDefinitionNode(
   name: NameNode(value: 'MediaFragment'),
   typeCondition: TypeConditionNode(
       on: NamedTypeNode(
-        name: NameNode(value: 'Media'),
-        isNonNull: false,
-      )),
+    name: NameNode(value: 'Media'),
+    isNonNull: false,
+  )),
   directives: [],
   selectionSet: SelectionSetNode(selections: [
     FieldNode(
@@ -1867,7 +1872,6 @@ extension ClientExtension$Fragment$MediaFragment on graphql.GraphQLClient {
         data: data.toJson(),
         broadcast: broadcast,
       );
-
   Fragment$MediaFragment? readFragment$MediaFragment({
     required Map<String, dynamic> idFields,
     bool optimistic = true,
@@ -1948,22 +1952,22 @@ class Fragment$MediaFragment$title {
 }
 
 extension UtilityExtension$Fragment$MediaFragment$title
-on Fragment$MediaFragment$title {
+    on Fragment$MediaFragment$title {
   CopyWith$Fragment$MediaFragment$title<Fragment$MediaFragment$title>
-  get copyWith =>
-      CopyWith$Fragment$MediaFragment$title(
-        this,
+      get copyWith => CopyWith$Fragment$MediaFragment$title(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Fragment$MediaFragment$title<TRes> {
   factory CopyWith$Fragment$MediaFragment$title(
-      Fragment$MediaFragment$title instance,
-      TRes Function(Fragment$MediaFragment$title) then,) = _CopyWithImpl$Fragment$MediaFragment$title;
+    Fragment$MediaFragment$title instance,
+    TRes Function(Fragment$MediaFragment$title) then,
+  ) = _CopyWithImpl$Fragment$MediaFragment$title;
 
   factory CopyWith$Fragment$MediaFragment$title.stub(TRes res) =
-  _CopyWithStubImpl$Fragment$MediaFragment$title;
+      _CopyWithStubImpl$Fragment$MediaFragment$title;
 
   TRes call({
     String? userPreferred,
@@ -1973,8 +1977,10 @@ abstract class CopyWith$Fragment$MediaFragment$title<TRes> {
 
 class _CopyWithImpl$Fragment$MediaFragment$title<TRes>
     implements CopyWith$Fragment$MediaFragment$title<TRes> {
-  _CopyWithImpl$Fragment$MediaFragment$title(this._instance,
-      this._then,);
+  _CopyWithImpl$Fragment$MediaFragment$title(
+    this._instance,
+    this._then,
+  );
 
   final Fragment$MediaFragment$title _instance;
 
@@ -2072,22 +2078,22 @@ class Fragment$MediaFragment$coverImage {
 }
 
 extension UtilityExtension$Fragment$MediaFragment$coverImage
-on Fragment$MediaFragment$coverImage {
+    on Fragment$MediaFragment$coverImage {
   CopyWith$Fragment$MediaFragment$coverImage<Fragment$MediaFragment$coverImage>
-  get copyWith =>
-      CopyWith$Fragment$MediaFragment$coverImage(
-        this,
+      get copyWith => CopyWith$Fragment$MediaFragment$coverImage(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Fragment$MediaFragment$coverImage<TRes> {
   factory CopyWith$Fragment$MediaFragment$coverImage(
-      Fragment$MediaFragment$coverImage instance,
-      TRes Function(Fragment$MediaFragment$coverImage) then,) = _CopyWithImpl$Fragment$MediaFragment$coverImage;
+    Fragment$MediaFragment$coverImage instance,
+    TRes Function(Fragment$MediaFragment$coverImage) then,
+  ) = _CopyWithImpl$Fragment$MediaFragment$coverImage;
 
   factory CopyWith$Fragment$MediaFragment$coverImage.stub(TRes res) =
-  _CopyWithStubImpl$Fragment$MediaFragment$coverImage;
+      _CopyWithStubImpl$Fragment$MediaFragment$coverImage;
 
   TRes call({
     String? extraLarge,
@@ -2097,8 +2103,10 @@ abstract class CopyWith$Fragment$MediaFragment$coverImage<TRes> {
 
 class _CopyWithImpl$Fragment$MediaFragment$coverImage<TRes>
     implements CopyWith$Fragment$MediaFragment$coverImage<TRes> {
-  _CopyWithImpl$Fragment$MediaFragment$coverImage(this._instance,
-      this._then,);
+  _CopyWithImpl$Fragment$MediaFragment$coverImage(
+    this._instance,
+    this._then,
+  );
 
   final Fragment$MediaFragment$coverImage _instance;
 
@@ -2178,11 +2186,10 @@ class Variables$Query$MediaEntry {
   }
 
   CopyWith$Variables$Query$MediaEntry<Variables$Query$MediaEntry>
-  get copyWith =>
-      CopyWith$Variables$Query$MediaEntry(
-        this,
+      get copyWith => CopyWith$Variables$Query$MediaEntry(
+            this,
             (i) => i,
-      );
+          );
 
   @override
   bool operator ==(Object other) {
@@ -2225,11 +2232,12 @@ class Variables$Query$MediaEntry {
 
 abstract class CopyWith$Variables$Query$MediaEntry<TRes> {
   factory CopyWith$Variables$Query$MediaEntry(
-      Variables$Query$MediaEntry instance,
-      TRes Function(Variables$Query$MediaEntry) then,) = _CopyWithImpl$Variables$Query$MediaEntry;
+    Variables$Query$MediaEntry instance,
+    TRes Function(Variables$Query$MediaEntry) then,
+  ) = _CopyWithImpl$Variables$Query$MediaEntry;
 
   factory CopyWith$Variables$Query$MediaEntry.stub(TRes res) =
-  _CopyWithStubImpl$Variables$Query$MediaEntry;
+      _CopyWithStubImpl$Variables$Query$MediaEntry;
 
   TRes call({
     int? mediaId,
@@ -2239,8 +2247,10 @@ abstract class CopyWith$Variables$Query$MediaEntry<TRes> {
 
 class _CopyWithImpl$Variables$Query$MediaEntry<TRes>
     implements CopyWith$Variables$Query$MediaEntry<TRes> {
-  _CopyWithImpl$Variables$Query$MediaEntry(this._instance,
-      this._then,);
+  _CopyWithImpl$Variables$Query$MediaEntry(
+    this._instance,
+    this._then,
+  );
 
   final Variables$Query$MediaEntry _instance;
 
@@ -2285,7 +2295,7 @@ class Query$MediaEntry {
       MediaList: l$MediaList == null
           ? null
           : Query$MediaEntry$MediaList.fromJson(
-          (l$MediaList as Map<String, dynamic>)),
+              (l$MediaList as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -2339,29 +2349,32 @@ extension UtilityExtension$Query$MediaEntry on Query$MediaEntry {
   CopyWith$Query$MediaEntry<Query$MediaEntry> get copyWith =>
       CopyWith$Query$MediaEntry(
         this,
-            (i) => i,
+        (i) => i,
       );
 }
 
 abstract class CopyWith$Query$MediaEntry<TRes> {
-  factory CopyWith$Query$MediaEntry(Query$MediaEntry instance,
-      TRes Function(Query$MediaEntry) then,) = _CopyWithImpl$Query$MediaEntry;
+  factory CopyWith$Query$MediaEntry(
+    Query$MediaEntry instance,
+    TRes Function(Query$MediaEntry) then,
+  ) = _CopyWithImpl$Query$MediaEntry;
 
   factory CopyWith$Query$MediaEntry.stub(TRes res) =
-  _CopyWithStubImpl$Query$MediaEntry;
+      _CopyWithStubImpl$Query$MediaEntry;
 
   TRes call({
     Query$MediaEntry$MediaList? MediaList,
     String? $__typename,
   });
-
   CopyWith$Query$MediaEntry$MediaList<TRes> get MediaList;
 }
 
 class _CopyWithImpl$Query$MediaEntry<TRes>
     implements CopyWith$Query$MediaEntry<TRes> {
-  _CopyWithImpl$Query$MediaEntry(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaEntry(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaEntry _instance;
 
@@ -2387,7 +2400,7 @@ class _CopyWithImpl$Query$MediaEntry<TRes>
     return local$MediaList == null
         ? CopyWith$Query$MediaEntry$MediaList.stub(_then(_instance))
         : CopyWith$Query$MediaEntry$MediaList(
-        local$MediaList, (e) => call(MediaList: e));
+            local$MediaList, (e) => call(MediaList: e));
   }
 }
 
@@ -2518,14 +2531,12 @@ const documentNodeQueryMediaEntry = DocumentNode(definitions: [
   fragmentDefinitionFuzzyDate,
   fragmentDefinitionMediaFragment,
 ]);
-
 Query$MediaEntry _parserFn$Query$MediaEntry(Map<String, dynamic> data) =>
     Query$MediaEntry.fromJson(data);
-
 typedef OnQueryComplete$Query$MediaEntry = FutureOr<void> Function(
-    Map<String, dynamic>?,
-    Query$MediaEntry?,
-    );
+  Map<String, dynamic>?,
+  Query$MediaEntry?,
+);
 
 class Options$Query$MediaEntry extends graphql.QueryOptions<Query$MediaEntry> {
   Options$Query$MediaEntry({
@@ -2540,34 +2551,31 @@ class Options$Query$MediaEntry extends graphql.QueryOptions<Query$MediaEntry> {
     graphql.Context? context,
     OnQueryComplete$Query$MediaEntry? onComplete,
     graphql.OnQueryError? onError,
-  })
-      : onCompleteWithParsed = onComplete,
+  })  : onCompleteWithParsed = onComplete,
         super(
-        variables: variables?.toJson() ?? {},
-        operationName: operationName,
-        fetchPolicy: fetchPolicy,
-        errorPolicy: errorPolicy,
-        cacheRereadPolicy: cacheRereadPolicy,
-        optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-        pollInterval: pollInterval,
-        context: context,
-        onComplete: onComplete == null
-            ? null
-            : (data) =>
-            onComplete(
-              data,
-              data == null ? null : _parserFn$Query$MediaEntry(data),
-            ),
-        onError: onError,
-        document: documentNodeQueryMediaEntry,
-        parserFn: _parserFn$Query$MediaEntry,
-      );
+          variables: variables?.toJson() ?? {},
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          pollInterval: pollInterval,
+          context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$MediaEntry(data),
+                  ),
+          onError: onError,
+          document: documentNodeQueryMediaEntry,
+          parserFn: _parserFn$Query$MediaEntry,
+        );
 
   final OnQueryComplete$Query$MediaEntry? onCompleteWithParsed;
 
   @override
-  List<Object?> get properties =>
-      [
+  List<Object?> get properties => [
         ...super.onComplete == null
             ? super.properties
             : super.properties.where((property) => property != onComplete),
@@ -2591,20 +2599,20 @@ class WatchOptions$Query$MediaEntry
     bool carryForwardDataOnException = true,
     bool fetchResults = false,
   }) : super(
-    variables: variables?.toJson() ?? {},
-    operationName: operationName,
-    fetchPolicy: fetchPolicy,
-    errorPolicy: errorPolicy,
-    cacheRereadPolicy: cacheRereadPolicy,
-    optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-    context: context,
-    document: documentNodeQueryMediaEntry,
-    pollInterval: pollInterval,
-    eagerlyFetchResults: eagerlyFetchResults,
-    carryForwardDataOnException: carryForwardDataOnException,
-    fetchResults: fetchResults,
-    parserFn: _parserFn$Query$MediaEntry,
-  );
+          variables: variables?.toJson() ?? {},
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeQueryMediaEntry,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Query$MediaEntry,
+        );
 }
 
 class FetchMoreOptions$Query$MediaEntry extends graphql.FetchMoreOptions {
@@ -2612,21 +2620,19 @@ class FetchMoreOptions$Query$MediaEntry extends graphql.FetchMoreOptions {
     required graphql.UpdateQuery updateQuery,
     Variables$Query$MediaEntry? variables,
   }) : super(
-    updateQuery: updateQuery,
-    variables: variables?.toJson() ?? {},
-    document: documentNodeQueryMediaEntry,
-  );
+          updateQuery: updateQuery,
+          variables: variables?.toJson() ?? {},
+          document: documentNodeQueryMediaEntry,
+        );
 }
 
 extension ClientExtension$Query$MediaEntry on graphql.GraphQLClient {
   Future<graphql.QueryResult<Query$MediaEntry>> query$MediaEntry(
-      [Options$Query$MediaEntry? options]) async =>
+          [Options$Query$MediaEntry? options]) async =>
       await this.query(options ?? Options$Query$MediaEntry());
-
   graphql.ObservableQuery<Query$MediaEntry> watchQuery$MediaEntry(
-      [WatchOptions$Query$MediaEntry? options]) =>
+          [WatchOptions$Query$MediaEntry? options]) =>
       this.watchQuery(options ?? WatchOptions$Query$MediaEntry());
-
   void writeQuery$MediaEntry({
     required Query$MediaEntry data,
     Variables$Query$MediaEntry? variables,
@@ -2640,7 +2646,6 @@ extension ClientExtension$Query$MediaEntry on graphql.GraphQLClient {
         data: data.toJson(),
         broadcast: broadcast,
       );
-
   Query$MediaEntry? readQuery$MediaEntry({
     Variables$Query$MediaEntry? variables,
     bool optimistic = true,
@@ -2657,11 +2662,10 @@ extension ClientExtension$Query$MediaEntry on graphql.GraphQLClient {
 }
 
 graphql_flutter.QueryHookResult<Query$MediaEntry> useQuery$MediaEntry(
-    [Options$Query$MediaEntry? options]) =>
+        [Options$Query$MediaEntry? options]) =>
     graphql_flutter.useQuery(options ?? Options$Query$MediaEntry());
-
 graphql.ObservableQuery<Query$MediaEntry> useWatchQuery$MediaEntry(
-    [WatchOptions$Query$MediaEntry? options]) =>
+        [WatchOptions$Query$MediaEntry? options]) =>
     graphql_flutter.useWatchQuery(options ?? WatchOptions$Query$MediaEntry());
 
 class Query$MediaEntry$Widget extends graphql_flutter.Query<Query$MediaEntry> {
@@ -2670,10 +2674,10 @@ class Query$MediaEntry$Widget extends graphql_flutter.Query<Query$MediaEntry> {
     Options$Query$MediaEntry? options,
     required graphql_flutter.QueryBuilder<Query$MediaEntry> builder,
   }) : super(
-    key: key,
-    options: options ?? Options$Query$MediaEntry(),
-    builder: builder,
-  );
+          key: key,
+          options: options ?? Options$Query$MediaEntry(),
+          builder: builder,
+        );
 }
 
 class Query$MediaEntry$MediaList implements Fragment$MediaListEntry {
@@ -2739,16 +2743,16 @@ class Query$MediaEntry$MediaList implements Fragment$MediaListEntry {
       completedAt: l$completedAt == null
           ? null
           : Fragment$FuzzyDate.fromJson(
-          (l$completedAt as Map<String, dynamic>)),
+              (l$completedAt as Map<String, dynamic>)),
       media: l$media == null
           ? null
           : Query$MediaEntry$MediaList$media.fromJson(
-          (l$media as Map<String, dynamic>)),
+              (l$media as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
       user: l$user == null
           ? null
           : Query$MediaEntry$MediaList$user.fromJson(
-          (l$user as Map<String, dynamic>)),
+              (l$user as Map<String, dynamic>)),
     );
   }
 
@@ -2796,7 +2800,7 @@ class Query$MediaEntry$MediaList implements Fragment$MediaListEntry {
     _resultData['mediaId'] = l$mediaId;
     final l$status = status;
     _resultData['status'] =
-    l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
+        l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
     final l$updatedAt = updatedAt;
     _resultData['updatedAt'] = l$updatedAt;
     final l$progress = progress;
@@ -2976,22 +2980,22 @@ class Query$MediaEntry$MediaList implements Fragment$MediaListEntry {
 }
 
 extension UtilityExtension$Query$MediaEntry$MediaList
-on Query$MediaEntry$MediaList {
+    on Query$MediaEntry$MediaList {
   CopyWith$Query$MediaEntry$MediaList<Query$MediaEntry$MediaList>
-  get copyWith =>
-      CopyWith$Query$MediaEntry$MediaList(
-        this,
+      get copyWith => CopyWith$Query$MediaEntry$MediaList(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Query$MediaEntry$MediaList<TRes> {
   factory CopyWith$Query$MediaEntry$MediaList(
-      Query$MediaEntry$MediaList instance,
-      TRes Function(Query$MediaEntry$MediaList) then,) = _CopyWithImpl$Query$MediaEntry$MediaList;
+    Query$MediaEntry$MediaList instance,
+    TRes Function(Query$MediaEntry$MediaList) then,
+  ) = _CopyWithImpl$Query$MediaEntry$MediaList;
 
   factory CopyWith$Query$MediaEntry$MediaList.stub(TRes res) =
-  _CopyWithStubImpl$Query$MediaEntry$MediaList;
+      _CopyWithStubImpl$Query$MediaEntry$MediaList;
 
   TRes call({
     int? id,
@@ -3013,20 +3017,18 @@ abstract class CopyWith$Query$MediaEntry$MediaList<TRes> {
     String? $__typename,
     Query$MediaEntry$MediaList$user? user,
   });
-
   CopyWith$Fragment$FuzzyDate<TRes> get startedAt;
-
   CopyWith$Fragment$FuzzyDate<TRes> get completedAt;
-
   CopyWith$Query$MediaEntry$MediaList$media<TRes> get media;
-
   CopyWith$Query$MediaEntry$MediaList$user<TRes> get user;
 }
 
 class _CopyWithImpl$Query$MediaEntry$MediaList<TRes>
     implements CopyWith$Query$MediaEntry$MediaList<TRes> {
-  _CopyWithImpl$Query$MediaEntry$MediaList(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaEntry$MediaList(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaEntry$MediaList _instance;
 
@@ -3063,14 +3065,14 @@ class _CopyWithImpl$Query$MediaEntry$MediaList<TRes>
             ? _instance.status
             : (status as Enum$MediaListStatus?),
         updatedAt:
-        updatedAt == _undefined ? _instance.updatedAt : (updatedAt as int?),
+            updatedAt == _undefined ? _instance.updatedAt : (updatedAt as int?),
         progress:
-        progress == _undefined ? _instance.progress : (progress as int?),
+            progress == _undefined ? _instance.progress : (progress as int?),
         progressVolumes: progressVolumes == _undefined
             ? _instance.progressVolumes
             : (progressVolumes as int?),
         priority:
-        priority == _undefined ? _instance.priority : (priority as int?),
+            priority == _undefined ? _instance.priority : (priority as int?),
         notes: notes == _undefined ? _instance.notes : (notes as String?),
         hiddenFromStatusLists: hiddenFromStatusLists == _undefined
             ? _instance.hiddenFromStatusLists
@@ -3103,7 +3105,7 @@ class _CopyWithImpl$Query$MediaEntry$MediaList<TRes>
     return local$startedAt == null
         ? CopyWith$Fragment$FuzzyDate.stub(_then(_instance))
         : CopyWith$Fragment$FuzzyDate(
-        local$startedAt, (e) => call(startedAt: e));
+            local$startedAt, (e) => call(startedAt: e));
   }
 
   CopyWith$Fragment$FuzzyDate<TRes> get completedAt {
@@ -3111,7 +3113,7 @@ class _CopyWithImpl$Query$MediaEntry$MediaList<TRes>
     return local$completedAt == null
         ? CopyWith$Fragment$FuzzyDate.stub(_then(_instance))
         : CopyWith$Fragment$FuzzyDate(
-        local$completedAt, (e) => call(completedAt: e));
+            local$completedAt, (e) => call(completedAt: e));
   }
 
   CopyWith$Query$MediaEntry$MediaList$media<TRes> get media {
@@ -3119,7 +3121,7 @@ class _CopyWithImpl$Query$MediaEntry$MediaList<TRes>
     return local$media == null
         ? CopyWith$Query$MediaEntry$MediaList$media.stub(_then(_instance))
         : CopyWith$Query$MediaEntry$MediaList$media(
-        local$media, (e) => call(media: e));
+            local$media, (e) => call(media: e));
   }
 
   CopyWith$Query$MediaEntry$MediaList$user<TRes> get user {
@@ -3127,7 +3129,7 @@ class _CopyWithImpl$Query$MediaEntry$MediaList<TRes>
     return local$user == null
         ? CopyWith$Query$MediaEntry$MediaList$user.stub(_then(_instance))
         : CopyWith$Query$MediaEntry$MediaList$user(
-        local$user, (e) => call(user: e));
+            local$user, (e) => call(user: e));
   }
 }
 
@@ -3220,11 +3222,11 @@ class Query$MediaEntry$MediaList$media
       title: l$title == null
           ? null
           : Query$MediaEntry$MediaList$media$title.fromJson(
-          (l$title as Map<String, dynamic>)),
+              (l$title as Map<String, dynamic>)),
       coverImage: l$coverImage == null
           ? null
           : Query$MediaEntry$MediaList$media$coverImage.fromJson(
-          (l$coverImage as Map<String, dynamic>)),
+              (l$coverImage as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
       episodes: (l$episodes as int?),
       chapters: (l$chapters as int?),
@@ -3281,7 +3283,7 @@ class Query$MediaEntry$MediaList$media
     _resultData['genres'] = l$genres?.map((e) => e).toList();
     final l$format = format;
     _resultData['format'] =
-    l$format == null ? null : toJson$Enum$MediaFormat(l$format);
+        l$format == null ? null : toJson$Enum$MediaFormat(l$format);
     final l$description = description;
     _resultData['description'] = l$description;
     final l$title = title;
@@ -3296,7 +3298,7 @@ class Query$MediaEntry$MediaList$media
     _resultData['chapters'] = l$chapters;
     final l$status = status;
     _resultData['status'] =
-    l$status == null ? null : toJson$Enum$MediaStatus(l$status);
+        l$status == null ? null : toJson$Enum$MediaStatus(l$status);
     final l$averageScore = averageScore;
     _resultData['averageScore'] = l$averageScore;
     final l$popularity = popularity;
@@ -3442,22 +3444,22 @@ class Query$MediaEntry$MediaList$media
 }
 
 extension UtilityExtension$Query$MediaEntry$MediaList$media
-on Query$MediaEntry$MediaList$media {
+    on Query$MediaEntry$MediaList$media {
   CopyWith$Query$MediaEntry$MediaList$media<Query$MediaEntry$MediaList$media>
-  get copyWith =>
-      CopyWith$Query$MediaEntry$MediaList$media(
-        this,
+      get copyWith => CopyWith$Query$MediaEntry$MediaList$media(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Query$MediaEntry$MediaList$media<TRes> {
   factory CopyWith$Query$MediaEntry$MediaList$media(
-      Query$MediaEntry$MediaList$media instance,
-      TRes Function(Query$MediaEntry$MediaList$media) then,) = _CopyWithImpl$Query$MediaEntry$MediaList$media;
+    Query$MediaEntry$MediaList$media instance,
+    TRes Function(Query$MediaEntry$MediaList$media) then,
+  ) = _CopyWithImpl$Query$MediaEntry$MediaList$media;
 
   factory CopyWith$Query$MediaEntry$MediaList$media.stub(TRes res) =
-  _CopyWithStubImpl$Query$MediaEntry$MediaList$media;
+      _CopyWithStubImpl$Query$MediaEntry$MediaList$media;
 
   TRes call({
     int? id,
@@ -3476,18 +3478,17 @@ abstract class CopyWith$Query$MediaEntry$MediaList$media<TRes> {
     int? popularity,
     Fragment$FuzzyDate? startDate,
   });
-
   CopyWith$Query$MediaEntry$MediaList$media$title<TRes> get title;
-
   CopyWith$Query$MediaEntry$MediaList$media$coverImage<TRes> get coverImage;
-
   CopyWith$Fragment$FuzzyDate<TRes> get startDate;
 }
 
 class _CopyWithImpl$Query$MediaEntry$MediaList$media<TRes>
     implements CopyWith$Query$MediaEntry$MediaList$media<TRes> {
-  _CopyWithImpl$Query$MediaEntry$MediaList$media(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaEntry$MediaList$media(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaEntry$MediaList$media _instance;
 
@@ -3535,9 +3536,9 @@ class _CopyWithImpl$Query$MediaEntry$MediaList$media<TRes>
             ? _instance.$__typename
             : ($__typename as String),
         episodes:
-        episodes == _undefined ? _instance.episodes : (episodes as int?),
+            episodes == _undefined ? _instance.episodes : (episodes as int?),
         chapters:
-        chapters == _undefined ? _instance.chapters : (chapters as int?),
+            chapters == _undefined ? _instance.chapters : (chapters as int?),
         status: status == _undefined
             ? _instance.status
             : (status as Enum$MediaStatus?),
@@ -3557,16 +3558,16 @@ class _CopyWithImpl$Query$MediaEntry$MediaList$media<TRes>
     return local$title == null
         ? CopyWith$Query$MediaEntry$MediaList$media$title.stub(_then(_instance))
         : CopyWith$Query$MediaEntry$MediaList$media$title(
-        local$title, (e) => call(title: e));
+            local$title, (e) => call(title: e));
   }
 
   CopyWith$Query$MediaEntry$MediaList$media$coverImage<TRes> get coverImage {
     final local$coverImage = _instance.coverImage;
     return local$coverImage == null
         ? CopyWith$Query$MediaEntry$MediaList$media$coverImage.stub(
-        _then(_instance))
+            _then(_instance))
         : CopyWith$Query$MediaEntry$MediaList$media$coverImage(
-        local$coverImage, (e) => call(coverImage: e));
+            local$coverImage, (e) => call(coverImage: e));
   }
 
   CopyWith$Fragment$FuzzyDate<TRes> get startDate {
@@ -3574,7 +3575,7 @@ class _CopyWithImpl$Query$MediaEntry$MediaList$media<TRes>
     return local$startDate == null
         ? CopyWith$Fragment$FuzzyDate.stub(_then(_instance))
         : CopyWith$Fragment$FuzzyDate(
-        local$startDate, (e) => call(startDate: e));
+            local$startDate, (e) => call(startDate: e));
   }
 }
 
@@ -3679,23 +3680,23 @@ class Query$MediaEntry$MediaList$media$title
 }
 
 extension UtilityExtension$Query$MediaEntry$MediaList$media$title
-on Query$MediaEntry$MediaList$media$title {
+    on Query$MediaEntry$MediaList$media$title {
   CopyWith$Query$MediaEntry$MediaList$media$title<
-      Query$MediaEntry$MediaList$media$title>
-  get copyWith =>
-      CopyWith$Query$MediaEntry$MediaList$media$title(
-        this,
+          Query$MediaEntry$MediaList$media$title>
+      get copyWith => CopyWith$Query$MediaEntry$MediaList$media$title(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Query$MediaEntry$MediaList$media$title<TRes> {
   factory CopyWith$Query$MediaEntry$MediaList$media$title(
-      Query$MediaEntry$MediaList$media$title instance,
-      TRes Function(Query$MediaEntry$MediaList$media$title) then,) = _CopyWithImpl$Query$MediaEntry$MediaList$media$title;
+    Query$MediaEntry$MediaList$media$title instance,
+    TRes Function(Query$MediaEntry$MediaList$media$title) then,
+  ) = _CopyWithImpl$Query$MediaEntry$MediaList$media$title;
 
   factory CopyWith$Query$MediaEntry$MediaList$media$title.stub(TRes res) =
-  _CopyWithStubImpl$Query$MediaEntry$MediaList$media$title;
+      _CopyWithStubImpl$Query$MediaEntry$MediaList$media$title;
 
   TRes call({
     String? userPreferred,
@@ -3705,8 +3706,10 @@ abstract class CopyWith$Query$MediaEntry$MediaList$media$title<TRes> {
 
 class _CopyWithImpl$Query$MediaEntry$MediaList$media$title<TRes>
     implements CopyWith$Query$MediaEntry$MediaList$media$title<TRes> {
-  _CopyWithImpl$Query$MediaEntry$MediaList$media$title(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaEntry$MediaList$media$title(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaEntry$MediaList$media$title _instance;
 
@@ -3807,23 +3810,23 @@ class Query$MediaEntry$MediaList$media$coverImage
 }
 
 extension UtilityExtension$Query$MediaEntry$MediaList$media$coverImage
-on Query$MediaEntry$MediaList$media$coverImage {
+    on Query$MediaEntry$MediaList$media$coverImage {
   CopyWith$Query$MediaEntry$MediaList$media$coverImage<
-      Query$MediaEntry$MediaList$media$coverImage>
-  get copyWith =>
-      CopyWith$Query$MediaEntry$MediaList$media$coverImage(
-        this,
+          Query$MediaEntry$MediaList$media$coverImage>
+      get copyWith => CopyWith$Query$MediaEntry$MediaList$media$coverImage(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Query$MediaEntry$MediaList$media$coverImage<TRes> {
   factory CopyWith$Query$MediaEntry$MediaList$media$coverImage(
-      Query$MediaEntry$MediaList$media$coverImage instance,
-      TRes Function(Query$MediaEntry$MediaList$media$coverImage) then,) = _CopyWithImpl$Query$MediaEntry$MediaList$media$coverImage;
+    Query$MediaEntry$MediaList$media$coverImage instance,
+    TRes Function(Query$MediaEntry$MediaList$media$coverImage) then,
+  ) = _CopyWithImpl$Query$MediaEntry$MediaList$media$coverImage;
 
   factory CopyWith$Query$MediaEntry$MediaList$media$coverImage.stub(TRes res) =
-  _CopyWithStubImpl$Query$MediaEntry$MediaList$media$coverImage;
+      _CopyWithStubImpl$Query$MediaEntry$MediaList$media$coverImage;
 
   TRes call({
     String? extraLarge,
@@ -3833,8 +3836,10 @@ abstract class CopyWith$Query$MediaEntry$MediaList$media$coverImage<TRes> {
 
 class _CopyWithImpl$Query$MediaEntry$MediaList$media$coverImage<TRes>
     implements CopyWith$Query$MediaEntry$MediaList$media$coverImage<TRes> {
-  _CopyWithImpl$Query$MediaEntry$MediaList$media$coverImage(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaEntry$MediaList$media$coverImage(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaEntry$MediaList$media$coverImage _instance;
 
@@ -3885,7 +3890,7 @@ class Query$MediaEntry$MediaList$user {
       mediaListOptions: l$mediaListOptions == null
           ? null
           : Query$MediaEntry$MediaList$user$mediaListOptions.fromJson(
-          (l$mediaListOptions as Map<String, dynamic>)),
+              (l$mediaListOptions as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -3948,37 +3953,38 @@ class Query$MediaEntry$MediaList$user {
 }
 
 extension UtilityExtension$Query$MediaEntry$MediaList$user
-on Query$MediaEntry$MediaList$user {
+    on Query$MediaEntry$MediaList$user {
   CopyWith$Query$MediaEntry$MediaList$user<Query$MediaEntry$MediaList$user>
-  get copyWith =>
-      CopyWith$Query$MediaEntry$MediaList$user(
-        this,
+      get copyWith => CopyWith$Query$MediaEntry$MediaList$user(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Query$MediaEntry$MediaList$user<TRes> {
   factory CopyWith$Query$MediaEntry$MediaList$user(
-      Query$MediaEntry$MediaList$user instance,
-      TRes Function(Query$MediaEntry$MediaList$user) then,) = _CopyWithImpl$Query$MediaEntry$MediaList$user;
+    Query$MediaEntry$MediaList$user instance,
+    TRes Function(Query$MediaEntry$MediaList$user) then,
+  ) = _CopyWithImpl$Query$MediaEntry$MediaList$user;
 
   factory CopyWith$Query$MediaEntry$MediaList$user.stub(TRes res) =
-  _CopyWithStubImpl$Query$MediaEntry$MediaList$user;
+      _CopyWithStubImpl$Query$MediaEntry$MediaList$user;
 
   TRes call({
     int? id,
     Query$MediaEntry$MediaList$user$mediaListOptions? mediaListOptions,
     String? $__typename,
   });
-
   CopyWith$Query$MediaEntry$MediaList$user$mediaListOptions<TRes>
-  get mediaListOptions;
+      get mediaListOptions;
 }
 
 class _CopyWithImpl$Query$MediaEntry$MediaList$user<TRes>
     implements CopyWith$Query$MediaEntry$MediaList$user<TRes> {
-  _CopyWithImpl$Query$MediaEntry$MediaList$user(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaEntry$MediaList$user(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaEntry$MediaList$user _instance;
 
@@ -3996,20 +4002,20 @@ class _CopyWithImpl$Query$MediaEntry$MediaList$user<TRes>
         mediaListOptions: mediaListOptions == _undefined
             ? _instance.mediaListOptions
             : (mediaListOptions
-        as Query$MediaEntry$MediaList$user$mediaListOptions?),
+                as Query$MediaEntry$MediaList$user$mediaListOptions?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
   CopyWith$Query$MediaEntry$MediaList$user$mediaListOptions<TRes>
-  get mediaListOptions {
+      get mediaListOptions {
     final local$mediaListOptions = _instance.mediaListOptions;
     return local$mediaListOptions == null
         ? CopyWith$Query$MediaEntry$MediaList$user$mediaListOptions.stub(
-        _then(_instance))
+            _then(_instance))
         : CopyWith$Query$MediaEntry$MediaList$user$mediaListOptions(
-        local$mediaListOptions, (e) => call(mediaListOptions: e));
+            local$mediaListOptions, (e) => call(mediaListOptions: e));
   }
 }
 
@@ -4027,8 +4033,8 @@ class _CopyWithStubImpl$Query$MediaEntry$MediaList$user<TRes>
       _res;
 
   CopyWith$Query$MediaEntry$MediaList$user$mediaListOptions<TRes>
-  get mediaListOptions =>
-      CopyWith$Query$MediaEntry$MediaList$user$mediaListOptions.stub(_res);
+      get mediaListOptions =>
+          CopyWith$Query$MediaEntry$MediaList$user$mediaListOptions.stub(_res);
 }
 
 class Query$MediaEntry$MediaList$user$mediaListOptions {
@@ -4057,7 +4063,7 @@ class Query$MediaEntry$MediaList$user$mediaListOptions {
     final _resultData = <String, dynamic>{};
     final l$scoreFormat = scoreFormat;
     _resultData['scoreFormat'] =
-    l$scoreFormat == null ? null : toJson$Enum$ScoreFormat(l$scoreFormat);
+        l$scoreFormat == null ? null : toJson$Enum$ScoreFormat(l$scoreFormat);
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -4097,24 +4103,24 @@ class Query$MediaEntry$MediaList$user$mediaListOptions {
 }
 
 extension UtilityExtension$Query$MediaEntry$MediaList$user$mediaListOptions
-on Query$MediaEntry$MediaList$user$mediaListOptions {
+    on Query$MediaEntry$MediaList$user$mediaListOptions {
   CopyWith$Query$MediaEntry$MediaList$user$mediaListOptions<
-      Query$MediaEntry$MediaList$user$mediaListOptions>
-  get copyWith =>
-      CopyWith$Query$MediaEntry$MediaList$user$mediaListOptions(
-        this,
+          Query$MediaEntry$MediaList$user$mediaListOptions>
+      get copyWith => CopyWith$Query$MediaEntry$MediaList$user$mediaListOptions(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Query$MediaEntry$MediaList$user$mediaListOptions<TRes> {
   factory CopyWith$Query$MediaEntry$MediaList$user$mediaListOptions(
-      Query$MediaEntry$MediaList$user$mediaListOptions instance,
-      TRes Function(Query$MediaEntry$MediaList$user$mediaListOptions) then,) = _CopyWithImpl$Query$MediaEntry$MediaList$user$mediaListOptions;
+    Query$MediaEntry$MediaList$user$mediaListOptions instance,
+    TRes Function(Query$MediaEntry$MediaList$user$mediaListOptions) then,
+  ) = _CopyWithImpl$Query$MediaEntry$MediaList$user$mediaListOptions;
 
   factory CopyWith$Query$MediaEntry$MediaList$user$mediaListOptions.stub(
-      TRes res) =
-  _CopyWithStubImpl$Query$MediaEntry$MediaList$user$mediaListOptions;
+          TRes res) =
+      _CopyWithStubImpl$Query$MediaEntry$MediaList$user$mediaListOptions;
 
   TRes call({
     Enum$ScoreFormat? scoreFormat,
@@ -4124,8 +4130,10 @@ abstract class CopyWith$Query$MediaEntry$MediaList$user$mediaListOptions<TRes> {
 
 class _CopyWithImpl$Query$MediaEntry$MediaList$user$mediaListOptions<TRes>
     implements CopyWith$Query$MediaEntry$MediaList$user$mediaListOptions<TRes> {
-  _CopyWithImpl$Query$MediaEntry$MediaList$user$mediaListOptions(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaEntry$MediaList$user$mediaListOptions(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaEntry$MediaList$user$mediaListOptions _instance;
 
@@ -4271,14 +4279,14 @@ class Variables$Mutation$SaveMediaListEntry {
       result$data['startedAt'] = l$startedAt == null
           ? null
           : Input$FuzzyDateInput.fromJson(
-          (l$startedAt as Map<String, dynamic>));
+              (l$startedAt as Map<String, dynamic>));
     }
     if (data.containsKey('completedAt')) {
       final l$completedAt = data['completedAt'];
       result$data['completedAt'] = l$completedAt == null
           ? null
           : Input$FuzzyDateInput.fromJson(
-          (l$completedAt as Map<String, dynamic>));
+              (l$completedAt as Map<String, dynamic>));
     }
     return Variables$Mutation$SaveMediaListEntry._(result$data);
   }
@@ -4334,7 +4342,7 @@ class Variables$Mutation$SaveMediaListEntry {
     if (_$data.containsKey('status')) {
       final l$status = status;
       result$data['status'] =
-      l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
+          l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
     }
     if (_$data.containsKey('score')) {
       final l$score = score;
@@ -4392,12 +4400,11 @@ class Variables$Mutation$SaveMediaListEntry {
   }
 
   CopyWith$Variables$Mutation$SaveMediaListEntry<
-      Variables$Mutation$SaveMediaListEntry>
-  get copyWith =>
-      CopyWith$Variables$Mutation$SaveMediaListEntry(
-        this,
+          Variables$Mutation$SaveMediaListEntry>
+      get copyWith => CopyWith$Variables$Mutation$SaveMediaListEntry(
+            this,
             (i) => i,
-      );
+          );
 
   @override
   bool operator ==(Object other) {
@@ -4605,13 +4612,13 @@ class Variables$Mutation$SaveMediaListEntry {
           : const {},
       _$data.containsKey('customLists')
           ? l$customLists == null
-          ? null
-          : Object.hashAll(l$customLists.map((v) => v))
+              ? null
+              : Object.hashAll(l$customLists.map((v) => v))
           : const {},
       _$data.containsKey('advancedScores')
           ? l$advancedScores == null
-          ? null
-          : Object.hashAll(l$advancedScores.map((v) => v))
+              ? null
+              : Object.hashAll(l$advancedScores.map((v) => v))
           : const {},
       _$data.containsKey('startedAt') ? l$startedAt : const {},
       _$data.containsKey('completedAt') ? l$completedAt : const {},
@@ -4621,11 +4628,12 @@ class Variables$Mutation$SaveMediaListEntry {
 
 abstract class CopyWith$Variables$Mutation$SaveMediaListEntry<TRes> {
   factory CopyWith$Variables$Mutation$SaveMediaListEntry(
-      Variables$Mutation$SaveMediaListEntry instance,
-      TRes Function(Variables$Mutation$SaveMediaListEntry) then,) = _CopyWithImpl$Variables$Mutation$SaveMediaListEntry;
+    Variables$Mutation$SaveMediaListEntry instance,
+    TRes Function(Variables$Mutation$SaveMediaListEntry) then,
+  ) = _CopyWithImpl$Variables$Mutation$SaveMediaListEntry;
 
   factory CopyWith$Variables$Mutation$SaveMediaListEntry.stub(TRes res) =
-  _CopyWithStubImpl$Variables$Mutation$SaveMediaListEntry;
+      _CopyWithStubImpl$Variables$Mutation$SaveMediaListEntry;
 
   TRes call({
     int? id,
@@ -4649,8 +4657,10 @@ abstract class CopyWith$Variables$Mutation$SaveMediaListEntry<TRes> {
 
 class _CopyWithImpl$Variables$Mutation$SaveMediaListEntry<TRes>
     implements CopyWith$Variables$Mutation$SaveMediaListEntry<TRes> {
-  _CopyWithImpl$Variables$Mutation$SaveMediaListEntry(this._instance,
-      this._then,);
+  _CopyWithImpl$Variables$Mutation$SaveMediaListEntry(
+    this._instance,
+    this._then,
+  );
 
   final Variables$Mutation$SaveMediaListEntry _instance;
 
@@ -4743,7 +4753,7 @@ class Mutation$SaveMediaListEntry {
       SaveMediaListEntry: l$SaveMediaListEntry == null
           ? null
           : Fragment$MediaListEntry.fromJson(
-          (l$SaveMediaListEntry as Map<String, dynamic>)),
+              (l$SaveMediaListEntry as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -4795,35 +4805,36 @@ class Mutation$SaveMediaListEntry {
 }
 
 extension UtilityExtension$Mutation$SaveMediaListEntry
-on Mutation$SaveMediaListEntry {
+    on Mutation$SaveMediaListEntry {
   CopyWith$Mutation$SaveMediaListEntry<Mutation$SaveMediaListEntry>
-  get copyWith =>
-      CopyWith$Mutation$SaveMediaListEntry(
-        this,
+      get copyWith => CopyWith$Mutation$SaveMediaListEntry(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Mutation$SaveMediaListEntry<TRes> {
   factory CopyWith$Mutation$SaveMediaListEntry(
-      Mutation$SaveMediaListEntry instance,
-      TRes Function(Mutation$SaveMediaListEntry) then,) = _CopyWithImpl$Mutation$SaveMediaListEntry;
+    Mutation$SaveMediaListEntry instance,
+    TRes Function(Mutation$SaveMediaListEntry) then,
+  ) = _CopyWithImpl$Mutation$SaveMediaListEntry;
 
   factory CopyWith$Mutation$SaveMediaListEntry.stub(TRes res) =
-  _CopyWithStubImpl$Mutation$SaveMediaListEntry;
+      _CopyWithStubImpl$Mutation$SaveMediaListEntry;
 
   TRes call({
     Fragment$MediaListEntry? SaveMediaListEntry,
     String? $__typename,
   });
-
   CopyWith$Fragment$MediaListEntry<TRes> get SaveMediaListEntry;
 }
 
 class _CopyWithImpl$Mutation$SaveMediaListEntry<TRes>
     implements CopyWith$Mutation$SaveMediaListEntry<TRes> {
-  _CopyWithImpl$Mutation$SaveMediaListEntry(this._instance,
-      this._then,);
+  _CopyWithImpl$Mutation$SaveMediaListEntry(
+    this._instance,
+    this._then,
+  );
 
   final Mutation$SaveMediaListEntry _instance;
 
@@ -4849,7 +4860,7 @@ class _CopyWithImpl$Mutation$SaveMediaListEntry<TRes>
     return local$SaveMediaListEntry == null
         ? CopyWith$Fragment$MediaListEntry.stub(_then(_instance))
         : CopyWith$Fragment$MediaListEntry(
-        local$SaveMediaListEntry, (e) => call(SaveMediaListEntry: e));
+            local$SaveMediaListEntry, (e) => call(SaveMediaListEntry: e));
   }
 }
 
@@ -5124,16 +5135,14 @@ const documentNodeMutationSaveMediaListEntry = DocumentNode(definitions: [
   fragmentDefinitionFuzzyDate,
   fragmentDefinitionMediaFragment,
 ]);
-
 Mutation$SaveMediaListEntry _parserFn$Mutation$SaveMediaListEntry(
-    Map<String, dynamic> data) =>
+        Map<String, dynamic> data) =>
     Mutation$SaveMediaListEntry.fromJson(data);
-
 typedef OnMutationCompleted$Mutation$SaveMediaListEntry = FutureOr<void>
-Function(
-    Map<String, dynamic>?,
-    Mutation$SaveMediaListEntry?,
-    );
+    Function(
+  Map<String, dynamic>?,
+  Mutation$SaveMediaListEntry?,
+);
 
 class Options$Mutation$SaveMediaListEntry
     extends graphql.MutationOptions<Mutation$SaveMediaListEntry> {
@@ -5149,36 +5158,33 @@ class Options$Mutation$SaveMediaListEntry
     OnMutationCompleted$Mutation$SaveMediaListEntry? onCompleted,
     graphql.OnMutationUpdate<Mutation$SaveMediaListEntry>? update,
     graphql.OnError? onError,
-  })
-      : onCompletedWithParsed = onCompleted,
+  })  : onCompletedWithParsed = onCompleted,
         super(
-        variables: variables?.toJson() ?? {},
-        operationName: operationName,
-        fetchPolicy: fetchPolicy,
-        errorPolicy: errorPolicy,
-        cacheRereadPolicy: cacheRereadPolicy,
-        optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-        context: context,
-        onCompleted: onCompleted == null
-            ? null
-            : (data) =>
-            onCompleted(
-              data,
-              data == null
-                  ? null
-                  : _parserFn$Mutation$SaveMediaListEntry(data),
-            ),
-        update: update,
-        onError: onError,
-        document: documentNodeMutationSaveMediaListEntry,
-        parserFn: _parserFn$Mutation$SaveMediaListEntry,
-      );
+          variables: variables?.toJson() ?? {},
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Mutation$SaveMediaListEntry(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationSaveMediaListEntry,
+          parserFn: _parserFn$Mutation$SaveMediaListEntry,
+        );
 
   final OnMutationCompleted$Mutation$SaveMediaListEntry? onCompletedWithParsed;
 
   @override
-  List<Object?> get properties =>
-      [
+  List<Object?> get properties => [
         ...super.onCompleted == null
             ? super.properties
             : super.properties.where((property) => property != onCompleted),
@@ -5202,37 +5208,38 @@ class WatchOptions$Mutation$SaveMediaListEntry
     bool carryForwardDataOnException = true,
     bool fetchResults = false,
   }) : super(
-    variables: variables?.toJson() ?? {},
-    operationName: operationName,
-    fetchPolicy: fetchPolicy,
-    errorPolicy: errorPolicy,
-    cacheRereadPolicy: cacheRereadPolicy,
-    optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-    context: context,
-    document: documentNodeMutationSaveMediaListEntry,
-    pollInterval: pollInterval,
-    eagerlyFetchResults: eagerlyFetchResults,
-    carryForwardDataOnException: carryForwardDataOnException,
-    fetchResults: fetchResults,
-    parserFn: _parserFn$Mutation$SaveMediaListEntry,
-  );
+          variables: variables?.toJson() ?? {},
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeMutationSaveMediaListEntry,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Mutation$SaveMediaListEntry,
+        );
 }
 
 extension ClientExtension$Mutation$SaveMediaListEntry on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$SaveMediaListEntry>>
-  mutate$SaveMediaListEntry(
-      [Options$Mutation$SaveMediaListEntry? options]) async =>
-      await this.mutate(options ?? Options$Mutation$SaveMediaListEntry());
-
+      mutate$SaveMediaListEntry(
+              [Options$Mutation$SaveMediaListEntry? options]) async =>
+          await this.mutate(options ?? Options$Mutation$SaveMediaListEntry());
   graphql.ObservableQuery<
       Mutation$SaveMediaListEntry> watchMutation$SaveMediaListEntry(
-      [WatchOptions$Mutation$SaveMediaListEntry? options]) =>
+          [WatchOptions$Mutation$SaveMediaListEntry? options]) =>
       this.watchMutation(options ?? WatchOptions$Mutation$SaveMediaListEntry());
 }
 
 class Mutation$SaveMediaListEntry$HookResult {
-  Mutation$SaveMediaListEntry$HookResult(this.runMutation,
-      this.result,);
+  Mutation$SaveMediaListEntry$HookResult(
+    this.runMutation,
+    this.result,
+  );
 
   final RunMutation$Mutation$SaveMediaListEntry runMutation;
 
@@ -5244,20 +5251,20 @@ Mutation$SaveMediaListEntry$HookResult useMutation$SaveMediaListEntry(
   final result = graphql_flutter
       .useMutation(options ?? WidgetOptions$Mutation$SaveMediaListEntry());
   return Mutation$SaveMediaListEntry$HookResult(
-        ({variables, optimisticResult, typedOptimisticResult}) =>
+    ({variables, optimisticResult, typedOptimisticResult}) =>
         result.runMutation(
-          variables?.toJson() ?? const {},
-          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-        ),
+      variables?.toJson() ?? const {},
+      optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+    ),
     result.result,
   );
 }
 
 graphql.ObservableQuery<Mutation$SaveMediaListEntry>
-useWatchMutation$SaveMediaListEntry(
-    [WatchOptions$Mutation$SaveMediaListEntry? options]) =>
-    graphql_flutter.useWatchMutation(
-        options ?? WatchOptions$Mutation$SaveMediaListEntry());
+    useWatchMutation$SaveMediaListEntry(
+            [WatchOptions$Mutation$SaveMediaListEntry? options]) =>
+        graphql_flutter.useWatchMutation(
+            options ?? WatchOptions$Mutation$SaveMediaListEntry());
 
 class WidgetOptions$Mutation$SaveMediaListEntry
     extends graphql.MutationOptions<Mutation$SaveMediaListEntry> {
@@ -5272,35 +5279,32 @@ class WidgetOptions$Mutation$SaveMediaListEntry
     OnMutationCompleted$Mutation$SaveMediaListEntry? onCompleted,
     graphql.OnMutationUpdate<Mutation$SaveMediaListEntry>? update,
     graphql.OnError? onError,
-  })
-      : onCompletedWithParsed = onCompleted,
+  })  : onCompletedWithParsed = onCompleted,
         super(
-        operationName: operationName,
-        fetchPolicy: fetchPolicy,
-        errorPolicy: errorPolicy,
-        cacheRereadPolicy: cacheRereadPolicy,
-        optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-        context: context,
-        onCompleted: onCompleted == null
-            ? null
-            : (data) =>
-            onCompleted(
-              data,
-              data == null
-                  ? null
-                  : _parserFn$Mutation$SaveMediaListEntry(data),
-            ),
-        update: update,
-        onError: onError,
-        document: documentNodeMutationSaveMediaListEntry,
-        parserFn: _parserFn$Mutation$SaveMediaListEntry,
-      );
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Mutation$SaveMediaListEntry(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationSaveMediaListEntry,
+          parserFn: _parserFn$Mutation$SaveMediaListEntry,
+        );
 
   final OnMutationCompleted$Mutation$SaveMediaListEntry? onCompletedWithParsed;
 
   @override
-  List<Object?> get properties =>
-      [
+  List<Object?> get properties => [
         ...super.onCompleted == null
             ? super.properties
             : super.properties.where((property) => property != onCompleted),
@@ -5309,15 +5313,15 @@ class WidgetOptions$Mutation$SaveMediaListEntry
 }
 
 typedef RunMutation$Mutation$SaveMediaListEntry
-= graphql.MultiSourceResult<Mutation$SaveMediaListEntry> Function({
-Variables$Mutation$SaveMediaListEntry? variables,
-Object? optimisticResult,
-Mutation$SaveMediaListEntry? typedOptimisticResult,
+    = graphql.MultiSourceResult<Mutation$SaveMediaListEntry> Function({
+  Variables$Mutation$SaveMediaListEntry? variables,
+  Object? optimisticResult,
+  Mutation$SaveMediaListEntry? typedOptimisticResult,
 });
 typedef Builder$Mutation$SaveMediaListEntry = widgets.Widget Function(
-    RunMutation$Mutation$SaveMediaListEntry,
-    graphql.QueryResult<Mutation$SaveMediaListEntry>?,
-    );
+  RunMutation$Mutation$SaveMediaListEntry,
+  graphql.QueryResult<Mutation$SaveMediaListEntry>?,
+);
 
 class Mutation$SaveMediaListEntry$Widget
     extends graphql_flutter.Mutation<Mutation$SaveMediaListEntry> {
@@ -5326,24 +5330,26 @@ class Mutation$SaveMediaListEntry$Widget
     WidgetOptions$Mutation$SaveMediaListEntry? options,
     required Builder$Mutation$SaveMediaListEntry builder,
   }) : super(
-    key: key,
-    options: options ?? WidgetOptions$Mutation$SaveMediaListEntry(),
-    builder: (run,
-        result,) =>
-        builder(
-              ({
-            variables,
-            optimisticResult,
-            typedOptimisticResult,
-          }) =>
-              run(
-                variables?.toJson() ?? const {},
-                optimisticResult:
-                optimisticResult ?? typedOptimisticResult?.toJson(),
-              ),
-          result,
-        ),
-  );
+          key: key,
+          options: options ?? WidgetOptions$Mutation$SaveMediaListEntry(),
+          builder: (
+            run,
+            result,
+          ) =>
+              builder(
+            ({
+              variables,
+              optimisticResult,
+              typedOptimisticResult,
+            }) =>
+                run(
+              variables?.toJson() ?? const {},
+              optimisticResult:
+                  optimisticResult ?? typedOptimisticResult?.toJson(),
+            ),
+            result,
+          ),
+        );
 }
 
 class Variables$Mutation$DeleteMediaListEntry {
@@ -5378,12 +5384,11 @@ class Variables$Mutation$DeleteMediaListEntry {
   }
 
   CopyWith$Variables$Mutation$DeleteMediaListEntry<
-      Variables$Mutation$DeleteMediaListEntry>
-  get copyWith =>
-      CopyWith$Variables$Mutation$DeleteMediaListEntry(
-        this,
+          Variables$Mutation$DeleteMediaListEntry>
+      get copyWith => CopyWith$Variables$Mutation$DeleteMediaListEntry(
+            this,
             (i) => i,
-      );
+          );
 
   @override
   bool operator ==(Object other) {
@@ -5414,19 +5419,22 @@ class Variables$Mutation$DeleteMediaListEntry {
 
 abstract class CopyWith$Variables$Mutation$DeleteMediaListEntry<TRes> {
   factory CopyWith$Variables$Mutation$DeleteMediaListEntry(
-      Variables$Mutation$DeleteMediaListEntry instance,
-      TRes Function(Variables$Mutation$DeleteMediaListEntry) then,) = _CopyWithImpl$Variables$Mutation$DeleteMediaListEntry;
+    Variables$Mutation$DeleteMediaListEntry instance,
+    TRes Function(Variables$Mutation$DeleteMediaListEntry) then,
+  ) = _CopyWithImpl$Variables$Mutation$DeleteMediaListEntry;
 
   factory CopyWith$Variables$Mutation$DeleteMediaListEntry.stub(TRes res) =
-  _CopyWithStubImpl$Variables$Mutation$DeleteMediaListEntry;
+      _CopyWithStubImpl$Variables$Mutation$DeleteMediaListEntry;
 
   TRes call({int? id});
 }
 
 class _CopyWithImpl$Variables$Mutation$DeleteMediaListEntry<TRes>
     implements CopyWith$Variables$Mutation$DeleteMediaListEntry<TRes> {
-  _CopyWithImpl$Variables$Mutation$DeleteMediaListEntry(this._instance,
-      this._then,);
+  _CopyWithImpl$Variables$Mutation$DeleteMediaListEntry(
+    this._instance,
+    this._then,
+  );
 
   final Variables$Mutation$DeleteMediaListEntry _instance;
 
@@ -5463,13 +5471,13 @@ class Mutation$DeleteMediaListEntry {
       DeleteMediaListEntry: l$DeleteMediaListEntry == null
           ? null
           : Mutation$DeleteMediaListEntry$DeleteMediaListEntry.fromJson(
-          (l$DeleteMediaListEntry as Map<String, dynamic>)),
+              (l$DeleteMediaListEntry as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
   final Mutation$DeleteMediaListEntry$DeleteMediaListEntry?
-  DeleteMediaListEntry;
+      DeleteMediaListEntry;
 
   final String $__typename;
 
@@ -5516,36 +5524,37 @@ class Mutation$DeleteMediaListEntry {
 }
 
 extension UtilityExtension$Mutation$DeleteMediaListEntry
-on Mutation$DeleteMediaListEntry {
+    on Mutation$DeleteMediaListEntry {
   CopyWith$Mutation$DeleteMediaListEntry<Mutation$DeleteMediaListEntry>
-  get copyWith =>
-      CopyWith$Mutation$DeleteMediaListEntry(
-        this,
+      get copyWith => CopyWith$Mutation$DeleteMediaListEntry(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Mutation$DeleteMediaListEntry<TRes> {
   factory CopyWith$Mutation$DeleteMediaListEntry(
-      Mutation$DeleteMediaListEntry instance,
-      TRes Function(Mutation$DeleteMediaListEntry) then,) = _CopyWithImpl$Mutation$DeleteMediaListEntry;
+    Mutation$DeleteMediaListEntry instance,
+    TRes Function(Mutation$DeleteMediaListEntry) then,
+  ) = _CopyWithImpl$Mutation$DeleteMediaListEntry;
 
   factory CopyWith$Mutation$DeleteMediaListEntry.stub(TRes res) =
-  _CopyWithStubImpl$Mutation$DeleteMediaListEntry;
+      _CopyWithStubImpl$Mutation$DeleteMediaListEntry;
 
   TRes call({
     Mutation$DeleteMediaListEntry$DeleteMediaListEntry? DeleteMediaListEntry,
     String? $__typename,
   });
-
   CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry<TRes>
-  get DeleteMediaListEntry;
+      get DeleteMediaListEntry;
 }
 
 class _CopyWithImpl$Mutation$DeleteMediaListEntry<TRes>
     implements CopyWith$Mutation$DeleteMediaListEntry<TRes> {
-  _CopyWithImpl$Mutation$DeleteMediaListEntry(this._instance,
-      this._then,);
+  _CopyWithImpl$Mutation$DeleteMediaListEntry(
+    this._instance,
+    this._then,
+  );
 
   final Mutation$DeleteMediaListEntry _instance;
 
@@ -5561,20 +5570,20 @@ class _CopyWithImpl$Mutation$DeleteMediaListEntry<TRes>
         DeleteMediaListEntry: DeleteMediaListEntry == _undefined
             ? _instance.DeleteMediaListEntry
             : (DeleteMediaListEntry
-        as Mutation$DeleteMediaListEntry$DeleteMediaListEntry?),
+                as Mutation$DeleteMediaListEntry$DeleteMediaListEntry?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
   CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry<TRes>
-  get DeleteMediaListEntry {
+      get DeleteMediaListEntry {
     final local$DeleteMediaListEntry = _instance.DeleteMediaListEntry;
     return local$DeleteMediaListEntry == null
         ? CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry.stub(
-        _then(_instance))
+            _then(_instance))
         : CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry(
-        local$DeleteMediaListEntry, (e) => call(DeleteMediaListEntry: e));
+            local$DeleteMediaListEntry, (e) => call(DeleteMediaListEntry: e));
   }
 }
 
@@ -5591,9 +5600,9 @@ class _CopyWithStubImpl$Mutation$DeleteMediaListEntry<TRes>
       _res;
 
   CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry<TRes>
-  get DeleteMediaListEntry =>
-      CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry.stub(
-          _res);
+      get DeleteMediaListEntry =>
+          CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry.stub(
+              _res);
 }
 
 const documentNodeMutationDeleteMediaListEntry = DocumentNode(definitions: [
@@ -5650,16 +5659,14 @@ const documentNodeMutationDeleteMediaListEntry = DocumentNode(definitions: [
     ]),
   ),
 ]);
-
 Mutation$DeleteMediaListEntry _parserFn$Mutation$DeleteMediaListEntry(
-    Map<String, dynamic> data) =>
+        Map<String, dynamic> data) =>
     Mutation$DeleteMediaListEntry.fromJson(data);
-
 typedef OnMutationCompleted$Mutation$DeleteMediaListEntry = FutureOr<void>
-Function(
-    Map<String, dynamic>?,
-    Mutation$DeleteMediaListEntry?,
-    );
+    Function(
+  Map<String, dynamic>?,
+  Mutation$DeleteMediaListEntry?,
+);
 
 class Options$Mutation$DeleteMediaListEntry
     extends graphql.MutationOptions<Mutation$DeleteMediaListEntry> {
@@ -5675,37 +5682,34 @@ class Options$Mutation$DeleteMediaListEntry
     OnMutationCompleted$Mutation$DeleteMediaListEntry? onCompleted,
     graphql.OnMutationUpdate<Mutation$DeleteMediaListEntry>? update,
     graphql.OnError? onError,
-  })
-      : onCompletedWithParsed = onCompleted,
+  })  : onCompletedWithParsed = onCompleted,
         super(
-        variables: variables?.toJson() ?? {},
-        operationName: operationName,
-        fetchPolicy: fetchPolicy,
-        errorPolicy: errorPolicy,
-        cacheRereadPolicy: cacheRereadPolicy,
-        optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-        context: context,
-        onCompleted: onCompleted == null
-            ? null
-            : (data) =>
-            onCompleted(
-              data,
-              data == null
-                  ? null
-                  : _parserFn$Mutation$DeleteMediaListEntry(data),
-            ),
-        update: update,
-        onError: onError,
-        document: documentNodeMutationDeleteMediaListEntry,
-        parserFn: _parserFn$Mutation$DeleteMediaListEntry,
-      );
+          variables: variables?.toJson() ?? {},
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Mutation$DeleteMediaListEntry(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationDeleteMediaListEntry,
+          parserFn: _parserFn$Mutation$DeleteMediaListEntry,
+        );
 
   final OnMutationCompleted$Mutation$DeleteMediaListEntry?
-  onCompletedWithParsed;
+      onCompletedWithParsed;
 
   @override
-  List<Object?> get properties =>
-      [
+  List<Object?> get properties => [
         ...super.onCompleted == null
             ? super.properties
             : super.properties.where((property) => property != onCompleted),
@@ -5729,39 +5733,40 @@ class WatchOptions$Mutation$DeleteMediaListEntry
     bool carryForwardDataOnException = true,
     bool fetchResults = false,
   }) : super(
-    variables: variables?.toJson() ?? {},
-    operationName: operationName,
-    fetchPolicy: fetchPolicy,
-    errorPolicy: errorPolicy,
-    cacheRereadPolicy: cacheRereadPolicy,
-    optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-    context: context,
-    document: documentNodeMutationDeleteMediaListEntry,
-    pollInterval: pollInterval,
-    eagerlyFetchResults: eagerlyFetchResults,
-    carryForwardDataOnException: carryForwardDataOnException,
-    fetchResults: fetchResults,
-    parserFn: _parserFn$Mutation$DeleteMediaListEntry,
-  );
+          variables: variables?.toJson() ?? {},
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeMutationDeleteMediaListEntry,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Mutation$DeleteMediaListEntry,
+        );
 }
 
 extension ClientExtension$Mutation$DeleteMediaListEntry
-on graphql.GraphQLClient {
+    on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$DeleteMediaListEntry>>
-  mutate$DeleteMediaListEntry(
-      [Options$Mutation$DeleteMediaListEntry? options]) async =>
-      await this.mutate(options ?? Options$Mutation$DeleteMediaListEntry());
-
+      mutate$DeleteMediaListEntry(
+              [Options$Mutation$DeleteMediaListEntry? options]) async =>
+          await this.mutate(options ?? Options$Mutation$DeleteMediaListEntry());
   graphql.ObservableQuery<Mutation$DeleteMediaListEntry>
-  watchMutation$DeleteMediaListEntry(
-      [WatchOptions$Mutation$DeleteMediaListEntry? options]) =>
-      this.watchMutation(
-          options ?? WatchOptions$Mutation$DeleteMediaListEntry());
+      watchMutation$DeleteMediaListEntry(
+              [WatchOptions$Mutation$DeleteMediaListEntry? options]) =>
+          this.watchMutation(
+              options ?? WatchOptions$Mutation$DeleteMediaListEntry());
 }
 
 class Mutation$DeleteMediaListEntry$HookResult {
-  Mutation$DeleteMediaListEntry$HookResult(this.runMutation,
-      this.result,);
+  Mutation$DeleteMediaListEntry$HookResult(
+    this.runMutation,
+    this.result,
+  );
 
   final RunMutation$Mutation$DeleteMediaListEntry runMutation;
 
@@ -5773,20 +5778,20 @@ Mutation$DeleteMediaListEntry$HookResult useMutation$DeleteMediaListEntry(
   final result = graphql_flutter
       .useMutation(options ?? WidgetOptions$Mutation$DeleteMediaListEntry());
   return Mutation$DeleteMediaListEntry$HookResult(
-        ({variables, optimisticResult, typedOptimisticResult}) =>
+    ({variables, optimisticResult, typedOptimisticResult}) =>
         result.runMutation(
-          variables?.toJson() ?? const {},
-          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-        ),
+      variables?.toJson() ?? const {},
+      optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+    ),
     result.result,
   );
 }
 
 graphql.ObservableQuery<Mutation$DeleteMediaListEntry>
-useWatchMutation$DeleteMediaListEntry(
-    [WatchOptions$Mutation$DeleteMediaListEntry? options]) =>
-    graphql_flutter.useWatchMutation(
-        options ?? WatchOptions$Mutation$DeleteMediaListEntry());
+    useWatchMutation$DeleteMediaListEntry(
+            [WatchOptions$Mutation$DeleteMediaListEntry? options]) =>
+        graphql_flutter.useWatchMutation(
+            options ?? WatchOptions$Mutation$DeleteMediaListEntry());
 
 class WidgetOptions$Mutation$DeleteMediaListEntry
     extends graphql.MutationOptions<Mutation$DeleteMediaListEntry> {
@@ -5801,36 +5806,33 @@ class WidgetOptions$Mutation$DeleteMediaListEntry
     OnMutationCompleted$Mutation$DeleteMediaListEntry? onCompleted,
     graphql.OnMutationUpdate<Mutation$DeleteMediaListEntry>? update,
     graphql.OnError? onError,
-  })
-      : onCompletedWithParsed = onCompleted,
+  })  : onCompletedWithParsed = onCompleted,
         super(
-        operationName: operationName,
-        fetchPolicy: fetchPolicy,
-        errorPolicy: errorPolicy,
-        cacheRereadPolicy: cacheRereadPolicy,
-        optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-        context: context,
-        onCompleted: onCompleted == null
-            ? null
-            : (data) =>
-            onCompleted(
-              data,
-              data == null
-                  ? null
-                  : _parserFn$Mutation$DeleteMediaListEntry(data),
-            ),
-        update: update,
-        onError: onError,
-        document: documentNodeMutationDeleteMediaListEntry,
-        parserFn: _parserFn$Mutation$DeleteMediaListEntry,
-      );
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Mutation$DeleteMediaListEntry(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationDeleteMediaListEntry,
+          parserFn: _parserFn$Mutation$DeleteMediaListEntry,
+        );
 
   final OnMutationCompleted$Mutation$DeleteMediaListEntry?
-  onCompletedWithParsed;
+      onCompletedWithParsed;
 
   @override
-  List<Object?> get properties =>
-      [
+  List<Object?> get properties => [
         ...super.onCompleted == null
             ? super.properties
             : super.properties.where((property) => property != onCompleted),
@@ -5839,15 +5841,15 @@ class WidgetOptions$Mutation$DeleteMediaListEntry
 }
 
 typedef RunMutation$Mutation$DeleteMediaListEntry
-= graphql.MultiSourceResult<Mutation$DeleteMediaListEntry> Function({
-Variables$Mutation$DeleteMediaListEntry? variables,
-Object? optimisticResult,
-Mutation$DeleteMediaListEntry? typedOptimisticResult,
+    = graphql.MultiSourceResult<Mutation$DeleteMediaListEntry> Function({
+  Variables$Mutation$DeleteMediaListEntry? variables,
+  Object? optimisticResult,
+  Mutation$DeleteMediaListEntry? typedOptimisticResult,
 });
 typedef Builder$Mutation$DeleteMediaListEntry = widgets.Widget Function(
-    RunMutation$Mutation$DeleteMediaListEntry,
-    graphql.QueryResult<Mutation$DeleteMediaListEntry>?,
-    );
+  RunMutation$Mutation$DeleteMediaListEntry,
+  graphql.QueryResult<Mutation$DeleteMediaListEntry>?,
+);
 
 class Mutation$DeleteMediaListEntry$Widget
     extends graphql_flutter.Mutation<Mutation$DeleteMediaListEntry> {
@@ -5856,24 +5858,26 @@ class Mutation$DeleteMediaListEntry$Widget
     WidgetOptions$Mutation$DeleteMediaListEntry? options,
     required Builder$Mutation$DeleteMediaListEntry builder,
   }) : super(
-    key: key,
-    options: options ?? WidgetOptions$Mutation$DeleteMediaListEntry(),
-    builder: (run,
-        result,) =>
-        builder(
-              ({
-            variables,
-            optimisticResult,
-            typedOptimisticResult,
-          }) =>
-              run(
-                variables?.toJson() ?? const {},
-                optimisticResult:
-                optimisticResult ?? typedOptimisticResult?.toJson(),
-              ),
-          result,
-        ),
-  );
+          key: key,
+          options: options ?? WidgetOptions$Mutation$DeleteMediaListEntry(),
+          builder: (
+            run,
+            result,
+          ) =>
+              builder(
+            ({
+              variables,
+              optimisticResult,
+              typedOptimisticResult,
+            }) =>
+                run(
+              variables?.toJson() ?? const {},
+              optimisticResult:
+                  optimisticResult ?? typedOptimisticResult?.toJson(),
+            ),
+            result,
+          ),
+        );
 }
 
 class Mutation$DeleteMediaListEntry$DeleteMediaListEntry {
@@ -5939,25 +5943,26 @@ class Mutation$DeleteMediaListEntry$DeleteMediaListEntry {
 }
 
 extension UtilityExtension$Mutation$DeleteMediaListEntry$DeleteMediaListEntry
-on Mutation$DeleteMediaListEntry$DeleteMediaListEntry {
+    on Mutation$DeleteMediaListEntry$DeleteMediaListEntry {
   CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry<
-      Mutation$DeleteMediaListEntry$DeleteMediaListEntry>
-  get copyWith =>
-      CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry(
-        this,
+          Mutation$DeleteMediaListEntry$DeleteMediaListEntry>
+      get copyWith =>
+          CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry<
-TRes> {
+    TRes> {
   factory CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry(
-      Mutation$DeleteMediaListEntry$DeleteMediaListEntry instance,
-      TRes Function(Mutation$DeleteMediaListEntry$DeleteMediaListEntry) then,) = _CopyWithImpl$Mutation$DeleteMediaListEntry$DeleteMediaListEntry;
+    Mutation$DeleteMediaListEntry$DeleteMediaListEntry instance,
+    TRes Function(Mutation$DeleteMediaListEntry$DeleteMediaListEntry) then,
+  ) = _CopyWithImpl$Mutation$DeleteMediaListEntry$DeleteMediaListEntry;
 
   factory CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry.stub(
-      TRes res) =
-  _CopyWithStubImpl$Mutation$DeleteMediaListEntry$DeleteMediaListEntry;
+          TRes res) =
+      _CopyWithStubImpl$Mutation$DeleteMediaListEntry$DeleteMediaListEntry;
 
   TRes call({
     bool? deleted,
@@ -5969,8 +5974,9 @@ class _CopyWithImpl$Mutation$DeleteMediaListEntry$DeleteMediaListEntry<TRes>
     implements
         CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry<TRes> {
   _CopyWithImpl$Mutation$DeleteMediaListEntry$DeleteMediaListEntry(
-      this._instance,
-      this._then,);
+    this._instance,
+    this._then,
+  );
 
   final Mutation$DeleteMediaListEntry$DeleteMediaListEntry _instance;
 

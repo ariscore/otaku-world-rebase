@@ -66,12 +66,11 @@ class Variables$Query$MediaActivityQuery {
   }
 
   CopyWith$Variables$Query$MediaActivityQuery<
-      Variables$Query$MediaActivityQuery>
-  get copyWith =>
-      CopyWith$Variables$Query$MediaActivityQuery(
-        this,
+          Variables$Query$MediaActivityQuery>
+      get copyWith => CopyWith$Variables$Query$MediaActivityQuery(
+            this,
             (i) => i,
-      );
+          );
 
   @override
   bool operator ==(Object other) {
@@ -125,11 +124,12 @@ class Variables$Query$MediaActivityQuery {
 
 abstract class CopyWith$Variables$Query$MediaActivityQuery<TRes> {
   factory CopyWith$Variables$Query$MediaActivityQuery(
-      Variables$Query$MediaActivityQuery instance,
-      TRes Function(Variables$Query$MediaActivityQuery) then,) = _CopyWithImpl$Variables$Query$MediaActivityQuery;
+    Variables$Query$MediaActivityQuery instance,
+    TRes Function(Variables$Query$MediaActivityQuery) then,
+  ) = _CopyWithImpl$Variables$Query$MediaActivityQuery;
 
   factory CopyWith$Variables$Query$MediaActivityQuery.stub(TRes res) =
-  _CopyWithStubImpl$Variables$Query$MediaActivityQuery;
+      _CopyWithStubImpl$Variables$Query$MediaActivityQuery;
 
   TRes call({
     int? mediaId,
@@ -140,8 +140,10 @@ abstract class CopyWith$Variables$Query$MediaActivityQuery<TRes> {
 
 class _CopyWithImpl$Variables$Query$MediaActivityQuery<TRes>
     implements CopyWith$Variables$Query$MediaActivityQuery<TRes> {
-  _CopyWithImpl$Variables$Query$MediaActivityQuery(this._instance,
-      this._then,);
+  _CopyWithImpl$Variables$Query$MediaActivityQuery(
+    this._instance,
+    this._then,
+  );
 
   final Variables$Query$MediaActivityQuery _instance;
 
@@ -189,7 +191,7 @@ class Query$MediaActivityQuery {
       Page: l$Page == null
           ? null
           : Query$MediaActivityQuery$Page.fromJson(
-          (l$Page as Map<String, dynamic>)),
+              (l$Page as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -241,33 +243,36 @@ class Query$MediaActivityQuery {
 }
 
 extension UtilityExtension$Query$MediaActivityQuery
-on Query$MediaActivityQuery {
+    on Query$MediaActivityQuery {
   CopyWith$Query$MediaActivityQuery<Query$MediaActivityQuery> get copyWith =>
       CopyWith$Query$MediaActivityQuery(
         this,
-            (i) => i,
+        (i) => i,
       );
 }
 
 abstract class CopyWith$Query$MediaActivityQuery<TRes> {
-  factory CopyWith$Query$MediaActivityQuery(Query$MediaActivityQuery instance,
-      TRes Function(Query$MediaActivityQuery) then,) = _CopyWithImpl$Query$MediaActivityQuery;
+  factory CopyWith$Query$MediaActivityQuery(
+    Query$MediaActivityQuery instance,
+    TRes Function(Query$MediaActivityQuery) then,
+  ) = _CopyWithImpl$Query$MediaActivityQuery;
 
   factory CopyWith$Query$MediaActivityQuery.stub(TRes res) =
-  _CopyWithStubImpl$Query$MediaActivityQuery;
+      _CopyWithStubImpl$Query$MediaActivityQuery;
 
   TRes call({
     Query$MediaActivityQuery$Page? Page,
     String? $__typename,
   });
-
   CopyWith$Query$MediaActivityQuery$Page<TRes> get Page;
 }
 
 class _CopyWithImpl$Query$MediaActivityQuery<TRes>
     implements CopyWith$Query$MediaActivityQuery<TRes> {
-  _CopyWithImpl$Query$MediaActivityQuery(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaActivityQuery(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaActivityQuery _instance;
 
@@ -293,7 +298,7 @@ class _CopyWithImpl$Query$MediaActivityQuery<TRes>
     return local$Page == null
         ? CopyWith$Query$MediaActivityQuery$Page.stub(_then(_instance))
         : CopyWith$Query$MediaActivityQuery$Page(
-        local$Page, (e) => call(Page: e));
+            local$Page, (e) => call(Page: e));
   }
 }
 
@@ -462,15 +467,13 @@ const documentNodeQueryMediaActivityQuery = DocumentNode(definitions: [
   ),
   fragmentDefinitionListActivity,
 ]);
-
 Query$MediaActivityQuery _parserFn$Query$MediaActivityQuery(
-    Map<String, dynamic> data) =>
+        Map<String, dynamic> data) =>
     Query$MediaActivityQuery.fromJson(data);
-
 typedef OnQueryComplete$Query$MediaActivityQuery = FutureOr<void> Function(
-    Map<String, dynamic>?,
-    Query$MediaActivityQuery?,
-    );
+  Map<String, dynamic>?,
+  Query$MediaActivityQuery?,
+);
 
 class Options$Query$MediaActivityQuery
     extends graphql.QueryOptions<Query$MediaActivityQuery> {
@@ -486,36 +489,33 @@ class Options$Query$MediaActivityQuery
     graphql.Context? context,
     OnQueryComplete$Query$MediaActivityQuery? onComplete,
     graphql.OnQueryError? onError,
-  })
-      : onCompleteWithParsed = onComplete,
+  })  : onCompleteWithParsed = onComplete,
         super(
-        variables: variables?.toJson() ?? {},
-        operationName: operationName,
-        fetchPolicy: fetchPolicy,
-        errorPolicy: errorPolicy,
-        cacheRereadPolicy: cacheRereadPolicy,
-        optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-        pollInterval: pollInterval,
-        context: context,
-        onComplete: onComplete == null
-            ? null
-            : (data) =>
-            onComplete(
-              data,
-              data == null
-                  ? null
-                  : _parserFn$Query$MediaActivityQuery(data),
-            ),
-        onError: onError,
-        document: documentNodeQueryMediaActivityQuery,
-        parserFn: _parserFn$Query$MediaActivityQuery,
-      );
+          variables: variables?.toJson() ?? {},
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          pollInterval: pollInterval,
+          context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Query$MediaActivityQuery(data),
+                  ),
+          onError: onError,
+          document: documentNodeQueryMediaActivityQuery,
+          parserFn: _parserFn$Query$MediaActivityQuery,
+        );
 
   final OnQueryComplete$Query$MediaActivityQuery? onCompleteWithParsed;
 
   @override
-  List<Object?> get properties =>
-      [
+  List<Object?> get properties => [
         ...super.onComplete == null
             ? super.properties
             : super.properties.where((property) => property != onComplete),
@@ -539,20 +539,20 @@ class WatchOptions$Query$MediaActivityQuery
     bool carryForwardDataOnException = true,
     bool fetchResults = false,
   }) : super(
-    variables: variables?.toJson() ?? {},
-    operationName: operationName,
-    fetchPolicy: fetchPolicy,
-    errorPolicy: errorPolicy,
-    cacheRereadPolicy: cacheRereadPolicy,
-    optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-    context: context,
-    document: documentNodeQueryMediaActivityQuery,
-    pollInterval: pollInterval,
-    eagerlyFetchResults: eagerlyFetchResults,
-    carryForwardDataOnException: carryForwardDataOnException,
-    fetchResults: fetchResults,
-    parserFn: _parserFn$Query$MediaActivityQuery,
-  );
+          variables: variables?.toJson() ?? {},
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeQueryMediaActivityQuery,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Query$MediaActivityQuery,
+        );
 }
 
 class FetchMoreOptions$Query$MediaActivityQuery
@@ -561,22 +561,21 @@ class FetchMoreOptions$Query$MediaActivityQuery
     required graphql.UpdateQuery updateQuery,
     Variables$Query$MediaActivityQuery? variables,
   }) : super(
-    updateQuery: updateQuery,
-    variables: variables?.toJson() ?? {},
-    document: documentNodeQueryMediaActivityQuery,
-  );
+          updateQuery: updateQuery,
+          variables: variables?.toJson() ?? {},
+          document: documentNodeQueryMediaActivityQuery,
+        );
 }
 
 extension ClientExtension$Query$MediaActivityQuery on graphql.GraphQLClient {
   Future<graphql.QueryResult<Query$MediaActivityQuery>>
-  query$MediaActivityQuery([Options$Query$MediaActivityQuery? options]) async =>
-      await this.query(options ?? Options$Query$MediaActivityQuery());
-
+      query$MediaActivityQuery(
+              [Options$Query$MediaActivityQuery? options]) async =>
+          await this.query(options ?? Options$Query$MediaActivityQuery());
   graphql.ObservableQuery<Query$MediaActivityQuery>
-  watchQuery$MediaActivityQuery(
-      [WatchOptions$Query$MediaActivityQuery? options]) =>
-      this.watchQuery(options ?? WatchOptions$Query$MediaActivityQuery());
-
+      watchQuery$MediaActivityQuery(
+              [WatchOptions$Query$MediaActivityQuery? options]) =>
+          this.watchQuery(options ?? WatchOptions$Query$MediaActivityQuery());
   void writeQuery$MediaActivityQuery({
     required Query$MediaActivityQuery data,
     Variables$Query$MediaActivityQuery? variables,
@@ -585,13 +584,12 @@ extension ClientExtension$Query$MediaActivityQuery on graphql.GraphQLClient {
       this.writeQuery(
         graphql.Request(
           operation:
-          graphql.Operation(document: documentNodeQueryMediaActivityQuery),
+              graphql.Operation(document: documentNodeQueryMediaActivityQuery),
           variables: variables?.toJson() ?? const {},
         ),
         data: data.toJson(),
         broadcast: broadcast,
       );
-
   Query$MediaActivityQuery? readQuery$MediaActivityQuery({
     Variables$Query$MediaActivityQuery? variables,
     bool optimistic = true,
@@ -599,7 +597,7 @@ extension ClientExtension$Query$MediaActivityQuery on graphql.GraphQLClient {
     final result = this.readQuery(
       graphql.Request(
         operation:
-        graphql.Operation(document: documentNodeQueryMediaActivityQuery),
+            graphql.Operation(document: documentNodeQueryMediaActivityQuery),
         variables: variables?.toJson() ?? const {},
       ),
       optimistic: optimistic,
@@ -609,14 +607,13 @@ extension ClientExtension$Query$MediaActivityQuery on graphql.GraphQLClient {
 }
 
 graphql_flutter.QueryHookResult<Query$MediaActivityQuery>
-useQuery$MediaActivityQuery([Options$Query$MediaActivityQuery? options]) =>
-    graphql_flutter.useQuery(options ?? Options$Query$MediaActivityQuery());
-
+    useQuery$MediaActivityQuery([Options$Query$MediaActivityQuery? options]) =>
+        graphql_flutter.useQuery(options ?? Options$Query$MediaActivityQuery());
 graphql.ObservableQuery<Query$MediaActivityQuery>
-useWatchQuery$MediaActivityQuery(
-    [WatchOptions$Query$MediaActivityQuery? options]) =>
-    graphql_flutter
-        .useWatchQuery(options ?? WatchOptions$Query$MediaActivityQuery());
+    useWatchQuery$MediaActivityQuery(
+            [WatchOptions$Query$MediaActivityQuery? options]) =>
+        graphql_flutter
+            .useWatchQuery(options ?? WatchOptions$Query$MediaActivityQuery());
 
 class Query$MediaActivityQuery$Widget
     extends graphql_flutter.Query<Query$MediaActivityQuery> {
@@ -625,10 +622,10 @@ class Query$MediaActivityQuery$Widget
     Options$Query$MediaActivityQuery? options,
     required graphql_flutter.QueryBuilder<Query$MediaActivityQuery> builder,
   }) : super(
-    key: key,
-    options: options ?? Options$Query$MediaActivityQuery(),
-    builder: builder,
-  );
+          key: key,
+          options: options ?? Options$Query$MediaActivityQuery(),
+          builder: builder,
+        );
 }
 
 class Query$MediaActivityQuery$Page {
@@ -646,13 +643,12 @@ class Query$MediaActivityQuery$Page {
       pageInfo: l$pageInfo == null
           ? null
           : Query$MediaActivityQuery$Page$pageInfo.fromJson(
-          (l$pageInfo as Map<String, dynamic>)),
+              (l$pageInfo as Map<String, dynamic>)),
       activities: (l$activities as List<dynamic>?)
-          ?.map((e) =>
-      e == null
-          ? null
-          : Query$MediaActivityQuery$Page$activities.fromJson(
-          (e as Map<String, dynamic>)))
+          ?.map((e) => e == null
+              ? null
+              : Query$MediaActivityQuery$Page$activities.fromJson(
+                  (e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -727,42 +723,44 @@ class Query$MediaActivityQuery$Page {
 }
 
 extension UtilityExtension$Query$MediaActivityQuery$Page
-on Query$MediaActivityQuery$Page {
+    on Query$MediaActivityQuery$Page {
   CopyWith$Query$MediaActivityQuery$Page<Query$MediaActivityQuery$Page>
-  get copyWith =>
-      CopyWith$Query$MediaActivityQuery$Page(
-        this,
+      get copyWith => CopyWith$Query$MediaActivityQuery$Page(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Query$MediaActivityQuery$Page<TRes> {
   factory CopyWith$Query$MediaActivityQuery$Page(
-      Query$MediaActivityQuery$Page instance,
-      TRes Function(Query$MediaActivityQuery$Page) then,) = _CopyWithImpl$Query$MediaActivityQuery$Page;
+    Query$MediaActivityQuery$Page instance,
+    TRes Function(Query$MediaActivityQuery$Page) then,
+  ) = _CopyWithImpl$Query$MediaActivityQuery$Page;
 
   factory CopyWith$Query$MediaActivityQuery$Page.stub(TRes res) =
-  _CopyWithStubImpl$Query$MediaActivityQuery$Page;
+      _CopyWithStubImpl$Query$MediaActivityQuery$Page;
 
   TRes call({
     Query$MediaActivityQuery$Page$pageInfo? pageInfo,
     List<Query$MediaActivityQuery$Page$activities?>? activities,
     String? $__typename,
   });
-
   CopyWith$Query$MediaActivityQuery$Page$pageInfo<TRes> get pageInfo;
 
-  TRes activities(Iterable<Query$MediaActivityQuery$Page$activities?>? Function(
-      Iterable<
-          CopyWith$Query$MediaActivityQuery$Page$activities<
-              Query$MediaActivityQuery$Page$activities>?>?)
-  _fn);
+  TRes activities(
+      Iterable<Query$MediaActivityQuery$Page$activities?>? Function(
+              Iterable<
+                  CopyWith$Query$MediaActivityQuery$Page$activities<
+                      Query$MediaActivityQuery$Page$activities>?>?)
+          _fn);
 }
 
 class _CopyWithImpl$Query$MediaActivityQuery$Page<TRes>
     implements CopyWith$Query$MediaActivityQuery$Page<TRes> {
-  _CopyWithImpl$Query$MediaActivityQuery$Page(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaActivityQuery$Page(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaActivityQuery$Page _instance;
 
@@ -792,22 +790,22 @@ class _CopyWithImpl$Query$MediaActivityQuery$Page<TRes>
     return local$pageInfo == null
         ? CopyWith$Query$MediaActivityQuery$Page$pageInfo.stub(_then(_instance))
         : CopyWith$Query$MediaActivityQuery$Page$pageInfo(
-        local$pageInfo, (e) => call(pageInfo: e));
+            local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  TRes activities(Iterable<Query$MediaActivityQuery$Page$activities?>? Function(
-      Iterable<
-          CopyWith$Query$MediaActivityQuery$Page$activities<
-              Query$MediaActivityQuery$Page$activities>?>?)
-  _fn) =>
+  TRes activities(
+          Iterable<Query$MediaActivityQuery$Page$activities?>? Function(
+                  Iterable<
+                      CopyWith$Query$MediaActivityQuery$Page$activities<
+                          Query$MediaActivityQuery$Page$activities>?>?)
+              _fn) =>
       call(
-          activities: _fn(_instance.activities?.map((e) =>
-          e == null
+          activities: _fn(_instance.activities?.map((e) => e == null
               ? null
               : CopyWith$Query$MediaActivityQuery$Page$activities(
-            e,
-                (i) => i,
-          )))?.toList());
+                  e,
+                  (i) => i,
+                )))?.toList());
 }
 
 class _CopyWithStubImpl$Query$MediaActivityQuery$Page<TRes>
@@ -948,23 +946,23 @@ class Query$MediaActivityQuery$Page$pageInfo {
 }
 
 extension UtilityExtension$Query$MediaActivityQuery$Page$pageInfo
-on Query$MediaActivityQuery$Page$pageInfo {
+    on Query$MediaActivityQuery$Page$pageInfo {
   CopyWith$Query$MediaActivityQuery$Page$pageInfo<
-      Query$MediaActivityQuery$Page$pageInfo>
-  get copyWith =>
-      CopyWith$Query$MediaActivityQuery$Page$pageInfo(
-        this,
+          Query$MediaActivityQuery$Page$pageInfo>
+      get copyWith => CopyWith$Query$MediaActivityQuery$Page$pageInfo(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Query$MediaActivityQuery$Page$pageInfo<TRes> {
   factory CopyWith$Query$MediaActivityQuery$Page$pageInfo(
-      Query$MediaActivityQuery$Page$pageInfo instance,
-      TRes Function(Query$MediaActivityQuery$Page$pageInfo) then,) = _CopyWithImpl$Query$MediaActivityQuery$Page$pageInfo;
+    Query$MediaActivityQuery$Page$pageInfo instance,
+    TRes Function(Query$MediaActivityQuery$Page$pageInfo) then,
+  ) = _CopyWithImpl$Query$MediaActivityQuery$Page$pageInfo;
 
   factory CopyWith$Query$MediaActivityQuery$Page$pageInfo.stub(TRes res) =
-  _CopyWithStubImpl$Query$MediaActivityQuery$Page$pageInfo;
+      _CopyWithStubImpl$Query$MediaActivityQuery$Page$pageInfo;
 
   TRes call({
     int? total,
@@ -978,8 +976,10 @@ abstract class CopyWith$Query$MediaActivityQuery$Page$pageInfo<TRes> {
 
 class _CopyWithImpl$Query$MediaActivityQuery$Page$pageInfo<TRes>
     implements CopyWith$Query$MediaActivityQuery$Page$pageInfo<TRes> {
-  _CopyWithImpl$Query$MediaActivityQuery$Page$pageInfo(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaActivityQuery$Page$pageInfo(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaActivityQuery$Page$pageInfo _instance;
 
@@ -1002,7 +1002,7 @@ class _CopyWithImpl$Query$MediaActivityQuery$Page$pageInfo<TRes>
             ? _instance.currentPage
             : (currentPage as int?),
         lastPage:
-        lastPage == _undefined ? _instance.lastPage : (lastPage as int?),
+            lastPage == _undefined ? _instance.lastPage : (lastPage as int?),
         hasNextPage: hasNextPage == _undefined
             ? _instance.hasNextPage
             : (hasNextPage as bool?),
@@ -1088,23 +1088,21 @@ class Query$MediaActivityQuery$Page$activities {
 }
 
 extension UtilityExtension$Query$MediaActivityQuery$Page$activities
-on Query$MediaActivityQuery$Page$activities {
+    on Query$MediaActivityQuery$Page$activities {
   CopyWith$Query$MediaActivityQuery$Page$activities<
-      Query$MediaActivityQuery$Page$activities>
-  get copyWith =>
-      CopyWith$Query$MediaActivityQuery$Page$activities(
-        this,
+          Query$MediaActivityQuery$Page$activities>
+      get copyWith => CopyWith$Query$MediaActivityQuery$Page$activities(
+            this,
             (i) => i,
-      );
-
+          );
   _T when<_T>({
     required _T Function(Query$MediaActivityQuery$Page$activities$$ListActivity)
-    listActivity,
+        listActivity,
     required _T Function(
-        Query$MediaActivityQuery$Page$activities$$MessageActivity)
-    messageActivity,
+            Query$MediaActivityQuery$Page$activities$$MessageActivity)
+        messageActivity,
     required _T Function(Query$MediaActivityQuery$Page$activities$$TextActivity)
-    textActivity,
+        textActivity,
     required _T Function() orElse,
   }) {
     switch ($__typename) {
@@ -1127,11 +1125,11 @@ on Query$MediaActivityQuery$Page$activities {
 
   _T maybeWhen<_T>({
     _T Function(Query$MediaActivityQuery$Page$activities$$ListActivity)?
-    listActivity,
+        listActivity,
     _T Function(Query$MediaActivityQuery$Page$activities$$MessageActivity)?
-    messageActivity,
+        messageActivity,
     _T Function(Query$MediaActivityQuery$Page$activities$$TextActivity)?
-    textActivity,
+        textActivity,
     required _T Function() orElse,
   }) {
     switch ($__typename) {
@@ -1146,7 +1144,7 @@ on Query$MediaActivityQuery$Page$activities {
       case "MessageActivity":
         if (messageActivity != null) {
           return messageActivity(this
-          as Query$MediaActivityQuery$Page$activities$$MessageActivity);
+              as Query$MediaActivityQuery$Page$activities$$MessageActivity);
         } else {
           return orElse();
         }
@@ -1167,19 +1165,22 @@ on Query$MediaActivityQuery$Page$activities {
 
 abstract class CopyWith$Query$MediaActivityQuery$Page$activities<TRes> {
   factory CopyWith$Query$MediaActivityQuery$Page$activities(
-      Query$MediaActivityQuery$Page$activities instance,
-      TRes Function(Query$MediaActivityQuery$Page$activities) then,) = _CopyWithImpl$Query$MediaActivityQuery$Page$activities;
+    Query$MediaActivityQuery$Page$activities instance,
+    TRes Function(Query$MediaActivityQuery$Page$activities) then,
+  ) = _CopyWithImpl$Query$MediaActivityQuery$Page$activities;
 
   factory CopyWith$Query$MediaActivityQuery$Page$activities.stub(TRes res) =
-  _CopyWithStubImpl$Query$MediaActivityQuery$Page$activities;
+      _CopyWithStubImpl$Query$MediaActivityQuery$Page$activities;
 
   TRes call({String? $__typename});
 }
 
 class _CopyWithImpl$Query$MediaActivityQuery$Page$activities<TRes>
     implements CopyWith$Query$MediaActivityQuery$Page$activities<TRes> {
-  _CopyWithImpl$Query$MediaActivityQuery$Page$activities(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaActivityQuery$Page$activities(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaActivityQuery$Page$activities _instance;
 
@@ -1239,7 +1240,7 @@ class Query$MediaActivityQuery$Page$activities$$ListActivity
       user: l$user == null
           ? null
           : Fragment$ListActivity$user.fromJson(
-          (l$user as Map<String, dynamic>)),
+              (l$user as Map<String, dynamic>)),
       likeCount: (l$likeCount as int),
       replyCount: (l$replyCount as int),
       createdAt: (l$createdAt as int),
@@ -1251,7 +1252,7 @@ class Query$MediaActivityQuery$Page$activities$$ListActivity
       media: l$media == null
           ? null
           : Fragment$ListActivity$media.fromJson(
-          (l$media as Map<String, dynamic>)),
+              (l$media as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1413,25 +1414,26 @@ class Query$MediaActivityQuery$Page$activities$$ListActivity
 }
 
 extension UtilityExtension$Query$MediaActivityQuery$Page$activities$$ListActivity
-on Query$MediaActivityQuery$Page$activities$$ListActivity {
+    on Query$MediaActivityQuery$Page$activities$$ListActivity {
   CopyWith$Query$MediaActivityQuery$Page$activities$$ListActivity<
-      Query$MediaActivityQuery$Page$activities$$ListActivity>
-  get copyWith =>
-      CopyWith$Query$MediaActivityQuery$Page$activities$$ListActivity(
-        this,
+          Query$MediaActivityQuery$Page$activities$$ListActivity>
+      get copyWith =>
+          CopyWith$Query$MediaActivityQuery$Page$activities$$ListActivity(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Query$MediaActivityQuery$Page$activities$$ListActivity<
-TRes> {
+    TRes> {
   factory CopyWith$Query$MediaActivityQuery$Page$activities$$ListActivity(
-      Query$MediaActivityQuery$Page$activities$$ListActivity instance,
-      TRes Function(Query$MediaActivityQuery$Page$activities$$ListActivity) then,) = _CopyWithImpl$Query$MediaActivityQuery$Page$activities$$ListActivity;
+    Query$MediaActivityQuery$Page$activities$$ListActivity instance,
+    TRes Function(Query$MediaActivityQuery$Page$activities$$ListActivity) then,
+  ) = _CopyWithImpl$Query$MediaActivityQuery$Page$activities$$ListActivity;
 
   factory CopyWith$Query$MediaActivityQuery$Page$activities$$ListActivity.stub(
-      TRes res) =
-  _CopyWithStubImpl$Query$MediaActivityQuery$Page$activities$$ListActivity;
+          TRes res) =
+      _CopyWithStubImpl$Query$MediaActivityQuery$Page$activities$$ListActivity;
 
   TRes call({
     int? id,
@@ -1447,9 +1449,7 @@ TRes> {
     Fragment$ListActivity$media? media,
     String? $__typename,
   });
-
   CopyWith$Fragment$ListActivity$user<TRes> get user;
-
   CopyWith$Fragment$ListActivity$media<TRes> get media;
 }
 
@@ -1457,13 +1457,14 @@ class _CopyWithImpl$Query$MediaActivityQuery$Page$activities$$ListActivity<TRes>
     implements
         CopyWith$Query$MediaActivityQuery$Page$activities$$ListActivity<TRes> {
   _CopyWithImpl$Query$MediaActivityQuery$Page$activities$$ListActivity(
-      this._instance,
-      this._then,);
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaActivityQuery$Page$activities$$ListActivity _instance;
 
   final TRes Function(Query$MediaActivityQuery$Page$activities$$ListActivity)
-  _then;
+      _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1500,9 +1501,9 @@ class _CopyWithImpl$Query$MediaActivityQuery$Page$activities$$ListActivity<TRes>
             ? _instance.isSubscribed
             : (isSubscribed as bool?),
         siteUrl:
-        siteUrl == _undefined ? _instance.siteUrl : (siteUrl as String?),
+            siteUrl == _undefined ? _instance.siteUrl : (siteUrl as String?),
         progress:
-        progress == _undefined ? _instance.progress : (progress as String?),
+            progress == _undefined ? _instance.progress : (progress as String?),
         status: status == _undefined ? _instance.status : (status as String?),
         media: media == _undefined
             ? _instance.media
@@ -1524,12 +1525,12 @@ class _CopyWithImpl$Query$MediaActivityQuery$Page$activities$$ListActivity<TRes>
     return local$media == null
         ? CopyWith$Fragment$ListActivity$media.stub(_then(_instance))
         : CopyWith$Fragment$ListActivity$media(
-        local$media, (e) => call(media: e));
+            local$media, (e) => call(media: e));
   }
 }
 
 class _CopyWithStubImpl$Query$MediaActivityQuery$Page$activities$$ListActivity<
-TRes>
+        TRes>
     implements
         CopyWith$Query$MediaActivityQuery$Page$activities$$ListActivity<TRes> {
   _CopyWithStubImpl$Query$MediaActivityQuery$Page$activities$$ListActivity(
@@ -1606,43 +1607,45 @@ class Query$MediaActivityQuery$Page$activities$$MessageActivity
 }
 
 extension UtilityExtension$Query$MediaActivityQuery$Page$activities$$MessageActivity
-on Query$MediaActivityQuery$Page$activities$$MessageActivity {
+    on Query$MediaActivityQuery$Page$activities$$MessageActivity {
   CopyWith$Query$MediaActivityQuery$Page$activities$$MessageActivity<
-      Query$MediaActivityQuery$Page$activities$$MessageActivity>
-  get copyWith =>
-      CopyWith$Query$MediaActivityQuery$Page$activities$$MessageActivity(
-        this,
+          Query$MediaActivityQuery$Page$activities$$MessageActivity>
+      get copyWith =>
+          CopyWith$Query$MediaActivityQuery$Page$activities$$MessageActivity(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Query$MediaActivityQuery$Page$activities$$MessageActivity<
-TRes> {
+    TRes> {
   factory CopyWith$Query$MediaActivityQuery$Page$activities$$MessageActivity(
-      Query$MediaActivityQuery$Page$activities$$MessageActivity instance,
-      TRes Function(Query$MediaActivityQuery$Page$activities$$MessageActivity)
-      then,) = _CopyWithImpl$Query$MediaActivityQuery$Page$activities$$MessageActivity;
+    Query$MediaActivityQuery$Page$activities$$MessageActivity instance,
+    TRes Function(Query$MediaActivityQuery$Page$activities$$MessageActivity)
+        then,
+  ) = _CopyWithImpl$Query$MediaActivityQuery$Page$activities$$MessageActivity;
 
   factory CopyWith$Query$MediaActivityQuery$Page$activities$$MessageActivity.stub(
-      TRes res) =
-  _CopyWithStubImpl$Query$MediaActivityQuery$Page$activities$$MessageActivity;
+          TRes res) =
+      _CopyWithStubImpl$Query$MediaActivityQuery$Page$activities$$MessageActivity;
 
   TRes call({String? $__typename});
 }
 
 class _CopyWithImpl$Query$MediaActivityQuery$Page$activities$$MessageActivity<
-TRes>
+        TRes>
     implements
         CopyWith$Query$MediaActivityQuery$Page$activities$$MessageActivity<
             TRes> {
   _CopyWithImpl$Query$MediaActivityQuery$Page$activities$$MessageActivity(
-      this._instance,
-      this._then,);
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaActivityQuery$Page$activities$$MessageActivity _instance;
 
   final TRes Function(Query$MediaActivityQuery$Page$activities$$MessageActivity)
-  _then;
+      _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1654,7 +1657,7 @@ TRes>
 }
 
 class _CopyWithStubImpl$Query$MediaActivityQuery$Page$activities$$MessageActivity<
-TRes>
+        TRes>
     implements
         CopyWith$Query$MediaActivityQuery$Page$activities$$MessageActivity<
             TRes> {
@@ -1712,25 +1715,26 @@ class Query$MediaActivityQuery$Page$activities$$TextActivity
 }
 
 extension UtilityExtension$Query$MediaActivityQuery$Page$activities$$TextActivity
-on Query$MediaActivityQuery$Page$activities$$TextActivity {
+    on Query$MediaActivityQuery$Page$activities$$TextActivity {
   CopyWith$Query$MediaActivityQuery$Page$activities$$TextActivity<
-      Query$MediaActivityQuery$Page$activities$$TextActivity>
-  get copyWith =>
-      CopyWith$Query$MediaActivityQuery$Page$activities$$TextActivity(
-        this,
+          Query$MediaActivityQuery$Page$activities$$TextActivity>
+      get copyWith =>
+          CopyWith$Query$MediaActivityQuery$Page$activities$$TextActivity(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Query$MediaActivityQuery$Page$activities$$TextActivity<
-TRes> {
+    TRes> {
   factory CopyWith$Query$MediaActivityQuery$Page$activities$$TextActivity(
-      Query$MediaActivityQuery$Page$activities$$TextActivity instance,
-      TRes Function(Query$MediaActivityQuery$Page$activities$$TextActivity) then,) = _CopyWithImpl$Query$MediaActivityQuery$Page$activities$$TextActivity;
+    Query$MediaActivityQuery$Page$activities$$TextActivity instance,
+    TRes Function(Query$MediaActivityQuery$Page$activities$$TextActivity) then,
+  ) = _CopyWithImpl$Query$MediaActivityQuery$Page$activities$$TextActivity;
 
   factory CopyWith$Query$MediaActivityQuery$Page$activities$$TextActivity.stub(
-      TRes res) =
-  _CopyWithStubImpl$Query$MediaActivityQuery$Page$activities$$TextActivity;
+          TRes res) =
+      _CopyWithStubImpl$Query$MediaActivityQuery$Page$activities$$TextActivity;
 
   TRes call({String? $__typename});
 }
@@ -1739,13 +1743,14 @@ class _CopyWithImpl$Query$MediaActivityQuery$Page$activities$$TextActivity<TRes>
     implements
         CopyWith$Query$MediaActivityQuery$Page$activities$$TextActivity<TRes> {
   _CopyWithImpl$Query$MediaActivityQuery$Page$activities$$TextActivity(
-      this._instance,
-      this._then,);
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaActivityQuery$Page$activities$$TextActivity _instance;
 
   final TRes Function(Query$MediaActivityQuery$Page$activities$$TextActivity)
-  _then;
+      _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1757,7 +1762,7 @@ class _CopyWithImpl$Query$MediaActivityQuery$Page$activities$$TextActivity<TRes>
 }
 
 class _CopyWithStubImpl$Query$MediaActivityQuery$Page$activities$$TextActivity<
-TRes>
+        TRes>
     implements
         CopyWith$Query$MediaActivityQuery$Page$activities$$TextActivity<TRes> {
   _CopyWithStubImpl$Query$MediaActivityQuery$Page$activities$$TextActivity(

@@ -71,16 +71,17 @@ class Query$Viewer {
 }
 
 extension UtilityExtension$Query$Viewer on Query$Viewer {
-  CopyWith$Query$Viewer<Query$Viewer> get copyWith =>
-      CopyWith$Query$Viewer(
+  CopyWith$Query$Viewer<Query$Viewer> get copyWith => CopyWith$Query$Viewer(
         this,
-            (i) => i,
+        (i) => i,
       );
 }
 
 abstract class CopyWith$Query$Viewer<TRes> {
-  factory CopyWith$Query$Viewer(Query$Viewer instance,
-      TRes Function(Query$Viewer) then,) = _CopyWithImpl$Query$Viewer;
+  factory CopyWith$Query$Viewer(
+    Query$Viewer instance,
+    TRes Function(Query$Viewer) then,
+  ) = _CopyWithImpl$Query$Viewer;
 
   factory CopyWith$Query$Viewer.stub(TRes res) = _CopyWithStubImpl$Query$Viewer;
 
@@ -88,13 +89,14 @@ abstract class CopyWith$Query$Viewer<TRes> {
     Fragment$User? Viewer,
     String? $__typename,
   });
-
   CopyWith$Fragment$User<TRes> get Viewer;
 }
 
 class _CopyWithImpl$Query$Viewer<TRes> implements CopyWith$Query$Viewer<TRes> {
-  _CopyWithImpl$Query$Viewer(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$Viewer(
+    this._instance,
+    this._then,
+  );
 
   final Query$Viewer _instance;
 
@@ -175,14 +177,12 @@ const documentNodeQueryViewer = DocumentNode(definitions: [
   ),
   fragmentDefinitionUser,
 ]);
-
 Query$Viewer _parserFn$Query$Viewer(Map<String, dynamic> data) =>
     Query$Viewer.fromJson(data);
-
 typedef OnQueryComplete$Query$Viewer = FutureOr<void> Function(
-    Map<String, dynamic>?,
-    Query$Viewer?,
-    );
+  Map<String, dynamic>?,
+  Query$Viewer?,
+);
 
 class Options$Query$Viewer extends graphql.QueryOptions<Query$Viewer> {
   Options$Query$Viewer({
@@ -196,33 +196,30 @@ class Options$Query$Viewer extends graphql.QueryOptions<Query$Viewer> {
     graphql.Context? context,
     OnQueryComplete$Query$Viewer? onComplete,
     graphql.OnQueryError? onError,
-  })
-      : onCompleteWithParsed = onComplete,
+  })  : onCompleteWithParsed = onComplete,
         super(
-        operationName: operationName,
-        fetchPolicy: fetchPolicy,
-        errorPolicy: errorPolicy,
-        cacheRereadPolicy: cacheRereadPolicy,
-        optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-        pollInterval: pollInterval,
-        context: context,
-        onComplete: onComplete == null
-            ? null
-            : (data) =>
-            onComplete(
-              data,
-              data == null ? null : _parserFn$Query$Viewer(data),
-            ),
-        onError: onError,
-        document: documentNodeQueryViewer,
-        parserFn: _parserFn$Query$Viewer,
-      );
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          pollInterval: pollInterval,
+          context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$Viewer(data),
+                  ),
+          onError: onError,
+          document: documentNodeQueryViewer,
+          parserFn: _parserFn$Query$Viewer,
+        );
 
   final OnQueryComplete$Query$Viewer? onCompleteWithParsed;
 
   @override
-  List<Object?> get properties =>
-      [
+  List<Object?> get properties => [
         ...super.onComplete == null
             ? super.properties
             : super.properties.where((property) => property != onComplete),
@@ -245,38 +242,36 @@ class WatchOptions$Query$Viewer
     bool carryForwardDataOnException = true,
     bool fetchResults = false,
   }) : super(
-    operationName: operationName,
-    fetchPolicy: fetchPolicy,
-    errorPolicy: errorPolicy,
-    cacheRereadPolicy: cacheRereadPolicy,
-    optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-    context: context,
-    document: documentNodeQueryViewer,
-    pollInterval: pollInterval,
-    eagerlyFetchResults: eagerlyFetchResults,
-    carryForwardDataOnException: carryForwardDataOnException,
-    fetchResults: fetchResults,
-    parserFn: _parserFn$Query$Viewer,
-  );
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeQueryViewer,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Query$Viewer,
+        );
 }
 
 class FetchMoreOptions$Query$Viewer extends graphql.FetchMoreOptions {
   FetchMoreOptions$Query$Viewer({required graphql.UpdateQuery updateQuery})
       : super(
-    updateQuery: updateQuery,
-    document: documentNodeQueryViewer,
-  );
+          updateQuery: updateQuery,
+          document: documentNodeQueryViewer,
+        );
 }
 
 extension ClientExtension$Query$Viewer on graphql.GraphQLClient {
   Future<graphql.QueryResult<Query$Viewer>> query$Viewer(
-      [Options$Query$Viewer? options]) async =>
+          [Options$Query$Viewer? options]) async =>
       await this.query(options ?? Options$Query$Viewer());
-
   graphql.ObservableQuery<Query$Viewer> watchQuery$Viewer(
-      [WatchOptions$Query$Viewer? options]) =>
+          [WatchOptions$Query$Viewer? options]) =>
       this.watchQuery(options ?? WatchOptions$Query$Viewer());
-
   void writeQuery$Viewer({
     required Query$Viewer data,
     bool broadcast = true,
@@ -287,7 +282,6 @@ extension ClientExtension$Query$Viewer on graphql.GraphQLClient {
         data: data.toJson(),
         broadcast: broadcast,
       );
-
   Query$Viewer? readQuery$Viewer({bool optimistic = true}) {
     final result = this.readQuery(
       graphql.Request(
@@ -299,11 +293,10 @@ extension ClientExtension$Query$Viewer on graphql.GraphQLClient {
 }
 
 graphql_flutter.QueryHookResult<Query$Viewer> useQuery$Viewer(
-    [Options$Query$Viewer? options]) =>
+        [Options$Query$Viewer? options]) =>
     graphql_flutter.useQuery(options ?? Options$Query$Viewer());
-
 graphql.ObservableQuery<Query$Viewer> useWatchQuery$Viewer(
-    [WatchOptions$Query$Viewer? options]) =>
+        [WatchOptions$Query$Viewer? options]) =>
     graphql_flutter.useWatchQuery(options ?? WatchOptions$Query$Viewer());
 
 class Query$Viewer$Widget extends graphql_flutter.Query<Query$Viewer> {
@@ -312,8 +305,8 @@ class Query$Viewer$Widget extends graphql_flutter.Query<Query$Viewer> {
     Options$Query$Viewer? options,
     required graphql_flutter.QueryBuilder<Query$Viewer> builder,
   }) : super(
-    key: key,
-    options: options ?? Options$Query$Viewer(),
-    builder: builder,
-  );
+          key: key,
+          options: options ?? Options$Query$Viewer(),
+          builder: builder,
+        );
 }

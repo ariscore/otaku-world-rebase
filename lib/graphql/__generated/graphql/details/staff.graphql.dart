@@ -52,11 +52,10 @@ class Variables$Query$MediaStaff {
   }
 
   CopyWith$Variables$Query$MediaStaff<Variables$Query$MediaStaff>
-  get copyWith =>
-      CopyWith$Variables$Query$MediaStaff(
-        this,
+      get copyWith => CopyWith$Variables$Query$MediaStaff(
+            this,
             (i) => i,
-      );
+          );
 
   @override
   bool operator ==(Object other) {
@@ -99,11 +98,12 @@ class Variables$Query$MediaStaff {
 
 abstract class CopyWith$Variables$Query$MediaStaff<TRes> {
   factory CopyWith$Variables$Query$MediaStaff(
-      Variables$Query$MediaStaff instance,
-      TRes Function(Variables$Query$MediaStaff) then,) = _CopyWithImpl$Variables$Query$MediaStaff;
+    Variables$Query$MediaStaff instance,
+    TRes Function(Variables$Query$MediaStaff) then,
+  ) = _CopyWithImpl$Variables$Query$MediaStaff;
 
   factory CopyWith$Variables$Query$MediaStaff.stub(TRes res) =
-  _CopyWithStubImpl$Variables$Query$MediaStaff;
+      _CopyWithStubImpl$Variables$Query$MediaStaff;
 
   TRes call({
     int? mediaId,
@@ -113,8 +113,10 @@ abstract class CopyWith$Variables$Query$MediaStaff<TRes> {
 
 class _CopyWithImpl$Variables$Query$MediaStaff<TRes>
     implements CopyWith$Variables$Query$MediaStaff<TRes> {
-  _CopyWithImpl$Variables$Query$MediaStaff(this._instance,
-      this._then,);
+  _CopyWithImpl$Variables$Query$MediaStaff(
+    this._instance,
+    this._then,
+  );
 
   final Variables$Query$MediaStaff _instance;
 
@@ -212,29 +214,32 @@ extension UtilityExtension$Query$MediaStaff on Query$MediaStaff {
   CopyWith$Query$MediaStaff<Query$MediaStaff> get copyWith =>
       CopyWith$Query$MediaStaff(
         this,
-            (i) => i,
+        (i) => i,
       );
 }
 
 abstract class CopyWith$Query$MediaStaff<TRes> {
-  factory CopyWith$Query$MediaStaff(Query$MediaStaff instance,
-      TRes Function(Query$MediaStaff) then,) = _CopyWithImpl$Query$MediaStaff;
+  factory CopyWith$Query$MediaStaff(
+    Query$MediaStaff instance,
+    TRes Function(Query$MediaStaff) then,
+  ) = _CopyWithImpl$Query$MediaStaff;
 
   factory CopyWith$Query$MediaStaff.stub(TRes res) =
-  _CopyWithStubImpl$Query$MediaStaff;
+      _CopyWithStubImpl$Query$MediaStaff;
 
   TRes call({
     Query$MediaStaff$Media? Media,
     String? $__typename,
   });
-
   CopyWith$Query$MediaStaff$Media<TRes> get Media;
 }
 
 class _CopyWithImpl$Query$MediaStaff<TRes>
     implements CopyWith$Query$MediaStaff<TRes> {
-  _CopyWithImpl$Query$MediaStaff(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaStaff(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaStaff _instance;
 
@@ -486,14 +491,12 @@ const documentNodeQueryMediaStaff = DocumentNode(definitions: [
     ]),
   ),
 ]);
-
 Query$MediaStaff _parserFn$Query$MediaStaff(Map<String, dynamic> data) =>
     Query$MediaStaff.fromJson(data);
-
 typedef OnQueryComplete$Query$MediaStaff = FutureOr<void> Function(
-    Map<String, dynamic>?,
-    Query$MediaStaff?,
-    );
+  Map<String, dynamic>?,
+  Query$MediaStaff?,
+);
 
 class Options$Query$MediaStaff extends graphql.QueryOptions<Query$MediaStaff> {
   Options$Query$MediaStaff({
@@ -508,34 +511,31 @@ class Options$Query$MediaStaff extends graphql.QueryOptions<Query$MediaStaff> {
     graphql.Context? context,
     OnQueryComplete$Query$MediaStaff? onComplete,
     graphql.OnQueryError? onError,
-  })
-      : onCompleteWithParsed = onComplete,
+  })  : onCompleteWithParsed = onComplete,
         super(
-        variables: variables?.toJson() ?? {},
-        operationName: operationName,
-        fetchPolicy: fetchPolicy,
-        errorPolicy: errorPolicy,
-        cacheRereadPolicy: cacheRereadPolicy,
-        optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-        pollInterval: pollInterval,
-        context: context,
-        onComplete: onComplete == null
-            ? null
-            : (data) =>
-            onComplete(
-              data,
-              data == null ? null : _parserFn$Query$MediaStaff(data),
-            ),
-        onError: onError,
-        document: documentNodeQueryMediaStaff,
-        parserFn: _parserFn$Query$MediaStaff,
-      );
+          variables: variables?.toJson() ?? {},
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          pollInterval: pollInterval,
+          context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$MediaStaff(data),
+                  ),
+          onError: onError,
+          document: documentNodeQueryMediaStaff,
+          parserFn: _parserFn$Query$MediaStaff,
+        );
 
   final OnQueryComplete$Query$MediaStaff? onCompleteWithParsed;
 
   @override
-  List<Object?> get properties =>
-      [
+  List<Object?> get properties => [
         ...super.onComplete == null
             ? super.properties
             : super.properties.where((property) => property != onComplete),
@@ -559,20 +559,20 @@ class WatchOptions$Query$MediaStaff
     bool carryForwardDataOnException = true,
     bool fetchResults = false,
   }) : super(
-    variables: variables?.toJson() ?? {},
-    operationName: operationName,
-    fetchPolicy: fetchPolicy,
-    errorPolicy: errorPolicy,
-    cacheRereadPolicy: cacheRereadPolicy,
-    optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-    context: context,
-    document: documentNodeQueryMediaStaff,
-    pollInterval: pollInterval,
-    eagerlyFetchResults: eagerlyFetchResults,
-    carryForwardDataOnException: carryForwardDataOnException,
-    fetchResults: fetchResults,
-    parserFn: _parserFn$Query$MediaStaff,
-  );
+          variables: variables?.toJson() ?? {},
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeQueryMediaStaff,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Query$MediaStaff,
+        );
 }
 
 class FetchMoreOptions$Query$MediaStaff extends graphql.FetchMoreOptions {
@@ -580,21 +580,19 @@ class FetchMoreOptions$Query$MediaStaff extends graphql.FetchMoreOptions {
     required graphql.UpdateQuery updateQuery,
     Variables$Query$MediaStaff? variables,
   }) : super(
-    updateQuery: updateQuery,
-    variables: variables?.toJson() ?? {},
-    document: documentNodeQueryMediaStaff,
-  );
+          updateQuery: updateQuery,
+          variables: variables?.toJson() ?? {},
+          document: documentNodeQueryMediaStaff,
+        );
 }
 
 extension ClientExtension$Query$MediaStaff on graphql.GraphQLClient {
   Future<graphql.QueryResult<Query$MediaStaff>> query$MediaStaff(
-      [Options$Query$MediaStaff? options]) async =>
+          [Options$Query$MediaStaff? options]) async =>
       await this.query(options ?? Options$Query$MediaStaff());
-
   graphql.ObservableQuery<Query$MediaStaff> watchQuery$MediaStaff(
-      [WatchOptions$Query$MediaStaff? options]) =>
+          [WatchOptions$Query$MediaStaff? options]) =>
       this.watchQuery(options ?? WatchOptions$Query$MediaStaff());
-
   void writeQuery$MediaStaff({
     required Query$MediaStaff data,
     Variables$Query$MediaStaff? variables,
@@ -608,7 +606,6 @@ extension ClientExtension$Query$MediaStaff on graphql.GraphQLClient {
         data: data.toJson(),
         broadcast: broadcast,
       );
-
   Query$MediaStaff? readQuery$MediaStaff({
     Variables$Query$MediaStaff? variables,
     bool optimistic = true,
@@ -625,11 +622,10 @@ extension ClientExtension$Query$MediaStaff on graphql.GraphQLClient {
 }
 
 graphql_flutter.QueryHookResult<Query$MediaStaff> useQuery$MediaStaff(
-    [Options$Query$MediaStaff? options]) =>
+        [Options$Query$MediaStaff? options]) =>
     graphql_flutter.useQuery(options ?? Options$Query$MediaStaff());
-
 graphql.ObservableQuery<Query$MediaStaff> useWatchQuery$MediaStaff(
-    [WatchOptions$Query$MediaStaff? options]) =>
+        [WatchOptions$Query$MediaStaff? options]) =>
     graphql_flutter.useWatchQuery(options ?? WatchOptions$Query$MediaStaff());
 
 class Query$MediaStaff$Widget extends graphql_flutter.Query<Query$MediaStaff> {
@@ -638,10 +634,10 @@ class Query$MediaStaff$Widget extends graphql_flutter.Query<Query$MediaStaff> {
     Options$Query$MediaStaff? options,
     required graphql_flutter.QueryBuilder<Query$MediaStaff> builder,
   }) : super(
-    key: key,
-    options: options ?? Options$Query$MediaStaff(),
-    builder: builder,
-  );
+          key: key,
+          options: options ?? Options$Query$MediaStaff(),
+          builder: builder,
+        );
 }
 
 class Query$MediaStaff$Media {
@@ -660,7 +656,7 @@ class Query$MediaStaff$Media {
       staff: l$staff == null
           ? null
           : Query$MediaStaff$Media$staff.fromJson(
-          (l$staff as Map<String, dynamic>)),
+              (l$staff as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -726,30 +722,33 @@ extension UtilityExtension$Query$MediaStaff$Media on Query$MediaStaff$Media {
   CopyWith$Query$MediaStaff$Media<Query$MediaStaff$Media> get copyWith =>
       CopyWith$Query$MediaStaff$Media(
         this,
-            (i) => i,
+        (i) => i,
       );
 }
 
 abstract class CopyWith$Query$MediaStaff$Media<TRes> {
-  factory CopyWith$Query$MediaStaff$Media(Query$MediaStaff$Media instance,
-      TRes Function(Query$MediaStaff$Media) then,) = _CopyWithImpl$Query$MediaStaff$Media;
+  factory CopyWith$Query$MediaStaff$Media(
+    Query$MediaStaff$Media instance,
+    TRes Function(Query$MediaStaff$Media) then,
+  ) = _CopyWithImpl$Query$MediaStaff$Media;
 
   factory CopyWith$Query$MediaStaff$Media.stub(TRes res) =
-  _CopyWithStubImpl$Query$MediaStaff$Media;
+      _CopyWithStubImpl$Query$MediaStaff$Media;
 
   TRes call({
     int? id,
     Query$MediaStaff$Media$staff? staff,
     String? $__typename,
   });
-
   CopyWith$Query$MediaStaff$Media$staff<TRes> get staff;
 }
 
 class _CopyWithImpl$Query$MediaStaff$Media<TRes>
     implements CopyWith$Query$MediaStaff$Media<TRes> {
-  _CopyWithImpl$Query$MediaStaff$Media(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaStaff$Media(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaStaff$Media _instance;
 
@@ -777,7 +776,7 @@ class _CopyWithImpl$Query$MediaStaff$Media<TRes>
     return local$staff == null
         ? CopyWith$Query$MediaStaff$Media$staff.stub(_then(_instance))
         : CopyWith$Query$MediaStaff$Media$staff(
-        local$staff, (e) => call(staff: e));
+            local$staff, (e) => call(staff: e));
   }
 }
 
@@ -813,13 +812,12 @@ class Query$MediaStaff$Media$staff {
       pageInfo: l$pageInfo == null
           ? null
           : Query$MediaStaff$Media$staff$pageInfo.fromJson(
-          (l$pageInfo as Map<String, dynamic>)),
+              (l$pageInfo as Map<String, dynamic>)),
       edges: (l$edges as List<dynamic>?)
-          ?.map((e) =>
-      e == null
-          ? null
-          : Query$MediaStaff$Media$staff$edges.fromJson(
-          (e as Map<String, dynamic>)))
+          ?.map((e) => e == null
+              ? null
+              : Query$MediaStaff$Media$staff$edges.fromJson(
+                  (e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -894,42 +892,43 @@ class Query$MediaStaff$Media$staff {
 }
 
 extension UtilityExtension$Query$MediaStaff$Media$staff
-on Query$MediaStaff$Media$staff {
+    on Query$MediaStaff$Media$staff {
   CopyWith$Query$MediaStaff$Media$staff<Query$MediaStaff$Media$staff>
-  get copyWith =>
-      CopyWith$Query$MediaStaff$Media$staff(
-        this,
+      get copyWith => CopyWith$Query$MediaStaff$Media$staff(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Query$MediaStaff$Media$staff<TRes> {
   factory CopyWith$Query$MediaStaff$Media$staff(
-      Query$MediaStaff$Media$staff instance,
-      TRes Function(Query$MediaStaff$Media$staff) then,) = _CopyWithImpl$Query$MediaStaff$Media$staff;
+    Query$MediaStaff$Media$staff instance,
+    TRes Function(Query$MediaStaff$Media$staff) then,
+  ) = _CopyWithImpl$Query$MediaStaff$Media$staff;
 
   factory CopyWith$Query$MediaStaff$Media$staff.stub(TRes res) =
-  _CopyWithStubImpl$Query$MediaStaff$Media$staff;
+      _CopyWithStubImpl$Query$MediaStaff$Media$staff;
 
   TRes call({
     Query$MediaStaff$Media$staff$pageInfo? pageInfo,
     List<Query$MediaStaff$Media$staff$edges?>? edges,
     String? $__typename,
   });
-
   CopyWith$Query$MediaStaff$Media$staff$pageInfo<TRes> get pageInfo;
-
-  TRes edges(Iterable<Query$MediaStaff$Media$staff$edges?>? Function(
-      Iterable<
-          CopyWith$Query$MediaStaff$Media$staff$edges<
-              Query$MediaStaff$Media$staff$edges>?>?)
-  _fn);
+  TRes edges(
+      Iterable<Query$MediaStaff$Media$staff$edges?>? Function(
+              Iterable<
+                  CopyWith$Query$MediaStaff$Media$staff$edges<
+                      Query$MediaStaff$Media$staff$edges>?>?)
+          _fn);
 }
 
 class _CopyWithImpl$Query$MediaStaff$Media$staff<TRes>
     implements CopyWith$Query$MediaStaff$Media$staff<TRes> {
-  _CopyWithImpl$Query$MediaStaff$Media$staff(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaStaff$Media$staff(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaStaff$Media$staff _instance;
 
@@ -959,22 +958,22 @@ class _CopyWithImpl$Query$MediaStaff$Media$staff<TRes>
     return local$pageInfo == null
         ? CopyWith$Query$MediaStaff$Media$staff$pageInfo.stub(_then(_instance))
         : CopyWith$Query$MediaStaff$Media$staff$pageInfo(
-        local$pageInfo, (e) => call(pageInfo: e));
+            local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  TRes edges(Iterable<Query$MediaStaff$Media$staff$edges?>? Function(
-      Iterable<
-          CopyWith$Query$MediaStaff$Media$staff$edges<
-              Query$MediaStaff$Media$staff$edges>?>?)
-  _fn) =>
+  TRes edges(
+          Iterable<Query$MediaStaff$Media$staff$edges?>? Function(
+                  Iterable<
+                      CopyWith$Query$MediaStaff$Media$staff$edges<
+                          Query$MediaStaff$Media$staff$edges>?>?)
+              _fn) =>
       call(
-          edges: _fn(_instance.edges?.map((e) =>
-          e == null
+          edges: _fn(_instance.edges?.map((e) => e == null
               ? null
               : CopyWith$Query$MediaStaff$Media$staff$edges(
-            e,
-                (i) => i,
-          )))?.toList());
+                  e,
+                  (i) => i,
+                )))?.toList());
 }
 
 class _CopyWithStubImpl$Query$MediaStaff$Media$staff<TRes>
@@ -1073,23 +1072,23 @@ class Query$MediaStaff$Media$staff$pageInfo {
 }
 
 extension UtilityExtension$Query$MediaStaff$Media$staff$pageInfo
-on Query$MediaStaff$Media$staff$pageInfo {
+    on Query$MediaStaff$Media$staff$pageInfo {
   CopyWith$Query$MediaStaff$Media$staff$pageInfo<
-      Query$MediaStaff$Media$staff$pageInfo>
-  get copyWith =>
-      CopyWith$Query$MediaStaff$Media$staff$pageInfo(
-        this,
+          Query$MediaStaff$Media$staff$pageInfo>
+      get copyWith => CopyWith$Query$MediaStaff$Media$staff$pageInfo(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Query$MediaStaff$Media$staff$pageInfo<TRes> {
   factory CopyWith$Query$MediaStaff$Media$staff$pageInfo(
-      Query$MediaStaff$Media$staff$pageInfo instance,
-      TRes Function(Query$MediaStaff$Media$staff$pageInfo) then,) = _CopyWithImpl$Query$MediaStaff$Media$staff$pageInfo;
+    Query$MediaStaff$Media$staff$pageInfo instance,
+    TRes Function(Query$MediaStaff$Media$staff$pageInfo) then,
+  ) = _CopyWithImpl$Query$MediaStaff$Media$staff$pageInfo;
 
   factory CopyWith$Query$MediaStaff$Media$staff$pageInfo.stub(TRes res) =
-  _CopyWithStubImpl$Query$MediaStaff$Media$staff$pageInfo;
+      _CopyWithStubImpl$Query$MediaStaff$Media$staff$pageInfo;
 
   TRes call({
     int? currentPage,
@@ -1100,8 +1099,10 @@ abstract class CopyWith$Query$MediaStaff$Media$staff$pageInfo<TRes> {
 
 class _CopyWithImpl$Query$MediaStaff$Media$staff$pageInfo<TRes>
     implements CopyWith$Query$MediaStaff$Media$staff$pageInfo<TRes> {
-  _CopyWithImpl$Query$MediaStaff$Media$staff$pageInfo(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaStaff$Media$staff$pageInfo(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaStaff$Media$staff$pageInfo _instance;
 
@@ -1158,7 +1159,7 @@ class Query$MediaStaff$Media$staff$edges {
       node: l$node == null
           ? null
           : Query$MediaStaff$Media$staff$edges$node.fromJson(
-          (l$node as Map<String, dynamic>)),
+              (l$node as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1221,37 +1222,38 @@ class Query$MediaStaff$Media$staff$edges {
 }
 
 extension UtilityExtension$Query$MediaStaff$Media$staff$edges
-on Query$MediaStaff$Media$staff$edges {
+    on Query$MediaStaff$Media$staff$edges {
   CopyWith$Query$MediaStaff$Media$staff$edges<
-      Query$MediaStaff$Media$staff$edges>
-  get copyWith =>
-      CopyWith$Query$MediaStaff$Media$staff$edges(
-        this,
+          Query$MediaStaff$Media$staff$edges>
+      get copyWith => CopyWith$Query$MediaStaff$Media$staff$edges(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Query$MediaStaff$Media$staff$edges<TRes> {
   factory CopyWith$Query$MediaStaff$Media$staff$edges(
-      Query$MediaStaff$Media$staff$edges instance,
-      TRes Function(Query$MediaStaff$Media$staff$edges) then,) = _CopyWithImpl$Query$MediaStaff$Media$staff$edges;
+    Query$MediaStaff$Media$staff$edges instance,
+    TRes Function(Query$MediaStaff$Media$staff$edges) then,
+  ) = _CopyWithImpl$Query$MediaStaff$Media$staff$edges;
 
   factory CopyWith$Query$MediaStaff$Media$staff$edges.stub(TRes res) =
-  _CopyWithStubImpl$Query$MediaStaff$Media$staff$edges;
+      _CopyWithStubImpl$Query$MediaStaff$Media$staff$edges;
 
   TRes call({
     String? role,
     Query$MediaStaff$Media$staff$edges$node? node,
     String? $__typename,
   });
-
   CopyWith$Query$MediaStaff$Media$staff$edges$node<TRes> get node;
 }
 
 class _CopyWithImpl$Query$MediaStaff$Media$staff$edges<TRes>
     implements CopyWith$Query$MediaStaff$Media$staff$edges<TRes> {
-  _CopyWithImpl$Query$MediaStaff$Media$staff$edges(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaStaff$Media$staff$edges(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaStaff$Media$staff$edges _instance;
 
@@ -1278,9 +1280,9 @@ class _CopyWithImpl$Query$MediaStaff$Media$staff$edges<TRes>
     final local$node = _instance.node;
     return local$node == null
         ? CopyWith$Query$MediaStaff$Media$staff$edges$node.stub(
-        _then(_instance))
+            _then(_instance))
         : CopyWith$Query$MediaStaff$Media$staff$edges$node(
-        local$node, (e) => call(node: e));
+            local$node, (e) => call(node: e));
   }
 }
 
@@ -1320,11 +1322,11 @@ class Query$MediaStaff$Media$staff$edges$node {
       name: l$name == null
           ? null
           : Query$MediaStaff$Media$staff$edges$node$name.fromJson(
-          (l$name as Map<String, dynamic>)),
+              (l$name as Map<String, dynamic>)),
       image: l$image == null
           ? null
           : Query$MediaStaff$Media$staff$edges$node$image.fromJson(
-          (l$image as Map<String, dynamic>)),
+              (l$image as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1398,23 +1400,23 @@ class Query$MediaStaff$Media$staff$edges$node {
 }
 
 extension UtilityExtension$Query$MediaStaff$Media$staff$edges$node
-on Query$MediaStaff$Media$staff$edges$node {
+    on Query$MediaStaff$Media$staff$edges$node {
   CopyWith$Query$MediaStaff$Media$staff$edges$node<
-      Query$MediaStaff$Media$staff$edges$node>
-  get copyWith =>
-      CopyWith$Query$MediaStaff$Media$staff$edges$node(
-        this,
+          Query$MediaStaff$Media$staff$edges$node>
+      get copyWith => CopyWith$Query$MediaStaff$Media$staff$edges$node(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Query$MediaStaff$Media$staff$edges$node<TRes> {
   factory CopyWith$Query$MediaStaff$Media$staff$edges$node(
-      Query$MediaStaff$Media$staff$edges$node instance,
-      TRes Function(Query$MediaStaff$Media$staff$edges$node) then,) = _CopyWithImpl$Query$MediaStaff$Media$staff$edges$node;
+    Query$MediaStaff$Media$staff$edges$node instance,
+    TRes Function(Query$MediaStaff$Media$staff$edges$node) then,
+  ) = _CopyWithImpl$Query$MediaStaff$Media$staff$edges$node;
 
   factory CopyWith$Query$MediaStaff$Media$staff$edges$node.stub(TRes res) =
-  _CopyWithStubImpl$Query$MediaStaff$Media$staff$edges$node;
+      _CopyWithStubImpl$Query$MediaStaff$Media$staff$edges$node;
 
   TRes call({
     int? id,
@@ -1422,16 +1424,16 @@ abstract class CopyWith$Query$MediaStaff$Media$staff$edges$node<TRes> {
     Query$MediaStaff$Media$staff$edges$node$image? image,
     String? $__typename,
   });
-
   CopyWith$Query$MediaStaff$Media$staff$edges$node$name<TRes> get name;
-
   CopyWith$Query$MediaStaff$Media$staff$edges$node$image<TRes> get image;
 }
 
 class _CopyWithImpl$Query$MediaStaff$Media$staff$edges$node<TRes>
     implements CopyWith$Query$MediaStaff$Media$staff$edges$node<TRes> {
-  _CopyWithImpl$Query$MediaStaff$Media$staff$edges$node(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaStaff$Media$staff$edges$node(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaStaff$Media$staff$edges$node _instance;
 
@@ -1462,18 +1464,18 @@ class _CopyWithImpl$Query$MediaStaff$Media$staff$edges$node<TRes>
     final local$name = _instance.name;
     return local$name == null
         ? CopyWith$Query$MediaStaff$Media$staff$edges$node$name.stub(
-        _then(_instance))
+            _then(_instance))
         : CopyWith$Query$MediaStaff$Media$staff$edges$node$name(
-        local$name, (e) => call(name: e));
+            local$name, (e) => call(name: e));
   }
 
   CopyWith$Query$MediaStaff$Media$staff$edges$node$image<TRes> get image {
     final local$image = _instance.image;
     return local$image == null
         ? CopyWith$Query$MediaStaff$Media$staff$edges$node$image.stub(
-        _then(_instance))
+            _then(_instance))
         : CopyWith$Query$MediaStaff$Media$staff$edges$node$image(
-        local$image, (e) => call(image: e));
+            local$image, (e) => call(image: e));
   }
 }
 
@@ -1561,23 +1563,23 @@ class Query$MediaStaff$Media$staff$edges$node$name {
 }
 
 extension UtilityExtension$Query$MediaStaff$Media$staff$edges$node$name
-on Query$MediaStaff$Media$staff$edges$node$name {
+    on Query$MediaStaff$Media$staff$edges$node$name {
   CopyWith$Query$MediaStaff$Media$staff$edges$node$name<
-      Query$MediaStaff$Media$staff$edges$node$name>
-  get copyWith =>
-      CopyWith$Query$MediaStaff$Media$staff$edges$node$name(
-        this,
+          Query$MediaStaff$Media$staff$edges$node$name>
+      get copyWith => CopyWith$Query$MediaStaff$Media$staff$edges$node$name(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Query$MediaStaff$Media$staff$edges$node$name<TRes> {
   factory CopyWith$Query$MediaStaff$Media$staff$edges$node$name(
-      Query$MediaStaff$Media$staff$edges$node$name instance,
-      TRes Function(Query$MediaStaff$Media$staff$edges$node$name) then,) = _CopyWithImpl$Query$MediaStaff$Media$staff$edges$node$name;
+    Query$MediaStaff$Media$staff$edges$node$name instance,
+    TRes Function(Query$MediaStaff$Media$staff$edges$node$name) then,
+  ) = _CopyWithImpl$Query$MediaStaff$Media$staff$edges$node$name;
 
   factory CopyWith$Query$MediaStaff$Media$staff$edges$node$name.stub(TRes res) =
-  _CopyWithStubImpl$Query$MediaStaff$Media$staff$edges$node$name;
+      _CopyWithStubImpl$Query$MediaStaff$Media$staff$edges$node$name;
 
   TRes call({
     String? userPreferred,
@@ -1587,8 +1589,10 @@ abstract class CopyWith$Query$MediaStaff$Media$staff$edges$node$name<TRes> {
 
 class _CopyWithImpl$Query$MediaStaff$Media$staff$edges$node$name<TRes>
     implements CopyWith$Query$MediaStaff$Media$staff$edges$node$name<TRes> {
-  _CopyWithImpl$Query$MediaStaff$Media$staff$edges$node$name(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaStaff$Media$staff$edges$node$name(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaStaff$Media$staff$edges$node$name _instance;
 
@@ -1686,24 +1690,24 @@ class Query$MediaStaff$Media$staff$edges$node$image {
 }
 
 extension UtilityExtension$Query$MediaStaff$Media$staff$edges$node$image
-on Query$MediaStaff$Media$staff$edges$node$image {
+    on Query$MediaStaff$Media$staff$edges$node$image {
   CopyWith$Query$MediaStaff$Media$staff$edges$node$image<
-      Query$MediaStaff$Media$staff$edges$node$image>
-  get copyWith =>
-      CopyWith$Query$MediaStaff$Media$staff$edges$node$image(
-        this,
+          Query$MediaStaff$Media$staff$edges$node$image>
+      get copyWith => CopyWith$Query$MediaStaff$Media$staff$edges$node$image(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Query$MediaStaff$Media$staff$edges$node$image<TRes> {
   factory CopyWith$Query$MediaStaff$Media$staff$edges$node$image(
-      Query$MediaStaff$Media$staff$edges$node$image instance,
-      TRes Function(Query$MediaStaff$Media$staff$edges$node$image) then,) = _CopyWithImpl$Query$MediaStaff$Media$staff$edges$node$image;
+    Query$MediaStaff$Media$staff$edges$node$image instance,
+    TRes Function(Query$MediaStaff$Media$staff$edges$node$image) then,
+  ) = _CopyWithImpl$Query$MediaStaff$Media$staff$edges$node$image;
 
   factory CopyWith$Query$MediaStaff$Media$staff$edges$node$image.stub(
-      TRes res) =
-  _CopyWithStubImpl$Query$MediaStaff$Media$staff$edges$node$image;
+          TRes res) =
+      _CopyWithStubImpl$Query$MediaStaff$Media$staff$edges$node$image;
 
   TRes call({
     String? large,
@@ -1713,8 +1717,10 @@ abstract class CopyWith$Query$MediaStaff$Media$staff$edges$node$image<TRes> {
 
 class _CopyWithImpl$Query$MediaStaff$Media$staff$edges$node$image<TRes>
     implements CopyWith$Query$MediaStaff$Media$staff$edges$node$image<TRes> {
-  _CopyWithImpl$Query$MediaStaff$Media$staff$edges$node$image(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaStaff$Media$staff$edges$node$image(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaStaff$Media$staff$edges$node$image _instance;
 

@@ -40,9 +40,7 @@ class MediaDetailScreen extends HookWidget {
     dev.log('Key is $key', name: 'Key Value');
     final tabController = useTabController(initialLength: tabs.length);
     final client =
-        (context
-            .read<GraphqlClientCubit>()
-            .state as GraphqlClientInitialized)
+        (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
             .client;
 
     // return PopScope(
@@ -140,40 +138,40 @@ class MediaDetailScreen extends HookWidget {
       },
       child: Scaffold(
         floatingActionButton: BlocBuilder<MediaDetailBloc, MediaDetailState>(
-            builder: (context, state) {
-              if (state is MediaDetailLoaded) {
-                final String icon = state.media.mediaListEntry == null &&
-                    state.media.mediaListEntry?.status ? Assets
-                    .mediaEditorMediaAdd : Assets.mediaEditorMediaEdit;
-                return FloatingActionButton(
-                  onPressed: () {},
-                  child: Container(
-                    color: AppColors.sunsetOrange,
-                    child: SvgPicture.asset(
-                        state.media.mediaListEntry Assets.mediaEditorMediaAdd),
-                  ),
-                );
-              } else {
-                return const SizedBox();
-              }
-            }),
+          builder: (context, state) {
+            if (state is MediaDetailLoaded) {
+              final String icon = state.media.mediaListEntry == null &&
+                      state.media.mediaListEntry?.status != null
+                  ? Assets.mediaEditorMediaAdd
+                  : Assets.mediaEditorMediaEdit;
+              return FloatingActionButton(
+                onPressed: () {},
+                child: Container(
+                  color: AppColors.sunsetOrange,
+                  child: SvgPicture.asset(icon),
+                ),
+              );
+            } else {
+              return const SizedBox();
+            }
+          },
+        ),
         body: BlocBuilder<MediaDetailBloc, MediaDetailState>(
           builder: (context, state) {
             if (state is MediaDetailInitial) {
               context.read<MediaDetailBloc>().add(
-                LoadMediaDetail(
-                  id: mediaId,
-                  client: client,
-                ),
-              );
+                    LoadMediaDetail(
+                      id: mediaId,
+                      client: client,
+                    ),
+                  );
             } else if (state is MediaDetailLoading) {
               return _buildLoading(context);
             } else if (state is MediaDetailLoaded) {
               final media = state.media;
 
               dev.log(
-                "query Id : $mediaId ---> State Id : ${media
-                    .id}  Key Id : ---> $key ",
+                "query Id : $mediaId ---> State Id : ${media.id}  Key Id : ---> $key ",
                 name: "MediaDetailScreenMatched",
               );
 
@@ -206,8 +204,7 @@ class MediaDetailScreen extends HookWidget {
                     ),
                     BlocProvider(
                       create: (context) =>
-                      MediaReviewBloc(mediaId: mediaId)
-                        ..loadData(client),
+                          MediaReviewBloc(mediaId: mediaId)..loadData(client),
                       child: const Reviews(),
                     ),
                   ],

@@ -53,12 +53,11 @@ class Variables$Mutation$ToggleFavoriteMedia {
   }
 
   CopyWith$Variables$Mutation$ToggleFavoriteMedia<
-      Variables$Mutation$ToggleFavoriteMedia>
-  get copyWith =>
-      CopyWith$Variables$Mutation$ToggleFavoriteMedia(
-        this,
+          Variables$Mutation$ToggleFavoriteMedia>
+      get copyWith => CopyWith$Variables$Mutation$ToggleFavoriteMedia(
+            this,
             (i) => i,
-      );
+          );
 
   @override
   bool operator ==(Object other) {
@@ -101,11 +100,12 @@ class Variables$Mutation$ToggleFavoriteMedia {
 
 abstract class CopyWith$Variables$Mutation$ToggleFavoriteMedia<TRes> {
   factory CopyWith$Variables$Mutation$ToggleFavoriteMedia(
-      Variables$Mutation$ToggleFavoriteMedia instance,
-      TRes Function(Variables$Mutation$ToggleFavoriteMedia) then,) = _CopyWithImpl$Variables$Mutation$ToggleFavoriteMedia;
+    Variables$Mutation$ToggleFavoriteMedia instance,
+    TRes Function(Variables$Mutation$ToggleFavoriteMedia) then,
+  ) = _CopyWithImpl$Variables$Mutation$ToggleFavoriteMedia;
 
   factory CopyWith$Variables$Mutation$ToggleFavoriteMedia.stub(TRes res) =
-  _CopyWithStubImpl$Variables$Mutation$ToggleFavoriteMedia;
+      _CopyWithStubImpl$Variables$Mutation$ToggleFavoriteMedia;
 
   TRes call({
     int? animeId,
@@ -115,8 +115,10 @@ abstract class CopyWith$Variables$Mutation$ToggleFavoriteMedia<TRes> {
 
 class _CopyWithImpl$Variables$Mutation$ToggleFavoriteMedia<TRes>
     implements CopyWith$Variables$Mutation$ToggleFavoriteMedia<TRes> {
-  _CopyWithImpl$Variables$Mutation$ToggleFavoriteMedia(this._instance,
-      this._then,);
+  _CopyWithImpl$Variables$Mutation$ToggleFavoriteMedia(
+    this._instance,
+    this._then,
+  );
 
   final Variables$Mutation$ToggleFavoriteMedia _instance;
 
@@ -161,7 +163,7 @@ class Mutation$ToggleFavoriteMedia {
       ToggleFavourite: l$ToggleFavourite == null
           ? null
           : Mutation$ToggleFavoriteMedia$ToggleFavourite.fromJson(
-          (l$ToggleFavourite as Map<String, dynamic>)),
+              (l$ToggleFavourite as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -213,36 +215,37 @@ class Mutation$ToggleFavoriteMedia {
 }
 
 extension UtilityExtension$Mutation$ToggleFavoriteMedia
-on Mutation$ToggleFavoriteMedia {
+    on Mutation$ToggleFavoriteMedia {
   CopyWith$Mutation$ToggleFavoriteMedia<Mutation$ToggleFavoriteMedia>
-  get copyWith =>
-      CopyWith$Mutation$ToggleFavoriteMedia(
-        this,
+      get copyWith => CopyWith$Mutation$ToggleFavoriteMedia(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Mutation$ToggleFavoriteMedia<TRes> {
   factory CopyWith$Mutation$ToggleFavoriteMedia(
-      Mutation$ToggleFavoriteMedia instance,
-      TRes Function(Mutation$ToggleFavoriteMedia) then,) = _CopyWithImpl$Mutation$ToggleFavoriteMedia;
+    Mutation$ToggleFavoriteMedia instance,
+    TRes Function(Mutation$ToggleFavoriteMedia) then,
+  ) = _CopyWithImpl$Mutation$ToggleFavoriteMedia;
 
   factory CopyWith$Mutation$ToggleFavoriteMedia.stub(TRes res) =
-  _CopyWithStubImpl$Mutation$ToggleFavoriteMedia;
+      _CopyWithStubImpl$Mutation$ToggleFavoriteMedia;
 
   TRes call({
     Mutation$ToggleFavoriteMedia$ToggleFavourite? ToggleFavourite,
     String? $__typename,
   });
-
   CopyWith$Mutation$ToggleFavoriteMedia$ToggleFavourite<TRes>
-  get ToggleFavourite;
+      get ToggleFavourite;
 }
 
 class _CopyWithImpl$Mutation$ToggleFavoriteMedia<TRes>
     implements CopyWith$Mutation$ToggleFavoriteMedia<TRes> {
-  _CopyWithImpl$Mutation$ToggleFavoriteMedia(this._instance,
-      this._then,);
+  _CopyWithImpl$Mutation$ToggleFavoriteMedia(
+    this._instance,
+    this._then,
+  );
 
   final Mutation$ToggleFavoriteMedia _instance;
 
@@ -258,20 +261,20 @@ class _CopyWithImpl$Mutation$ToggleFavoriteMedia<TRes>
         ToggleFavourite: ToggleFavourite == _undefined
             ? _instance.ToggleFavourite
             : (ToggleFavourite
-        as Mutation$ToggleFavoriteMedia$ToggleFavourite?),
+                as Mutation$ToggleFavoriteMedia$ToggleFavourite?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
   CopyWith$Mutation$ToggleFavoriteMedia$ToggleFavourite<TRes>
-  get ToggleFavourite {
+      get ToggleFavourite {
     final local$ToggleFavourite = _instance.ToggleFavourite;
     return local$ToggleFavourite == null
         ? CopyWith$Mutation$ToggleFavoriteMedia$ToggleFavourite.stub(
-        _then(_instance))
+            _then(_instance))
         : CopyWith$Mutation$ToggleFavoriteMedia$ToggleFavourite(
-        local$ToggleFavourite, (e) => call(ToggleFavourite: e));
+            local$ToggleFavourite, (e) => call(ToggleFavourite: e));
   }
 }
 
@@ -288,8 +291,8 @@ class _CopyWithStubImpl$Mutation$ToggleFavoriteMedia<TRes>
       _res;
 
   CopyWith$Mutation$ToggleFavoriteMedia$ToggleFavourite<TRes>
-  get ToggleFavourite =>
-      CopyWith$Mutation$ToggleFavoriteMedia$ToggleFavourite.stub(_res);
+      get ToggleFavourite =>
+          CopyWith$Mutation$ToggleFavoriteMedia$ToggleFavourite.stub(_res);
 }
 
 const documentNodeMutationToggleFavoriteMedia = DocumentNode(definitions: [
@@ -352,16 +355,14 @@ const documentNodeMutationToggleFavoriteMedia = DocumentNode(definitions: [
     ]),
   ),
 ]);
-
 Mutation$ToggleFavoriteMedia _parserFn$Mutation$ToggleFavoriteMedia(
-    Map<String, dynamic> data) =>
+        Map<String, dynamic> data) =>
     Mutation$ToggleFavoriteMedia.fromJson(data);
-
 typedef OnMutationCompleted$Mutation$ToggleFavoriteMedia = FutureOr<void>
-Function(
-    Map<String, dynamic>?,
-    Mutation$ToggleFavoriteMedia?,
-    );
+    Function(
+  Map<String, dynamic>?,
+  Mutation$ToggleFavoriteMedia?,
+);
 
 class Options$Mutation$ToggleFavoriteMedia
     extends graphql.MutationOptions<Mutation$ToggleFavoriteMedia> {
@@ -377,36 +378,33 @@ class Options$Mutation$ToggleFavoriteMedia
     OnMutationCompleted$Mutation$ToggleFavoriteMedia? onCompleted,
     graphql.OnMutationUpdate<Mutation$ToggleFavoriteMedia>? update,
     graphql.OnError? onError,
-  })
-      : onCompletedWithParsed = onCompleted,
+  })  : onCompletedWithParsed = onCompleted,
         super(
-        variables: variables?.toJson() ?? {},
-        operationName: operationName,
-        fetchPolicy: fetchPolicy,
-        errorPolicy: errorPolicy,
-        cacheRereadPolicy: cacheRereadPolicy,
-        optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-        context: context,
-        onCompleted: onCompleted == null
-            ? null
-            : (data) =>
-            onCompleted(
-              data,
-              data == null
-                  ? null
-                  : _parserFn$Mutation$ToggleFavoriteMedia(data),
-            ),
-        update: update,
-        onError: onError,
-        document: documentNodeMutationToggleFavoriteMedia,
-        parserFn: _parserFn$Mutation$ToggleFavoriteMedia,
-      );
+          variables: variables?.toJson() ?? {},
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Mutation$ToggleFavoriteMedia(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationToggleFavoriteMedia,
+          parserFn: _parserFn$Mutation$ToggleFavoriteMedia,
+        );
 
   final OnMutationCompleted$Mutation$ToggleFavoriteMedia? onCompletedWithParsed;
 
   @override
-  List<Object?> get properties =>
-      [
+  List<Object?> get properties => [
         ...super.onCompleted == null
             ? super.properties
             : super.properties.where((property) => property != onCompleted),
@@ -430,39 +428,40 @@ class WatchOptions$Mutation$ToggleFavoriteMedia
     bool carryForwardDataOnException = true,
     bool fetchResults = false,
   }) : super(
-    variables: variables?.toJson() ?? {},
-    operationName: operationName,
-    fetchPolicy: fetchPolicy,
-    errorPolicy: errorPolicy,
-    cacheRereadPolicy: cacheRereadPolicy,
-    optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-    context: context,
-    document: documentNodeMutationToggleFavoriteMedia,
-    pollInterval: pollInterval,
-    eagerlyFetchResults: eagerlyFetchResults,
-    carryForwardDataOnException: carryForwardDataOnException,
-    fetchResults: fetchResults,
-    parserFn: _parserFn$Mutation$ToggleFavoriteMedia,
-  );
+          variables: variables?.toJson() ?? {},
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeMutationToggleFavoriteMedia,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Mutation$ToggleFavoriteMedia,
+        );
 }
 
 extension ClientExtension$Mutation$ToggleFavoriteMedia
-on graphql.GraphQLClient {
+    on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$ToggleFavoriteMedia>>
-  mutate$ToggleFavoriteMedia(
-      [Options$Mutation$ToggleFavoriteMedia? options]) async =>
-      await this.mutate(options ?? Options$Mutation$ToggleFavoriteMedia());
-
+      mutate$ToggleFavoriteMedia(
+              [Options$Mutation$ToggleFavoriteMedia? options]) async =>
+          await this.mutate(options ?? Options$Mutation$ToggleFavoriteMedia());
   graphql.ObservableQuery<Mutation$ToggleFavoriteMedia>
-  watchMutation$ToggleFavoriteMedia(
-      [WatchOptions$Mutation$ToggleFavoriteMedia? options]) =>
-      this.watchMutation(
-          options ?? WatchOptions$Mutation$ToggleFavoriteMedia());
+      watchMutation$ToggleFavoriteMedia(
+              [WatchOptions$Mutation$ToggleFavoriteMedia? options]) =>
+          this.watchMutation(
+              options ?? WatchOptions$Mutation$ToggleFavoriteMedia());
 }
 
 class Mutation$ToggleFavoriteMedia$HookResult {
-  Mutation$ToggleFavoriteMedia$HookResult(this.runMutation,
-      this.result,);
+  Mutation$ToggleFavoriteMedia$HookResult(
+    this.runMutation,
+    this.result,
+  );
 
   final RunMutation$Mutation$ToggleFavoriteMedia runMutation;
 
@@ -474,20 +473,20 @@ Mutation$ToggleFavoriteMedia$HookResult useMutation$ToggleFavoriteMedia(
   final result = graphql_flutter
       .useMutation(options ?? WidgetOptions$Mutation$ToggleFavoriteMedia());
   return Mutation$ToggleFavoriteMedia$HookResult(
-        ({variables, optimisticResult, typedOptimisticResult}) =>
+    ({variables, optimisticResult, typedOptimisticResult}) =>
         result.runMutation(
-          variables?.toJson() ?? const {},
-          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-        ),
+      variables?.toJson() ?? const {},
+      optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+    ),
     result.result,
   );
 }
 
 graphql.ObservableQuery<Mutation$ToggleFavoriteMedia>
-useWatchMutation$ToggleFavoriteMedia(
-    [WatchOptions$Mutation$ToggleFavoriteMedia? options]) =>
-    graphql_flutter.useWatchMutation(
-        options ?? WatchOptions$Mutation$ToggleFavoriteMedia());
+    useWatchMutation$ToggleFavoriteMedia(
+            [WatchOptions$Mutation$ToggleFavoriteMedia? options]) =>
+        graphql_flutter.useWatchMutation(
+            options ?? WatchOptions$Mutation$ToggleFavoriteMedia());
 
 class WidgetOptions$Mutation$ToggleFavoriteMedia
     extends graphql.MutationOptions<Mutation$ToggleFavoriteMedia> {
@@ -502,35 +501,32 @@ class WidgetOptions$Mutation$ToggleFavoriteMedia
     OnMutationCompleted$Mutation$ToggleFavoriteMedia? onCompleted,
     graphql.OnMutationUpdate<Mutation$ToggleFavoriteMedia>? update,
     graphql.OnError? onError,
-  })
-      : onCompletedWithParsed = onCompleted,
+  })  : onCompletedWithParsed = onCompleted,
         super(
-        operationName: operationName,
-        fetchPolicy: fetchPolicy,
-        errorPolicy: errorPolicy,
-        cacheRereadPolicy: cacheRereadPolicy,
-        optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-        context: context,
-        onCompleted: onCompleted == null
-            ? null
-            : (data) =>
-            onCompleted(
-              data,
-              data == null
-                  ? null
-                  : _parserFn$Mutation$ToggleFavoriteMedia(data),
-            ),
-        update: update,
-        onError: onError,
-        document: documentNodeMutationToggleFavoriteMedia,
-        parserFn: _parserFn$Mutation$ToggleFavoriteMedia,
-      );
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Mutation$ToggleFavoriteMedia(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationToggleFavoriteMedia,
+          parserFn: _parserFn$Mutation$ToggleFavoriteMedia,
+        );
 
   final OnMutationCompleted$Mutation$ToggleFavoriteMedia? onCompletedWithParsed;
 
   @override
-  List<Object?> get properties =>
-      [
+  List<Object?> get properties => [
         ...super.onCompleted == null
             ? super.properties
             : super.properties.where((property) => property != onCompleted),
@@ -539,15 +535,15 @@ class WidgetOptions$Mutation$ToggleFavoriteMedia
 }
 
 typedef RunMutation$Mutation$ToggleFavoriteMedia
-= graphql.MultiSourceResult<Mutation$ToggleFavoriteMedia> Function({
-Variables$Mutation$ToggleFavoriteMedia? variables,
-Object? optimisticResult,
-Mutation$ToggleFavoriteMedia? typedOptimisticResult,
+    = graphql.MultiSourceResult<Mutation$ToggleFavoriteMedia> Function({
+  Variables$Mutation$ToggleFavoriteMedia? variables,
+  Object? optimisticResult,
+  Mutation$ToggleFavoriteMedia? typedOptimisticResult,
 });
 typedef Builder$Mutation$ToggleFavoriteMedia = widgets.Widget Function(
-    RunMutation$Mutation$ToggleFavoriteMedia,
-    graphql.QueryResult<Mutation$ToggleFavoriteMedia>?,
-    );
+  RunMutation$Mutation$ToggleFavoriteMedia,
+  graphql.QueryResult<Mutation$ToggleFavoriteMedia>?,
+);
 
 class Mutation$ToggleFavoriteMedia$Widget
     extends graphql_flutter.Mutation<Mutation$ToggleFavoriteMedia> {
@@ -556,24 +552,26 @@ class Mutation$ToggleFavoriteMedia$Widget
     WidgetOptions$Mutation$ToggleFavoriteMedia? options,
     required Builder$Mutation$ToggleFavoriteMedia builder,
   }) : super(
-    key: key,
-    options: options ?? WidgetOptions$Mutation$ToggleFavoriteMedia(),
-    builder: (run,
-        result,) =>
-        builder(
-              ({
-            variables,
-            optimisticResult,
-            typedOptimisticResult,
-          }) =>
-              run(
-                variables?.toJson() ?? const {},
-                optimisticResult:
-                optimisticResult ?? typedOptimisticResult?.toJson(),
-              ),
-          result,
-        ),
-  );
+          key: key,
+          options: options ?? WidgetOptions$Mutation$ToggleFavoriteMedia(),
+          builder: (
+            run,
+            result,
+          ) =>
+              builder(
+            ({
+              variables,
+              optimisticResult,
+              typedOptimisticResult,
+            }) =>
+                run(
+              variables?.toJson() ?? const {},
+              optimisticResult:
+                  optimisticResult ?? typedOptimisticResult?.toJson(),
+            ),
+            result,
+          ),
+        );
 }
 
 class Mutation$ToggleFavoriteMedia$ToggleFavourite {
@@ -621,31 +619,33 @@ class Mutation$ToggleFavoriteMedia$ToggleFavourite {
 }
 
 extension UtilityExtension$Mutation$ToggleFavoriteMedia$ToggleFavourite
-on Mutation$ToggleFavoriteMedia$ToggleFavourite {
+    on Mutation$ToggleFavoriteMedia$ToggleFavourite {
   CopyWith$Mutation$ToggleFavoriteMedia$ToggleFavourite<
-      Mutation$ToggleFavoriteMedia$ToggleFavourite>
-  get copyWith =>
-      CopyWith$Mutation$ToggleFavoriteMedia$ToggleFavourite(
-        this,
+          Mutation$ToggleFavoriteMedia$ToggleFavourite>
+      get copyWith => CopyWith$Mutation$ToggleFavoriteMedia$ToggleFavourite(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Mutation$ToggleFavoriteMedia$ToggleFavourite<TRes> {
   factory CopyWith$Mutation$ToggleFavoriteMedia$ToggleFavourite(
-      Mutation$ToggleFavoriteMedia$ToggleFavourite instance,
-      TRes Function(Mutation$ToggleFavoriteMedia$ToggleFavourite) then,) = _CopyWithImpl$Mutation$ToggleFavoriteMedia$ToggleFavourite;
+    Mutation$ToggleFavoriteMedia$ToggleFavourite instance,
+    TRes Function(Mutation$ToggleFavoriteMedia$ToggleFavourite) then,
+  ) = _CopyWithImpl$Mutation$ToggleFavoriteMedia$ToggleFavourite;
 
   factory CopyWith$Mutation$ToggleFavoriteMedia$ToggleFavourite.stub(TRes res) =
-  _CopyWithStubImpl$Mutation$ToggleFavoriteMedia$ToggleFavourite;
+      _CopyWithStubImpl$Mutation$ToggleFavoriteMedia$ToggleFavourite;
 
   TRes call({String? $__typename});
 }
 
 class _CopyWithImpl$Mutation$ToggleFavoriteMedia$ToggleFavourite<TRes>
     implements CopyWith$Mutation$ToggleFavoriteMedia$ToggleFavourite<TRes> {
-  _CopyWithImpl$Mutation$ToggleFavoriteMedia$ToggleFavourite(this._instance,
-      this._then,);
+  _CopyWithImpl$Mutation$ToggleFavoriteMedia$ToggleFavourite(
+    this._instance,
+    this._then,
+  );
 
   final Mutation$ToggleFavoriteMedia$ToggleFavourite _instance;
 

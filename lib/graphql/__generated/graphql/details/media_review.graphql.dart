@@ -63,17 +63,16 @@ class Variables$Query$MediaReviews {
     if (_$data.containsKey('reviewSort')) {
       final l$reviewSort = reviewSort;
       result$data['reviewSort'] =
-      l$reviewSort == null ? null : toJson$Enum$ReviewSort(l$reviewSort);
+          l$reviewSort == null ? null : toJson$Enum$ReviewSort(l$reviewSort);
     }
     return result$data;
   }
 
   CopyWith$Variables$Query$MediaReviews<Variables$Query$MediaReviews>
-  get copyWith =>
-      CopyWith$Variables$Query$MediaReviews(
-        this,
+      get copyWith => CopyWith$Variables$Query$MediaReviews(
+            this,
             (i) => i,
-      );
+          );
 
   @override
   bool operator ==(Object other) {
@@ -127,11 +126,12 @@ class Variables$Query$MediaReviews {
 
 abstract class CopyWith$Variables$Query$MediaReviews<TRes> {
   factory CopyWith$Variables$Query$MediaReviews(
-      Variables$Query$MediaReviews instance,
-      TRes Function(Variables$Query$MediaReviews) then,) = _CopyWithImpl$Variables$Query$MediaReviews;
+    Variables$Query$MediaReviews instance,
+    TRes Function(Variables$Query$MediaReviews) then,
+  ) = _CopyWithImpl$Variables$Query$MediaReviews;
 
   factory CopyWith$Variables$Query$MediaReviews.stub(TRes res) =
-  _CopyWithStubImpl$Variables$Query$MediaReviews;
+      _CopyWithStubImpl$Variables$Query$MediaReviews;
 
   TRes call({
     int? mediaId,
@@ -142,8 +142,10 @@ abstract class CopyWith$Variables$Query$MediaReviews<TRes> {
 
 class _CopyWithImpl$Variables$Query$MediaReviews<TRes>
     implements CopyWith$Variables$Query$MediaReviews<TRes> {
-  _CopyWithImpl$Variables$Query$MediaReviews(this._instance,
-      this._then,);
+  _CopyWithImpl$Variables$Query$MediaReviews(
+    this._instance,
+    this._then,
+  );
 
   final Variables$Query$MediaReviews _instance;
 
@@ -192,7 +194,7 @@ class Query$MediaReviews {
       Media: l$Media == null
           ? null
           : Query$MediaReviews$Media.fromJson(
-          (l$Media as Map<String, dynamic>)),
+              (l$Media as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -246,29 +248,32 @@ extension UtilityExtension$Query$MediaReviews on Query$MediaReviews {
   CopyWith$Query$MediaReviews<Query$MediaReviews> get copyWith =>
       CopyWith$Query$MediaReviews(
         this,
-            (i) => i,
+        (i) => i,
       );
 }
 
 abstract class CopyWith$Query$MediaReviews<TRes> {
-  factory CopyWith$Query$MediaReviews(Query$MediaReviews instance,
-      TRes Function(Query$MediaReviews) then,) = _CopyWithImpl$Query$MediaReviews;
+  factory CopyWith$Query$MediaReviews(
+    Query$MediaReviews instance,
+    TRes Function(Query$MediaReviews) then,
+  ) = _CopyWithImpl$Query$MediaReviews;
 
   factory CopyWith$Query$MediaReviews.stub(TRes res) =
-  _CopyWithStubImpl$Query$MediaReviews;
+      _CopyWithStubImpl$Query$MediaReviews;
 
   TRes call({
     Query$MediaReviews$Media? Media,
     String? $__typename,
   });
-
   CopyWith$Query$MediaReviews$Media<TRes> get Media;
 }
 
 class _CopyWithImpl$Query$MediaReviews<TRes>
     implements CopyWith$Query$MediaReviews<TRes> {
-  _CopyWithImpl$Query$MediaReviews(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaReviews(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaReviews _instance;
 
@@ -451,14 +456,12 @@ const documentNodeQueryMediaReviews = DocumentNode(definitions: [
   fragmentDefinitionPageInfo,
   fragmentDefinitionReview,
 ]);
-
 Query$MediaReviews _parserFn$Query$MediaReviews(Map<String, dynamic> data) =>
     Query$MediaReviews.fromJson(data);
-
 typedef OnQueryComplete$Query$MediaReviews = FutureOr<void> Function(
-    Map<String, dynamic>?,
-    Query$MediaReviews?,
-    );
+  Map<String, dynamic>?,
+  Query$MediaReviews?,
+);
 
 class Options$Query$MediaReviews
     extends graphql.QueryOptions<Query$MediaReviews> {
@@ -474,34 +477,31 @@ class Options$Query$MediaReviews
     graphql.Context? context,
     OnQueryComplete$Query$MediaReviews? onComplete,
     graphql.OnQueryError? onError,
-  })
-      : onCompleteWithParsed = onComplete,
+  })  : onCompleteWithParsed = onComplete,
         super(
-        variables: variables?.toJson() ?? {},
-        operationName: operationName,
-        fetchPolicy: fetchPolicy,
-        errorPolicy: errorPolicy,
-        cacheRereadPolicy: cacheRereadPolicy,
-        optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-        pollInterval: pollInterval,
-        context: context,
-        onComplete: onComplete == null
-            ? null
-            : (data) =>
-            onComplete(
-              data,
-              data == null ? null : _parserFn$Query$MediaReviews(data),
-            ),
-        onError: onError,
-        document: documentNodeQueryMediaReviews,
-        parserFn: _parserFn$Query$MediaReviews,
-      );
+          variables: variables?.toJson() ?? {},
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          pollInterval: pollInterval,
+          context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$MediaReviews(data),
+                  ),
+          onError: onError,
+          document: documentNodeQueryMediaReviews,
+          parserFn: _parserFn$Query$MediaReviews,
+        );
 
   final OnQueryComplete$Query$MediaReviews? onCompleteWithParsed;
 
   @override
-  List<Object?> get properties =>
-      [
+  List<Object?> get properties => [
         ...super.onComplete == null
             ? super.properties
             : super.properties.where((property) => property != onComplete),
@@ -525,20 +525,20 @@ class WatchOptions$Query$MediaReviews
     bool carryForwardDataOnException = true,
     bool fetchResults = false,
   }) : super(
-    variables: variables?.toJson() ?? {},
-    operationName: operationName,
-    fetchPolicy: fetchPolicy,
-    errorPolicy: errorPolicy,
-    cacheRereadPolicy: cacheRereadPolicy,
-    optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-    context: context,
-    document: documentNodeQueryMediaReviews,
-    pollInterval: pollInterval,
-    eagerlyFetchResults: eagerlyFetchResults,
-    carryForwardDataOnException: carryForwardDataOnException,
-    fetchResults: fetchResults,
-    parserFn: _parserFn$Query$MediaReviews,
-  );
+          variables: variables?.toJson() ?? {},
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeQueryMediaReviews,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Query$MediaReviews,
+        );
 }
 
 class FetchMoreOptions$Query$MediaReviews extends graphql.FetchMoreOptions {
@@ -546,21 +546,19 @@ class FetchMoreOptions$Query$MediaReviews extends graphql.FetchMoreOptions {
     required graphql.UpdateQuery updateQuery,
     Variables$Query$MediaReviews? variables,
   }) : super(
-    updateQuery: updateQuery,
-    variables: variables?.toJson() ?? {},
-    document: documentNodeQueryMediaReviews,
-  );
+          updateQuery: updateQuery,
+          variables: variables?.toJson() ?? {},
+          document: documentNodeQueryMediaReviews,
+        );
 }
 
 extension ClientExtension$Query$MediaReviews on graphql.GraphQLClient {
   Future<graphql.QueryResult<Query$MediaReviews>> query$MediaReviews(
-      [Options$Query$MediaReviews? options]) async =>
+          [Options$Query$MediaReviews? options]) async =>
       await this.query(options ?? Options$Query$MediaReviews());
-
   graphql.ObservableQuery<Query$MediaReviews> watchQuery$MediaReviews(
-      [WatchOptions$Query$MediaReviews? options]) =>
+          [WatchOptions$Query$MediaReviews? options]) =>
       this.watchQuery(options ?? WatchOptions$Query$MediaReviews());
-
   void writeQuery$MediaReviews({
     required Query$MediaReviews data,
     Variables$Query$MediaReviews? variables,
@@ -574,7 +572,6 @@ extension ClientExtension$Query$MediaReviews on graphql.GraphQLClient {
         data: data.toJson(),
         broadcast: broadcast,
       );
-
   Query$MediaReviews? readQuery$MediaReviews({
     Variables$Query$MediaReviews? variables,
     bool optimistic = true,
@@ -591,11 +588,10 @@ extension ClientExtension$Query$MediaReviews on graphql.GraphQLClient {
 }
 
 graphql_flutter.QueryHookResult<Query$MediaReviews> useQuery$MediaReviews(
-    [Options$Query$MediaReviews? options]) =>
+        [Options$Query$MediaReviews? options]) =>
     graphql_flutter.useQuery(options ?? Options$Query$MediaReviews());
-
 graphql.ObservableQuery<Query$MediaReviews> useWatchQuery$MediaReviews(
-    [WatchOptions$Query$MediaReviews? options]) =>
+        [WatchOptions$Query$MediaReviews? options]) =>
     graphql_flutter.useWatchQuery(options ?? WatchOptions$Query$MediaReviews());
 
 class Query$MediaReviews$Widget
@@ -605,10 +601,10 @@ class Query$MediaReviews$Widget
     Options$Query$MediaReviews? options,
     required graphql_flutter.QueryBuilder<Query$MediaReviews> builder,
   }) : super(
-    key: key,
-    options: options ?? Options$Query$MediaReviews(),
-    builder: builder,
-  );
+          key: key,
+          options: options ?? Options$Query$MediaReviews(),
+          builder: builder,
+        );
 }
 
 class Query$MediaReviews$Media {
@@ -627,7 +623,7 @@ class Query$MediaReviews$Media {
       reviews: l$reviews == null
           ? null
           : Query$MediaReviews$Media$reviews.fromJson(
-          (l$reviews as Map<String, dynamic>)),
+              (l$reviews as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -690,34 +686,37 @@ class Query$MediaReviews$Media {
 }
 
 extension UtilityExtension$Query$MediaReviews$Media
-on Query$MediaReviews$Media {
+    on Query$MediaReviews$Media {
   CopyWith$Query$MediaReviews$Media<Query$MediaReviews$Media> get copyWith =>
       CopyWith$Query$MediaReviews$Media(
         this,
-            (i) => i,
+        (i) => i,
       );
 }
 
 abstract class CopyWith$Query$MediaReviews$Media<TRes> {
-  factory CopyWith$Query$MediaReviews$Media(Query$MediaReviews$Media instance,
-      TRes Function(Query$MediaReviews$Media) then,) = _CopyWithImpl$Query$MediaReviews$Media;
+  factory CopyWith$Query$MediaReviews$Media(
+    Query$MediaReviews$Media instance,
+    TRes Function(Query$MediaReviews$Media) then,
+  ) = _CopyWithImpl$Query$MediaReviews$Media;
 
   factory CopyWith$Query$MediaReviews$Media.stub(TRes res) =
-  _CopyWithStubImpl$Query$MediaReviews$Media;
+      _CopyWithStubImpl$Query$MediaReviews$Media;
 
   TRes call({
     int? id,
     Query$MediaReviews$Media$reviews? reviews,
     String? $__typename,
   });
-
   CopyWith$Query$MediaReviews$Media$reviews<TRes> get reviews;
 }
 
 class _CopyWithImpl$Query$MediaReviews$Media<TRes>
     implements CopyWith$Query$MediaReviews$Media<TRes> {
-  _CopyWithImpl$Query$MediaReviews$Media(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaReviews$Media(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaReviews$Media _instance;
 
@@ -745,7 +744,7 @@ class _CopyWithImpl$Query$MediaReviews$Media<TRes>
     return local$reviews == null
         ? CopyWith$Query$MediaReviews$Media$reviews.stub(_then(_instance))
         : CopyWith$Query$MediaReviews$Media$reviews(
-        local$reviews, (e) => call(reviews: e));
+            local$reviews, (e) => call(reviews: e));
   }
 }
 
@@ -782,10 +781,9 @@ class Query$MediaReviews$Media$reviews {
           ? null
           : Fragment$PageInfo.fromJson((l$pageInfo as Map<String, dynamic>)),
       nodes: (l$nodes as List<dynamic>?)
-          ?.map((e) =>
-      e == null
-          ? null
-          : Fragment$Review.fromJson((e as Map<String, dynamic>)))
+          ?.map((e) => e == null
+              ? null
+              : Fragment$Review.fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -860,40 +858,41 @@ class Query$MediaReviews$Media$reviews {
 }
 
 extension UtilityExtension$Query$MediaReviews$Media$reviews
-on Query$MediaReviews$Media$reviews {
+    on Query$MediaReviews$Media$reviews {
   CopyWith$Query$MediaReviews$Media$reviews<Query$MediaReviews$Media$reviews>
-  get copyWith =>
-      CopyWith$Query$MediaReviews$Media$reviews(
-        this,
+      get copyWith => CopyWith$Query$MediaReviews$Media$reviews(
+            this,
             (i) => i,
-      );
+          );
 }
 
 abstract class CopyWith$Query$MediaReviews$Media$reviews<TRes> {
   factory CopyWith$Query$MediaReviews$Media$reviews(
-      Query$MediaReviews$Media$reviews instance,
-      TRes Function(Query$MediaReviews$Media$reviews) then,) = _CopyWithImpl$Query$MediaReviews$Media$reviews;
+    Query$MediaReviews$Media$reviews instance,
+    TRes Function(Query$MediaReviews$Media$reviews) then,
+  ) = _CopyWithImpl$Query$MediaReviews$Media$reviews;
 
   factory CopyWith$Query$MediaReviews$Media$reviews.stub(TRes res) =
-  _CopyWithStubImpl$Query$MediaReviews$Media$reviews;
+      _CopyWithStubImpl$Query$MediaReviews$Media$reviews;
 
   TRes call({
     Fragment$PageInfo? pageInfo,
     List<Fragment$Review?>? nodes,
     String? $__typename,
   });
-
   CopyWith$Fragment$PageInfo<TRes> get pageInfo;
-
-  TRes nodes(Iterable<Fragment$Review?>? Function(
-      Iterable<CopyWith$Fragment$Review<Fragment$Review>?>?)
-  _fn);
+  TRes nodes(
+      Iterable<Fragment$Review?>? Function(
+              Iterable<CopyWith$Fragment$Review<Fragment$Review>?>?)
+          _fn);
 }
 
 class _CopyWithImpl$Query$MediaReviews$Media$reviews<TRes>
     implements CopyWith$Query$MediaReviews$Media$reviews<TRes> {
-  _CopyWithImpl$Query$MediaReviews$Media$reviews(this._instance,
-      this._then,);
+  _CopyWithImpl$Query$MediaReviews$Media$reviews(
+    this._instance,
+    this._then,
+  );
 
   final Query$MediaReviews$Media$reviews _instance;
 
@@ -925,17 +924,17 @@ class _CopyWithImpl$Query$MediaReviews$Media$reviews<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  TRes nodes(Iterable<Fragment$Review?>? Function(
-      Iterable<CopyWith$Fragment$Review<Fragment$Review>?>?)
-  _fn) =>
+  TRes nodes(
+          Iterable<Fragment$Review?>? Function(
+                  Iterable<CopyWith$Fragment$Review<Fragment$Review>?>?)
+              _fn) =>
       call(
-          nodes: _fn(_instance.nodes?.map((e) =>
-          e == null
+          nodes: _fn(_instance.nodes?.map((e) => e == null
               ? null
               : CopyWith$Fragment$Review(
-            e,
-                (i) => i,
-          )))?.toList());
+                  e,
+                  (i) => i,
+                )))?.toList());
 }
 
 class _CopyWithStubImpl$Query$MediaReviews$Media$reviews<TRes>
