@@ -104,19 +104,10 @@ class _CustomDropdownState<T extends Object> extends State<CustomDropdown<T>> {
           items: List<DropdownMenuItem<T>>.generate(
             dropdownItemsValues.length,
             (index) {
-              final value =
-                  widget.selectedValueNotifier?.value ?? selectedValue;
-              final listItem = widget.dropdownItemsValues?[index] ??
-                  widget.dropdownItems[index];
               return DropdownMenuItem<T>(
                 value: dropdownItemsValues[index],
                 child: Text(
                   widget.dropdownItems[index],
-                  style: TextStyle(
-                    color: value == listItem
-                        ? AppColors.sunsetOrange
-                        : AppColors.white,
-                  ),
                 ), // Display string
               );
             },

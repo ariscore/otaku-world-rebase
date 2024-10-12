@@ -17,14 +17,29 @@ final class ActivitiesLoaded extends ActivitiesState {
     required this.globalActivities,
     required this.hasNextPageFollowing,
     required this.hasNextPageGlobal,
+    this.showProgress = false,
   });
 
   final List<dynamic> followingActivities, globalActivities;
   final bool hasNextPageFollowing, hasNextPageGlobal;
+  final bool showProgress;
 
   @override
   String toString() {
-    return 'ActivitiesLoaded{ following: $followingActivities, global: $globalActivities, hasNextPageFollowing: $hasNextPageFollowing, hasNextPageGlobal: $hasNextPageGlobal }';
+    return 'ActivitiesLoaded{ following: $followingActivities, '
+        'global: $globalActivities, '
+        'hasNextPageFollowing: $hasNextPageFollowing, '
+        'hasNextPageGlobal: $hasNextPageGlobal }';
+  }
+
+  ActivitiesLoaded copyWith({bool? showProgress}) {
+    return ActivitiesLoaded(
+      followingActivities: followingActivities,
+      globalActivities: globalActivities,
+      hasNextPageFollowing: hasNextPageFollowing,
+      hasNextPageGlobal: hasNextPageGlobal,
+      showProgress: showProgress ?? this.showProgress,
+    );
   }
 
   @override
@@ -33,6 +48,7 @@ final class ActivitiesLoaded extends ActivitiesState {
         globalActivities,
         hasNextPageFollowing,
         hasNextPageGlobal,
+        showProgress,
       ];
 }
 

@@ -6,6 +6,10 @@ import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/social/activities.graphql.dart';
+import 'package:otaku_world/graphql/__generated/graphql/social/activity_subscription.graphql.dart';
+import 'package:otaku_world/graphql/__generated/graphql/social/delete_activity.graphql.dart';
+
+import '../../../constants/string_constants.dart';
 
 part 'activities_event.dart';
 
@@ -18,7 +22,8 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
     on<ResetActivities>(_onResetActivities);
     on<RefreshActivities>(_onRefreshActivities);
     on<LoadMoreActivities>(_onLoadMoreActivities, transformer: droppable());
-    // on<SelectActivityScope>(_onSelectActivityScope);
+    on<UpdateActivities>(_onUpdateActivities);
+    on<UpdateLoading>(_onUpdateLoading);
   }
 
   int followingPage = 1, globalPage = 1;
@@ -26,6 +31,10 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
   final List<dynamic> followingList = [], globalList = [];
   List<Enum$ActivityType> types = Enum$ActivityType.values;
   bool isFollowing = true;
+
+  // bool isTogglingSubscription = false;
+  // bool isDeletingActivity = false;
+  bool showProgress = false;
 
   void _onResetActivities(
     ResetActivities event,
@@ -81,7 +90,7 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
           const ActivitiesError('Please check your internet connection!'),
         );
       } else {
-        emit(const ActivitiesError('Some Unexpected error occurred!'));
+        emit(const ActivitiesError('Something went wrong!'));
       }
     } else {
       _processData(response: followingResponse, isFollowing: true);
@@ -119,7 +128,7 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
           const ActivitiesError('Please check your internet connection!'),
         );
       } else {
-        emit(const ActivitiesError('Some Unexpected error occurred!'));
+        emit(const ActivitiesError('Something went wrong!'));
       }
     } else {
       _processData(response: response, isFollowing: event.isFollowing);
@@ -189,18 +198,103 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
     add(RefreshActivities(event.client));
   }
 
-  // void _onSelectActivityScope(
-  //   SelectActivityScope event,
-  //   Emitter<ActivitiesState> emit,
-  // ) {
-  //   isFollowing = event.isFollowing;
-  //   add(RefreshActivities(event.client));
-  // }
+  void _onUpdateActivities(
+    UpdateActivities event,
+    Emitter<ActivitiesState> emit,
+  ) {
+    emit(ActivitiesLoading());
+    emit(ActivitiesLoaded(
+      followingActivities: event.followingActivities,
+      globalActivities: event.globalActivities,
+      hasNextPageFollowing: event.hasNextPageFollowing,
+      hasNextPageGlobal: event.hasNextPageGlobal,
+    ));
+  }
+
+  void _onUpdateLoading(UpdateLoading event, Emitter<ActivitiesState> emit) {
+    emit((state as ActivitiesLoaded).copyWith(
+      showProgress: event.showProgress,
+    ));
+  }
+
+  Future<String?> toggleActivitySubscription(
+    GraphQLClient client, {
+    required int activityId,
+    required bool subscribe,
+  }) async {
+    if (showProgress) {
+      return ActivityConstants.alreadyInProgress;
+    } else {
+      showProgress = true;
+      log('Activity subscription: ${!subscribe}');
+      final response = await client.mutate$ActivitySubscription(
+        Options$Mutation$ActivitySubscription(
+          variables: Variables$Mutation$ActivitySubscription(
+            activityId: activityId,
+            subscribe: !subscribe,
+          ),
+        ),
+      );
+      log('Response: $response');
+
+      showProgress = false;
+      if (response.hasException) {
+        if (response.exception!.linkException != null) {
+          return 'Please check your internet connection!';
+        } else {
+          return 'Something went wrong!';
+        }
+      } else {
+        return null;
+      }
+    }
+  }
+
+  Future<String?> deleteActivity(
+    GraphQLClient client, {
+    required int activityId,
+  }) async {
+    if (showProgress) {
+      return ActivityConstants.alreadyInProgress;
+    } else {
+      showProgress = true;
+      add(const UpdateLoading(true));
+      final response = await client.mutate$DeleteActivity(
+        Options$Mutation$DeleteActivity(
+          variables: Variables$Mutation$DeleteActivity(
+            activityId: activityId,
+          ),
+        ),
+      );
+
+      log('Response: $response');
+
+      if (response.hasException) {
+        showProgress = false;
+        add(const UpdateLoading(false));
+        if (response.exception!.linkException != null) {
+          return 'Please check your internet connection!';
+        } else {
+          return 'Something went wrong!';
+        }
+      } else {
+        followingList.removeWhere((e) => e.id == activityId);
+        globalList.removeWhere((e) => e.id == activityId);
+        showProgress = false;
+        add(const UpdateLoading(false));
+        add(UpdateActivities(
+          followingActivities: followingList,
+          globalActivities: globalList,
+          hasNextPageFollowing: hasNextPageFollowing,
+          hasNextPageGlobal: hasNextPageGlobal,
+        ));
+        return null;
+      }
+    }
+  }
 
   @override
-  void onTransition(
-    Transition<ActivitiesEvent, ActivitiesState> transition,
-  ) {
+  void onTransition(Transition<ActivitiesEvent, ActivitiesState> transition) {
     log(transition.toString(), name: 'ActivitiesBloc');
     super.onTransition(transition);
   }

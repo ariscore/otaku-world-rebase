@@ -318,6 +318,7 @@ fragment TextActivity on TextActivity {
             medium
         }
         name
+        isFollowing
     }
     likeCount
     replyCount
@@ -336,6 +337,7 @@ fragment MessageActivity on MessageActivity {
             medium
         }
         name
+        isFollowing
     }
     recipient {
         id
@@ -361,6 +363,7 @@ fragment ListActivity on ListActivity {
             medium
         }
         name
+        isFollowing
     }
     likeCount
     replyCount

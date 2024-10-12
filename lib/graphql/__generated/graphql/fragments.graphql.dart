@@ -16058,6 +16058,13 @@ const fragmentDefinitionTextActivity = FragmentDefinitionNode(
           selectionSet: null,
         ),
         FieldNode(
+          name: NameNode(value: 'isFollowing'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
           name: NameNode(value: '__typename'),
           alias: null,
           arguments: [],
@@ -16168,6 +16175,7 @@ class Fragment$TextActivity$user {
     required this.id,
     this.avatar,
     required this.name,
+    this.isFollowing,
     this.$__typename = 'User',
   });
 
@@ -16175,6 +16183,7 @@ class Fragment$TextActivity$user {
     final l$id = json['id'];
     final l$avatar = json['avatar'];
     final l$name = json['name'];
+    final l$isFollowing = json['isFollowing'];
     final l$$__typename = json['__typename'];
     return Fragment$TextActivity$user(
       id: (l$id as int),
@@ -16183,6 +16192,7 @@ class Fragment$TextActivity$user {
           : Fragment$TextActivity$user$avatar.fromJson(
               (l$avatar as Map<String, dynamic>)),
       name: (l$name as String),
+      isFollowing: (l$isFollowing as bool?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -16192,6 +16202,8 @@ class Fragment$TextActivity$user {
   final Fragment$TextActivity$user$avatar? avatar;
 
   final String name;
+
+  final bool? isFollowing;
 
   final String $__typename;
 
@@ -16203,6 +16215,8 @@ class Fragment$TextActivity$user {
     _resultData['avatar'] = l$avatar?.toJson();
     final l$name = name;
     _resultData['name'] = l$name;
+    final l$isFollowing = isFollowing;
+    _resultData['isFollowing'] = l$isFollowing;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -16213,11 +16227,13 @@ class Fragment$TextActivity$user {
     final l$id = id;
     final l$avatar = avatar;
     final l$name = name;
+    final l$isFollowing = isFollowing;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$avatar,
       l$name,
+      l$isFollowing,
       l$$__typename,
     ]);
   }
@@ -16244,6 +16260,11 @@ class Fragment$TextActivity$user {
     final l$name = name;
     final lOther$name = other.name;
     if (l$name != lOther$name) {
+      return false;
+    }
+    final l$isFollowing = isFollowing;
+    final lOther$isFollowing = other.isFollowing;
+    if (l$isFollowing != lOther$isFollowing) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -16277,6 +16298,7 @@ abstract class CopyWith$Fragment$TextActivity$user<TRes> {
     int? id,
     Fragment$TextActivity$user$avatar? avatar,
     String? name,
+    bool? isFollowing,
     String? $__typename,
   });
   CopyWith$Fragment$TextActivity$user$avatar<TRes> get avatar;
@@ -16299,6 +16321,7 @@ class _CopyWithImpl$Fragment$TextActivity$user<TRes>
     Object? id = _undefined,
     Object? avatar = _undefined,
     Object? name = _undefined,
+    Object? isFollowing = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$TextActivity$user(
@@ -16309,6 +16332,9 @@ class _CopyWithImpl$Fragment$TextActivity$user<TRes>
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
+        isFollowing: isFollowing == _undefined
+            ? _instance.isFollowing
+            : (isFollowing as bool?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -16333,6 +16359,7 @@ class _CopyWithStubImpl$Fragment$TextActivity$user<TRes>
     int? id,
     Fragment$TextActivity$user$avatar? avatar,
     String? name,
+    bool? isFollowing,
     String? $__typename,
   }) =>
       _res;
@@ -16853,6 +16880,13 @@ const fragmentDefinitionMessageActivity = FragmentDefinitionNode(
           selectionSet: null,
         ),
         FieldNode(
+          name: NameNode(value: 'isFollowing'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
           name: NameNode(value: '__typename'),
           alias: null,
           arguments: [],
@@ -17014,6 +17048,7 @@ class Fragment$MessageActivity$messenger {
     required this.id,
     this.avatar,
     required this.name,
+    this.isFollowing,
     this.$__typename = 'User',
   });
 
@@ -17022,6 +17057,7 @@ class Fragment$MessageActivity$messenger {
     final l$id = json['id'];
     final l$avatar = json['avatar'];
     final l$name = json['name'];
+    final l$isFollowing = json['isFollowing'];
     final l$$__typename = json['__typename'];
     return Fragment$MessageActivity$messenger(
       id: (l$id as int),
@@ -17030,6 +17066,7 @@ class Fragment$MessageActivity$messenger {
           : Fragment$MessageActivity$messenger$avatar.fromJson(
               (l$avatar as Map<String, dynamic>)),
       name: (l$name as String),
+      isFollowing: (l$isFollowing as bool?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -17039,6 +17076,8 @@ class Fragment$MessageActivity$messenger {
   final Fragment$MessageActivity$messenger$avatar? avatar;
 
   final String name;
+
+  final bool? isFollowing;
 
   final String $__typename;
 
@@ -17050,6 +17089,8 @@ class Fragment$MessageActivity$messenger {
     _resultData['avatar'] = l$avatar?.toJson();
     final l$name = name;
     _resultData['name'] = l$name;
+    final l$isFollowing = isFollowing;
+    _resultData['isFollowing'] = l$isFollowing;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -17060,11 +17101,13 @@ class Fragment$MessageActivity$messenger {
     final l$id = id;
     final l$avatar = avatar;
     final l$name = name;
+    final l$isFollowing = isFollowing;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$avatar,
       l$name,
+      l$isFollowing,
       l$$__typename,
     ]);
   }
@@ -17091,6 +17134,11 @@ class Fragment$MessageActivity$messenger {
     final l$name = name;
     final lOther$name = other.name;
     if (l$name != lOther$name) {
+      return false;
+    }
+    final l$isFollowing = isFollowing;
+    final lOther$isFollowing = other.isFollowing;
+    if (l$isFollowing != lOther$isFollowing) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -17125,6 +17173,7 @@ abstract class CopyWith$Fragment$MessageActivity$messenger<TRes> {
     int? id,
     Fragment$MessageActivity$messenger$avatar? avatar,
     String? name,
+    bool? isFollowing,
     String? $__typename,
   });
   CopyWith$Fragment$MessageActivity$messenger$avatar<TRes> get avatar;
@@ -17147,6 +17196,7 @@ class _CopyWithImpl$Fragment$MessageActivity$messenger<TRes>
     Object? id = _undefined,
     Object? avatar = _undefined,
     Object? name = _undefined,
+    Object? isFollowing = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$MessageActivity$messenger(
@@ -17157,6 +17207,9 @@ class _CopyWithImpl$Fragment$MessageActivity$messenger<TRes>
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
+        isFollowing: isFollowing == _undefined
+            ? _instance.isFollowing
+            : (isFollowing as bool?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -17182,6 +17235,7 @@ class _CopyWithStubImpl$Fragment$MessageActivity$messenger<TRes>
     int? id,
     Fragment$MessageActivity$messenger$avatar? avatar,
     String? name,
+    bool? isFollowing,
     String? $__typename,
   }) =>
       _res;
@@ -18024,6 +18078,13 @@ const fragmentDefinitionListActivity = FragmentDefinitionNode(
           selectionSet: null,
         ),
         FieldNode(
+          name: NameNode(value: 'isFollowing'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
           name: NameNode(value: '__typename'),
           alias: null,
           arguments: [],
@@ -18228,6 +18289,7 @@ class Fragment$ListActivity$user {
     required this.id,
     this.avatar,
     required this.name,
+    this.isFollowing,
     this.$__typename = 'User',
   });
 
@@ -18235,6 +18297,7 @@ class Fragment$ListActivity$user {
     final l$id = json['id'];
     final l$avatar = json['avatar'];
     final l$name = json['name'];
+    final l$isFollowing = json['isFollowing'];
     final l$$__typename = json['__typename'];
     return Fragment$ListActivity$user(
       id: (l$id as int),
@@ -18243,6 +18306,7 @@ class Fragment$ListActivity$user {
           : Fragment$ListActivity$user$avatar.fromJson(
               (l$avatar as Map<String, dynamic>)),
       name: (l$name as String),
+      isFollowing: (l$isFollowing as bool?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -18252,6 +18316,8 @@ class Fragment$ListActivity$user {
   final Fragment$ListActivity$user$avatar? avatar;
 
   final String name;
+
+  final bool? isFollowing;
 
   final String $__typename;
 
@@ -18263,6 +18329,8 @@ class Fragment$ListActivity$user {
     _resultData['avatar'] = l$avatar?.toJson();
     final l$name = name;
     _resultData['name'] = l$name;
+    final l$isFollowing = isFollowing;
+    _resultData['isFollowing'] = l$isFollowing;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -18273,11 +18341,13 @@ class Fragment$ListActivity$user {
     final l$id = id;
     final l$avatar = avatar;
     final l$name = name;
+    final l$isFollowing = isFollowing;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$avatar,
       l$name,
+      l$isFollowing,
       l$$__typename,
     ]);
   }
@@ -18304,6 +18374,11 @@ class Fragment$ListActivity$user {
     final l$name = name;
     final lOther$name = other.name;
     if (l$name != lOther$name) {
+      return false;
+    }
+    final l$isFollowing = isFollowing;
+    final lOther$isFollowing = other.isFollowing;
+    if (l$isFollowing != lOther$isFollowing) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -18337,6 +18412,7 @@ abstract class CopyWith$Fragment$ListActivity$user<TRes> {
     int? id,
     Fragment$ListActivity$user$avatar? avatar,
     String? name,
+    bool? isFollowing,
     String? $__typename,
   });
   CopyWith$Fragment$ListActivity$user$avatar<TRes> get avatar;
@@ -18359,6 +18435,7 @@ class _CopyWithImpl$Fragment$ListActivity$user<TRes>
     Object? id = _undefined,
     Object? avatar = _undefined,
     Object? name = _undefined,
+    Object? isFollowing = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$ListActivity$user(
@@ -18369,6 +18446,9 @@ class _CopyWithImpl$Fragment$ListActivity$user<TRes>
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
+        isFollowing: isFollowing == _undefined
+            ? _instance.isFollowing
+            : (isFollowing as bool?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -18393,6 +18473,7 @@ class _CopyWithStubImpl$Fragment$ListActivity$user<TRes>
     int? id,
     Fragment$ListActivity$user$avatar? avatar,
     String? name,
+    bool? isFollowing,
     String? $__typename,
   }) =>
       _res;
