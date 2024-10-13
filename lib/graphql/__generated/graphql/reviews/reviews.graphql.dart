@@ -1,15 +1,13 @@
 // GENERATED FILE
 // DO NOT MODIFY
 // ignore_for_file: type=lint
+import '../fragments.graphql.dart';
+import '../schema.graphql.dart';
 import 'dart:async';
-
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
 import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
-
-import '../fragments.graphql.dart';
-import '../schema.graphql.dart';
 
 class Variables$Query$GetReviews {
   factory Variables$Query$GetReviews({

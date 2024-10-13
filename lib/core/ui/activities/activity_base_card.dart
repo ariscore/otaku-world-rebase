@@ -1,12 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:otaku_world/bloc/social/activities/activities_bloc.dart';
 import 'package:otaku_world/core/ui/activities/activity_actions.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
 
-class ActivityBaseCard extends StatelessWidget {
+import '../../../bloc/graphql_client/graphql_client_cubit.dart';
+import '../../../constants/string_constants.dart';
+import '../../../utils/ui_utils.dart';
+import '../dialogs/alert_dialog.dart';
+
+class ActivityBaseCard extends StatefulWidget {
   const ActivityBaseCard({
     super.key,
     required this.id,
@@ -22,6 +30,7 @@ class ActivityBaseCard extends StatelessWidget {
     required this.timestamp,
     required this.type,
     this.isCurrentUserMessage = false,
+    required this.isSubscribed,
   });
 
   final Widget child;
@@ -37,6 +46,20 @@ class ActivityBaseCard extends StatelessWidget {
   final int timestamp;
   final Object type;
   final bool isCurrentUserMessage;
+  final bool isSubscribed;
+
+  @override
+  State<ActivityBaseCard> createState() => _ActivityBaseCardState();
+}
+
+class _ActivityBaseCardState extends State<ActivityBaseCard> {
+  bool isSubscribed = false;
+
+  @override
+  void initState() {
+    isSubscribed = widget.isSubscribed;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,14 +69,7 @@ class ActivityBaseCard extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 10),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              AppColors.japaneseIndigo,
-              AppColors.darkCharcoal,
-            ],
-          ),
+          gradient: AppColors.secondaryGradient,
           borderRadius: BorderRadius.circular(15),
         ),
         child: Column(
@@ -69,10 +85,10 @@ class ActivityBaseCard extends StatelessWidget {
                     children: [
                       _buildUser(
                         context,
-                        avatarUrl: avatarUrl,
-                        userName: userName,
+                        avatarUrl: widget.avatarUrl,
+                        userName: widget.userName,
                       ),
-                      if (receiverAvatarUrl != null)
+                      if (widget.receiverAvatarUrl != null)
                         Padding(
                           padding: const EdgeInsets.symmetric(
                             vertical: 8,
@@ -80,11 +96,11 @@ class ActivityBaseCard extends StatelessWidget {
                           ),
                           child: SvgPicture.asset(Assets.iconsArrowRight),
                         ),
-                      if (receiverAvatarUrl != null)
+                      if (widget.receiverAvatarUrl != null)
                         _buildUser(
                           context,
-                          avatarUrl: receiverAvatarUrl,
-                          userName: receiverUserName,
+                          avatarUrl: widget.receiverAvatarUrl,
+                          userName: widget.receiverUserName,
                         ),
                     ],
                   ),
@@ -93,20 +109,23 @@ class ActivityBaseCard extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             // Main content
-            child,
+            widget.child,
             // Other details
             ActivityActions(
-              userId: userId,
-              likeCount: likeCount,
-              replyCount: replyCount,
-              activityId: id,
-              isLiked: isLiked,
-              type: type,
-              isCurrentUserMessage: isCurrentUserMessage,
+              userId: widget.userId,
+              likeCount: widget.likeCount,
+              replyCount: widget.replyCount,
+              activityId: widget.id,
+              isLiked: widget.isLiked,
+              type: widget.type,
+              isCurrentUserMessage: widget.isCurrentUserMessage,
+              isSubscribed: isSubscribed,
+              onToggleSubscription: () => _toggleSubscription(context),
+              onDelete: () => _delete(context),
             ),
             const SizedBox(height: 5),
             Text(
-              FormattingUtils.formatUnixTimestamp(timestamp),
+              FormattingUtils.formatUnixTimestamp(widget.timestamp),
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: AppColors.white.withOpacity(0.8),
                   ),
@@ -114,6 +133,64 @@ class ActivityBaseCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void _toggleSubscription(BuildContext context) async {
+    final client = context.read<GraphqlClientCubit>().getClient();
+    if (client != null) {
+      final bloc = context.read<ActivitiesBloc>();
+
+      bloc
+          .toggleActivitySubscription(
+        client,
+        activityId: widget.id,
+        subscribe: isSubscribed,
+      )
+          .then(
+        (result) {
+          if (result == null) {
+            setState(() {
+              isSubscribed = !isSubscribed;
+              UIUtils.showSnackBar(
+                context,
+                ActivityConstants.subscriptionSuccess(isSubscribed),
+              );
+            });
+          } else {
+            UIUtils.showSnackBar(context, result);
+          }
+        },
+      );
+    } else {
+      UIUtils.showSnackBar(context, ActivityConstants.clientError);
+    }
+  }
+
+  void _delete(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return CustomAlertDialog(
+          title: 'Delete Activity',
+          body: 'Are you sure you want to delete this activity?',
+          confirmText: 'Delete',
+          onConfirm: () {
+            dialogContext.pop();
+            final client = context.read<GraphqlClientCubit>().getClient();
+            if (client != null) {
+              final bloc = context.read<ActivitiesBloc>();
+              bloc.deleteActivity(
+                client,
+                activityId: widget.id,
+              );
+            } else {
+              UIUtils.showSnackBar(context, ActivityConstants.clientError);
+            }
+          },
+          onCancel: dialogContext.pop,
+        );
+      },
     );
   }
 

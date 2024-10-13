@@ -23,6 +23,7 @@ class TextActivityCard extends StatelessWidget {
       replyCount: activity.replyCount,
       timestamp: activity.createdAt,
       type: Fragment$TextActivity,
+      isSubscribed: activity.isSubscribed ?? false,
       // child: Text(
       //   activity.text!,
       //   style: Theme.of(context).textTheme.headlineSmall,

@@ -1495,6 +1495,7 @@ class Query$GetActivities$Page$activities$$ListActivity$user
     required this.id,
     this.avatar,
     required this.name,
+    this.isFollowing,
     this.$__typename = 'User',
   });
 
@@ -1503,6 +1504,7 @@ class Query$GetActivities$Page$activities$$ListActivity$user
     final l$id = json['id'];
     final l$avatar = json['avatar'];
     final l$name = json['name'];
+    final l$isFollowing = json['isFollowing'];
     final l$$__typename = json['__typename'];
     return Query$GetActivities$Page$activities$$ListActivity$user(
       id: (l$id as int),
@@ -1511,6 +1513,7 @@ class Query$GetActivities$Page$activities$$ListActivity$user
           : Query$GetActivities$Page$activities$$ListActivity$user$avatar
               .fromJson((l$avatar as Map<String, dynamic>)),
       name: (l$name as String),
+      isFollowing: (l$isFollowing as bool?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1520,6 +1523,8 @@ class Query$GetActivities$Page$activities$$ListActivity$user
   final Query$GetActivities$Page$activities$$ListActivity$user$avatar? avatar;
 
   final String name;
+
+  final bool? isFollowing;
 
   final String $__typename;
 
@@ -1531,6 +1536,8 @@ class Query$GetActivities$Page$activities$$ListActivity$user
     _resultData['avatar'] = l$avatar?.toJson();
     final l$name = name;
     _resultData['name'] = l$name;
+    final l$isFollowing = isFollowing;
+    _resultData['isFollowing'] = l$isFollowing;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1541,11 +1548,13 @@ class Query$GetActivities$Page$activities$$ListActivity$user
     final l$id = id;
     final l$avatar = avatar;
     final l$name = name;
+    final l$isFollowing = isFollowing;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$avatar,
       l$name,
+      l$isFollowing,
       l$$__typename,
     ]);
   }
@@ -1572,6 +1581,11 @@ class Query$GetActivities$Page$activities$$ListActivity$user
     final l$name = name;
     final lOther$name = other.name;
     if (l$name != lOther$name) {
+      return false;
+    }
+    final l$isFollowing = isFollowing;
+    final lOther$isFollowing = other.isFollowing;
+    if (l$isFollowing != lOther$isFollowing) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -1609,6 +1623,7 @@ abstract class CopyWith$Query$GetActivities$Page$activities$$ListActivity$user<
     int? id,
     Query$GetActivities$Page$activities$$ListActivity$user$avatar? avatar,
     String? name,
+    bool? isFollowing,
     String? $__typename,
   });
   CopyWith$Query$GetActivities$Page$activities$$ListActivity$user$avatar<TRes>
@@ -1634,6 +1649,7 @@ class _CopyWithImpl$Query$GetActivities$Page$activities$$ListActivity$user<TRes>
     Object? id = _undefined,
     Object? avatar = _undefined,
     Object? name = _undefined,
+    Object? isFollowing = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$GetActivities$Page$activities$$ListActivity$user(
@@ -1645,6 +1661,9 @@ class _CopyWithImpl$Query$GetActivities$Page$activities$$ListActivity$user<TRes>
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
+        isFollowing: isFollowing == _undefined
+            ? _instance.isFollowing
+            : (isFollowing as bool?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -1674,6 +1693,7 @@ class _CopyWithStubImpl$Query$GetActivities$Page$activities$$ListActivity$user<
     int? id,
     Query$GetActivities$Page$activities$$ListActivity$user$avatar? avatar,
     String? name,
+    bool? isFollowing,
     String? $__typename,
   }) =>
       _res;
@@ -2745,6 +2765,7 @@ class Query$GetActivities$Page$activities$$MessageActivity$messenger
     required this.id,
     this.avatar,
     required this.name,
+    this.isFollowing,
     this.$__typename = 'User',
   });
 
@@ -2753,6 +2774,7 @@ class Query$GetActivities$Page$activities$$MessageActivity$messenger
     final l$id = json['id'];
     final l$avatar = json['avatar'];
     final l$name = json['name'];
+    final l$isFollowing = json['isFollowing'];
     final l$$__typename = json['__typename'];
     return Query$GetActivities$Page$activities$$MessageActivity$messenger(
       id: (l$id as int),
@@ -2761,6 +2783,7 @@ class Query$GetActivities$Page$activities$$MessageActivity$messenger
           : Query$GetActivities$Page$activities$$MessageActivity$messenger$avatar
               .fromJson((l$avatar as Map<String, dynamic>)),
       name: (l$name as String),
+      isFollowing: (l$isFollowing as bool?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -2772,6 +2795,8 @@ class Query$GetActivities$Page$activities$$MessageActivity$messenger
 
   final String name;
 
+  final bool? isFollowing;
+
   final String $__typename;
 
   Map<String, dynamic> toJson() {
@@ -2782,6 +2807,8 @@ class Query$GetActivities$Page$activities$$MessageActivity$messenger
     _resultData['avatar'] = l$avatar?.toJson();
     final l$name = name;
     _resultData['name'] = l$name;
+    final l$isFollowing = isFollowing;
+    _resultData['isFollowing'] = l$isFollowing;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -2792,11 +2819,13 @@ class Query$GetActivities$Page$activities$$MessageActivity$messenger
     final l$id = id;
     final l$avatar = avatar;
     final l$name = name;
+    final l$isFollowing = isFollowing;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$avatar,
       l$name,
+      l$isFollowing,
       l$$__typename,
     ]);
   }
@@ -2824,6 +2853,11 @@ class Query$GetActivities$Page$activities$$MessageActivity$messenger
     final l$name = name;
     final lOther$name = other.name;
     if (l$name != lOther$name) {
+      return false;
+    }
+    final l$isFollowing = isFollowing;
+    final lOther$isFollowing = other.isFollowing;
+    if (l$isFollowing != lOther$isFollowing) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -2864,6 +2898,7 @@ abstract class CopyWith$Query$GetActivities$Page$activities$$MessageActivity$mes
     Query$GetActivities$Page$activities$$MessageActivity$messenger$avatar?
         avatar,
     String? name,
+    bool? isFollowing,
     String? $__typename,
   });
   CopyWith$Query$GetActivities$Page$activities$$MessageActivity$messenger$avatar<
@@ -2892,6 +2927,7 @@ class _CopyWithImpl$Query$GetActivities$Page$activities$$MessageActivity$messeng
     Object? id = _undefined,
     Object? avatar = _undefined,
     Object? name = _undefined,
+    Object? isFollowing = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$GetActivities$Page$activities$$MessageActivity$messenger(
@@ -2903,6 +2939,9 @@ class _CopyWithImpl$Query$GetActivities$Page$activities$$MessageActivity$messeng
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
+        isFollowing: isFollowing == _undefined
+            ? _instance.isFollowing
+            : (isFollowing as bool?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -2934,6 +2973,7 @@ class _CopyWithStubImpl$Query$GetActivities$Page$activities$$MessageActivity$mes
     Query$GetActivities$Page$activities$$MessageActivity$messenger$avatar?
         avatar,
     String? name,
+    bool? isFollowing,
     String? $__typename,
   }) =>
       _res;
@@ -3752,6 +3792,7 @@ class Query$GetActivities$Page$activities$$TextActivity$user
     required this.id,
     this.avatar,
     required this.name,
+    this.isFollowing,
     this.$__typename = 'User',
   });
 
@@ -3760,6 +3801,7 @@ class Query$GetActivities$Page$activities$$TextActivity$user
     final l$id = json['id'];
     final l$avatar = json['avatar'];
     final l$name = json['name'];
+    final l$isFollowing = json['isFollowing'];
     final l$$__typename = json['__typename'];
     return Query$GetActivities$Page$activities$$TextActivity$user(
       id: (l$id as int),
@@ -3768,6 +3810,7 @@ class Query$GetActivities$Page$activities$$TextActivity$user
           : Query$GetActivities$Page$activities$$TextActivity$user$avatar
               .fromJson((l$avatar as Map<String, dynamic>)),
       name: (l$name as String),
+      isFollowing: (l$isFollowing as bool?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -3777,6 +3820,8 @@ class Query$GetActivities$Page$activities$$TextActivity$user
   final Query$GetActivities$Page$activities$$TextActivity$user$avatar? avatar;
 
   final String name;
+
+  final bool? isFollowing;
 
   final String $__typename;
 
@@ -3788,6 +3833,8 @@ class Query$GetActivities$Page$activities$$TextActivity$user
     _resultData['avatar'] = l$avatar?.toJson();
     final l$name = name;
     _resultData['name'] = l$name;
+    final l$isFollowing = isFollowing;
+    _resultData['isFollowing'] = l$isFollowing;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -3798,11 +3845,13 @@ class Query$GetActivities$Page$activities$$TextActivity$user
     final l$id = id;
     final l$avatar = avatar;
     final l$name = name;
+    final l$isFollowing = isFollowing;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$avatar,
       l$name,
+      l$isFollowing,
       l$$__typename,
     ]);
   }
@@ -3829,6 +3878,11 @@ class Query$GetActivities$Page$activities$$TextActivity$user
     final l$name = name;
     final lOther$name = other.name;
     if (l$name != lOther$name) {
+      return false;
+    }
+    final l$isFollowing = isFollowing;
+    final lOther$isFollowing = other.isFollowing;
+    if (l$isFollowing != lOther$isFollowing) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -3866,6 +3920,7 @@ abstract class CopyWith$Query$GetActivities$Page$activities$$TextActivity$user<
     int? id,
     Query$GetActivities$Page$activities$$TextActivity$user$avatar? avatar,
     String? name,
+    bool? isFollowing,
     String? $__typename,
   });
   CopyWith$Query$GetActivities$Page$activities$$TextActivity$user$avatar<TRes>
@@ -3891,6 +3946,7 @@ class _CopyWithImpl$Query$GetActivities$Page$activities$$TextActivity$user<TRes>
     Object? id = _undefined,
     Object? avatar = _undefined,
     Object? name = _undefined,
+    Object? isFollowing = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$GetActivities$Page$activities$$TextActivity$user(
@@ -3902,6 +3958,9 @@ class _CopyWithImpl$Query$GetActivities$Page$activities$$TextActivity$user<TRes>
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
+        isFollowing: isFollowing == _undefined
+            ? _instance.isFollowing
+            : (isFollowing as bool?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -3931,6 +3990,7 @@ class _CopyWithStubImpl$Query$GetActivities$Page$activities$$TextActivity$user<
     int? id,
     Query$GetActivities$Page$activities$$TextActivity$user$avatar? avatar,
     String? name,
+    bool? isFollowing,
     String? $__typename,
   }) =>
       _res;

@@ -1,13 +1,14 @@
 import 'dart:developer';
 
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:like_button/like_button.dart';
 import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
+import 'package:otaku_world/core/ui/dialogs/alert_dialog.dart';
 import 'package:otaku_world/features/reviews/widgets/bottom_sheet_component.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
@@ -28,7 +29,10 @@ class ActivityActions extends StatelessWidget {
     required this.activityId,
     required this.isLiked,
     required this.type,
+    required this.isSubscribed,
     this.isCurrentUserMessage = false,
+    required this.onToggleSubscription,
+    required this.onDelete,
   });
 
   final int userId;
@@ -38,6 +42,9 @@ class ActivityActions extends StatelessWidget {
   final int replyCount;
   final Object type;
   final bool isCurrentUserMessage;
+  final bool isSubscribed;
+  final VoidCallback onToggleSubscription;
+  final VoidCallback onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +104,7 @@ class ActivityActions extends StatelessWidget {
         IconButton(
           onPressed: () {
             // Show options bottom sheet
-            _showOptions(context, activityId: activityId);
+            _showOptions(context);
           },
           icon: SvgPicture.asset(Assets.iconsMoreHorizontal),
         ),
@@ -125,7 +132,7 @@ class ActivityActions extends StatelessWidget {
     );
   }
 
-  void _showOptions(BuildContext context, {required int activityId}) {
+  void _showOptions(BuildContext context) {
     final state = context.read<ViewerBloc>().state;
     final client =
         (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
@@ -147,27 +154,53 @@ class ActivityActions extends StatelessWidget {
               BottomSheetComponent(
                 iconName: Assets.iconsDelete,
                 text: 'Delete',
-                onTap: () {},
+                onTap: () {
+                  context.pop();
+                  onDelete();
+                },
               ),
             );
+
+            if (type != Fragment$ListActivity) {
+              options.add(
+                BottomSheetComponent(
+                  iconName: Assets.iconsEditSmall,
+                  text: 'Edit',
+                  onTap: () {},
+                ),
+              );
+            }
 
             if (type == Fragment$MessageActivity && !isCurrentUserMessage) {
               options.add(
                 BottomSheetComponent(
                   iconName: Assets.iconsAlert,
                   text: 'Report',
-                  onTap: () {},
+                  onTap: () => _report(context),
                 ),
               );
             }
-          } else {
+          } else if (type != Fragment$ListActivity) {
             options.add(
               BottomSheetComponent(
                 iconName: Assets.iconsAlert,
                 text: 'Report',
-                onTap: () {},
+                onTap: () => _report(context),
               ),
             );
+
+            if (type == Fragment$MessageActivity && isCurrentUserMessage) {
+              options.add(
+                BottomSheetComponent(
+                  iconName: Assets.iconsDelete,
+                  text: 'Delete',
+                  onTap: () {
+                    context.pop();
+                    onDelete();
+                  },
+                ),
+              );
+            }
           }
         } else if (state is! ViewerLoading) {
           context.read<ViewerBloc>().add(LoadViewer(client));
@@ -178,18 +211,7 @@ class ActivityActions extends StatelessWidget {
           BottomSheetComponent(
             iconName: Assets.iconsLinkSquare,
             text: 'View on AniList',
-            onTap: () async {
-              final Uri reviewUri = Uri(
-                scheme: 'https',
-                host: 'anilist.co',
-                path: 'activity/$activityId',
-              );
-              context.pop();
-              await launchUrl(
-                reviewUri,
-                mode: LaunchMode.externalApplication,
-              );
-            },
+            onTap: () => _viewOnAniList(context),
           ),
         );
 
@@ -197,7 +219,7 @@ class ActivityActions extends StatelessWidget {
           BottomSheetComponent(
             iconName: Assets.iconsCopyLink,
             text: 'Copy Link',
-            onTap: () {},
+            onTap: () => _copyLink(context),
           ),
         );
 
@@ -228,9 +250,14 @@ class ActivityActions extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 BottomSheetComponent(
-                  iconName: Assets.iconsNotification,
-                  text: 'Subscribe',
-                  onTap: () {},
+                  iconName: isSubscribed
+                      ? Assets.iconsNotificationOff
+                      : Assets.iconsNotification,
+                  text: isSubscribed ? 'Unsubscribe' : 'Subscribe',
+                  onTap: () {
+                    onToggleSubscription();
+                    context.pop();
+                  },
                 ),
                 Container(
                   color: AppColors.white.withOpacity(0.5),
@@ -242,6 +269,54 @@ class ActivityActions extends StatelessWidget {
             ),
           ),
         );
+      },
+    );
+  }
+
+  void _report(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return CustomAlertDialog(
+          title: 'Report Activity',
+          body: 'This action must be completed on AniList website. Continue?',
+          confirmText: 'Report',
+          cancelText: 'Cancel',
+          onConfirm: () {
+            _viewOnAniList(context);
+          },
+          onCancel: context.pop,
+        );
+      },
+    );
+  }
+
+  void _copyLink(BuildContext context) {
+    final url = 'https://anilist.co/activity/$activityId';
+    Clipboard.setData(ClipboardData(text: url)).then((v) {
+      context.pop();
+      UIUtils.showSnackBar(context, 'Link copied!');
+    });
+  }
+
+  void _viewOnAniList(BuildContext context) {
+    final Uri reviewUri = Uri(
+      scheme: 'https',
+      host: 'anilist.co',
+      path: 'activity/$activityId',
+    );
+    context.pop();
+    launchUrl(
+      reviewUri,
+      mode: LaunchMode.externalApplication,
+    ).then(
+      (isSuccess) {
+        if (!isSuccess) {
+          UIUtils.showSnackBar(context, "Can't open the link!");
+        }
+      },
+      onError: (e) {
+        UIUtils.showSnackBar(context, "Can't open the link!");
       },
     );
   }

@@ -26,3 +26,9 @@ class UpdateData<E> extends PaginatedDataEvent {
 
   final List<E?> list;
 }
+
+class UpdateLoading extends PaginatedDataEvent {
+  const UpdateLoading(this.showProgress);
+
+  final bool showProgress;
+}

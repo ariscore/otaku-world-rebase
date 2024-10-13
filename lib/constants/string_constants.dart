@@ -85,6 +85,17 @@ class DiscoverConstants {
       'Narratives and Artistry';
 }
 
+class ActivityConstants {
+  static const clientError = 'Something went wrong, Please restart the app!';
+  static const somethingWrong = 'Something went wrong!';
+
+  static String subscriptionSuccess(bool subscribed) {
+    return '${subscribed ? 'Subscribed' : 'Unsubscribed'} the activity!';
+  }
+
+  static const alreadyInProgress = 'Action already in progress. Please wait!';
+}
+
 class UiConstants {
   static const noImageUrl = '';
   static const noName = '';

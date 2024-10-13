@@ -13,6 +13,7 @@ class PrimaryButton extends StatelessWidget {
     this.fontSize,
     this.radius,
     this.fontColor = AppColors.white,
+    this.isSmall = false,
   });
 
   final double horizontalPadding;
@@ -24,6 +25,7 @@ class PrimaryButton extends StatelessWidget {
   final double? radius;
   final double verticalPadding;
   final Color fontColor;
+  final bool isSmall;
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +35,12 @@ class PrimaryButton extends StatelessWidget {
       ),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(radius ?? 20),
+        borderRadius: BorderRadius.circular(isSmall ? 10 : 15),
         child: Container(
           width: width ??
               MediaQuery.of(context).size.width - horizontalPadding * 2,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(radius ?? 20),
+            borderRadius: BorderRadius.circular(isSmall ? 10 : 15),
             color: color,
             boxShadow: [
               BoxShadow(

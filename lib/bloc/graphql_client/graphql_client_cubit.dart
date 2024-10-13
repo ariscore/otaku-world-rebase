@@ -27,6 +27,14 @@ class GraphqlClientCubit extends Cubit<GraphqlClientState> {
     ));
   }
 
+  GraphQLClient? getClient() {
+    if (state is GraphqlClientInitialized) {
+      return (state as GraphqlClientInitialized).client;
+    } else {
+      return null;
+    }
+  }
+
   @override
   void onChange(Change<GraphqlClientState> change) {
     dev.log(change.toString(), name: 'GraphqlCubit');

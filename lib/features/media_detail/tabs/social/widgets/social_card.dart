@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
 import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/ui/activities/activity_actions.dart';
 import 'package:otaku_world/features/reviews/widgets/review_profile_photo.dart';
@@ -6,23 +9,41 @@ import 'package:otaku_world/graphql/__generated/graphql/details/media_activities
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/utils/extensions.dart';
 
+import '../../../../../bloc/graphql_client/graphql_client_cubit.dart';
+import '../../../../../core/ui/dialogs/alert_dialog.dart';
 import '../../../../../theme/colors.dart';
 import '../../../../../theme/decorations.dart';
 import '../../../../../utils/formatting_utils.dart';
+import '../../../../../utils/ui_utils.dart';
 
-class SocialCard extends StatelessWidget {
+class SocialCard extends StatefulWidget {
   const SocialCard({
     super.key,
     required this.activity,
   });
 
   final Query$MediaActivityQuery$Page$activities$$ListActivity activity;
+
+  @override
+  State<SocialCard> createState() => _SocialCardState();
+}
+
+class _SocialCardState extends State<SocialCard> {
+  bool isSubscribed = false;
+
+  @override
+  void initState() {
+    isSubscribed = widget.activity.isSubscribed ?? false;
+    super.initState();
+  }
+
   final TextStyle userNameTextStyle = const TextStyle(
     color: AppColors.white,
     fontSize: 12,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w400,
   );
+
   final TextStyle progressOfMediaActivity = const TextStyle(
     color: AppColors.white,
     fontSize: 14,
@@ -46,7 +67,7 @@ class SocialCard extends StatelessWidget {
             children: [
               ReviewProfilePhoto(
                 profilePicUrl:
-                    activity.user?.avatar?.medium ?? UiConstants.noImageUrl,
+                    widget.activity.user?.avatar?.medium ?? UiConstants.noImageUrl,
                 radius: 25,
               ),
               const SizedBox(
@@ -57,29 +78,32 @@ class SocialCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    activity.user?.name ?? 'Unknown',
+                    widget.activity.user?.name ?? 'Unknown',
                     style: userNameTextStyle,
                   ),
                   const SizedBox(
                     height: 5,
                   ),
                   Text(
-                      '${activity.status?.checkIfNullReturnsEmpty().toCapitalized() ?? ''} ${activity.progress ?? ''}',
+                      '${widget.activity.status?.checkIfNullReturnsEmpty().toCapitalized() ?? ''} ${widget.activity.progress ?? ''}',
                       style: progressOfMediaActivity),
                 ],
               )
             ],
           ),
           ActivityActions(
-            activityId: activity.id,
-            userId: activity.user?.id ?? 0,
-            isLiked: activity.isLiked ?? false,
-            likeCount: activity.likeCount,
-            replyCount: activity.replyCount,
+            activityId: widget.activity.id,
+            userId: widget.activity.user?.id ?? 0,
+            isLiked: widget.activity.isLiked ?? false,
+            likeCount: widget.activity.likeCount,
+            replyCount: widget.activity.replyCount,
             type: Fragment$ListActivity,
+            isSubscribed: isSubscribed,
+            onToggleSubscription: () => _toggleSubscription(context),
+            onDelete: () => _delete(context),
           ),
           Text(
-            FormattingUtils.formatUnixTimestamp(activity.createdAt),
+            FormattingUtils.formatUnixTimestamp(widget.activity.createdAt),
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontSize: 12,
                   fontFamily: 'Roboto',
@@ -91,16 +115,61 @@ class SocialCard extends StatelessWidget {
     );
   }
 
-// String formatProgress(
-//   String status,
-//   String progress,
-// ) {
-//   if (status == 'watched episode' || status == 'read chapter') {
-//     return '${status.toCapitalized()} $progress';
-//   } else if (status == 'rewatched episode') {
-//     return '${status.toCapitalized()} $progress';
-//   } else {
-//     return status.toCapitalized();
-//   }
-// }
+  void _toggleSubscription(BuildContext context) async {
+    final client = context.read<GraphqlClientCubit>().getClient();
+    if (client != null) {
+      final bloc = context.read<SocialBloc>();
+
+      bloc
+          .toggleActivitySubscription(
+        client,
+        activityId: widget.activity.id,
+        subscribe: isSubscribed,
+      )
+          .then(
+            (result) {
+          if (result == null) {
+            setState(() {
+              isSubscribed = !isSubscribed;
+              UIUtils.showSnackBar(
+                context,
+                ActivityConstants.subscriptionSuccess(isSubscribed),
+              );
+            });
+          } else {
+            UIUtils.showSnackBar(context, result);
+          }
+        },
+      );
+    } else {
+      UIUtils.showSnackBar(context, ActivityConstants.clientError);
+    }
+  }
+
+  void _delete(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return CustomAlertDialog(
+          title: 'Delete Activity',
+          body: 'Are you sure you want to delete this activity?',
+          confirmText: 'Delete',
+          onConfirm: () {
+            dialogContext.pop();
+            final client = context.read<GraphqlClientCubit>().getClient();
+            if (client != null) {
+              final bloc = context.read<SocialBloc>();
+              bloc.deleteActivity(
+                client,
+                activityId: widget.activity.id,
+              );
+            } else {
+              UIUtils.showSnackBar(context, ActivityConstants.clientError);
+            }
+          },
+          onCancel: dialogContext.pop,
+        );
+      },
+    );
+  }
 }
