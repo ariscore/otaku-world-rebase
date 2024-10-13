@@ -23,6 +23,7 @@ abstract class PaginatedDataBloc<Q, E>
     );
     on<UpdateData<E>>(_onUpdateData);
     on<ResetData>(_onResetData);
+    on<UpdateLoading>(_onUpdateLoading);
   }
 
   var page = 1;
@@ -83,6 +84,12 @@ abstract class PaginatedDataBloc<Q, E>
   Future<QueryResult<Q>> loadData(GraphQLClient client);
 
   void processData(QueryResult<Q> response);
+
+  void _onUpdateLoading(UpdateLoading event, Emitter<PaginatedDataState> emit) {
+    emit((state as PaginatedDataLoaded).copyWith(
+      showProgress: event.showProgress,
+    ));
+  }
 
   @override
   void onTransition(

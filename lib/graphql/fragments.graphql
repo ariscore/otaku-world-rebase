@@ -389,6 +389,7 @@ fragment ListActivity on ListActivity {
 
 fragment ActivityReply on ActivityReply {
     id
+    activityId
     user {
         id
         avatar {

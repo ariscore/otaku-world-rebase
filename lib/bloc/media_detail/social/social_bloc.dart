@@ -4,6 +4,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/graphql/__generated/graphql/details/media_activities.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/social/activity_subscription.graphql.dart';
+import 'package:otaku_world/graphql/__generated/graphql/social/delete_activity.graphql.dart';
 
 import '../../paginated_data/paginated_data_bloc.dart';
 
@@ -11,6 +12,7 @@ class SocialBloc extends PaginatedDataBloc<Query$MediaActivityQuery, dynamic> {
   final int mediaId;
   bool isFollowing = false;
   bool isTogglingSubscription = false;
+  bool showProgress = false;
 
   SocialBloc({required this.mediaId});
 
@@ -73,6 +75,43 @@ class SocialBloc extends PaginatedDataBloc<Query$MediaActivityQuery, dynamic> {
           return 'Something went wrong!';
         }
       } else {
+        return null;
+      }
+    }
+  }
+
+  Future<String?> deleteActivity(
+    GraphQLClient client, {
+    required int activityId,
+  }) async {
+    if (showProgress) {
+      return ActivityConstants.alreadyInProgress;
+    } else {
+      showProgress = true;
+      add(const UpdateLoading(true));
+      final response = await client.mutate$DeleteActivity(
+        Options$Mutation$DeleteActivity(
+          variables: Variables$Mutation$DeleteActivity(
+            activityId: activityId,
+          ),
+        ),
+      );
+
+      log('Response: $response');
+
+      if (response.hasException) {
+        showProgress = false;
+        add(const UpdateLoading(false));
+        if (response.exception!.linkException != null) {
+          return 'Please check your internet connection!';
+        } else {
+          return 'Something went wrong!';
+        }
+      } else {
+        list.removeWhere((e) => e.id == activityId);
+        showProgress = false;
+        add(const UpdateLoading(false));
+        add(UpdateData(list: list));
         return null;
       }
     }

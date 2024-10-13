@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
 import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/ui/activities/activity_actions.dart';
@@ -9,6 +10,7 @@ import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../../../bloc/graphql_client/graphql_client_cubit.dart';
+import '../../../../../core/ui/dialogs/alert_dialog.dart';
 import '../../../../../theme/colors.dart';
 import '../../../../../theme/decorations.dart';
 import '../../../../../utils/formatting_utils.dart';
@@ -98,7 +100,7 @@ class _SocialCardState extends State<SocialCard> {
             type: Fragment$ListActivity,
             isSubscribed: isSubscribed,
             onToggleSubscription: () => _toggleSubscription(context),
-            onDelete: () {},
+            onDelete: () => _delete(context),
           ),
           Text(
             FormattingUtils.formatUnixTimestamp(widget.activity.createdAt),
@@ -142,5 +144,32 @@ class _SocialCardState extends State<SocialCard> {
     } else {
       UIUtils.showSnackBar(context, ActivityConstants.clientError);
     }
+  }
+
+  void _delete(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return CustomAlertDialog(
+          title: 'Delete Activity',
+          body: 'Are you sure you want to delete this activity?',
+          confirmText: 'Delete',
+          onConfirm: () {
+            dialogContext.pop();
+            final client = context.read<GraphqlClientCubit>().getClient();
+            if (client != null) {
+              final bloc = context.read<SocialBloc>();
+              bloc.deleteActivity(
+                client,
+                activityId: widget.activity.id,
+              );
+            } else {
+              UIUtils.showSnackBar(context, ActivityConstants.clientError);
+            }
+          },
+          onCancel: dialogContext.pop,
+        );
+      },
+    );
   }
 }

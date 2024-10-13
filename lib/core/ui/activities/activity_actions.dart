@@ -273,32 +273,6 @@ class ActivityActions extends StatelessWidget {
     );
   }
 
-  // void _delete(BuildContext context) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (context) {
-  //       return CustomAlertDialog(
-  //         title: 'Delete',
-  //         body: 'body',
-  //         onConfirm: () {
-  //           final client = context.read<GraphqlClientCubit>().getClient();
-  //           if (client != null) {
-  //             final bloc = context.read<ActivitiesBloc>();
-  //             bloc.deleteActivity(
-  //               client,
-  //               activityId: activityId,
-  //               isFollowing: isFollowing,
-  //             );
-  //           } else {
-  //             UIUtils.showSnackBar(context, ActivityConstants.clientError);
-  //           }
-  //         },
-  //         onCancel: context.pop,
-  //       );
-  //     },
-  //   );
-  // }
-
   void _report(BuildContext context) {
     showDialog(
       context: context,

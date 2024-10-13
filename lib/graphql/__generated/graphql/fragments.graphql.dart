@@ -19112,6 +19112,7 @@ class _CopyWithStubImpl$Fragment$ListActivity$media$title<TRes>
 class Fragment$ActivityReply {
   Fragment$ActivityReply({
     required this.id,
+    this.activityId,
     this.user,
     this.text,
     this.isLiked,
@@ -19122,6 +19123,7 @@ class Fragment$ActivityReply {
 
   factory Fragment$ActivityReply.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
+    final l$activityId = json['activityId'];
     final l$user = json['user'];
     final l$text = json['text'];
     final l$isLiked = json['isLiked'];
@@ -19130,6 +19132,7 @@ class Fragment$ActivityReply {
     final l$$__typename = json['__typename'];
     return Fragment$ActivityReply(
       id: (l$id as int),
+      activityId: (l$activityId as int?),
       user: l$user == null
           ? null
           : Fragment$ActivityReply$user.fromJson(
@@ -19143,6 +19146,8 @@ class Fragment$ActivityReply {
   }
 
   final int id;
+
+  final int? activityId;
 
   final Fragment$ActivityReply$user? user;
 
@@ -19160,6 +19165,8 @@ class Fragment$ActivityReply {
     final _resultData = <String, dynamic>{};
     final l$id = id;
     _resultData['id'] = l$id;
+    final l$activityId = activityId;
+    _resultData['activityId'] = l$activityId;
     final l$user = user;
     _resultData['user'] = l$user?.toJson();
     final l$text = text;
@@ -19178,6 +19185,7 @@ class Fragment$ActivityReply {
   @override
   int get hashCode {
     final l$id = id;
+    final l$activityId = activityId;
     final l$user = user;
     final l$text = text;
     final l$isLiked = isLiked;
@@ -19186,6 +19194,7 @@ class Fragment$ActivityReply {
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
+      l$activityId,
       l$user,
       l$text,
       l$isLiked,
@@ -19207,6 +19216,11 @@ class Fragment$ActivityReply {
     final l$id = id;
     final lOther$id = other.id;
     if (l$id != lOther$id) {
+      return false;
+    }
+    final l$activityId = activityId;
+    final lOther$activityId = other.activityId;
+    if (l$activityId != lOther$activityId) {
       return false;
     }
     final l$user = user;
@@ -19262,6 +19276,7 @@ abstract class CopyWith$Fragment$ActivityReply<TRes> {
 
   TRes call({
     int? id,
+    int? activityId,
     Fragment$ActivityReply$user? user,
     String? text,
     bool? isLiked,
@@ -19287,6 +19302,7 @@ class _CopyWithImpl$Fragment$ActivityReply<TRes>
 
   TRes call({
     Object? id = _undefined,
+    Object? activityId = _undefined,
     Object? user = _undefined,
     Object? text = _undefined,
     Object? isLiked = _undefined,
@@ -19296,6 +19312,9 @@ class _CopyWithImpl$Fragment$ActivityReply<TRes>
   }) =>
       _then(Fragment$ActivityReply(
         id: id == _undefined || id == null ? _instance.id : (id as int),
+        activityId: activityId == _undefined
+            ? _instance.activityId
+            : (activityId as int?),
         user: user == _undefined
             ? _instance.user
             : (user as Fragment$ActivityReply$user?),
@@ -19329,6 +19348,7 @@ class _CopyWithStubImpl$Fragment$ActivityReply<TRes>
 
   call({
     int? id,
+    int? activityId,
     Fragment$ActivityReply$user? user,
     String? text,
     bool? isLiked,
@@ -19353,6 +19373,13 @@ const fragmentDefinitionActivityReply = FragmentDefinitionNode(
   selectionSet: SelectionSetNode(selections: [
     FieldNode(
       name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'activityId'),
       alias: null,
       arguments: [],
       directives: [],
