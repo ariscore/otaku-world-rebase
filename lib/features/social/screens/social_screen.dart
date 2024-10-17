@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/social/activities/activities_bloc.dart';
 import 'package:otaku_world/constants/filter_constants.dart';
@@ -53,94 +54,121 @@ class SocialScreen extends HookWidget {
       return null;
     }, const []);
 
-    return Scaffold(
-      floatingActionButton: ScrollToTopFAB(controller: scrollController),
-      body: NestedScrollView(
-        controller: scrollController,
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return [
-            SliverOverlapAbsorber(
-              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-              sliver: const SliverAppBar(
-                collapsedHeight: 90,
-                expandedHeight: 90,
-                backgroundColor: AppColors.raisinBlack,
-                flexibleSpace: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: DiscoverHeader(
-                    title: StringConstants.socialHeading,
-                    subtitle: StringConstants.socialSubheading,
+    return BlocListener<ActivitiesBloc, ActivitiesState>(
+      listenWhen: (previous, current) =>
+          current is ActivitiesLoaded &&
+          previous is ActivitiesLoaded &&
+          previous.showProgress != current.showProgress,
+      listener: (context, state) {
+        if (state is ActivitiesLoaded && state.showProgress) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            useRootNavigator: true,
+            builder: (context) {
+              return WillPopScope(
+                onWillPop: () async => false,
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            },
+          );
+        } else {
+          context.pop();
+        }
+      },
+      child: Scaffold(
+        floatingActionButton: ScrollToTopFAB(controller: scrollController),
+        body: NestedScrollView(
+          controller: scrollController,
+          headerSliverBuilder: (context, innerBoxIsScrolled) {
+            return [
+              SliverOverlapAbsorber(
+                handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                    context),
+                sliver: const SliverAppBar(
+                  collapsedHeight: 90,
+                  expandedHeight: 90,
+                  backgroundColor: AppColors.raisinBlack,
+                  flexibleSpace: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: DiscoverHeader(
+                      title: StringConstants.socialHeading,
+                      subtitle: StringConstants.socialSubheading,
+                    ),
                   ),
                 ),
               ),
-            ),
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: _StickyHeaderDelegate(
-                child: Column(
-                  children: [
-                    CustomTabBar(
-                      tabs: const [
-                        'Following',
-                        'Global',
-                      ],
-                      controller: tabController,
-                      tabWidth: size.width / 2 - 45,
-                    ),
-                    const SizedBox(height: 5),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Activity',
-                            style: Theme.of(context)
-                                .textTheme
-                                .displayMedium
-                                ?.copyWith(
-                                  fontFamily: 'Roboto-Condensed',
-                                ),
-                          ),
-                          const SizedBox(width: 100),
-                          Expanded(
-                            child: CustomDropdown(
-                              dropdownItems: FilterConstants.activitiesOptions,
-                              initialValue:
-                                  FilterConstants.activitiesOptions[0],
-                              borderRadius: 20,
-                              onChange: (option) {
-                                activitiesBloc.add(
-                                  SelectActivityType(
-                                    client: client,
-                                    type: option,
-                                  ),
-                                );
-                                scrollController.jumpTo(0);
-                              },
-                            ),
-                          ),
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _StickyHeaderDelegate(
+                  child: Column(
+                    children: [
+                      CustomTabBar(
+                        tabs: const [
+                          'Following',
+                          'Global',
                         ],
+                        controller: tabController,
+                        tabWidth: size.width / 2 - 45,
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 5),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Activity',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displayMedium
+                                  ?.copyWith(
+                                    fontFamily: 'Roboto-Condensed',
+                                  ),
+                            ),
+                            const SizedBox(width: 100),
+                            Expanded(
+                              child: CustomDropdown(
+                                dropdownItems:
+                                    FilterConstants.activitiesOptions,
+                                initialValue:
+                                    FilterConstants.activitiesOptions[0],
+                                borderRadius: 20,
+                                onChange: (option) {
+                                  activitiesBloc.add(
+                                    SelectActivityType(
+                                      client: client,
+                                      type: option,
+                                    ),
+                                  );
+                                  scrollController.jumpTo(0);
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ];
-        },
-        body: TabBarView(
-          controller: tabController,
-          children: const [
-            ActivitiesList(
-              pageKey: PageStorageKey<String>('following'),
-              isFollowing: true,
-            ),
-            ActivitiesList(
-              pageKey: PageStorageKey<String>('global'),
-              isFollowing: false,
-            ),
-          ],
+            ];
+          },
+          body: TabBarView(
+            controller: tabController,
+            children: const [
+              ActivitiesList(
+                pageKey: PageStorageKey<String>('following'),
+                isFollowing: true,
+              ),
+              ActivitiesList(
+                pageKey: PageStorageKey<String>('global'),
+                isFollowing: false,
+              ),
+            ],
+          ),
         ),
       ),
     );

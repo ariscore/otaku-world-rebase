@@ -169,9 +169,10 @@ class _BottomAreaState extends State<_BottomArea> {
             bottom: 45,
             child: PrimaryButton(
               onTap: () async {
-                final sharedPrefs = await SharedPreferences.getInstance();
-                sharedPrefs.setBool('is_first_time', false);
-                context.go('/login');
+                SharedPreferences.getInstance().then((sharedPrefs) {
+                  sharedPrefs.setBool('is_first_time', false);
+                  context.go('/login');
+                });
               },
               label: 'Get Started',
             ),

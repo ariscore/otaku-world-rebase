@@ -10,6 +10,7 @@ class PrimaryOutlinedButton extends StatelessWidget {
     this.fontSize,
     required this.onTap,
     required this.label,
+    this.isSmall = false,
   });
 
   final double horizontalPadding;
@@ -18,37 +19,33 @@ class PrimaryOutlinedButton extends StatelessWidget {
   final VoidCallback onTap;
   final String label;
   final double? fontSize;
+  final bool isSmall;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: horizontalPadding,
-      ),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(15),
-        child: Container(
-          width: width ??
-              MediaQuery.of(context).size.width - horizontalPadding * 2,
-          decoration: ShapeDecoration(
-            shape: RoundedRectangleBorder(
-              side: BorderSide(width: 1, color: Theme.of(context).primaryColor),
-              borderRadius: BorderRadius.circular(15),
-            ),
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(isSmall ? 10 : 15),
+      child: Container(
+        width: width ??
+            MediaQuery.of(context).size.width - horizontalPadding * 2,
+        decoration: ShapeDecoration(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(width: 1, color: Theme.of(context).primaryColor),
+            borderRadius: BorderRadius.circular(isSmall ? 10 : 15),
           ),
-          child: Center(
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: verticalPadding,
-              ),
-              child: Text(
-                label,
-                style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  fontSize: fontSize,
-                  color: AppColors.white,
-                  fontFamily: 'Poppins',
-                ),
+        ),
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: verticalPadding,
+            ),
+            child: Text(
+              label,
+              style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                fontSize: fontSize,
+                color: AppColors.white,
+                fontFamily: 'Poppins',
               ),
             ),
           ),

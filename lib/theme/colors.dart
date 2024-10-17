@@ -35,4 +35,13 @@ class AppColors {
   static const Color mangoTango = Color(0xFFF87F3C);
   
   static const Color brilliantAzure = Color(0x3332A6F9);
+
+  static const secondaryGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      AppColors.japaneseIndigo,
+      AppColors.darkCharcoal,
+    ],
+  );
 }

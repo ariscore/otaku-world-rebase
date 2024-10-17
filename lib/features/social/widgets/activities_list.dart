@@ -5,7 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/core/ui/activities/message_activity_card.dart';
 import 'package:otaku_world/core/ui/error_text.dart';
+import 'package:otaku_world/core/ui/placeholders/anime_character_placeholder.dart';
 import 'package:otaku_world/features/social/widgets/activity_shimmer_list.dart';
+import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/theme/colors.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
@@ -44,47 +46,57 @@ class ActivitiesList extends StatelessWidget {
           return RefreshIndicator(
             backgroundColor: AppColors.raisinBlack,
             onRefresh: () => _refresh(client, activitiesBloc),
-            child: CustomScrollView(
-              key: pageKey,
-              slivers: [
-                SliverOverlapInjector(
-                  handle:
-                      NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-                ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      if (index == activities.length - 1) {
-                        log('Loading more activities');
-                        activitiesBloc.add(
-                          LoadMoreActivities(
-                            client: client,
-                            isFollowing: isFollowing,
-                          ),
-                        );
-                      }
+            child: activities.isEmpty
+                ? const Center(
+                    child: AnimeCharacterPlaceholder(
+                      asset: Assets.charactersCigaretteGirl,
+                      heading: 'Nothing to Show',
+                      subheading: 'Looks like there are no activities yet!',
+                    ),
+                  )
+                : CustomScrollView(
+                    key: pageKey,
+                    slivers: [
+                      SliverOverlapInjector(
+                        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                            context),
+                      ),
+                      SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            if (index == activities.length - 1) {
+                              log('Loading more activities');
+                              activitiesBloc.add(
+                                LoadMoreActivities(
+                                  client: client,
+                                  isFollowing: isFollowing,
+                                ),
+                              );
+                            }
 
-                      final activity = activities[index];
-                      if (activity
-                          is Query$GetActivities$Page$activities$$TextActivity) {
-                        return TextActivityCard(activity: activity);
-                      } else if (activity
-                          is Query$GetActivities$Page$activities$$ListActivity) {
-                        return ListActivityCard(activity: activity);
-                      } else if (activity
-                          is Query$GetActivities$Page$activities$$MessageActivity) {
-                        return MessageActivityCard(activity: activity);
-                      } else {
-                        return const SizedBox();
-                      }
-                    },
-                    childCount: activities.length,
+                            final activity = activities[index];
+                            if (activity
+                                is Query$GetActivities$Page$activities$$TextActivity) {
+                              return TextActivityCard(activity: activity);
+                            } else if (activity
+                                is Query$GetActivities$Page$activities$$ListActivity) {
+                              return ListActivityCard(activity: activity);
+                            } else if (activity
+                                is Query$GetActivities$Page$activities$$MessageActivity) {
+                              return MessageActivityCard(activity: activity);
+                            } else {
+                              return const SizedBox();
+                            }
+                          },
+                          childCount: activities.length,
+                        ),
+                      ),
+                      if (isFollowing && state.hasNextPageFollowing)
+                        _buildLoader(),
+                      if (!isFollowing && state.hasNextPageGlobal)
+                        _buildLoader()
+                    ],
                   ),
-                ),
-                if (isFollowing && state.hasNextPageFollowing) _buildLoader(),
-                if (!isFollowing && state.hasNextPageGlobal) _buildLoader()
-              ],
-            ),
           );
         } else if (state is ActivitiesError) {
           return ErrorText(message: state.message, onTryAgain: () {});

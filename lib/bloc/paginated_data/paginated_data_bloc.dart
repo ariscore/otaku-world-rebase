@@ -5,7 +5,6 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 
 part 'paginated_data_event.dart';
 
@@ -24,6 +23,7 @@ abstract class PaginatedDataBloc<Q, E>
     );
     on<UpdateData<E>>(_onUpdateData);
     on<ResetData>(_onResetData);
+    on<UpdateLoading>(_onUpdateLoading);
   }
 
   var page = 1;
@@ -84,6 +84,12 @@ abstract class PaginatedDataBloc<Q, E>
   Future<QueryResult<Q>> loadData(GraphQLClient client);
 
   void processData(QueryResult<Q> response);
+
+  void _onUpdateLoading(UpdateLoading event, Emitter<PaginatedDataState> emit) {
+    emit((state as PaginatedDataLoaded).copyWith(
+      showProgress: event.showProgress,
+    ));
+  }
 
   @override
   void onTransition(

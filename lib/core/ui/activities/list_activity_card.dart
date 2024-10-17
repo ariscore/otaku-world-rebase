@@ -30,6 +30,7 @@ class ListActivityCard extends StatelessWidget {
       replyCount: activity.replyCount,
       timestamp: activity.createdAt,
       type: Fragment$ListActivity,
+      isSubscribed: activity.isSubscribed ?? false,
       child: InkWell(
         onTap: () => NavigationHelper.goToMediaDetailScreen(
           context: context,
