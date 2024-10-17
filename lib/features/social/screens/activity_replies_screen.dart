@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
@@ -52,7 +53,30 @@ class ActivityRepliesScreen extends HookWidget {
       return null;
     });
 
-    return BlocBuilder<ActivityRepliesBloc, PaginatedDataState>(
+    return BlocConsumer<ActivityRepliesBloc, PaginatedDataState>(
+      listenWhen: (previous, current) =>
+      current is PaginatedDataLoaded &&
+          previous is PaginatedDataLoaded &&
+          previous.showProgress != current.showProgress,
+      listener: (context, state) {
+        if (state is PaginatedDataLoaded && state.showProgress) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            useRootNavigator: true,
+            builder: (context) {
+              return WillPopScope(
+                onWillPop: () async => false,
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            },
+          );
+        } else {
+          context.pop();
+        }
+      },
       builder: (context, state) {
         if (state is PaginatedDataInitial) {
           activityRepliesBloc.add(LoadData(client));

@@ -38,6 +38,7 @@ class Assets {
   static const String iconsDiscoverFilter = 'assets/icons/discover_filter.svg';
   static const String iconsDoubleArrowRight = 'assets/icons/double-arrow-right.svg';
   static const String iconsEdit = 'assets/icons/edit.svg';
+  static const String iconsEditSmall = 'assets/icons/edit-small.svg';
   static const String iconsFavourite = 'assets/icons/favourite.svg';
   static const String iconsFilterVertical = 'assets/icons/filter-vertical.svg';
   static const String iconsHome = 'assets/icons/home.svg';
