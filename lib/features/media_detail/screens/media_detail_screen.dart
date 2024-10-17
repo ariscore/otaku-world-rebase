@@ -141,14 +141,15 @@ class MediaDetailScreen extends HookWidget {
           builder: (context, state) {
             if (state is MediaDetailLoaded) {
               final String icon = state.media.mediaListEntry == null &&
-                      state.media.mediaListEntry?.status != null
-                  ? Assets.mediaEditorMediaAdd
-                  : Assets.mediaEditorMediaEdit;
+                      state.media.mediaListEntry?.status == null
+                  ? Assets.iconsMediaAdd
+                  : Assets.iconsMediaEdit;
               return FloatingActionButton(
                 onPressed: () {},
-                child: Container(
-                  color: AppColors.sunsetOrange,
-                  child: SvgPicture.asset(icon),
+                backgroundColor: AppColors.sunsetOrange,
+                child: SvgPicture.asset(
+                  icon,
+                  width: 30,
                 ),
               );
             } else {

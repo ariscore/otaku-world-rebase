@@ -45,6 +45,8 @@ class Assets {
   static const String iconsLike = 'assets/icons/like.svg';
   static const String iconsLineVertical = 'assets/icons/line_vertical.svg';
   static const String iconsLinkSquare = 'assets/icons/link-square.svg';
+  static const String iconsMediaAdd = 'assets/icons/media-add.svg';
+  static const String iconsMediaEdit = 'assets/icons/media-edit.svg';
   static const String iconsMoreHorizontal = 'assets/icons/more-horizontal.svg';
   static const String iconsMoreVertical = 'assets/icons/more-vertical.svg';
   static const String iconsNextButton = 'assets/icons/next-button.svg';
@@ -52,6 +54,7 @@ class Assets {
   static const String iconsNotificationOff = 'assets/icons/notification-off.svg';
   static const String iconsOpenLink2 = 'assets/icons/open-link2.svg';
   static const String iconsRemove = 'assets/icons/remove.svg';
+  static const String iconsReviewAdd = 'assets/icons/review-add.svg';
   static const String iconsSearch = 'assets/icons/search.svg';
   static const String iconsSearchSmall = 'assets/icons/search-small.svg';
   static const String iconsShare = 'assets/icons/share.svg';
@@ -68,9 +71,6 @@ class Assets {
   static const String mangaHorimiya = 'assets/images/discover/manga/horimiya.png';
   static const String mangaOnePunchMan = 'assets/images/discover/manga/one-punch-man.jpg';
   static const String mangaSpyxfamily = 'assets/images/discover/manga/spyxfamily.jpg';
-  static const String mediaEditorMediaAdd = 'assets/icons/media_editor/media-add.svg';
-  static const String mediaEditorMediaEdit = 'assets/icons/media_editor/media-edit.svg';
-  static const String mediaEditorReviewAdd = 'assets/icons/media_editor/review-add.svg';
   static const String myRefreshIndicatorForest = 'assets/my_refresh_indicator/forest.png';
   static const String myRefreshIndicatorFullMoon = 'assets/my_refresh_indicator/full_moon.svg';
   static const String myRefreshIndicatorMeteorite1 = 'assets/my_refresh_indicator/meteorite1.svg';
