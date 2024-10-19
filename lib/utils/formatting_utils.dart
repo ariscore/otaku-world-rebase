@@ -63,9 +63,13 @@ class FormattingUtils {
     return DateFormat('hh:mm a').format(time);
   }
 
-  static String formatUnixTimestamp(int unixTimestamp) {
-    DateTime dateTime =
-        DateTime.fromMillisecondsSinceEpoch(unixTimestamp * 1000);
+  static String formatUnixTimestamp(
+    int unixTimestamp, {
+    bool isFromAniList = true,
+  }) {
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(
+      isFromAniList ? unixTimestamp * 1000 : unixTimestamp,
+    );
     String formattedDate = DateFormat('E, d MMM yyyy').format(dateTime);
     String formattedTime = DateFormat('h:mm a').format(dateTime);
     return '$formattedDate at $formattedTime';

@@ -6,11 +6,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/social/reply_activity/reply_activity_cubit.dart';
+import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
 import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/types/types.dart';
+import 'package:otaku_world/core/ui/activities/activity_reply_preview.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/custom_text_field.dart';
 import 'package:otaku_world/generated/assets.dart';
+import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
 
 class ReplyActivityScreen extends StatefulWidget {
@@ -24,10 +27,12 @@ class ReplyActivityScreen extends StatefulWidget {
 
 class _ReplyActivityScreenState extends State<ReplyActivityScreen> {
   final textController = TextEditingController();
+  final focusNode = FocusNode();
 
   @override
   void dispose() {
     textController.dispose();
+    focusNode.dispose();
     super.dispose();
   }
 
@@ -60,6 +65,22 @@ class _ReplyActivityScreenState extends State<ReplyActivityScreen> {
         }
       },
       child: Scaffold(
+        floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: AppColors.sunsetOrange,
+          onPressed: _showPreview,
+          label: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 10,
+            ),
+            child: Text(
+              'Preview',
+              style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                    fontFamily: 'Poppins',
+                  ),
+            ),
+          ),
+        ),
         appBar: SimpleAppBar(
           title: 'Reply Activity',
           actions: [
@@ -91,12 +112,36 @@ class _ReplyActivityScreenState extends State<ReplyActivityScreen> {
           ),
           child: Stack(
             children: [
-              CustomTextField(controller: textController,),
+              CustomTextField(
+                controller: textController,
+                focusNode: focusNode,
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void _showPreview() {
+    focusNode.unfocus();
+    final state = context.read<ViewerBloc>().state;
+    if (state is ViewerLoaded) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return Center(
+            child: ActivityReplyPreview(
+              text: textController.text.trim(),
+              userAvatar: state.user.avatar?.medium ?? '',
+              userName: state.user.name,
+            ),
+          );
+        },
+      );
+    } else {
+      UIUtils.showSnackBar(context, 'Preview not available!');
+    }
   }
 
   void _replyActivity() {
