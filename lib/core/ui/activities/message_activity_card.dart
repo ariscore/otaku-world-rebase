@@ -40,6 +40,9 @@ class MessageActivityCard extends StatelessWidget {
       type: Fragment$MessageActivity,
       isCurrentUserMessage: isCurrentUserMessage,
       isSubscribed: activity.isSubscribed ?? false,
+      onEdit: () {
+
+      },
       child: Text(
         activity.message!,
         style: Theme.of(context).textTheme.headlineSmall,

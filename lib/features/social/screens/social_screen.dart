@@ -79,14 +79,17 @@ class SocialScreen extends HookWidget {
         }
       },
       child: Scaffold(
-        floatingActionButton: ScrollToTopFAB(controller: scrollController),
+        floatingActionButton: ScrollToTopFAB(
+          controller: scrollController,
+          tag: 'social',
+        ),
         body: NestedScrollView(
           controller: scrollController,
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               SliverOverlapAbsorber(
-                handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                    context),
+                handle:
+                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                 sliver: const SliverAppBar(
                   collapsedHeight: 90,
                   expandedHeight: 90,

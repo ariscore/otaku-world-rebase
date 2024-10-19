@@ -29,6 +29,7 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
     super.key,
     this.crossAxisCount = 3,
     this.isTop100 = false,
+    required this.tag,
   });
 
   final int crossAxisCount;
@@ -36,6 +37,7 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
   final List<Widget>? actions;
   final Enum$MediaType mediaType;
   final bool isTop100;
+  final String tag;
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +137,7 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
           return const Text('Unknown State');
         },
       ),
-      floatingActionButton: ScrollToTopFAB(controller: scrollController),
+      floatingActionButton: ScrollToTopFAB(controller: scrollController, tag: '',),
     );
   }
 

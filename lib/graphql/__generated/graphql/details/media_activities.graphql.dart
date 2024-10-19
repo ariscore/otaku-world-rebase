@@ -746,7 +746,6 @@ abstract class CopyWith$Query$MediaActivityQuery$Page<TRes> {
     String? $__typename,
   });
   CopyWith$Query$MediaActivityQuery$Page$pageInfo<TRes> get pageInfo;
-
   TRes activities(
       Iterable<Query$MediaActivityQuery$Page$activities?>? Function(
               Iterable<

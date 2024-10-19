@@ -13,6 +13,7 @@ class TopAnimeScreen extends StatelessWidget {
       mediaType: Enum$MediaType.ANIME,
       appbarTitle: 'Top 100 Anime',
       isTop100: true,
+      tag: 'top_100_anime',
     );
   }
 }

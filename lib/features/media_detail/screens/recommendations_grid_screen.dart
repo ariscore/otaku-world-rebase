@@ -19,6 +19,7 @@ class RecommendationsGridScreen extends StatelessWidget {
       child: MediaGridScreen<RecommendationAnimeBloc>(
         mediaType: mediaType,
         appbarTitle: 'Recommendations',
+        tag: 'recommendations',
       ),
     );
   }

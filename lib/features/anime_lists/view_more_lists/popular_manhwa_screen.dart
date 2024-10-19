@@ -12,6 +12,7 @@ class PopularManhwaScreen extends StatelessWidget {
     return const MediaGridScreen<PopularManhwaBloc>(
       mediaType: Enum$MediaType.MANGA,
       appbarTitle: 'Popular Manhwa',
+      tag: 'popular_manhwa',
     );
   }
 }

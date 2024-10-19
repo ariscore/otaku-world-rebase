@@ -13,6 +13,7 @@ class TopMangaScreen extends StatelessWidget {
       mediaType: Enum$MediaType.MANGA,
       appbarTitle: 'Top 100 Manga',
       isTop100: true,
+      tag: 'top_100_manga',
     );
   }
 }

@@ -116,4 +116,20 @@ class SocialBloc extends PaginatedDataBloc<Query$MediaActivityQuery, dynamic> {
       }
     }
   }
+
+  void updateReplyCount({required int activityId, required bool increase}) {
+    final index = list.indexWhere((e) => e.id == activityId);
+
+    final inc = increase ? 1 : -1;
+    if (index != -1) {
+      final activity = list[index];
+      if (activity is Query$MediaActivityQuery$Page$activities$$ListActivity) {
+        list[index] = activity.copyWith(
+          replyCount: activity.replyCount + inc,
+        );
+      }
+    }
+
+    add(UpdateData(list: list));
+  }
 }

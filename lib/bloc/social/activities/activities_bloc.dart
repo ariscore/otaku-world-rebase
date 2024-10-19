@@ -293,6 +293,61 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
     }
   }
 
+  void updateReplyCount({required int activityId, required bool increase}) {
+    int index = followingList.indexWhere(
+      (e) => e.id == activityId,
+    );
+
+    final inc = increase ? 1 : -1;
+    if (index != -1) {
+      final activity = followingList[index];
+      if (activity is Query$GetActivities$Page$activities$$TextActivity) {
+        followingList[index] = activity.copyWith(
+          replyCount: activity.replyCount + inc,
+        );
+      } else if (activity
+          is Query$GetActivities$Page$activities$$ListActivity) {
+        followingList[index] = activity.copyWith(
+          replyCount: activity.replyCount + inc,
+        );
+      } else if (activity
+          is Query$GetActivities$Page$activities$$MessageActivity) {
+        followingList[index] = activity.copyWith(
+          replyCount: activity.replyCount + inc,
+        );
+      }
+    }
+
+    index = globalList.indexWhere(
+      (e) => e.id == activityId,
+    );
+    if (index != -1) {
+      final activity = globalList[index];
+      if (activity is Query$GetActivities$Page$activities$$TextActivity) {
+        globalList[index] = activity.copyWith(
+          replyCount: activity.replyCount + inc,
+        );
+      } else if (activity
+          is Query$GetActivities$Page$activities$$ListActivity) {
+        globalList[index] = activity.copyWith(
+          replyCount: activity.replyCount + inc,
+        );
+      } else if (activity
+          is Query$GetActivities$Page$activities$$MessageActivity) {
+        globalList[index] = activity.copyWith(
+          replyCount: activity.replyCount + inc,
+        );
+      }
+    }
+
+    add(UpdateActivities(
+      followingActivities: followingList,
+      globalActivities: globalList,
+      hasNextPageFollowing: hasNextPageFollowing,
+      hasNextPageGlobal: hasNextPageGlobal,
+    ));
+  }
+
   @override
   void onTransition(Transition<ActivitiesEvent, ActivitiesState> transition) {
     log(transition.toString(), name: 'ActivitiesBloc');

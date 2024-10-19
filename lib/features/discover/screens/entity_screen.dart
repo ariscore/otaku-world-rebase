@@ -16,9 +16,10 @@ import '../../../graphql/__generated/graphql/fragments.graphql.dart';
 import '../widgets/entity_card.dart';
 
 class EntityScreen<B extends PaginatedDataBloc> extends HookWidget {
-  const EntityScreen({super.key, required this.title});
+  const EntityScreen({super.key, required this.title, required this.tag});
 
   final String title;
+  final String tag;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,10 @@ class EntityScreen<B extends PaginatedDataBloc> extends HookWidget {
     }, const []);
 
     return Scaffold(
-      floatingActionButton: ScrollToTopFAB(controller: scrollController),
+      floatingActionButton: ScrollToTopFAB(
+        controller: scrollController,
+        tag: tag,
+      ),
       body: BlocBuilder<B, PaginatedDataState>(
         builder: (context, state) {
           if (state is PaginatedDataInitial || state is PaginatedDataLoading) {

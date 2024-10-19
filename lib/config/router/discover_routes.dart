@@ -122,6 +122,7 @@ final discoverRoutes = [
             directionTween: SlideTransitionRoute.bottomToTopTween,
             builder: (context) => const EntityScreen<BirthdayCharactersBloc>(
               title: 'Birthdays',
+              tag: 'characters_birthdays',
             ),
           ),
           SlideTransitionRoute(
@@ -130,6 +131,7 @@ final discoverRoutes = [
             builder: (context) =>
                 const EntityScreen<MostFavoriteCharactersBloc>(
               title: 'Most Favorite Characters',
+                  tag: 'most_favorite_characters',
             ),
           ),
         ],
@@ -153,6 +155,7 @@ final discoverRoutes = [
             directionTween: SlideTransitionRoute.bottomToTopTween,
             builder: (context) => const EntityScreen<BirthdayStaffBloc>(
               title: 'Birthdays',
+              tag: 'staff_birthdays',
             ),
           ),
           SlideTransitionRoute(
@@ -160,6 +163,7 @@ final discoverRoutes = [
             directionTween: SlideTransitionRoute.bottomToTopTween,
             builder: (context) => const EntityScreen<MostFavoriteStaffBloc>(
               title: 'Most Favorite Staff',
+              tag: 'most_favorite_staff',
             ),
           ),
         ],
