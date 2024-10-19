@@ -56,7 +56,10 @@ class StudiosDiscoverScreen extends HookWidget {
 
     return Scaffold(
       appBar: const SimpleAppBar(title: "Studios"),
-      floatingActionButton: ScrollToTopFAB(controller: scrollController),
+      floatingActionButton: ScrollToTopFAB(
+        controller: scrollController,
+        tag: 'discover_studios',
+      ),
       body: SingleChildScrollView(
         controller: scrollController,
         child: Column(

@@ -12,6 +12,7 @@ class AllTimePopularMangaScreen extends StatelessWidget {
     return const MediaGridScreen<AllTimePopularMangaBloc>(
       mediaType: Enum$MediaType.MANGA,
       appbarTitle: 'All Time Popular',
+      tag: 'all_time_popular_manga',
     );
   }
 }

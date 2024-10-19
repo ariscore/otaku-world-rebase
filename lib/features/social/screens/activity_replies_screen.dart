@@ -1,27 +1,34 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
+import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
+import 'package:otaku_world/bloc/social/activities/activities_bloc.dart';
 import 'package:otaku_world/bloc/social/activity_replies/activity_replies_bloc.dart';
+import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/activities/activity_reply_card.dart';
 import 'package:otaku_world/core/ui/placeholders/anime_character_placeholder.dart';
 import 'package:otaku_world/core/ui/shimmers/activity_shimmer_card.dart';
 import 'package:otaku_world/generated/assets.dart';
+import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 
 import '../../../core/ui/appbars/simple_app_bar.dart';
 import '../../../core/ui/appbars/simple_sliver_app_bar.dart';
 import '../../../core/ui/error_text.dart';
-import '../../reviews/widgets/scroll_to_top_fab.dart';
 
 class ActivityRepliesScreen extends HookWidget {
-  const ActivityRepliesScreen({super.key});
+  const ActivityRepliesScreen({super.key, required this.bloc});
+
+  final Bloc bloc;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +62,7 @@ class ActivityRepliesScreen extends HookWidget {
 
     return BlocConsumer<ActivityRepliesBloc, PaginatedDataState>(
       listenWhen: (previous, current) =>
-      current is PaginatedDataLoaded &&
+          current is PaginatedDataLoaded &&
           previous is PaginatedDataLoaded &&
           previous.showProgress != current.showProgress,
       listener: (context, state) {
@@ -85,20 +92,28 @@ class ActivityRepliesScreen extends HookWidget {
           return _buildLoadingScaffold();
         } else if (state is PaginatedDataLoaded) {
           return Scaffold(
-            floatingActionButton: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ScrollToTopFAB(
-                  controller: repliesScrollController,
-                  tag: 'replies_fab',
-                ),
-                const SizedBox(height: 10),
-                FloatingActionButton(
-                  backgroundColor: AppColors.sunsetOrange,
-                  onPressed: () {},
-                  child: SvgPicture.asset(Assets.iconsEdit, width: 25),
-                ),
-              ],
+            floatingActionButton: _WriteReplyButton(
+              controller: repliesScrollController,
+              onPressed: () {
+                context.push(
+                  '${RouteConstants.replyActivity}'
+                  '?id=${activityRepliesBloc.activityId}',
+                  extra: (Fragment$ActivityReply activityReply) {
+                    activityRepliesBloc.addReply(activityReply);
+                    if (bloc is ActivitiesBloc) {
+                      (bloc as ActivitiesBloc).updateReplyCount(
+                        activityId: activityReply.activityId ?? 0,
+                        increase: true,
+                      );
+                    } else if (bloc is SocialBloc) {
+                      (bloc as SocialBloc).updateReplyCount(
+                        activityId: activityReply.activityId ?? 0,
+                        increase: true,
+                      );
+                    }
+                  },
+                );
+              },
             ),
             body: RefreshIndicator(
               backgroundColor: AppColors.raisinBlack,
@@ -130,8 +145,22 @@ class ActivityRepliesScreen extends HookWidget {
                       : SliverList(
                           delegate: SliverChildBuilderDelegate(
                             (context, index) {
+                              final activityReply = state.list[index];
                               return ActivityReplyCard(
-                                activityReply: state.list[index],
+                                activityReply: activityReply,
+                                onDeleted: () {
+                                  if (bloc is ActivitiesBloc) {
+                                    (bloc as ActivitiesBloc).updateReplyCount(
+                                      activityId: activityReply.activityId ?? 0,
+                                      increase: false,
+                                    );
+                                  } else if (bloc is SocialBloc) {
+                                    (bloc as SocialBloc).updateReplyCount(
+                                      activityId: activityReply.activityId ?? 0,
+                                      increase: false,
+                                    );
+                                  }
+                                },
                               );
                             },
                             childCount: state.list.length,
@@ -175,7 +204,7 @@ class ActivityRepliesScreen extends HookWidget {
   Widget _buildErrorScaffold(String message, VoidCallback onTryAgain) {
     return Scaffold(
       appBar: const SimpleAppBar(
-        title: 'Reviews',
+        title: 'Replies',
       ),
       body: Center(
         child: ErrorText(
@@ -196,5 +225,54 @@ class ActivityRepliesScreen extends HookWidget {
         },
       ),
     );
+  }
+}
+
+class _WriteReplyButton extends StatefulHookWidget {
+  const _WriteReplyButton({required this.controller, required this.onPressed});
+
+  final ScrollController controller;
+  final VoidCallback onPressed;
+
+  @override
+  State<_WriteReplyButton> createState() => _WriteReplyButtonState();
+}
+
+class _WriteReplyButtonState extends State<_WriteReplyButton> {
+  bool _isVisible = true;
+
+  @override
+  Widget build(BuildContext context) {
+    useEffect(() {
+      widget.controller.addListener(() {
+        if (widget.controller.position.userScrollDirection ==
+            ScrollDirection.reverse) {
+          if (_isVisible) {
+            setState(() {
+              _isVisible = false;
+            });
+          }
+        } else if (widget.controller.position.userScrollDirection ==
+            ScrollDirection.forward) {
+          if (!_isVisible) {
+            setState(() {
+              _isVisible = true;
+            });
+          }
+        }
+      });
+      return null;
+    });
+
+    return _isVisible
+        ? Animate(
+            effects: const [ScaleEffect()],
+            child: FloatingActionButton(
+              backgroundColor: AppColors.sunsetOrange,
+              onPressed: widget.onPressed,
+              child: SvgPicture.asset(Assets.iconsEdit, width: 25),
+            ),
+          )
+        : const SizedBox();
   }
 }

@@ -22,7 +22,7 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
         onPressed: () {
           if (context.canPop()) {
             context.pop();
-          }else {
+          } else {
             context.go('/home');
           }
         },

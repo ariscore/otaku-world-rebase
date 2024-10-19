@@ -11,6 +11,7 @@ class TrendingAnimeScreen extends StatelessWidget {
     return const MediaGridScreen<TrendingAnimeBloc>(
       appbarTitle: 'Trending Anime',
       mediaType: Enum$MediaType.ANIME,
+      tag: 'trending_anime',
     );
   }
 }

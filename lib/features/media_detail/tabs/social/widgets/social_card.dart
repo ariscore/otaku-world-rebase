@@ -10,6 +10,7 @@ import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../../../bloc/graphql_client/graphql_client_cubit.dart';
+import '../../../../../config/router/router_constants.dart';
 import '../../../../../core/ui/dialogs/alert_dialog.dart';
 import '../../../../../theme/colors.dart';
 import '../../../../../theme/decorations.dart';
@@ -66,8 +67,8 @@ class _SocialCardState extends State<SocialCard> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               ReviewProfilePhoto(
-                profilePicUrl:
-                    widget.activity.user?.avatar?.medium ?? UiConstants.noImageUrl,
+                profilePicUrl: widget.activity.user?.avatar?.medium ??
+                    UiConstants.noImageUrl,
                 radius: 25,
               ),
               const SizedBox(
@@ -101,6 +102,13 @@ class _SocialCardState extends State<SocialCard> {
             isSubscribed: isSubscribed,
             onToggleSubscription: () => _toggleSubscription(context),
             onDelete: () => _delete(context),
+            onReply: () {
+              context.push(
+                '${RouteConstants.activityReplies}?id=${widget.activity.id}',
+                extra: context.read<SocialBloc>(),
+              );
+            },
+            onEdit: () {},
           ),
           Text(
             FormattingUtils.formatUnixTimestamp(widget.activity.createdAt),
@@ -127,7 +135,7 @@ class _SocialCardState extends State<SocialCard> {
         subscribe: isSubscribed,
       )
           .then(
-            (result) {
+        (result) {
           if (result == null) {
             setState(() {
               isSubscribed = !isSubscribed;
