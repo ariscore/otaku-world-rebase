@@ -15,6 +15,10 @@ import 'package:otaku_world/core/ui/custom_text_field.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
 
+import '../../../bloc/viewer/viewer_bloc.dart';
+import '../../../core/ui/activities/activity_reply_preview.dart';
+import '../../../theme/colors.dart';
+
 class EditActivityReplyScreen extends StatefulWidget {
   const EditActivityReplyScreen({
     super.key,
@@ -32,6 +36,7 @@ class EditActivityReplyScreen extends StatefulWidget {
 
 class _EditActivityReplyScreenState extends State<EditActivityReplyScreen> {
   late final TextEditingController textController;
+  final focusNode = FocusNode();
 
   @override
   void initState() {
@@ -42,6 +47,7 @@ class _EditActivityReplyScreenState extends State<EditActivityReplyScreen> {
   @override
   void dispose() {
     textController.dispose();
+    focusNode.dispose();
     super.dispose();
   }
 
@@ -73,6 +79,22 @@ class _EditActivityReplyScreenState extends State<EditActivityReplyScreen> {
         }
       },
       child: Scaffold(
+        floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: AppColors.sunsetOrange,
+          onPressed: _showPreview,
+          label: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 10,
+            ),
+            child: Text(
+              'Preview',
+              style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                fontFamily: 'Poppins',
+              ),
+            ),
+          ),
+        ),
         appBar: SimpleAppBar(
           title: 'Edit Activity Reply',
           actions: [
@@ -112,6 +134,27 @@ class _EditActivityReplyScreenState extends State<EditActivityReplyScreen> {
         ),
       ),
     );
+  }
+
+  void _showPreview() {
+    focusNode.unfocus();
+    final state = context.read<ViewerBloc>().state;
+    if (state is ViewerLoaded) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return Center(
+            child: ActivityReplyPreview(
+              text: textController.text.trim(),
+              userAvatar: state.user.avatar?.medium ?? '',
+              userName: state.user.name,
+            ),
+          );
+        },
+      );
+    } else {
+      UIUtils.showSnackBar(context, 'Preview not available!');
+    }
   }
 
   void _replyActivity() {
