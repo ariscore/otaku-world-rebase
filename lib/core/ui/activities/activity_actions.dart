@@ -16,7 +16,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/social/like_activity/like_activity_cubit.dart';
-import '../../../config/router/router_constants.dart';
 import '../../../generated/assets.dart';
 import '../../../theme/colors.dart';
 
@@ -33,6 +32,8 @@ class ActivityActions extends StatelessWidget {
     this.isCurrentUserMessage = false,
     required this.onToggleSubscription,
     required this.onDelete,
+    required this.onReply,
+    required this.onEdit,
   });
 
   final int userId;
@@ -45,6 +46,8 @@ class ActivityActions extends StatelessWidget {
   final bool isSubscribed;
   final VoidCallback onToggleSubscription;
   final VoidCallback onDelete;
+  final VoidCallback onReply;
+  final VoidCallback onEdit;
 
   @override
   Widget build(BuildContext context) {
@@ -80,11 +83,7 @@ class ActivityActions extends StatelessWidget {
             ),
             const SizedBox(width: 15),
             InkWell(
-              onTap: () {
-                context.push(
-                  '${RouteConstants.activityReplies}?id=$activityId',
-                );
-              },
+              onTap: onReply,
               child: Row(
                 children: [
                   SvgPicture.asset(
@@ -166,7 +165,10 @@ class ActivityActions extends StatelessWidget {
                 BottomSheetComponent(
                   iconName: Assets.iconsEditSmall,
                   text: 'Edit',
-                  onTap: () {},
+                  onTap: () {
+                    context.pop();
+                    onEdit();
+                  },
                 ),
               );
             }

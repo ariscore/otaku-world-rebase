@@ -34,9 +34,7 @@ class SimpleSliverAppBar extends StatelessWidget {
       toolbarHeight: 55,
       title: Text(
         title,
-        style: Theme.of(context).textTheme.displayMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
+        style: Theme.of(context).textTheme.displayMedium,
       ),
       backgroundColor: AppColors.raisinBlack,
       elevation: 0,

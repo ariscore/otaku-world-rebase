@@ -52,7 +52,10 @@ class CharactersDiscoverScreen extends HookWidget {
 
     return Scaffold(
       appBar: const SimpleAppBar(title: "Characters"),
-      floatingActionButton: ScrollToTopFAB(controller: scrollController),
+      floatingActionButton: ScrollToTopFAB(
+        controller: scrollController,
+        tag: 'discover_characters',
+      ),
       body: SingleChildScrollView(
         controller: scrollController,
         child: Column(

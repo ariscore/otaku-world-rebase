@@ -12,6 +12,7 @@ class TopUpcomingAnimeScreen extends StatelessWidget {
     return const MediaGridScreen<TopUpcomingAnimeBloc>(
       mediaType: Enum$MediaType.ANIME,
       appbarTitle: 'Top Upcoming',
+      tag: 'top_upcoming_anime',
     );
   }
 }

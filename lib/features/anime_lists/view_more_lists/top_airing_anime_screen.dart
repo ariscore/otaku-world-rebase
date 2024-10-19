@@ -12,6 +12,7 @@ class TopAiringAnimeScreen extends StatelessWidget {
     return const MediaGridScreen<TopAiringAnimeBloc>(
       mediaType: Enum$MediaType.ANIME,
       appbarTitle: 'Top Airing',
+      tag: 'top_airing_anime',
     );
   }
 }

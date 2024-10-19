@@ -52,7 +52,10 @@ class StaffDiscoverScreen extends HookWidget {
 
     return Scaffold(
       appBar: const SimpleAppBar(title: "Staff"),
-      floatingActionButton: ScrollToTopFAB(controller: scrollController),
+      floatingActionButton: ScrollToTopFAB(
+        controller: scrollController,
+        tag: 'discover_staff',
+      ),
       body: SingleChildScrollView(
         controller: scrollController,
         child: Column(

@@ -113,4 +113,16 @@ class ActivityRepliesBloc extends PaginatedDataBloc<Query$GetActivityReplies,
       }
     }
   }
+
+  void addReply(Fragment$ActivityReply reply) {
+    add(UpdateData(list: list..add(reply)));
+  }
+
+  void editReply(Fragment$ActivityReply reply) {
+    final index = list.indexWhere((e) => e?.id == reply.id);
+    if (index != -1) {
+      list[index] = reply;
+    }
+    add(UpdateData(list: list));
+  }
 }

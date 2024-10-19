@@ -99,7 +99,9 @@ class ActivitiesList extends StatelessWidget {
                   ),
           );
         } else if (state is ActivitiesError) {
-          return ErrorText(message: state.message, onTryAgain: () {});
+          return ErrorText(message: state.message, onTryAgain: () {
+            activitiesBloc.add(LoadActivities(client));
+          });
         } else {
           return const Text('Unknown State');
         }

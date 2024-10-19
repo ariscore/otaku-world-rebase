@@ -24,6 +24,9 @@ class TextActivityCard extends StatelessWidget {
       timestamp: activity.createdAt,
       type: Fragment$TextActivity,
       isSubscribed: activity.isSubscribed ?? false,
+      onEdit: () {
+
+      },
       // child: Text(
       //   activity.text!,
       //   style: Theme.of(context).textTheme.headlineSmall,

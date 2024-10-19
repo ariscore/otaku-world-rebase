@@ -9,6 +9,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:like_button/like_button.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
+import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/markdown/markdown.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -23,9 +24,14 @@ import '../../../utils/ui_utils.dart';
 import '../dialogs/alert_dialog.dart';
 
 class ActivityReplyCard extends StatelessWidget {
-  const ActivityReplyCard({super.key, required this.activityReply});
+  const ActivityReplyCard({
+    super.key,
+    required this.activityReply,
+    required this.onDeleted,
+  });
 
   final Fragment$ActivityReply activityReply;
+  final VoidCallback onDeleted;
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +159,7 @@ class ActivityReplyCard extends StatelessWidget {
           BottomSheetComponent(
             iconName: Assets.iconsEditSmall,
             text: 'Edit',
-            onTap: () {},
+            onTap: () => _edit(context),
           ),
         ];
 
@@ -192,6 +198,20 @@ class ActivityReplyCard extends StatelessWidget {
     );
   }
 
+  void _edit(BuildContext context) {
+    context.pop();
+    context.push(
+      '${RouteConstants.editActivityReply}?id=${activityReply.id}&activity_id=${activityReply.activityId}',
+      extra: {
+        'text': activityReply.text,
+        'on_replied': (Fragment$ActivityReply reply) {
+          final bloc = context.read<ActivityRepliesBloc>();
+          bloc.editReply(reply);
+        },
+      },
+    );
+  }
+
   void _delete(BuildContext context) {
     showDialog(
       context: context,
@@ -206,10 +226,18 @@ class ActivityReplyCard extends StatelessWidget {
             final client = context.read<GraphqlClientCubit>().getClient();
             if (client != null) {
               final bloc = context.read<ActivityRepliesBloc>();
-              bloc.deleteActivityReply(
+              bloc
+                  .deleteActivityReply(
                 client,
                 replyId: activityReply.id,
-              );
+              )
+                  .then((e) {
+                if (e != null) {
+                  UIUtils.showSnackBar(context, e);
+                } else {
+                  onDeleted();
+                }
+              });
             } else {
               UIUtils.showSnackBar(context, ActivityConstants.clientError);
             }

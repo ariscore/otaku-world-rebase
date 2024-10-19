@@ -10,6 +10,7 @@ import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
+import '../../../config/router/router_constants.dart';
 import '../../../constants/string_constants.dart';
 import '../../../utils/ui_utils.dart';
 import '../dialogs/alert_dialog.dart';
@@ -31,6 +32,7 @@ class ActivityBaseCard extends StatefulWidget {
     required this.type,
     this.isCurrentUserMessage = false,
     required this.isSubscribed,
+    required this.onEdit,
   });
 
   final Widget child;
@@ -47,6 +49,7 @@ class ActivityBaseCard extends StatefulWidget {
   final Object type;
   final bool isCurrentUserMessage;
   final bool isSubscribed;
+  final VoidCallback onEdit;
 
   @override
   State<ActivityBaseCard> createState() => _ActivityBaseCardState();
@@ -122,6 +125,13 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
               isSubscribed: isSubscribed,
               onToggleSubscription: () => _toggleSubscription(context),
               onDelete: () => _delete(context),
+              onReply: () {
+                context.push(
+                  '${RouteConstants.activityReplies}?id=${widget.id}',
+                  extra: context.read<ActivitiesBloc>(),
+                );
+              },
+              onEdit: widget.onEdit,
             ),
             const SizedBox(height: 5),
             Text(
@@ -183,7 +193,11 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
               bloc.deleteActivity(
                 client,
                 activityId: widget.id,
-              );
+              ).then((e) {
+                if (e != null) {
+                  UIUtils.showSnackBar(context, e);
+                }
+              });
             } else {
               UIUtils.showSnackBar(context, ActivityConstants.clientError);
             }
