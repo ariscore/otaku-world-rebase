@@ -5,36 +5,28 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
-import 'package:otaku_world/bloc/social/edit_activity_reply/edit_activity_reply_cubit.dart';
-
-// import 'package:otaku_world/bloc/social/reply_activity/reply_activity_cubit.dart';
+import 'package:otaku_world/bloc/social/edit_text_activity/edit_text_activity_cubit.dart';
+import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
 import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/types/types.dart';
+import 'package:otaku_world/core/ui/activities/previews/text_activity_preview.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/custom_text_field.dart';
 import 'package:otaku_world/generated/assets.dart';
+import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
 
-import '../../../bloc/viewer/viewer_bloc.dart';
-import '../../../core/ui/activities/previews/activity_reply_preview.dart';
-import '../../../theme/colors.dart';
+class EditTextActivityScreen extends StatefulWidget {
+  const EditTextActivityScreen({super.key, required this.onPosted, required this.text,});
 
-class EditActivityReplyScreen extends StatefulWidget {
-  const EditActivityReplyScreen({
-    super.key,
-    required this.onReplied,
-    required this.text,
-  });
-
-  final OnReplied onReplied;
+  final OnPosted onPosted;
   final String text;
 
   @override
-  State<EditActivityReplyScreen> createState() =>
-      _EditActivityReplyScreenState();
+  State<EditTextActivityScreen> createState() => _EditTextActivityScreenState();
 }
 
-class _EditActivityReplyScreenState extends State<EditActivityReplyScreen> {
+class _EditTextActivityScreenState extends State<EditTextActivityScreen> {
   late final TextEditingController textController;
   final focusNode = FocusNode();
 
@@ -53,9 +45,9 @@ class _EditActivityReplyScreenState extends State<EditActivityReplyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<EditActivityReplyCubit, EditActivityReplyState>(
+    return BlocListener<EditTextActivityCubit, EditTextActivityState>(
       listener: (context, state) {
-        if (state is EditingActivityReply) {
+        if (state is EditingActivity) {
           showDialog(
             context: context,
             barrierDismissible: false,
@@ -69,11 +61,11 @@ class _EditActivityReplyScreenState extends State<EditActivityReplyScreen> {
               );
             },
           );
-        } else if (state is EditedActivityReply) {
-          widget.onReplied(state.activityReply);
+        } else if (state is EditedActivity) {
+          widget.onPosted(state.activity);
           context.pop();
           context.pop();
-        } else if (state is EditActivityReplyError) {
+        } else if (state is EditActivityError) {
           context.pop();
           UIUtils.showSnackBar(context, state.message);
         }
@@ -96,18 +88,18 @@ class _EditActivityReplyScreenState extends State<EditActivityReplyScreen> {
           ),
         ),
         appBar: SimpleAppBar(
-          title: 'Edit Activity Reply',
+          title: 'Edit Text Status',
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 10),
-              child: BlocBuilder<EditActivityReplyCubit, EditActivityReplyState>(
+              child: BlocBuilder<EditTextActivityCubit, EditTextActivityState>(
                 builder: (context, state) {
-                  if (state is EditingActivityReply) {
+                  if (state is EditingActivity) {
                     return const CircularProgressIndicator();
                   } else {
                     return IconButton(
                       onPressed: () {
-                        _replyActivity();
+                        _editActivity();
                       },
                       icon: SvgPicture.asset(
                         Assets.iconsSend,
@@ -127,8 +119,8 @@ class _EditActivityReplyScreenState extends State<EditActivityReplyScreen> {
           child: Stack(
             children: [
               CustomTextField(
-                focusNode: focusNode,
                 controller: textController,
+                focusNode: focusNode,
               ),
             ],
           ),
@@ -145,7 +137,7 @@ class _EditActivityReplyScreenState extends State<EditActivityReplyScreen> {
         context: context,
         builder: (context) {
           return Center(
-            child: ActivityReplyPreview(
+            child: TextActivityPreview(
               text: textController.text.trim(),
               userAvatar: state.user.avatar?.medium ?? '',
               userName: state.user.name,
@@ -158,17 +150,17 @@ class _EditActivityReplyScreenState extends State<EditActivityReplyScreen> {
     }
   }
 
-  void _replyActivity() {
-    log('Replying activity');
+  void _editActivity() {
+    log('Editing activity');
     final text = textController.text.trim();
     if (text.isEmpty) {
-      UIUtils.showSnackBar(context, 'Reply can\'t be empty!');
+      UIUtils.showSnackBar(context, 'Activity can\'t be empty!');
     } else {
-      final replyCubit = context.read<EditActivityReplyCubit>();
+      final replyCubit = context.read<EditTextActivityCubit>();
 
       final client = context.read<GraphqlClientCubit>().getClient();
       if (client != null) {
-        replyCubit.editActivityReply(client, text: text);
+        replyCubit.editActivity(client, text: text);
       } else {
         UIUtils.showSnackBar(context, ActivityConstants.clientError);
       }

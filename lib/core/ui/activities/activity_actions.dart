@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:like_button/like_button.dart';
+import 'package:otaku_world/bloc/social/activities/activities_bloc.dart';
 import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
 import 'package:otaku_world/core/ui/dialogs/alert_dialog.dart';
 import 'package:otaku_world/features/reviews/widgets/bottom_sheet_component.dart';
@@ -126,6 +127,7 @@ class ActivityActions extends StatelessWidget {
         return null;
       },
       (isLiked) {
+        context.read<ActivitiesBloc>().toggleLike(activityId: activityId);
         return isLiked;
       },
     );

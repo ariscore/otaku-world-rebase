@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:otaku_world/bloc/social/activities/activities_bloc.dart';
+import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/activities/activity_base_card.dart';
 import 'package:otaku_world/core/ui/markdown/markdown.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
-import 'package:otaku_world/graphql/__generated/graphql/social/activities.graphql.dart';
+import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 
 class TextActivityCard extends StatelessWidget {
   const TextActivityCard({super.key, required this.activity});
 
-  final Query$GetActivities$Page$activities$$TextActivity activity;
+  final Fragment$TextActivity activity;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +29,16 @@ class TextActivityCard extends StatelessWidget {
       type: Fragment$TextActivity,
       isSubscribed: activity.isSubscribed ?? false,
       onEdit: () {
-
+        context.push(
+          '${RouteConstants.editTextActivity}?id=${activity.id}',
+          extra: {
+            'text': activity.text,
+            'on_posted': (Fragment$TextActivity activity) {
+              final bloc = context.read<ActivitiesBloc>();
+              bloc.editActivity(activity, type: Enum$ActivityType.TEXT);
+            },
+          },
+        );
       },
       // child: Text(
       //   activity.text!,

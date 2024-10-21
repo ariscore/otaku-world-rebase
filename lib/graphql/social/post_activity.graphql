@@ -1,0 +1,5 @@
+mutation PostActivity($id: Int, $text: String) {
+    SaveTextActivity(id: $id, text: $text) {
+        ...TextActivity
+    }
+}
