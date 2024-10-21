@@ -8,13 +8,13 @@ import 'package:otaku_world/core/ui/error_text.dart';
 import 'package:otaku_world/core/ui/placeholders/anime_character_placeholder.dart';
 import 'package:otaku_world/features/social/widgets/activity_shimmer_list.dart';
 import 'package:otaku_world/generated/assets.dart';
+import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/social/activities/activities_bloc.dart';
 import '../../../core/ui/activities/list_activity_card.dart';
 import '../../../core/ui/activities/text_activity_card.dart';
-import '../../../graphql/__generated/graphql/social/activities.graphql.dart';
 
 class ActivitiesList extends StatelessWidget {
   const ActivitiesList({
@@ -75,14 +75,11 @@ class ActivitiesList extends StatelessWidget {
                             }
 
                             final activity = activities[index];
-                            if (activity
-                                is Query$GetActivities$Page$activities$$TextActivity) {
+                            if (activity is Fragment$TextActivity) {
                               return TextActivityCard(activity: activity);
-                            } else if (activity
-                                is Query$GetActivities$Page$activities$$ListActivity) {
+                            } else if (activity is Fragment$ListActivity) {
                               return ListActivityCard(activity: activity);
-                            } else if (activity
-                                is Query$GetActivities$Page$activities$$MessageActivity) {
+                            } else if (activity is Fragment$MessageActivity) {
                               return MessageActivityCard(activity: activity);
                             } else {
                               return const SizedBox();
@@ -99,9 +96,11 @@ class ActivitiesList extends StatelessWidget {
                   ),
           );
         } else if (state is ActivitiesError) {
-          return ErrorText(message: state.message, onTryAgain: () {
-            activitiesBloc.add(LoadActivities(client));
-          });
+          return ErrorText(
+              message: state.message,
+              onTryAgain: () {
+                activitiesBloc.add(LoadActivities(client));
+              });
         } else {
           return const Text('Unknown State');
         }

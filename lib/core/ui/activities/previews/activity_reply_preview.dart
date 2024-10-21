@@ -2,10 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../generated/assets.dart';
-import '../../../theme/colors.dart';
-import '../../../utils/formatting_utils.dart';
-import '../markdown/markdown.dart';
+import '../../../../generated/assets.dart';
+import '../../../../theme/colors.dart';
+import '../../../../utils/formatting_utils.dart';
+import '../../markdown/markdown.dart';
 
 class ActivityReplyPreview extends StatelessWidget {
   const ActivityReplyPreview({
@@ -52,6 +52,11 @@ class ActivityReplyPreview extends StatelessWidget {
                 Row(
                   children: [
                     SvgPicture.asset(Assets.iconsLike, width: 25),
+                    const SizedBox(width: 5),
+                    Text(
+                      '0',
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
                   ],
                 ),
                 IconButton(
