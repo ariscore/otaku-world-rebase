@@ -1,11 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
@@ -15,6 +12,7 @@ import 'package:otaku_world/bloc/social/activities/activities_bloc.dart';
 import 'package:otaku_world/bloc/social/activity_replies/activity_replies_bloc.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/activities/activity_reply_card.dart';
+import 'package:otaku_world/core/ui/buttons/primary_fab.dart';
 import 'package:otaku_world/core/ui/placeholders/anime_character_placeholder.dart';
 import 'package:otaku_world/core/ui/shimmers/activity_shimmer_card.dart';
 import 'package:otaku_world/generated/assets.dart';
@@ -92,7 +90,7 @@ class ActivityRepliesScreen extends HookWidget {
           return _buildLoadingScaffold();
         } else if (state is PaginatedDataLoaded) {
           return Scaffold(
-            floatingActionButton: _WriteReplyButton(
+            floatingActionButton: PrimaryFAB(
               controller: repliesScrollController,
               onPressed: () {
                 context.push(
@@ -225,54 +223,5 @@ class ActivityRepliesScreen extends HookWidget {
         },
       ),
     );
-  }
-}
-
-class _WriteReplyButton extends StatefulHookWidget {
-  const _WriteReplyButton({required this.controller, required this.onPressed});
-
-  final ScrollController controller;
-  final VoidCallback onPressed;
-
-  @override
-  State<_WriteReplyButton> createState() => _WriteReplyButtonState();
-}
-
-class _WriteReplyButtonState extends State<_WriteReplyButton> {
-  bool _isVisible = true;
-
-  @override
-  Widget build(BuildContext context) {
-    useEffect(() {
-      widget.controller.addListener(() {
-        if (widget.controller.position.userScrollDirection ==
-            ScrollDirection.reverse) {
-          if (_isVisible) {
-            setState(() {
-              _isVisible = false;
-            });
-          }
-        } else if (widget.controller.position.userScrollDirection ==
-            ScrollDirection.forward) {
-          if (!_isVisible) {
-            setState(() {
-              _isVisible = true;
-            });
-          }
-        }
-      });
-      return null;
-    });
-
-    return _isVisible
-        ? Animate(
-            effects: const [ScaleEffect()],
-            child: FloatingActionButton(
-              backgroundColor: AppColors.sunsetOrange,
-              onPressed: widget.onPressed,
-              child: SvgPicture.asset(Assets.iconsEdit, width: 25),
-            ),
-          )
-        : const SizedBox();
   }
 }

@@ -5,6 +5,10 @@ class StringConstants {
   static const socialSubheading =
       'Stay Updated with Global Anime Activities and'
       ' \nInteractions';
+
+  static const noInternetError = 'Please check your internet connection!';
+  static const somethingWentWrongError = 'Something went wrong!';
+  static const validationError = 'Please enter valid text!';
 }
 
 class LoginConstants {

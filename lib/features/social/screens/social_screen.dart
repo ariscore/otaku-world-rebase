@@ -7,13 +7,15 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/social/activities/activities_bloc.dart';
+import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/constants/filter_constants.dart';
 import 'package:otaku_world/constants/string_constants.dart';
+import 'package:otaku_world/core/ui/buttons/primary_fab.dart';
 import 'package:otaku_world/core/ui/discover_header.dart';
 import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
-import 'package:otaku_world/core/ui/media_section/scroll_to_top_button.dart';
 import 'package:otaku_world/core/ui/tabs/custom_tab_bar.dart';
 import 'package:otaku_world/features/social/widgets/activities_list.dart';
+import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 
 import '../../../bloc/bottom_nav_bar/bottom_nav_bar_cubit.dart';
@@ -79,9 +81,17 @@ class SocialScreen extends HookWidget {
         }
       },
       child: Scaffold(
-        floatingActionButton: ScrollToTopFAB(
+        floatingActionButton: PrimaryFAB(
           controller: scrollController,
-          tag: 'social',
+          onPressed: () {
+            context.push(
+              RouteConstants.postNewActivity,
+              extra: (Fragment$TextActivity activity) {
+                log('Posted new activity');
+                activitiesBloc.addTextActivity(activity: activity);
+              },
+            );
+          },
         ),
         body: NestedScrollView(
           controller: scrollController,
@@ -128,7 +138,7 @@ class SocialScreen extends HookWidget {
                                   .textTheme
                                   .displayMedium
                                   ?.copyWith(
-                                    fontFamily: 'Roboto-Condensed',
+                                    // fontFamily: 'Roboto-Condensed',
                                   ),
                             ),
                             const SizedBox(width: 100),

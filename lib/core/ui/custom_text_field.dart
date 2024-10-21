@@ -7,9 +7,11 @@ class CustomTextField extends StatelessWidget {
     required this.controller,
     this.hintText = 'Type something here...',
     this.textCapitalization = TextCapitalization.sentences,
+    this.focusNode,
   });
 
   final TextEditingController controller;
+  final FocusNode? focusNode;
   final String hintText;
   final TextCapitalization textCapitalization;
 
@@ -17,6 +19,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      focusNode: focusNode,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: Theme.of(context).textTheme.headlineMedium?.copyWith(
