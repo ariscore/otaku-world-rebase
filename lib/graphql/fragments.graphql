@@ -414,3 +414,21 @@ fragment User on User {
         medium
     }
 }
+
+fragment UserInfo on User {
+    id
+    name
+    avatar {
+        large
+    }
+    bannerImage
+    about
+    statistics {
+        anime {
+            count
+        }
+        manga {
+            count
+        }
+    }
+}

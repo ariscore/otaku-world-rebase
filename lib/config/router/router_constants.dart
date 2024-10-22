@@ -6,6 +6,8 @@ class RouteConstants {
   static const onBoarding = '/on-boarding';
   static const login = '/login';
   static const home = '/home';
+  static const myProfile = '/my-profile';
+  static const settings = '/settings';
   static const discover = '/discover';
   static const social = '/social';
   static const activityReplies = '/activity-replies';

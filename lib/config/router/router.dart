@@ -9,6 +9,7 @@ import 'package:otaku_world/bloc/discover/characters/most_favorite_characters_bl
 import 'package:otaku_world/bloc/discover/staff/birthday_staff_bloc.dart';
 import 'package:otaku_world/bloc/discover/staff/most_favorite_staff_bloc.dart';
 import 'package:otaku_world/bloc/discover/studios/most_favorite_studios_bloc.dart';
+import 'package:otaku_world/bloc/profile/my_profile/my_profile_bloc.dart';
 import 'package:otaku_world/bloc/recommendations/recommendation_anime_bloc.dart';
 import 'package:otaku_world/bloc/reviews/review_detail/review_detail_bloc.dart';
 import 'package:otaku_world/bloc/routes/redirect_route_cubit.dart';
@@ -56,9 +57,11 @@ import 'package:otaku_world/features/media_detail/models/recommendations_paramet
 import 'package:otaku_world/features/media_detail/screens/media_detail_screen.dart';
 import 'package:otaku_world/features/media_detail/screens/recommendations_grid_screen.dart';
 import 'package:otaku_world/features/media_detail/screens/recommendations_slider_screen.dart';
+import 'package:otaku_world/features/profile/screens/my_profile_screen.dart';
 import 'package:otaku_world/features/reviews/screens/review_detail_screen.dart';
 import 'package:otaku_world/features/reviews/screens/reviews_screen.dart';
 import 'package:otaku_world/features/search/screens/search_screen.dart';
+import 'package:otaku_world/features/settings/screens/settings_screen.dart';
 import 'package:otaku_world/features/social/screens/edit_activity_reply_screen.dart';
 import 'package:otaku_world/features/social/screens/edit_message_activity_screen.dart';
 import 'package:otaku_world/features/social/screens/edit_text_activity_screen.dart';
@@ -92,6 +95,8 @@ part 'home_routes.dart';
 
 part 'social_routes.dart';
 
+part 'profile_routes.dart';
+
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorHomeKey = GlobalKey<NavigatorState>();
 final _shellNavigatorDiscoverKey = GlobalKey<NavigatorState>();
@@ -114,6 +119,7 @@ final router = GoRouter(
     ...homeRoutes,
     ...discoverRoutes,
     ...socialRoutes,
+    ...profileRoutes,
     GoRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: RouteConstants.mediaDetail,

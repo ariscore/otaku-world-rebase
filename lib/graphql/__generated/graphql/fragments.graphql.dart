@@ -20415,3 +20415,970 @@ class _CopyWithStubImpl$Fragment$User$avatar<TRes>
   }) =>
       _res;
 }
+
+class Fragment$UserInfo {
+  Fragment$UserInfo({
+    required this.id,
+    required this.name,
+    this.avatar,
+    this.bannerImage,
+    this.about,
+    this.statistics,
+    this.$__typename = 'User',
+  });
+
+  factory Fragment$UserInfo.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$avatar = json['avatar'];
+    final l$bannerImage = json['bannerImage'];
+    final l$about = json['about'];
+    final l$statistics = json['statistics'];
+    final l$$__typename = json['__typename'];
+    return Fragment$UserInfo(
+      id: (l$id as int),
+      name: (l$name as String),
+      avatar: l$avatar == null
+          ? null
+          : Fragment$UserInfo$avatar.fromJson(
+              (l$avatar as Map<String, dynamic>)),
+      bannerImage: (l$bannerImage as String?),
+      about: (l$about as String?),
+      statistics: l$statistics == null
+          ? null
+          : Fragment$UserInfo$statistics.fromJson(
+              (l$statistics as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String name;
+
+  final Fragment$UserInfo$avatar? avatar;
+
+  final String? bannerImage;
+
+  final String? about;
+
+  final Fragment$UserInfo$statistics? statistics;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$avatar = avatar;
+    _resultData['avatar'] = l$avatar?.toJson();
+    final l$bannerImage = bannerImage;
+    _resultData['bannerImage'] = l$bannerImage;
+    final l$about = about;
+    _resultData['about'] = l$about;
+    final l$statistics = statistics;
+    _resultData['statistics'] = l$statistics?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$avatar = avatar;
+    final l$bannerImage = bannerImage;
+    final l$about = about;
+    final l$statistics = statistics;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$avatar,
+      l$bannerImage,
+      l$about,
+      l$statistics,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$UserInfo) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$avatar = avatar;
+    final lOther$avatar = other.avatar;
+    if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$bannerImage = bannerImage;
+    final lOther$bannerImage = other.bannerImage;
+    if (l$bannerImage != lOther$bannerImage) {
+      return false;
+    }
+    final l$about = about;
+    final lOther$about = other.about;
+    if (l$about != lOther$about) {
+      return false;
+    }
+    final l$statistics = statistics;
+    final lOther$statistics = other.statistics;
+    if (l$statistics != lOther$statistics) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$UserInfo on Fragment$UserInfo {
+  CopyWith$Fragment$UserInfo<Fragment$UserInfo> get copyWith =>
+      CopyWith$Fragment$UserInfo(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Fragment$UserInfo<TRes> {
+  factory CopyWith$Fragment$UserInfo(
+    Fragment$UserInfo instance,
+    TRes Function(Fragment$UserInfo) then,
+  ) = _CopyWithImpl$Fragment$UserInfo;
+
+  factory CopyWith$Fragment$UserInfo.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$UserInfo;
+
+  TRes call({
+    int? id,
+    String? name,
+    Fragment$UserInfo$avatar? avatar,
+    String? bannerImage,
+    String? about,
+    Fragment$UserInfo$statistics? statistics,
+    String? $__typename,
+  });
+  CopyWith$Fragment$UserInfo$avatar<TRes> get avatar;
+  CopyWith$Fragment$UserInfo$statistics<TRes> get statistics;
+}
+
+class _CopyWithImpl$Fragment$UserInfo<TRes>
+    implements CopyWith$Fragment$UserInfo<TRes> {
+  _CopyWithImpl$Fragment$UserInfo(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$UserInfo _instance;
+
+  final TRes Function(Fragment$UserInfo) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? avatar = _undefined,
+    Object? bannerImage = _undefined,
+    Object? about = _undefined,
+    Object? statistics = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$UserInfo(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        avatar: avatar == _undefined
+            ? _instance.avatar
+            : (avatar as Fragment$UserInfo$avatar?),
+        bannerImage: bannerImage == _undefined
+            ? _instance.bannerImage
+            : (bannerImage as String?),
+        about: about == _undefined ? _instance.about : (about as String?),
+        statistics: statistics == _undefined
+            ? _instance.statistics
+            : (statistics as Fragment$UserInfo$statistics?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$UserInfo$avatar<TRes> get avatar {
+    final local$avatar = _instance.avatar;
+    return local$avatar == null
+        ? CopyWith$Fragment$UserInfo$avatar.stub(_then(_instance))
+        : CopyWith$Fragment$UserInfo$avatar(
+            local$avatar, (e) => call(avatar: e));
+  }
+
+  CopyWith$Fragment$UserInfo$statistics<TRes> get statistics {
+    final local$statistics = _instance.statistics;
+    return local$statistics == null
+        ? CopyWith$Fragment$UserInfo$statistics.stub(_then(_instance))
+        : CopyWith$Fragment$UserInfo$statistics(
+            local$statistics, (e) => call(statistics: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$UserInfo<TRes>
+    implements CopyWith$Fragment$UserInfo<TRes> {
+  _CopyWithStubImpl$Fragment$UserInfo(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? name,
+    Fragment$UserInfo$avatar? avatar,
+    String? bannerImage,
+    String? about,
+    Fragment$UserInfo$statistics? statistics,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$UserInfo$avatar<TRes> get avatar =>
+      CopyWith$Fragment$UserInfo$avatar.stub(_res);
+
+  CopyWith$Fragment$UserInfo$statistics<TRes> get statistics =>
+      CopyWith$Fragment$UserInfo$statistics.stub(_res);
+}
+
+const fragmentDefinitionUserInfo = FragmentDefinitionNode(
+  name: NameNode(value: 'UserInfo'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'User'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'name'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'avatar'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'large'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'bannerImage'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'about'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'statistics'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'anime'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'count'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: 'manga'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'count'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentUserInfo = DocumentNode(definitions: [
+  fragmentDefinitionUserInfo,
+]);
+
+extension ClientExtension$Fragment$UserInfo on graphql.GraphQLClient {
+  void writeFragment$UserInfo({
+    required Fragment$UserInfo data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'UserInfo',
+            document: documentNodeFragmentUserInfo,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$UserInfo? readFragment$UserInfo({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'UserInfo',
+          document: documentNodeFragmentUserInfo,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Fragment$UserInfo.fromJson(result);
+  }
+}
+
+class Fragment$UserInfo$avatar {
+  Fragment$UserInfo$avatar({
+    this.large,
+    this.$__typename = 'UserAvatar',
+  });
+
+  factory Fragment$UserInfo$avatar.fromJson(Map<String, dynamic> json) {
+    final l$large = json['large'];
+    final l$$__typename = json['__typename'];
+    return Fragment$UserInfo$avatar(
+      large: (l$large as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? large;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$large = large;
+    _resultData['large'] = l$large;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$large = large;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$large,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$UserInfo$avatar) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$large = large;
+    final lOther$large = other.large;
+    if (l$large != lOther$large) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$UserInfo$avatar
+    on Fragment$UserInfo$avatar {
+  CopyWith$Fragment$UserInfo$avatar<Fragment$UserInfo$avatar> get copyWith =>
+      CopyWith$Fragment$UserInfo$avatar(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Fragment$UserInfo$avatar<TRes> {
+  factory CopyWith$Fragment$UserInfo$avatar(
+    Fragment$UserInfo$avatar instance,
+    TRes Function(Fragment$UserInfo$avatar) then,
+  ) = _CopyWithImpl$Fragment$UserInfo$avatar;
+
+  factory CopyWith$Fragment$UserInfo$avatar.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$UserInfo$avatar;
+
+  TRes call({
+    String? large,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$UserInfo$avatar<TRes>
+    implements CopyWith$Fragment$UserInfo$avatar<TRes> {
+  _CopyWithImpl$Fragment$UserInfo$avatar(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$UserInfo$avatar _instance;
+
+  final TRes Function(Fragment$UserInfo$avatar) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? large = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$UserInfo$avatar(
+        large: large == _undefined ? _instance.large : (large as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$UserInfo$avatar<TRes>
+    implements CopyWith$Fragment$UserInfo$avatar<TRes> {
+  _CopyWithStubImpl$Fragment$UserInfo$avatar(this._res);
+
+  TRes _res;
+
+  call({
+    String? large,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$UserInfo$statistics {
+  Fragment$UserInfo$statistics({
+    this.anime,
+    this.manga,
+    this.$__typename = 'UserStatisticTypes',
+  });
+
+  factory Fragment$UserInfo$statistics.fromJson(Map<String, dynamic> json) {
+    final l$anime = json['anime'];
+    final l$manga = json['manga'];
+    final l$$__typename = json['__typename'];
+    return Fragment$UserInfo$statistics(
+      anime: l$anime == null
+          ? null
+          : Fragment$UserInfo$statistics$anime.fromJson(
+              (l$anime as Map<String, dynamic>)),
+      manga: l$manga == null
+          ? null
+          : Fragment$UserInfo$statistics$manga.fromJson(
+              (l$manga as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Fragment$UserInfo$statistics$anime? anime;
+
+  final Fragment$UserInfo$statistics$manga? manga;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$anime = anime;
+    _resultData['anime'] = l$anime?.toJson();
+    final l$manga = manga;
+    _resultData['manga'] = l$manga?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$anime = anime;
+    final l$manga = manga;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$anime,
+      l$manga,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$UserInfo$statistics) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$anime = anime;
+    final lOther$anime = other.anime;
+    if (l$anime != lOther$anime) {
+      return false;
+    }
+    final l$manga = manga;
+    final lOther$manga = other.manga;
+    if (l$manga != lOther$manga) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$UserInfo$statistics
+    on Fragment$UserInfo$statistics {
+  CopyWith$Fragment$UserInfo$statistics<Fragment$UserInfo$statistics>
+      get copyWith => CopyWith$Fragment$UserInfo$statistics(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$UserInfo$statistics<TRes> {
+  factory CopyWith$Fragment$UserInfo$statistics(
+    Fragment$UserInfo$statistics instance,
+    TRes Function(Fragment$UserInfo$statistics) then,
+  ) = _CopyWithImpl$Fragment$UserInfo$statistics;
+
+  factory CopyWith$Fragment$UserInfo$statistics.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$UserInfo$statistics;
+
+  TRes call({
+    Fragment$UserInfo$statistics$anime? anime,
+    Fragment$UserInfo$statistics$manga? manga,
+    String? $__typename,
+  });
+  CopyWith$Fragment$UserInfo$statistics$anime<TRes> get anime;
+  CopyWith$Fragment$UserInfo$statistics$manga<TRes> get manga;
+}
+
+class _CopyWithImpl$Fragment$UserInfo$statistics<TRes>
+    implements CopyWith$Fragment$UserInfo$statistics<TRes> {
+  _CopyWithImpl$Fragment$UserInfo$statistics(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$UserInfo$statistics _instance;
+
+  final TRes Function(Fragment$UserInfo$statistics) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? anime = _undefined,
+    Object? manga = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$UserInfo$statistics(
+        anime: anime == _undefined
+            ? _instance.anime
+            : (anime as Fragment$UserInfo$statistics$anime?),
+        manga: manga == _undefined
+            ? _instance.manga
+            : (manga as Fragment$UserInfo$statistics$manga?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$UserInfo$statistics$anime<TRes> get anime {
+    final local$anime = _instance.anime;
+    return local$anime == null
+        ? CopyWith$Fragment$UserInfo$statistics$anime.stub(_then(_instance))
+        : CopyWith$Fragment$UserInfo$statistics$anime(
+            local$anime, (e) => call(anime: e));
+  }
+
+  CopyWith$Fragment$UserInfo$statistics$manga<TRes> get manga {
+    final local$manga = _instance.manga;
+    return local$manga == null
+        ? CopyWith$Fragment$UserInfo$statistics$manga.stub(_then(_instance))
+        : CopyWith$Fragment$UserInfo$statistics$manga(
+            local$manga, (e) => call(manga: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$UserInfo$statistics<TRes>
+    implements CopyWith$Fragment$UserInfo$statistics<TRes> {
+  _CopyWithStubImpl$Fragment$UserInfo$statistics(this._res);
+
+  TRes _res;
+
+  call({
+    Fragment$UserInfo$statistics$anime? anime,
+    Fragment$UserInfo$statistics$manga? manga,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$UserInfo$statistics$anime<TRes> get anime =>
+      CopyWith$Fragment$UserInfo$statistics$anime.stub(_res);
+
+  CopyWith$Fragment$UserInfo$statistics$manga<TRes> get manga =>
+      CopyWith$Fragment$UserInfo$statistics$manga.stub(_res);
+}
+
+class Fragment$UserInfo$statistics$anime {
+  Fragment$UserInfo$statistics$anime({
+    required this.count,
+    this.$__typename = 'UserStatistics',
+  });
+
+  factory Fragment$UserInfo$statistics$anime.fromJson(
+      Map<String, dynamic> json) {
+    final l$count = json['count'];
+    final l$$__typename = json['__typename'];
+    return Fragment$UserInfo$statistics$anime(
+      count: (l$count as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int count;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$count = count;
+    _resultData['count'] = l$count;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$count = count;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$count,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$UserInfo$statistics$anime) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$count = count;
+    final lOther$count = other.count;
+    if (l$count != lOther$count) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$UserInfo$statistics$anime
+    on Fragment$UserInfo$statistics$anime {
+  CopyWith$Fragment$UserInfo$statistics$anime<
+          Fragment$UserInfo$statistics$anime>
+      get copyWith => CopyWith$Fragment$UserInfo$statistics$anime(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$UserInfo$statistics$anime<TRes> {
+  factory CopyWith$Fragment$UserInfo$statistics$anime(
+    Fragment$UserInfo$statistics$anime instance,
+    TRes Function(Fragment$UserInfo$statistics$anime) then,
+  ) = _CopyWithImpl$Fragment$UserInfo$statistics$anime;
+
+  factory CopyWith$Fragment$UserInfo$statistics$anime.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$UserInfo$statistics$anime;
+
+  TRes call({
+    int? count,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$UserInfo$statistics$anime<TRes>
+    implements CopyWith$Fragment$UserInfo$statistics$anime<TRes> {
+  _CopyWithImpl$Fragment$UserInfo$statistics$anime(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$UserInfo$statistics$anime _instance;
+
+  final TRes Function(Fragment$UserInfo$statistics$anime) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? count = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$UserInfo$statistics$anime(
+        count: count == _undefined || count == null
+            ? _instance.count
+            : (count as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$UserInfo$statistics$anime<TRes>
+    implements CopyWith$Fragment$UserInfo$statistics$anime<TRes> {
+  _CopyWithStubImpl$Fragment$UserInfo$statistics$anime(this._res);
+
+  TRes _res;
+
+  call({
+    int? count,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$UserInfo$statistics$manga {
+  Fragment$UserInfo$statistics$manga({
+    required this.count,
+    this.$__typename = 'UserStatistics',
+  });
+
+  factory Fragment$UserInfo$statistics$manga.fromJson(
+      Map<String, dynamic> json) {
+    final l$count = json['count'];
+    final l$$__typename = json['__typename'];
+    return Fragment$UserInfo$statistics$manga(
+      count: (l$count as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int count;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$count = count;
+    _resultData['count'] = l$count;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$count = count;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$count,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$UserInfo$statistics$manga) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$count = count;
+    final lOther$count = other.count;
+    if (l$count != lOther$count) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$UserInfo$statistics$manga
+    on Fragment$UserInfo$statistics$manga {
+  CopyWith$Fragment$UserInfo$statistics$manga<
+          Fragment$UserInfo$statistics$manga>
+      get copyWith => CopyWith$Fragment$UserInfo$statistics$manga(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$UserInfo$statistics$manga<TRes> {
+  factory CopyWith$Fragment$UserInfo$statistics$manga(
+    Fragment$UserInfo$statistics$manga instance,
+    TRes Function(Fragment$UserInfo$statistics$manga) then,
+  ) = _CopyWithImpl$Fragment$UserInfo$statistics$manga;
+
+  factory CopyWith$Fragment$UserInfo$statistics$manga.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$UserInfo$statistics$manga;
+
+  TRes call({
+    int? count,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$UserInfo$statistics$manga<TRes>
+    implements CopyWith$Fragment$UserInfo$statistics$manga<TRes> {
+  _CopyWithImpl$Fragment$UserInfo$statistics$manga(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$UserInfo$statistics$manga _instance;
+
+  final TRes Function(Fragment$UserInfo$statistics$manga) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? count = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$UserInfo$statistics$manga(
+        count: count == _undefined || count == null
+            ? _instance.count
+            : (count as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$UserInfo$statistics$manga<TRes>
+    implements CopyWith$Fragment$UserInfo$statistics$manga<TRes> {
+  _CopyWithStubImpl$Fragment$UserInfo$statistics$manga(this._res);
+
+  TRes _res;
+
+  call({
+    int? count,
+    String? $__typename,
+  }) =>
+      _res;
+}
