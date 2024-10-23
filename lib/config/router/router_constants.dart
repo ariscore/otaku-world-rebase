@@ -7,6 +7,14 @@ class RouteConstants {
   static const login = '/login';
   static const home = '/home';
   static const myProfile = '/my-profile';
+  static const favoriteAnime = '/favorite-anime';
+  static const favoriteAnimeSlider = '/favorite-anime-slider';
+  static const favoriteManga = '/favorite-manga';
+  static const favoriteMangaSlider = '/favorite-manga-slider';
+  static const favoriteCharacters = '/favorite-characters';
+  static const favoriteStaff = '/favorite-staff';
+  static const favoriteStudios = '/favorite-studios';
+
   static const settings = '/settings';
   static const discover = '/discover';
   static const social = '/social';

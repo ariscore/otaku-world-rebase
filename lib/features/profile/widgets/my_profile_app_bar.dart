@@ -7,7 +7,6 @@ import 'package:otaku_world/core/ui/image.dart';
 import 'package:otaku_world/features/profile/widgets/user_avatar.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../core/ui/tabs/custom_tab_bar.dart';
 import '../../../generated/assets.dart';

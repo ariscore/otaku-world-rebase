@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
-import 'package:otaku_world/bloc/profile/my_profile/my_profile_bloc.dart';
 import 'package:otaku_world/core/ui/markdown/markdown.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
@@ -20,56 +17,47 @@ class UserOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final client = context.read<GraphqlClientCubit>().getClient()!;
-
-    // TODO: Check for refresh indicator
-    return RefreshIndicator(
-      backgroundColor: AppColors.raisinBlack,
-      onRefresh: () async {
-        context.read<MyProfileBloc>().add(LoadProfile(client));
-      },
-      child: CustomScrollView(
-        slivers: [
-          SliverOverlapInjector(
-              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context)),
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 10,
-            ),
-            sliver: _buildItem(
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _buildStat(
-                    context,
-                    count: user.statistics?.anime?.count ?? 0,
-                    label: 'Anime',
-                  ),
-                  _buildSeparator(),
-                  _buildStat(
-                    context,
-                    count: user.statistics?.manga?.count ?? 0,
-                    label: 'Manga',
-                  ),
-                  _buildSeparator(),
-                  _buildStat(context,
-                      count: followingCount, label: 'Following'),
-                  _buildSeparator(),
-                  _buildStat(context, count: followerCount, label: 'Followers'),
-                ],
-              ),
+    return CustomScrollView(
+      slivers: [
+        SliverOverlapInjector(
+          handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 10,
+          ),
+          sliver: _buildItem(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildStat(
+                  context,
+                  count: user.statistics?.anime?.count ?? 0,
+                  label: 'Anime',
+                ),
+                _buildSeparator(),
+                _buildStat(
+                  context,
+                  count: user.statistics?.manga?.count ?? 0,
+                  label: 'Manga',
+                ),
+                _buildSeparator(),
+                _buildStat(context, count: followingCount, label: 'Following'),
+                _buildSeparator(),
+                _buildStat(context, count: followerCount, label: 'Followers'),
+              ],
             ),
           ),
-          // const SizedBox(height: 15),
-          SliverPadding(
-            padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-            sliver: _buildItem(
-              Markdown(data: user.about ?? '*No Description*'),
-            ),
+        ),
+        // const SizedBox(height: 15),
+        SliverPadding(
+          padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+          sliver: _buildItem(
+            Markdown(data: user.about ?? '*No Description*'),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

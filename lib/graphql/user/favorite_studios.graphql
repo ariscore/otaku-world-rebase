@@ -1,0 +1,14 @@
+query FavoriteStudios($page: Int, $userId: Int) {
+    User(id: $userId) {
+        favourites {
+            studios(page: $page, perPage: 30) {
+                pageInfo {
+                    hasNextPage
+                }
+                nodes {
+                    ...SearchResultStudio
+                }
+            }
+        }
+    }
+}

@@ -5,10 +5,9 @@ import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/profile/my_profile/my_profile_bloc.dart';
 import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/ui/error_text.dart';
-import 'package:otaku_world/core/ui/tabs/custom_tab_bar.dart';
 import 'package:otaku_world/features/profile/widgets/my_profile_app_bar.dart';
+import 'package:otaku_world/features/profile/widgets/user_favorites.dart';
 import 'package:otaku_world/features/profile/widgets/user_overview.dart';
-import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/theme/colors.dart';
 
 class MyProfileScreen extends HookWidget {
@@ -31,57 +30,74 @@ class MyProfileScreen extends HookWidget {
               );
             }
             profileBloc.add(LoadProfile(client));
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           } else if (state is MyProfileLoading) {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           } else if (state is MyProfileLoaded) {
-            return NestedScrollView(
-              headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                // MyProfileAppBar(user: state.user),
-                SliverOverlapAbsorber(
-                  handle:
-                  NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-                  sliver: MyProfileAppBar(user: state.user, tabController: tabController),
-                ),
-                // SliverOverlapAbsorber(
-                //   handle:
-                //   NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-                //   sliver: SliverPersistentHeader(
-                //     pinned: true,
-                //     delegate: _SliverTabBarDelegate(
-                //       CustomTabBar(
-                //         controller: tabController,
-                //         tabs: const [
-                //           'Overview',
-                //           'Favourites',
-                //           'Stats',
-                //           'Social',
-                //           'Reviews',
-                //         ],
-                //       ),
-                //     ),
-                //   ),
-                // ),
-              ],
-              // TabBarView Content
-              body: TabBarView(
-                controller: tabController,
-                children: [
-                  UserOverview(
-                    key: const PageStorageKey<String>('my_profile_overview'),
-                    user: state.user,
-                    followingCount: state.followingCount,
-                    followerCount: state.followerCount,
+            return RefreshIndicator(
+              backgroundColor: AppColors.raisinBlack,
+              onRefresh: () {
+                return Future.delayed(const Duration(seconds: 1), () {
+                  context.read<MyProfileBloc>().add(LoadProfile(client!));
+                });
+              },
+              notificationPredicate: (notification) {
+                return notification.depth == 2;
+              },
+              child: NestedScrollView(
+                headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                  // MyProfileAppBar(user: state.user),
+                  SliverOverlapAbsorber(
+                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                      context,
+                    ),
+                    sliver: MyProfileAppBar(
+                      user: state.user,
+                      tabController: tabController,
+                    ),
                   ),
-                  _buildListView(
-                      'Details Content', PageStorageKey<String>('2')),
-                  _buildListView(
-                      'Settings Content', PageStorageKey<String>('3')),
-                  _buildListView(
-                      'Settings Content', PageStorageKey<String>('4')),
-                  _buildListView(
-                      'Settings Content', PageStorageKey<String>('5')),
+                  // SliverOverlapAbsorber(
+                  //   handle:
+                  //   NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+                  //   sliver: SliverPersistentHeader(
+                  //     pinned: true,
+                  //     delegate: _SliverTabBarDelegate(
+                  //       CustomTabBar(
+                  //         controller: tabController,
+                  //         tabs: const [
+                  //           'Overview',
+                  //           'Favourites',
+                  //           'Stats',
+                  //           'Social',
+                  //           'Reviews',
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
+                // TabBarView Content
+                body: TabBarView(
+                  controller: tabController,
+                  children: [
+                    UserOverview(
+                      key: const PageStorageKey<String>('my_profile_overview'),
+                      user: state.user,
+                      followingCount: state.followingCount,
+                      followerCount: state.followerCount,
+                    ),
+                    UserFavorites(
+                      key: const PageStorageKey<String>('my_favorites'),
+                      userId: state.user.id,
+                    ),
+                    _buildListView(
+                        'Settings Content', PageStorageKey<String>('3')),
+                    _buildListView(
+                        'Settings Content', PageStorageKey<String>('4')),
+                    _buildListView(
+                        'Settings Content', PageStorageKey<String>('5')),
+                  ],
+                ),
               ),
             );
           } else if (state is MyProfileError) {
@@ -113,34 +129,5 @@ class MyProfileScreen extends HookWidget {
         );
       },
     );
-  }
-}
-
-class _SliverTabBarDelegate extends SliverPersistentHeaderDelegate {
-  final PreferredSizeWidget tabBar;
-
-  _SliverTabBarDelegate(this.tabBar);
-
-  @override
-  double get minExtent => tabBar.preferredSize.height;
-
-  @override
-  double get maxExtent => tabBar.preferredSize.height;
-
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return Container(
-      color: AppColors.raisinBlack,
-      child: tabBar,
-    );
-  }
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    return false;
   }
 }
