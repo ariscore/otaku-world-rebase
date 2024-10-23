@@ -4,24 +4,32 @@ import 'package:otaku_world/features/discover/widgets/entity_card.dart';
 import '../../../graphql/__generated/graphql/fragments.graphql.dart';
 
 class EntityGrid<E> extends StatelessWidget {
-  const EntityGrid({super.key, required this.list, required this.hasNextPage, this.title = 'Results',});
+  const EntityGrid({
+    super.key,
+    required this.list,
+    required this.hasNextPage,
+    this.title = 'Results',
+    this.showTitle = true,
+  });
 
   final List<E?> list;
   final bool hasNextPage;
   final String title;
+  final bool showTitle;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                fontFamily: 'Roboto-Condensed',
-              ),
-        ),
-        const SizedBox(height: 10),
+        if (showTitle)
+          Text(
+            title,
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                  fontFamily: 'Roboto-Condensed',
+                ),
+          ),
+        if (showTitle) const SizedBox(height: 10),
         CustomScrollView(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
@@ -47,8 +55,22 @@ class EntityGrid<E> extends StatelessWidget {
                         imageUrl: character.image?.large,
                         favorites: character.favourites,
                       );
+                    } else if (E == Fragment$CharacterShort) {
+                      final character = list[index] as Fragment$CharacterShort;
+                      return EntityCard(
+                        title: character.name?.userPreferred ?? ' - - ',
+                        imageUrl: character.image?.large,
+                        favorites: character.favourites,
+                      );
                     } else if (E == Fragment$SearchResultStaff) {
                       final staff = list[index] as Fragment$SearchResultStaff;
+                      return EntityCard(
+                        title: staff.name?.userPreferred ?? ' - - ',
+                        imageUrl: staff.image?.large,
+                        favorites: staff.favourites,
+                      );
+                    } else if (E == Fragment$StaffShort) {
+                      final staff = list[index] as Fragment$StaffShort;
                       return EntityCard(
                         title: staff.name?.userPreferred ?? ' - - ',
                         imageUrl: staff.image?.large,
@@ -59,7 +81,9 @@ class EntityGrid<E> extends StatelessWidget {
                       final media = studio.media?.nodes?[0];
                       String poster = '';
                       if (media != null) {
-                        poster = (media.isAdult ?? true) ? '' : (media.coverImage?.large ?? '');
+                        poster = (media.isAdult ?? true)
+                            ? ''
+                            : (media.coverImage?.large ?? '');
                       }
 
                       return EntityCard(

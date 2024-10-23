@@ -35,9 +35,6 @@ class MediaSection<B extends PaginatedDataBloc> extends HookWidget {
   @override
   Widget build(BuildContext context) {
     useAutomaticKeepAlive();
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-
     final scrollController = useScrollController();
 
     useEffect(() {
@@ -50,7 +47,7 @@ class MediaSection<B extends PaginatedDataBloc> extends HookWidget {
           final hasNextPage = (bloc.state as PaginatedDataLoaded).hasNextPage;
           if (hasNextPage) {
             final client = (context.read<GraphqlClientCubit>().state
-            as GraphqlClientInitialized)
+                    as GraphqlClientInitialized)
                 .client;
             bloc.add(LoadData(client));
           }
@@ -58,6 +55,102 @@ class MediaSection<B extends PaginatedDataBloc> extends HookWidget {
       });
       return null;
     }, const []);
+
+    return BlocBuilder<B, PaginatedDataState>(
+      builder: (context, state) {
+        if (state is PaginatedDataInitial) {
+          final client = context.read<GraphqlClientCubit>().getClient()!;
+          context.read<B>().add(LoadData(client));
+          return _buildLoadingShimmer(context);
+        } else if (state is PaginatedDataLoading) {
+          return _buildLoadingShimmer(context);
+        } else if (state is PaginatedDataLoaded) {
+          // return _buildLoadingShimmer(context);
+          if (state.list.isEmpty) return const SizedBox();
+          return Padding(
+            padding: EdgeInsets.only(
+              left: leftPadding,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Section header
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: 10,
+                      ),
+                      child: Text(
+                        label,
+                        style:
+                            Theme.of(context).textTheme.displayMedium?.copyWith(
+                                  fontFamily: 'Roboto-Condensed',
+                                ),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: onSliderPressed,
+                          icon: Padding(
+                            padding: const EdgeInsets.only(
+                              left: 12,
+                              right: 12,
+                              // bottom: 10,
+                            ),
+                            child: SvgPicture.asset(Assets.iconsViewSlider),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: onMorePressed,
+                          icon: Padding(
+                            padding: const EdgeInsets.only(
+                              left: 12,
+                              right: 12,
+                            ),
+                            child: SvgPicture.asset(Assets.iconsArrowRight),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                // Media list
+                _buildMediaList(
+                  state.list as List<Fragment$MediaShort?>,
+                  state.hasNextPage,
+                  scrollController,
+                ),
+              ],
+            ),
+          );
+        } else if (state is PaginatedDataError) {
+          return ErrorText(
+            message: state.message,
+            onTryAgain: () {
+              final client = context.read<GraphqlClientCubit>().getClient()!;
+              context.read<B>().add(LoadData(client));
+            },
+          );
+        } else {
+          return const Text('Unknown State');
+        }
+      },
+    );
+  }
+
+  // return _buildMediaList(
+  // state.list as List<Fragment$MediaShort?>,
+  // state.hasNextPage,
+  // scrollController,
+  // );
+
+  Widget _buildLoadingShimmer(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Padding(
       padding: EdgeInsets.only(
@@ -78,14 +171,14 @@ class MediaSection<B extends PaginatedDataBloc> extends HookWidget {
                 child: Text(
                   label,
                   style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                    fontFamily: 'Roboto-Condensed',
-                  ),
+                        fontFamily: 'Roboto-Condensed',
+                      ),
                 ),
               ),
               Row(
                 children: [
                   IconButton(
-                    onPressed: onSliderPressed,
+                    onPressed: () {},
                     icon: Padding(
                       padding: const EdgeInsets.only(
                         left: 12,
@@ -96,7 +189,7 @@ class MediaSection<B extends PaginatedDataBloc> extends HookWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: onMorePressed,
+                    onPressed: () {},
                     icon: Padding(
                       padding: const EdgeInsets.only(
                         left: 12,
@@ -110,65 +203,21 @@ class MediaSection<B extends PaginatedDataBloc> extends HookWidget {
             ],
           ),
           // Media list
-          BlocBuilder<B, PaginatedDataState>(
-            builder: (context, state) {
-              if (state is PaginatedDataInitial) {
-                final client = (context.read<GraphqlClientCubit>().state
-                as GraphqlClientInitialized)
-                    .client;
-                context.read<B>().add(LoadData(client));
-                return ShimmerLoaderList(
-                  widgetWidth: UIUtils.getWidgetWidth(
-                    targetWidgetWidth: 115,
-                    screenWidth: screenWidth,
-                  ),
-                  widgetHeight: UIUtils.getWidgetHeight(
-                    targetWidgetHeight: 169,
-                    screenHeight: screenHeight,
-                  ),
-                  height: UIUtils.getWidgetHeight(
-                    targetWidgetHeight: 169,
-                    screenHeight: screenHeight,
-                  ),
-                  widgetBorder: 10,
-                  direction: Axis.horizontal,
-                );
-              } else if (state is PaginatedDataLoading) {
-                return ShimmerLoaderList(
-                  widgetWidth: UIUtils.getWidgetWidth(
-                    targetWidgetWidth: 115,
-                    screenWidth: screenWidth,
-                  ),
-                  widgetHeight: UIUtils.getWidgetHeight(
-                    targetWidgetHeight: 169,
-                    screenHeight: screenHeight,
-                  ),
-                  height: UIUtils.getWidgetHeight(
-                    targetWidgetHeight: 169,
-                    screenHeight: screenHeight,
-                  ),
-                  widgetBorder: 10,
-                  direction: Axis.horizontal,
-                );
-              } else if (state is PaginatedDataLoaded) {
-                return _buildMediaList(
-                  state.list as List<Fragment$MediaShort?>,
-                  state.hasNextPage,
-                  scrollController,
-                );
-              } else if (state is PaginatedDataError) {
-                return ErrorText(
-                    message: state.message,
-                    onTryAgain: () {
-                      final client = (context.read<GraphqlClientCubit>().state
-                      as GraphqlClientInitialized)
-                          .client;
-                      context.read<B>().add(LoadData(client));
-                    });
-              } else {
-                return const Text('Unknown State');
-              }
-            },
+          ShimmerLoaderList(
+            widgetWidth: UIUtils.getWidgetWidth(
+              targetWidgetWidth: 115,
+              screenWidth: screenWidth,
+            ),
+            widgetHeight: UIUtils.getWidgetHeight(
+              targetWidgetHeight: 169,
+              screenHeight: screenHeight,
+            ),
+            height: UIUtils.getWidgetHeight(
+              targetWidgetHeight: 169,
+              screenHeight: screenHeight,
+            ),
+            widgetBorder: 10,
+            direction: Axis.horizontal,
           ),
         ],
       ),
@@ -176,10 +225,10 @@ class MediaSection<B extends PaginatedDataBloc> extends HookWidget {
   }
 
   Widget _buildMediaList(
-      List<Fragment$MediaShort?> mediaList,
-      bool hasNextPage,
-      ScrollController controller,
-      ) {
+    List<Fragment$MediaShort?> mediaList,
+    bool hasNextPage,
+    ScrollController controller,
+  ) {
     return SizedBox(
       height: 205,
       child: Stack(
@@ -191,7 +240,7 @@ class MediaSection<B extends PaginatedDataBloc> extends HookWidget {
             slivers: [
               SliverList(
                 delegate: SliverChildBuilderDelegate(
-                      (context, index) =>
+                  (context, index) =>
                       _buildMediaCard(context, mediaList[index]),
                   childCount: mediaList.length,
                 ),
@@ -256,8 +305,8 @@ class MediaSection<B extends PaginatedDataBloc> extends HookWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontFamily: 'Roboto-Condensed',
-                ),
+                      fontFamily: 'Roboto-Condensed',
+                    ),
               ),
             ),
           ],
@@ -293,49 +342,11 @@ class MediaSection<B extends PaginatedDataBloc> extends HookWidget {
           Text(
             (meanScore == null) ? '0' : meanScore.toString(),
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontFamily: 'Roboto-Condensed',
-            ),
+                  fontFamily: 'Roboto-Condensed',
+                ),
           ),
         ],
       ),
     );
   }
-
-// Widget _buildMediaPoster(String? imageUrl, Enum$MediaType type) {
-//   return (imageUrl != null)
-//       ? CachedNetworkImage(
-//           cacheManager: ImageCacheManager.instance,
-//           imageUrl: imageUrl,
-//           width: 115,
-//           height: 169,
-//           fit: BoxFit.cover,
-//           imageBuilder: (context, imageProvider) {
-//             return ClipRRect(
-//               borderRadius: (type == Enum$MediaType.ANIME)
-//                   ? BorderRadius.circular(15)
-//                   : BorderRadius.circular(5),
-//               child: Image(
-//                 image: imageProvider,
-//                 fit: BoxFit.cover,
-//               ),
-//             );
-//           },
-//           placeholder: (context, url) {
-//             return _buildPlaceholderImage115x169(type);
-//           },
-//           errorWidget: (context, url, error) {
-//             return _buildPlaceholderImage115x169(type);
-//           },
-//         )
-//       : _buildPlaceholderImage115x169(type);
-// }
-//
-// Widget _buildPlaceholderImage115x169(Enum$MediaType type) {
-//   return ClipRRect(
-//     borderRadius: (type == Enum$MediaType.ANIME)
-//         ? BorderRadius.circular(15)
-//         : BorderRadius.circular(5),
-//     child: Image.asset(Assets.placeholders115x169),
-//   );
-// }
 }

@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
+import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/theme/colors.dart';
 
@@ -33,7 +35,9 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 Widget _buildAvatar(BuildContext context) {
   return GestureDetector(
-    onTap: () {},
+    onTap: () {
+      context.push(RouteConstants.myProfile);
+    },
     child: Padding(
       padding: const EdgeInsets.only(right: 20),
       child: ClipOval(

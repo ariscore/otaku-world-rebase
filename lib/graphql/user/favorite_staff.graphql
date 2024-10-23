@@ -1,0 +1,14 @@
+query FavoriteStaff($page: Int, $userId: Int) {
+    User(id: $userId) {
+        favourites {
+            staff(page: $page, perPage: 30) {
+                pageInfo {
+                    hasNextPage
+                }
+                nodes {
+                    ...StaffShort
+                }
+            }
+        }
+    }
+}
