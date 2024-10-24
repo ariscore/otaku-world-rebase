@@ -68,6 +68,7 @@ class MediaCarouselCard extends StatelessWidget {
                   horizontal: 10,
                 ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
                       media!.title!.userPreferred!,
@@ -77,11 +78,10 @@ class MediaCarouselCard extends StatelessWidget {
                                 fontWeight: FontWeight.w500,
                               ),
                       textAlign: TextAlign.left,
+                      overflow: TextOverflow.ellipsis,
                       maxLines: 3,
                     ),
-                    // const SizedBox(
-                    //   height: 50,
-                    // ),
+                    const SizedBox(height: 15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -103,13 +103,9 @@ class MediaCarouselCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    // const SizedBox(
-                    //   height: 15,
-                    // ),
+                    const SizedBox(height: 15),
                     _buildStatusRow(context, media!),
-                    // const SizedBox(
-                    //   height: 15,
-                    // ),
+                    const SizedBox(height: 15),
                     GenreText(
                       genres: media!.genres,
                       genreStyle:
@@ -125,9 +121,7 @@ class MediaCarouselCard extends StatelessWidget {
                                 fontFamily: 'Poppins',
                               ),
                     ),
-                    // const SizedBox(
-                    //   height: 15,
-                    // ),
+                    const SizedBox(height: 20),
                     _buildMediaDetails(context, media!),
                   ],
                 ),
@@ -163,6 +157,7 @@ class MediaCarouselCard extends StatelessWidget {
           horizontalPadding: 0,
           verticalPadding: 7,
           radius: 8,
+          isSmall: true,
         ),
         PrimaryButton(
           onTap: () => NavigationHelper.goToMediaDetailScreen(
@@ -178,6 +173,7 @@ class MediaCarouselCard extends StatelessWidget {
           horizontalPadding: 0,
           verticalPadding: 7,
           radius: 8,
+          isSmall: true,
         ),
       ],
     );

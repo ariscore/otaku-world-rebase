@@ -8,6 +8,7 @@ import 'package:otaku_world/core/ui/error_text.dart';
 import 'package:otaku_world/features/profile/widgets/my_profile_app_bar.dart';
 import 'package:otaku_world/features/profile/widgets/user_favorites.dart';
 import 'package:otaku_world/features/profile/widgets/user_overview.dart';
+import 'package:otaku_world/features/profile/widgets/user_social.dart';
 import 'package:otaku_world/theme/colors.dart';
 
 class MyProfileScreen extends HookWidget {
@@ -36,6 +37,7 @@ class MyProfileScreen extends HookWidget {
           } else if (state is MyProfileLoaded) {
             return RefreshIndicator(
               backgroundColor: AppColors.raisinBlack,
+              displacement: 60,
               onRefresh: () {
                 return Future.delayed(const Duration(seconds: 1), () {
                   context.read<MyProfileBloc>().add(LoadProfile(client!));
@@ -56,27 +58,7 @@ class MyProfileScreen extends HookWidget {
                       tabController: tabController,
                     ),
                   ),
-                  // SliverOverlapAbsorber(
-                  //   handle:
-                  //   NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-                  //   sliver: SliverPersistentHeader(
-                  //     pinned: true,
-                  //     delegate: _SliverTabBarDelegate(
-                  //       CustomTabBar(
-                  //         controller: tabController,
-                  //         tabs: const [
-                  //           'Overview',
-                  //           'Favourites',
-                  //           'Stats',
-                  //           'Social',
-                  //           'Reviews',
-                  //         ],
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                 ],
-                // TabBarView Content
                 body: TabBarView(
                   controller: tabController,
                   children: [
@@ -91,9 +73,11 @@ class MyProfileScreen extends HookWidget {
                       userId: state.user.id,
                     ),
                     _buildListView(
-                        'Settings Content', PageStorageKey<String>('3')),
-                    _buildListView(
                         'Settings Content', PageStorageKey<String>('4')),
+                    UserSocial(
+                      key: const PageStorageKey<String>('social'),
+                      userId: state.user.id,
+                    ),
                     _buildListView(
                         'Settings Content', PageStorageKey<String>('5')),
                   ],

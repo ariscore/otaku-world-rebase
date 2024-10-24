@@ -17,6 +17,7 @@ class UserAvatar extends StatelessWidget {
         width: 100,
         height: 100,
         imageUrl: url,
+        viewer: true,
         errorWidget: (context, url, error) {
           return Container(
             padding: const EdgeInsets.all(5),
