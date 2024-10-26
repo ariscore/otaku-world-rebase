@@ -26,3 +26,17 @@ class ChangeType extends UserSocialEvent {
 
   final bool isFollowing;
 }
+
+class FollowUser extends UserSocialEvent {
+  const FollowUser({required this.client, required this.userId});
+
+  final GraphQLClient client;
+  final int userId;
+}
+
+class UnfollowUser extends UserSocialEvent {
+  const UnfollowUser({required this.client, required this.userId});
+
+  final GraphQLClient client;
+  final int userId;
+}

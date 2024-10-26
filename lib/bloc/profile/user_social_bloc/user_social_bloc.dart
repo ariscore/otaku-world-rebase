@@ -1,12 +1,14 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/followers.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/following.graphql.dart';
+import 'package:otaku_world/graphql/__generated/graphql/user/toggle_follow.graphql.dart';
 
 part 'user_social_event.dart';
 
@@ -16,8 +18,10 @@ class UserSocialBloc extends Bloc<UserSocialEvent, UserSocialState> {
   UserSocialBloc({required this.userId}) : super(UserSocialInitial()) {
     on<ResetData>(_onResetData);
     on<LoadSocialData>(_onLoadSocialData);
-    on<LoadMoreData>(_onLoadMoreData);
+    on<LoadMoreData>(_onLoadMoreData, transformer: droppable());
     on<ChangeType>(_onChangeType);
+    on<FollowUser>(_onFollowUser);
+    on<UnfollowUser>(_onUnfollowUser);
   }
 
   final int userId;
@@ -45,6 +49,8 @@ class UserSocialBloc extends Bloc<UserSocialEvent, UserSocialState> {
     log('Fetching for following: $isFollowing', name: 'UserSocialBloc');
     final followingResponse = await event.client.query$Following(
       Options$Query$Following(
+        fetchPolicy: FetchPolicy.networkOnly,
+        cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
         variables: Variables$Query$Following(
           userId: userId,
           page: followingPage,
@@ -54,6 +60,8 @@ class UserSocialBloc extends Bloc<UserSocialEvent, UserSocialState> {
 
     final followerResponse = await event.client.query$Followers(
       Options$Query$Followers(
+        fetchPolicy: FetchPolicy.networkOnly,
+        cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
         variables: Variables$Query$Followers(
           userId: userId,
           page: followersPage,
@@ -93,9 +101,115 @@ class UserSocialBloc extends Bloc<UserSocialEvent, UserSocialState> {
     }
   }
 
-  void _onLoadMoreData(LoadMoreData event, Emitter<UserSocialState> emit) {}
+  void _onLoadMoreData(LoadMoreData event, Emitter<UserSocialState> emit) async {
+    if ((!hasNextPageFollowing && event.isFollowing) ||
+        (!hasNextPageFollowers && !event.isFollowing)) {
+      return;
+    }
+    final loadedState = state as UserSocialLoaded;
+
+    if (event.isFollowing) {
+      final response = await event.client.query$Following(
+        Options$Query$Following(
+          variables: Variables$Query$Following(
+            page: followingPage,
+            userId: userId,
+          ),
+        ),
+      );
+      log('Response: $response', name: 'UserSocialBloc');
+
+      if (response.hasException) {
+        if (response.exception!.linkException != null) {
+          emit(loadedState.copyWith(error: StringConstants.noInternetError,),);
+        } else {
+          emit(loadedState.copyWith(error: StringConstants.somethingWentWrongError,),);
+        }
+      } else {
+        final data = response.parsedData!.Page;
+        hasNextPageFollowing = data?.pageInfo?.hasNextPage ?? false;
+        followingList.addAll(data?.following ?? []);
+        emit(loadedState.copyWith(followings: followingList));
+      }
+    } else {
+
+    }
+  }
 
   void _onChangeType(ChangeType event, Emitter<UserSocialState> emit) {
     isFollowing = event.isFollowing;
+    emit((state as UserSocialLoaded).copyWith(isFollowing: isFollowing));
+  }
+
+  void _onFollowUser(FollowUser event, Emitter<UserSocialState> emit) async {
+    await _handleToggleFollow(
+      client: event.client,
+      userId: event.userId,
+      isFollow: true,
+      emit: emit,
+    );
+  }
+
+  void _onUnfollowUser(UnfollowUser event, Emitter<UserSocialState> emit) async {
+    await _handleToggleFollow(
+      client: event.client,
+      userId: event.userId,
+      isFollow: false,
+      emit: emit,
+    );
+  }
+
+  Future<void> _handleToggleFollow({
+    required GraphQLClient client,
+    required int userId,
+    required bool isFollow,
+    required Emitter<UserSocialState> emit,
+  }) async {
+    final loadedState = state as UserSocialLoaded;
+    emit(loadedState.copyWith(showProgress: true));
+
+    final response = await client.mutate$ToggleFollow(
+      Options$Mutation$ToggleFollow(
+        variables: Variables$Mutation$ToggleFollow(
+          userId: userId,
+        ),
+      ),
+    );
+
+    if (response.hasException) {
+      if (response.exception!.linkException != null) {
+        emit(loadedState.copyWith(
+          error: StringConstants.noInternetError,
+          showProgress: false,
+        ));
+      } else {
+        emit(loadedState.copyWith(
+          error: StringConstants.somethingWentWrongError,
+          showProgress: false,
+        ));
+      }
+    } else {
+      final user = response.parsedData!.ToggleFollow;
+      int index = followersList.indexWhere((e) => e?.id == userId);
+
+      if (index != -1) {
+        followersList[index] = user;
+      }
+      if (isFollow) {
+        followingList.add(user);
+      } else {
+        followingList.removeWhere((e) => e?.id == user?.id);
+        // followersList.removeAt(index);
+        // followingList.removeWhere((e) => e?.id == userId);
+      }
+
+      emit(
+        loadedState.copyWith(
+          followers: followersList,
+          followings: followingList,
+          showProgress: false,
+        ),
+      );
+    }
   }
 }

@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/profile/user_social_bloc/user_social_bloc.dart';
 import 'package:otaku_world/constants/filter_constants.dart';
+import 'package:otaku_world/core/ui/error_text.dart';
 import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
+import 'package:otaku_world/features/profile/widgets/shimmers/social_shimmer.dart';
+import 'package:otaku_world/features/profile/widgets/user_card.dart';
+import 'package:otaku_world/generated/assets.dart';
+import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../../theme/colors.dart';
+import '../../../utils/ui_utils.dart';
+import '../../reviews/widgets/bottom_sheet_component.dart';
 
 class UserSocial extends StatelessWidget {
   const UserSocial({super.key, required this.userId});
@@ -11,45 +24,270 @@ class UserSocial extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => UserSocialBloc(userId: userId),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 10,
-        ),
-        child: CustomScrollView(
-          slivers: [
-            SliverOverlapInjector(
-              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-            ),
-            SliverToBoxAdapter(
-              child: CustomDropdown(
-                dropdownItems: FilterConstants.socialOptions,
-                initialValue: FilterConstants.socialOptions[0],
-                onChange: (option) {
+    final client = context.read<GraphqlClientCubit>().getClient();
 
+    return BlocProvider(
+      create: (context) => UserSocialBloc(userId: userId)
+        ..add(
+          LoadSocialData(client!),
+        ),
+      child: BlocListener<UserSocialBloc, UserSocialState>(
+        listenWhen: (previous, current) =>
+            current is UserSocialLoaded &&
+            previous is UserSocialLoaded &&
+            previous.showProgress != current.showProgress,
+        listener: (context, state) {
+          if (state is UserSocialLoaded) {
+            if (state.showProgress) {
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                useRootNavigator: true,
+                builder: (context) {
+                  return WillPopScope(
+                    onWillPop: () async => false,
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                },
+              );
+            } else {
+              context.pop();
+              if (state.error != null) {
+                UIUtils.showSnackBar(context, state.error!);
+              }
+            }
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 10,
+          ),
+          child: CustomScrollView(
+            slivers: [
+              SliverOverlapInjector(
+                handle:
+                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+              ),
+              Builder(builder: (context) {
+                return SliverPadding(
+                  padding: const EdgeInsets.only(
+                    bottom: 10,
+                  ),
+                  sliver: SliverToBoxAdapter(
+                    child: CustomDropdown(
+                      dropdownItems: FilterConstants.socialOptions,
+                      initialValue: FilterConstants.socialOptions[0],
+                      onChange: (option) {
+                        context.read<UserSocialBloc>().add(
+                              ChangeType(
+                                isFollowing:
+                                    option == 'Following' ? true : false,
+                              ),
+                            );
+                      },
+                    ),
+                  ),
+                );
+              }),
+              BlocBuilder<UserSocialBloc, UserSocialState>(
+                builder: (context, state) {
+                  if (state is UserSocialLoading) {
+                    return const SocialShimmer();
+                  } else if (state is UserSocialLoaded) {
+                    final list =
+                        state.isFollowing ? state.followings : state.followers;
+                    return SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          if (index == list.length - 5) {
+                            context.read<UserSocialBloc>().add(
+                                  LoadMoreData(
+                                    client: client!,
+                                    isFollowing: state.isFollowing,
+                                  ),
+                                );
+                          }
+                          final user = list[index];
+                          if (user == null) return const SizedBox();
+                          return UserCard(
+                            user: user,
+                            onMorePressed: () {
+                              _showOptions(context, user);
+                            },
+                          );
+                        },
+                        childCount: list.length,
+                      ),
+                    );
+                  } else if (state is UserSocialError) {
+                    return SliverToBoxAdapter(
+                      child: ErrorText(
+                        message: state.message,
+                        onTryAgain: () {},
+                      ),
+                    );
+                  } else {
+                    return const SliverToBoxAdapter(
+                      child: Text('Unknown State'),
+                    );
+                  }
                 },
               ),
-            ),
-            // BlocBuilder<UserSocialBloc, UserSocialState>(
-            //   builder: (context, state) {
-            //     if (state is UserSocialLoading) {
-            //       return const CircularProgressIndicator();
-            //     } else if (state is UserSocialLoaded) {
-            //       return SliverList(
-            //         delegate: SliverChildBuilderDelegate(
-            //           (context, index) {
-            //
-            //           },
-            //           childCount: state.followings.length
-            //         ),
-            //       );
-            //     }
-            //   },
-            // ),
-          ],
+              BlocBuilder<UserSocialBloc, UserSocialState>(
+                builder: (context, state) {
+                  if (state is UserSocialLoaded) {
+                    if (state.isFollowing && state.hasNextPageFollowing) {
+                      return _buildLoader();
+                    } else if (!state.isFollowing &&
+                        state.hasNextPageFollowers) {
+                      return _buildLoader();
+                    } else {
+                      return const SliverToBoxAdapter();
+                    }
+                  } else {
+                    return const SliverToBoxAdapter();
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  Widget _buildLoader() {
+    return const SliverToBoxAdapter(
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
+
+  void _showOptions(BuildContext context, Fragment$User user) {
+    List<BottomSheetComponent> options = [];
+    final isCurrentUser = userId == user.id;
+
+    if (!(user.isFollowing ?? false) && !isCurrentUser) {
+      options.add(
+        BottomSheetComponent(
+          iconName: Assets.iconsFollow,
+          text: 'Follow',
+          onTap: () => _followUser(context, user.id),
+        ),
+      );
+    } else if (!isCurrentUser) {
+      options.add(
+        BottomSheetComponent(
+          iconName: Assets.iconsUnfollow,
+          text: 'Unfollow',
+          onTap: () => _unfollowUser(context, user.id),
+        ),
+      );
+    }
+
+    options.add(
+      BottomSheetComponent(
+        iconName: Assets.iconsShare,
+        text: 'Share Profile',
+        onTap: () => _shareProfile(context, user.name),
+      ),
+    );
+    options.add(
+      BottomSheetComponent(
+        iconName: Assets.iconsLinkSquare,
+        text: 'View on AniList',
+        onTap: () => _viewOnAniList(context, user.name),
+      ),
+    );
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: AppColors.darkCharcoal,
+      isScrollControlled: true,
+      useRootNavigator: true,
+      builder: (context) {
+        return Container(
+          decoration: const BoxDecoration(
+            color: AppColors.darkCharcoal,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15),
+              topRight: Radius.circular(15),
+            ),
+          ),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 15,
+            vertical: 10,
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  height: 5,
+                  width: 50,
+                  decoration: ShapeDecoration(
+                    color: AppColors.lightSilver,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                ...options
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _followUser(BuildContext context, int userId) {
+    context.pop();
+    context.read<UserSocialBloc>().add(
+          FollowUser(
+            client: context.read<GraphqlClientCubit>().getClient()!,
+            userId: userId,
+          ),
+        );
+  }
+
+  void _unfollowUser(BuildContext context, int userId) {
+    context.pop();
+    context.read<UserSocialBloc>().add(
+          UnfollowUser(
+            client: context.read<GraphqlClientCubit>().getClient()!,
+            userId: userId,
+          ),
+        );
+  }
+
+  void _shareProfile(BuildContext context, String userName) {
+    context.pop();
+    Share.share('Bhai ni profile check karo: $userName');
+  }
+
+  void _viewOnAniList(BuildContext context, String userName) {
+    context.pop();
+    final Uri reviewUri = Uri(
+      scheme: 'https',
+      host: 'anilist.co',
+      path: 'user/$userName',
+    );
+    launchUrl(
+      reviewUri,
+      mode: LaunchMode.externalApplication,
+    ).then(
+      (isSuccess) {
+        if (!isSuccess) {
+          UIUtils.showSnackBar(context, 'Can\'t open the link!');
+        }
+      },
+      onError: (e) {
+        UIUtils.showSnackBar(context, 'Can\'t open the link!');
+      },
     );
   }
 }

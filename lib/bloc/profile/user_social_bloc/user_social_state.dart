@@ -19,12 +19,15 @@ final class UserSocialLoaded extends UserSocialState {
     required this.hasNextPageFollowers,
     this.showProgress = false,
     required this.isFollowing,
+    this.error,
   });
 
   final List<Fragment$User?> followings, followers;
   final bool hasNextPageFollowing, hasNextPageFollowers;
   final bool showProgress;
   final bool isFollowing;
+
+  final String? error;
 
   @override
   String toString() {
@@ -34,14 +37,21 @@ final class UserSocialLoaded extends UserSocialState {
         'hasNextPageFollowers: $hasNextPageFollowers }';
   }
 
-  UserSocialLoaded copyWith({bool? showProgress, bool? isFollowing}) {
+  UserSocialLoaded copyWith({
+    List<Fragment$User?>? followers,
+    List<Fragment$User?>? followings,
+    bool? showProgress,
+    bool? isFollowing,
+    String? error,
+  }) {
     return UserSocialLoaded(
-      followings: followings,
-      followers: followers,
+      followings: followings ?? this.followings,
+      followers: followers ?? this.followers,
       hasNextPageFollowing: hasNextPageFollowing,
       hasNextPageFollowers: hasNextPageFollowers,
       showProgress: showProgress ?? this.showProgress,
       isFollowing: isFollowing ?? this.isFollowing,
+      error: error,
     );
   }
 
@@ -52,6 +62,7 @@ final class UserSocialLoaded extends UserSocialState {
         hasNextPageFollowing,
         hasNextPageFollowers,
         showProgress,
+        isFollowing,
       ];
 }
 
