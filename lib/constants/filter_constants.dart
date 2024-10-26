@@ -48,4 +48,9 @@ class FilterConstants {
     'Message',
     'List Progress',
   ];
+
+  static const socialOptions = [
+    'Following',
+    'Followers',
+  ];
 }

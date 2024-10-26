@@ -413,6 +413,8 @@ fragment User on User {
     avatar {
         medium
     }
+    isFollower
+    isFollowing
 }
 
 fragment UserInfo on User {

@@ -16,18 +16,24 @@ import '../../../bloc/social/activities/activities_bloc.dart';
 import '../../../core/ui/activities/list_activity_card.dart';
 import '../../../core/ui/activities/text_activity_card.dart';
 
-class ActivitiesList extends StatelessWidget {
+class ActivitiesList extends StatefulWidget {
   const ActivitiesList({
     super.key,
-    required this.pageKey,
+    // required this.pageKey,
     required this.isFollowing,
   });
 
   final bool isFollowing;
-  final PageStorageKey pageKey;
+  // final PageStorageKey pageKey;
 
   @override
+  State<ActivitiesList> createState() => _ActivitiesListState();
+}
+
+class _ActivitiesListState extends State<ActivitiesList> with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     final client =
         (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
             .client;
@@ -42,7 +48,7 @@ class ActivitiesList extends StatelessWidget {
           return const ActivityShimmerList();
         } else if (state is ActivitiesLoaded) {
           final activities =
-              isFollowing ? state.followingActivities : state.globalActivities;
+              widget.isFollowing ? state.followingActivities : state.globalActivities;
           return RefreshIndicator(
             backgroundColor: AppColors.raisinBlack,
             onRefresh: () => _refresh(client, activitiesBloc),
@@ -55,12 +61,13 @@ class ActivitiesList extends StatelessWidget {
                     ),
                   )
                 : CustomScrollView(
-                    key: pageKey,
+                    // key: widget.pageKey,
                     slivers: [
-                      SliverOverlapInjector(
-                        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                            context),
-                      ),
+                      // SliverOverlapInjector(
+                      //   handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                      //     context,
+                      //   ),
+                      // ),
                       SliverList(
                         delegate: SliverChildBuilderDelegate(
                           (context, index) {
@@ -69,7 +76,7 @@ class ActivitiesList extends StatelessWidget {
                               activitiesBloc.add(
                                 LoadMoreActivities(
                                   client: client,
-                                  isFollowing: isFollowing,
+                                  isFollowing: widget.isFollowing,
                                 ),
                               );
                             }
@@ -88,9 +95,9 @@ class ActivitiesList extends StatelessWidget {
                           childCount: activities.length,
                         ),
                       ),
-                      if (isFollowing && state.hasNextPageFollowing)
+                      if (widget.isFollowing && state.hasNextPageFollowing)
                         _buildLoader(),
-                      if (!isFollowing && state.hasNextPageGlobal)
+                      if (!widget.isFollowing && state.hasNextPageGlobal)
                         _buildLoader()
                     ],
                   ),
@@ -122,4 +129,7 @@ class ActivitiesList extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

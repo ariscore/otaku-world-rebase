@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,29 +21,35 @@ import 'package:otaku_world/theme/colors.dart';
 
 import '../../../bloc/bottom_nav_bar/bottom_nav_bar_cubit.dart';
 
-class SocialScreen extends HookWidget {
+class SocialScreen extends StatefulHookWidget {
   const SocialScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    log('Building social screen', name: 'Social');
-    final size = MediaQuery.of(context).size;
-    final tabController = useTabController(initialLength: 2);
-    final scrollController = useScrollController();
-    final bottomBarBloc = context.read<BottomNavBarCubit>();
-    final client =
-        (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
-            .client;
-    final activitiesBloc = context.read<ActivitiesBloc>();
+  State<SocialScreen> createState() => _SocialScreenState();
+}
 
-    useEffect(() {
-      scrollController.addListener(() {
-        if (scrollController.position.pixels <=
-                scrollController.position.minScrollExtent &&
+class _SocialScreenState extends State<SocialScreen>
+    with SingleTickerProviderStateMixin {
+  final scrollViewKey = GlobalKey<ExtendedNestedScrollViewState>();
+  late final BottomNavBarCubit bottomBarBloc;
+  late final TabController tabController;
+
+  @override
+  void initState() {
+    tabController = TabController(length: 2, vsync: this);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final scrollController = scrollViewKey.currentState?.innerController;
+      scrollController?.addListener(() {
+        if (tabController.indexIsChanging) return;
+        final position = tabController.index == 0
+            ? scrollController.positions.first
+            : scrollController.positions.last;
+
+        if (position.pixels <= position.minScrollExtent &&
             bottomBarBloc.state is BottomNavBarNotVisible) {
           bottomBarBloc.showBottomBar();
         }
-        final direction = scrollController.position.userScrollDirection;
+        final direction = position.userScrollDirection;
         if (direction == ScrollDirection.forward) {
           if (bottomBarBloc.state is BottomNavBarNotVisible) {
             bottomBarBloc.showBottomBar();
@@ -53,6 +60,49 @@ class SocialScreen extends HookWidget {
           }
         }
       });
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    // final tabController = useTabController(initialLength: 2);
+    // final scrollController = useScrollController();
+    // bottomBarBloc = context.read<BottomNavBarCubit>();
+    final client =
+        (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
+            .client;
+    final activitiesBloc = context.read<ActivitiesBloc>();
+
+    useEffect(() {
+      bottomBarBloc = context.read<BottomNavBarCubit>();
+      final scrollController = scrollViewKey.currentState?.outerController;
+      log('Scroll controller: $scrollController');
+      // scrollController?.addListener(() {
+      //   log('Position: ${scrollController.position}');
+      //   if (scrollController.position.pixels <=
+      //           scrollController.position.minScrollExtent &&
+      //       bottomBarBloc.state is BottomNavBarNotVisible) {
+      //     bottomBarBloc.showBottomBar();
+      //   }
+      //   final direction = scrollController.position.userScrollDirection;
+      //   if (direction == ScrollDirection.forward) {
+      //     if (bottomBarBloc.state is BottomNavBarNotVisible) {
+      //       bottomBarBloc.showBottomBar();
+      //     }
+      //   } else if (direction == ScrollDirection.reverse) {
+      //     if (bottomBarBloc.state is BottomNavBarVisible) {
+      //       bottomBarBloc.hideBottomBar();
+      //     }
+      //   }
+      // });
       return null;
     }, const []);
 
@@ -82,7 +132,7 @@ class SocialScreen extends HookWidget {
       },
       child: Scaffold(
         floatingActionButton: PrimaryFAB(
-          controller: scrollController,
+          controller: ScrollController(),
           onPressed: () {
             context.push(
               RouteConstants.postNewActivity,
@@ -93,91 +143,102 @@ class SocialScreen extends HookWidget {
             );
           },
         ),
-        body: NestedScrollView(
-          controller: scrollController,
+        body: ExtendedNestedScrollView(
+          // controller: scrollController,
+          key: scrollViewKey,
+          onlyOneScrollInBody: true,
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
-              SliverOverlapAbsorber(
-                handle:
-                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-                sliver: const SliverAppBar(
-                  collapsedHeight: 90,
-                  expandedHeight: 90,
-                  backgroundColor: AppColors.raisinBlack,
-                  flexibleSpace: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    child: DiscoverHeader(
-                      title: StringConstants.socialHeading,
-                      subtitle: StringConstants.socialSubheading,
-                    ),
+              SliverAppBar(
+                expandedHeight: 210,
+                pinned: true,
+                backgroundColor: AppColors.raisinBlack,
+                flexibleSpace: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: DiscoverHeader(
+                    title: StringConstants.socialHeading,
+                    subtitle: StringConstants.socialSubheading,
                   ),
                 ),
-              ),
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: _StickyHeaderDelegate(
-                  child: Column(
-                    children: [
-                      CustomTabBar(
-                        tabs: const [
-                          'Following',
-                          'Global',
-                        ],
-                        controller: tabController,
-                        tabWidth: size.width / 2 - 45,
-                      ),
-                      const SizedBox(height: 5),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Activity',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displayMedium
-                                  ?.copyWith(
-                                    // fontFamily: 'Roboto-Condensed',
-                                  ),
-                            ),
-                            const SizedBox(width: 100),
-                            Expanded(
-                              child: CustomDropdown(
-                                dropdownItems:
-                                    FilterConstants.activitiesOptions,
-                                initialValue:
-                                    FilterConstants.activitiesOptions[0],
-                                borderRadius: 20,
-                                onChange: (option) {
-                                  activitiesBloc.add(
-                                    SelectActivityType(
-                                      client: client,
-                                      type: option,
-                                    ),
-                                  );
-                                  scrollController.jumpTo(0);
-                                },
-                              ),
-                            ),
+                bottom: PreferredSize(
+                  preferredSize: const Size.fromHeight(60),
+                  child: Container(
+                    color: AppColors.raisinBlack,
+                    padding: const EdgeInsets.only(
+                      bottom: 10,
+                    ),
+                    child: Column(
+                      children: [
+                        CustomTabBar(
+                          tabs: const [
+                            'Following',
+                            'Global',
                           ],
+                          controller: tabController,
+                          tabWidth: size.width / 2 - 45,
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 5),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Activity',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displayMedium
+                                    ?.copyWith(
+                                        // fontFamily: 'Roboto-Condensed',
+                                        ),
+                              ),
+                              const SizedBox(width: 100),
+                              Expanded(
+                                child: CustomDropdown(
+                                  dropdownItems:
+                                      FilterConstants.activitiesOptions,
+                                  initialValue:
+                                      FilterConstants.activitiesOptions[0],
+                                  borderRadius: 20,
+                                  onChange: (option) {
+                                    activitiesBloc.add(
+                                      SelectActivityType(
+                                        client: client,
+                                        type: option,
+                                      ),
+                                    );
+                                    // scrollController.jumpTo(0);
+                                    scrollViewKey.currentState!.outerController
+                                        .animateTo(
+                                      0,
+                                      duration: const Duration(seconds: 1),
+                                      curve: Curves.ease,
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ];
           },
+          pinnedHeaderSliverHeightBuilder: () {
+            return 120;
+          },
           body: TabBarView(
             controller: tabController,
             children: const [
               ActivitiesList(
-                pageKey: PageStorageKey<String>('following'),
+                // key: PageStorageKey<String>('following'),
                 isFollowing: true,
               ),
               ActivitiesList(
-                pageKey: PageStorageKey<String>('global'),
+                // key: PageStorageKey<String>('global'),
                 isFollowing: false,
               ),
             ],
@@ -185,34 +246,5 @@ class SocialScreen extends HookWidget {
         ),
       ),
     );
-  }
-}
-
-class _StickyHeaderDelegate extends SliverPersistentHeaderDelegate {
-  final Widget child;
-
-  _StickyHeaderDelegate({required this.child});
-
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return Container(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      child: child,
-    );
-  }
-
-  @override
-  double get maxExtent => 115.0;
-
-  @override
-  double get minExtent => 115.0;
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    return true;
   }
 }

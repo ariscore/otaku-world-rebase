@@ -41,6 +41,7 @@ class Assets {
   static const String iconsEditSmall = 'assets/icons/edit-small.svg';
   static const String iconsFavourite = 'assets/icons/favourite.svg';
   static const String iconsFilterVertical = 'assets/icons/filter-vertical.svg';
+  static const String iconsFollow = 'assets/icons/follow.svg';
   static const String iconsHome = 'assets/icons/home.svg';
   static const String iconsLike = 'assets/icons/like.svg';
   static const String iconsLineVertical = 'assets/icons/line_vertical.svg';
@@ -68,6 +69,7 @@ class Assets {
   static const String iconsThumbsUp = 'assets/icons/thumbs-up.svg';
   static const String iconsThumbsUpFilled = 'assets/icons/thumbs-up-filled.svg';
   static const String iconsTrendUp = 'assets/icons/trend-up.svg';
+  static const String iconsUnfollow = 'assets/icons/unfollow.svg';
   static const String iconsUserGroup = 'assets/icons/user-group.svg';
   static const String iconsViewSlider = 'assets/icons/view-slider.svg';
   static const String logosAppLogo = 'assets/logos/app_logo.png';

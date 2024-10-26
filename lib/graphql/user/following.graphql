@@ -1,0 +1,10 @@
+query Following($page: Int, $userId: Int!) {
+    Page(page: $page, perPage: 30) {
+        pageInfo {
+            hasNextPage
+        }
+        following(userId: $userId,sort: [USERNAME]) {
+            ...User
+        }
+    }
+}

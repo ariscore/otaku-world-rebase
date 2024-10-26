@@ -20034,6 +20034,8 @@ class Fragment$User {
     required this.id,
     required this.name,
     this.avatar,
+    this.isFollower,
+    this.isFollowing,
     this.$__typename = 'User',
   });
 
@@ -20041,6 +20043,8 @@ class Fragment$User {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$avatar = json['avatar'];
+    final l$isFollower = json['isFollower'];
+    final l$isFollowing = json['isFollowing'];
     final l$$__typename = json['__typename'];
     return Fragment$User(
       id: (l$id as int),
@@ -20048,6 +20052,8 @@ class Fragment$User {
       avatar: l$avatar == null
           ? null
           : Fragment$User$avatar.fromJson((l$avatar as Map<String, dynamic>)),
+      isFollower: (l$isFollower as bool?),
+      isFollowing: (l$isFollowing as bool?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -20057,6 +20063,10 @@ class Fragment$User {
   final String name;
 
   final Fragment$User$avatar? avatar;
+
+  final bool? isFollower;
+
+  final bool? isFollowing;
 
   final String $__typename;
 
@@ -20068,6 +20078,10 @@ class Fragment$User {
     _resultData['name'] = l$name;
     final l$avatar = avatar;
     _resultData['avatar'] = l$avatar?.toJson();
+    final l$isFollower = isFollower;
+    _resultData['isFollower'] = l$isFollower;
+    final l$isFollowing = isFollowing;
+    _resultData['isFollowing'] = l$isFollowing;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -20078,11 +20092,15 @@ class Fragment$User {
     final l$id = id;
     final l$name = name;
     final l$avatar = avatar;
+    final l$isFollower = isFollower;
+    final l$isFollowing = isFollowing;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$name,
       l$avatar,
+      l$isFollower,
+      l$isFollowing,
       l$$__typename,
     ]);
   }
@@ -20108,6 +20126,16 @@ class Fragment$User {
     final l$avatar = avatar;
     final lOther$avatar = other.avatar;
     if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$isFollower = isFollower;
+    final lOther$isFollower = other.isFollower;
+    if (l$isFollower != lOther$isFollower) {
+      return false;
+    }
+    final l$isFollowing = isFollowing;
+    final lOther$isFollowing = other.isFollowing;
+    if (l$isFollowing != lOther$isFollowing) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -20139,6 +20167,8 @@ abstract class CopyWith$Fragment$User<TRes> {
     int? id,
     String? name,
     Fragment$User$avatar? avatar,
+    bool? isFollower,
+    bool? isFollowing,
     String? $__typename,
   });
   CopyWith$Fragment$User$avatar<TRes> get avatar;
@@ -20161,6 +20191,8 @@ class _CopyWithImpl$Fragment$User<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? avatar = _undefined,
+    Object? isFollower = _undefined,
+    Object? isFollowing = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$User(
@@ -20171,6 +20203,12 @@ class _CopyWithImpl$Fragment$User<TRes>
         avatar: avatar == _undefined
             ? _instance.avatar
             : (avatar as Fragment$User$avatar?),
+        isFollower: isFollower == _undefined
+            ? _instance.isFollower
+            : (isFollower as bool?),
+        isFollowing: isFollowing == _undefined
+            ? _instance.isFollowing
+            : (isFollowing as bool?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -20194,6 +20232,8 @@ class _CopyWithStubImpl$Fragment$User<TRes>
     int? id,
     String? name,
     Fragment$User$avatar? avatar,
+    bool? isFollower,
+    bool? isFollowing,
     String? $__typename,
   }) =>
       _res;
@@ -20246,6 +20286,20 @@ const fragmentDefinitionUser = FragmentDefinitionNode(
           selectionSet: null,
         ),
       ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'isFollower'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isFollowing'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
     ),
     FieldNode(
       name: NameNode(value: '__typename'),
