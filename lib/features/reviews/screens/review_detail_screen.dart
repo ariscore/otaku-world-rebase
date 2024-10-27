@@ -24,6 +24,7 @@ import 'package:otaku_world/utils/ui_utils.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../bloc/profile/reviews/user_reviews_bloc.dart';
 import '../../../core/ui/appbars/simple_app_bar.dart';
 import '../../../theme/colors.dart';
 import '../../../utils/formatting_utils.dart';
@@ -241,6 +242,11 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
         );
       } else if (widget.bloc is MediaReviewBloc) {
         (widget.bloc as MediaReviewBloc).updateReviewRating(
+          reviewId: id,
+          userRating: rating,
+        );
+      } else if (widget.bloc is UserReviewsBloc) {
+        (widget.bloc as UserReviewsBloc).updateReviewRating(
           reviewId: id,
           userRating: rating,
         );

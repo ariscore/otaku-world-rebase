@@ -17,6 +17,7 @@ import '../../../bloc/reviews/reviews/reviews_bloc.dart';
 import '../../../core/ui/media_section/scroll_to_top_button.dart';
 import '../../../generated/assets.dart';
 import '../../../theme/colors.dart';
+import '../../../utils/navigation_helper.dart';
 
 class ReviewScreen extends HookWidget {
   const ReviewScreen({super.key});
@@ -101,14 +102,15 @@ class ReviewScreen extends HookWidget {
                   SliverPadding(
                     padding: const EdgeInsets.all(10.0),
                     sliver: SliverList.builder(
-                      // itemBuilder: (context, index) {
-                      //   return const SizedBox(
-                      //     height: 10,
-                      //   );
-                      // },
                       itemBuilder: (context, index) {
+                        final review = state.list[index]!;
                         return ReviewCard(
-                          review: state.list[index]!,
+                          review: review,
+                          onPressed: () => NavigationHelper.goToReviewDetailScreen(
+                            context: context,
+                            reviewId: review.id,
+                            bloc: context.read<ReviewsBloc>(),
+                          ),
                         );
                       },
                       itemCount: state.list.length,

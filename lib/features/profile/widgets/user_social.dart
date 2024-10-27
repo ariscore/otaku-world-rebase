@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -6,6 +9,7 @@ import 'package:otaku_world/bloc/profile/user_social_bloc/user_social_bloc.dart'
 import 'package:otaku_world/constants/filter_constants.dart';
 import 'package:otaku_world/core/ui/error_text.dart';
 import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
+import 'package:otaku_world/core/ui/placeholders/anime_character_placeholder.dart';
 import 'package:otaku_world/features/profile/widgets/shimmers/social_shimmer.dart';
 import 'package:otaku_world/features/profile/widgets/user_card.dart';
 import 'package:otaku_world/generated/assets.dart';
@@ -18,12 +22,14 @@ import '../../../utils/ui_utils.dart';
 import '../../reviews/widgets/bottom_sheet_component.dart';
 
 class UserSocial extends StatelessWidget {
-  const UserSocial({super.key, required this.userId});
+  const UserSocial({super.key, required this.userId, this.scrollKey});
 
   final int userId;
+  final GlobalKey<ExtendedNestedScrollViewState>? scrollKey;
 
   @override
   Widget build(BuildContext context) {
+    log('Scroll view key: $scrollKey');
     final client = context.read<GraphqlClientCubit>().getClient();
 
     return BlocProvider(
@@ -66,17 +72,11 @@ class UserSocial extends StatelessWidget {
           ),
           child: CustomScrollView(
             slivers: [
-              SliverOverlapInjector(
-                handle:
-                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-              ),
-              Builder(builder: (context) {
-                return SliverPadding(
-                  padding: const EdgeInsets.only(
-                    bottom: 10,
-                  ),
-                  sliver: SliverToBoxAdapter(
-                    child: CustomDropdown(
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _OptionDropdownDelegate(
+                  Builder(builder: (context) {
+                    return CustomDropdown(
                       dropdownItems: FilterConstants.socialOptions,
                       initialValue: FilterConstants.socialOptions[0],
                       onChange: (option) {
@@ -86,11 +86,22 @@ class UserSocial extends StatelessWidget {
                                     option == 'Following' ? true : false,
                               ),
                             );
+                        if (scrollKey?.currentState != null) {
+                          final position = scrollKey!.currentState!.innerController.positions.first;
+                          log('Position: $position');
+                          if (position.viewportDimension > 680) {
+                            scrollKey?.currentState?.innerController.animateTo(
+                              0,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.ease,
+                            );
+                          }
+                        }
                       },
-                    ),
-                  ),
-                );
-              }),
+                    );
+                  }),
+                ),
+              ),
               BlocBuilder<UserSocialBloc, UserSocialState>(
                 builder: (context, state) {
                   if (state is UserSocialLoading) {
@@ -98,6 +109,26 @@ class UserSocial extends StatelessWidget {
                   } else if (state is UserSocialLoaded) {
                     final list =
                         state.isFollowing ? state.followings : state.followers;
+
+                    if (list.isEmpty) {
+                      return SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: AnimeCharacterPlaceholder(
+                            asset: state.isFollowing
+                                ? Assets.charactersCigaretteGirl
+                                : Assets.charactersErenYeager,
+                            height: 150,
+                            heading: state.isFollowing
+                                ? 'Not Following Anyone'
+                                : 'No Followers Yet',
+                            subheading: state.isFollowing
+                                ? 'Follow people to see their profiles here.'
+                                : 'Looks like no one is following you right now.',
+                          ),
+                        ),
+                      );
+                    }
                     return SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (context, index) {
@@ -289,5 +320,32 @@ class UserSocial extends StatelessWidget {
         UIUtils.showSnackBar(context, 'Can\'t open the link!');
       },
     );
+  }
+}
+
+class _OptionDropdownDelegate extends SliverPersistentHeaderDelegate {
+  const _OptionDropdownDelegate(this.child);
+
+  final Widget child;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      color: AppColors.raisinBlack,
+      child: child,
+    );
+  }
+
+  @override
+  double get maxExtent => 60;
+
+  @override
+  double get minExtent => 60;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    return false;
   }
 }

@@ -19,9 +19,6 @@ class UserOverview extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        SliverOverlapInjector(
-          handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-        ),
         SliverPadding(
           padding: const EdgeInsets.symmetric(
             horizontal: 10,
