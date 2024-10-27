@@ -1,30 +1,24 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:otaku_world/bloc/reviews/reviews/reviews_bloc.dart';
 import 'package:otaku_world/features/reviews/widgets/review_by_user.dart';
 import 'package:otaku_world/features/reviews/widgets/review_card_rating.dart';
 import 'package:otaku_world/features/reviews/widgets/review_profile_photo.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
-import 'package:otaku_world/utils/navigation_helper.dart';
 
 import '../../../core/ui/placeholders/poster_placeholder.dart';
 
 class ReviewCard extends StatelessWidget {
-  const ReviewCard({super.key, required this.review});
+  const ReviewCard({super.key, required this.review, required this.onPressed});
 
   final Fragment$Review review;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => NavigationHelper.goToReviewDetailScreen(
-        context: context,
-        reviewId: review.id,
-        bloc: context.read<ReviewsBloc>(),
-      ),
+      onTap: onPressed,
       child: Container(
         margin: const EdgeInsets.only(bottom: 15),
         decoration: BoxDecoration(

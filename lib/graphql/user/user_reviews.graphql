@@ -1,0 +1,10 @@
+query UserReviews($page: Int, $userId: Int) {
+    Page(page: $page, perPage: 20) {
+        pageInfo {
+            hasNextPage
+        }
+        reviews(userId: $userId, sort: [CREATED_AT_DESC]) {
+            ...Review
+        }
+    }
+}

@@ -39,6 +39,7 @@ class UserAvatar extends StatelessWidget {
         child: CImage(
           imageUrl: url,
           viewer: viewer,
+          placeholder: (context, url) => _buildPlaceholderProfile(),
           errorWidget: (context, url, error) {
             return Container(
               padding: const EdgeInsets.all(5),
@@ -48,6 +49,14 @@ class UserAvatar extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+
+  Widget _buildPlaceholderProfile() {
+    return Container(
+      padding: const EdgeInsets.all(5),
+      color: AppColors.darkGray,
+      child: SvgPicture.asset(Assets.assetsLogoBw),
     );
   }
 }

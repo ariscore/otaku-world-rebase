@@ -39,9 +39,9 @@ class UserFavorites extends StatelessWidget {
       ],
       child: CustomScrollView(
         slivers: [
-          SliverOverlapInjector(
-            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-          ),
+          // SliverOverlapInjector(
+          //   handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+          // ),
           SliverToBoxAdapter(
             child: Builder(builder: (context) {
               return MediaSection<FavoriteAnimeBloc>(
