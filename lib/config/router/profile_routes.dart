@@ -97,4 +97,15 @@ final profileRoutes = [
       return const SettingsScreen();
     },
   ),
+  SlideTransitionRoute(
+    parentNavigatorKey: _rootNavigatorKey,
+    path: RouteConstants.userActivities,
+    directionTween: SlideTransitionRoute.leftToRightTween,
+    builder: (state) {
+      final isCurrentUser =
+          state.uri.queryParameters['is_current_user'] == '1' ? true : false;
+      final userId = int.parse(state.uri.queryParameters['user_id']!);
+      return UserActivitiesScreen(isCurrentUser: isCurrentUser, userId: userId);
+    },
+  ),
 ];

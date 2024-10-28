@@ -1,0 +1,12 @@
+query UserActivities($page: Int, $userId: Int, $type: ActivityType) {
+    Page(page: $page, perPage: 30) {
+        pageInfo {
+            hasNextPage
+        }
+        activities(userId: $userId, sort: [ID_DESC], type: $type) {
+            ...TextActivity
+            ...MessageActivity
+            ...ListActivity
+        }
+    }
+}

@@ -22,6 +22,7 @@ class Assets {
   static const String fontsRobotoCondensedRegular = 'assets/fonts/RobotoCondensed-Regular.ttf';
   static const String fontsRobotoMedium = 'assets/fonts/Roboto-Medium.ttf';
   static const String fontsRobotoRegular = 'assets/fonts/Roboto-Regular.ttf';
+  static const String iconsActivity = 'assets/icons/activity.svg';
   static const String iconsAdd = 'assets/icons/add.svg';
   static const String iconsAlert = 'assets/icons/alert.svg';
   static const String iconsArrowDown = 'assets/icons/arrow_down.svg';
@@ -46,9 +47,11 @@ class Assets {
   static const String iconsLike = 'assets/icons/like.svg';
   static const String iconsLineVertical = 'assets/icons/line_vertical.svg';
   static const String iconsLinkSquare = 'assets/icons/link-square.svg';
+  static const String iconsList = 'assets/icons/list.svg';
   static const String iconsMediaAdd = 'assets/icons/media-add.svg';
   static const String iconsMediaEdit = 'assets/icons/media-edit.svg';
   static const String iconsMessage = 'assets/icons/message.svg';
+  static const String iconsMessageBubble = 'assets/icons/message-bubble.svg';
   static const String iconsMoreHorizontal = 'assets/icons/more-horizontal.svg';
   static const String iconsMoreVertical = 'assets/icons/more-vertical.svg';
   static const String iconsNextButton = 'assets/icons/next-button.svg';
@@ -65,6 +68,7 @@ class Assets {
   static const String iconsSettings = 'assets/icons/settings.svg';
   static const String iconsShare = 'assets/icons/share.svg';
   static const String iconsStar = 'assets/icons/star.svg';
+  static const String iconsStatus = 'assets/icons/status.svg';
   static const String iconsThumbsDown = 'assets/icons/thumbs-down.svg';
   static const String iconsThumbsDownFilled = 'assets/icons/thumbs-down-filled.svg';
   static const String iconsThumbsUp = 'assets/icons/thumbs-up.svg';

@@ -15,8 +15,6 @@ import 'package:otaku_world/features/profile/widgets/user_favorites.dart';
 import 'package:otaku_world/features/profile/widgets/user_overview.dart';
 import 'package:otaku_world/features/profile/widgets/user_reviews.dart';
 import 'package:otaku_world/features/profile/widgets/user_social.dart';
-import 'package:otaku_world/features/reviews/widgets/bottom_sheet_component.dart';
-import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/theme/colors.dart';
 
 class MyProfileScreen extends HookWidget {
@@ -140,52 +138,6 @@ class MyProfileScreen extends HookWidget {
           onTryAgain: onPressed,
         ),
       ),
-    );
-  }
-
-  void _showOptions(BuildContext context) {
-    List<BottomSheetComponent> options = [];
-
-    options.add(BottomSheetComponent(iconName: Assets.iconsSettings, text: 'Settings', onTap: () {},),);
-
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: AppColors.darkCharcoal,
-      isScrollControlled: true,
-      useRootNavigator: true,
-      builder: (context) {
-        return Container(
-          decoration: const BoxDecoration(
-            color: AppColors.darkCharcoal,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15),
-              topRight: Radius.circular(15),
-            ),
-          ),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 15,
-            vertical: 10,
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  height: 5,
-                  width: 50,
-                  decoration: ShapeDecoration(
-                    color: AppColors.lightSilver,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                ...options
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 }

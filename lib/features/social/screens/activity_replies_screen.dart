@@ -8,6 +8,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
+import 'package:otaku_world/bloc/profile/user_activities_bloc/user_activities_bloc.dart';
 import 'package:otaku_world/bloc/social/activities/activities_bloc.dart';
 import 'package:otaku_world/bloc/social/activity_replies/activity_replies_bloc.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
@@ -108,6 +109,11 @@ class ActivityRepliesScreen extends HookWidget {
                         activityId: activityReply.activityId ?? 0,
                         increase: true,
                       );
+                    } else if (bloc is UserActivitiesBloc) {
+                      (bloc as UserActivitiesBloc).updateReplyCount(
+                        activityId: activityReply.activityId ?? 0,
+                        increase: true,
+                      );
                     }
                   },
                 );
@@ -143,7 +149,8 @@ class ActivityRepliesScreen extends HookWidget {
                       : SliverList(
                           delegate: SliverChildBuilderDelegate(
                             (context, index) {
-                              final activityReply = state.list[index];
+                              final activityReply =
+                                  state.list[index] as Fragment$ActivityReply;
                               return ActivityReplyCard(
                                 activityReply: activityReply,
                                 onDeleted: () {
@@ -154,6 +161,12 @@ class ActivityRepliesScreen extends HookWidget {
                                     );
                                   } else if (bloc is SocialBloc) {
                                     (bloc as SocialBloc).updateReplyCount(
+                                      activityId: activityReply.activityId ?? 0,
+                                      increase: false,
+                                    );
+                                  } else if (bloc is UserActivitiesBloc) {
+                                    (bloc as UserActivitiesBloc)
+                                        .updateReplyCount(
                                       activityId: activityReply.activityId ?? 0,
                                       increase: false,
                                     );

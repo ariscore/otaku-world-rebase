@@ -14,6 +14,7 @@ class RouteConstants {
   static const favoriteCharacters = '/favorite-characters';
   static const favoriteStaff = '/favorite-staff';
   static const favoriteStudios = '/favorite-studios';
+  static const userActivities = '/user-activities';
 
   static const settings = '/settings';
   static const discover = '/discover';

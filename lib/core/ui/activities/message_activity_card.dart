@@ -12,9 +12,16 @@ import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'activity_base_card.dart';
 
 class MessageActivityCard extends StatelessWidget {
-  const MessageActivityCard({super.key, required this.activity});
+  const MessageActivityCard({
+    super.key,
+    required this.activity,
+    required this.bloc,
+    this.isProfile = false,
+  });
 
   final Fragment$MessageActivity activity;
+  final bool isProfile;
+  final Bloc bloc;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +51,9 @@ class MessageActivityCard extends StatelessWidget {
       type: Fragment$MessageActivity,
       isCurrentUserMessage: isCurrentUserMessage,
       isSubscribed: activity.isSubscribed ?? false,
+      isProfile: isProfile,
+      isPrivate: activity.isPrivate ?? false,
+      bloc: bloc,
       onEdit: () {
         context.push(RouteConstants.editMessageActivity, extra: {
           'activity': activity,
