@@ -16,8 +16,11 @@ import '../../../utils/ui_utils.dart';
 import '../../reviews/widgets/bottom_sheet_component.dart';
 
 class MyProfileAppBar extends StatelessWidget {
-  const MyProfileAppBar(
-      {super.key, required this.user, required this.tabController});
+  const MyProfileAppBar({
+    super.key,
+    required this.user,
+    required this.tabController,
+  });
 
   final Fragment$UserInfo user;
   final TabController tabController;
@@ -40,7 +43,11 @@ class MyProfileAppBar extends StatelessWidget {
       actions: [
         _buildAction(
           asset: Assets.iconsMessage,
-          onPressed: () {},
+          onPressed: () {
+            context.push(
+              '${RouteConstants.userActivities}?is_current_user=1&user_id=${user.id}',
+            );
+          },
         ),
         _buildAction(
           asset: Assets.iconsNotificationUnread,
@@ -210,7 +217,7 @@ class MyProfileAppBar extends StatelessWidget {
       reviewUri,
       mode: LaunchMode.externalApplication,
     ).then(
-          (isSuccess) {
+      (isSuccess) {
         if (!isSuccess) {
           UIUtils.showSnackBar(context, 'Can\'t open the link!');
         }

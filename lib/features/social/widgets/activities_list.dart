@@ -19,18 +19,17 @@ import '../../../core/ui/activities/text_activity_card.dart';
 class ActivitiesList extends StatefulWidget {
   const ActivitiesList({
     super.key,
-    // required this.pageKey,
     required this.isFollowing,
   });
 
   final bool isFollowing;
-  // final PageStorageKey pageKey;
 
   @override
   State<ActivitiesList> createState() => _ActivitiesListState();
 }
 
-class _ActivitiesListState extends State<ActivitiesList> with AutomaticKeepAliveClientMixin {
+class _ActivitiesListState extends State<ActivitiesList>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -47,8 +46,9 @@ class _ActivitiesListState extends State<ActivitiesList> with AutomaticKeepAlive
         } else if (state is ActivitiesLoading) {
           return const ActivityShimmerList();
         } else if (state is ActivitiesLoaded) {
-          final activities =
-              widget.isFollowing ? state.followingActivities : state.globalActivities;
+          final activities = widget.isFollowing
+              ? state.followingActivities
+              : state.globalActivities;
           return RefreshIndicator(
             backgroundColor: AppColors.raisinBlack,
             onRefresh: () => _refresh(client, activitiesBloc),
@@ -61,13 +61,7 @@ class _ActivitiesListState extends State<ActivitiesList> with AutomaticKeepAlive
                     ),
                   )
                 : CustomScrollView(
-                    // key: widget.pageKey,
                     slivers: [
-                      // SliverOverlapInjector(
-                      //   handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                      //     context,
-                      //   ),
-                      // ),
                       SliverList(
                         delegate: SliverChildBuilderDelegate(
                           (context, index) {
@@ -83,11 +77,20 @@ class _ActivitiesListState extends State<ActivitiesList> with AutomaticKeepAlive
 
                             final activity = activities[index];
                             if (activity is Fragment$TextActivity) {
-                              return TextActivityCard(activity: activity);
+                              return TextActivityCard(
+                                activity: activity,
+                                bloc: activitiesBloc,
+                              );
                             } else if (activity is Fragment$ListActivity) {
-                              return ListActivityCard(activity: activity);
+                              return ListActivityCard(
+                                activity: activity,
+                                bloc: activitiesBloc,
+                              );
                             } else if (activity is Fragment$MessageActivity) {
-                              return MessageActivityCard(activity: activity);
+                              return MessageActivityCard(
+                                activity: activity,
+                                bloc: activitiesBloc,
+                              );
                             } else {
                               return const SizedBox();
                             }

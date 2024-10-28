@@ -5,7 +5,6 @@ import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
 import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/ui/activities/activity_actions.dart';
 import 'package:otaku_world/features/reviews/widgets/review_profile_photo.dart';
-import 'package:otaku_world/graphql/__generated/graphql/details/media_activities.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/utils/extensions.dart';
 
@@ -23,7 +22,7 @@ class SocialCard extends StatefulWidget {
     required this.activity,
   });
 
-  final Query$MediaActivityQuery$Page$activities$$ListActivity activity;
+  final Fragment$ListActivity activity;
 
   @override
   State<SocialCard> createState() => _SocialCardState();
@@ -109,6 +108,11 @@ class _SocialCardState extends State<SocialCard> {
               );
             },
             onEdit: () {},
+            onToggleLike: () {
+              context.read<SocialBloc>().toggleLike(
+                    activityId: widget.activity.id,
+                  );
+            },
           ),
           Text(
             FormattingUtils.formatUnixTimestamp(widget.activity.createdAt),

@@ -69,6 +69,7 @@ import 'package:otaku_world/features/profile/screens/favorite_manga_screen.dart'
 import 'package:otaku_world/features/profile/screens/favorite_staff_screen.dart';
 import 'package:otaku_world/features/profile/screens/favorite_studios_screen.dart';
 import 'package:otaku_world/features/profile/screens/my_profile_screen.dart';
+import 'package:otaku_world/features/profile/screens/user_activities_screen.dart';
 import 'package:otaku_world/features/reviews/screens/review_detail_screen.dart';
 import 'package:otaku_world/features/reviews/screens/reviews_screen.dart';
 import 'package:otaku_world/features/search/screens/search_screen.dart';

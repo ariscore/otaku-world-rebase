@@ -15,8 +15,6 @@ import 'package:otaku_world/features/profile/widgets/user_favorites.dart';
 import 'package:otaku_world/features/profile/widgets/user_overview.dart';
 import 'package:otaku_world/features/profile/widgets/user_reviews.dart';
 import 'package:otaku_world/features/profile/widgets/user_social.dart';
-import 'package:otaku_world/features/reviews/widgets/bottom_sheet_component.dart';
-import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/theme/colors.dart';
 
 class MyProfileScreen extends HookWidget {

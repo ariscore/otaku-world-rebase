@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
+import 'package:otaku_world/bloc/profile/user_activities_bloc/user_activities_bloc.dart';
 import 'package:otaku_world/bloc/social/activities/activities_bloc.dart';
 import 'package:otaku_world/core/ui/activities/activity_actions.dart';
 import 'package:otaku_world/generated/assets.dart';
@@ -33,6 +35,9 @@ class ActivityBaseCard extends StatefulWidget {
     this.isCurrentUserMessage = false,
     required this.isSubscribed,
     required this.onEdit,
+    this.isProfile = false,
+    this.isPrivate = false,
+    required this.bloc,
   });
 
   final Widget child;
@@ -50,6 +55,9 @@ class ActivityBaseCard extends StatefulWidget {
   final bool isCurrentUserMessage;
   final bool isSubscribed;
   final VoidCallback onEdit;
+  final bool isProfile;
+  final bool isPrivate;
+  final Bloc bloc;
 
   @override
   State<ActivityBaseCard> createState() => _ActivityBaseCardState();
@@ -79,38 +87,68 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Name and Avatar
-            Row(
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width - 40,
-                  child: Wrap(
-                    runSpacing: 5,
+            if (!widget.isProfile)
+              Row(
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width - 40,
+                    child: Wrap(
+                      runSpacing: 5,
+                      children: [
+                        _buildUser(
+                          context,
+                          avatarUrl: widget.avatarUrl,
+                          userName: widget.userName,
+                        ),
+                        if (widget.receiverAvatarUrl != null)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 8,
+                              horizontal: 10,
+                            ),
+                            child: SvgPicture.asset(Assets.iconsArrowRight),
+                          ),
+                        if (widget.receiverAvatarUrl != null)
+                          _buildUser(
+                            context,
+                            avatarUrl: widget.receiverAvatarUrl,
+                            userName: widget.receiverUserName,
+                          ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            if (widget.isProfile && widget.receiverUserName != null)
+              Column(
+                children: [
+                  Row(
                     children: [
                       _buildUser(
                         context,
                         avatarUrl: widget.avatarUrl,
                         userName: widget.userName,
                       ),
-                      if (widget.receiverAvatarUrl != null)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8,
-                            horizontal: 10,
+                      if (widget.isPrivate)
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: AppColors.sunsetOrange,
                           ),
-                          child: SvgPicture.asset(Assets.iconsArrowRight),
-                        ),
-                      if (widget.receiverAvatarUrl != null)
-                        _buildUser(
-                          context,
-                          avatarUrl: widget.receiverAvatarUrl,
-                          userName: widget.receiverUserName,
+                          padding: const EdgeInsets.all(5),
+                          margin: const EdgeInsets.only(left: 10),
+                          child: Text(
+                            'Private',
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
                         ),
                     ],
                   ),
-                )
-              ],
-            ),
-            const SizedBox(height: 10),
+                  const SizedBox(height: 10),
+                ],
+              ),
+            if (!widget.isProfile && widget.receiverUserName != null)
+              const SizedBox(height: 10),
             // Main content
             widget.child,
             // Other details
@@ -123,12 +161,23 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
               type: widget.type,
               isCurrentUserMessage: widget.isCurrentUserMessage,
               isSubscribed: isSubscribed,
+              onToggleLike: () {
+                if (widget.bloc is ActivitiesBloc) {
+                  (widget.bloc as ActivitiesBloc).toggleLike(
+                    activityId: widget.id,
+                  );
+                } else if (widget.bloc is UserActivitiesBloc) {
+                  (widget.bloc as UserActivitiesBloc).toggleLike(
+                    activityId: widget.id,
+                  );
+                }
+              },
               onToggleSubscription: () => _toggleSubscription(context),
               onDelete: () => _delete(context),
               onReply: () {
                 context.push(
                   '${RouteConstants.activityReplies}?id=${widget.id}',
-                  extra: context.read<ActivitiesBloc>(),
+                  extra: widget.bloc,
                 );
               },
               onEdit: widget.onEdit,
@@ -149,31 +198,63 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
   void _toggleSubscription(BuildContext context) async {
     final client = context.read<GraphqlClientCubit>().getClient();
     if (client != null) {
-      final bloc = context.read<ActivitiesBloc>();
-
-      bloc
-          .toggleActivitySubscription(
-        client,
-        activityId: widget.id,
-        subscribe: isSubscribed,
-      )
-          .then(
-        (result) {
-          if (result == null) {
-            setState(() {
-              isSubscribed = !isSubscribed;
-              UIUtils.showSnackBar(
+      final bloc = widget.bloc;
+      if (bloc is ActivitiesBloc) {
+        bloc
+            .toggleActivitySubscription(
+              client,
+              activityId: widget.id,
+              subscribe: isSubscribed,
+            )
+            .then(
+              (result) => _processSubscription(
                 context,
-                ActivityConstants.subscriptionSuccess(isSubscribed),
-              );
-            });
-          } else {
-            UIUtils.showSnackBar(context, result);
-          }
-        },
-      );
+                result,
+              ),
+            );
+      } else if (bloc is SocialBloc) {
+        bloc
+            .toggleActivitySubscription(
+              client,
+              activityId: widget.id,
+              subscribe: isSubscribed,
+            )
+            .then(
+              (result) => _processSubscription(
+                context,
+                result,
+              ),
+            );
+      } else if (bloc is UserActivitiesBloc) {
+        bloc
+            .toggleActivitySubscription(
+              client,
+              activityId: widget.id,
+              subscribe: isSubscribed,
+            )
+            .then(
+              (result) => _processSubscription(
+                context,
+                result,
+              ),
+            );
+      }
     } else {
       UIUtils.showSnackBar(context, ActivityConstants.clientError);
+    }
+  }
+
+  void _processSubscription(BuildContext context, String? result) {
+    if (result == null) {
+      setState(() {
+        isSubscribed = !isSubscribed;
+        UIUtils.showSnackBar(
+          context,
+          ActivityConstants.subscriptionSuccess(isSubscribed),
+        );
+      });
+    } else {
+      UIUtils.showSnackBar(context, result);
     }
   }
 
@@ -189,15 +270,26 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
             dialogContext.pop();
             final client = context.read<GraphqlClientCubit>().getClient();
             if (client != null) {
-              final bloc = context.read<ActivitiesBloc>();
-              bloc.deleteActivity(
-                client,
-                activityId: widget.id,
-              ).then((e) {
-                if (e != null) {
-                  UIUtils.showSnackBar(context, e);
-                }
-              });
+              final bloc = widget.bloc;
+              if (bloc is ActivitiesBloc) {
+                bloc.deleteActivity(client, activityId: widget.id).then((e) {
+                  if (e != null) {
+                    UIUtils.showSnackBar(context, e);
+                  }
+                });
+              } else if (bloc is SocialBloc) {
+                bloc.deleteActivity(client, activityId: widget.id).then((e) {
+                  if (e != null) {
+                    UIUtils.showSnackBar(context, e);
+                  }
+                });
+              } else if (bloc is UserActivitiesBloc) {
+                bloc.deleteActivity(client, activityId: widget.id).then((e) {
+                  if (e != null) {
+                    UIUtils.showSnackBar(context, e);
+                  }
+                });
+              }
             } else {
               UIUtils.showSnackBar(context, ActivityConstants.clientError);
             }

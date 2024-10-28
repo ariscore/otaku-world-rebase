@@ -16504,6 +16504,7 @@ class Fragment$MessageActivity {
     this.isSubscribed,
     this.siteUrl,
     this.message,
+    this.isPrivate,
     this.$__typename = 'MessageActivity',
   });
 
@@ -16518,6 +16519,7 @@ class Fragment$MessageActivity {
     final l$isSubscribed = json['isSubscribed'];
     final l$siteUrl = json['siteUrl'];
     final l$message = json['message'];
+    final l$isPrivate = json['isPrivate'];
     final l$$__typename = json['__typename'];
     return Fragment$MessageActivity(
       id: (l$id as int),
@@ -16536,6 +16538,7 @@ class Fragment$MessageActivity {
       isSubscribed: (l$isSubscribed as bool?),
       siteUrl: (l$siteUrl as String?),
       message: (l$message as String?),
+      isPrivate: (l$isPrivate as bool?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -16559,6 +16562,8 @@ class Fragment$MessageActivity {
   final String? siteUrl;
 
   final String? message;
+
+  final bool? isPrivate;
 
   final String $__typename;
 
@@ -16584,6 +16589,8 @@ class Fragment$MessageActivity {
     _resultData['siteUrl'] = l$siteUrl;
     final l$message = message;
     _resultData['message'] = l$message;
+    final l$isPrivate = isPrivate;
+    _resultData['isPrivate'] = l$isPrivate;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -16601,6 +16608,7 @@ class Fragment$MessageActivity {
     final l$isSubscribed = isSubscribed;
     final l$siteUrl = siteUrl;
     final l$message = message;
+    final l$isPrivate = isPrivate;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
@@ -16613,6 +16621,7 @@ class Fragment$MessageActivity {
       l$isSubscribed,
       l$siteUrl,
       l$message,
+      l$isPrivate,
       l$$__typename,
     ]);
   }
@@ -16676,6 +16685,11 @@ class Fragment$MessageActivity {
     if (l$message != lOther$message) {
       return false;
     }
+    final l$isPrivate = isPrivate;
+    final lOther$isPrivate = other.isPrivate;
+    if (l$isPrivate != lOther$isPrivate) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -16714,6 +16728,7 @@ abstract class CopyWith$Fragment$MessageActivity<TRes> {
     bool? isSubscribed,
     String? siteUrl,
     String? message,
+    bool? isPrivate,
     String? $__typename,
   });
   CopyWith$Fragment$MessageActivity$messenger<TRes> get messenger;
@@ -16744,6 +16759,7 @@ class _CopyWithImpl$Fragment$MessageActivity<TRes>
     Object? isSubscribed = _undefined,
     Object? siteUrl = _undefined,
     Object? message = _undefined,
+    Object? isPrivate = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$MessageActivity(
@@ -16771,6 +16787,9 @@ class _CopyWithImpl$Fragment$MessageActivity<TRes>
             siteUrl == _undefined ? _instance.siteUrl : (siteUrl as String?),
         message:
             message == _undefined ? _instance.message : (message as String?),
+        isPrivate: isPrivate == _undefined
+            ? _instance.isPrivate
+            : (isPrivate as bool?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -16810,6 +16829,7 @@ class _CopyWithStubImpl$Fragment$MessageActivity<TRes>
     bool? isSubscribed,
     String? siteUrl,
     String? message,
+    bool? isPrivate,
     String? $__typename,
   }) =>
       _res;
@@ -16990,6 +17010,13 @@ const fragmentDefinitionMessageActivity = FragmentDefinitionNode(
     ),
     FieldNode(
       name: NameNode(value: 'message'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isPrivate'),
       alias: null,
       arguments: [],
       directives: [],
