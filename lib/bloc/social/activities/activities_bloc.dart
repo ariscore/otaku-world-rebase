@@ -249,6 +249,19 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
             likeCount: activity.likeCount + 1,
           );
         }
+      } else if (activity is Fragment$ListActivity &&
+          activity.isLiked != null) {
+        if (activity.isLiked!) {
+          followingList[index] = activity.copyWith(
+            isLiked: false,
+            likeCount: activity.likeCount - 1,
+          );
+        } else {
+          followingList[index] = activity.copyWith(
+            isLiked: true,
+            likeCount: activity.likeCount + 1,
+          );
+        }
       }
     }
 
@@ -269,6 +282,19 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
           );
         }
       } else if (activity is Fragment$MessageActivity &&
+          activity.isLiked != null) {
+        if (activity.isLiked!) {
+          globalList[index] = activity.copyWith(
+            isLiked: false,
+            likeCount: activity.likeCount - 1,
+          );
+        } else {
+          globalList[index] = activity.copyWith(
+            isLiked: true,
+            likeCount: activity.likeCount + 1,
+          );
+        }
+      } else if (activity is Fragment$ListActivity &&
           activity.isLiked != null) {
         if (activity.isLiked!) {
           globalList[index] = activity.copyWith(

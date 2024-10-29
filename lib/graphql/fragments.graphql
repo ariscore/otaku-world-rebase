@@ -435,3 +435,88 @@ fragment UserInfo on User {
         }
     }
 }
+
+# Notifications
+fragment ActivityLikeNotification on ActivityLikeNotification {
+    id
+    activityId
+    user {
+        id
+        name
+        avatar {
+            medium
+        }
+    }
+    context
+    createdAt
+}
+
+fragment ActivityMessageNotification on ActivityMessageNotification {
+    id
+    activityId
+    user {
+        id
+        name
+        avatar {
+            medium
+        }
+    }
+    context
+    createdAt
+}
+
+fragment ActivityMentionNotification on ActivityMentionNotification {
+    id
+    activityId
+    user {
+        id
+        name
+        avatar {
+            medium
+        }
+    }
+    context
+    createdAt
+}
+
+fragment ActivityReplyLikeNotification on ActivityReplyLikeNotification {
+    id
+    activityId
+    user {
+        id
+        name
+        avatar {
+            medium
+        }
+    }
+    context
+    createdAt
+}
+
+fragment ActivityReplyNotification on ActivityReplyNotification {
+    id
+    activityId
+    user {
+        id
+        name
+        avatar {
+            medium
+        }
+    }
+    context
+    createdAt
+}
+
+fragment ActivityReplySubscribedNotification on ActivityReplySubscribedNotification {
+    id
+    activityId
+    user {
+        id
+        name
+        avatar {
+            medium
+        }
+    }
+    context
+    createdAt
+}

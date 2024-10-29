@@ -1,0 +1,15 @@
+query UserNotifications($page: Int, $type_in: [NotificationType], $resetNotificationCount: Boolean) {
+    Page(page: $page, perPage: 30) {
+        pageInfo {
+            hasNextPage
+        }
+        notifications(type_in: $type_in, resetNotificationCount: $resetNotificationCount) {
+            ...ActivityLikeNotification
+            ...ActivityMessageNotification
+            ...ActivityReplySubscribedNotification
+            ...ActivityReplyNotification
+            ...ActivityReplyLikeNotification
+            ...ActivityMentionNotification
+        }
+    }
+}

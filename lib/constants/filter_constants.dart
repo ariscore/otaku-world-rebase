@@ -53,4 +53,13 @@ class FilterConstants {
     'Following',
     'Followers',
   ];
+
+  static const notificationOptions = [
+    'All',
+    'Airing',
+    'Activity',
+    'Follows',
+    'Forum',
+    'Media',
+  ];
 }
