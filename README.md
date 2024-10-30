@@ -12,7 +12,7 @@ This [Flutter](https://flutter.dev/)-based mobile app brings [AniList](https://a
 - [x] **Calendar** - Anime airing schedule, Plan your next watch
 - [x] **Discover** - Explore anime, manga, characters and more to their fullest
 - [ ] **Anime & Manga Details** - Get all the details, stats, reviews, activities, etc. in one place
-- [ ] **Social** - Connect with fellow Otakus and share your activities
+- [x] **Social** - Connect with fellow Otakus and share your activities
 - [ ] **My List** - Keep track of your anime watching and manga reading progress
 - [ ] **Profile** - Personalized analytics of your activity, keep favorites and more
 
@@ -24,3 +24,21 @@ This [Flutter](https://flutter.dev/)-based mobile app brings [AniList](https://a
 
   ### Reviews
     Read fan-written reviews of anime and manga to help you decide what to watch or read next. Share your thoughts too by writing your own reviews. This feature lets you both benefit from others' opinions and contribute to the community.
+
+  ### Calendar
+    Keep track of upcoming anime episodes with a daily or weekly schedule. Filter by date to see which shows are airing and never miss a release.
+
+  ### Discover
+    Explore a vast collection of anime, manga, characters, staff, and studios. Use powerful filters and search tools to find exactly what interests you and uncover new favorites easily.
+
+  ### Anime & Manga Details
+    Access all the essential information about anime, manga, characters, staff, and studios in one place. View titles, stats, trailers, related media, and more with a well-organized layout that keeps everything at your fingertips.
+
+  ### Social
+    Stay connected with fellow anime fans by viewing their activities, including what they’re watching or reading, status updates, and messages. Browse both global and following feeds to stay engaged with the community.
+
+  ### My List
+    Easily track your anime watching and manga reading progress with various tracking options. Stay organized by marking what you’ve completed, paused, or plan to watch, ensuring you never lose track of your progress.
+
+  ### Profile
+    View and manage your personal profile with ease. Access user stats, favorites, reviews, and social features like followers and followings. Stay engaged by tracking your activity and exploring in-depth insights about your interactions and interests.
