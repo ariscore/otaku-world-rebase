@@ -16,10 +16,25 @@ final class MyProfileLoaded extends MyProfileState {
     required this.user,
     required this.followerCount,
     required this.followingCount,
+    required this.unreadNotificationCount,
   });
 
   final Fragment$UserInfo user;
   final int followerCount, followingCount;
+  final int unreadNotificationCount;
+
+  MyProfileLoaded copyWith({int? unreadNotificationCount}) {
+    return MyProfileLoaded(
+      user: user,
+      followerCount: followerCount,
+      followingCount: followingCount,
+      unreadNotificationCount:
+          unreadNotificationCount ?? this.unreadNotificationCount,
+    );
+  }
+
+  @override
+  List<Object> get props => [unreadNotificationCount];
 }
 
 final class MyProfileError extends MyProfileState {

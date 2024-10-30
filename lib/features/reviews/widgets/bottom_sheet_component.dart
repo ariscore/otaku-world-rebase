@@ -41,7 +41,13 @@ class BottomSheetComponent extends StatelessWidget {
             SizedBox(
               width: 30,
               height: 30,
-              child: SvgPicture.asset(iconName),
+              child: SvgPicture.asset(
+                iconName,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.sunsetOrange,
+                  BlendMode.srcIn,
+                ),
+              ),
             ),
             const SizedBox(
               width: 10,

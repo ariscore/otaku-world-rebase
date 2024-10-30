@@ -30,6 +30,9 @@ class MyProfileScreen extends HookWidget {
 
     return Scaffold(
       body: BlocBuilder<MyProfileBloc, MyProfileState>(
+        buildWhen: (previous, current) {
+          return previous.runtimeType != current.runtimeType;
+        },
         builder: (context, state) {
           if (state is MyProfileInitial) {
             if (client == null) {

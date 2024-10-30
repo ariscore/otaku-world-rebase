@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:otaku_world/bloc/profile/my_profile/my_profile_bloc.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/buttons/back_button.dart';
 import 'package:otaku_world/core/ui/image.dart';
@@ -49,9 +51,28 @@ class MyProfileAppBar extends StatelessWidget {
             );
           },
         ),
-        _buildAction(
-          asset: Assets.iconsNotificationUnread,
-          onPressed: () {},
+        BlocSelector<MyProfileBloc, MyProfileState, int>(
+          selector: (state) {
+            if (state is MyProfileLoaded) {
+              return state.unreadNotificationCount;
+            }
+            return 0;
+          },
+          builder: (context, unreadCount) {
+            return _buildAction(
+              asset: unreadCount > 0
+                  ? Assets.iconsNotificationUnread
+                  : Assets.iconsNotificationRead,
+              onPressed: () {
+                context.push(
+                  RouteConstants.userNotifications,
+                  extra: () {
+                    context.read<MyProfileBloc>().add(ResetNotificationCount());
+                  },
+                );
+              },
+            );
+          },
         ),
         _buildAction(
           asset: Assets.iconsMoreVertical,

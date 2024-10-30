@@ -10,6 +10,17 @@ query UserNotifications($page: Int, $type_in: [NotificationType], $resetNotifica
             ...ActivityReplyNotification
             ...ActivityReplyLikeNotification
             ...ActivityMentionNotification
+            ...AiringNotification
+            ...FollowingNotification
+            ...ThreadCommentSubscribedNotification
+            ...ThreadLikeNotification
+            ...ThreadCommentReplyNotification
+            ...ThreadCommentMentionNotification
+            ...ThreadCommentLikeNotification
+            ...MediaDataChangeNotification
+            ...MediaMergeNotification
+            ...MediaDeletionNotification
+            ...RelatedMediaAdditionNotification
         }
     }
 }

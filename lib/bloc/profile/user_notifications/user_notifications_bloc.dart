@@ -5,7 +5,7 @@ import 'package:otaku_world/graphql/__generated/graphql/user/user_notifications.
 
 class UserNotificationsBloc
     extends PaginatedDataBloc<Query$UserNotifications, dynamic> {
-  bool resetNotificationCount = false;
+  bool resetNotificationCount = true;
   List<Enum$NotificationType> types = [];
 
   @override
@@ -30,7 +30,10 @@ class UserNotificationsBloc
     list.addAll(data.Page!.notifications!);
   }
 
-  void setNotificationType(GraphQLClient client, String type) {
+  void setNotificationType({
+    required GraphQLClient client,
+    required String type,
+  }) {
     switch (type) {
       case 'All':
         types = [];

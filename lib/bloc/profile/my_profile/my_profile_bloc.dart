@@ -15,7 +15,10 @@ part 'my_profile_state.dart';
 class MyProfileBloc extends Bloc<MyProfileEvent, MyProfileState> {
   MyProfileBloc() : super(MyProfileInitial()) {
     on<LoadProfile>(_onLoadProfile);
+    on<ResetNotificationCount>(_onResetNotificationCount);
   }
+
+  int _unReadNotificationCount = 0;
 
   Future<void> _onLoadProfile(
     LoadProfile event,
@@ -42,6 +45,7 @@ class MyProfileBloc extends Bloc<MyProfileEvent, MyProfileState> {
       if (data == null) {
         emit(const MyProfileError(StringConstants.somethingWentWrongError));
       } else {
+        _unReadNotificationCount = data.unreadNotificationCount ?? 0;
         final socialCountResponse =
             await event.client.query$FollowingAndFollowersCount(
           Options$Query$FollowingAndFollowersCount(
@@ -57,15 +61,39 @@ class MyProfileBloc extends Bloc<MyProfileEvent, MyProfileState> {
             socialCountResponse.parsedData == null) {
           emit(const MyProfileError(StringConstants.somethingWentWrongError));
         } else {
-          emit(MyProfileLoaded(
-            user: data,
-            followerCount:
-                socialCountResponse.parsedData!.followers?.pageInfo?.total ?? 0,
-            followingCount:
-                socialCountResponse.parsedData!.following?.pageInfo?.total ?? 0,
-          ));
+          emit(
+            MyProfileLoaded(
+              user: data,
+              unreadNotificationCount: _unReadNotificationCount,
+              followerCount:
+                  socialCountResponse.parsedData!.followers?.pageInfo?.total ??
+                      0,
+              followingCount:
+                  socialCountResponse.parsedData!.following?.pageInfo?.total ??
+                      0,
+            ),
+          );
         }
       }
     }
+  }
+
+  void _onResetNotificationCount(
+    ResetNotificationCount event,
+    Emitter<MyProfileState> emit,
+  ) {
+    _unReadNotificationCount = 0;
+    final loadedState = state as MyProfileLoaded;
+    emit(
+      loadedState.copyWith(
+        unreadNotificationCount: _unReadNotificationCount,
+      ),
+    );
+  }
+  
+  @override
+  void onTransition(Transition<MyProfileEvent, MyProfileState> transition) {
+    log(transition.toString(), name: 'MyProfileBloc');
+    super.onTransition(transition);
   }
 }

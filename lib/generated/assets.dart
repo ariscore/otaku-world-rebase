@@ -9,6 +9,7 @@ class Assets {
   static const String assetsAppLogoHorizontal = 'assets/app_logo_horizontal.svg';
   static const String assetsLogoBw = 'assets/logo_bw.svg';
   static const String charactersCharacters = 'assets/images/discover/characters/characters.png';
+  static const String charactersChillBoy = 'assets/images/characters/chill-boy.png';
   static const String charactersCigaretteGirl = 'assets/images/characters/cigarette_girl.png';
   static const String charactersErenYeager = 'assets/images/characters/eren_yeager.png';
   static const String charactersGirl1 = 'assets/images/discover/characters/girl_1.svg';
@@ -19,6 +20,7 @@ class Assets {
   static const String fontsPoppinsRegular = 'assets/fonts/Poppins-Regular.ttf';
   static const String fontsPoppinsSemiBold = 'assets/fonts/Poppins-SemiBold.ttf';
   static const String fontsPoppinsThin = 'assets/fonts/Poppins-Thin.ttf';
+  static const String fontsRobotoBold = 'assets/fonts/Roboto-Bold.ttf';
   static const String fontsRobotoCondensedRegular = 'assets/fonts/RobotoCondensed-Regular.ttf';
   static const String fontsRobotoMedium = 'assets/fonts/Roboto-Medium.ttf';
   static const String fontsRobotoRegular = 'assets/fonts/Roboto-Regular.ttf';
@@ -48,6 +50,7 @@ class Assets {
   static const String iconsLineVertical = 'assets/icons/line_vertical.svg';
   static const String iconsLinkSquare = 'assets/icons/link-square.svg';
   static const String iconsList = 'assets/icons/list.svg';
+  static const String iconsMedia = 'assets/icons/media.svg';
   static const String iconsMediaAdd = 'assets/icons/media-add.svg';
   static const String iconsMediaEdit = 'assets/icons/media-edit.svg';
   static const String iconsMessage = 'assets/icons/message.svg';
@@ -76,6 +79,7 @@ class Assets {
   static const String iconsTrendUp = 'assets/icons/trend-up.svg';
   static const String iconsUnfollow = 'assets/icons/unfollow.svg';
   static const String iconsUserGroup = 'assets/icons/user-group.svg';
+  static const String iconsUserGroup2 = 'assets/icons/user-group-2.svg';
   static const String iconsViewSlider = 'assets/icons/view-slider.svg';
   static const String logosAppLogo = 'assets/logos/app_logo.png';
   static const String logosAppLogo500 = 'assets/logos/app_logo_500.png';
