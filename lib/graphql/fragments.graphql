@@ -426,6 +426,7 @@ fragment UserInfo on User {
     }
     bannerImage
     about
+    unreadNotificationCount
     statistics {
         anime {
             count
@@ -434,4 +435,254 @@ fragment UserInfo on User {
             count
         }
     }
+}
+
+# Notifications
+fragment ActivityLikeNotification on ActivityLikeNotification {
+    id
+    activityId
+    user {
+        id
+        name
+        avatar {
+            medium
+        }
+    }
+    context
+    createdAt
+}
+
+fragment ActivityMessageNotification on ActivityMessageNotification {
+    id
+    activityId
+    user {
+        id
+        name
+        avatar {
+            medium
+        }
+    }
+    context
+    createdAt
+}
+
+fragment ActivityMentionNotification on ActivityMentionNotification {
+    id
+    activityId
+    user {
+        id
+        name
+        avatar {
+            medium
+        }
+    }
+    context
+    createdAt
+}
+
+fragment ActivityReplyLikeNotification on ActivityReplyLikeNotification {
+    id
+    activityId
+    user {
+        id
+        name
+        avatar {
+            medium
+        }
+    }
+    context
+    createdAt
+}
+
+fragment ActivityReplyNotification on ActivityReplyNotification {
+    id
+    activityId
+    user {
+        id
+        name
+        avatar {
+            medium
+        }
+    }
+    context
+    createdAt
+}
+
+fragment ActivityReplySubscribedNotification on ActivityReplySubscribedNotification {
+    id
+    activityId
+    user {
+        id
+        name
+        avatar {
+            medium
+        }
+    }
+    context
+    createdAt
+}
+
+fragment AiringNotification on AiringNotification {
+    id
+    media {
+        id
+        coverImage {
+            medium
+        }
+        title {
+            userPreferred
+        }
+    }
+    contexts
+    createdAt
+    episode
+}
+
+fragment FollowingNotification on FollowingNotification {
+    id
+    user {
+        id
+        name
+        avatar {
+            medium
+        }
+    }
+    context
+    createdAt
+}
+
+fragment ThreadCommentLikeNotification on ThreadCommentLikeNotification {
+    id
+    thread {
+        id
+    }
+    user {
+        id
+        name
+        avatar {
+            medium
+        }
+    }
+    context
+    createdAt
+}
+
+fragment ThreadCommentMentionNotification on ThreadCommentMentionNotification {
+    id
+    thread {
+        id
+    }
+    user {
+        id
+        name
+        avatar {
+            medium
+        }
+    }
+    context
+    createdAt
+}
+
+fragment ThreadCommentReplyNotification on ThreadCommentReplyNotification {
+    id
+    thread {
+        id
+    }
+    user {
+        id
+        name
+        avatar {
+            medium
+        }
+    }
+    context
+    createdAt
+}
+
+fragment ThreadLikeNotification on ThreadLikeNotification {
+    id
+    thread {
+        id
+    }
+    user {
+        id
+        name
+        avatar {
+            medium
+        }
+    }
+    context
+    createdAt
+}
+
+fragment ThreadCommentSubscribedNotification on ThreadCommentSubscribedNotification {
+    id
+    thread {
+        id
+    }
+    user {
+        id
+        name
+        avatar {
+            medium
+        }
+    }
+    context
+    createdAt
+}
+
+fragment MediaDeletionNotification on MediaDeletionNotification {
+    id
+    deletedMediaTitle
+    reason
+    context
+    createdAt
+}
+
+fragment MediaMergeNotification on MediaMergeNotification {
+    id
+    media {
+        id
+        title {
+            userPreferred
+        }
+        coverImage {
+            medium
+        }
+    }
+    deletedMediaTitles
+    context
+    createdAt
+    reason
+}
+
+fragment MediaDataChangeNotification on MediaDataChangeNotification {
+    id
+    media {
+        id
+        title {
+            userPreferred
+        }
+        coverImage {
+            medium
+        }
+    }
+    context
+    reason
+    createdAt
+}
+
+fragment RelatedMediaAdditionNotification on RelatedMediaAdditionNotification {
+    id
+    media {
+        id
+        title {
+            userPreferred
+        }
+        coverImage {
+            medium
+        }
+    }
+    context
+    createdAt
 }

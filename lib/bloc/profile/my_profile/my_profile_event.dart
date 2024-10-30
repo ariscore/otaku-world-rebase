@@ -9,3 +9,5 @@ class LoadProfile extends MyProfileEvent {
 
   final GraphQLClient client;
 }
+
+class ResetNotificationCount extends MyProfileEvent {}

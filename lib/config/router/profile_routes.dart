@@ -108,4 +108,12 @@ final profileRoutes = [
       return UserActivitiesScreen(isCurrentUser: isCurrentUser, userId: userId);
     },
   ),
+  SlideTransitionRoute(
+    parentNavigatorKey: _rootNavigatorKey,
+    path: RouteConstants.userNotifications,
+    directionTween: SlideTransitionRoute.leftToRightTween,
+    builder: (state) {
+      return UserNotificationsScreen(resetCount: state.extra! as VoidCallback);
+    },
+  ),
 ];

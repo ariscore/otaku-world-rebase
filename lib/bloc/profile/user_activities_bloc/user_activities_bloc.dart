@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
@@ -10,10 +9,6 @@ import 'package:otaku_world/graphql/__generated/graphql/user/user_activities.gra
 
 import '../../../constants/string_constants.dart';
 import '../../../graphql/__generated/graphql/fragments.graphql.dart';
-
-part 'user_activities_event.dart';
-
-part 'user_activities_state.dart';
 
 class UserActivitiesBloc
     extends PaginatedDataBloc<Query$UserActivities, dynamic> {
@@ -80,6 +75,19 @@ class UserActivitiesBloc
           );
         }
       } else if (activity is Fragment$MessageActivity &&
+          activity.isLiked != null) {
+        if (activity.isLiked!) {
+          list[index] = activity.copyWith(
+            isLiked: false,
+            likeCount: activity.likeCount - 1,
+          );
+        } else {
+          list[index] = activity.copyWith(
+            isLiked: true,
+            likeCount: activity.likeCount + 1,
+          );
+        }
+      } else if (activity is Fragment$ListActivity &&
           activity.isLiked != null) {
         if (activity.isLiked!) {
           list[index] = activity.copyWith(
