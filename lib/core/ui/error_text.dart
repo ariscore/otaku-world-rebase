@@ -9,24 +9,30 @@ class ErrorText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          message,
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
-        const SizedBox(height: 5),
-        TextButton(
-          onPressed: onTryAgain,
-          child: Text(
-            'Try again',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: AppColors.sunsetOrange,
-                ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 10,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            message,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headlineMedium,
           ),
-        ),
-      ],
+          const SizedBox(height: 5),
+          TextButton(
+            onPressed: onTryAgain,
+            child: Text(
+              'Try again',
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    color: AppColors.sunsetOrange,
+                  ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -90,6 +90,7 @@ class DiscoverConstants {
 }
 
 class ActivityConstants {
+  static const notFound = 'Oops! It looks like this activity is no longer available. It may have been removed or deleted.';
   static const clientError = 'Something went wrong, Please restart the app!';
   static const somethingWrong = 'Something went wrong!';
 

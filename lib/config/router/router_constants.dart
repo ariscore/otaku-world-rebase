@@ -20,6 +20,7 @@ class RouteConstants {
   static const settings = '/settings';
   static const discover = '/discover';
   static const social = '/social';
+  static const activity = '/activity';
   static const activityReplies = '/activity-replies';
   static const postNewActivity = '/post-activity';
   static const editTextActivity = '/edit-text-activity';

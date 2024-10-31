@@ -37,11 +37,12 @@ class _UserNotificationsScreenState extends State<UserNotificationsScreen> {
     final client = context.read<GraphqlClientCubit>().getClient()!;
 
     return BlocProvider(
-      create: (context) => UserNotificationsBloc()
+      create: (context) =>
+      UserNotificationsBloc()
         ..add(
           LoadData(client),
         ),
-      child: BlocConsumer<UserNotificationsBloc, PaginatedDataState>(
+      child: BlocListener<UserNotificationsBloc, PaginatedDataState>(
         listenWhen: (previous, current) =>
             current is PaginatedDataLoaded &&
             previous is PaginatedDataLoaded &&
@@ -65,95 +66,98 @@ class _UserNotificationsScreenState extends State<UserNotificationsScreen> {
             context.pop();
           }
         },
-        builder: (context, state) {
-          if (state is PaginatedDataLoading || state is PaginatedDataInitial) {
-            return _buildLoadingShimmer();
-          } else if (state is PaginatedDataLoaded) {
-            if (resetCount) {
-              widget.resetCount();
-              resetCount = false;
-            }
+        child: BlocBuilder<UserNotificationsBloc, PaginatedDataState>(
+          builder: (context, state) {
+            if (state is PaginatedDataLoading ||
+                state is PaginatedDataInitial) {
+              return _buildLoadingShimmer();
+            } else if (state is PaginatedDataLoaded) {
+              if (resetCount) {
+                widget.resetCount();
+                resetCount = false;
+              }
 
-            return Scaffold(
-              body: RefreshIndicator(
-                backgroundColor: AppColors.raisinBlack,
-                onRefresh: () {
-                  return Future.delayed(const Duration(seconds: 2), () {
-                    context.read<UserNotificationsBloc>().add(
-                          RefreshData(client),
-                        );
-                  });
-                },
-                child: CustomScrollView(
-                  slivers: [
-                    SimpleSliverAppBar(
-                      floating: true,
-                      title: 'Notifications',
-                      actions: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: IconButton(
-                            onPressed: () =>
-                                _showFilterOptions(context, client),
-                            icon: SvgPicture.asset(
-                              Assets.iconsFilterVertical,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    state.list.isEmpty
-                        ? const SliverToBoxAdapter(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 50,
-                              ),
-                              child: AnimeCharacterPlaceholder(
-                                asset: Assets.charactersChillBoy,
-                                heading: 'No Notifications to Show',
-                                subheading:
-                                    'New notifications will be displayed here when they arrive.',
+              return Scaffold(
+                body: RefreshIndicator(
+                  backgroundColor: AppColors.raisinBlack,
+                  onRefresh: () {
+                    return Future.delayed(const Duration(seconds: 2), () {
+                      context.read<UserNotificationsBloc>().add(
+                        RefreshData(client),
+                      );
+                    });
+                  },
+                  child: CustomScrollView(
+                    slivers: [
+                      SimpleSliverAppBar(
+                        floating: true,
+                        title: 'Notifications',
+                        actions: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: IconButton(
+                              onPressed: () =>
+                                  _showFilterOptions(context, client),
+                              icon: SvgPicture.asset(
+                                Assets.iconsFilterVertical,
                               ),
                             ),
-                          )
-                        : SliverList.builder(
-                            itemCount: state.list.length,
-                            itemBuilder: (context, index) {
-                              final bloc =
-                                  context.read<UserNotificationsBloc>();
-                              if (index == state.list.length - 1 &&
-                                  state.hasNextPage) {
-                                bloc.add(LoadData(client));
-                              }
-
-                              return NotificationCard(
-                                notification: state.list[index],
-                              );
-                            },
                           ),
-                    if (state.hasNextPage)
-                      const SliverToBoxAdapter(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          child: Center(child: CircularProgressIndicator()),
-                        ),
+                        ],
                       ),
-                  ],
+                      state.list.isEmpty
+                          ? const SliverToBoxAdapter(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 50,
+                          ),
+                          child: AnimeCharacterPlaceholder(
+                            asset: Assets.charactersChillBoy,
+                            heading: 'No Notifications to Show',
+                            subheading:
+                            'New notifications will be displayed here when they arrive.',
+                          ),
+                        ),
+                      )
+                          : SliverList.builder(
+                        itemCount: state.list.length,
+                        itemBuilder: (context, index) {
+                          final bloc =
+                          context.read<UserNotificationsBloc>();
+                          if (index == state.list.length - 1 &&
+                              state.hasNextPage) {
+                            bloc.add(LoadData(client));
+                          }
+
+                          return NotificationCard(
+                            notification: state.list[index],
+                          );
+                        },
+                      ),
+                      if (state.hasNextPage)
+                        const SliverToBoxAdapter(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            child: Center(child: CircularProgressIndicator()),
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          } else if (state is PaginatedDataError) {
-            return _buildErrorScaffold(
-              message: state.message,
-              onPressed: () {
-                context.read<UserNotificationsBloc>().add(LoadData(client));
-              },
-            );
-          } else {
-            return const Text('Unknown State');
-          }
-        },
+              );
+            } else if (state is PaginatedDataError) {
+              return _buildErrorScaffold(
+                message: state.message,
+                onPressed: () {
+                  context.read<UserNotificationsBloc>().add(LoadData(client));
+                },
+              );
+            } else {
+              return const Text('Unknown State');
+            }
+          },
+        ),
       ),
     );
   }
@@ -267,8 +271,8 @@ class _UserNotificationsScreenState extends State<UserNotificationsScreen> {
     if (filter == option) return;
     filter = option;
     context.read<UserNotificationsBloc>().setNotificationType(
-          client: client,
-          type: option,
-        );
+      client: client,
+      type: option,
+    );
   }
 }

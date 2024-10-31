@@ -75,6 +75,7 @@ import 'package:otaku_world/features/reviews/screens/review_detail_screen.dart';
 import 'package:otaku_world/features/reviews/screens/reviews_screen.dart';
 import 'package:otaku_world/features/search/screens/search_screen.dart';
 import 'package:otaku_world/features/settings/screens/settings_screen.dart';
+import 'package:otaku_world/features/social/screens/activity_screen.dart';
 import 'package:otaku_world/features/social/screens/edit_activity_reply_screen.dart';
 import 'package:otaku_world/features/social/screens/edit_message_activity_screen.dart';
 import 'package:otaku_world/features/social/screens/edit_text_activity_screen.dart';
