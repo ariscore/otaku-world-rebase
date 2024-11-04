@@ -6,8 +6,17 @@ final profileRoutes = [
     path: RouteConstants.myProfile,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
-      return BlocProvider(
-        create: (context) => MyProfileBloc(),
+      return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => MyProfileBloc(),
+          ),
+          // TODO: Remove later on
+          BlocProvider(
+            create: (context) =>
+                UserStatsBloc(userId: 336693), // 336693 // 6295294
+          ),
+        ],
         child: const MyProfileScreen(),
       );
     },
@@ -114,6 +123,20 @@ final profileRoutes = [
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       return UserNotificationsScreen(resetCount: state.extra! as VoidCallback);
+    },
+  ),
+  SlideTransitionRoute(
+    parentNavigatorKey: _rootNavigatorKey,
+    path: RouteConstants.statusDistribution,
+    directionTween: SlideTransitionRoute.leftToRightTween,
+    builder: (state) {
+      final type = state.uri.queryParameters['type'] == 'anime'
+          ? Enum$MediaType.ANIME
+          : Enum$MediaType.MANGA;
+      return StatusDistributionScreen(
+        statuses: state.extra! as List<Fragment$UserStatistics$statuses?>,
+        type: type,
+      );
     },
   ),
 ];

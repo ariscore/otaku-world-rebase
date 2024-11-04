@@ -37,6 +37,24 @@ class AppColors {
 
   static const Color brilliantAzure = Color(0x3332A6F9);
 
+  static const primaryGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      sunsetOrange,
+      japaneseIndigo,
+    ],
+  );
+
+  static const chartGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      Colors.transparent,
+      japaneseIndigo,
+    ],
+  );
+
   static const secondaryGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,

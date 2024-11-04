@@ -60,6 +60,35 @@ extension FuzzyToDate on Fragment$FuzzyDate {
   }
 }
 
+extension MediaFormatExtension on Enum$MediaFormat {
+  Color get toColor {
+    switch (this) {
+      case Enum$MediaFormat.TV:
+        return AppColors.toolBox;
+      case Enum$MediaFormat.TV_SHORT:
+        return AppColors.americanGreen;
+      case Enum$MediaFormat.MOVIE:
+        return AppColors.pantonePink;
+      case Enum$MediaFormat.SPECIAL:
+        return AppColors.deepLemon;
+      case Enum$MediaFormat.OVA:
+        return AppColors.quickSilver;
+      case Enum$MediaFormat.ONA:
+        return AppColors.mangoTango;
+      case Enum$MediaFormat.MANGA:
+        return AppColors.toolBox;
+      case Enum$MediaFormat.NOVEL:
+        return AppColors.americanGreen;
+      case Enum$MediaFormat.MUSIC:
+        return AppColors.brilliantAzure;
+      case Enum$MediaFormat.ONE_SHOT:
+        return AppColors.pantonePink;
+      default:
+        return AppColors.white;
+    }
+  }
+}
+
 extension MediaStatsExtension on Enum$MediaListStatus {
   String displayTitle(Enum$MediaType type) {
     switch (this) {

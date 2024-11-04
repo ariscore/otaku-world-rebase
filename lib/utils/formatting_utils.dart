@@ -81,6 +81,16 @@ class FormattingUtils {
     return dateTime.year;
   }
 
+  static String minutesToDays(int minutes) {
+    final days = minutes / (24 * 60);
+    return days.toStringAsFixed(1);
+  }
+
+  static String minutesToHours(int minutes) {
+    final hours = minutes / 60;
+    return hours.truncate().toString();
+  }
+
   static String getCountryCode(String country) {
     switch (country) {
       case 'Japan':
@@ -97,6 +107,7 @@ class FormattingUtils {
   }
 
   static String getCountry(String? countryCode) {
+    if (countryCode == null) return 'Unknown';
     switch (countryCode) {
       case 'JP':
         return 'Japan';
@@ -108,6 +119,21 @@ class FormattingUtils {
         return 'Taiwan';
       default:
         return 'All';
+    }
+  }
+
+  static Color getCountryColor(String? country) {
+    switch(country) {
+      case 'JP' || 'Japan':
+        return AppColors.toolBox;
+      case 'KR' || 'South Korea':
+        return AppColors.americanGreen;
+      case 'CN' || 'China':
+        return AppColors.pantonePink;
+      case 'TW' || 'Taiwan':
+        return AppColors.deepLemon;
+      default:
+        return AppColors.white;
     }
   }
 

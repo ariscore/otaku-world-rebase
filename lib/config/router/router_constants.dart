@@ -16,6 +16,7 @@ class RouteConstants {
   static const favoriteStudios = '/favorite-studios';
   static const userActivities = '/user-activities';
   static const userNotifications = '/user-notifications';
+  static const statusDistribution = '/status-distribution';
 
   static const settings = '/settings';
   static const discover = '/discover';

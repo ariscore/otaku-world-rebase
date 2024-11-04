@@ -14,6 +14,7 @@ class FavoriteStudiosBloc
     return client.query$FavoriteStudios(
       Options$Query$FavoriteStudios(
         fetchPolicy: FetchPolicy.networkOnly,
+        cacheRereadPolicy: CacheRereadPolicy.ignoreOptimisitic,
         variables: Variables$Query$FavoriteStudios(
           userId: userId,
           page: page,

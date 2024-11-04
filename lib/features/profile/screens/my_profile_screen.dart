@@ -11,6 +11,7 @@ import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/error_text.dart';
 import 'package:otaku_world/features/profile/widgets/keep_alive_tab.dart';
 import 'package:otaku_world/features/profile/widgets/my_profile_app_bar.dart';
+import 'package:otaku_world/features/profile/widgets/stats/user_stats.dart';
 import 'package:otaku_world/features/profile/widgets/user_favorites.dart';
 import 'package:otaku_world/features/profile/widgets/user_overview.dart';
 import 'package:otaku_world/features/profile/widgets/user_reviews.dart';
@@ -87,9 +88,8 @@ class MyProfileScreen extends HookWidget {
                       ),
                     ),
                     KeepAliveTab(
-                      child: UserSocial(
+                      child: UserStats(
                         userId: state.user.id,
-                        scrollKey: scrollViewKey,
                       ),
                     ),
                     KeepAliveTab(

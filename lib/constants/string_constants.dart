@@ -9,6 +9,7 @@ class StringConstants {
   static const noInternetError = 'Please check your internet connection!';
   static const somethingWentWrongError = 'Something went wrong!';
   static const validationError = 'Please enter valid text!';
+  static const statsNotAvailable = 'Statistics not available!';
 }
 
 class LoginConstants {

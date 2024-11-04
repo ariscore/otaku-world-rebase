@@ -62,4 +62,88 @@ class FilterConstants {
     'Forum',
     'Media',
   ];
+
+  static const releaseYearOptionsAnime = [
+    'Titles Watched',
+    'Hours Watched',
+    'Mean Score',
+  ];
+
+  static const releaseYearOptionsManga = [
+    'Titles Read',
+    'Chapters Read',
+    'Mean Score',
+  ];
+
+  static const scoreDistOptionsAnime = [
+    'Titles Watched',
+    'Hours Watched',
+  ];
+
+  static const scoreDistOptionsManga = [
+    'Titles Read',
+    'Chapters Read',
+  ];
+
+  static const lengthDistOptionsAnime = [
+    'Titles Watched',
+    'Hours Watched',
+    'Mean Score',
+  ];
+
+  static const lengthDistOptionsManga = [
+    'Titles Read',
+    'Chapters Read',
+    'Mean Score',
+  ];
+
+  static StatsOption statsOptionFromString(String value) {
+    switch(value) {
+      case 'Overview':
+        return StatsOption.overview;
+      case 'Genres':
+        return StatsOption.genres;
+      case 'Tags':
+        return StatsOption.tags;
+      case 'Voice Actors':
+        return StatsOption.voiceActors;
+      case 'Studios':
+        return StatsOption.studios;
+      case 'Staff':
+        return StatsOption.staff;
+      default:
+        return StatsOption.overview;
+    }
+  }
 }
+
+enum StatsOption {
+  overview,
+  genres,
+  tags,
+  voiceActors,
+  studios,
+  staff,
+}
+
+extension StatOptionExtension on StatsOption {
+  String get displayName {
+    switch (this) {
+      case StatsOption.overview:
+        return 'Overview';
+      case StatsOption.genres:
+        return 'Genres';
+      case StatsOption.tags:
+        return 'Tags';
+      case StatsOption.voiceActors:
+        return 'Voice Actors';
+      case StatsOption.studios:
+        return 'Studios';
+      case StatsOption.staff:
+        return 'Staff';
+      default:
+        return '';
+    }
+  }
+}
+
