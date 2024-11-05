@@ -16,10 +16,18 @@ class RouteConstants {
   static const favoriteStudios = '/favorite-studios';
   static const userActivities = '/user-activities';
   static const userNotifications = '/user-notifications';
+  static const statusDistribution = '/status-distribution';
+  static const formatDistribution = '/format-distribution';
+  static const countryDistribution = '/country-distribution';
+  static const releaseYearDistribution = '/release-year-distribution';
+  static const startYearDistribution = '/start-year-distribution';
+  static const scoreDistribution = '/score-distribution';
+  static const lengthDistribution = '/length-distribution';
 
   static const settings = '/settings';
   static const discover = '/discover';
   static const social = '/social';
+  static const activity = '/activity';
   static const activityReplies = '/activity-replies';
   static const postNewActivity = '/post-activity';
   static const editTextActivity = '/edit-text-activity';

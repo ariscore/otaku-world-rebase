@@ -6,8 +6,12 @@ final profileRoutes = [
     path: RouteConstants.myProfile,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
-      return BlocProvider(
-        create: (context) => MyProfileBloc(),
+      return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => MyProfileBloc(),
+          ),
+        ],
         child: const MyProfileScreen(),
       );
     },
@@ -114,6 +118,104 @@ final profileRoutes = [
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       return UserNotificationsScreen(resetCount: state.extra! as VoidCallback);
+    },
+  ),
+  SlideTransitionRoute(
+    parentNavigatorKey: _rootNavigatorKey,
+    path: RouteConstants.statusDistribution,
+    directionTween: SlideTransitionRoute.leftToRightTween,
+    builder: (state) {
+      final type = state.uri.queryParameters['type'] == 'anime'
+          ? Enum$MediaType.ANIME
+          : Enum$MediaType.MANGA;
+      return StatusDistributionScreen(
+        statuses: state.extra! as List<Fragment$UserStatistics$statuses?>,
+        type: type,
+      );
+    },
+  ),
+  SlideTransitionRoute(
+    parentNavigatorKey: _rootNavigatorKey,
+    path: RouteConstants.formatDistribution,
+    directionTween: SlideTransitionRoute.leftToRightTween,
+    builder: (state) {
+      final type = state.uri.queryParameters['type'] == 'anime'
+          ? Enum$MediaType.ANIME
+          : Enum$MediaType.MANGA;
+      return FormatDistributionScreen(
+        formats: state.extra! as List<Fragment$UserStatistics$formats?>,
+        type: type,
+      );
+    },
+  ),
+  SlideTransitionRoute(
+    parentNavigatorKey: _rootNavigatorKey,
+    path: RouteConstants.countryDistribution,
+    directionTween: SlideTransitionRoute.leftToRightTween,
+    builder: (state) {
+      final type = state.uri.queryParameters['type'] == 'anime'
+          ? Enum$MediaType.ANIME
+          : Enum$MediaType.MANGA;
+      return CountryDistributionScreen(
+        countries: state.extra! as List<Fragment$UserStatistics$countries?>,
+        type: type,
+      );
+    },
+  ),
+  SlideTransitionRoute(
+    parentNavigatorKey: _rootNavigatorKey,
+    path: RouteConstants.releaseYearDistribution,
+    directionTween: SlideTransitionRoute.leftToRightTween,
+    builder: (state) {
+      final type = state.uri.queryParameters['type'] == 'anime'
+          ? Enum$MediaType.ANIME
+          : Enum$MediaType.MANGA;
+      return ReleaseYearDistributionScreen(
+        releaseYears: state.extra! as List<Fragment$UserStatistics$releaseYears?>,
+        type: type,
+      );
+    },
+  ),
+  SlideTransitionRoute(
+    parentNavigatorKey: _rootNavigatorKey,
+    path: RouteConstants.startYearDistribution,
+    directionTween: SlideTransitionRoute.leftToRightTween,
+    builder: (state) {
+      final type = state.uri.queryParameters['type'] == 'anime'
+          ? Enum$MediaType.ANIME
+          : Enum$MediaType.MANGA;
+      return StartYearDistributionScreen(
+        startYears: state.extra! as List<Fragment$UserStatistics$startYears?>,
+        type: type,
+      );
+    },
+  ),
+  SlideTransitionRoute(
+    parentNavigatorKey: _rootNavigatorKey,
+    path: RouteConstants.scoreDistribution ,
+    directionTween: SlideTransitionRoute.leftToRightTween,
+    builder: (state) {
+      final type = state.uri.queryParameters['type'] == 'anime'
+          ? Enum$MediaType.ANIME
+          : Enum$MediaType.MANGA;
+      return ScoreDistributionScreen(
+        scores: state.extra! as List<Fragment$UserStatistics$scores?>,
+        type: type,
+      );
+    },
+  ),
+  SlideTransitionRoute(
+    parentNavigatorKey: _rootNavigatorKey,
+    path: RouteConstants.lengthDistribution,
+    directionTween: SlideTransitionRoute.leftToRightTween,
+    builder: (state) {
+      final type = state.uri.queryParameters['type'] == 'anime'
+          ? Enum$MediaType.ANIME
+          : Enum$MediaType.MANGA;
+      return LengthDistributionScreen(
+        lengths: state.extra! as List<Fragment$UserStatistics$lengths?>,
+        type: type,
+      );
     },
   ),
 ];

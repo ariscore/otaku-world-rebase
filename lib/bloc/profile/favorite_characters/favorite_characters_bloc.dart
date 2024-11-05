@@ -14,6 +14,7 @@ class FavoriteCharactersBloc
     return client.query$FavoriteCharacters(
       Options$Query$FavoriteCharacters(
         fetchPolicy: FetchPolicy.networkOnly,
+        cacheRereadPolicy: CacheRereadPolicy.ignoreOptimisitic,
         variables: Variables$Query$FavoriteCharacters(
           userId: userId,
           page: page,

@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/features/profile/widgets/notifications/notification_base_card.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 
@@ -13,16 +15,14 @@ class ActivityLikeNotificationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('${notification.context}');
-    final textStyle = Theme
-        .of(context)
-        .textTheme
-        .headlineSmall;
+    final textStyle = Theme.of(context).textTheme.headlineSmall;
 
     return NotificationBaseCard(
       createdAt: notification.createdAt ?? 0,
       onPressed: () {
-        log('Card clicked');
+        context.push(
+          '${RouteConstants.activity}?id=${notification.activityId}',
+        );
       },
       child: Row(
         children: [

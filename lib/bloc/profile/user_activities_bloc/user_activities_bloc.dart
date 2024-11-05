@@ -40,8 +40,10 @@ class UserActivitiesBloc
     list.addAll(data.Page!.activities!);
   }
 
-  void changeType(
-      {required GraphQLClient client, required String activityType}) {
+  void changeType({
+    required GraphQLClient client,
+    required String activityType,
+  }) {
     if (activityType == 'List Progress') {
       type = Enum$ActivityType.MEDIA_LIST;
     } else if (activityType == 'Text') {

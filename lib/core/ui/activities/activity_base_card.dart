@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
 import 'package:otaku_world/bloc/profile/user_activities_bloc/user_activities_bloc.dart';
 import 'package:otaku_world/bloc/social/activities/activities_bloc.dart';
+import 'package:otaku_world/bloc/social/activity/activity_bloc.dart';
 import 'package:otaku_world/core/ui/activities/activity_actions.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/theme/colors.dart';
@@ -120,35 +121,28 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
                 ],
               ),
             if (widget.isProfile && widget.receiverUserName != null)
-              Column(
+              Row(
                 children: [
-                  Row(
-                    children: [
-                      _buildUser(
-                        context,
-                        avatarUrl: widget.avatarUrl,
-                        userName: widget.userName,
-                      ),
-                      if (widget.isPrivate)
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: AppColors.sunsetOrange,
-                          ),
-                          padding: const EdgeInsets.all(5),
-                          margin: const EdgeInsets.only(left: 10),
-                          child: Text(
-                            'Private',
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                        ),
-                    ],
+                  _buildUser(
+                    context,
+                    avatarUrl: widget.avatarUrl,
+                    userName: widget.userName,
                   ),
-                  const SizedBox(height: 10),
+                  if (widget.isPrivate)
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: AppColors.sunsetOrange,
+                      ),
+                      padding: const EdgeInsets.all(5),
+                      margin: const EdgeInsets.only(left: 10, bottom: 10),
+                      child: Text(
+                        'Private',
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                    ),
                 ],
               ),
-            if (!widget.isProfile && widget.receiverUserName != null)
-              const SizedBox(height: 10),
             // Main content
             widget.child,
             // Other details
@@ -170,6 +164,8 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
                   (widget.bloc as UserActivitiesBloc).toggleLike(
                     activityId: widget.id,
                   );
+                } else if (widget.bloc is ActivityBloc) {
+                  (widget.bloc as ActivityBloc).add(ToggleLike());
                 }
               },
               onToggleSubscription: () => _toggleSubscription(context),
@@ -238,6 +234,19 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
                 result,
               ),
             );
+      } else if (bloc is ActivityBloc) {
+        bloc
+            .toggleActivitySubscription(
+              client,
+              activityId: widget.id,
+              subscribe: isSubscribed,
+            )
+            .then(
+              (result) => _processSubscription(
+                context,
+                result,
+              ),
+            );
       }
     } else {
       UIUtils.showSnackBar(context, ActivityConstants.clientError);
@@ -289,6 +298,14 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
                     UIUtils.showSnackBar(context, e);
                   }
                 });
+              } else if (bloc is ActivityBloc) {
+                bloc.deleteActivity(client, activityId: widget.id).then((e) {
+                  if (e != null) {
+                    UIUtils.showSnackBar(context, e);
+                  } else {
+                    context.pop();
+                  }
+                });
               }
             } else {
               UIUtils.showSnackBar(context, ActivityConstants.clientError);
@@ -305,45 +322,48 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
     required String? avatarUrl,
     required String? userName,
   }) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 35,
-          height: 35,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.fromBorderSide(
-              BorderSide(color: AppColors.sunsetOrange),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 35,
+            height: 35,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.fromBorderSide(
+                BorderSide(color: AppColors.sunsetOrange),
+              ),
+            ),
+            // padding: const EdgeInsets.all(1),
+            child: ClipOval(
+              child: CachedNetworkImage(
+                imageUrl: avatarUrl ?? '',
+                imageBuilder: (context, imageProvider) {
+                  return Image(image: imageProvider, fit: BoxFit.cover);
+                },
+                placeholder: (context, url) {
+                  return _buildPlaceholderProfile();
+                },
+                errorWidget: (context, url, error) {
+                  return _buildPlaceholderProfile();
+                },
+              ),
             ),
           ),
-          // padding: const EdgeInsets.all(1),
-          child: ClipOval(
-            child: CachedNetworkImage(
-              imageUrl: avatarUrl ?? '',
-              imageBuilder: (context, imageProvider) {
-                return Image(image: imageProvider, fit: BoxFit.cover);
-              },
-              placeholder: (context, url) {
-                return _buildPlaceholderProfile();
-              },
-              errorWidget: (context, url, error) {
-                return _buildPlaceholderProfile();
-              },
+          const SizedBox(width: 10),
+          Flexible(
+            child: Text(
+              userName ?? '',
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontFamily: 'Poppins',
+                  ),
             ),
           ),
-        ),
-        const SizedBox(width: 10),
-        Flexible(
-          child: Text(
-            userName ?? '',
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontFamily: 'Poppins',
-                ),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

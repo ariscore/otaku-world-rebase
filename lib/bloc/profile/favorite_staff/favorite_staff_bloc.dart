@@ -14,6 +14,7 @@ class FavoriteStaffBloc
     return client.query$FavoriteStaff(
       Options$Query$FavoriteStaff(
         fetchPolicy: FetchPolicy.networkOnly,
+        cacheRereadPolicy: CacheRereadPolicy.ignoreOptimisitic,
         variables: Variables$Query$FavoriteStaff(
           userId: userId,
           page: page,

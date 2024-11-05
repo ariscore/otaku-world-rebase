@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -66,6 +68,7 @@ class _UserActivitiesScreenState extends State<UserActivitiesScreen> {
             current is PaginatedDataLoaded &&
             previous is PaginatedDataLoaded &&
             previous.showProgress != current.showProgress,
+        buildWhen: (previous, current) => true,
         listener: (context, state) {
           if (state is PaginatedDataLoaded && state.showProgress) {
             showDialog(
@@ -135,6 +138,7 @@ class _UserActivitiesScreenState extends State<UserActivitiesScreen> {
                         final bloc = context.read<UserActivitiesBloc>();
                         if (index == state.list.length - 1 &&
                             state.hasNextPage) {
+                          log('Loading more activities');
                           bloc.add(LoadData(client));
                         }
 

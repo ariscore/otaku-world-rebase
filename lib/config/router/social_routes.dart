@@ -101,4 +101,13 @@ final socialRoutes = [
       );
     },
   ),
+  SlideTransitionRoute(
+    parentNavigatorKey: _rootNavigatorKey,
+    path: RouteConstants.activity,
+    directionTween: SlideTransitionRoute.leftToRightTween,
+    builder: (state) {
+      final id = int.parse(state.uri.queryParameters['id']!);
+      return ActivityScreen(activityId: id);
+    },
+  ),
 ];

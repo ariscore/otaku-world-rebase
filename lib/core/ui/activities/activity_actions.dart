@@ -12,6 +12,7 @@ import 'package:otaku_world/core/ui/dialogs/alert_dialog.dart';
 import 'package:otaku_world/features/reviews/widgets/bottom_sheet_component.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
@@ -223,6 +224,14 @@ class ActivityActions extends StatelessWidget {
 
         options.add(
           BottomSheetComponent(
+            iconName: Assets.iconsShare,
+            text: 'Share',
+            onTap: () => _share(context),
+          ),
+        );
+
+        options.add(
+          BottomSheetComponent(
             iconName: Assets.iconsCopyLink,
             text: 'Copy Link',
             onTap: () => _copyLink(context),
@@ -324,6 +333,14 @@ class ActivityActions extends StatelessWidget {
       onError: (e) {
         UIUtils.showSnackBar(context, "Can't open the link!");
       },
+    );
+  }
+
+  void _share(BuildContext context) {
+    context.pop();
+    Share.share(
+      'Checkout this activity: https://otaku-world-8a7f4.firebaseapp.com/'
+      'activity?id=$activityId',
     );
   }
 }

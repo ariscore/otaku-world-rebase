@@ -13,7 +13,6 @@ class FollowingNotificationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('${notification.context}');
     final textStyle = Theme
         .of(context)
         .textTheme

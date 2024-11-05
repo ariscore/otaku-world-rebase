@@ -9,6 +9,7 @@ class StringConstants {
   static const noInternetError = 'Please check your internet connection!';
   static const somethingWentWrongError = 'Something went wrong!';
   static const validationError = 'Please enter valid text!';
+  static const statsNotAvailable = 'Statistics not available!';
 }
 
 class LoginConstants {
@@ -90,6 +91,7 @@ class DiscoverConstants {
 }
 
 class ActivityConstants {
+  static const notFound = 'Oops! It looks like this activity is no longer available. It may have been removed or deleted.';
   static const clientError = 'Something went wrong, Please restart the app!';
   static const somethingWrong = 'Something went wrong!';
 

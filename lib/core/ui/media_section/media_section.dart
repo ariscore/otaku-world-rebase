@@ -230,7 +230,7 @@ class MediaSection<B extends PaginatedDataBloc> extends HookWidget {
     ScrollController controller,
   ) {
     return SizedBox(
-      height: 205,
+      height: 210,
       child: Stack(
         children: [
           CustomScrollView(

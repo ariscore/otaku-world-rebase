@@ -14,6 +14,7 @@ class FavoriteAnimeBloc
     return client.query$FavoriteAnime(
       Options$Query$FavoriteAnime(
         fetchPolicy: FetchPolicy.networkOnly,
+        cacheRereadPolicy: CacheRereadPolicy.ignoreOptimisitic,
         variables: Variables$Query$FavoriteAnime(
           userId: userId,
           page: page,
