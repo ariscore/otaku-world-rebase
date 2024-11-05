@@ -10,8 +10,8 @@ import 'package:otaku_world/graphql/__generated/graphql/user/user_stats.graphql.
 import 'package:otaku_world/utils/extensions.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../../../../constants/duration_constants.dart';
-import '../../../../theme/colors.dart';
+import '../../../../../constants/duration_constants.dart';
+import '../../../../../theme/colors.dart';
 
 class AnimeStatusDistributionChart extends StatelessWidget {
   const AnimeStatusDistributionChart({super.key, required this.statuses});

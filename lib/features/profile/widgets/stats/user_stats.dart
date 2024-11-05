@@ -5,8 +5,8 @@ import 'package:otaku_world/bloc/profile/user_stats/user_stats_bloc.dart';
 import 'package:otaku_world/constants/filter_constants.dart';
 import 'package:otaku_world/core/ui/error_text.dart';
 import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
-import 'package:otaku_world/features/profile/widgets/stats/anime_stats_overview.dart';
-import 'package:otaku_world/features/profile/widgets/stats/manga_stats_overview.dart';
+import 'package:otaku_world/features/profile/widgets/stats/overview/anime_stats_overview.dart';
+import 'package:otaku_world/features/profile/widgets/stats/overview/manga_stats_overview.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/user_stats.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 

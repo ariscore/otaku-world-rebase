@@ -79,8 +79,8 @@ import 'package:otaku_world/features/profile/screens/stats/start_year_distributi
 import 'package:otaku_world/features/profile/screens/stats/status_distribution_screen.dart';
 import 'package:otaku_world/features/profile/screens/user_activities_screen.dart';
 import 'package:otaku_world/features/profile/screens/user_notifications_screen.dart';
-import 'package:otaku_world/features/profile/widgets/stats/country_distribution_chart.dart';
-import 'package:otaku_world/features/profile/widgets/stats/release_year_distribution_chart.dart';
+import 'package:otaku_world/features/profile/widgets/stats/overview/country_distribution_chart.dart';
+import 'package:otaku_world/features/profile/widgets/stats/overview/release_year_distribution_chart.dart';
 import 'package:otaku_world/features/reviews/screens/review_detail_screen.dart';
 import 'package:otaku_world/features/reviews/screens/reviews_screen.dart';
 import 'package:otaku_world/features/search/screens/search_screen.dart';

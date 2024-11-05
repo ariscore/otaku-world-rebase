@@ -8,11 +8,11 @@ import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/user_stats.graphql.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../../../../constants/filter_constants.dart';
-import '../../../../core/ui/filters/custom_dropdown.dart';
-import '../../../../generated/assets.dart';
-import '../../../../theme/colors.dart';
-import '../../../../utils/formatting_utils.dart';
+import '../../../../../constants/filter_constants.dart';
+import '../../../../../core/ui/filters/custom_dropdown.dart';
+import '../../../../../generated/assets.dart';
+import '../../../../../theme/colors.dart';
+import '../../../../../utils/formatting_utils.dart';
 
 class LengthDistributionChart extends StatefulWidget {
   const LengthDistributionChart({
