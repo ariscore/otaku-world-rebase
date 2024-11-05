@@ -2,18 +2,26 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:otaku_world/generated/assets.dart';
+import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/user_stats.graphql.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../../../../config/router/router_constants.dart';
 import '../../../../constants/duration_constants.dart';
 import '../../../../theme/colors.dart';
 
 class CountryDistributionChart extends StatelessWidget {
-  const CountryDistributionChart({super.key, required this.countries});
+  const CountryDistributionChart({
+    super.key,
+    required this.countries,
+    required this.type,
+  });
 
   final List<Fragment$UserStatistics$countries?>? countries;
+  final Enum$MediaType type;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +46,12 @@ class CountryDistributionChart extends StatelessWidget {
                     ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.push(
+                    '${RouteConstants.countryDistribution}?type=${type == Enum$MediaType.ANIME ? 'anime' : 'manga'}',
+                    extra: countries,
+                  );
+                },
                 icon: SvgPicture.asset(
                   Assets.iconsArrowRight,
                 ),

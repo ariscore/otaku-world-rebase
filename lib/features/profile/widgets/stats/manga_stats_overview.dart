@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:otaku_world/features/profile/widgets/stats/anime_format_distribution_chart.dart';
+import 'package:otaku_world/features/profile/widgets/stats/format_distribution_chart.dart';
 import 'package:otaku_world/features/profile/widgets/stats/length_distribution_chart.dart';
 import 'package:otaku_world/features/profile/widgets/stats/manga_status_distribution_chart.dart';
 import 'package:otaku_world/features/profile/widgets/stats/release_year_distribution_chart.dart';
@@ -42,9 +42,15 @@ class MangaStatsOverview extends StatelessWidget {
           const SizedBox(height: 10),
           MangaStatusDistributionChart(statuses: stats.statuses),
           const SizedBox(height: 10),
-          FormatDistributionChart(formats: stats.formats),
+          FormatDistributionChart(
+            formats: stats.formats,
+            type: Enum$MediaType.MANGA,
+          ),
           const SizedBox(height: 10),
-          CountryDistributionChart(countries: stats.countries),
+          CountryDistributionChart(
+            countries: stats.countries,
+            type: Enum$MediaType.ANIME,
+          ),
           const SizedBox(height: 10),
           ReleaseYearDistributionChart(
             releaseYears: stats.releaseYears,

@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/user_stats.graphql.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -13,7 +15,11 @@ import '../../../../theme/colors.dart';
 import '../../../../utils/formatting_utils.dart';
 
 class ScoreDistributionChart extends StatefulWidget {
-  const ScoreDistributionChart({super.key, required this.scores, required this.type,});
+  const ScoreDistributionChart({
+    super.key,
+    required this.scores,
+    required this.type,
+  });
 
   final List<Fragment$UserStatistics$scores?>? scores;
   final Enum$MediaType type;
@@ -48,11 +54,16 @@ class _ScoreDistributionChartState extends State<ScoreDistributionChart> {
               Text(
                 'Score Distribution',
                 style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  fontFamily: 'Roboto-Medium',
-                ),
+                      fontFamily: 'Roboto-Medium',
+                    ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.push(
+                    '${RouteConstants.scoreDistribution}?type=${widget.type == Enum$MediaType.ANIME ? 'anime' : 'manga'}',
+                    extra: widget.scores,
+                  );
+                },
                 icon: SvgPicture.asset(
                   Assets.iconsArrowRight,
                 ),
@@ -94,11 +105,9 @@ class _ScoreDistributionChartState extends State<ScoreDistributionChart> {
               ),
               primaryYAxis: const NumericAxis(
                 isVisible: false,
-                majorGridLines:
-                MajorGridLines(width: 0),
+                majorGridLines: MajorGridLines(width: 0),
               ),
-              series: <ColumnSeries<Fragment$UserStatistics$scores?,
-                  int>>[
+              series: <ColumnSeries<Fragment$UserStatistics$scores?, int>>[
                 ColumnSeries<Fragment$UserStatistics$scores?, int>(
                   sortingOrder: SortingOrder.ascending,
                   enableTooltip: true,

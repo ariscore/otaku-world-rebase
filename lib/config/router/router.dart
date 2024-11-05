@@ -70,9 +70,17 @@ import 'package:otaku_world/features/profile/screens/favorite_manga_screen.dart'
 import 'package:otaku_world/features/profile/screens/favorite_staff_screen.dart';
 import 'package:otaku_world/features/profile/screens/favorite_studios_screen.dart';
 import 'package:otaku_world/features/profile/screens/my_profile_screen.dart';
+import 'package:otaku_world/features/profile/screens/stats/country_distribution_screen.dart';
+import 'package:otaku_world/features/profile/screens/stats/format_distribution_screen.dart';
+import 'package:otaku_world/features/profile/screens/stats/length_distribution_screen.dart';
+import 'package:otaku_world/features/profile/screens/stats/release_year_distribution_screen.dart';
+import 'package:otaku_world/features/profile/screens/stats/score_distribution_screen.dart';
+import 'package:otaku_world/features/profile/screens/stats/start_year_distribution_screen.dart';
 import 'package:otaku_world/features/profile/screens/stats/status_distribution_screen.dart';
 import 'package:otaku_world/features/profile/screens/user_activities_screen.dart';
 import 'package:otaku_world/features/profile/screens/user_notifications_screen.dart';
+import 'package:otaku_world/features/profile/widgets/stats/country_distribution_chart.dart';
+import 'package:otaku_world/features/profile/widgets/stats/release_year_distribution_chart.dart';
 import 'package:otaku_world/features/reviews/screens/review_detail_screen.dart';
 import 'package:otaku_world/features/reviews/screens/reviews_screen.dart';
 import 'package:otaku_world/features/search/screens/search_screen.dart';

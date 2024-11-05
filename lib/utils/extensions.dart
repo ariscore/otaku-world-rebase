@@ -80,7 +80,7 @@ extension MediaFormatExtension on Enum$MediaFormat {
       case Enum$MediaFormat.NOVEL:
         return AppColors.americanGreen;
       case Enum$MediaFormat.MUSIC:
-        return AppColors.brilliantAzure;
+        return AppColors.darkMagenta;
       case Enum$MediaFormat.ONE_SHOT:
         return AppColors.pantonePink;
       default:

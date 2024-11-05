@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/constants/filter_constants.dart';
 import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
@@ -58,7 +60,12 @@ class _ReleaseYearDistributionChartState
                     ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.push(
+                    '${RouteConstants.releaseYearDistribution}?type=${widget.type == Enum$MediaType.ANIME ? 'anime' : 'manga'}',
+                    extra: widget.releaseYears,
+                  );
+                },
                 icon: SvgPicture.asset(
                   Assets.iconsArrowRight,
                 ),
@@ -93,7 +100,6 @@ class _ReleaseYearDistributionChartState
               tooltipBehavior: TooltipBehavior(
                 enable: true,
                 header: 'Release Year',
-                shared: true,
               ),
               primaryXAxis: CategoryAxis(
                 arrangeByIndex: true,

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:otaku_world/constants/filter_constants.dart';
 import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
@@ -10,6 +11,7 @@ import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../../../../config/router/router_constants.dart';
 import '../../../../generated/assets.dart';
 
 class StartYearDistributionChart extends StatefulWidget {
@@ -54,11 +56,16 @@ class _StartYearDistributionChartState
               Text(
                 'Start Year Distribution',
                 style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  fontFamily: 'Roboto-Medium',
-                ),
+                      fontFamily: 'Roboto-Medium',
+                    ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.push(
+                    '${RouteConstants.startYearDistribution}?type=${widget.type == Enum$MediaType.ANIME ? 'anime' : 'manga'}',
+                    extra: widget.startYears,
+                  );
+                },
                 icon: SvgPicture.asset(
                   Assets.iconsArrowRight,
                 ),

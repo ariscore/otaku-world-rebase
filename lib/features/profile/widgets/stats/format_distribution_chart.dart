@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/user_stats.graphql.dart';
@@ -9,13 +10,19 @@ import 'package:otaku_world/utils/extensions.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../../../../config/router/router_constants.dart';
 import '../../../../constants/duration_constants.dart';
 import '../../../../theme/colors.dart';
 
 class FormatDistributionChart extends StatelessWidget {
-  const FormatDistributionChart({super.key, required this.formats});
+  const FormatDistributionChart({
+    super.key,
+    required this.formats,
+    required this.type,
+  });
 
   final List<Fragment$UserStatistics$formats?>? formats;
+  final Enum$MediaType type;
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +42,16 @@ class FormatDistributionChart extends StatelessWidget {
               Text(
                 'Format Distribution',
                 style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  fontFamily: 'Roboto-Medium',
-                ),
+                      fontFamily: 'Roboto-Medium',
+                    ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.push(
+                    '${RouteConstants.formatDistribution}?type=${type == Enum$MediaType.ANIME ? 'anime' : 'manga'}',
+                    extra: formats,
+                  );
+                },
                 icon: SvgPicture.asset(
                   Assets.iconsArrowRight,
                 ),
@@ -83,7 +95,7 @@ class FormatDistributionChart extends StatelessWidget {
                 shrinkWrap: true,
                 children: List.generate(
                   formats!.length,
-                      (index) {
+                  (index) {
                     final format = formats![index];
                     if (format == null) return const SizedBox();
                     return _buildFormat(format.format!, format.count, total);

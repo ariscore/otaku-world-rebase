@@ -11,22 +11,22 @@ import '../../../../constants/filter_constants.dart';
 import '../../../../core/ui/filters/custom_dropdown.dart';
 import '../../../../theme/colors.dart';
 
-class StatusDistributionScreen extends StatefulWidget {
-  const StatusDistributionScreen({
+class FormatDistributionScreen extends StatefulWidget {
+  const FormatDistributionScreen({
     super.key,
-    required this.statuses,
+    required this.formats,
     required this.type,
   });
 
-  final List<Fragment$UserStatistics$statuses?> statuses;
+  final List<Fragment$UserStatistics$formats?> formats;
   final Enum$MediaType type;
 
   @override
-  State<StatusDistributionScreen> createState() =>
-      _StatusDistributionScreenState();
+  State<FormatDistributionScreen> createState() =>
+      _FormatDistributionScreenState();
 }
 
-class _StatusDistributionScreenState extends State<StatusDistributionScreen> {
+class _FormatDistributionScreenState extends State<FormatDistributionScreen> {
   late String option;
 
   @override
@@ -40,7 +40,7 @@ class _StatusDistributionScreenState extends State<StatusDistributionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const SimpleAppBar(title: 'Status Distribution'),
+      appBar: const SimpleAppBar(title: 'Format Distribution'),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -65,20 +65,20 @@ class _StatusDistributionScreenState extends State<StatusDistributionScreen> {
               child: SfCircularChart(
                 key: UniqueKey(),
                 tooltipBehavior: TooltipBehavior(enable: true),
-                series: <CircularSeries<Fragment$UserStatistics$statuses?,
+                series: <CircularSeries<Fragment$UserStatistics$formats?,
                     String>>[
-                  PieSeries<Fragment$UserStatistics$statuses?, String>(
+                  PieSeries<Fragment$UserStatistics$formats?, String>(
                     animationDuration: 1000,
                     dataLabelMapper: (datum, index) =>
-                        datum!.status!.displayTitle(widget.type),
+                        FormattingUtils.getMediaFormatString(datum?.format),
                     strokeColor: AppColors.raisinBlack,
                     strokeWidth: 3,
                     radius: "100%",
                     explode: true,
-                    pointColorMapper: (data, index) => data!.status!.toColor,
-                    dataSource: widget.statuses,
+                    pointColorMapper: (data, index) => data!.format!.toColor,
+                    dataSource: widget.formats,
                     xValueMapper: (data, index) =>
-                        data!.status!.displayTitle(widget.type),
+                        FormattingUtils.getMediaFormatString(data?.format),
                     yValueMapper: _mapYValue,
                   ),
                 ],
@@ -88,21 +88,21 @@ class _StatusDistributionScreenState extends State<StatusDistributionScreen> {
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: widget.statuses.length,
+              itemCount: widget.formats.length,
               itemBuilder: (context, index) {
-                final status = widget.statuses[index];
-                if (status == null) return const SizedBox();
+                final format = widget.formats[index];
+                if (format == null) return const SizedBox();
                 return ChartDataSection(
-                  title: status.status?.displayTitle(widget.type) ?? '',
-                  color: status.status?.toColor,
-                  value1: status.count,
+                  title: FormattingUtils.getMediaFormatString(format.format),
+                  color: format.format?.toColor,
+                  value1: format.count,
                   field2: widget.type == Enum$MediaType.ANIME
                       ? 'Time Watched'
                       : 'Chapters Read',
                   value2: widget.type == Enum$MediaType.ANIME
-                      ? '${FormattingUtils.minutesToHours(status.minutesWatched)} Hours'
-                      : status.chaptersRead,
-                  value3: status.meanScore,
+                      ? '${FormattingUtils.minutesToHours(format.minutesWatched)} Hours'
+                      : format.chaptersRead,
+                  value3: format.meanScore,
                 );
               },
             ),
@@ -112,7 +112,7 @@ class _StatusDistributionScreenState extends State<StatusDistributionScreen> {
     );
   }
 
-  num? _mapYValue(Fragment$UserStatistics$statuses? data, int index) {
+  num? _mapYValue(Fragment$UserStatistics$formats? data, int index) {
     switch (option) {
       case 'Titles Watched' || 'Titles Read':
         return data?.count;

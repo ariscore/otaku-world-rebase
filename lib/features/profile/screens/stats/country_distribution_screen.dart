@@ -3,7 +3,6 @@ import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/features/profile/widgets/stats/chart_data_section.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/user_stats.graphql.dart';
-import 'package:otaku_world/utils/extensions.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -11,22 +10,22 @@ import '../../../../constants/filter_constants.dart';
 import '../../../../core/ui/filters/custom_dropdown.dart';
 import '../../../../theme/colors.dart';
 
-class StatusDistributionScreen extends StatefulWidget {
-  const StatusDistributionScreen({
+class CountryDistributionScreen extends StatefulWidget {
+  const CountryDistributionScreen({
     super.key,
-    required this.statuses,
+    required this.countries,
     required this.type,
   });
 
-  final List<Fragment$UserStatistics$statuses?> statuses;
+  final List<Fragment$UserStatistics$countries?> countries;
   final Enum$MediaType type;
 
   @override
-  State<StatusDistributionScreen> createState() =>
-      _StatusDistributionScreenState();
+  State<CountryDistributionScreen> createState() =>
+      _CountryDistributionScreenState();
 }
 
-class _StatusDistributionScreenState extends State<StatusDistributionScreen> {
+class _CountryDistributionScreenState extends State<CountryDistributionScreen> {
   late String option;
 
   @override
@@ -40,7 +39,7 @@ class _StatusDistributionScreenState extends State<StatusDistributionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const SimpleAppBar(title: 'Status Distribution'),
+      appBar: const SimpleAppBar(title: 'Country Distribution'),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -65,20 +64,21 @@ class _StatusDistributionScreenState extends State<StatusDistributionScreen> {
               child: SfCircularChart(
                 key: UniqueKey(),
                 tooltipBehavior: TooltipBehavior(enable: true),
-                series: <CircularSeries<Fragment$UserStatistics$statuses?,
+                series: <CircularSeries<Fragment$UserStatistics$countries?,
                     String>>[
-                  PieSeries<Fragment$UserStatistics$statuses?, String>(
+                  PieSeries<Fragment$UserStatistics$countries?, String>(
                     animationDuration: 1000,
                     dataLabelMapper: (datum, index) =>
-                        datum!.status!.displayTitle(widget.type),
+                        FormattingUtils.getCountry(datum?.country),
                     strokeColor: AppColors.raisinBlack,
                     strokeWidth: 3,
                     radius: "100%",
                     explode: true,
-                    pointColorMapper: (data, index) => data!.status!.toColor,
-                    dataSource: widget.statuses,
+                    pointColorMapper: (data, index) =>
+                        FormattingUtils.getCountryColor(data?.country),
+                    dataSource: widget.countries,
                     xValueMapper: (data, index) =>
-                        data!.status!.displayTitle(widget.type),
+                        FormattingUtils.getCountry(data?.country),
                     yValueMapper: _mapYValue,
                   ),
                 ],
@@ -88,21 +88,17 @@ class _StatusDistributionScreenState extends State<StatusDistributionScreen> {
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: widget.statuses.length,
+              itemCount: widget.countries.length,
               itemBuilder: (context, index) {
-                final status = widget.statuses[index];
-                if (status == null) return const SizedBox();
+                final country = widget.countries[index];
+                if (country == null) return const SizedBox();
                 return ChartDataSection(
-                  title: status.status?.displayTitle(widget.type) ?? '',
-                  color: status.status?.toColor,
-                  value1: status.count,
-                  field2: widget.type == Enum$MediaType.ANIME
-                      ? 'Time Watched'
-                      : 'Chapters Read',
-                  value2: widget.type == Enum$MediaType.ANIME
-                      ? '${FormattingUtils.minutesToHours(status.minutesWatched)} Hours'
-                      : status.chaptersRead,
-                  value3: status.meanScore,
+                  title: FormattingUtils.getCountry(country.country),
+                  color: FormattingUtils.getCountryColor(country.country),
+                  value1: country.count,
+                  value2:
+                  '${FormattingUtils.minutesToHours(country.minutesWatched)} Hours',
+                  value3: country.meanScore,
                 );
               },
             ),
@@ -112,7 +108,7 @@ class _StatusDistributionScreenState extends State<StatusDistributionScreen> {
     );
   }
 
-  num? _mapYValue(Fragment$UserStatistics$statuses? data, int index) {
+  num? _mapYValue(Fragment$UserStatistics$countries? data, int index) {
     switch (option) {
       case 'Titles Watched' || 'Titles Read':
         return data?.count;

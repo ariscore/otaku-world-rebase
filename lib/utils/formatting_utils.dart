@@ -169,7 +169,7 @@ class FormattingUtils {
     }
   }
 
-  static String getMediaFormatString(Enum$MediaFormat format) {
+  static String getMediaFormatString(Enum$MediaFormat? format) {
     switch (format) {
       case Enum$MediaFormat.TV:
         return 'TV Show';
