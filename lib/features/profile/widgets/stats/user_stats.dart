@@ -60,7 +60,10 @@ class _UserStatsState extends State<UserStats> {
                               ),
                               Switch(
                                 value: isAnime,
-                                activeColor: AppColors.sunsetOrange,
+                                activeTrackColor: AppColors.sunsetOrange,
+                                inactiveTrackColor: AppColors.japaneseIndigo,
+                                activeColor: AppColors.white,
+                                inactiveThumbColor: AppColors.white,
                                 onChanged: (value) {
                                   setState(() {
                                     isAnime = value;
