@@ -7,30 +7,30 @@ import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
 import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
 
-class Fragment$MediaPoster {
-  Fragment$MediaPoster({
+class Fragment$CharacterImage {
+  Fragment$CharacterImage({
     required this.id,
-    this.coverImage,
-    this.$__typename = 'Media',
+    this.image,
+    this.$__typename = 'Character',
   });
 
-  factory Fragment$MediaPoster.fromJson(Map<String, dynamic> json) {
+  factory Fragment$CharacterImage.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
-    final l$coverImage = json['coverImage'];
+    final l$image = json['image'];
     final l$$__typename = json['__typename'];
-    return Fragment$MediaPoster(
+    return Fragment$CharacterImage(
       id: (l$id as int),
-      coverImage: l$coverImage == null
+      image: l$image == null
           ? null
-          : Fragment$MediaPoster$coverImage.fromJson(
-              (l$coverImage as Map<String, dynamic>)),
+          : Fragment$CharacterImage$image.fromJson(
+              (l$image as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
   final int id;
 
-  final Fragment$MediaPoster$coverImage? coverImage;
+  final Fragment$CharacterImage$image? image;
 
   final String $__typename;
 
@@ -38,8 +38,8 @@ class Fragment$MediaPoster {
     final _resultData = <String, dynamic>{};
     final l$id = id;
     _resultData['id'] = l$id;
-    final l$coverImage = coverImage;
-    _resultData['coverImage'] = l$coverImage?.toJson();
+    final l$image = image;
+    _resultData['image'] = l$image?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -48,11 +48,11 @@ class Fragment$MediaPoster {
   @override
   int get hashCode {
     final l$id = id;
-    final l$coverImage = coverImage;
+    final l$image = image;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
-      l$coverImage,
+      l$image,
       l$$__typename,
     ]);
   }
@@ -62,7 +62,8 @@ class Fragment$MediaPoster {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaPoster) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment$CharacterImage) ||
+        runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -70,9 +71,9 @@ class Fragment$MediaPoster {
     if (l$id != lOther$id) {
       return false;
     }
-    final l$coverImage = coverImage;
-    final lOther$coverImage = other.coverImage;
-    if (l$coverImage != lOther$coverImage) {
+    final l$image = image;
+    final lOther$image = other.image;
+    if (l$image != lOther$image) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -84,90 +85,90 @@ class Fragment$MediaPoster {
   }
 }
 
-extension UtilityExtension$Fragment$MediaPoster on Fragment$MediaPoster {
-  CopyWith$Fragment$MediaPoster<Fragment$MediaPoster> get copyWith =>
-      CopyWith$Fragment$MediaPoster(
+extension UtilityExtension$Fragment$CharacterImage on Fragment$CharacterImage {
+  CopyWith$Fragment$CharacterImage<Fragment$CharacterImage> get copyWith =>
+      CopyWith$Fragment$CharacterImage(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$MediaPoster<TRes> {
-  factory CopyWith$Fragment$MediaPoster(
-    Fragment$MediaPoster instance,
-    TRes Function(Fragment$MediaPoster) then,
-  ) = _CopyWithImpl$Fragment$MediaPoster;
+abstract class CopyWith$Fragment$CharacterImage<TRes> {
+  factory CopyWith$Fragment$CharacterImage(
+    Fragment$CharacterImage instance,
+    TRes Function(Fragment$CharacterImage) then,
+  ) = _CopyWithImpl$Fragment$CharacterImage;
 
-  factory CopyWith$Fragment$MediaPoster.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$MediaPoster;
+  factory CopyWith$Fragment$CharacterImage.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$CharacterImage;
 
   TRes call({
     int? id,
-    Fragment$MediaPoster$coverImage? coverImage,
+    Fragment$CharacterImage$image? image,
     String? $__typename,
   });
-  CopyWith$Fragment$MediaPoster$coverImage<TRes> get coverImage;
+  CopyWith$Fragment$CharacterImage$image<TRes> get image;
 }
 
-class _CopyWithImpl$Fragment$MediaPoster<TRes>
-    implements CopyWith$Fragment$MediaPoster<TRes> {
-  _CopyWithImpl$Fragment$MediaPoster(
+class _CopyWithImpl$Fragment$CharacterImage<TRes>
+    implements CopyWith$Fragment$CharacterImage<TRes> {
+  _CopyWithImpl$Fragment$CharacterImage(
     this._instance,
     this._then,
   );
 
-  final Fragment$MediaPoster _instance;
+  final Fragment$CharacterImage _instance;
 
-  final TRes Function(Fragment$MediaPoster) _then;
+  final TRes Function(Fragment$CharacterImage) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
-    Object? coverImage = _undefined,
+    Object? image = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$MediaPoster(
+      _then(Fragment$CharacterImage(
         id: id == _undefined || id == null ? _instance.id : (id as int),
-        coverImage: coverImage == _undefined
-            ? _instance.coverImage
-            : (coverImage as Fragment$MediaPoster$coverImage?),
+        image: image == _undefined
+            ? _instance.image
+            : (image as Fragment$CharacterImage$image?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
-  CopyWith$Fragment$MediaPoster$coverImage<TRes> get coverImage {
-    final local$coverImage = _instance.coverImage;
-    return local$coverImage == null
-        ? CopyWith$Fragment$MediaPoster$coverImage.stub(_then(_instance))
-        : CopyWith$Fragment$MediaPoster$coverImage(
-            local$coverImage, (e) => call(coverImage: e));
+  CopyWith$Fragment$CharacterImage$image<TRes> get image {
+    final local$image = _instance.image;
+    return local$image == null
+        ? CopyWith$Fragment$CharacterImage$image.stub(_then(_instance))
+        : CopyWith$Fragment$CharacterImage$image(
+            local$image, (e) => call(image: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$MediaPoster<TRes>
-    implements CopyWith$Fragment$MediaPoster<TRes> {
-  _CopyWithStubImpl$Fragment$MediaPoster(this._res);
+class _CopyWithStubImpl$Fragment$CharacterImage<TRes>
+    implements CopyWith$Fragment$CharacterImage<TRes> {
+  _CopyWithStubImpl$Fragment$CharacterImage(this._res);
 
   TRes _res;
 
   call({
     int? id,
-    Fragment$MediaPoster$coverImage? coverImage,
+    Fragment$CharacterImage$image? image,
     String? $__typename,
   }) =>
       _res;
 
-  CopyWith$Fragment$MediaPoster$coverImage<TRes> get coverImage =>
-      CopyWith$Fragment$MediaPoster$coverImage.stub(_res);
+  CopyWith$Fragment$CharacterImage$image<TRes> get image =>
+      CopyWith$Fragment$CharacterImage$image.stub(_res);
 }
 
-const fragmentDefinitionMediaPoster = FragmentDefinitionNode(
-  name: NameNode(value: 'MediaPoster'),
+const fragmentDefinitionCharacterImage = FragmentDefinitionNode(
+  name: NameNode(value: 'CharacterImage'),
   typeCondition: TypeConditionNode(
       on: NamedTypeNode(
-    name: NameNode(value: 'Media'),
+    name: NameNode(value: 'Character'),
     isNonNull: false,
   )),
   directives: [],
@@ -180,7 +181,7 @@ const fragmentDefinitionMediaPoster = FragmentDefinitionNode(
       selectionSet: null,
     ),
     FieldNode(
-      name: NameNode(value: 'coverImage'),
+      name: NameNode(value: 'image'),
       alias: null,
       arguments: [],
       directives: [],
@@ -210,13 +211,13 @@ const fragmentDefinitionMediaPoster = FragmentDefinitionNode(
     ),
   ]),
 );
-const documentNodeFragmentMediaPoster = DocumentNode(definitions: [
-  fragmentDefinitionMediaPoster,
+const documentNodeFragmentCharacterImage = DocumentNode(definitions: [
+  fragmentDefinitionCharacterImage,
 ]);
 
-extension ClientExtension$Fragment$MediaPoster on graphql.GraphQLClient {
-  void writeFragment$MediaPoster({
-    required Fragment$MediaPoster data,
+extension ClientExtension$Fragment$CharacterImage on graphql.GraphQLClient {
+  void writeFragment$CharacterImage({
+    required Fragment$CharacterImage data,
     required Map<String, dynamic> idFields,
     bool broadcast = true,
   }) =>
@@ -224,14 +225,14 @@ extension ClientExtension$Fragment$MediaPoster on graphql.GraphQLClient {
         graphql.FragmentRequest(
           idFields: idFields,
           fragment: const graphql.Fragment(
-            fragmentName: 'MediaPoster',
-            document: documentNodeFragmentMediaPoster,
+            fragmentName: 'CharacterImage',
+            document: documentNodeFragmentCharacterImage,
           ),
         ),
         data: data.toJson(),
         broadcast: broadcast,
       );
-  Fragment$MediaPoster? readFragment$MediaPoster({
+  Fragment$CharacterImage? readFragment$CharacterImage({
     required Map<String, dynamic> idFields,
     bool optimistic = true,
   }) {
@@ -239,26 +240,26 @@ extension ClientExtension$Fragment$MediaPoster on graphql.GraphQLClient {
       graphql.FragmentRequest(
         idFields: idFields,
         fragment: const graphql.Fragment(
-          fragmentName: 'MediaPoster',
-          document: documentNodeFragmentMediaPoster,
+          fragmentName: 'CharacterImage',
+          document: documentNodeFragmentCharacterImage,
         ),
       ),
       optimistic: optimistic,
     );
-    return result == null ? null : Fragment$MediaPoster.fromJson(result);
+    return result == null ? null : Fragment$CharacterImage.fromJson(result);
   }
 }
 
-class Fragment$MediaPoster$coverImage {
-  Fragment$MediaPoster$coverImage({
+class Fragment$CharacterImage$image {
+  Fragment$CharacterImage$image({
     this.medium,
-    this.$__typename = 'MediaCoverImage',
+    this.$__typename = 'CharacterImage',
   });
 
-  factory Fragment$MediaPoster$coverImage.fromJson(Map<String, dynamic> json) {
+  factory Fragment$CharacterImage$image.fromJson(Map<String, dynamic> json) {
     final l$medium = json['medium'];
     final l$$__typename = json['__typename'];
-    return Fragment$MediaPoster$coverImage(
+    return Fragment$CharacterImage$image(
       medium: (l$medium as String?),
       $__typename: (l$$__typename as String),
     );
@@ -292,7 +293,7 @@ class Fragment$MediaPoster$coverImage {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaPoster$coverImage) ||
+    if (!(other is Fragment$CharacterImage$image) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -310,23 +311,23 @@ class Fragment$MediaPoster$coverImage {
   }
 }
 
-extension UtilityExtension$Fragment$MediaPoster$coverImage
-    on Fragment$MediaPoster$coverImage {
-  CopyWith$Fragment$MediaPoster$coverImage<Fragment$MediaPoster$coverImage>
-      get copyWith => CopyWith$Fragment$MediaPoster$coverImage(
+extension UtilityExtension$Fragment$CharacterImage$image
+    on Fragment$CharacterImage$image {
+  CopyWith$Fragment$CharacterImage$image<Fragment$CharacterImage$image>
+      get copyWith => CopyWith$Fragment$CharacterImage$image(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$MediaPoster$coverImage<TRes> {
-  factory CopyWith$Fragment$MediaPoster$coverImage(
-    Fragment$MediaPoster$coverImage instance,
-    TRes Function(Fragment$MediaPoster$coverImage) then,
-  ) = _CopyWithImpl$Fragment$MediaPoster$coverImage;
+abstract class CopyWith$Fragment$CharacterImage$image<TRes> {
+  factory CopyWith$Fragment$CharacterImage$image(
+    Fragment$CharacterImage$image instance,
+    TRes Function(Fragment$CharacterImage$image) then,
+  ) = _CopyWithImpl$Fragment$CharacterImage$image;
 
-  factory CopyWith$Fragment$MediaPoster$coverImage.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$MediaPoster$coverImage;
+  factory CopyWith$Fragment$CharacterImage$image.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$CharacterImage$image;
 
   TRes call({
     String? medium,
@@ -334,16 +335,16 @@ abstract class CopyWith$Fragment$MediaPoster$coverImage<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$MediaPoster$coverImage<TRes>
-    implements CopyWith$Fragment$MediaPoster$coverImage<TRes> {
-  _CopyWithImpl$Fragment$MediaPoster$coverImage(
+class _CopyWithImpl$Fragment$CharacterImage$image<TRes>
+    implements CopyWith$Fragment$CharacterImage$image<TRes> {
+  _CopyWithImpl$Fragment$CharacterImage$image(
     this._instance,
     this._then,
   );
 
-  final Fragment$MediaPoster$coverImage _instance;
+  final Fragment$CharacterImage$image _instance;
 
-  final TRes Function(Fragment$MediaPoster$coverImage) _then;
+  final TRes Function(Fragment$CharacterImage$image) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -351,7 +352,7 @@ class _CopyWithImpl$Fragment$MediaPoster$coverImage<TRes>
     Object? medium = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$MediaPoster$coverImage(
+      _then(Fragment$CharacterImage$image(
         medium: medium == _undefined ? _instance.medium : (medium as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -359,9 +360,9 @@ class _CopyWithImpl$Fragment$MediaPoster$coverImage<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$MediaPoster$coverImage<TRes>
-    implements CopyWith$Fragment$MediaPoster$coverImage<TRes> {
-  _CopyWithStubImpl$Fragment$MediaPoster$coverImage(this._res);
+class _CopyWithStubImpl$Fragment$CharacterImage$image<TRes>
+    implements CopyWith$Fragment$CharacterImage$image<TRes> {
+  _CopyWithStubImpl$Fragment$CharacterImage$image(this._res);
 
   TRes _res;
 
@@ -372,19 +373,19 @@ class _CopyWithStubImpl$Fragment$MediaPoster$coverImage<TRes>
       _res;
 }
 
-class Variables$Query$MediaPosters {
-  factory Variables$Query$MediaPosters({
+class Variables$Query$CharacterImages {
+  factory Variables$Query$CharacterImages({
     int? page,
     List<int?>? id_in,
   }) =>
-      Variables$Query$MediaPosters._({
+      Variables$Query$CharacterImages._({
         if (page != null) r'page': page,
         if (id_in != null) r'id_in': id_in,
       });
 
-  Variables$Query$MediaPosters._(this._$data);
+  Variables$Query$CharacterImages._(this._$data);
 
-  factory Variables$Query$MediaPosters.fromJson(Map<String, dynamic> data) {
+  factory Variables$Query$CharacterImages.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('page')) {
       final l$page = data['page'];
@@ -395,7 +396,7 @@ class Variables$Query$MediaPosters {
       result$data['id_in'] =
           (l$id_in as List<dynamic>?)?.map((e) => (e as int?)).toList();
     }
-    return Variables$Query$MediaPosters._(result$data);
+    return Variables$Query$CharacterImages._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -417,8 +418,8 @@ class Variables$Query$MediaPosters {
     return result$data;
   }
 
-  CopyWith$Variables$Query$MediaPosters<Variables$Query$MediaPosters>
-      get copyWith => CopyWith$Variables$Query$MediaPosters(
+  CopyWith$Variables$Query$CharacterImages<Variables$Query$CharacterImages>
+      get copyWith => CopyWith$Variables$Query$CharacterImages(
             this,
             (i) => i,
           );
@@ -428,7 +429,7 @@ class Variables$Query$MediaPosters {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$MediaPosters) ||
+    if (!(other is Variables$Query$CharacterImages) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -477,14 +478,14 @@ class Variables$Query$MediaPosters {
   }
 }
 
-abstract class CopyWith$Variables$Query$MediaPosters<TRes> {
-  factory CopyWith$Variables$Query$MediaPosters(
-    Variables$Query$MediaPosters instance,
-    TRes Function(Variables$Query$MediaPosters) then,
-  ) = _CopyWithImpl$Variables$Query$MediaPosters;
+abstract class CopyWith$Variables$Query$CharacterImages<TRes> {
+  factory CopyWith$Variables$Query$CharacterImages(
+    Variables$Query$CharacterImages instance,
+    TRes Function(Variables$Query$CharacterImages) then,
+  ) = _CopyWithImpl$Variables$Query$CharacterImages;
 
-  factory CopyWith$Variables$Query$MediaPosters.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Query$MediaPosters;
+  factory CopyWith$Variables$Query$CharacterImages.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Query$CharacterImages;
 
   TRes call({
     int? page,
@@ -492,16 +493,16 @@ abstract class CopyWith$Variables$Query$MediaPosters<TRes> {
   });
 }
 
-class _CopyWithImpl$Variables$Query$MediaPosters<TRes>
-    implements CopyWith$Variables$Query$MediaPosters<TRes> {
-  _CopyWithImpl$Variables$Query$MediaPosters(
+class _CopyWithImpl$Variables$Query$CharacterImages<TRes>
+    implements CopyWith$Variables$Query$CharacterImages<TRes> {
+  _CopyWithImpl$Variables$Query$CharacterImages(
     this._instance,
     this._then,
   );
 
-  final Variables$Query$MediaPosters _instance;
+  final Variables$Query$CharacterImages _instance;
 
-  final TRes Function(Variables$Query$MediaPosters) _then;
+  final TRes Function(Variables$Query$CharacterImages) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -509,16 +510,16 @@ class _CopyWithImpl$Variables$Query$MediaPosters<TRes>
     Object? page = _undefined,
     Object? id_in = _undefined,
   }) =>
-      _then(Variables$Query$MediaPosters._({
+      _then(Variables$Query$CharacterImages._({
         ..._instance._$data,
         if (page != _undefined) 'page': (page as int?),
         if (id_in != _undefined) 'id_in': (id_in as List<int?>?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Query$MediaPosters<TRes>
-    implements CopyWith$Variables$Query$MediaPosters<TRes> {
-  _CopyWithStubImpl$Variables$Query$MediaPosters(this._res);
+class _CopyWithStubImpl$Variables$Query$CharacterImages<TRes>
+    implements CopyWith$Variables$Query$CharacterImages<TRes> {
+  _CopyWithStubImpl$Variables$Query$CharacterImages(this._res);
 
   TRes _res;
 
@@ -529,24 +530,25 @@ class _CopyWithStubImpl$Variables$Query$MediaPosters<TRes>
       _res;
 }
 
-class Query$MediaPosters {
-  Query$MediaPosters({
+class Query$CharacterImages {
+  Query$CharacterImages({
     this.Page,
     this.$__typename = 'Query',
   });
 
-  factory Query$MediaPosters.fromJson(Map<String, dynamic> json) {
+  factory Query$CharacterImages.fromJson(Map<String, dynamic> json) {
     final l$Page = json['Page'];
     final l$$__typename = json['__typename'];
-    return Query$MediaPosters(
+    return Query$CharacterImages(
       Page: l$Page == null
           ? null
-          : Query$MediaPosters$Page.fromJson((l$Page as Map<String, dynamic>)),
+          : Query$CharacterImages$Page.fromJson(
+              (l$Page as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$MediaPosters$Page? Page;
+  final Query$CharacterImages$Page? Page;
 
   final String $__typename;
 
@@ -574,7 +576,7 @@ class Query$MediaPosters {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$MediaPosters) || runtimeType != other.runtimeType) {
+    if (!(other is Query$CharacterImages) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -591,40 +593,40 @@ class Query$MediaPosters {
   }
 }
 
-extension UtilityExtension$Query$MediaPosters on Query$MediaPosters {
-  CopyWith$Query$MediaPosters<Query$MediaPosters> get copyWith =>
-      CopyWith$Query$MediaPosters(
+extension UtilityExtension$Query$CharacterImages on Query$CharacterImages {
+  CopyWith$Query$CharacterImages<Query$CharacterImages> get copyWith =>
+      CopyWith$Query$CharacterImages(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Query$MediaPosters<TRes> {
-  factory CopyWith$Query$MediaPosters(
-    Query$MediaPosters instance,
-    TRes Function(Query$MediaPosters) then,
-  ) = _CopyWithImpl$Query$MediaPosters;
+abstract class CopyWith$Query$CharacterImages<TRes> {
+  factory CopyWith$Query$CharacterImages(
+    Query$CharacterImages instance,
+    TRes Function(Query$CharacterImages) then,
+  ) = _CopyWithImpl$Query$CharacterImages;
 
-  factory CopyWith$Query$MediaPosters.stub(TRes res) =
-      _CopyWithStubImpl$Query$MediaPosters;
+  factory CopyWith$Query$CharacterImages.stub(TRes res) =
+      _CopyWithStubImpl$Query$CharacterImages;
 
   TRes call({
-    Query$MediaPosters$Page? Page,
+    Query$CharacterImages$Page? Page,
     String? $__typename,
   });
-  CopyWith$Query$MediaPosters$Page<TRes> get Page;
+  CopyWith$Query$CharacterImages$Page<TRes> get Page;
 }
 
-class _CopyWithImpl$Query$MediaPosters<TRes>
-    implements CopyWith$Query$MediaPosters<TRes> {
-  _CopyWithImpl$Query$MediaPosters(
+class _CopyWithImpl$Query$CharacterImages<TRes>
+    implements CopyWith$Query$CharacterImages<TRes> {
+  _CopyWithImpl$Query$CharacterImages(
     this._instance,
     this._then,
   );
 
-  final Query$MediaPosters _instance;
+  final Query$CharacterImages _instance;
 
-  final TRes Function(Query$MediaPosters) _then;
+  final TRes Function(Query$CharacterImages) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -632,43 +634,43 @@ class _CopyWithImpl$Query$MediaPosters<TRes>
     Object? Page = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$MediaPosters(
+      _then(Query$CharacterImages(
         Page: Page == _undefined
             ? _instance.Page
-            : (Page as Query$MediaPosters$Page?),
+            : (Page as Query$CharacterImages$Page?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
-  CopyWith$Query$MediaPosters$Page<TRes> get Page {
+  CopyWith$Query$CharacterImages$Page<TRes> get Page {
     final local$Page = _instance.Page;
     return local$Page == null
-        ? CopyWith$Query$MediaPosters$Page.stub(_then(_instance))
-        : CopyWith$Query$MediaPosters$Page(local$Page, (e) => call(Page: e));
+        ? CopyWith$Query$CharacterImages$Page.stub(_then(_instance))
+        : CopyWith$Query$CharacterImages$Page(local$Page, (e) => call(Page: e));
   }
 }
 
-class _CopyWithStubImpl$Query$MediaPosters<TRes>
-    implements CopyWith$Query$MediaPosters<TRes> {
-  _CopyWithStubImpl$Query$MediaPosters(this._res);
+class _CopyWithStubImpl$Query$CharacterImages<TRes>
+    implements CopyWith$Query$CharacterImages<TRes> {
+  _CopyWithStubImpl$Query$CharacterImages(this._res);
 
   TRes _res;
 
   call({
-    Query$MediaPosters$Page? Page,
+    Query$CharacterImages$Page? Page,
     String? $__typename,
   }) =>
       _res;
 
-  CopyWith$Query$MediaPosters$Page<TRes> get Page =>
-      CopyWith$Query$MediaPosters$Page.stub(_res);
+  CopyWith$Query$CharacterImages$Page<TRes> get Page =>
+      CopyWith$Query$CharacterImages$Page.stub(_res);
 }
 
-const documentNodeQueryMediaPosters = DocumentNode(definitions: [
+const documentNodeQueryCharacterImages = DocumentNode(definitions: [
   OperationDefinitionNode(
     type: OperationType.query,
-    name: NameNode(value: 'MediaPosters'),
+    name: NameNode(value: 'CharacterImages'),
     variableDefinitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'page')),
@@ -732,7 +734,7 @@ const documentNodeQueryMediaPosters = DocumentNode(definitions: [
             ]),
           ),
           FieldNode(
-            name: NameNode(value: 'media'),
+            name: NameNode(value: 'characters'),
             alias: null,
             arguments: [
               ArgumentNode(
@@ -742,14 +744,14 @@ const documentNodeQueryMediaPosters = DocumentNode(definitions: [
               ArgumentNode(
                 name: NameNode(value: 'sort'),
                 value: ListValueNode(values: [
-                  EnumValueNode(name: NameNode(value: 'POPULARITY_DESC'))
+                  EnumValueNode(name: NameNode(value: 'FAVOURITES_DESC'))
                 ]),
               ),
             ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'MediaPoster'),
+                name: NameNode(value: 'CharacterImage'),
                 directives: [],
               ),
               FieldNode(
@@ -779,28 +781,29 @@ const documentNodeQueryMediaPosters = DocumentNode(definitions: [
       ),
     ]),
   ),
-  fragmentDefinitionMediaPoster,
+  fragmentDefinitionCharacterImage,
 ]);
-Query$MediaPosters _parserFn$Query$MediaPosters(Map<String, dynamic> data) =>
-    Query$MediaPosters.fromJson(data);
-typedef OnQueryComplete$Query$MediaPosters = FutureOr<void> Function(
+Query$CharacterImages _parserFn$Query$CharacterImages(
+        Map<String, dynamic> data) =>
+    Query$CharacterImages.fromJson(data);
+typedef OnQueryComplete$Query$CharacterImages = FutureOr<void> Function(
   Map<String, dynamic>?,
-  Query$MediaPosters?,
+  Query$CharacterImages?,
 );
 
-class Options$Query$MediaPosters
-    extends graphql.QueryOptions<Query$MediaPosters> {
-  Options$Query$MediaPosters({
+class Options$Query$CharacterImages
+    extends graphql.QueryOptions<Query$CharacterImages> {
+  Options$Query$CharacterImages({
     String? operationName,
-    Variables$Query$MediaPosters? variables,
+    Variables$Query$CharacterImages? variables,
     graphql.FetchPolicy? fetchPolicy,
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
-    Query$MediaPosters? typedOptimisticResult,
+    Query$CharacterImages? typedOptimisticResult,
     Duration? pollInterval,
     graphql.Context? context,
-    OnQueryComplete$Query$MediaPosters? onComplete,
+    OnQueryComplete$Query$CharacterImages? onComplete,
     graphql.OnQueryError? onError,
   })  : onCompleteWithParsed = onComplete,
         super(
@@ -816,14 +819,14 @@ class Options$Query$MediaPosters
               ? null
               : (data) => onComplete(
                     data,
-                    data == null ? null : _parserFn$Query$MediaPosters(data),
+                    data == null ? null : _parserFn$Query$CharacterImages(data),
                   ),
           onError: onError,
-          document: documentNodeQueryMediaPosters,
-          parserFn: _parserFn$Query$MediaPosters,
+          document: documentNodeQueryCharacterImages,
+          parserFn: _parserFn$Query$CharacterImages,
         );
 
-  final OnQueryComplete$Query$MediaPosters? onCompleteWithParsed;
+  final OnQueryComplete$Query$CharacterImages? onCompleteWithParsed;
 
   @override
   List<Object?> get properties => [
@@ -834,16 +837,16 @@ class Options$Query$MediaPosters
       ];
 }
 
-class WatchOptions$Query$MediaPosters
-    extends graphql.WatchQueryOptions<Query$MediaPosters> {
-  WatchOptions$Query$MediaPosters({
+class WatchOptions$Query$CharacterImages
+    extends graphql.WatchQueryOptions<Query$CharacterImages> {
+  WatchOptions$Query$CharacterImages({
     String? operationName,
-    Variables$Query$MediaPosters? variables,
+    Variables$Query$CharacterImages? variables,
     graphql.FetchPolicy? fetchPolicy,
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
-    Query$MediaPosters? typedOptimisticResult,
+    Query$CharacterImages? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -857,109 +860,112 @@ class WatchOptions$Query$MediaPosters
           cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
-          document: documentNodeQueryMediaPosters,
+          document: documentNodeQueryCharacterImages,
           pollInterval: pollInterval,
           eagerlyFetchResults: eagerlyFetchResults,
           carryForwardDataOnException: carryForwardDataOnException,
           fetchResults: fetchResults,
-          parserFn: _parserFn$Query$MediaPosters,
+          parserFn: _parserFn$Query$CharacterImages,
         );
 }
 
-class FetchMoreOptions$Query$MediaPosters extends graphql.FetchMoreOptions {
-  FetchMoreOptions$Query$MediaPosters({
+class FetchMoreOptions$Query$CharacterImages extends graphql.FetchMoreOptions {
+  FetchMoreOptions$Query$CharacterImages({
     required graphql.UpdateQuery updateQuery,
-    Variables$Query$MediaPosters? variables,
+    Variables$Query$CharacterImages? variables,
   }) : super(
           updateQuery: updateQuery,
           variables: variables?.toJson() ?? {},
-          document: documentNodeQueryMediaPosters,
+          document: documentNodeQueryCharacterImages,
         );
 }
 
-extension ClientExtension$Query$MediaPosters on graphql.GraphQLClient {
-  Future<graphql.QueryResult<Query$MediaPosters>> query$MediaPosters(
-          [Options$Query$MediaPosters? options]) async =>
-      await this.query(options ?? Options$Query$MediaPosters());
-  graphql.ObservableQuery<Query$MediaPosters> watchQuery$MediaPosters(
-          [WatchOptions$Query$MediaPosters? options]) =>
-      this.watchQuery(options ?? WatchOptions$Query$MediaPosters());
-  void writeQuery$MediaPosters({
-    required Query$MediaPosters data,
-    Variables$Query$MediaPosters? variables,
+extension ClientExtension$Query$CharacterImages on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Query$CharacterImages>> query$CharacterImages(
+          [Options$Query$CharacterImages? options]) async =>
+      await this.query(options ?? Options$Query$CharacterImages());
+  graphql.ObservableQuery<Query$CharacterImages> watchQuery$CharacterImages(
+          [WatchOptions$Query$CharacterImages? options]) =>
+      this.watchQuery(options ?? WatchOptions$Query$CharacterImages());
+  void writeQuery$CharacterImages({
+    required Query$CharacterImages data,
+    Variables$Query$CharacterImages? variables,
     bool broadcast = true,
   }) =>
       this.writeQuery(
         graphql.Request(
-          operation: graphql.Operation(document: documentNodeQueryMediaPosters),
+          operation:
+              graphql.Operation(document: documentNodeQueryCharacterImages),
           variables: variables?.toJson() ?? const {},
         ),
         data: data.toJson(),
         broadcast: broadcast,
       );
-  Query$MediaPosters? readQuery$MediaPosters({
-    Variables$Query$MediaPosters? variables,
+  Query$CharacterImages? readQuery$CharacterImages({
+    Variables$Query$CharacterImages? variables,
     bool optimistic = true,
   }) {
     final result = this.readQuery(
       graphql.Request(
-        operation: graphql.Operation(document: documentNodeQueryMediaPosters),
+        operation:
+            graphql.Operation(document: documentNodeQueryCharacterImages),
         variables: variables?.toJson() ?? const {},
       ),
       optimistic: optimistic,
     );
-    return result == null ? null : Query$MediaPosters.fromJson(result);
+    return result == null ? null : Query$CharacterImages.fromJson(result);
   }
 }
 
-graphql_flutter.QueryHookResult<Query$MediaPosters> useQuery$MediaPosters(
-        [Options$Query$MediaPosters? options]) =>
-    graphql_flutter.useQuery(options ?? Options$Query$MediaPosters());
-graphql.ObservableQuery<Query$MediaPosters> useWatchQuery$MediaPosters(
-        [WatchOptions$Query$MediaPosters? options]) =>
-    graphql_flutter.useWatchQuery(options ?? WatchOptions$Query$MediaPosters());
+graphql_flutter.QueryHookResult<Query$CharacterImages> useQuery$CharacterImages(
+        [Options$Query$CharacterImages? options]) =>
+    graphql_flutter.useQuery(options ?? Options$Query$CharacterImages());
+graphql.ObservableQuery<Query$CharacterImages> useWatchQuery$CharacterImages(
+        [WatchOptions$Query$CharacterImages? options]) =>
+    graphql_flutter
+        .useWatchQuery(options ?? WatchOptions$Query$CharacterImages());
 
-class Query$MediaPosters$Widget
-    extends graphql_flutter.Query<Query$MediaPosters> {
-  Query$MediaPosters$Widget({
+class Query$CharacterImages$Widget
+    extends graphql_flutter.Query<Query$CharacterImages> {
+  Query$CharacterImages$Widget({
     widgets.Key? key,
-    Options$Query$MediaPosters? options,
-    required graphql_flutter.QueryBuilder<Query$MediaPosters> builder,
+    Options$Query$CharacterImages? options,
+    required graphql_flutter.QueryBuilder<Query$CharacterImages> builder,
   }) : super(
           key: key,
-          options: options ?? Options$Query$MediaPosters(),
+          options: options ?? Options$Query$CharacterImages(),
           builder: builder,
         );
 }
 
-class Query$MediaPosters$Page {
-  Query$MediaPosters$Page({
+class Query$CharacterImages$Page {
+  Query$CharacterImages$Page({
     this.pageInfo,
-    this.media,
+    this.characters,
     this.$__typename = 'Page',
   });
 
-  factory Query$MediaPosters$Page.fromJson(Map<String, dynamic> json) {
+  factory Query$CharacterImages$Page.fromJson(Map<String, dynamic> json) {
     final l$pageInfo = json['pageInfo'];
-    final l$media = json['media'];
+    final l$characters = json['characters'];
     final l$$__typename = json['__typename'];
-    return Query$MediaPosters$Page(
+    return Query$CharacterImages$Page(
       pageInfo: l$pageInfo == null
           ? null
-          : Query$MediaPosters$Page$pageInfo.fromJson(
+          : Query$CharacterImages$Page$pageInfo.fromJson(
               (l$pageInfo as Map<String, dynamic>)),
-      media: (l$media as List<dynamic>?)
+      characters: (l$characters as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Fragment$MediaPoster.fromJson((e as Map<String, dynamic>)))
+              : Fragment$CharacterImage.fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$MediaPosters$Page$pageInfo? pageInfo;
+  final Query$CharacterImages$Page$pageInfo? pageInfo;
 
-  final List<Fragment$MediaPoster?>? media;
+  final List<Fragment$CharacterImage?>? characters;
 
   final String $__typename;
 
@@ -967,8 +973,8 @@ class Query$MediaPosters$Page {
     final _resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
     _resultData['pageInfo'] = l$pageInfo?.toJson();
-    final l$media = media;
-    _resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
+    final l$characters = characters;
+    _resultData['characters'] = l$characters?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -977,11 +983,11 @@ class Query$MediaPosters$Page {
   @override
   int get hashCode {
     final l$pageInfo = pageInfo;
-    final l$media = media;
+    final l$characters = characters;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$pageInfo,
-      l$media == null ? null : Object.hashAll(l$media.map((v) => v)),
+      l$characters == null ? null : Object.hashAll(l$characters.map((v) => v)),
       l$$__typename,
     ]);
   }
@@ -991,7 +997,7 @@ class Query$MediaPosters$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$MediaPosters$Page) ||
+    if (!(other is Query$CharacterImages$Page) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1000,20 +1006,20 @@ class Query$MediaPosters$Page {
     if (l$pageInfo != lOther$pageInfo) {
       return false;
     }
-    final l$media = media;
-    final lOther$media = other.media;
-    if (l$media != null && lOther$media != null) {
-      if (l$media.length != lOther$media.length) {
+    final l$characters = characters;
+    final lOther$characters = other.characters;
+    if (l$characters != null && lOther$characters != null) {
+      if (l$characters.length != lOther$characters.length) {
         return false;
       }
-      for (int i = 0; i < l$media.length; i++) {
-        final l$media$entry = l$media[i];
-        final lOther$media$entry = lOther$media[i];
-        if (l$media$entry != lOther$media$entry) {
+      for (int i = 0; i < l$characters.length; i++) {
+        final l$characters$entry = l$characters[i];
+        final lOther$characters$entry = lOther$characters[i];
+        if (l$characters$entry != lOther$characters$entry) {
           return false;
         }
       }
-    } else if (l$media != lOther$media) {
+    } else if (l$characters != lOther$characters) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -1025,116 +1031,120 @@ class Query$MediaPosters$Page {
   }
 }
 
-extension UtilityExtension$Query$MediaPosters$Page on Query$MediaPosters$Page {
-  CopyWith$Query$MediaPosters$Page<Query$MediaPosters$Page> get copyWith =>
-      CopyWith$Query$MediaPosters$Page(
-        this,
-        (i) => i,
-      );
+extension UtilityExtension$Query$CharacterImages$Page
+    on Query$CharacterImages$Page {
+  CopyWith$Query$CharacterImages$Page<Query$CharacterImages$Page>
+      get copyWith => CopyWith$Query$CharacterImages$Page(
+            this,
+            (i) => i,
+          );
 }
 
-abstract class CopyWith$Query$MediaPosters$Page<TRes> {
-  factory CopyWith$Query$MediaPosters$Page(
-    Query$MediaPosters$Page instance,
-    TRes Function(Query$MediaPosters$Page) then,
-  ) = _CopyWithImpl$Query$MediaPosters$Page;
+abstract class CopyWith$Query$CharacterImages$Page<TRes> {
+  factory CopyWith$Query$CharacterImages$Page(
+    Query$CharacterImages$Page instance,
+    TRes Function(Query$CharacterImages$Page) then,
+  ) = _CopyWithImpl$Query$CharacterImages$Page;
 
-  factory CopyWith$Query$MediaPosters$Page.stub(TRes res) =
-      _CopyWithStubImpl$Query$MediaPosters$Page;
+  factory CopyWith$Query$CharacterImages$Page.stub(TRes res) =
+      _CopyWithStubImpl$Query$CharacterImages$Page;
 
   TRes call({
-    Query$MediaPosters$Page$pageInfo? pageInfo,
-    List<Fragment$MediaPoster?>? media,
+    Query$CharacterImages$Page$pageInfo? pageInfo,
+    List<Fragment$CharacterImage?>? characters,
     String? $__typename,
   });
-  CopyWith$Query$MediaPosters$Page$pageInfo<TRes> get pageInfo;
-  TRes media(
-      Iterable<Fragment$MediaPoster?>? Function(
-              Iterable<CopyWith$Fragment$MediaPoster<Fragment$MediaPoster>?>?)
+  CopyWith$Query$CharacterImages$Page$pageInfo<TRes> get pageInfo;
+  TRes characters(
+      Iterable<Fragment$CharacterImage?>? Function(
+              Iterable<
+                  CopyWith$Fragment$CharacterImage<Fragment$CharacterImage>?>?)
           _fn);
 }
 
-class _CopyWithImpl$Query$MediaPosters$Page<TRes>
-    implements CopyWith$Query$MediaPosters$Page<TRes> {
-  _CopyWithImpl$Query$MediaPosters$Page(
+class _CopyWithImpl$Query$CharacterImages$Page<TRes>
+    implements CopyWith$Query$CharacterImages$Page<TRes> {
+  _CopyWithImpl$Query$CharacterImages$Page(
     this._instance,
     this._then,
   );
 
-  final Query$MediaPosters$Page _instance;
+  final Query$CharacterImages$Page _instance;
 
-  final TRes Function(Query$MediaPosters$Page) _then;
+  final TRes Function(Query$CharacterImages$Page) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? pageInfo = _undefined,
-    Object? media = _undefined,
+    Object? characters = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$MediaPosters$Page(
+      _then(Query$CharacterImages$Page(
         pageInfo: pageInfo == _undefined
             ? _instance.pageInfo
-            : (pageInfo as Query$MediaPosters$Page$pageInfo?),
-        media: media == _undefined
-            ? _instance.media
-            : (media as List<Fragment$MediaPoster?>?),
+            : (pageInfo as Query$CharacterImages$Page$pageInfo?),
+        characters: characters == _undefined
+            ? _instance.characters
+            : (characters as List<Fragment$CharacterImage?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
-  CopyWith$Query$MediaPosters$Page$pageInfo<TRes> get pageInfo {
+  CopyWith$Query$CharacterImages$Page$pageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
-        ? CopyWith$Query$MediaPosters$Page$pageInfo.stub(_then(_instance))
-        : CopyWith$Query$MediaPosters$Page$pageInfo(
+        ? CopyWith$Query$CharacterImages$Page$pageInfo.stub(_then(_instance))
+        : CopyWith$Query$CharacterImages$Page$pageInfo(
             local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  TRes media(
-          Iterable<Fragment$MediaPoster?>? Function(
+  TRes characters(
+          Iterable<Fragment$CharacterImage?>? Function(
                   Iterable<
-                      CopyWith$Fragment$MediaPoster<Fragment$MediaPoster>?>?)
+                      CopyWith$Fragment$CharacterImage<
+                          Fragment$CharacterImage>?>?)
               _fn) =>
       call(
-          media: _fn(_instance.media?.map((e) => e == null
+          characters: _fn(_instance.characters?.map((e) => e == null
               ? null
-              : CopyWith$Fragment$MediaPoster(
+              : CopyWith$Fragment$CharacterImage(
                   e,
                   (i) => i,
                 )))?.toList());
 }
 
-class _CopyWithStubImpl$Query$MediaPosters$Page<TRes>
-    implements CopyWith$Query$MediaPosters$Page<TRes> {
-  _CopyWithStubImpl$Query$MediaPosters$Page(this._res);
+class _CopyWithStubImpl$Query$CharacterImages$Page<TRes>
+    implements CopyWith$Query$CharacterImages$Page<TRes> {
+  _CopyWithStubImpl$Query$CharacterImages$Page(this._res);
 
   TRes _res;
 
   call({
-    Query$MediaPosters$Page$pageInfo? pageInfo,
-    List<Fragment$MediaPoster?>? media,
+    Query$CharacterImages$Page$pageInfo? pageInfo,
+    List<Fragment$CharacterImage?>? characters,
     String? $__typename,
   }) =>
       _res;
 
-  CopyWith$Query$MediaPosters$Page$pageInfo<TRes> get pageInfo =>
-      CopyWith$Query$MediaPosters$Page$pageInfo.stub(_res);
+  CopyWith$Query$CharacterImages$Page$pageInfo<TRes> get pageInfo =>
+      CopyWith$Query$CharacterImages$Page$pageInfo.stub(_res);
 
-  media(_fn) => _res;
+  characters(_fn) => _res;
 }
 
-class Query$MediaPosters$Page$pageInfo {
-  Query$MediaPosters$Page$pageInfo({
+class Query$CharacterImages$Page$pageInfo {
+  Query$CharacterImages$Page$pageInfo({
     this.hasNextPage,
     this.$__typename = 'PageInfo',
   });
 
-  factory Query$MediaPosters$Page$pageInfo.fromJson(Map<String, dynamic> json) {
+  factory Query$CharacterImages$Page$pageInfo.fromJson(
+      Map<String, dynamic> json) {
     final l$hasNextPage = json['hasNextPage'];
     final l$$__typename = json['__typename'];
-    return Query$MediaPosters$Page$pageInfo(
+    return Query$CharacterImages$Page$pageInfo(
       hasNextPage: (l$hasNextPage as bool?),
       $__typename: (l$$__typename as String),
     );
@@ -1168,7 +1178,7 @@ class Query$MediaPosters$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$MediaPosters$Page$pageInfo) ||
+    if (!(other is Query$CharacterImages$Page$pageInfo) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1186,23 +1196,24 @@ class Query$MediaPosters$Page$pageInfo {
   }
 }
 
-extension UtilityExtension$Query$MediaPosters$Page$pageInfo
-    on Query$MediaPosters$Page$pageInfo {
-  CopyWith$Query$MediaPosters$Page$pageInfo<Query$MediaPosters$Page$pageInfo>
-      get copyWith => CopyWith$Query$MediaPosters$Page$pageInfo(
+extension UtilityExtension$Query$CharacterImages$Page$pageInfo
+    on Query$CharacterImages$Page$pageInfo {
+  CopyWith$Query$CharacterImages$Page$pageInfo<
+          Query$CharacterImages$Page$pageInfo>
+      get copyWith => CopyWith$Query$CharacterImages$Page$pageInfo(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$MediaPosters$Page$pageInfo<TRes> {
-  factory CopyWith$Query$MediaPosters$Page$pageInfo(
-    Query$MediaPosters$Page$pageInfo instance,
-    TRes Function(Query$MediaPosters$Page$pageInfo) then,
-  ) = _CopyWithImpl$Query$MediaPosters$Page$pageInfo;
+abstract class CopyWith$Query$CharacterImages$Page$pageInfo<TRes> {
+  factory CopyWith$Query$CharacterImages$Page$pageInfo(
+    Query$CharacterImages$Page$pageInfo instance,
+    TRes Function(Query$CharacterImages$Page$pageInfo) then,
+  ) = _CopyWithImpl$Query$CharacterImages$Page$pageInfo;
 
-  factory CopyWith$Query$MediaPosters$Page$pageInfo.stub(TRes res) =
-      _CopyWithStubImpl$Query$MediaPosters$Page$pageInfo;
+  factory CopyWith$Query$CharacterImages$Page$pageInfo.stub(TRes res) =
+      _CopyWithStubImpl$Query$CharacterImages$Page$pageInfo;
 
   TRes call({
     bool? hasNextPage,
@@ -1210,16 +1221,16 @@ abstract class CopyWith$Query$MediaPosters$Page$pageInfo<TRes> {
   });
 }
 
-class _CopyWithImpl$Query$MediaPosters$Page$pageInfo<TRes>
-    implements CopyWith$Query$MediaPosters$Page$pageInfo<TRes> {
-  _CopyWithImpl$Query$MediaPosters$Page$pageInfo(
+class _CopyWithImpl$Query$CharacterImages$Page$pageInfo<TRes>
+    implements CopyWith$Query$CharacterImages$Page$pageInfo<TRes> {
+  _CopyWithImpl$Query$CharacterImages$Page$pageInfo(
     this._instance,
     this._then,
   );
 
-  final Query$MediaPosters$Page$pageInfo _instance;
+  final Query$CharacterImages$Page$pageInfo _instance;
 
-  final TRes Function(Query$MediaPosters$Page$pageInfo) _then;
+  final TRes Function(Query$CharacterImages$Page$pageInfo) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1227,7 +1238,7 @@ class _CopyWithImpl$Query$MediaPosters$Page$pageInfo<TRes>
     Object? hasNextPage = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$MediaPosters$Page$pageInfo(
+      _then(Query$CharacterImages$Page$pageInfo(
         hasNextPage: hasNextPage == _undefined
             ? _instance.hasNextPage
             : (hasNextPage as bool?),
@@ -1237,9 +1248,9 @@ class _CopyWithImpl$Query$MediaPosters$Page$pageInfo<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Query$MediaPosters$Page$pageInfo<TRes>
-    implements CopyWith$Query$MediaPosters$Page$pageInfo<TRes> {
-  _CopyWithStubImpl$Query$MediaPosters$Page$pageInfo(this._res);
+class _CopyWithStubImpl$Query$CharacterImages$Page$pageInfo<TRes>
+    implements CopyWith$Query$CharacterImages$Page$pageInfo<TRes> {
+  _CopyWithStubImpl$Query$CharacterImages$Page$pageInfo(this._res);
 
   TRes _res;
 

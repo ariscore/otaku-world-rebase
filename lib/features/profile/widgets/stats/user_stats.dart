@@ -12,6 +12,7 @@ import 'package:otaku_world/features/profile/widgets/stats/genre/genre_stats.dar
 import 'package:otaku_world/features/profile/widgets/stats/overview/anime_stats_overview.dart';
 import 'package:otaku_world/features/profile/widgets/stats/overview/manga_stats_overview.dart';
 import 'package:otaku_world/features/profile/widgets/stats/tags/tags_stats.dart';
+import 'package:otaku_world/features/profile/widgets/stats/voice_actors/voice_actor_stats.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/user_stats.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
@@ -28,11 +29,19 @@ class UserStats extends StatefulWidget {
 
 class _UserStatsState extends State<UserStats> {
   bool isAnime = true;
-  StatsOption option = StatsOption.genres;
+  StatsOption option = StatsOption.voiceActors;
 
   @override
   Widget build(BuildContext context) {
     final client = context.read<GraphqlClientCubit>().getClient()!;
+    final dropdownOptions = isAnime
+        ? StatsOption.values
+        : [
+            StatsOption.overview,
+            StatsOption.genres,
+            StatsOption.tags,
+            StatsOption.staff,
+          ];
 
     // TODO: Provide bloc here
     return BlocBuilder<UserStatsBloc, UserStatsState>(
@@ -73,13 +82,19 @@ class _UserStatsState extends State<UserStats> {
                               onChanged: (value) {
                                 setState(() {
                                   isAnime = value;
+                                  if (!isAnime &&
+                                      (option == StatsOption.voiceActors ||
+                                          option == StatsOption.studios)) {
+                                    option = StatsOption.overview;
+                                  }
                                 });
                               },
                             ),
                           ],
                         ),
                         CustomDropdown(
-                          dropdownItems: StatsOption.values
+                          key: UniqueKey(),
+                          dropdownItems: dropdownOptions
                               .map((e) => e.displayName)
                               .toList(),
                           initialValue: option.displayName,
@@ -161,7 +176,10 @@ class _UserStatsState extends State<UserStats> {
                 type: Enum$MediaType.MANGA,
               );
       case StatsOption.voiceActors:
-        return const SizedBox();
+        return VoiceActorStats(
+          key: UniqueKey(),
+          voiceActors: animeStats.voiceActors,
+        );
       case StatsOption.studios:
         return const SizedBox();
       case StatsOption.staff:

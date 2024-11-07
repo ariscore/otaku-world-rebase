@@ -3,7 +3,7 @@ query MediaPosters($page: Int, $id_in: [Int]) {
         pageInfo {
             hasNextPage
         }
-        media(id_in: $id_in) {
+        media(id_in: $id_in, sort: [POPULARITY_DESC]) {
             ...MediaPoster
         }
     }

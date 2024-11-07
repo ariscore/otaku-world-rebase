@@ -107,6 +107,8 @@ class FilterConstants {
     ];
   }
 
+  static const voiceActorOptions = ['Anime', 'Characters'];
+
   static StatsOption statsOptionFromString(String value) {
     switch(value) {
       case 'Overview':

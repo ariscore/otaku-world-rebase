@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -153,7 +151,7 @@ class _GenreCardState extends State<GenreCard>
                     ),
                   );
                 } else {
-                  return const SizedBox(height: 120);
+                  return const SizedBox(height: 130);
                 }
               },
             ),

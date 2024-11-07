@@ -151,7 +151,7 @@ class _TagCardState extends State<TagCard> with AutomaticKeepAliveClientMixin {
                     ),
                   );
                 } else {
-                  return const SizedBox(height: 120);
+                  return const SizedBox(height: 130);
                 }
               },
             ),

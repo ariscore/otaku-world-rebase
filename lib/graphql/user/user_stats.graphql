@@ -113,6 +113,9 @@ fragment UserStatistics on UserStatistics {
                 alternative
                 userPreferred
             }
+            image {
+                large
+            }
         }
         characterIds
     }
@@ -132,6 +135,9 @@ fragment UserStatistics on UserStatistics {
                 native
                 alternative
                 userPreferred
+            }
+            image {
+                large
             }
         }
     }
