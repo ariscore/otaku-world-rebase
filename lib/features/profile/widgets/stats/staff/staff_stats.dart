@@ -3,27 +3,27 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:otaku_world/constants/filter_constants.dart';
 import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
-import 'package:otaku_world/features/profile/widgets/stats/tags/tag_card.dart';
+import 'package:otaku_world/features/profile/widgets/stats/staff/staff_card.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/user_stats.graphql.dart';
 
-class TagsStats extends StatefulWidget {
-  const TagsStats({super.key, required this.tags, required this.type});
+class StaffStats extends StatefulWidget {
+  const StaffStats({super.key, required this.staff, required this.type});
 
-  final List<Fragment$UserStatistics$tags?>? tags;
+  final List<Fragment$UserStatistics$staff?>? staff;
   final Enum$MediaType type;
 
   @override
-  State<TagsStats> createState() => _TagsStatsState();
+  State<StaffStats> createState() => _StaffStatsState();
 }
 
-class _TagsStatsState extends State<TagsStats> {
-  List<Fragment$UserStatistics$tags?>? tags;
+class _StaffStatsState extends State<StaffStats> {
+  List<Fragment$UserStatistics$staff?>? staff;
   late String option;
 
   @override
   void initState() {
-    tags = widget.tags;
+    staff = widget.staff;
     option = FilterConstants.genreSortOptions(widget.type)[0];
     super.initState();
   }
@@ -31,7 +31,7 @@ class _TagsStatsState extends State<TagsStats> {
   @override
   Widget build(BuildContext context) {
     // TODO: Show placeholder
-    if (widget.tags == null) return const SizedBox();
+    if (widget.staff == null) return const SizedBox();
     final list = _getSortedList();
 
     return SliverList.builder(
@@ -40,8 +40,8 @@ class _TagsStatsState extends State<TagsStats> {
         if (index == 0) {
           return _buildSortOption();
         }
-        return TagCard(
-          tag: list[index - 1],
+        return StaffCard(
+          staff: list[index - 1],
           index: index,
           type: widget.type,
         );
@@ -57,8 +57,8 @@ class _TagsStatsState extends State<TagsStats> {
         Text(
           'Sort',
           style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                fontFamily: 'Roboto-Medium',
-              ),
+            fontFamily: 'Roboto-Medium',
+          ),
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width / 2,
@@ -76,29 +76,29 @@ class _TagsStatsState extends State<TagsStats> {
     );
   }
 
-  List<Fragment$UserStatistics$tags?> _getSortedList() {
+  List<Fragment$UserStatistics$staff?> _getSortedList() {
     if (option == 'Titles Watched') {
-      return widget.tags!
+      return widget.staff!
         ..sort(
-          (a, b) => (b?.count ?? 0).compareTo(a?.count ?? 0),
+              (a, b) => (b?.count ?? 0).compareTo(a?.count ?? 0),
         );
     } else if (option == 'Time Watched') {
-      return widget.tags!
+      return widget.staff!
         ..sort(
-          (a, b) => (b?.minutesWatched ?? 0).compareTo(a?.minutesWatched ?? 0),
+              (a, b) => (b?.minutesWatched ?? 0).compareTo(a?.minutesWatched ?? 0),
         );
     } else if (option == 'Mean Score') {
-      return widget.tags!
+      return widget.staff!
         ..sort(
-          (a, b) => (b?.meanScore ?? 0).compareTo((a?.meanScore ?? 0)),
+              (a, b) => (b?.meanScore ?? 0).compareTo((a?.meanScore ?? 0)),
         );
     } else if (option == 'Chapters Read') {
-      return widget.tags!
+      return widget.staff!
         ..sort(
-          (a, b) => (b?.chaptersRead ?? 0).compareTo(a?.chaptersRead ?? 0),
+              (a, b) => (b?.chaptersRead ?? 0).compareTo(a?.chaptersRead ?? 0),
         );
     } else {
-      return widget.tags!;
+      return widget.staff!;
     }
   }
 }

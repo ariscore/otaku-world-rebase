@@ -9,6 +9,7 @@ import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
 import 'package:otaku_world/features/profile/widgets/stats/genre/genre_stats.dart';
 import 'package:otaku_world/features/profile/widgets/stats/overview/anime_stats_overview.dart';
 import 'package:otaku_world/features/profile/widgets/stats/overview/manga_stats_overview.dart';
+import 'package:otaku_world/features/profile/widgets/stats/staff/staff_stats.dart';
 import 'package:otaku_world/features/profile/widgets/stats/studios/studio_stats.dart';
 import 'package:otaku_world/features/profile/widgets/stats/tags/tags_stats.dart';
 import 'package:otaku_world/features/profile/widgets/stats/voice_actors/voice_actor_stats.dart';
@@ -28,7 +29,7 @@ class UserStats extends StatefulWidget {
 
 class _UserStatsState extends State<UserStats> {
   bool isAnime = true;
-  StatsOption option = StatsOption.voiceActors;
+  StatsOption option = StatsOption.overview;
 
   @override
   Widget build(BuildContext context) {
@@ -185,7 +186,17 @@ class _UserStatsState extends State<UserStats> {
           studios: animeStats.studios,
         );
       case StatsOption.staff:
-        return const SizedBox();
+        return isAnime
+            ? StaffStats(
+                key: UniqueKey(),
+                staff: animeStats.staff,
+                type: Enum$MediaType.ANIME,
+              )
+            : StaffStats(
+                key: UniqueKey(),
+                staff: mangaStats.staff,
+                type: Enum$MediaType.MANGA,
+              );
     }
   }
 }

@@ -3,11 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
-import 'package:otaku_world/bloc/profile/character_images/character_images_bloc.dart';
 import 'package:otaku_world/bloc/profile/media_posters/media_posters_bloc.dart';
 import 'package:otaku_world/core/ui/image.dart';
 import 'package:otaku_world/generated/assets.dart';
-import 'package:otaku_world/graphql/__generated/graphql/user/character_images.graphql.dart';
+import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/media_posters.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/user_stats.graphql.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
@@ -15,44 +14,34 @@ import 'package:otaku_world/utils/navigation_helper.dart';
 
 import '../../../../../theme/colors.dart';
 
-class VoiceActorCard extends StatefulWidget {
-  const VoiceActorCard({
+class StaffCard extends StatefulWidget {
+  const StaffCard({
     super.key,
-    required this.voiceActor,
+    required this.staff,
     required this.index,
-    required this.option,
+    required this.type,
   });
 
-  final Fragment$UserStatistics$voiceActors? voiceActor;
+  final Fragment$UserStatistics$staff? staff;
   final int index;
-  final String option;
+  final Enum$MediaType type;
 
   @override
-  State<VoiceActorCard> createState() => _VoiceActorCardState();
+  State<StaffCard> createState() => _StaffCardState();
 }
 
-class _VoiceActorCardState extends State<VoiceActorCard>
+class _StaffCardState extends State<StaffCard>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    if (widget.voiceActor == null) return const SizedBox();
+    if (widget.staff == null) return const SizedBox();
     final client = context.read<GraphqlClientCubit>().getClient()!;
 
-    return MultiBlocProvider(
+    return BlocProvider(
+      create: (context) =>
+          MediaPostersBloc(idIn: widget.staff!.mediaIds)..add(LoadData(client)),
       key: UniqueKey(),
-      providers: [
-        BlocProvider(
-          create: (context) =>
-              MediaPostersBloc(idIn: widget.voiceActor!.mediaIds)
-                ..add(LoadData(client)),
-        ),
-        BlocProvider(
-          create: (context) => CharacterImagesBloc(
-            idIn: widget.voiceActor!.characterIds,
-          ),
-        ),
-      ],
       child: Container(
         margin: const EdgeInsets.symmetric(
           // horizontal: 10,
@@ -72,7 +61,7 @@ class _VoiceActorCardState extends State<VoiceActorCard>
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  widget.voiceActor?.voiceActor?.name?.userPreferred ?? '',
+                  widget.staff?.staff?.name?.userPreferred ?? '',
                   style: Theme.of(context).textTheme.displaySmall?.copyWith(
                         fontFamily: 'Poppins',
                       ),
@@ -91,7 +80,7 @@ class _VoiceActorCardState extends State<VoiceActorCard>
                 ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: CImage(
-                    imageUrl: widget.voiceActor!.voiceActor?.image?.large ?? '',
+                    imageUrl: widget.staff!.staff?.image?.large ?? '',
                     width: 100,
                     placeholder: (context, url) => _buildPlaceholder(),
                     errorWidget: (context, url, error) => _buildPlaceholder(),
@@ -103,88 +92,61 @@ class _VoiceActorCardState extends State<VoiceActorCard>
                   children: [
                     _buildStat(
                       context,
-                      count: widget.voiceActor!.count,
+                      count: widget.staff!.count,
                       label: 'Count',
                     ),
                     const SizedBox(height: 10),
                     _buildStat(
                       context,
-                      count: FormattingUtils.formatMinutes(
-                        widget.voiceActor!.minutesWatched,
-                      ),
-                      label: 'Time Watched',
+                      count: widget.type == Enum$MediaType.ANIME
+                          ? FormattingUtils.formatMinutes(
+                              widget.staff!.minutesWatched,
+                            )
+                          : widget.staff!.chaptersRead,
+                      label: widget.type == Enum$MediaType.ANIME
+                          ? 'Time Watched'
+                          : 'Chapter Read',
                     ),
                     const SizedBox(height: 10),
                     _buildStat(
                       context,
-                      count: '${formatDouble(widget.voiceActor!.meanScore)}%',
+                      count: '${formatDouble(widget.staff!.meanScore)}%',
                       label: 'Mean Score',
                     ),
                   ],
                 ),
               ],
             ),
-            (widget.option == 'Characters')
-                ? BlocBuilder<CharacterImagesBloc, PaginatedDataState>(
-                    builder: (context, state) {
-                      if (state is PaginatedDataInitial) {
-                        context
-                            .read<CharacterImagesBloc>()
-                            .add(LoadData(client));
-                      }
-                      if (state is PaginatedDataLoaded) {
-                        return Container(
-                          height: 120,
-                          margin: const EdgeInsets.only(top: 10),
-                          child: ListView.builder(
-                            clipBehavior: Clip.none,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              final poster =
-                                  state.list[index] as Fragment$CharacterImage;
-                              return _buildImage(
-                                url: poster.image?.medium,
-                                onTap: () {},
-                              );
-                            },
-                            itemCount: state.list.length,
-                          ),
+            BlocBuilder<MediaPostersBloc, PaginatedDataState>(
+              builder: (context, state) {
+                if (state is PaginatedDataLoaded) {
+                  return Container(
+                    height: 120,
+                    margin: const EdgeInsets.only(top: 10),
+                    child: ListView.builder(
+                      clipBehavior: Clip.none,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        final poster =
+                            state.list[index] as Fragment$MediaPoster;
+                        return _buildImage(
+                          url: poster.coverImage?.medium,
+                          onTap: () {
+                            NavigationHelper.goToMediaDetailScreen(
+                              context: context,
+                              mediaId: poster.id,
+                            );
+                          },
                         );
-                      } else {
-                        return const SizedBox(height: 130);
-                      }
-                    },
-                  )
-                : BlocBuilder<MediaPostersBloc, PaginatedDataState>(
-                    builder: (context, state) {
-                      if (state is PaginatedDataLoaded) {
-                        return Container(
-                          height: 120,
-                          margin: const EdgeInsets.only(top: 10),
-                          child: ListView.builder(
-                            clipBehavior: Clip.none,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              final poster =
-                                  state.list[index] as Fragment$MediaPoster;
-                              return _buildImage(
-                                url: poster.coverImage?.medium,
-                                onTap: () {
-                                  NavigationHelper.goToMediaDetailScreen(
-                                    context: context,
-                                    mediaId: poster.id,
-                                  );
-                                },
-                              );
-                            },
-                            itemCount: state.list.length,
-                          ),
-                        );
-                      } else {
-                        return const SizedBox(height: 130);
-                      }
-                    },
-                  ),
+                      },
+                      itemCount: state.list.length,
+                    ),
+                  );
+                } else {
+                  return const SizedBox(height: 130);
+                }
+              },
+            ),
           ],
         ),
       ),
@@ -199,7 +161,9 @@ class _VoiceActorCardState extends State<VoiceActorCard>
         child: AspectRatio(
           aspectRatio: 70 / 100,
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(
+              widget.type == Enum$MediaType.ANIME ? 12 : 5,
+            ),
             child: CImage(
               imageUrl: url ?? '',
               placeholder: (context, url) {
