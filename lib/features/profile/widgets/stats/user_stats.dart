@@ -43,102 +43,104 @@ class _UserStatsState extends State<UserStats> {
             StatsOption.staff,
           ];
 
-    // TODO: Provide bloc here
-    return BlocBuilder<UserStatsBloc, UserStatsState>(
-      builder: (context, state) {
-        if (state is UserStatsInitial) {
-          context.read<UserStatsBloc>().add(LoadUserStats(client));
-        }
-        if (state is UserStatsLoading || state is UserStatsInitial) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (state is UserStatsLoaded) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: CustomScrollView(
-              slivers: [
-                SliverPersistentHeader(
-                  pinned: true,
-                  delegate: _OptionDropdownDelegate(
-                    Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              isAnime ? 'Anime' : 'Manga',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineMedium
-                                  ?.copyWith(
-                                    fontFamily: 'Poppins',
-                                  ),
-                            ),
-                            Switch(
-                              value: isAnime,
-                              activeTrackColor: AppColors.sunsetOrange,
-                              inactiveTrackColor: AppColors.japaneseIndigo,
-                              activeColor: AppColors.white,
-                              inactiveThumbColor: AppColors.white,
-                              onChanged: (value) {
-                                setState(() {
-                                  isAnime = value;
-                                  if (!isAnime &&
-                                      (option == StatsOption.voiceActors ||
-                                          option == StatsOption.studios)) {
-                                    option = StatsOption.overview;
-                                  }
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                        CustomDropdown(
-                          key: UniqueKey(),
-                          dropdownItems: dropdownOptions
-                              .map((e) => e.displayName)
-                              .toList(),
-                          initialValue: option.displayName,
-                          onChange: (value) async {
-                            if (widget.scrollKey?.currentState != null) {
-                              final position = widget.scrollKey!.currentState!
-                                  .innerController.positions.first;
-                              if (position.viewportDimension > 680) {
-                                await widget
-                                    .scrollKey?.currentState?.innerController
-                                    .animateTo(
-                                  0,
-                                  duration: const Duration(microseconds: 1),
-                                  curve: Curves.ease,
-                                );
+    return BlocProvider(
+      create: (context) => UserStatsBloc(userId: widget.userId),
+      child: BlocBuilder<UserStatsBloc, UserStatsState>(
+        builder: (context, state) {
+          if (state is UserStatsInitial) {
+            context.read<UserStatsBloc>().add(LoadUserStats(client));
+          }
+          if (state is UserStatsLoading || state is UserStatsInitial) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is UserStatsLoaded) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: CustomScrollView(
+                slivers: [
+                  SliverPersistentHeader(
+                    pinned: true,
+                    delegate: _OptionDropdownDelegate(
+                      Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                isAnime ? 'Anime' : 'Manga',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium
+                                    ?.copyWith(
+                                      fontFamily: 'Poppins',
+                                    ),
+                              ),
+                              Switch(
+                                value: isAnime,
+                                activeTrackColor: AppColors.sunsetOrange,
+                                inactiveTrackColor: AppColors.japaneseIndigo,
+                                activeColor: AppColors.white,
+                                inactiveThumbColor: AppColors.white,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isAnime = value;
+                                    if (!isAnime &&
+                                        (option == StatsOption.voiceActors ||
+                                            option == StatsOption.studios)) {
+                                      option = StatsOption.overview;
+                                    }
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                          CustomDropdown(
+                            key: UniqueKey(),
+                            dropdownItems: dropdownOptions
+                                .map((e) => e.displayName)
+                                .toList(),
+                            initialValue: option.displayName,
+                            onChange: (value) async {
+                              if (widget.scrollKey?.currentState != null) {
+                                final position = widget.scrollKey!.currentState!
+                                    .innerController.positions.first;
+                                if (position.viewportDimension > 680) {
+                                  await widget
+                                      .scrollKey?.currentState?.innerController
+                                      .animateTo(
+                                    0,
+                                    duration: const Duration(microseconds: 1),
+                                    curve: Curves.ease,
+                                  );
+                                }
                               }
-                            }
-                            setState(() {
-                              option = FilterConstants.statsOptionFromString(
-                                value,
-                              );
-                            });
-                          },
-                        ),
-                      ],
+                              setState(() {
+                                option = FilterConstants.statsOptionFromString(
+                                  value,
+                                );
+                              });
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                _buildStats(
-                  animeStats: state.animeStats,
-                  mangaStats: state.mangaStats,
-                ),
-              ],
-            ),
-          );
-        } else if (state is UserStatsError) {
-          return ErrorText(
-            message: state.message,
-            onTryAgain: () {},
-          );
-        } else {
-          return const Text('Unknown State');
-        }
-      },
+                  _buildStats(
+                    animeStats: state.animeStats,
+                    mangaStats: state.mangaStats,
+                  ),
+                ],
+              ),
+            );
+          } else if (state is UserStatsError) {
+            return ErrorText(
+              message: state.message,
+              onTryAgain: () {},
+            );
+          } else {
+            return const Text('Unknown State');
+          }
+        },
+      ),
     );
   }
 

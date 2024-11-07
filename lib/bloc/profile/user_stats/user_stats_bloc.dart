@@ -20,7 +20,7 @@ class UserStatsBloc extends Bloc<UserStatsEvent, UserStatsState> {
     emit(UserStatsLoading());
     final response = await event.client.query$GetUserStats(
       Options$Query$GetUserStats(
-        fetchPolicy: FetchPolicy.networkOnly,
+        fetchPolicy: FetchPolicy.cacheFirst,
         variables: Variables$Query$GetUserStats(
           id: userId,
         ),
