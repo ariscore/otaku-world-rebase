@@ -6,15 +6,8 @@ final profileRoutes = [
     path: RouteConstants.myProfile,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
-      return MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => MyProfileBloc(),
-          ),
-          BlocProvider(
-            create: (context) => UserStatsBloc(userId: 336693),
-          ),
-        ],
+      return BlocProvider(
+        create: (context) => MyProfileBloc(),
         child: const MyProfileScreen(),
       );
     },
