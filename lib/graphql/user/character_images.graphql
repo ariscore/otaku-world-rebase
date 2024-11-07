@@ -1,0 +1,17 @@
+query CharacterImages($page: Int, $id_in: [Int]) {
+    Page(page: $page, perPage: 20) {
+        pageInfo {
+            hasNextPage
+        }
+        characters(id_in: $id_in, sort: [FAVOURITES_DESC]) {
+            ...CharacterImage
+        }
+    }
+}
+
+fragment CharacterImage on Character {
+    id
+    image {
+        medium
+    }
+}

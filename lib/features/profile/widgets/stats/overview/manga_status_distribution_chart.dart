@@ -1,30 +1,24 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/user_stats.graphql.dart';
 import 'package:otaku_world/utils/extensions.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../../../../constants/duration_constants.dart';
-import '../../../../theme/colors.dart';
+import '../../../../../config/router/router_constants.dart';
+import '../../../../../constants/duration_constants.dart';
+import '../../../../../theme/colors.dart';
 
-class AnimeStatusDistributionChart extends StatelessWidget {
-  const AnimeStatusDistributionChart({super.key, required this.statuses});
+class MangaStatusDistributionChart extends StatelessWidget {
+  const MangaStatusDistributionChart({super.key, required this.statuses});
 
   final List<Fragment$UserStatistics$statuses?>? statuses;
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Show placeholder here
     if (statuses == null || statuses!.isEmpty) return const SizedBox();
-    final total =
-        statuses!.fold(0, (sum, status) => sum + (status?.count ?? 0));
-    log('Total count: $total', name: 'AnimeStats');
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,13 +31,13 @@ class AnimeStatusDistributionChart extends StatelessWidget {
               Text(
                 'Status Distribution',
                 style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                      fontFamily: 'Roboto-Medium',
-                    ),
+                  fontFamily: 'Roboto-Medium',
+                ),
               ),
               IconButton(
                 onPressed: () {
                   context.push(
-                    '${RouteConstants.statusDistribution}?type=anime',
+                    '${RouteConstants.statusDistribution}?type=manga',
                     extra: statuses,
                   );
                 },
@@ -66,11 +60,9 @@ class AnimeStatusDistributionChart extends StatelessWidget {
                     String>>[
                   DoughnutSeries<Fragment$UserStatistics$statuses?, String>(
                     animationDelay: ChartDurationConstants.animationDelay,
-                    // animationDelay: 0,
                     animationDuration: ChartDurationConstants.animationDuration,
-                    // animationDuration: 0,
                     dataLabelMapper: (datum, index) =>
-                        datum!.status!.displayTitle(Enum$MediaType.ANIME),
+                        datum!.status!.displayTitle(Enum$MediaType.MANGA),
                     strokeColor: AppColors.raisinBlack,
                     strokeWidth: 3,
                     radius: "100%",
@@ -78,7 +70,7 @@ class AnimeStatusDistributionChart extends StatelessWidget {
                     pointColorMapper: (data, index) => data!.status!.toColor,
                     dataSource: statuses,
                     xValueMapper: (data, index) =>
-                        data!.status!.displayTitle(Enum$MediaType.ANIME),
+                        data!.status!.displayTitle(Enum$MediaType.MANGA),
                     yValueMapper: (data, _) => data?.count ?? 0,
                   ),
                 ],
@@ -90,10 +82,10 @@ class AnimeStatusDistributionChart extends StatelessWidget {
                 shrinkWrap: true,
                 children: List.generate(
                   statuses!.length,
-                  (index) {
+                      (index) {
                     final status = statuses![index];
                     if (status == null) return const SizedBox();
-                    return _buildStatus(status.status!, status.count, total);
+                    return _buildStatus(status.status!, status.count);
                   },
                 ),
               ),
@@ -104,7 +96,7 @@ class AnimeStatusDistributionChart extends StatelessWidget {
     );
   }
 
-  Widget _buildStatus(Enum$MediaListStatus status, int count, int total) {
+  Widget _buildStatus(Enum$MediaListStatus status, int count) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: Row(
@@ -124,7 +116,7 @@ class AnimeStatusDistributionChart extends StatelessWidget {
             child: RichText(
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
-                text: "${status.displayTitle(Enum$MediaType.ANIME)} - ",
+                text: "${status.displayTitle(Enum$MediaType.MANGA)} - ",
                 style: const TextStyle(
                   color: AppColors.white,
                   fontSize: 14,
@@ -133,7 +125,7 @@ class AnimeStatusDistributionChart extends StatelessWidget {
                 ),
                 children: <TextSpan>[
                   TextSpan(
-                    text: '${formatPercentage(count, total)}%',
+                    text: count.toString(),
                     style: TextStyle(
                       color: status.toColor,
                     ),
@@ -148,7 +140,7 @@ class AnimeStatusDistributionChart extends StatelessWidget {
   }
 
   String formatPercentage(int count, int total) {
-    if (total == 0) return "0";
+    if (total == 0) return "0"; // Handle division by zero
 
     double percentage = (count / total) * 100;
 

@@ -1,5 +1,7 @@
 import 'dart:core';
 
+import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
+
 class FilterConstants {
   static const List<String> mediaSortOptions = [
     'Popularity',
@@ -96,6 +98,16 @@ class FilterConstants {
     'Chapters Read',
     'Mean Score',
   ];
+
+  static List<String> genreSortOptions(Enum$MediaType type) {
+    return [
+      type == Enum$MediaType.ANIME ? 'Titles Watched' : 'Titles Read',
+      type == Enum$MediaType.ANIME ? 'Time Watched' : 'Chapters Read',
+      'Mean Score',
+    ];
+  }
+
+  static const voiceActorOptions = ['Anime', 'Characters'];
 
   static StatsOption statsOptionFromString(String value) {
     switch(value) {

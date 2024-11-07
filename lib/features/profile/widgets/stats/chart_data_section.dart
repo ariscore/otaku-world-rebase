@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../theme/colors.dart';
 
 class ChartDataSection extends StatelessWidget {
+  // TODO: Format time properly (21 days 10 hours)
   const ChartDataSection({
     super.key,
     required this.value1,

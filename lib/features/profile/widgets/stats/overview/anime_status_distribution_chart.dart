@@ -3,33 +3,27 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/user_stats.graphql.dart';
 import 'package:otaku_world/utils/extensions.dart';
-import 'package:otaku_world/utils/formatting_utils.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../../../../config/router/router_constants.dart';
-import '../../../../constants/duration_constants.dart';
-import '../../../../theme/colors.dart';
+import '../../../../../constants/duration_constants.dart';
+import '../../../../../theme/colors.dart';
 
-class FormatDistributionChart extends StatelessWidget {
-  const FormatDistributionChart({
-    super.key,
-    required this.formats,
-    required this.type,
-  });
+class AnimeStatusDistributionChart extends StatelessWidget {
+  const AnimeStatusDistributionChart({super.key, required this.statuses});
 
-  final List<Fragment$UserStatistics$formats?>? formats;
-  final Enum$MediaType type;
+  final List<Fragment$UserStatistics$statuses?>? statuses;
 
   @override
   Widget build(BuildContext context) {
     // TODO: Show placeholder here
-    if (formats == null || formats!.isEmpty) return const SizedBox();
-    final total = formats!.fold(0, (sum, status) => sum + (status?.count ?? 0));
-    log('Total count: $total', name: 'AnimeStats');
+    if (statuses == null || statuses!.isEmpty) return const SizedBox();
+    final total =
+        statuses!.fold(0, (sum, status) => sum + (status?.count ?? 0));
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +34,7 @@ class FormatDistributionChart extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Format Distribution',
+                'Status Distribution',
                 style: Theme.of(context).textTheme.displayMedium?.copyWith(
                       fontFamily: 'Roboto-Medium',
                     ),
@@ -48,8 +42,8 @@ class FormatDistributionChart extends StatelessWidget {
               IconButton(
                 onPressed: () {
                   context.push(
-                    '${RouteConstants.formatDistribution}?type=${type == Enum$MediaType.ANIME ? 'anime' : 'manga'}',
-                    extra: formats,
+                    '${RouteConstants.statusDistribution}?type=anime',
+                    extra: statuses,
                   );
                 },
                 icon: SvgPicture.asset(
@@ -59,7 +53,7 @@ class FormatDistributionChart extends StatelessWidget {
             ],
           ),
         ),
-        // const SizedBox(height: 10),
+        const SizedBox(height: 10),
         Row(
           children: [
             SizedBox(
@@ -67,23 +61,23 @@ class FormatDistributionChart extends StatelessWidget {
               height: 170,
               child: SfCircularChart(
                 tooltipBehavior: TooltipBehavior(enable: true),
-                series: <CircularSeries<Fragment$UserStatistics$formats?,
+                series: <CircularSeries<Fragment$UserStatistics$statuses?,
                     String>>[
-                  DoughnutSeries<Fragment$UserStatistics$formats?, String>(
+                  DoughnutSeries<Fragment$UserStatistics$statuses?, String>(
                     animationDelay: ChartDurationConstants.animationDelay,
                     // animationDelay: 0,
                     animationDuration: ChartDurationConstants.animationDuration,
                     // animationDuration: 0,
                     dataLabelMapper: (datum, index) =>
-                        FormattingUtils.getMediaFormatString(datum!.format!),
+                        datum!.status!.displayTitle(Enum$MediaType.ANIME),
                     strokeColor: AppColors.raisinBlack,
                     strokeWidth: 3,
                     radius: "100%",
                     innerRadius: "65%",
-                    pointColorMapper: (data, index) => data!.format!.toColor,
-                    dataSource: formats,
+                    pointColorMapper: (data, index) => data!.status!.toColor,
+                    dataSource: statuses,
                     xValueMapper: (data, index) =>
-                        FormattingUtils.getMediaFormatString(data!.format!),
+                        data!.status!.displayTitle(Enum$MediaType.ANIME),
                     yValueMapper: (data, _) => data?.count ?? 0,
                   ),
                 ],
@@ -94,11 +88,11 @@ class FormatDistributionChart extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 children: List.generate(
-                  formats!.length,
+                  statuses!.length,
                   (index) {
-                    final format = formats![index];
-                    if (format == null) return const SizedBox();
-                    return _buildFormat(format.format!, format.count, total);
+                    final status = statuses![index];
+                    if (status == null) return const SizedBox();
+                    return _buildStatus(status.status!, status.count, total);
                   },
                 ),
               ),
@@ -109,7 +103,7 @@ class FormatDistributionChart extends StatelessWidget {
     );
   }
 
-  Widget _buildFormat(Enum$MediaFormat format, int count, int total) {
+  Widget _buildStatus(Enum$MediaListStatus status, int count, int total) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: Row(
@@ -118,7 +112,7 @@ class FormatDistributionChart extends StatelessWidget {
             width: 14,
             height: 14,
             decoration: ShapeDecoration(
-              color: format.toColor,
+              color: status.toColor,
               shape: const OvalBorder(),
             ),
           ),
@@ -129,7 +123,7 @@ class FormatDistributionChart extends StatelessWidget {
             child: RichText(
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
-                text: "${FormattingUtils.getMediaFormatString(format)} - ",
+                text: "${status.displayTitle(Enum$MediaType.ANIME)} - ",
                 style: const TextStyle(
                   color: AppColors.white,
                   fontSize: 14,
@@ -140,7 +134,7 @@ class FormatDistributionChart extends StatelessWidget {
                   TextSpan(
                     text: '${formatPercentage(count, total)}%',
                     style: TextStyle(
-                      color: format.toColor,
+                      color: status.toColor,
                     ),
                   ),
                 ],

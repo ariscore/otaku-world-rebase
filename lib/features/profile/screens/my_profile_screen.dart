@@ -90,6 +90,7 @@ class MyProfileScreen extends HookWidget {
                     KeepAliveTab(
                       child: UserStats(
                         userId: state.user.id,
+                        scrollKey: scrollViewKey,
                       ),
                     ),
                     KeepAliveTab(

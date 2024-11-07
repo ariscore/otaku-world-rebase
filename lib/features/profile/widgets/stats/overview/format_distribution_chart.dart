@@ -6,30 +6,29 @@ import 'package:go_router/go_router.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/user_stats.graphql.dart';
+import 'package:otaku_world/utils/extensions.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../../../../config/router/router_constants.dart';
-import '../../../../constants/duration_constants.dart';
-import '../../../../theme/colors.dart';
+import '../../../../../config/router/router_constants.dart';
+import '../../../../../constants/duration_constants.dart';
+import '../../../../../theme/colors.dart';
 
-class CountryDistributionChart extends StatelessWidget {
-  const CountryDistributionChart({
+class FormatDistributionChart extends StatelessWidget {
+  const FormatDistributionChart({
     super.key,
-    required this.countries,
+    required this.formats,
     required this.type,
   });
 
-  final List<Fragment$UserStatistics$countries?>? countries;
+  final List<Fragment$UserStatistics$formats?>? formats;
   final Enum$MediaType type;
 
   @override
   Widget build(BuildContext context) {
     // TODO: Show placeholder here
-    if (countries == null || countries!.isEmpty) return const SizedBox();
-    final total =
-        countries!.fold(0, (sum, status) => sum + (status?.count ?? 0));
-    log('Total count: $total', name: 'AnimeStats');
+    if (formats == null || formats!.isEmpty) return const SizedBox();
+    final total = formats!.fold(0, (sum, status) => sum + (status?.count ?? 0));
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +39,7 @@ class CountryDistributionChart extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Country Distribution',
+                'Format Distribution',
                 style: Theme.of(context).textTheme.displayMedium?.copyWith(
                       fontFamily: 'Roboto-Medium',
                     ),
@@ -48,8 +47,8 @@ class CountryDistributionChart extends StatelessWidget {
               IconButton(
                 onPressed: () {
                   context.push(
-                    '${RouteConstants.countryDistribution}?type=${type == Enum$MediaType.ANIME ? 'anime' : 'manga'}',
-                    extra: countries,
+                    '${RouteConstants.formatDistribution}?type=${type == Enum$MediaType.ANIME ? 'anime' : 'manga'}',
+                    extra: formats,
                   );
                 },
                 icon: SvgPicture.asset(
@@ -67,26 +66,23 @@ class CountryDistributionChart extends StatelessWidget {
               height: 170,
               child: SfCircularChart(
                 tooltipBehavior: TooltipBehavior(enable: true),
-                series: <CircularSeries<Fragment$UserStatistics$countries?,
+                series: <CircularSeries<Fragment$UserStatistics$formats?,
                     String>>[
-                  DoughnutSeries<Fragment$UserStatistics$countries?, String>(
+                  DoughnutSeries<Fragment$UserStatistics$formats?, String>(
                     animationDelay: ChartDurationConstants.animationDelay,
                     // animationDelay: 0,
                     animationDuration: ChartDurationConstants.animationDuration,
                     // animationDuration: 0,
                     dataLabelMapper: (datum, index) =>
-                        FormattingUtils.getCountry(datum!.country),
+                        FormattingUtils.getMediaFormatString(datum!.format!),
                     strokeColor: AppColors.raisinBlack,
                     strokeWidth: 3,
                     radius: "100%",
                     innerRadius: "65%",
-                    pointColorMapper: (data, index) =>
-                        FormattingUtils.getCountryColor(
-                      data!.country,
-                    ),
-                    dataSource: countries,
+                    pointColorMapper: (data, index) => data!.format!.toColor,
+                    dataSource: formats,
                     xValueMapper: (data, index) =>
-                        FormattingUtils.getCountry(data!.country),
+                        FormattingUtils.getMediaFormatString(data!.format!),
                     yValueMapper: (data, _) => data?.count ?? 0,
                   ),
                 ],
@@ -97,12 +93,11 @@ class CountryDistributionChart extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 children: List.generate(
-                  countries!.length,
+                  formats!.length,
                   (index) {
-                    final country = countries![index];
-                    if (country == null) return const SizedBox();
-                    return _buildCountry(
-                        country.country!, country.count, total);
+                    final format = formats![index];
+                    if (format == null) return const SizedBox();
+                    return _buildFormat(format.format!, format.count, total);
                   },
                 ),
               ),
@@ -113,7 +108,7 @@ class CountryDistributionChart extends StatelessWidget {
     );
   }
 
-  Widget _buildCountry(String countryCode, int count, int total) {
+  Widget _buildFormat(Enum$MediaFormat format, int count, int total) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: Row(
@@ -122,7 +117,7 @@ class CountryDistributionChart extends StatelessWidget {
             width: 14,
             height: 14,
             decoration: ShapeDecoration(
-              color: FormattingUtils.getCountryColor(countryCode),
+              color: format.toColor,
               shape: const OvalBorder(),
             ),
           ),
@@ -133,7 +128,7 @@ class CountryDistributionChart extends StatelessWidget {
             child: RichText(
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
-                text: "${FormattingUtils.getCountry(countryCode)} - ",
+                text: "${FormattingUtils.getMediaFormatString(format)} - ",
                 style: const TextStyle(
                   color: AppColors.white,
                   fontSize: 14,
@@ -144,7 +139,7 @@ class CountryDistributionChart extends StatelessWidget {
                   TextSpan(
                     text: '${formatPercentage(count, total)}%',
                     style: TextStyle(
-                      color: FormattingUtils.getCountryColor(countryCode),
+                      color: format.toColor,
                     ),
                   ),
                 ],

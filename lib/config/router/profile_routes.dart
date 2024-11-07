@@ -11,6 +11,9 @@ final profileRoutes = [
           BlocProvider(
             create: (context) => MyProfileBloc(),
           ),
+          BlocProvider(
+            create: (context) => UserStatsBloc(userId: 336693),
+          ),
         ],
         child: const MyProfileScreen(),
       );

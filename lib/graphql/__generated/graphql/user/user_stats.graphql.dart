@@ -1849,6 +1849,28 @@ const fragmentDefinitionUserStatistics = FragmentDefinitionNode(
               ]),
             ),
             FieldNode(
+              name: NameNode(value: 'image'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: SelectionSetNode(selections: [
+                FieldNode(
+                  name: NameNode(value: 'large'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ]),
+            ),
+            FieldNode(
               name: NameNode(value: '__typename'),
               alias: null,
               arguments: [],
@@ -1982,6 +2004,28 @@ const fragmentDefinitionUserStatistics = FragmentDefinitionNode(
                 ),
                 FieldNode(
                   name: NameNode(value: 'userPreferred'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ]),
+            ),
+            FieldNode(
+              name: NameNode(value: 'image'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: SelectionSetNode(selections: [
+                FieldNode(
+                  name: NameNode(value: 'large'),
                   alias: null,
                   arguments: [],
                   directives: [],
@@ -4689,6 +4733,7 @@ class Fragment$UserStatistics$voiceActors$voiceActor {
   Fragment$UserStatistics$voiceActors$voiceActor({
     required this.id,
     this.name,
+    this.image,
     this.$__typename = 'Staff',
   });
 
@@ -4696,6 +4741,7 @@ class Fragment$UserStatistics$voiceActors$voiceActor {
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
+    final l$image = json['image'];
     final l$$__typename = json['__typename'];
     return Fragment$UserStatistics$voiceActors$voiceActor(
       id: (l$id as int),
@@ -4703,6 +4749,10 @@ class Fragment$UserStatistics$voiceActors$voiceActor {
           ? null
           : Fragment$UserStatistics$voiceActors$voiceActor$name.fromJson(
               (l$name as Map<String, dynamic>)),
+      image: l$image == null
+          ? null
+          : Fragment$UserStatistics$voiceActors$voiceActor$image.fromJson(
+              (l$image as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -4710,6 +4760,8 @@ class Fragment$UserStatistics$voiceActors$voiceActor {
   final int id;
 
   final Fragment$UserStatistics$voiceActors$voiceActor$name? name;
+
+  final Fragment$UserStatistics$voiceActors$voiceActor$image? image;
 
   final String $__typename;
 
@@ -4719,6 +4771,8 @@ class Fragment$UserStatistics$voiceActors$voiceActor {
     _resultData['id'] = l$id;
     final l$name = name;
     _resultData['name'] = l$name?.toJson();
+    final l$image = image;
+    _resultData['image'] = l$image?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -4728,10 +4782,12 @@ class Fragment$UserStatistics$voiceActors$voiceActor {
   int get hashCode {
     final l$id = id;
     final l$name = name;
+    final l$image = image;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$name,
+      l$image,
       l$$__typename,
     ]);
   }
@@ -4753,6 +4809,11 @@ class Fragment$UserStatistics$voiceActors$voiceActor {
     final l$name = name;
     final lOther$name = other.name;
     if (l$name != lOther$name) {
+      return false;
+    }
+    final l$image = image;
+    final lOther$image = other.image;
+    if (l$image != lOther$image) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -4787,9 +4848,11 @@ abstract class CopyWith$Fragment$UserStatistics$voiceActors$voiceActor<TRes> {
   TRes call({
     int? id,
     Fragment$UserStatistics$voiceActors$voiceActor$name? name,
+    Fragment$UserStatistics$voiceActors$voiceActor$image? image,
     String? $__typename,
   });
   CopyWith$Fragment$UserStatistics$voiceActors$voiceActor$name<TRes> get name;
+  CopyWith$Fragment$UserStatistics$voiceActors$voiceActor$image<TRes> get image;
 }
 
 class _CopyWithImpl$Fragment$UserStatistics$voiceActors$voiceActor<TRes>
@@ -4808,6 +4871,7 @@ class _CopyWithImpl$Fragment$UserStatistics$voiceActors$voiceActor<TRes>
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
+    Object? image = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$UserStatistics$voiceActors$voiceActor(
@@ -4815,6 +4879,9 @@ class _CopyWithImpl$Fragment$UserStatistics$voiceActors$voiceActor<TRes>
         name: name == _undefined
             ? _instance.name
             : (name as Fragment$UserStatistics$voiceActors$voiceActor$name?),
+        image: image == _undefined
+            ? _instance.image
+            : (image as Fragment$UserStatistics$voiceActors$voiceActor$image?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -4828,6 +4895,16 @@ class _CopyWithImpl$Fragment$UserStatistics$voiceActors$voiceActor<TRes>
         : CopyWith$Fragment$UserStatistics$voiceActors$voiceActor$name(
             local$name, (e) => call(name: e));
   }
+
+  CopyWith$Fragment$UserStatistics$voiceActors$voiceActor$image<TRes>
+      get image {
+    final local$image = _instance.image;
+    return local$image == null
+        ? CopyWith$Fragment$UserStatistics$voiceActors$voiceActor$image.stub(
+            _then(_instance))
+        : CopyWith$Fragment$UserStatistics$voiceActors$voiceActor$image(
+            local$image, (e) => call(image: e));
+  }
 }
 
 class _CopyWithStubImpl$Fragment$UserStatistics$voiceActors$voiceActor<TRes>
@@ -4839,12 +4916,18 @@ class _CopyWithStubImpl$Fragment$UserStatistics$voiceActors$voiceActor<TRes>
   call({
     int? id,
     Fragment$UserStatistics$voiceActors$voiceActor$name? name,
+    Fragment$UserStatistics$voiceActors$voiceActor$image? image,
     String? $__typename,
   }) =>
       _res;
 
   CopyWith$Fragment$UserStatistics$voiceActors$voiceActor$name<TRes> get name =>
       CopyWith$Fragment$UserStatistics$voiceActors$voiceActor$name.stub(_res);
+
+  CopyWith$Fragment$UserStatistics$voiceActors$voiceActor$image<TRes>
+      get image =>
+          CopyWith$Fragment$UserStatistics$voiceActors$voiceActor$image.stub(
+              _res);
 }
 
 class Fragment$UserStatistics$voiceActors$voiceActor$name {
@@ -5107,6 +5190,139 @@ class _CopyWithStubImpl$Fragment$UserStatistics$voiceActors$voiceActor$name<
       _res;
 }
 
+class Fragment$UserStatistics$voiceActors$voiceActor$image {
+  Fragment$UserStatistics$voiceActors$voiceActor$image({
+    this.large,
+    this.$__typename = 'StaffImage',
+  });
+
+  factory Fragment$UserStatistics$voiceActors$voiceActor$image.fromJson(
+      Map<String, dynamic> json) {
+    final l$large = json['large'];
+    final l$$__typename = json['__typename'];
+    return Fragment$UserStatistics$voiceActors$voiceActor$image(
+      large: (l$large as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? large;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$large = large;
+    _resultData['large'] = l$large;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$large = large;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$large,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$UserStatistics$voiceActors$voiceActor$image) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$large = large;
+    final lOther$large = other.large;
+    if (l$large != lOther$large) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$UserStatistics$voiceActors$voiceActor$image
+    on Fragment$UserStatistics$voiceActors$voiceActor$image {
+  CopyWith$Fragment$UserStatistics$voiceActors$voiceActor$image<
+          Fragment$UserStatistics$voiceActors$voiceActor$image>
+      get copyWith =>
+          CopyWith$Fragment$UserStatistics$voiceActors$voiceActor$image(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$UserStatistics$voiceActors$voiceActor$image<
+    TRes> {
+  factory CopyWith$Fragment$UserStatistics$voiceActors$voiceActor$image(
+    Fragment$UserStatistics$voiceActors$voiceActor$image instance,
+    TRes Function(Fragment$UserStatistics$voiceActors$voiceActor$image) then,
+  ) = _CopyWithImpl$Fragment$UserStatistics$voiceActors$voiceActor$image;
+
+  factory CopyWith$Fragment$UserStatistics$voiceActors$voiceActor$image.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$UserStatistics$voiceActors$voiceActor$image;
+
+  TRes call({
+    String? large,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$UserStatistics$voiceActors$voiceActor$image<TRes>
+    implements
+        CopyWith$Fragment$UserStatistics$voiceActors$voiceActor$image<TRes> {
+  _CopyWithImpl$Fragment$UserStatistics$voiceActors$voiceActor$image(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$UserStatistics$voiceActors$voiceActor$image _instance;
+
+  final TRes Function(Fragment$UserStatistics$voiceActors$voiceActor$image)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? large = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$UserStatistics$voiceActors$voiceActor$image(
+        large: large == _undefined ? _instance.large : (large as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$UserStatistics$voiceActors$voiceActor$image<
+        TRes>
+    implements
+        CopyWith$Fragment$UserStatistics$voiceActors$voiceActor$image<TRes> {
+  _CopyWithStubImpl$Fragment$UserStatistics$voiceActors$voiceActor$image(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? large,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
 class Fragment$UserStatistics$staff {
   Fragment$UserStatistics$staff({
     required this.count,
@@ -5358,6 +5574,7 @@ class Fragment$UserStatistics$staff$staff {
   Fragment$UserStatistics$staff$staff({
     required this.id,
     this.name,
+    this.image,
     this.$__typename = 'Staff',
   });
 
@@ -5365,6 +5582,7 @@ class Fragment$UserStatistics$staff$staff {
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
+    final l$image = json['image'];
     final l$$__typename = json['__typename'];
     return Fragment$UserStatistics$staff$staff(
       id: (l$id as int),
@@ -5372,6 +5590,10 @@ class Fragment$UserStatistics$staff$staff {
           ? null
           : Fragment$UserStatistics$staff$staff$name.fromJson(
               (l$name as Map<String, dynamic>)),
+      image: l$image == null
+          ? null
+          : Fragment$UserStatistics$staff$staff$image.fromJson(
+              (l$image as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -5379,6 +5601,8 @@ class Fragment$UserStatistics$staff$staff {
   final int id;
 
   final Fragment$UserStatistics$staff$staff$name? name;
+
+  final Fragment$UserStatistics$staff$staff$image? image;
 
   final String $__typename;
 
@@ -5388,6 +5612,8 @@ class Fragment$UserStatistics$staff$staff {
     _resultData['id'] = l$id;
     final l$name = name;
     _resultData['name'] = l$name?.toJson();
+    final l$image = image;
+    _resultData['image'] = l$image?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -5397,10 +5623,12 @@ class Fragment$UserStatistics$staff$staff {
   int get hashCode {
     final l$id = id;
     final l$name = name;
+    final l$image = image;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$name,
+      l$image,
       l$$__typename,
     ]);
   }
@@ -5422,6 +5650,11 @@ class Fragment$UserStatistics$staff$staff {
     final l$name = name;
     final lOther$name = other.name;
     if (l$name != lOther$name) {
+      return false;
+    }
+    final l$image = image;
+    final lOther$image = other.image;
+    if (l$image != lOther$image) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -5455,9 +5688,11 @@ abstract class CopyWith$Fragment$UserStatistics$staff$staff<TRes> {
   TRes call({
     int? id,
     Fragment$UserStatistics$staff$staff$name? name,
+    Fragment$UserStatistics$staff$staff$image? image,
     String? $__typename,
   });
   CopyWith$Fragment$UserStatistics$staff$staff$name<TRes> get name;
+  CopyWith$Fragment$UserStatistics$staff$staff$image<TRes> get image;
 }
 
 class _CopyWithImpl$Fragment$UserStatistics$staff$staff<TRes>
@@ -5476,6 +5711,7 @@ class _CopyWithImpl$Fragment$UserStatistics$staff$staff<TRes>
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
+    Object? image = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$UserStatistics$staff$staff(
@@ -5483,6 +5719,9 @@ class _CopyWithImpl$Fragment$UserStatistics$staff$staff<TRes>
         name: name == _undefined
             ? _instance.name
             : (name as Fragment$UserStatistics$staff$staff$name?),
+        image: image == _undefined
+            ? _instance.image
+            : (image as Fragment$UserStatistics$staff$staff$image?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -5496,6 +5735,15 @@ class _CopyWithImpl$Fragment$UserStatistics$staff$staff<TRes>
         : CopyWith$Fragment$UserStatistics$staff$staff$name(
             local$name, (e) => call(name: e));
   }
+
+  CopyWith$Fragment$UserStatistics$staff$staff$image<TRes> get image {
+    final local$image = _instance.image;
+    return local$image == null
+        ? CopyWith$Fragment$UserStatistics$staff$staff$image.stub(
+            _then(_instance))
+        : CopyWith$Fragment$UserStatistics$staff$staff$image(
+            local$image, (e) => call(image: e));
+  }
 }
 
 class _CopyWithStubImpl$Fragment$UserStatistics$staff$staff<TRes>
@@ -5507,12 +5755,16 @@ class _CopyWithStubImpl$Fragment$UserStatistics$staff$staff<TRes>
   call({
     int? id,
     Fragment$UserStatistics$staff$staff$name? name,
+    Fragment$UserStatistics$staff$staff$image? image,
     String? $__typename,
   }) =>
       _res;
 
   CopyWith$Fragment$UserStatistics$staff$staff$name<TRes> get name =>
       CopyWith$Fragment$UserStatistics$staff$staff$name.stub(_res);
+
+  CopyWith$Fragment$UserStatistics$staff$staff$image<TRes> get image =>
+      CopyWith$Fragment$UserStatistics$staff$staff$image.stub(_res);
 }
 
 class Fragment$UserStatistics$staff$staff$name {
@@ -5762,6 +6014,131 @@ class _CopyWithStubImpl$Fragment$UserStatistics$staff$staff$name<TRes>
     String? native,
     List<String?>? alternative,
     String? userPreferred,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$UserStatistics$staff$staff$image {
+  Fragment$UserStatistics$staff$staff$image({
+    this.large,
+    this.$__typename = 'StaffImage',
+  });
+
+  factory Fragment$UserStatistics$staff$staff$image.fromJson(
+      Map<String, dynamic> json) {
+    final l$large = json['large'];
+    final l$$__typename = json['__typename'];
+    return Fragment$UserStatistics$staff$staff$image(
+      large: (l$large as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? large;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$large = large;
+    _resultData['large'] = l$large;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$large = large;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$large,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$UserStatistics$staff$staff$image) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$large = large;
+    final lOther$large = other.large;
+    if (l$large != lOther$large) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$UserStatistics$staff$staff$image
+    on Fragment$UserStatistics$staff$staff$image {
+  CopyWith$Fragment$UserStatistics$staff$staff$image<
+          Fragment$UserStatistics$staff$staff$image>
+      get copyWith => CopyWith$Fragment$UserStatistics$staff$staff$image(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$UserStatistics$staff$staff$image<TRes> {
+  factory CopyWith$Fragment$UserStatistics$staff$staff$image(
+    Fragment$UserStatistics$staff$staff$image instance,
+    TRes Function(Fragment$UserStatistics$staff$staff$image) then,
+  ) = _CopyWithImpl$Fragment$UserStatistics$staff$staff$image;
+
+  factory CopyWith$Fragment$UserStatistics$staff$staff$image.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$UserStatistics$staff$staff$image;
+
+  TRes call({
+    String? large,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$UserStatistics$staff$staff$image<TRes>
+    implements CopyWith$Fragment$UserStatistics$staff$staff$image<TRes> {
+  _CopyWithImpl$Fragment$UserStatistics$staff$staff$image(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$UserStatistics$staff$staff$image _instance;
+
+  final TRes Function(Fragment$UserStatistics$staff$staff$image) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? large = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$UserStatistics$staff$staff$image(
+        large: large == _undefined ? _instance.large : (large as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$UserStatistics$staff$staff$image<TRes>
+    implements CopyWith$Fragment$UserStatistics$staff$staff$image<TRes> {
+  _CopyWithStubImpl$Fragment$UserStatistics$staff$staff$image(this._res);
+
+  TRes _res;
+
+  call({
+    String? large,
     String? $__typename,
   }) =>
       _res;

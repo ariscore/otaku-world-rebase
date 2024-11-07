@@ -11,8 +11,8 @@ import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../../../../config/router/router_constants.dart';
-import '../../../../generated/assets.dart';
+import '../../../../../config/router/router_constants.dart';
+import '../../../../../generated/assets.dart';
 
 class StartYearDistributionChart extends StatefulWidget {
   const StartYearDistributionChart({
