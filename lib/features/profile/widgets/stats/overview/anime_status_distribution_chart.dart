@@ -24,7 +24,6 @@ class AnimeStatusDistributionChart extends StatelessWidget {
     if (statuses == null || statuses!.isEmpty) return const SizedBox();
     final total =
         statuses!.fold(0, (sum, status) => sum + (status?.count ?? 0));
-    log('Total count: $total', name: 'AnimeStats');
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

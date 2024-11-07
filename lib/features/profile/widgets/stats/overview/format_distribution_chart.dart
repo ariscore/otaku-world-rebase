@@ -29,7 +29,6 @@ class FormatDistributionChart extends StatelessWidget {
     // TODO: Show placeholder here
     if (formats == null || formats!.isEmpty) return const SizedBox();
     final total = formats!.fold(0, (sum, status) => sum + (status?.count ?? 0));
-    log('Total count: $total', name: 'AnimeStats');
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

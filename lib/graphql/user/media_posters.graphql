@@ -1,0 +1,17 @@
+query MediaPosters($page: Int, $id_in: [Int]) {
+    Page(page: $page, perPage: 20) {
+        pageInfo {
+            hasNextPage
+        }
+        media(id_in: $id_in) {
+            ...MediaPoster
+        }
+    }
+}
+
+fragment MediaPoster on Media {
+    id
+    coverImage {
+        medium
+    }
+}

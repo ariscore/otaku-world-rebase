@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -29,7 +27,6 @@ class CountryDistributionChart extends StatelessWidget {
     if (countries == null || countries!.isEmpty) return const SizedBox();
     final total =
         countries!.fold(0, (sum, status) => sum + (status?.count ?? 0));
-    log('Total count: $total', name: 'AnimeStats');
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

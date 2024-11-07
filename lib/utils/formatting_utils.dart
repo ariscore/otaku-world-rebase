@@ -91,6 +91,22 @@ class FormattingUtils {
     return hours.truncate().toString();
   }
 
+  static String formatMinutes(int minutesWatched) {
+    int days = minutesWatched ~/ (24 * 60);
+    int remainingMinutes = minutesWatched % (24 * 60);
+    int hours = remainingMinutes ~/ 60;
+    int minutes = remainingMinutes % 60;
+
+    if (days > 0) {
+      return hours > 0 ? '$days Days $hours Hours' : '$days Days';
+    } else if (hours > 0) {
+      return minutes > 0 ? '$hours Hours $minutes Minutes' : '$hours Hours';
+    } else {
+      return '$minutes Minutes';
+    }
+  }
+
+
   static String getCountryCode(String country) {
     switch (country) {
       case 'Japan':
