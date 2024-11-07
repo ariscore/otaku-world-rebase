@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +9,7 @@ import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
 import 'package:otaku_world/features/profile/widgets/stats/genre/genre_stats.dart';
 import 'package:otaku_world/features/profile/widgets/stats/overview/anime_stats_overview.dart';
 import 'package:otaku_world/features/profile/widgets/stats/overview/manga_stats_overview.dart';
+import 'package:otaku_world/features/profile/widgets/stats/studios/studio_stats.dart';
 import 'package:otaku_world/features/profile/widgets/stats/tags/tags_stats.dart';
 import 'package:otaku_world/features/profile/widgets/stats/voice_actors/voice_actor_stats.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
@@ -181,7 +180,10 @@ class _UserStatsState extends State<UserStats> {
           voiceActors: animeStats.voiceActors,
         );
       case StatsOption.studios:
-        return const SizedBox();
+        return StudioStats(
+          key: UniqueKey(),
+          studios: animeStats.studios,
+        );
       case StatsOption.staff:
         return const SizedBox();
     }
