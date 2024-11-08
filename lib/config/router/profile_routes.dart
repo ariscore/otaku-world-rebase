@@ -14,6 +14,33 @@ final profileRoutes = [
   ),
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
+    path: RouteConstants.profile,
+    directionTween: SlideTransitionRoute.leftToRightTween,
+    builder: (state) {
+      final id = int.parse(state.uri.queryParameters['id']!);
+      return BlocProvider(
+        create: (context) => ProfileBloc(userId: id),
+        child: const ProfileScreen(),
+      );
+    },
+  ),
+  SlideTransitionRoute(
+    parentNavigatorKey: _rootNavigatorKey,
+    path: RouteConstants.sendMessage,
+    directionTween: SlideTransitionRoute.bottomToTopTween,
+    builder: (state) {
+      final id = int.parse(state.uri.queryParameters['receiver_id']!);
+      return BlocProvider(
+        create: (context) => SendMessageCubit(),
+        child: SendMessageScreen(
+          receiverId: id,
+          onSent: state.extra! as OnMessaged,
+        ),
+      );
+    },
+  ),
+  SlideTransitionRoute(
+    parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.favoriteAnime,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
@@ -167,7 +194,8 @@ final profileRoutes = [
           ? Enum$MediaType.ANIME
           : Enum$MediaType.MANGA;
       return ReleaseYearDistributionScreen(
-        releaseYears: state.extra! as List<Fragment$UserStatistics$releaseYears?>,
+        releaseYears:
+            state.extra! as List<Fragment$UserStatistics$releaseYears?>,
         type: type,
       );
     },
@@ -188,7 +216,7 @@ final profileRoutes = [
   ),
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
-    path: RouteConstants.scoreDistribution ,
+    path: RouteConstants.scoreDistribution,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       final type = state.uri.queryParameters['type'] == 'anime'

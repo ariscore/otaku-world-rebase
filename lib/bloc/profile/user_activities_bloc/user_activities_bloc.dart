@@ -212,9 +212,15 @@ class UserActivitiesBloc
     }
   }
 
+  void addMessageActivity({required Fragment$MessageActivity activity}) {
+    if (type == Enum$ActivityType.MESSAGE || type == null) {
+      list.insert(0, activity);
+      add(UpdateData(list: list));
+    }
+  }
+
   void editActivity(dynamic activity, {required Enum$ActivityType type}) {
-    if (type == Enum$ActivityType.TEXT) {
-      log('Editing activity');
+    if (type == Enum$ActivityType.TEXT || type == Enum$ActivityType.MESSAGE) {
       int index = list.indexWhere((e) => e.id == activity.id);
 
       if (index != -1) {

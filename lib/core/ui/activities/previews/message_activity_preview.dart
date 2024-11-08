@@ -13,15 +13,11 @@ class MessageActivityPreview extends StatelessWidget {
     required this.text,
     required this.senderName,
     required this.senderAvatar,
-    required this.receiverName,
-    required this.receiverAvatar,
   });
 
   final String text;
   final String senderName;
   final String senderAvatar;
-  final String receiverName;
-  final String receiverAvatar;
 
   @override
   Widget build(BuildContext context) {
@@ -44,34 +40,10 @@ class MessageActivityPreview extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width - 40,
-                  child: Wrap(
-                    runSpacing: 5,
-                    children: [
-                      _buildUser(
-                        context,
-                        avatarUrl: senderAvatar,
-                        userName: senderName,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 8,
-                          horizontal: 10,
-                        ),
-                        child: SvgPicture.asset(Assets.iconsArrowRight),
-                      ),
-                      _buildUser(
-                        context,
-                        avatarUrl: receiverAvatar,
-                        userName: receiverName,
-                      ),
-                    ],
-                  ),
-                )
-              ],
+            _buildUser(
+              context,
+              avatarUrl: senderAvatar,
+              userName: senderName,
             ),
             const SizedBox(height: 10),
             // Main content

@@ -147,8 +147,6 @@ class _EditMessageActivityScreenState extends State<EditMessageActivityScreen> {
               text: textController.text.trim(),
               senderAvatar: widget.activity.messenger?.avatar?.medium ?? '',
               senderName: widget.activity.messenger?.name ?? '',
-              receiverAvatar: widget.activity.recipient?.avatar?.medium ?? '',
-              receiverName: widget.activity.recipient?.name ?? '',
             ),
           );
         },

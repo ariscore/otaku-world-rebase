@@ -123,7 +123,6 @@ class FormattingUtils {
   }
 
   static String getCountry(String? countryCode) {
-    if (countryCode == null) return 'Unknown';
     switch (countryCode) {
       case 'JP':
         return 'Japan';

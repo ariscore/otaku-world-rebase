@@ -5,40 +5,36 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
-import 'package:otaku_world/bloc/social/edit_text_activity/edit_text_activity_cubit.dart';
+import 'package:otaku_world/bloc/profile/send_message/send_message_cubit.dart';
 import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
 import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/types/types.dart';
+import 'package:otaku_world/core/ui/activities/previews/message_activity_preview.dart';
 import 'package:otaku_world/core/ui/activities/previews/text_activity_preview.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/custom_text_field.dart';
+import 'package:otaku_world/core/ui/dialogs/alert_dialog.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
 
-class EditTextActivityScreen extends StatefulWidget {
-  const EditTextActivityScreen({
+class SendMessageScreen extends StatefulWidget {
+  const SendMessageScreen({
     super.key,
-    required this.onPosted,
-    required this.text,
+    required this.receiverId,
+    required this.onSent,
   });
 
-  final OnPosted onPosted;
-  final String text;
+  final int receiverId;
+  final OnMessaged onSent;
 
   @override
-  State<EditTextActivityScreen> createState() => _EditTextActivityScreenState();
+  State<SendMessageScreen> createState() => _SendMessageScreenState();
 }
 
-class _EditTextActivityScreenState extends State<EditTextActivityScreen> {
-  late final TextEditingController textController;
+class _SendMessageScreenState extends State<SendMessageScreen> {
+  final textController = TextEditingController();
   final focusNode = FocusNode();
-
-  @override
-  void initState() {
-    textController = TextEditingController(text: widget.text);
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -49,9 +45,9 @@ class _EditTextActivityScreenState extends State<EditTextActivityScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<EditTextActivityCubit, EditTextActivityState>(
+    return BlocListener<SendMessageCubit, SendMessageState>(
       listener: (context, state) {
-        if (state is EditingActivity) {
+        if (state is SendingMessage) {
           showDialog(
             context: context,
             barrierDismissible: false,
@@ -65,11 +61,11 @@ class _EditTextActivityScreenState extends State<EditTextActivityScreen> {
               );
             },
           );
-        } else if (state is EditedActivity) {
-          widget.onPosted(state.activity);
+        } else if (state is SentMessage) {
+          widget.onSent(state.message);
           context.pop();
           context.pop();
-        } else if (state is EditActivityError) {
+        } else if (state is SendMessageError) {
           context.pop();
           UIUtils.showSnackBar(context, state.message);
         }
@@ -92,18 +88,18 @@ class _EditTextActivityScreenState extends State<EditTextActivityScreen> {
           ),
         ),
         appBar: SimpleAppBar(
-          title: 'Edit Text Status',
+          title: 'Send Message',
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 10),
-              child: BlocBuilder<EditTextActivityCubit, EditTextActivityState>(
+              child: BlocBuilder<SendMessageCubit, SendMessageState>(
                 builder: (context, state) {
-                  if (state is EditingActivity) {
+                  if (state is SendingMessage) {
                     return const CircularProgressIndicator();
                   } else {
                     return IconButton(
                       onPressed: () {
-                        _editActivity();
+                        _showConfirmDialog();
                       },
                       icon: SvgPicture.asset(
                         Assets.iconsSend,
@@ -141,10 +137,10 @@ class _EditTextActivityScreenState extends State<EditTextActivityScreen> {
         context: context,
         builder: (context) {
           return Center(
-            child: TextActivityPreview(
+            child: MessageActivityPreview(
               text: textController.text.trim(),
-              userAvatar: state.user.avatar?.medium ?? '',
-              userName: state.user.name,
+              senderAvatar: state.user.avatar?.medium ?? '',
+              senderName: state.user.name,
             ),
           );
         },
@@ -154,17 +150,47 @@ class _EditTextActivityScreenState extends State<EditTextActivityScreen> {
     }
   }
 
-  void _editActivity() {
-    log('Editing activity');
+  void _showConfirmDialog() {
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return CustomAlertDialog(
+          title: 'Send Message',
+          body: StringConstants.messageConfirmation,
+          showCheckBox: true,
+          checkValue: context.read<SendMessageCubit>().isPrivate,
+          onChange: () {
+            final value = context.read<SendMessageCubit>().isPrivate;
+            log('Private: $value');
+            context.read<SendMessageCubit>().changePrivate();
+          },
+          onConfirm: () {
+            dialogContext.pop();
+            _sendMessage();
+          },
+          onCancel: () {
+            dialogContext.pop();
+          },
+        );
+      },
+    );
+  }
+
+  void _sendMessage() {
+    log('Sending message');
     final text = textController.text.trim();
     if (text.isEmpty) {
-      UIUtils.showSnackBar(context, 'Activity can\'t be empty!');
+      UIUtils.showSnackBar(context, 'Message can\'t be empty!');
     } else {
-      final replyCubit = context.read<EditTextActivityCubit>();
+      final replyCubit = context.read<SendMessageCubit>();
 
       final client = context.read<GraphqlClientCubit>().getClient();
       if (client != null) {
-        replyCubit.editActivity(client, text: text);
+        replyCubit.sendMessage(
+          client,
+          text: text,
+          receiverId: widget.receiverId,
+        );
       } else {
         UIUtils.showSnackBar(context, ActivityConstants.clientError);
       }
