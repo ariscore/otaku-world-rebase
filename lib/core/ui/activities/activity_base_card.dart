@@ -11,6 +11,7 @@ import 'package:otaku_world/core/ui/activities/activity_actions.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
+import 'package:otaku_world/utils/navigation_helper.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../config/router/router_constants.dart';
@@ -330,7 +331,7 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
       padding: const EdgeInsets.only(bottom: 10),
       child: GestureDetector(
         onTap: () {
-          context.push('${RouteConstants.profile}?id=$id');
+          NavigationHelper.goToProfileScreen(context: context, userId: id);
         },
         child: Row(
           mainAxisSize: MainAxisSize.min,

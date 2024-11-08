@@ -17,7 +17,6 @@ import 'package:otaku_world/bloc/profile/favorite_studios/favorite_studios_bloc.
 import 'package:otaku_world/bloc/profile/my_profile/my_profile_bloc.dart';
 import 'package:otaku_world/bloc/profile/profile/profile_bloc.dart';
 import 'package:otaku_world/bloc/profile/send_message/send_message_cubit.dart';
-import 'package:otaku_world/bloc/profile/user_stats/user_stats_bloc.dart';
 import 'package:otaku_world/bloc/recommendations/recommendation_anime_bloc.dart';
 import 'package:otaku_world/bloc/reviews/review_detail/review_detail_bloc.dart';
 import 'package:otaku_world/bloc/routes/redirect_route_cubit.dart';
@@ -83,8 +82,6 @@ import 'package:otaku_world/features/profile/screens/stats/start_year_distributi
 import 'package:otaku_world/features/profile/screens/stats/status_distribution_screen.dart';
 import 'package:otaku_world/features/profile/screens/user_activities_screen.dart';
 import 'package:otaku_world/features/profile/screens/user_notifications_screen.dart';
-import 'package:otaku_world/features/profile/widgets/stats/overview/country_distribution_chart.dart';
-import 'package:otaku_world/features/profile/widgets/stats/overview/release_year_distribution_chart.dart';
 import 'package:otaku_world/features/reviews/screens/review_detail_screen.dart';
 import 'package:otaku_world/features/reviews/screens/reviews_screen.dart';
 import 'package:otaku_world/features/search/screens/search_screen.dart';

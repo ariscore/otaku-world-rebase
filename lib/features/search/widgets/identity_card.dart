@@ -91,10 +91,7 @@ class IdentityCard extends StatelessWidget {
         ? CachedNetworkImage(
             cacheManager: ImageCacheManager.instance,
             imageUrl: imageUrl,
-            width: UIUtils.getWidgetWidth(
-              targetWidgetWidth: 90,
-              screenWidth: size.width,
-            ),
+            width: 90,
             fit: BoxFit.cover,
             imageBuilder: (context, imageProvider) {
               return AspectRatio(

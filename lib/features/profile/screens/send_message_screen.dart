@@ -10,7 +10,6 @@ import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
 import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/types/types.dart';
 import 'package:otaku_world/core/ui/activities/previews/message_activity_preview.dart';
-import 'package:otaku_world/core/ui/activities/previews/text_activity_preview.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/custom_text_field.dart';
 import 'package:otaku_world/core/ui/dialogs/alert_dialog.dart';

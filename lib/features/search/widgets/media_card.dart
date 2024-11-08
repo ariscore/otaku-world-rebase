@@ -28,7 +28,10 @@ class ResultMediaCard extends StatelessWidget {
         mediaId: media!.id,
       ),
       child: Container(
-        height: UIUtils.getWidgetHeight(targetWidgetHeight: 150, screenHeight: size.height,),
+        height: UIUtils.getWidgetHeight(
+          targetWidgetHeight: 150,
+          screenHeight: size.height,
+        ),
         margin: const EdgeInsets.symmetric(
           vertical: 5,
         ),
@@ -108,10 +111,7 @@ class ResultMediaCard extends StatelessWidget {
         ? CachedNetworkImage(
             cacheManager: ImageCacheManager.instance,
             imageUrl: imageUrl,
-            width: UIUtils.getWidgetWidth(
-              targetWidgetWidth: 90,
-              screenWidth: size.width,
-            ),
+            width: 90,
             fit: BoxFit.cover,
             imageBuilder: (context, imageProvider) {
               return AspectRatio(
