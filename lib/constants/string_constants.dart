@@ -11,6 +11,7 @@ class StringConstants {
   static const validationError = 'Please enter valid text!';
   static const statsNotAvailable = 'Statistics not available!';
   static const messageConfirmation = 'Are you sure you want to send this message?';
+  static const unfollowConfirmation = 'Their activities will no longer appear in your Following tab.';
 }
 
 class LoginConstants {

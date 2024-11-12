@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/profile/user_social_bloc/user_social_bloc.dart';
+import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
 import 'package:otaku_world/constants/filter_constants.dart';
 import 'package:otaku_world/core/ui/error_text.dart';
 import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
@@ -17,14 +18,22 @@ import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../constants/string_constants.dart';
+import '../../../core/ui/dialogs/alert_dialog.dart';
 import '../../../theme/colors.dart';
 import '../../../utils/ui_utils.dart';
 import '../../reviews/widgets/bottom_sheet_component.dart';
 
 class UserSocial extends StatelessWidget {
-  const UserSocial({super.key, required this.userId, this.scrollKey});
+  const UserSocial({
+    super.key,
+    required this.userId,
+    required this.isMyProfile,
+    this.scrollKey,
+  });
 
   final int userId;
+  final bool isMyProfile;
   final GlobalKey<ExtendedNestedScrollViewState>? scrollKey;
 
   @override
@@ -33,10 +42,11 @@ class UserSocial extends StatelessWidget {
     final client = context.read<GraphqlClientCubit>().getClient();
 
     return BlocProvider(
-      create: (context) => UserSocialBloc(userId: userId)
-        ..add(
-          LoadSocialData(client!),
-        ),
+      create: (context) =>
+          UserSocialBloc(userId: userId, isMyProfile: isMyProfile)
+            ..add(
+              LoadSocialData(client!),
+            ),
       child: BlocListener<UserSocialBloc, UserSocialState>(
         listenWhen: (previous, current) =>
             current is UserSocialLoaded &&
@@ -87,7 +97,8 @@ class UserSocial extends StatelessWidget {
                               ),
                             );
                         if (scrollKey?.currentState != null) {
-                          final position = scrollKey!.currentState!.innerController.positions.first;
+                          final position = scrollKey!
+                              .currentState!.innerController.positions.first;
                           log('Position: $position');
                           if (position.viewportDimension > 680) {
                             scrollKey?.currentState?.innerController.animateTo(
@@ -103,10 +114,12 @@ class UserSocial extends StatelessWidget {
                 ),
               ),
               BlocBuilder<UserSocialBloc, UserSocialState>(
+                buildWhen: (previous, current) => true,
                 builder: (context, state) {
                   if (state is UserSocialLoading) {
                     return const SocialShimmer();
                   } else if (state is UserSocialLoaded) {
+                    log('Loaded state: $state', name: 'UserSocialBloc');
                     final list =
                         state.isFollowing ? state.followings : state.followers;
 
@@ -124,7 +137,9 @@ class UserSocial extends StatelessWidget {
                                 : 'No Followers Yet',
                             subheading: state.isFollowing
                                 ? 'Follow people to see their profiles here.'
-                                : 'Looks like no one is following you right now.',
+                                : isMyProfile
+                                    ? 'Looks like no one is following you right now.'
+                                    : 'This user doesn’t have any followers right now. Be the first to follow them!',
                           ),
                         ),
                       );
@@ -199,7 +214,8 @@ class UserSocial extends StatelessWidget {
 
   void _showOptions(BuildContext context, Fragment$User user) {
     List<BottomSheetComponent> options = [];
-    final isCurrentUser = userId == user.id;
+    final isCurrentUser =
+        (context.read<ViewerBloc>().state as ViewerLoaded).user.id == user.id;
 
     if (!(user.isFollowing ?? false) && !isCurrentUser) {
       options.add(
@@ -223,7 +239,7 @@ class UserSocial extends StatelessWidget {
       BottomSheetComponent(
         iconName: Assets.iconsShare,
         text: 'Share Profile',
-        onTap: () => _shareProfile(context, user.name),
+        onTap: () => _shareProfile(context, user.id),
       ),
     );
     options.add(
@@ -287,17 +303,43 @@ class UserSocial extends StatelessWidget {
 
   void _unfollowUser(BuildContext context, int userId) {
     context.pop();
-    context.read<UserSocialBloc>().add(
-          UnfollowUser(
-            client: context.read<GraphqlClientCubit>().getClient()!,
-            userId: userId,
-          ),
-        );
+    _showUnfollowConfirmation(context, userId);
   }
 
-  void _shareProfile(BuildContext context, String userName) {
+  void _showUnfollowConfirmation(BuildContext context, int userId) {
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return CustomAlertDialog(
+          title: 'Unfollow user?',
+          body: StringConstants.unfollowConfirmation,
+          confirmText: 'Unfollow',
+          onConfirm: () {
+            dialogContext.pop();
+            context.read<UserSocialBloc>().add(
+              UnfollowUser(
+                client: context.read<GraphqlClientCubit>().getClient()!,
+                userId: userId,
+              ),
+            );
+          },
+          onCancel: dialogContext.pop,
+        );
+      },
+    );
+  }
+
+  void _shareProfile(BuildContext context, int userId) {
     context.pop();
-    Share.share('Bhai ni profile check karo: $userName');
+    final uri = Uri(
+      scheme: 'https',
+      host: 'otaku-world-8a7f4.firebaseapp.com',
+      path: '/profile',
+      queryParameters: {
+        'id': userId.toString(),
+      },
+    );
+    Share.share('Bhai ni profile check karo: ${uri.toString()}');
   }
 
   void _viewOnAniList(BuildContext context, String userName) {

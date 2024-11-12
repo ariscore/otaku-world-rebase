@@ -9902,6 +9902,13 @@ const fragmentDefinitionReviewDetail = FragmentDefinitionNode(
       directives: [],
       selectionSet: SelectionSetNode(selections: [
         FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
           name: NameNode(value: 'name'),
           alias: null,
           arguments: [],
@@ -10048,16 +10055,19 @@ extension ClientExtension$Fragment$ReviewDetail on graphql.GraphQLClient {
 
 class Fragment$ReviewDetail$user {
   Fragment$ReviewDetail$user({
+    required this.id,
     required this.name,
     this.avatar,
     this.$__typename = 'User',
   });
 
   factory Fragment$ReviewDetail$user.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
     final l$name = json['name'];
     final l$avatar = json['avatar'];
     final l$$__typename = json['__typename'];
     return Fragment$ReviewDetail$user(
+      id: (l$id as int),
       name: (l$name as String),
       avatar: l$avatar == null
           ? null
@@ -10067,6 +10077,8 @@ class Fragment$ReviewDetail$user {
     );
   }
 
+  final int id;
+
   final String name;
 
   final Fragment$ReviewDetail$user$avatar? avatar;
@@ -10075,6 +10087,8 @@ class Fragment$ReviewDetail$user {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
     final l$name = name;
     _resultData['name'] = l$name;
     final l$avatar = avatar;
@@ -10086,10 +10100,12 @@ class Fragment$ReviewDetail$user {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$name = name;
     final l$avatar = avatar;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$id,
       l$name,
       l$avatar,
       l$$__typename,
@@ -10103,6 +10119,11 @@ class Fragment$ReviewDetail$user {
     }
     if (!(other is Fragment$ReviewDetail$user) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$name = name;
@@ -10143,6 +10164,7 @@ abstract class CopyWith$Fragment$ReviewDetail$user<TRes> {
       _CopyWithStubImpl$Fragment$ReviewDetail$user;
 
   TRes call({
+    int? id,
     String? name,
     Fragment$ReviewDetail$user$avatar? avatar,
     String? $__typename,
@@ -10164,11 +10186,13 @@ class _CopyWithImpl$Fragment$ReviewDetail$user<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? name = _undefined,
     Object? avatar = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$ReviewDetail$user(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
@@ -10196,6 +10220,7 @@ class _CopyWithStubImpl$Fragment$ReviewDetail$user<TRes>
   TRes _res;
 
   call({
+    int? id,
     String? name,
     Fragment$ReviewDetail$user$avatar? avatar,
     String? $__typename,
@@ -20505,6 +20530,9 @@ class Fragment$UserInfo {
     this.bannerImage,
     this.about,
     this.unreadNotificationCount,
+    this.isFollowing,
+    this.isFollower,
+    this.isBlocked,
     this.statistics,
     this.$__typename = 'User',
   });
@@ -20516,6 +20544,9 @@ class Fragment$UserInfo {
     final l$bannerImage = json['bannerImage'];
     final l$about = json['about'];
     final l$unreadNotificationCount = json['unreadNotificationCount'];
+    final l$isFollowing = json['isFollowing'];
+    final l$isFollower = json['isFollower'];
+    final l$isBlocked = json['isBlocked'];
     final l$statistics = json['statistics'];
     final l$$__typename = json['__typename'];
     return Fragment$UserInfo(
@@ -20528,6 +20559,9 @@ class Fragment$UserInfo {
       bannerImage: (l$bannerImage as String?),
       about: (l$about as String?),
       unreadNotificationCount: (l$unreadNotificationCount as int?),
+      isFollowing: (l$isFollowing as bool?),
+      isFollower: (l$isFollower as bool?),
+      isBlocked: (l$isBlocked as bool?),
       statistics: l$statistics == null
           ? null
           : Fragment$UserInfo$statistics.fromJson(
@@ -20548,6 +20582,12 @@ class Fragment$UserInfo {
 
   final int? unreadNotificationCount;
 
+  final bool? isFollowing;
+
+  final bool? isFollower;
+
+  final bool? isBlocked;
+
   final Fragment$UserInfo$statistics? statistics;
 
   final String $__typename;
@@ -20566,6 +20606,12 @@ class Fragment$UserInfo {
     _resultData['about'] = l$about;
     final l$unreadNotificationCount = unreadNotificationCount;
     _resultData['unreadNotificationCount'] = l$unreadNotificationCount;
+    final l$isFollowing = isFollowing;
+    _resultData['isFollowing'] = l$isFollowing;
+    final l$isFollower = isFollower;
+    _resultData['isFollower'] = l$isFollower;
+    final l$isBlocked = isBlocked;
+    _resultData['isBlocked'] = l$isBlocked;
     final l$statistics = statistics;
     _resultData['statistics'] = l$statistics?.toJson();
     final l$$__typename = $__typename;
@@ -20581,6 +20627,9 @@ class Fragment$UserInfo {
     final l$bannerImage = bannerImage;
     final l$about = about;
     final l$unreadNotificationCount = unreadNotificationCount;
+    final l$isFollowing = isFollowing;
+    final l$isFollower = isFollower;
+    final l$isBlocked = isBlocked;
     final l$statistics = statistics;
     final l$$__typename = $__typename;
     return Object.hashAll([
@@ -20590,6 +20639,9 @@ class Fragment$UserInfo {
       l$bannerImage,
       l$about,
       l$unreadNotificationCount,
+      l$isFollowing,
+      l$isFollower,
+      l$isBlocked,
       l$statistics,
       l$$__typename,
     ]);
@@ -20633,6 +20685,21 @@ class Fragment$UserInfo {
     if (l$unreadNotificationCount != lOther$unreadNotificationCount) {
       return false;
     }
+    final l$isFollowing = isFollowing;
+    final lOther$isFollowing = other.isFollowing;
+    if (l$isFollowing != lOther$isFollowing) {
+      return false;
+    }
+    final l$isFollower = isFollower;
+    final lOther$isFollower = other.isFollower;
+    if (l$isFollower != lOther$isFollower) {
+      return false;
+    }
+    final l$isBlocked = isBlocked;
+    final lOther$isBlocked = other.isBlocked;
+    if (l$isBlocked != lOther$isBlocked) {
+      return false;
+    }
     final l$statistics = statistics;
     final lOther$statistics = other.statistics;
     if (l$statistics != lOther$statistics) {
@@ -20671,6 +20738,9 @@ abstract class CopyWith$Fragment$UserInfo<TRes> {
     String? bannerImage,
     String? about,
     int? unreadNotificationCount,
+    bool? isFollowing,
+    bool? isFollower,
+    bool? isBlocked,
     Fragment$UserInfo$statistics? statistics,
     String? $__typename,
   });
@@ -20698,6 +20768,9 @@ class _CopyWithImpl$Fragment$UserInfo<TRes>
     Object? bannerImage = _undefined,
     Object? about = _undefined,
     Object? unreadNotificationCount = _undefined,
+    Object? isFollowing = _undefined,
+    Object? isFollower = _undefined,
+    Object? isBlocked = _undefined,
     Object? statistics = _undefined,
     Object? $__typename = _undefined,
   }) =>
@@ -20716,6 +20789,15 @@ class _CopyWithImpl$Fragment$UserInfo<TRes>
         unreadNotificationCount: unreadNotificationCount == _undefined
             ? _instance.unreadNotificationCount
             : (unreadNotificationCount as int?),
+        isFollowing: isFollowing == _undefined
+            ? _instance.isFollowing
+            : (isFollowing as bool?),
+        isFollower: isFollower == _undefined
+            ? _instance.isFollower
+            : (isFollower as bool?),
+        isBlocked: isBlocked == _undefined
+            ? _instance.isBlocked
+            : (isBlocked as bool?),
         statistics: statistics == _undefined
             ? _instance.statistics
             : (statistics as Fragment$UserInfo$statistics?),
@@ -20754,6 +20836,9 @@ class _CopyWithStubImpl$Fragment$UserInfo<TRes>
     String? bannerImage,
     String? about,
     int? unreadNotificationCount,
+    bool? isFollowing,
+    bool? isFollower,
+    bool? isBlocked,
     Fragment$UserInfo$statistics? statistics,
     String? $__typename,
   }) =>
@@ -20827,6 +20912,27 @@ const fragmentDefinitionUserInfo = FragmentDefinitionNode(
     ),
     FieldNode(
       name: NameNode(value: 'unreadNotificationCount'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isFollowing'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isFollower'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isBlocked'),
       alias: null,
       arguments: [],
       directives: [],

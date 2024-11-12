@@ -15,7 +15,10 @@ part 'user_social_event.dart';
 part 'user_social_state.dart';
 
 class UserSocialBloc extends Bloc<UserSocialEvent, UserSocialState> {
-  UserSocialBloc({required this.userId}) : super(UserSocialInitial()) {
+  UserSocialBloc({
+    required this.userId,
+    required this.isMyProfile,
+  }) : super(UserSocialInitial()) {
     on<ResetData>(_onResetData);
     on<LoadSocialData>(_onLoadSocialData);
     on<LoadMoreData>(_onLoadMoreData, transformer: droppable());
@@ -25,6 +28,7 @@ class UserSocialBloc extends Bloc<UserSocialEvent, UserSocialState> {
   }
 
   final int userId;
+  final bool isMyProfile;
   int followingPage = 1, followersPage = 1;
   bool hasNextPageFollowing = true, hasNextPageFollowers = true;
   final List<Fragment$User?> followingList = [], followersList = [];
@@ -101,7 +105,10 @@ class UserSocialBloc extends Bloc<UserSocialEvent, UserSocialState> {
     }
   }
 
-  void _onLoadMoreData(LoadMoreData event, Emitter<UserSocialState> emit) async {
+  void _onLoadMoreData(
+    LoadMoreData event,
+    Emitter<UserSocialState> emit,
+  ) async {
     if ((!hasNextPageFollowing && event.isFollowing) ||
         (!hasNextPageFollowers && !event.isFollowing)) {
       return;
@@ -121,19 +128,36 @@ class UserSocialBloc extends Bloc<UserSocialEvent, UserSocialState> {
 
       if (response.hasException) {
         if (response.exception!.linkException != null) {
-          emit(loadedState.copyWith(error: StringConstants.noInternetError,),);
+          emit(
+            loadedState.copyWith(
+              error: StringConstants.noInternetError,
+            ),
+          );
         } else {
-          emit(loadedState.copyWith(error: StringConstants.somethingWentWrongError,),);
+          emit(
+            loadedState.copyWith(
+              error: StringConstants.somethingWentWrongError,
+            ),
+          );
         }
       } else {
         final data = response.parsedData!.Page;
         hasNextPageFollowing = data?.pageInfo?.hasNextPage ?? false;
         followingList.addAll(data?.following ?? []);
-        emit(loadedState.copyWith(followings: followingList));
+        followingPage++;
+        // emit(loadedState.copyWith(followings: List.from(followingList)));
+        // emit(UserSocialLoading());
+        emit(
+          UserSocialLoaded(
+            followings: List.from(followingList),
+            followers: loadedState.followers,
+            hasNextPageFollowing: hasNextPageFollowing,
+            hasNextPageFollowers: hasNextPageFollowers,
+            isFollowing: isFollowing,
+          ),
+        );
       }
-    } else {
-
-    }
+    } else {}
   }
 
   void _onChangeType(ChangeType event, Emitter<UserSocialState> emit) {
@@ -150,7 +174,10 @@ class UserSocialBloc extends Bloc<UserSocialEvent, UserSocialState> {
     );
   }
 
-  void _onUnfollowUser(UnfollowUser event, Emitter<UserSocialState> emit) async {
+  void _onUnfollowUser(
+    UnfollowUser event,
+    Emitter<UserSocialState> emit,
+  ) async {
     await _handleToggleFollow(
       client: event.client,
       userId: event.userId,
@@ -175,6 +202,7 @@ class UserSocialBloc extends Bloc<UserSocialEvent, UserSocialState> {
         ),
       ),
     );
+    log('Response: $response');
 
     if (response.hasException) {
       if (response.exception!.linkException != null) {
@@ -195,12 +223,18 @@ class UserSocialBloc extends Bloc<UserSocialEvent, UserSocialState> {
       if (index != -1) {
         followersList[index] = user;
       }
-      if (isFollow) {
-        followingList.add(user);
+
+      if (isMyProfile) {
+        if (isFollow && (user?.isFollower ?? false)) {
+          followingList.add(user);
+        } else if (!(user?.isFollowing ?? false)) {
+          followingList.removeWhere((e) => e?.id == user?.id);
+        }
       } else {
-        followingList.removeWhere((e) => e?.id == user?.id);
-        // followersList.removeAt(index);
-        // followingList.removeWhere((e) => e?.id == userId);
+        index = followingList.indexWhere((e) => e?.id == userId);
+        if (index != -1) {
+          followingList[index] = user;
+        }
       }
 
       emit(
@@ -211,5 +245,11 @@ class UserSocialBloc extends Bloc<UserSocialEvent, UserSocialState> {
         ),
       );
     }
+  }
+
+  @override
+  void onTransition(Transition<UserSocialEvent, UserSocialState> transition) {
+    log(transition.toString(), name: 'UserSocialBloc');
+    super.onTransition(transition);
   }
 }

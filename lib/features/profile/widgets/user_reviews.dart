@@ -12,9 +12,14 @@ import '../../../bloc/profile/reviews/user_reviews_bloc.dart';
 import '../../reviews/widgets/review_card.dart';
 
 class UserReviews extends StatelessWidget {
-  const UserReviews({super.key, required this.userId});
+  const UserReviews({
+    super.key,
+    required this.userId,
+    this.isMyProfile = false,
+  });
 
   final int userId;
+  final bool isMyProfile;
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +36,16 @@ class UserReviews extends StatelessWidget {
             return const ReviewsShimmerList();
           } else if (state is PaginatedDataLoaded) {
             if (state.list.isEmpty) {
-              return const Center(
+              return Center(
                 child: AnimeCharacterPlaceholder(
                   asset: Assets.charactersCigaretteGirl,
                   height: 150,
                   heading: 'No Reviews Yet',
-                  subheading: 'Share your thoughts by reviewing anime or manga '
-                      'you\'ve watched or read.',
+                  subheading: isMyProfile
+                      ? 'Share your thoughts by reviewing anime or manga '
+                          'you\'ve watched or read.'
+                      : 'This user hasn’t posted any reviews. '
+                          'Check back later to see if they share their thoughts!',
                 ),
               );
             }

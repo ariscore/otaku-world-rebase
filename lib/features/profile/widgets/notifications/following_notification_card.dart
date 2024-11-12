@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:otaku_world/features/profile/widgets/notifications/notification_base_card.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
+import 'package:otaku_world/utils/navigation_helper.dart';
 
 import 'notification_image.dart';
 
@@ -13,22 +12,21 @@ class FollowingNotificationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = Theme
-        .of(context)
-        .textTheme
-        .headlineSmall;
+    final textStyle = Theme.of(context).textTheme.headlineSmall;
 
     return NotificationBaseCard(
       createdAt: notification.createdAt ?? 0,
-      onPressed: () {
-        log('Card clicked');
-      },
+      onPressed: () => NavigationHelper.goToProfileScreen(
+        context: context,
+        userId: notification.user?.id ?? 0,
+      ),
       child: Row(
         children: [
           GestureDetector(
-            onTap: () {
-              log('Image clicked');
-            },
+            onTap: () => NavigationHelper.goToProfileScreen(
+              context: context,
+              userId: notification.user?.id ?? 0,
+            ),
             child: NotificationImage(
               url: notification.user?.avatar?.medium ?? '',
             ),

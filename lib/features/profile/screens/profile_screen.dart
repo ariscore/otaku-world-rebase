@@ -97,6 +97,7 @@ class ProfileScreen extends HookWidget {
                       child: UserSocial(
                         userId: state.user.id,
                         scrollKey: scrollViewKey,
+                        isMyProfile: false,
                       ),
                     ),
                     KeepAliveTab(

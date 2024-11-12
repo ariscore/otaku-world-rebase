@@ -20,6 +20,7 @@ import 'package:otaku_world/bloc/profile/send_message/send_message_cubit.dart';
 import 'package:otaku_world/bloc/recommendations/recommendation_anime_bloc.dart';
 import 'package:otaku_world/bloc/reviews/review_detail/review_detail_bloc.dart';
 import 'package:otaku_world/bloc/routes/redirect_route_cubit.dart';
+import 'package:otaku_world/bloc/search/search_characters/search_characters_bloc.dart';
 import 'package:otaku_world/bloc/search/search_studios/search_studios_bloc.dart';
 import 'package:otaku_world/bloc/social/activities/activities_bloc.dart';
 import 'package:otaku_world/bloc/social/activity_replies/activity_replies_bloc.dart';

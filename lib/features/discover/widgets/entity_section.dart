@@ -222,6 +222,7 @@ class EntitySection<B extends PaginatedDataBloc, E> extends HookWidget {
                                 .media?.nodes?.firstOrNull?.coverImage?.large ??
                             '',
                         favorites: studio.favourites,
+                        rightMargin: 10,
                       );
                     } else {
                       return const SizedBox();

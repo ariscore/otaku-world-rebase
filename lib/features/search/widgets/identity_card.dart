@@ -6,7 +6,6 @@ import '../../../core/ui/placeholders/poster_placeholder.dart';
 import '../../../generated/assets.dart';
 import '../../../services/caching/image_cache_manager.dart';
 import '../../../theme/colors.dart';
-import '../../../utils/ui_utils.dart';
 
 class IdentityCard extends StatelessWidget {
   const IdentityCard({
@@ -97,7 +96,7 @@ class IdentityCard extends StatelessWidget {
               return AspectRatio(
                 aspectRatio: 0.7,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(15),
                   child: Image(
                     image: imageProvider,
                     fit: BoxFit.cover,

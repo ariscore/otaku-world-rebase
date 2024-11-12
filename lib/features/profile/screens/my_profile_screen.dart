@@ -97,11 +97,13 @@ class MyProfileScreen extends HookWidget {
                       child: UserSocial(
                         userId: state.user.id,
                         scrollKey: scrollViewKey,
+                        isMyProfile: true,
                       ),
                     ),
                     KeepAliveTab(
                       child: UserReviews(
                         userId: state.user.id,
+                        isMyProfile: true,
                       ),
                     ),
                   ],
