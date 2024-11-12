@@ -167,7 +167,7 @@ class MyProfileAppBar extends StatelessWidget {
         text: 'Settings',
         onTap: () {
           context.pop();
-          context.push(RouteConstants.settings);
+          context.push('${RouteConstants.settings}?name=${user.name}');
         },
       ),
       BottomSheetComponent(

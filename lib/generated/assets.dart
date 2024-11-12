@@ -24,6 +24,7 @@ class Assets {
   static const String fontsRobotoCondensedRegular = 'assets/fonts/RobotoCondensed-Regular.ttf';
   static const String fontsRobotoMedium = 'assets/fonts/Roboto-Medium.ttf';
   static const String fontsRobotoRegular = 'assets/fonts/Roboto-Regular.ttf';
+  static const String iconsAbout = 'assets/icons/about.svg';
   static const String iconsActivity = 'assets/icons/activity.svg';
   static const String iconsAdd = 'assets/icons/add.svg';
   static const String iconsAlert = 'assets/icons/alert.svg';
@@ -46,10 +47,13 @@ class Assets {
   static const String iconsFilterVertical = 'assets/icons/filter-vertical.svg';
   static const String iconsFollow = 'assets/icons/follow.svg';
   static const String iconsHome = 'assets/icons/home.svg';
+  static const String iconsLightning = 'assets/icons/lightning.svg';
   static const String iconsLike = 'assets/icons/like.svg';
   static const String iconsLineVertical = 'assets/icons/line_vertical.svg';
   static const String iconsLinkSquare = 'assets/icons/link-square.svg';
   static const String iconsList = 'assets/icons/list.svg';
+  static const String iconsList2 = 'assets/icons/list-2.svg';
+  static const String iconsLogout = 'assets/icons/logout.svg';
   static const String iconsMedia = 'assets/icons/media.svg';
   static const String iconsMediaAdd = 'assets/icons/media-add.svg';
   static const String iconsMediaEdit = 'assets/icons/media-edit.svg';
@@ -59,6 +63,7 @@ class Assets {
   static const String iconsMoreVertical = 'assets/icons/more-vertical.svg';
   static const String iconsNextButton = 'assets/icons/next-button.svg';
   static const String iconsNotification = 'assets/icons/notification.svg';
+  static const String iconsNotification2 = 'assets/icons/notification-2.svg';
   static const String iconsNotificationOff = 'assets/icons/notification-off.svg';
   static const String iconsNotificationRead = 'assets/icons/notification-read.svg';
   static const String iconsNotificationUnread = 'assets/icons/notification-unread.svg';
@@ -79,6 +84,7 @@ class Assets {
   static const String iconsThumbsUpFilled = 'assets/icons/thumbs-up-filled.svg';
   static const String iconsTrendUp = 'assets/icons/trend-up.svg';
   static const String iconsUnfollow = 'assets/icons/unfollow.svg';
+  static const String iconsUser = 'assets/icons/user.svg';
   static const String iconsUserGroup = 'assets/icons/user-group.svg';
   static const String iconsUserGroup2 = 'assets/icons/user-group-2.svg';
   static const String iconsViewSlider = 'assets/icons/view-slider.svg';
