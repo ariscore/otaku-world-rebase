@@ -121,7 +121,7 @@ final profileRoutes = [
     path: RouteConstants.settings,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
-      return const SettingsScreen();
+      return SettingsScreen(userName: state.uri.queryParameters['name']!);
     },
   ),
   SlideTransitionRoute(
