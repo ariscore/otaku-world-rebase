@@ -94,16 +94,17 @@ class _UserActivitiesScreenState extends State<UserActivitiesScreen> {
           } else if (state is PaginatedDataLoaded) {
             return Scaffold(
               floatingActionButton: PrimaryFAB(
+                key: const ValueKey<String>('user_activities_fab'),
                 controller: scrollController,
+                asset: widget.isCurrentUser
+                    ? Assets.iconsEdit
+                    : Assets.iconsSendMessage,
                 onPressed: () {
-                  context.push(
-                    RouteConstants.postNewActivity,
-                    extra: (Fragment$TextActivity activity) {
-                      context.read<UserActivitiesBloc>().addTextActivity(
-                            activity: activity,
-                          );
-                    },
-                  );
+                  if (widget.isCurrentUser) {
+                    _goToPostActivity(context.read<UserActivitiesBloc>());
+                  } else {
+                    _goToSendMessage(context.read<UserActivitiesBloc>());
+                  }
                 },
               ),
               body: RefreshIndicator(
@@ -187,6 +188,24 @@ class _UserActivitiesScreenState extends State<UserActivitiesScreen> {
           }
         },
       ),
+    );
+  }
+
+  void _goToPostActivity(UserActivitiesBloc bloc) {
+    context.push(
+      RouteConstants.postNewActivity,
+      extra: (Fragment$TextActivity activity) {
+        bloc.addTextActivity(activity: activity);
+      },
+    );
+  }
+
+  void _goToSendMessage(UserActivitiesBloc bloc) {
+    context.push(
+      '${RouteConstants.sendMessage}?receiver_id=${widget.userId}',
+      extra: (Fragment$MessageActivity activity) {
+        bloc.addMessageActivity(activity: activity);
+      },
     );
   }
 

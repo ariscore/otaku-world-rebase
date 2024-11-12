@@ -4,9 +4,7 @@ sealed class UserSocialEvent {
   const UserSocialEvent();
 }
 
-class ResetData extends UserSocialEvent {
-
-}
+class ResetData extends UserSocialEvent {}
 
 class LoadSocialData extends UserSocialEvent {
   const LoadSocialData(this.client);

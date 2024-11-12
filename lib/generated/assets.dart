@@ -68,6 +68,7 @@ class Assets {
   static const String iconsSearch = 'assets/icons/search.svg';
   static const String iconsSearchSmall = 'assets/icons/search-small.svg';
   static const String iconsSend = 'assets/icons/send.svg';
+  static const String iconsSendMessage = 'assets/icons/send_message.svg';
   static const String iconsSettings = 'assets/icons/settings.svg';
   static const String iconsShare = 'assets/icons/share.svg';
   static const String iconsStar = 'assets/icons/star.svg';

@@ -11,6 +11,7 @@ import 'package:otaku_world/core/ui/activities/activity_actions.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
+import 'package:otaku_world/utils/navigation_helper.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../config/router/router_constants.dart';
@@ -98,6 +99,7 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
                       children: [
                         _buildUser(
                           context,
+                          id: widget.userId,
                           avatarUrl: widget.avatarUrl,
                           userName: widget.userName,
                         ),
@@ -112,6 +114,7 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
                         if (widget.receiverAvatarUrl != null)
                           _buildUser(
                             context,
+                            id: widget.userId,
                             avatarUrl: widget.receiverAvatarUrl,
                             userName: widget.receiverUserName,
                           ),
@@ -125,6 +128,7 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
                 children: [
                   _buildUser(
                     context,
+                    id: widget.userId,
                     avatarUrl: widget.avatarUrl,
                     userName: widget.userName,
                   ),
@@ -319,50 +323,56 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
 
   Widget _buildUser(
     BuildContext context, {
+      required int id,
     required String? avatarUrl,
     required String? userName,
   }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 35,
-            height: 35,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.fromBorderSide(
-                BorderSide(color: AppColors.sunsetOrange),
+      child: GestureDetector(
+        onTap: () {
+          NavigationHelper.goToProfileScreen(context: context, userId: id);
+        },
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 35,
+              height: 35,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.fromBorderSide(
+                  BorderSide(color: AppColors.sunsetOrange),
+                ),
+              ),
+              // padding: const EdgeInsets.all(1),
+              child: ClipOval(
+                child: CachedNetworkImage(
+                  imageUrl: avatarUrl ?? '',
+                  imageBuilder: (context, imageProvider) {
+                    return Image(image: imageProvider, fit: BoxFit.cover);
+                  },
+                  placeholder: (context, url) {
+                    return _buildPlaceholderProfile();
+                  },
+                  errorWidget: (context, url, error) {
+                    return _buildPlaceholderProfile();
+                  },
+                ),
               ),
             ),
-            // padding: const EdgeInsets.all(1),
-            child: ClipOval(
-              child: CachedNetworkImage(
-                imageUrl: avatarUrl ?? '',
-                imageBuilder: (context, imageProvider) {
-                  return Image(image: imageProvider, fit: BoxFit.cover);
-                },
-                placeholder: (context, url) {
-                  return _buildPlaceholderProfile();
-                },
-                errorWidget: (context, url, error) {
-                  return _buildPlaceholderProfile();
-                },
+            const SizedBox(width: 10),
+            Flexible(
+              child: Text(
+                userName ?? '',
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontFamily: 'Poppins',
+                    ),
               ),
             ),
-          ),
-          const SizedBox(width: 10),
-          Flexible(
-            child: Text(
-              userName ?? '',
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontFamily: 'Poppins',
-                  ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

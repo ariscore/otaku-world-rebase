@@ -44,7 +44,8 @@ final class UserSocialLoaded extends UserSocialState {
     bool? isFollowing,
     String? error,
   }) {
-    return UserSocialLoaded(
+    log('Copy with followings: ${followings?.length} | ${this.followings.length}');
+    final st = UserSocialLoaded(
       followings: followings ?? this.followings,
       followers: followers ?? this.followers,
       hasNextPageFollowing: hasNextPageFollowing,
@@ -53,6 +54,9 @@ final class UserSocialLoaded extends UserSocialState {
       isFollowing: isFollowing ?? this.isFollowing,
       error: error,
     );
+    log('New state length: ${st.followings.length}');
+    log('Are equal: ${st.followings.length == this.followings.length}', name: 'UserSocialBloc');
+    return st;
   }
 
   @override

@@ -194,8 +194,8 @@ fragment ReviewDetail on Review {
     mediaType
     createdAt
     updatedAt
-
     user {
+        id
         name
         avatar {
             medium
@@ -427,6 +427,9 @@ fragment UserInfo on User {
     bannerImage
     about
     unreadNotificationCount
+    isFollowing
+    isFollower
+    isBlocked
     statistics {
         anime {
             count

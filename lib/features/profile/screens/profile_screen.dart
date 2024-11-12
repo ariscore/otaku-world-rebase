@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
-import 'package:otaku_world/bloc/profile/my_profile/my_profile_bloc.dart';
+import 'package:otaku_world/bloc/profile/profile/profile_bloc.dart';
 import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/error_text.dart';
 import 'package:otaku_world/features/profile/widgets/keep_alive_tab.dart';
-import 'package:otaku_world/features/profile/widgets/my_profile_app_bar.dart';
+import 'package:otaku_world/features/profile/widgets/profile_app_bar.dart';
 import 'package:otaku_world/features/profile/widgets/stats/user_stats.dart';
 import 'package:otaku_world/features/profile/widgets/user_favorites.dart';
 import 'package:otaku_world/features/profile/widgets/user_overview.dart';
@@ -18,24 +18,24 @@ import 'package:otaku_world/features/profile/widgets/user_reviews.dart';
 import 'package:otaku_world/features/profile/widgets/user_social.dart';
 import 'package:otaku_world/theme/colors.dart';
 
-class MyProfileScreen extends HookWidget {
-  const MyProfileScreen({super.key});
+class ProfileScreen extends HookWidget {
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     log('Building profile screen');
     final tabController = useTabController(initialLength: 5);
-    final profileBloc = context.read<MyProfileBloc>();
+    final profileBloc = context.read<ProfileBloc>();
     final client = context.read<GraphqlClientCubit>().getClient();
     final scrollViewKey = GlobalKey<ExtendedNestedScrollViewState>();
 
     return Scaffold(
-      body: BlocBuilder<MyProfileBloc, MyProfileState>(
+      body: BlocBuilder<ProfileBloc, ProfileState>(
         buildWhen: (previous, current) {
           return previous.runtimeType != current.runtimeType;
         },
         builder: (context, state) {
-          if (state is MyProfileInitial) {
+          if (state is ProfileInitial) {
             if (client == null) {
               return _buildErrorScaffold(
                 message: ActivityConstants.clientError,
@@ -46,15 +46,15 @@ class MyProfileScreen extends HookWidget {
             }
             profileBloc.add(LoadProfile(client));
             return _buildLoadingScaffold();
-          } else if (state is MyProfileLoading) {
+          } else if (state is ProfileLoading) {
             return _buildLoadingScaffold();
-          } else if (state is MyProfileLoaded) {
+          } else if (state is ProfileLoaded) {
             return RefreshIndicator(
               backgroundColor: AppColors.raisinBlack,
               displacement: 60,
               onRefresh: () {
                 return Future.delayed(const Duration(seconds: 1), () {
-                  context.read<MyProfileBloc>().add(LoadProfile(client!));
+                  context.read<ProfileBloc>().add(LoadProfile(client!));
                 });
               },
               notificationPredicate: (notification) {
@@ -64,7 +64,7 @@ class MyProfileScreen extends HookWidget {
                 key: scrollViewKey,
                 onlyOneScrollInBody: true,
                 headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                  MyProfileAppBar(
+                  ProfileAppBar(
                     user: state.user,
                     tabController: tabController,
                   ),
@@ -97,20 +97,19 @@ class MyProfileScreen extends HookWidget {
                       child: UserSocial(
                         userId: state.user.id,
                         scrollKey: scrollViewKey,
-                        isMyProfile: true,
+                        isMyProfile: false,
                       ),
                     ),
                     KeepAliveTab(
                       child: UserReviews(
                         userId: state.user.id,
-                        isMyProfile: true,
                       ),
                     ),
                   ],
                 ),
               ),
             );
-          } else if (state is MyProfileError) {
+          } else if (state is ProfileError) {
             return _buildErrorScaffold(
               message: state.message,
               onPressed: () {
@@ -127,7 +126,7 @@ class MyProfileScreen extends HookWidget {
 
   Widget _buildLoadingScaffold() {
     return const Scaffold(
-      appBar: SimpleAppBar(title: 'My Profile'),
+      appBar: SimpleAppBar(title: 'Profile'),
       body: Center(child: CircularProgressIndicator()),
     );
   }
@@ -137,7 +136,7 @@ class MyProfileScreen extends HookWidget {
     required VoidCallback onPressed,
   }) {
     return Scaffold(
-      appBar: const SimpleAppBar(title: 'My Profile'),
+      appBar: const SimpleAppBar(title: 'Profile'),
       body: Center(
         child: ErrorText(
           message: message,

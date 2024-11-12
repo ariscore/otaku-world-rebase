@@ -7,6 +7,7 @@ class RouteConstants {
   static const login = '/login';
   static const home = '/home';
   static const myProfile = '/my-profile';
+  static const profile = '/profile';
   static const favoriteAnime = '/favorite-anime';
   static const favoriteAnimeSlider = '/favorite-anime-slider';
   static const favoriteManga = '/favorite-manga';
@@ -32,6 +33,7 @@ class RouteConstants {
   static const postNewActivity = '/post-activity';
   static const editTextActivity = '/edit-text-activity';
   static const editMessageActivity = '/edit-message-activity';
+  static const sendMessage = '/send-message';
   static const replyActivity = '/reply-activity';
   static const editActivityReply = '/edit-activity-reply';
   static const myList = '/my-list';

@@ -9,6 +9,7 @@ import 'package:otaku_world/core/ui/markdown/markdown.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 
+import '../../../bloc/profile/user_activities_bloc/user_activities_bloc.dart';
 import 'activity_base_card.dart';
 
 class MessageActivityCard extends StatelessWidget {
@@ -58,8 +59,19 @@ class MessageActivityCard extends StatelessWidget {
         context.push(RouteConstants.editMessageActivity, extra: {
           'activity': activity,
           'on_messaged': (Fragment$MessageActivity activity) {
-            final bloc = context.read<ActivitiesBloc>();
-            bloc.editActivity(activity, type: Enum$ActivityType.MESSAGE);
+            if (bloc is ActivitiesBloc) {
+              (bloc as ActivitiesBloc).editActivity(
+                activity,
+                type: Enum$ActivityType.MESSAGE,
+              );
+            } else if (bloc is UserActivitiesBloc) {
+              (bloc as UserActivitiesBloc).editActivity(
+                activity,
+                type: Enum$ActivityType.MESSAGE,
+              );
+            }
+            // final bloc = context.read<ActivitiesBloc>();
+            // bloc.editActivity(activity, type: Enum$ActivityType.MESSAGE);
           },
         });
       },

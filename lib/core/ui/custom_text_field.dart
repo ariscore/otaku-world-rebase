@@ -41,7 +41,7 @@ class CustomTextField extends StatelessWidget {
       ),
       style: Theme.of(context).textTheme.headlineMedium,
       textCapitalization: textCapitalization,
-      maxLines: 30,
+      maxLines: 25,
     );
   }
 }

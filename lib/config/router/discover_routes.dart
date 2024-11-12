@@ -103,38 +103,49 @@ final discoverRoutes = [
     builder: (context) => const TopMangaScreen(),
     directionTween: SlideTransitionRoute.bottomToTopTween,
   ),
-  SlideTransitionShellRoute(
+  // SlideTransitionShellRoute(
+  //   parentNavigatorKey: _rootNavigatorKey,
+  //   builder: (context, state, child) {
+  //     return DiscoverCharactersWrapper(child: child);
+  //   },
+  //   directionTween: SlideTransitionRoute.leftToRightTween,
+  //   routes: [
+  //
+  //   ],
+  // ),
+  GoRoute(
     parentNavigatorKey: _rootNavigatorKey,
-    builder: (context, state, child) {
-      return DiscoverCharactersWrapper(child: child);
+    path: RouteConstants.discoverCharacters,
+    pageBuilder: (context, state) {
+      return NoTransitionPage(
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => BirthdayCharactersBloc()),
+            BlocProvider(create: (context) => MostFavoriteCharactersBloc()),
+            BlocProvider(create: (context) => SearchCharactersBloc()),
+          ],
+          child: const CharactersDiscoverScreen(),
+        ),
+      );
     },
-    directionTween: SlideTransitionRoute.leftToRightTween,
+    // directionTween: SlideTransitionRoute.leftToRightTween,
     routes: [
-      GoRoute(
-        path: RouteConstants.discoverCharacters,
-        pageBuilder: (context, state) {
-          return const NoTransitionPage(child: CharactersDiscoverScreen());
-        },
-        // directionTween: SlideTransitionRoute.leftToRightTween,
-        routes: [
-          SlideTransitionRoute(
-            path: RouteConstants.birthdayCharactersPath,
-            directionTween: SlideTransitionRoute.bottomToTopTween,
-            builder: (context) => const EntityScreen<BirthdayCharactersBloc>(
-              title: 'Birthdays',
-              tag: 'characters_birthdays',
-            ),
-          ),
-          SlideTransitionRoute(
-            path: RouteConstants.mostFavoriteCharactersPath,
-            directionTween: SlideTransitionRoute.bottomToTopTween,
-            builder: (context) =>
-                const EntityScreen<MostFavoriteCharactersBloc>(
-              title: 'Most Favorite Characters',
-                  tag: 'most_favorite_characters',
-            ),
-          ),
-        ],
+      SlideTransitionRoute(
+        path: RouteConstants.birthdayCharactersPath,
+        directionTween: SlideTransitionRoute.bottomToTopTween,
+        builder: (context) => const EntityScreen<BirthdayCharactersBloc>(
+          title: 'Birthdays',
+          tag: 'characters_birthdays',
+        ),
+      ),
+      SlideTransitionRoute(
+        path: RouteConstants.mostFavoriteCharactersPath,
+        directionTween: SlideTransitionRoute.bottomToTopTween,
+        builder: (context) =>
+        const EntityScreen<MostFavoriteCharactersBloc>(
+          title: 'Most Favorite Characters',
+          tag: 'most_favorite_characters',
+        ),
       ),
     ],
   ),
