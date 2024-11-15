@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:otaku_world/core/ui/buttons/primary_button.dart';
 import 'package:otaku_world/core/ui/buttons/primary_outlined_button.dart';
+import 'package:otaku_world/core/ui/filters/custom_check_box.dart';
 import 'package:otaku_world/theme/colors.dart';
 
-class CustomAlertDialog extends StatelessWidget {
+class CustomAlertDialog extends StatefulWidget {
   const CustomAlertDialog({
     super.key,
     required this.title,
@@ -12,6 +13,10 @@ class CustomAlertDialog extends StatelessWidget {
     required this.onCancel,
     this.confirmText = 'Ok',
     this.cancelText = 'Cancel',
+    this.showCheckBox = false,
+    this.checkValue = false,
+    this.checkLabel = 'Private',
+    this.onChange,
   });
 
   final String title;
@@ -20,6 +25,23 @@ class CustomAlertDialog extends StatelessWidget {
   final VoidCallback onCancel;
   final String confirmText;
   final String cancelText;
+  final bool showCheckBox;
+  final bool checkValue;
+  final String checkLabel;
+  final VoidCallback? onChange;
+
+  @override
+  State<CustomAlertDialog> createState() => _CustomAlertDialogState();
+}
+
+class _CustomAlertDialogState extends State<CustomAlertDialog> {
+  bool checkValue = false;
+
+  @override
+  void initState() {
+    checkValue = widget.checkValue;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,25 +62,35 @@ class CustomAlertDialog extends StatelessWidget {
           children: [
             const SizedBox(height: 10),
             Text(
-              title,
+              widget.title,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
             ),
             const SizedBox(height: 10),
             Text(
-              body,
+              widget.body,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.w500,
                   ),
             ),
+            if (widget.showCheckBox)
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: CustomCheckBox(
+                  value: '',
+                  label: widget.checkLabel,
+                  initialValue: checkValue,
+                  onChanged: widget.onChange!,
+                ),
+              ),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 PrimaryOutlinedButton(
-                  onTap: onCancel,
-                  label: cancelText,
+                  onTap: widget.onCancel,
+                  label: widget.cancelText,
                   isSmall: true,
                   width: 90,
                   horizontalPadding: 10,
@@ -66,8 +98,8 @@ class CustomAlertDialog extends StatelessWidget {
                   fontSize: 14,
                 ),
                 PrimaryButton(
-                  onTap: onConfirm,
-                  label: confirmText,
+                  onTap: widget.onConfirm,
+                  label: widget.confirmText,
                   isSmall: true,
                   width: 90,
                   horizontalPadding: 10,

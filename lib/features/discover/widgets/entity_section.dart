@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -31,8 +30,6 @@ class EntitySection<B extends PaginatedDataBloc, E> extends HookWidget {
   @override
   Widget build(BuildContext context) {
     useAutomaticKeepAlive();
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
 
     final scrollController = useScrollController();
 
@@ -55,6 +52,80 @@ class EntitySection<B extends PaginatedDataBloc, E> extends HookWidget {
       return null;
     }, const []);
 
+    return BlocBuilder<B, PaginatedDataState>(
+      builder: (context, state) {
+        if (state is PaginatedDataInitial) {
+          final client = context.read<GraphqlClientCubit>().getClient()!;
+          context.read<B>().add(LoadData(client));
+          return _buildLoadingShimmer(context);
+        } else if (state is PaginatedDataLoading) {
+          return _buildLoadingShimmer(context);
+        } else if (state is PaginatedDataLoaded) {
+          if (state.list.isEmpty) return const SizedBox();
+
+          return Padding(
+            padding: EdgeInsets.only(
+              left: leftPadding,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Section header
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      label,
+                      style:
+                          Theme.of(context).textTheme.displayMedium?.copyWith(
+                                fontFamily: 'Roboto-Condensed',
+                                fontWeight: FontWeight.w500,
+                              ),
+                    ),
+                    TextButton(
+                      onPressed: onViewAll,
+                      child: Text(
+                        'View All',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                              fontFamily: 'Roboto-Condensed',
+                              color: AppColors.sunsetOrange,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                    ),
+                  ],
+                ),
+                // Media list
+                _buildEntityList(
+                  state.list as List<E?>,
+                  state.hasNextPage,
+                  scrollController,
+                ),
+              ],
+            ),
+          );
+        } else if (state is PaginatedDataError) {
+          return ErrorText(
+            message: state.message,
+            onTryAgain: () {
+              final client = context.read<GraphqlClientCubit>().getClient()!;
+              context.read<B>().add(LoadData(client));
+            },
+          );
+        } else {
+          return const Text('Unknown State');
+        }
+      },
+    );
+  }
+
+  Widget _buildLoadingShimmer(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Padding(
       padding: EdgeInsets.only(
         left: leftPadding,
@@ -74,7 +145,7 @@ class EntitySection<B extends PaginatedDataBloc, E> extends HookWidget {
                     ),
               ),
               TextButton(
-                onPressed: onViewAll,
+                onPressed: () {},
                 child: Text(
                   'View All',
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -87,66 +158,21 @@ class EntitySection<B extends PaginatedDataBloc, E> extends HookWidget {
             ],
           ),
           // Media list
-          BlocBuilder<B, PaginatedDataState>(
-            builder: (context, state) {
-              if (state is PaginatedDataInitial) {
-                final client = (context.read<GraphqlClientCubit>().state
-                        as GraphqlClientInitialized)
-                    .client;
-                context.read<B>().add(LoadData(client));
-                return ShimmerLoaderList(
-                  widgetWidth: UIUtils.getWidgetWidth(
-                    targetWidgetWidth: 115,
-                    screenWidth: screenWidth,
-                  ),
-                  widgetHeight: UIUtils.getWidgetHeight(
-                    targetWidgetHeight: 169,
-                    screenHeight: screenHeight,
-                  ),
-                  height: UIUtils.getWidgetHeight(
-                    targetWidgetHeight: 169,
-                    screenHeight: screenHeight,
-                  ),
-                  widgetBorder: 10,
-                  direction: Axis.horizontal,
-                );
-              } else if (state is PaginatedDataLoading) {
-                return ShimmerLoaderList(
-                  widgetWidth: UIUtils.getWidgetWidth(
-                    targetWidgetWidth: 115,
-                    screenWidth: screenWidth,
-                  ),
-                  widgetHeight: UIUtils.getWidgetHeight(
-                    targetWidgetHeight: 169,
-                    screenHeight: screenHeight,
-                  ),
-                  height: UIUtils.getWidgetHeight(
-                    targetWidgetHeight: 169,
-                    screenHeight: screenHeight,
-                  ),
-                  widgetBorder: 10,
-                  direction: Axis.horizontal,
-                );
-              } else if (state is PaginatedDataLoaded) {
-                return _buildEntityList(
-                  state.list as List<E?>,
-                  state.hasNextPage,
-                  scrollController,
-                );
-              } else if (state is PaginatedDataError) {
-                return ErrorText(
-                  message: state.message,
-                  onTryAgain: () {
-                    final client = (context.read<GraphqlClientCubit>().state
-                            as GraphqlClientInitialized)
-                        .client;
-                    context.read<B>().add(LoadData(client));
-                  },
-                );
-              } else {
-                return const Text('Unknown State');
-              }
-            },
+          ShimmerLoaderList(
+            widgetWidth: UIUtils.getWidgetWidth(
+              targetWidgetWidth: 115,
+              screenWidth: screenWidth,
+            ),
+            widgetHeight: UIUtils.getWidgetHeight(
+              targetWidgetHeight: 169,
+              screenHeight: screenHeight,
+            ),
+            height: UIUtils.getWidgetHeight(
+              targetWidgetHeight: 169,
+              screenHeight: screenHeight,
+            ),
+            widgetBorder: 10,
+            direction: Axis.horizontal,
           ),
         ],
       ),
@@ -186,6 +212,16 @@ class EntitySection<B extends PaginatedDataBloc, E> extends HookWidget {
                         title: staff.name?.userPreferred ?? ' - - ',
                         imageUrl: staff.image?.large,
                         favorites: staff.favourites,
+                        rightMargin: 10,
+                      );
+                    } else if (E == Fragment$SearchResultStudio) {
+                      final studio = list[index] as Fragment$SearchResultStudio;
+                      return EntityCard(
+                        title: studio.name,
+                        imageUrl: studio
+                                .media?.nodes?.firstOrNull?.coverImage?.large ??
+                            '',
+                        favorites: studio.favourites,
                         rightMargin: 10,
                       );
                     } else {

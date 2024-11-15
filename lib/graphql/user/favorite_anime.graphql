@@ -1,0 +1,14 @@
+query FavoriteAnime($page: Int, $userId: Int) {
+    User(id: $userId) {
+        favourites {
+            anime(page: $page, perPage: 30) {
+                pageInfo {
+                    hasNextPage
+                }
+                nodes {
+                    ...MediaShort
+                }
+            }
+        }
+    }
+}

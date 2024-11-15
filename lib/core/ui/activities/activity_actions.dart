@@ -12,11 +12,11 @@ import 'package:otaku_world/core/ui/dialogs/alert_dialog.dart';
 import 'package:otaku_world/features/reviews/widgets/bottom_sheet_component.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/social/like_activity/like_activity_cubit.dart';
-import '../../../config/router/router_constants.dart';
 import '../../../generated/assets.dart';
 import '../../../theme/colors.dart';
 
@@ -31,8 +31,11 @@ class ActivityActions extends StatelessWidget {
     required this.type,
     required this.isSubscribed,
     this.isCurrentUserMessage = false,
+    required this.onToggleLike,
     required this.onToggleSubscription,
     required this.onDelete,
+    required this.onReply,
+    required this.onEdit,
   });
 
   final int userId;
@@ -43,8 +46,11 @@ class ActivityActions extends StatelessWidget {
   final Object type;
   final bool isCurrentUserMessage;
   final bool isSubscribed;
+  final VoidCallback onToggleLike;
   final VoidCallback onToggleSubscription;
   final VoidCallback onDelete;
+  final VoidCallback onReply;
+  final VoidCallback onEdit;
 
   @override
   Widget build(BuildContext context) {
@@ -80,11 +86,7 @@ class ActivityActions extends StatelessWidget {
             ),
             const SizedBox(width: 15),
             InkWell(
-              onTap: () {
-                context.push(
-                  '${RouteConstants.activityReplies}?id=$activityId',
-                );
-              },
+              onTap: onReply,
               child: Row(
                 children: [
                   SvgPicture.asset(
@@ -127,6 +129,8 @@ class ActivityActions extends StatelessWidget {
         return null;
       },
       (isLiked) {
+        // context.read<ActivitiesBloc>().toggleLike(activityId: activityId);
+        onToggleLike();
         return isLiked;
       },
     );
@@ -166,7 +170,10 @@ class ActivityActions extends StatelessWidget {
                 BottomSheetComponent(
                   iconName: Assets.iconsEditSmall,
                   text: 'Edit',
-                  onTap: () {},
+                  onTap: () {
+                    context.pop();
+                    onEdit();
+                  },
                 ),
               );
             }
@@ -212,6 +219,14 @@ class ActivityActions extends StatelessWidget {
             iconName: Assets.iconsLinkSquare,
             text: 'View on AniList',
             onTap: () => _viewOnAniList(context),
+          ),
+        );
+
+        options.add(
+          BottomSheetComponent(
+            iconName: Assets.iconsShare,
+            text: 'Share',
+            onTap: () => _share(context),
           ),
         );
 
@@ -318,6 +333,14 @@ class ActivityActions extends StatelessWidget {
       onError: (e) {
         UIUtils.showSnackBar(context, "Can't open the link!");
       },
+    );
+  }
+
+  void _share(BuildContext context) {
+    context.pop();
+    Share.share(
+      'Checkout this activity: https://otaku-world-8a7f4.firebaseapp.com/'
+      'activity?id=$activityId',
     );
   }
 }

@@ -202,6 +202,7 @@ class MangaFilters extends HookWidget {
                 children: [
                   ScrollToTopFAB(
                     controller: scrollController,
+                    tag: 'filter_manga',
                   ),
                   Container(
                     decoration: BoxDecoration(

@@ -8,26 +8,31 @@ import 'package:otaku_world/core/ui/error_text.dart';
 import 'package:otaku_world/core/ui/placeholders/anime_character_placeholder.dart';
 import 'package:otaku_world/features/social/widgets/activity_shimmer_list.dart';
 import 'package:otaku_world/generated/assets.dart';
+import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/social/activities/activities_bloc.dart';
 import '../../../core/ui/activities/list_activity_card.dart';
 import '../../../core/ui/activities/text_activity_card.dart';
-import '../../../graphql/__generated/graphql/social/activities.graphql.dart';
 
-class ActivitiesList extends StatelessWidget {
+class ActivitiesList extends StatefulWidget {
   const ActivitiesList({
     super.key,
-    required this.pageKey,
     required this.isFollowing,
   });
 
   final bool isFollowing;
-  final PageStorageKey pageKey;
 
   @override
+  State<ActivitiesList> createState() => _ActivitiesListState();
+}
+
+class _ActivitiesListState extends State<ActivitiesList>
+    with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     final client =
         (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
             .client;
@@ -41,8 +46,9 @@ class ActivitiesList extends StatelessWidget {
         } else if (state is ActivitiesLoading) {
           return const ActivityShimmerList();
         } else if (state is ActivitiesLoaded) {
-          final activities =
-              isFollowing ? state.followingActivities : state.globalActivities;
+          final activities = widget.isFollowing
+              ? state.followingActivities
+              : state.globalActivities;
           return RefreshIndicator(
             backgroundColor: AppColors.raisinBlack,
             onRefresh: () => _refresh(client, activitiesBloc),
@@ -55,12 +61,7 @@ class ActivitiesList extends StatelessWidget {
                     ),
                   )
                 : CustomScrollView(
-                    key: pageKey,
                     slivers: [
-                      SliverOverlapInjector(
-                        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                            context),
-                      ),
                       SliverList(
                         delegate: SliverChildBuilderDelegate(
                           (context, index) {
@@ -69,21 +70,27 @@ class ActivitiesList extends StatelessWidget {
                               activitiesBloc.add(
                                 LoadMoreActivities(
                                   client: client,
-                                  isFollowing: isFollowing,
+                                  isFollowing: widget.isFollowing,
                                 ),
                               );
                             }
 
                             final activity = activities[index];
-                            if (activity
-                                is Query$GetActivities$Page$activities$$TextActivity) {
-                              return TextActivityCard(activity: activity);
-                            } else if (activity
-                                is Query$GetActivities$Page$activities$$ListActivity) {
-                              return ListActivityCard(activity: activity);
-                            } else if (activity
-                                is Query$GetActivities$Page$activities$$MessageActivity) {
-                              return MessageActivityCard(activity: activity);
+                            if (activity is Fragment$TextActivity) {
+                              return TextActivityCard(
+                                activity: activity,
+                                bloc: activitiesBloc,
+                              );
+                            } else if (activity is Fragment$ListActivity) {
+                              return ListActivityCard(
+                                activity: activity,
+                                bloc: activitiesBloc,
+                              );
+                            } else if (activity is Fragment$MessageActivity) {
+                              return MessageActivityCard(
+                                activity: activity,
+                                bloc: activitiesBloc,
+                              );
                             } else {
                               return const SizedBox();
                             }
@@ -91,15 +98,19 @@ class ActivitiesList extends StatelessWidget {
                           childCount: activities.length,
                         ),
                       ),
-                      if (isFollowing && state.hasNextPageFollowing)
+                      if (widget.isFollowing && state.hasNextPageFollowing)
                         _buildLoader(),
-                      if (!isFollowing && state.hasNextPageGlobal)
+                      if (!widget.isFollowing && state.hasNextPageGlobal)
                         _buildLoader()
                     ],
                   ),
           );
         } else if (state is ActivitiesError) {
-          return ErrorText(message: state.message, onTryAgain: () {});
+          return ErrorText(
+              message: state.message,
+              onTryAgain: () {
+                activitiesBloc.add(LoadActivities(client));
+              });
         } else {
           return const Text('Unknown State');
         }
@@ -121,4 +132,7 @@ class ActivitiesList extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

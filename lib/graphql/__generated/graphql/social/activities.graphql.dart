@@ -2419,6 +2419,7 @@ class Query$GetActivities$Page$activities$$MessageActivity
     this.isSubscribed,
     this.siteUrl,
     this.message,
+    this.isPrivate,
   });
 
   factory Query$GetActivities$Page$activities$$MessageActivity.fromJson(
@@ -2434,6 +2435,7 @@ class Query$GetActivities$Page$activities$$MessageActivity
     final l$isSubscribed = json['isSubscribed'];
     final l$siteUrl = json['siteUrl'];
     final l$message = json['message'];
+    final l$isPrivate = json['isPrivate'];
     return Query$GetActivities$Page$activities$$MessageActivity(
       $__typename: (l$$__typename as String),
       id: (l$id as int),
@@ -2452,6 +2454,7 @@ class Query$GetActivities$Page$activities$$MessageActivity
       isSubscribed: (l$isSubscribed as bool?),
       siteUrl: (l$siteUrl as String?),
       message: (l$message as String?),
+      isPrivate: (l$isPrivate as bool?),
     );
   }
 
@@ -2479,6 +2482,8 @@ class Query$GetActivities$Page$activities$$MessageActivity
 
   final String? message;
 
+  final bool? isPrivate;
+
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$$__typename = $__typename;
@@ -2503,6 +2508,8 @@ class Query$GetActivities$Page$activities$$MessageActivity
     _resultData['siteUrl'] = l$siteUrl;
     final l$message = message;
     _resultData['message'] = l$message;
+    final l$isPrivate = isPrivate;
+    _resultData['isPrivate'] = l$isPrivate;
     return _resultData;
   }
 
@@ -2519,6 +2526,7 @@ class Query$GetActivities$Page$activities$$MessageActivity
     final l$isSubscribed = isSubscribed;
     final l$siteUrl = siteUrl;
     final l$message = message;
+    final l$isPrivate = isPrivate;
     return Object.hashAll([
       l$$__typename,
       l$id,
@@ -2531,6 +2539,7 @@ class Query$GetActivities$Page$activities$$MessageActivity
       l$isSubscribed,
       l$siteUrl,
       l$message,
+      l$isPrivate,
     ]);
   }
 
@@ -2598,6 +2607,11 @@ class Query$GetActivities$Page$activities$$MessageActivity
     if (l$message != lOther$message) {
       return false;
     }
+    final l$isPrivate = isPrivate;
+    final lOther$isPrivate = other.isPrivate;
+    if (l$isPrivate != lOther$isPrivate) {
+      return false;
+    }
     return true;
   }
 }
@@ -2636,6 +2650,7 @@ abstract class CopyWith$Query$GetActivities$Page$activities$$MessageActivity<
     bool? isSubscribed,
     String? siteUrl,
     String? message,
+    bool? isPrivate,
   });
   CopyWith$Query$GetActivities$Page$activities$$MessageActivity$messenger<TRes>
       get messenger;
@@ -2670,6 +2685,7 @@ class _CopyWithImpl$Query$GetActivities$Page$activities$$MessageActivity<TRes>
     Object? isSubscribed = _undefined,
     Object? siteUrl = _undefined,
     Object? message = _undefined,
+    Object? isPrivate = _undefined,
   }) =>
       _then(Query$GetActivities$Page$activities$$MessageActivity(
         $__typename: $__typename == _undefined || $__typename == null
@@ -2701,6 +2717,9 @@ class _CopyWithImpl$Query$GetActivities$Page$activities$$MessageActivity<TRes>
             siteUrl == _undefined ? _instance.siteUrl : (siteUrl as String?),
         message:
             message == _undefined ? _instance.message : (message as String?),
+        isPrivate: isPrivate == _undefined
+            ? _instance.isPrivate
+            : (isPrivate as bool?),
       ));
 
   CopyWith$Query$GetActivities$Page$activities$$MessageActivity$messenger<TRes>
@@ -2745,6 +2764,7 @@ class _CopyWithStubImpl$Query$GetActivities$Page$activities$$MessageActivity<
     bool? isSubscribed,
     String? siteUrl,
     String? message,
+    bool? isPrivate,
   }) =>
       _res;
 

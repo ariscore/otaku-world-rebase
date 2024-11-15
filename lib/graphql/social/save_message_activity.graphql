@@ -1,0 +1,5 @@
+mutation SaveMessageActivity($id: Int, $text: String, $private: Boolean, $recipientId: Int) {
+    SaveMessageActivity(id: $id, message: $text, private: $private, recipientId: $recipientId) {
+        ...MessageActivity
+    }
+}

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/graphql/__generated/graphql/details/media_activities.graphql.dart';
+import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/social/activity_subscription.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/social/delete_activity.graphql.dart';
 
@@ -45,6 +46,32 @@ class SocialBloc extends PaginatedDataBloc<Query$MediaActivityQuery, dynamic> {
     hasNextPage = data!.Page!.pageInfo!.hasNextPage!;
     page++;
     list.addAll(data.Page!.activities!.toList());
+  }
+
+  void toggleLike({required int activityId}) {
+    log('Toggling like for id: $activityId');
+    int index = list.indexWhere((e) => e.id == activityId);
+
+    if (index != -1) {
+      final activity = list[index];
+      if (activity is Fragment$ListActivity) {
+        if (activity.isLiked!) {
+          list[index] = activity.copyWith(
+            isLiked: false,
+            likeCount: activity.likeCount - 1,
+          );
+        } else {
+          list[index] = activity.copyWith(
+            isLiked: true,
+            likeCount: activity.likeCount + 1,
+          );
+        }
+      }
+    }
+
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      add(UpdateData(list: list));
+    });
   }
 
   Future<String?> toggleActivitySubscription(
@@ -115,5 +142,21 @@ class SocialBloc extends PaginatedDataBloc<Query$MediaActivityQuery, dynamic> {
         return null;
       }
     }
+  }
+
+  void updateReplyCount({required int activityId, required bool increase}) {
+    final index = list.indexWhere((e) => e.id == activityId);
+
+    final inc = increase ? 1 : -1;
+    if (index != -1) {
+      final activity = list[index];
+      if (activity is Query$MediaActivityQuery$Page$activities$$ListActivity) {
+        list[index] = activity.copyWith(
+          replyCount: activity.replyCount + inc,
+        );
+      }
+    }
+
+    add(UpdateData(list: list));
   }
 }

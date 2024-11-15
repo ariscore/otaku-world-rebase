@@ -212,6 +212,7 @@ class AnimeFilters extends HookWidget {
                 children: [
                   ScrollToTopFAB(
                     controller: scrollController,
+                    tag: 'filter_anime',
                   ),
                   Container(
                     decoration: BoxDecoration(

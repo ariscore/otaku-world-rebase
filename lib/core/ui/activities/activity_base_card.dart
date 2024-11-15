@@ -3,13 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
+import 'package:otaku_world/bloc/profile/user_activities_bloc/user_activities_bloc.dart';
 import 'package:otaku_world/bloc/social/activities/activities_bloc.dart';
+import 'package:otaku_world/bloc/social/activity/activity_bloc.dart';
 import 'package:otaku_world/core/ui/activities/activity_actions.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
+import 'package:otaku_world/utils/navigation_helper.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
+import '../../../config/router/router_constants.dart';
 import '../../../constants/string_constants.dart';
 import '../../../utils/ui_utils.dart';
 import '../dialogs/alert_dialog.dart';
@@ -31,6 +36,10 @@ class ActivityBaseCard extends StatefulWidget {
     required this.type,
     this.isCurrentUserMessage = false,
     required this.isSubscribed,
+    required this.onEdit,
+    this.isProfile = false,
+    this.isPrivate = false,
+    required this.bloc,
   });
 
   final Widget child;
@@ -47,6 +56,10 @@ class ActivityBaseCard extends StatefulWidget {
   final Object type;
   final bool isCurrentUserMessage;
   final bool isSubscribed;
+  final VoidCallback onEdit;
+  final bool isProfile;
+  final bool isPrivate;
+  final Bloc bloc;
 
   @override
   State<ActivityBaseCard> createState() => _ActivityBaseCardState();
@@ -76,38 +89,64 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Name and Avatar
-            Row(
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width - 40,
-                  child: Wrap(
-                    runSpacing: 5,
-                    children: [
-                      _buildUser(
-                        context,
-                        avatarUrl: widget.avatarUrl,
-                        userName: widget.userName,
-                      ),
-                      if (widget.receiverAvatarUrl != null)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8,
-                            horizontal: 10,
-                          ),
-                          child: SvgPicture.asset(Assets.iconsArrowRight),
-                        ),
-                      if (widget.receiverAvatarUrl != null)
+            if (!widget.isProfile)
+              Row(
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width - 40,
+                    child: Wrap(
+                      runSpacing: 5,
+                      children: [
                         _buildUser(
                           context,
-                          avatarUrl: widget.receiverAvatarUrl,
-                          userName: widget.receiverUserName,
+                          id: widget.userId,
+                          avatarUrl: widget.avatarUrl,
+                          userName: widget.userName,
                         ),
-                    ],
+                        if (widget.receiverAvatarUrl != null)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 8,
+                              horizontal: 10,
+                            ),
+                            child: SvgPicture.asset(Assets.iconsArrowRight),
+                          ),
+                        if (widget.receiverAvatarUrl != null)
+                          _buildUser(
+                            context,
+                            id: widget.userId,
+                            avatarUrl: widget.receiverAvatarUrl,
+                            userName: widget.receiverUserName,
+                          ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            if (widget.isProfile && widget.receiverUserName != null)
+              Row(
+                children: [
+                  _buildUser(
+                    context,
+                    id: widget.userId,
+                    avatarUrl: widget.avatarUrl,
+                    userName: widget.userName,
                   ),
-                )
-              ],
-            ),
-            const SizedBox(height: 10),
+                  if (widget.isPrivate)
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: AppColors.sunsetOrange,
+                      ),
+                      padding: const EdgeInsets.all(5),
+                      margin: const EdgeInsets.only(left: 10, bottom: 10),
+                      child: Text(
+                        'Private',
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                    ),
+                ],
+              ),
             // Main content
             widget.child,
             // Other details
@@ -120,8 +159,28 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
               type: widget.type,
               isCurrentUserMessage: widget.isCurrentUserMessage,
               isSubscribed: isSubscribed,
+              onToggleLike: () {
+                if (widget.bloc is ActivitiesBloc) {
+                  (widget.bloc as ActivitiesBloc).toggleLike(
+                    activityId: widget.id,
+                  );
+                } else if (widget.bloc is UserActivitiesBloc) {
+                  (widget.bloc as UserActivitiesBloc).toggleLike(
+                    activityId: widget.id,
+                  );
+                } else if (widget.bloc is ActivityBloc) {
+                  (widget.bloc as ActivityBloc).add(ToggleLike());
+                }
+              },
               onToggleSubscription: () => _toggleSubscription(context),
               onDelete: () => _delete(context),
+              onReply: () {
+                context.push(
+                  '${RouteConstants.activityReplies}?id=${widget.id}',
+                  extra: widget.bloc,
+                );
+              },
+              onEdit: widget.onEdit,
             ),
             const SizedBox(height: 5),
             Text(
@@ -139,31 +198,76 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
   void _toggleSubscription(BuildContext context) async {
     final client = context.read<GraphqlClientCubit>().getClient();
     if (client != null) {
-      final bloc = context.read<ActivitiesBloc>();
-
-      bloc
-          .toggleActivitySubscription(
-        client,
-        activityId: widget.id,
-        subscribe: isSubscribed,
-      )
-          .then(
-        (result) {
-          if (result == null) {
-            setState(() {
-              isSubscribed = !isSubscribed;
-              UIUtils.showSnackBar(
+      final bloc = widget.bloc;
+      if (bloc is ActivitiesBloc) {
+        bloc
+            .toggleActivitySubscription(
+              client,
+              activityId: widget.id,
+              subscribe: isSubscribed,
+            )
+            .then(
+              (result) => _processSubscription(
                 context,
-                ActivityConstants.subscriptionSuccess(isSubscribed),
-              );
-            });
-          } else {
-            UIUtils.showSnackBar(context, result);
-          }
-        },
-      );
+                result,
+              ),
+            );
+      } else if (bloc is SocialBloc) {
+        bloc
+            .toggleActivitySubscription(
+              client,
+              activityId: widget.id,
+              subscribe: isSubscribed,
+            )
+            .then(
+              (result) => _processSubscription(
+                context,
+                result,
+              ),
+            );
+      } else if (bloc is UserActivitiesBloc) {
+        bloc
+            .toggleActivitySubscription(
+              client,
+              activityId: widget.id,
+              subscribe: isSubscribed,
+            )
+            .then(
+              (result) => _processSubscription(
+                context,
+                result,
+              ),
+            );
+      } else if (bloc is ActivityBloc) {
+        bloc
+            .toggleActivitySubscription(
+              client,
+              activityId: widget.id,
+              subscribe: isSubscribed,
+            )
+            .then(
+              (result) => _processSubscription(
+                context,
+                result,
+              ),
+            );
+      }
     } else {
       UIUtils.showSnackBar(context, ActivityConstants.clientError);
+    }
+  }
+
+  void _processSubscription(BuildContext context, String? result) {
+    if (result == null) {
+      setState(() {
+        isSubscribed = !isSubscribed;
+        UIUtils.showSnackBar(
+          context,
+          ActivityConstants.subscriptionSuccess(isSubscribed),
+        );
+      });
+    } else {
+      UIUtils.showSnackBar(context, result);
     }
   }
 
@@ -179,11 +283,34 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
             dialogContext.pop();
             final client = context.read<GraphqlClientCubit>().getClient();
             if (client != null) {
-              final bloc = context.read<ActivitiesBloc>();
-              bloc.deleteActivity(
-                client,
-                activityId: widget.id,
-              );
+              final bloc = widget.bloc;
+              if (bloc is ActivitiesBloc) {
+                bloc.deleteActivity(client, activityId: widget.id).then((e) {
+                  if (e != null) {
+                    UIUtils.showSnackBar(context, e);
+                  }
+                });
+              } else if (bloc is SocialBloc) {
+                bloc.deleteActivity(client, activityId: widget.id).then((e) {
+                  if (e != null) {
+                    UIUtils.showSnackBar(context, e);
+                  }
+                });
+              } else if (bloc is UserActivitiesBloc) {
+                bloc.deleteActivity(client, activityId: widget.id).then((e) {
+                  if (e != null) {
+                    UIUtils.showSnackBar(context, e);
+                  }
+                });
+              } else if (bloc is ActivityBloc) {
+                bloc.deleteActivity(client, activityId: widget.id).then((e) {
+                  if (e != null) {
+                    UIUtils.showSnackBar(context, e);
+                  } else {
+                    context.pop();
+                  }
+                });
+              }
             } else {
               UIUtils.showSnackBar(context, ActivityConstants.clientError);
             }
@@ -196,48 +323,57 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
 
   Widget _buildUser(
     BuildContext context, {
+      required int id,
     required String? avatarUrl,
     required String? userName,
   }) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 35,
-          height: 35,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.fromBorderSide(
-              BorderSide(color: AppColors.sunsetOrange),
-            ),
-          ),
-          // padding: const EdgeInsets.all(1),
-          child: ClipOval(
-            child: CachedNetworkImage(
-              imageUrl: avatarUrl ?? '',
-              imageBuilder: (context, imageProvider) {
-                return Image(image: imageProvider, fit: BoxFit.cover);
-              },
-              placeholder: (context, url) {
-                return _buildPlaceholderProfile();
-              },
-              errorWidget: (context, url, error) {
-                return _buildPlaceholderProfile();
-              },
-            ),
-          ),
-        ),
-        const SizedBox(width: 10),
-        Flexible(
-          child: Text(
-            userName ?? '',
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontFamily: 'Poppins',
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: GestureDetector(
+        onTap: () {
+          NavigationHelper.goToProfileScreen(context: context, userId: id);
+        },
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 35,
+              height: 35,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.fromBorderSide(
+                  BorderSide(color: AppColors.sunsetOrange),
                 ),
-          ),
+              ),
+              // padding: const EdgeInsets.all(1),
+              child: ClipOval(
+                child: CachedNetworkImage(
+                  imageUrl: avatarUrl ?? '',
+                  imageBuilder: (context, imageProvider) {
+                    return Image(image: imageProvider, fit: BoxFit.cover);
+                  },
+                  placeholder: (context, url) {
+                    return _buildPlaceholderProfile();
+                  },
+                  errorWidget: (context, url, error) {
+                    return _buildPlaceholderProfile();
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Flexible(
+              child: Text(
+                userName ?? '',
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontFamily: 'Poppins',
+                    ),
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 

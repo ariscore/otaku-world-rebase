@@ -12,6 +12,7 @@ class RecommendedAnimeScreen extends StatelessWidget {
     return const MediaGridScreen<RecommendedAnimeBloc>(
       appbarTitle: 'Recommended Anime',
       mediaType: Enum$MediaType.ANIME,
+      tag: 'recommended_anime',
     );
   }
 }

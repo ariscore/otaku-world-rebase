@@ -9902,6 +9902,13 @@ const fragmentDefinitionReviewDetail = FragmentDefinitionNode(
       directives: [],
       selectionSet: SelectionSetNode(selections: [
         FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
           name: NameNode(value: 'name'),
           alias: null,
           arguments: [],
@@ -10048,16 +10055,19 @@ extension ClientExtension$Fragment$ReviewDetail on graphql.GraphQLClient {
 
 class Fragment$ReviewDetail$user {
   Fragment$ReviewDetail$user({
+    required this.id,
     required this.name,
     this.avatar,
     this.$__typename = 'User',
   });
 
   factory Fragment$ReviewDetail$user.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
     final l$name = json['name'];
     final l$avatar = json['avatar'];
     final l$$__typename = json['__typename'];
     return Fragment$ReviewDetail$user(
+      id: (l$id as int),
       name: (l$name as String),
       avatar: l$avatar == null
           ? null
@@ -10067,6 +10077,8 @@ class Fragment$ReviewDetail$user {
     );
   }
 
+  final int id;
+
   final String name;
 
   final Fragment$ReviewDetail$user$avatar? avatar;
@@ -10075,6 +10087,8 @@ class Fragment$ReviewDetail$user {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
     final l$name = name;
     _resultData['name'] = l$name;
     final l$avatar = avatar;
@@ -10086,10 +10100,12 @@ class Fragment$ReviewDetail$user {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$name = name;
     final l$avatar = avatar;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$id,
       l$name,
       l$avatar,
       l$$__typename,
@@ -10103,6 +10119,11 @@ class Fragment$ReviewDetail$user {
     }
     if (!(other is Fragment$ReviewDetail$user) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$name = name;
@@ -10143,6 +10164,7 @@ abstract class CopyWith$Fragment$ReviewDetail$user<TRes> {
       _CopyWithStubImpl$Fragment$ReviewDetail$user;
 
   TRes call({
+    int? id,
     String? name,
     Fragment$ReviewDetail$user$avatar? avatar,
     String? $__typename,
@@ -10164,11 +10186,13 @@ class _CopyWithImpl$Fragment$ReviewDetail$user<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? name = _undefined,
     Object? avatar = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$ReviewDetail$user(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
@@ -10196,6 +10220,7 @@ class _CopyWithStubImpl$Fragment$ReviewDetail$user<TRes>
   TRes _res;
 
   call({
+    int? id,
     String? name,
     Fragment$ReviewDetail$user$avatar? avatar,
     String? $__typename,
@@ -16504,6 +16529,7 @@ class Fragment$MessageActivity {
     this.isSubscribed,
     this.siteUrl,
     this.message,
+    this.isPrivate,
     this.$__typename = 'MessageActivity',
   });
 
@@ -16518,6 +16544,7 @@ class Fragment$MessageActivity {
     final l$isSubscribed = json['isSubscribed'];
     final l$siteUrl = json['siteUrl'];
     final l$message = json['message'];
+    final l$isPrivate = json['isPrivate'];
     final l$$__typename = json['__typename'];
     return Fragment$MessageActivity(
       id: (l$id as int),
@@ -16536,6 +16563,7 @@ class Fragment$MessageActivity {
       isSubscribed: (l$isSubscribed as bool?),
       siteUrl: (l$siteUrl as String?),
       message: (l$message as String?),
+      isPrivate: (l$isPrivate as bool?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -16559,6 +16587,8 @@ class Fragment$MessageActivity {
   final String? siteUrl;
 
   final String? message;
+
+  final bool? isPrivate;
 
   final String $__typename;
 
@@ -16584,6 +16614,8 @@ class Fragment$MessageActivity {
     _resultData['siteUrl'] = l$siteUrl;
     final l$message = message;
     _resultData['message'] = l$message;
+    final l$isPrivate = isPrivate;
+    _resultData['isPrivate'] = l$isPrivate;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -16601,6 +16633,7 @@ class Fragment$MessageActivity {
     final l$isSubscribed = isSubscribed;
     final l$siteUrl = siteUrl;
     final l$message = message;
+    final l$isPrivate = isPrivate;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
@@ -16613,6 +16646,7 @@ class Fragment$MessageActivity {
       l$isSubscribed,
       l$siteUrl,
       l$message,
+      l$isPrivate,
       l$$__typename,
     ]);
   }
@@ -16676,6 +16710,11 @@ class Fragment$MessageActivity {
     if (l$message != lOther$message) {
       return false;
     }
+    final l$isPrivate = isPrivate;
+    final lOther$isPrivate = other.isPrivate;
+    if (l$isPrivate != lOther$isPrivate) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -16714,6 +16753,7 @@ abstract class CopyWith$Fragment$MessageActivity<TRes> {
     bool? isSubscribed,
     String? siteUrl,
     String? message,
+    bool? isPrivate,
     String? $__typename,
   });
   CopyWith$Fragment$MessageActivity$messenger<TRes> get messenger;
@@ -16744,6 +16784,7 @@ class _CopyWithImpl$Fragment$MessageActivity<TRes>
     Object? isSubscribed = _undefined,
     Object? siteUrl = _undefined,
     Object? message = _undefined,
+    Object? isPrivate = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$MessageActivity(
@@ -16771,6 +16812,9 @@ class _CopyWithImpl$Fragment$MessageActivity<TRes>
             siteUrl == _undefined ? _instance.siteUrl : (siteUrl as String?),
         message:
             message == _undefined ? _instance.message : (message as String?),
+        isPrivate: isPrivate == _undefined
+            ? _instance.isPrivate
+            : (isPrivate as bool?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -16810,6 +16854,7 @@ class _CopyWithStubImpl$Fragment$MessageActivity<TRes>
     bool? isSubscribed,
     String? siteUrl,
     String? message,
+    bool? isPrivate,
     String? $__typename,
   }) =>
       _res;
@@ -16990,6 +17035,13 @@ const fragmentDefinitionMessageActivity = FragmentDefinitionNode(
     ),
     FieldNode(
       name: NameNode(value: 'message'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isPrivate'),
       alias: null,
       arguments: [],
       directives: [],
@@ -20034,6 +20086,8 @@ class Fragment$User {
     required this.id,
     required this.name,
     this.avatar,
+    this.isFollower,
+    this.isFollowing,
     this.$__typename = 'User',
   });
 
@@ -20041,6 +20095,8 @@ class Fragment$User {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$avatar = json['avatar'];
+    final l$isFollower = json['isFollower'];
+    final l$isFollowing = json['isFollowing'];
     final l$$__typename = json['__typename'];
     return Fragment$User(
       id: (l$id as int),
@@ -20048,6 +20104,8 @@ class Fragment$User {
       avatar: l$avatar == null
           ? null
           : Fragment$User$avatar.fromJson((l$avatar as Map<String, dynamic>)),
+      isFollower: (l$isFollower as bool?),
+      isFollowing: (l$isFollowing as bool?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -20057,6 +20115,10 @@ class Fragment$User {
   final String name;
 
   final Fragment$User$avatar? avatar;
+
+  final bool? isFollower;
+
+  final bool? isFollowing;
 
   final String $__typename;
 
@@ -20068,6 +20130,10 @@ class Fragment$User {
     _resultData['name'] = l$name;
     final l$avatar = avatar;
     _resultData['avatar'] = l$avatar?.toJson();
+    final l$isFollower = isFollower;
+    _resultData['isFollower'] = l$isFollower;
+    final l$isFollowing = isFollowing;
+    _resultData['isFollowing'] = l$isFollowing;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -20078,11 +20144,15 @@ class Fragment$User {
     final l$id = id;
     final l$name = name;
     final l$avatar = avatar;
+    final l$isFollower = isFollower;
+    final l$isFollowing = isFollowing;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$name,
       l$avatar,
+      l$isFollower,
+      l$isFollowing,
       l$$__typename,
     ]);
   }
@@ -20108,6 +20178,16 @@ class Fragment$User {
     final l$avatar = avatar;
     final lOther$avatar = other.avatar;
     if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$isFollower = isFollower;
+    final lOther$isFollower = other.isFollower;
+    if (l$isFollower != lOther$isFollower) {
+      return false;
+    }
+    final l$isFollowing = isFollowing;
+    final lOther$isFollowing = other.isFollowing;
+    if (l$isFollowing != lOther$isFollowing) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -20139,6 +20219,8 @@ abstract class CopyWith$Fragment$User<TRes> {
     int? id,
     String? name,
     Fragment$User$avatar? avatar,
+    bool? isFollower,
+    bool? isFollowing,
     String? $__typename,
   });
   CopyWith$Fragment$User$avatar<TRes> get avatar;
@@ -20161,6 +20243,8 @@ class _CopyWithImpl$Fragment$User<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? avatar = _undefined,
+    Object? isFollower = _undefined,
+    Object? isFollowing = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$User(
@@ -20171,6 +20255,12 @@ class _CopyWithImpl$Fragment$User<TRes>
         avatar: avatar == _undefined
             ? _instance.avatar
             : (avatar as Fragment$User$avatar?),
+        isFollower: isFollower == _undefined
+            ? _instance.isFollower
+            : (isFollower as bool?),
+        isFollowing: isFollowing == _undefined
+            ? _instance.isFollowing
+            : (isFollowing as bool?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -20194,6 +20284,8 @@ class _CopyWithStubImpl$Fragment$User<TRes>
     int? id,
     String? name,
     Fragment$User$avatar? avatar,
+    bool? isFollower,
+    bool? isFollowing,
     String? $__typename,
   }) =>
       _res;
@@ -20246,6 +20338,20 @@ const fragmentDefinitionUser = FragmentDefinitionNode(
           selectionSet: null,
         ),
       ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'isFollower'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isFollowing'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
     ),
     FieldNode(
       name: NameNode(value: '__typename'),
@@ -20406,6 +20512,13572 @@ class _CopyWithImpl$Fragment$User$avatar<TRes>
 class _CopyWithStubImpl$Fragment$User$avatar<TRes>
     implements CopyWith$Fragment$User$avatar<TRes> {
   _CopyWithStubImpl$Fragment$User$avatar(this._res);
+
+  TRes _res;
+
+  call({
+    String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$UserInfo {
+  Fragment$UserInfo({
+    required this.id,
+    required this.name,
+    this.avatar,
+    this.bannerImage,
+    this.about,
+    this.unreadNotificationCount,
+    this.isFollowing,
+    this.isFollower,
+    this.isBlocked,
+    this.statistics,
+    this.$__typename = 'User',
+  });
+
+  factory Fragment$UserInfo.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$avatar = json['avatar'];
+    final l$bannerImage = json['bannerImage'];
+    final l$about = json['about'];
+    final l$unreadNotificationCount = json['unreadNotificationCount'];
+    final l$isFollowing = json['isFollowing'];
+    final l$isFollower = json['isFollower'];
+    final l$isBlocked = json['isBlocked'];
+    final l$statistics = json['statistics'];
+    final l$$__typename = json['__typename'];
+    return Fragment$UserInfo(
+      id: (l$id as int),
+      name: (l$name as String),
+      avatar: l$avatar == null
+          ? null
+          : Fragment$UserInfo$avatar.fromJson(
+              (l$avatar as Map<String, dynamic>)),
+      bannerImage: (l$bannerImage as String?),
+      about: (l$about as String?),
+      unreadNotificationCount: (l$unreadNotificationCount as int?),
+      isFollowing: (l$isFollowing as bool?),
+      isFollower: (l$isFollower as bool?),
+      isBlocked: (l$isBlocked as bool?),
+      statistics: l$statistics == null
+          ? null
+          : Fragment$UserInfo$statistics.fromJson(
+              (l$statistics as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String name;
+
+  final Fragment$UserInfo$avatar? avatar;
+
+  final String? bannerImage;
+
+  final String? about;
+
+  final int? unreadNotificationCount;
+
+  final bool? isFollowing;
+
+  final bool? isFollower;
+
+  final bool? isBlocked;
+
+  final Fragment$UserInfo$statistics? statistics;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$avatar = avatar;
+    _resultData['avatar'] = l$avatar?.toJson();
+    final l$bannerImage = bannerImage;
+    _resultData['bannerImage'] = l$bannerImage;
+    final l$about = about;
+    _resultData['about'] = l$about;
+    final l$unreadNotificationCount = unreadNotificationCount;
+    _resultData['unreadNotificationCount'] = l$unreadNotificationCount;
+    final l$isFollowing = isFollowing;
+    _resultData['isFollowing'] = l$isFollowing;
+    final l$isFollower = isFollower;
+    _resultData['isFollower'] = l$isFollower;
+    final l$isBlocked = isBlocked;
+    _resultData['isBlocked'] = l$isBlocked;
+    final l$statistics = statistics;
+    _resultData['statistics'] = l$statistics?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$avatar = avatar;
+    final l$bannerImage = bannerImage;
+    final l$about = about;
+    final l$unreadNotificationCount = unreadNotificationCount;
+    final l$isFollowing = isFollowing;
+    final l$isFollower = isFollower;
+    final l$isBlocked = isBlocked;
+    final l$statistics = statistics;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$avatar,
+      l$bannerImage,
+      l$about,
+      l$unreadNotificationCount,
+      l$isFollowing,
+      l$isFollower,
+      l$isBlocked,
+      l$statistics,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$UserInfo) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$avatar = avatar;
+    final lOther$avatar = other.avatar;
+    if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$bannerImage = bannerImage;
+    final lOther$bannerImage = other.bannerImage;
+    if (l$bannerImage != lOther$bannerImage) {
+      return false;
+    }
+    final l$about = about;
+    final lOther$about = other.about;
+    if (l$about != lOther$about) {
+      return false;
+    }
+    final l$unreadNotificationCount = unreadNotificationCount;
+    final lOther$unreadNotificationCount = other.unreadNotificationCount;
+    if (l$unreadNotificationCount != lOther$unreadNotificationCount) {
+      return false;
+    }
+    final l$isFollowing = isFollowing;
+    final lOther$isFollowing = other.isFollowing;
+    if (l$isFollowing != lOther$isFollowing) {
+      return false;
+    }
+    final l$isFollower = isFollower;
+    final lOther$isFollower = other.isFollower;
+    if (l$isFollower != lOther$isFollower) {
+      return false;
+    }
+    final l$isBlocked = isBlocked;
+    final lOther$isBlocked = other.isBlocked;
+    if (l$isBlocked != lOther$isBlocked) {
+      return false;
+    }
+    final l$statistics = statistics;
+    final lOther$statistics = other.statistics;
+    if (l$statistics != lOther$statistics) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$UserInfo on Fragment$UserInfo {
+  CopyWith$Fragment$UserInfo<Fragment$UserInfo> get copyWith =>
+      CopyWith$Fragment$UserInfo(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Fragment$UserInfo<TRes> {
+  factory CopyWith$Fragment$UserInfo(
+    Fragment$UserInfo instance,
+    TRes Function(Fragment$UserInfo) then,
+  ) = _CopyWithImpl$Fragment$UserInfo;
+
+  factory CopyWith$Fragment$UserInfo.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$UserInfo;
+
+  TRes call({
+    int? id,
+    String? name,
+    Fragment$UserInfo$avatar? avatar,
+    String? bannerImage,
+    String? about,
+    int? unreadNotificationCount,
+    bool? isFollowing,
+    bool? isFollower,
+    bool? isBlocked,
+    Fragment$UserInfo$statistics? statistics,
+    String? $__typename,
+  });
+  CopyWith$Fragment$UserInfo$avatar<TRes> get avatar;
+  CopyWith$Fragment$UserInfo$statistics<TRes> get statistics;
+}
+
+class _CopyWithImpl$Fragment$UserInfo<TRes>
+    implements CopyWith$Fragment$UserInfo<TRes> {
+  _CopyWithImpl$Fragment$UserInfo(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$UserInfo _instance;
+
+  final TRes Function(Fragment$UserInfo) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? avatar = _undefined,
+    Object? bannerImage = _undefined,
+    Object? about = _undefined,
+    Object? unreadNotificationCount = _undefined,
+    Object? isFollowing = _undefined,
+    Object? isFollower = _undefined,
+    Object? isBlocked = _undefined,
+    Object? statistics = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$UserInfo(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        avatar: avatar == _undefined
+            ? _instance.avatar
+            : (avatar as Fragment$UserInfo$avatar?),
+        bannerImage: bannerImage == _undefined
+            ? _instance.bannerImage
+            : (bannerImage as String?),
+        about: about == _undefined ? _instance.about : (about as String?),
+        unreadNotificationCount: unreadNotificationCount == _undefined
+            ? _instance.unreadNotificationCount
+            : (unreadNotificationCount as int?),
+        isFollowing: isFollowing == _undefined
+            ? _instance.isFollowing
+            : (isFollowing as bool?),
+        isFollower: isFollower == _undefined
+            ? _instance.isFollower
+            : (isFollower as bool?),
+        isBlocked: isBlocked == _undefined
+            ? _instance.isBlocked
+            : (isBlocked as bool?),
+        statistics: statistics == _undefined
+            ? _instance.statistics
+            : (statistics as Fragment$UserInfo$statistics?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$UserInfo$avatar<TRes> get avatar {
+    final local$avatar = _instance.avatar;
+    return local$avatar == null
+        ? CopyWith$Fragment$UserInfo$avatar.stub(_then(_instance))
+        : CopyWith$Fragment$UserInfo$avatar(
+            local$avatar, (e) => call(avatar: e));
+  }
+
+  CopyWith$Fragment$UserInfo$statistics<TRes> get statistics {
+    final local$statistics = _instance.statistics;
+    return local$statistics == null
+        ? CopyWith$Fragment$UserInfo$statistics.stub(_then(_instance))
+        : CopyWith$Fragment$UserInfo$statistics(
+            local$statistics, (e) => call(statistics: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$UserInfo<TRes>
+    implements CopyWith$Fragment$UserInfo<TRes> {
+  _CopyWithStubImpl$Fragment$UserInfo(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? name,
+    Fragment$UserInfo$avatar? avatar,
+    String? bannerImage,
+    String? about,
+    int? unreadNotificationCount,
+    bool? isFollowing,
+    bool? isFollower,
+    bool? isBlocked,
+    Fragment$UserInfo$statistics? statistics,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$UserInfo$avatar<TRes> get avatar =>
+      CopyWith$Fragment$UserInfo$avatar.stub(_res);
+
+  CopyWith$Fragment$UserInfo$statistics<TRes> get statistics =>
+      CopyWith$Fragment$UserInfo$statistics.stub(_res);
+}
+
+const fragmentDefinitionUserInfo = FragmentDefinitionNode(
+  name: NameNode(value: 'UserInfo'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'User'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'name'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'avatar'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'large'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'bannerImage'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'about'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'unreadNotificationCount'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isFollowing'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isFollower'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isBlocked'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'statistics'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'anime'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'count'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: 'manga'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'count'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentUserInfo = DocumentNode(definitions: [
+  fragmentDefinitionUserInfo,
+]);
+
+extension ClientExtension$Fragment$UserInfo on graphql.GraphQLClient {
+  void writeFragment$UserInfo({
+    required Fragment$UserInfo data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'UserInfo',
+            document: documentNodeFragmentUserInfo,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$UserInfo? readFragment$UserInfo({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'UserInfo',
+          document: documentNodeFragmentUserInfo,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Fragment$UserInfo.fromJson(result);
+  }
+}
+
+class Fragment$UserInfo$avatar {
+  Fragment$UserInfo$avatar({
+    this.large,
+    this.$__typename = 'UserAvatar',
+  });
+
+  factory Fragment$UserInfo$avatar.fromJson(Map<String, dynamic> json) {
+    final l$large = json['large'];
+    final l$$__typename = json['__typename'];
+    return Fragment$UserInfo$avatar(
+      large: (l$large as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? large;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$large = large;
+    _resultData['large'] = l$large;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$large = large;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$large,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$UserInfo$avatar) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$large = large;
+    final lOther$large = other.large;
+    if (l$large != lOther$large) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$UserInfo$avatar
+    on Fragment$UserInfo$avatar {
+  CopyWith$Fragment$UserInfo$avatar<Fragment$UserInfo$avatar> get copyWith =>
+      CopyWith$Fragment$UserInfo$avatar(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Fragment$UserInfo$avatar<TRes> {
+  factory CopyWith$Fragment$UserInfo$avatar(
+    Fragment$UserInfo$avatar instance,
+    TRes Function(Fragment$UserInfo$avatar) then,
+  ) = _CopyWithImpl$Fragment$UserInfo$avatar;
+
+  factory CopyWith$Fragment$UserInfo$avatar.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$UserInfo$avatar;
+
+  TRes call({
+    String? large,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$UserInfo$avatar<TRes>
+    implements CopyWith$Fragment$UserInfo$avatar<TRes> {
+  _CopyWithImpl$Fragment$UserInfo$avatar(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$UserInfo$avatar _instance;
+
+  final TRes Function(Fragment$UserInfo$avatar) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? large = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$UserInfo$avatar(
+        large: large == _undefined ? _instance.large : (large as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$UserInfo$avatar<TRes>
+    implements CopyWith$Fragment$UserInfo$avatar<TRes> {
+  _CopyWithStubImpl$Fragment$UserInfo$avatar(this._res);
+
+  TRes _res;
+
+  call({
+    String? large,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$UserInfo$statistics {
+  Fragment$UserInfo$statistics({
+    this.anime,
+    this.manga,
+    this.$__typename = 'UserStatisticTypes',
+  });
+
+  factory Fragment$UserInfo$statistics.fromJson(Map<String, dynamic> json) {
+    final l$anime = json['anime'];
+    final l$manga = json['manga'];
+    final l$$__typename = json['__typename'];
+    return Fragment$UserInfo$statistics(
+      anime: l$anime == null
+          ? null
+          : Fragment$UserInfo$statistics$anime.fromJson(
+              (l$anime as Map<String, dynamic>)),
+      manga: l$manga == null
+          ? null
+          : Fragment$UserInfo$statistics$manga.fromJson(
+              (l$manga as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Fragment$UserInfo$statistics$anime? anime;
+
+  final Fragment$UserInfo$statistics$manga? manga;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$anime = anime;
+    _resultData['anime'] = l$anime?.toJson();
+    final l$manga = manga;
+    _resultData['manga'] = l$manga?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$anime = anime;
+    final l$manga = manga;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$anime,
+      l$manga,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$UserInfo$statistics) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$anime = anime;
+    final lOther$anime = other.anime;
+    if (l$anime != lOther$anime) {
+      return false;
+    }
+    final l$manga = manga;
+    final lOther$manga = other.manga;
+    if (l$manga != lOther$manga) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$UserInfo$statistics
+    on Fragment$UserInfo$statistics {
+  CopyWith$Fragment$UserInfo$statistics<Fragment$UserInfo$statistics>
+      get copyWith => CopyWith$Fragment$UserInfo$statistics(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$UserInfo$statistics<TRes> {
+  factory CopyWith$Fragment$UserInfo$statistics(
+    Fragment$UserInfo$statistics instance,
+    TRes Function(Fragment$UserInfo$statistics) then,
+  ) = _CopyWithImpl$Fragment$UserInfo$statistics;
+
+  factory CopyWith$Fragment$UserInfo$statistics.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$UserInfo$statistics;
+
+  TRes call({
+    Fragment$UserInfo$statistics$anime? anime,
+    Fragment$UserInfo$statistics$manga? manga,
+    String? $__typename,
+  });
+  CopyWith$Fragment$UserInfo$statistics$anime<TRes> get anime;
+  CopyWith$Fragment$UserInfo$statistics$manga<TRes> get manga;
+}
+
+class _CopyWithImpl$Fragment$UserInfo$statistics<TRes>
+    implements CopyWith$Fragment$UserInfo$statistics<TRes> {
+  _CopyWithImpl$Fragment$UserInfo$statistics(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$UserInfo$statistics _instance;
+
+  final TRes Function(Fragment$UserInfo$statistics) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? anime = _undefined,
+    Object? manga = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$UserInfo$statistics(
+        anime: anime == _undefined
+            ? _instance.anime
+            : (anime as Fragment$UserInfo$statistics$anime?),
+        manga: manga == _undefined
+            ? _instance.manga
+            : (manga as Fragment$UserInfo$statistics$manga?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$UserInfo$statistics$anime<TRes> get anime {
+    final local$anime = _instance.anime;
+    return local$anime == null
+        ? CopyWith$Fragment$UserInfo$statistics$anime.stub(_then(_instance))
+        : CopyWith$Fragment$UserInfo$statistics$anime(
+            local$anime, (e) => call(anime: e));
+  }
+
+  CopyWith$Fragment$UserInfo$statistics$manga<TRes> get manga {
+    final local$manga = _instance.manga;
+    return local$manga == null
+        ? CopyWith$Fragment$UserInfo$statistics$manga.stub(_then(_instance))
+        : CopyWith$Fragment$UserInfo$statistics$manga(
+            local$manga, (e) => call(manga: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$UserInfo$statistics<TRes>
+    implements CopyWith$Fragment$UserInfo$statistics<TRes> {
+  _CopyWithStubImpl$Fragment$UserInfo$statistics(this._res);
+
+  TRes _res;
+
+  call({
+    Fragment$UserInfo$statistics$anime? anime,
+    Fragment$UserInfo$statistics$manga? manga,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$UserInfo$statistics$anime<TRes> get anime =>
+      CopyWith$Fragment$UserInfo$statistics$anime.stub(_res);
+
+  CopyWith$Fragment$UserInfo$statistics$manga<TRes> get manga =>
+      CopyWith$Fragment$UserInfo$statistics$manga.stub(_res);
+}
+
+class Fragment$UserInfo$statistics$anime {
+  Fragment$UserInfo$statistics$anime({
+    required this.count,
+    this.$__typename = 'UserStatistics',
+  });
+
+  factory Fragment$UserInfo$statistics$anime.fromJson(
+      Map<String, dynamic> json) {
+    final l$count = json['count'];
+    final l$$__typename = json['__typename'];
+    return Fragment$UserInfo$statistics$anime(
+      count: (l$count as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int count;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$count = count;
+    _resultData['count'] = l$count;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$count = count;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$count,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$UserInfo$statistics$anime) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$count = count;
+    final lOther$count = other.count;
+    if (l$count != lOther$count) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$UserInfo$statistics$anime
+    on Fragment$UserInfo$statistics$anime {
+  CopyWith$Fragment$UserInfo$statistics$anime<
+          Fragment$UserInfo$statistics$anime>
+      get copyWith => CopyWith$Fragment$UserInfo$statistics$anime(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$UserInfo$statistics$anime<TRes> {
+  factory CopyWith$Fragment$UserInfo$statistics$anime(
+    Fragment$UserInfo$statistics$anime instance,
+    TRes Function(Fragment$UserInfo$statistics$anime) then,
+  ) = _CopyWithImpl$Fragment$UserInfo$statistics$anime;
+
+  factory CopyWith$Fragment$UserInfo$statistics$anime.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$UserInfo$statistics$anime;
+
+  TRes call({
+    int? count,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$UserInfo$statistics$anime<TRes>
+    implements CopyWith$Fragment$UserInfo$statistics$anime<TRes> {
+  _CopyWithImpl$Fragment$UserInfo$statistics$anime(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$UserInfo$statistics$anime _instance;
+
+  final TRes Function(Fragment$UserInfo$statistics$anime) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? count = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$UserInfo$statistics$anime(
+        count: count == _undefined || count == null
+            ? _instance.count
+            : (count as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$UserInfo$statistics$anime<TRes>
+    implements CopyWith$Fragment$UserInfo$statistics$anime<TRes> {
+  _CopyWithStubImpl$Fragment$UserInfo$statistics$anime(this._res);
+
+  TRes _res;
+
+  call({
+    int? count,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$UserInfo$statistics$manga {
+  Fragment$UserInfo$statistics$manga({
+    required this.count,
+    this.$__typename = 'UserStatistics',
+  });
+
+  factory Fragment$UserInfo$statistics$manga.fromJson(
+      Map<String, dynamic> json) {
+    final l$count = json['count'];
+    final l$$__typename = json['__typename'];
+    return Fragment$UserInfo$statistics$manga(
+      count: (l$count as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int count;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$count = count;
+    _resultData['count'] = l$count;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$count = count;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$count,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$UserInfo$statistics$manga) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$count = count;
+    final lOther$count = other.count;
+    if (l$count != lOther$count) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$UserInfo$statistics$manga
+    on Fragment$UserInfo$statistics$manga {
+  CopyWith$Fragment$UserInfo$statistics$manga<
+          Fragment$UserInfo$statistics$manga>
+      get copyWith => CopyWith$Fragment$UserInfo$statistics$manga(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$UserInfo$statistics$manga<TRes> {
+  factory CopyWith$Fragment$UserInfo$statistics$manga(
+    Fragment$UserInfo$statistics$manga instance,
+    TRes Function(Fragment$UserInfo$statistics$manga) then,
+  ) = _CopyWithImpl$Fragment$UserInfo$statistics$manga;
+
+  factory CopyWith$Fragment$UserInfo$statistics$manga.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$UserInfo$statistics$manga;
+
+  TRes call({
+    int? count,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$UserInfo$statistics$manga<TRes>
+    implements CopyWith$Fragment$UserInfo$statistics$manga<TRes> {
+  _CopyWithImpl$Fragment$UserInfo$statistics$manga(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$UserInfo$statistics$manga _instance;
+
+  final TRes Function(Fragment$UserInfo$statistics$manga) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? count = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$UserInfo$statistics$manga(
+        count: count == _undefined || count == null
+            ? _instance.count
+            : (count as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$UserInfo$statistics$manga<TRes>
+    implements CopyWith$Fragment$UserInfo$statistics$manga<TRes> {
+  _CopyWithStubImpl$Fragment$UserInfo$statistics$manga(this._res);
+
+  TRes _res;
+
+  call({
+    int? count,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$ActivityLikeNotification {
+  Fragment$ActivityLikeNotification({
+    required this.id,
+    required this.activityId,
+    this.user,
+    this.context,
+    this.createdAt,
+    this.$__typename = 'ActivityLikeNotification',
+  });
+
+  factory Fragment$ActivityLikeNotification.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$activityId = json['activityId'];
+    final l$user = json['user'];
+    final l$context = json['context'];
+    final l$createdAt = json['createdAt'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityLikeNotification(
+      id: (l$id as int),
+      activityId: (l$activityId as int),
+      user: l$user == null
+          ? null
+          : Fragment$ActivityLikeNotification$user.fromJson(
+              (l$user as Map<String, dynamic>)),
+      context: (l$context as String?),
+      createdAt: (l$createdAt as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final int activityId;
+
+  final Fragment$ActivityLikeNotification$user? user;
+
+  final String? context;
+
+  final int? createdAt;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$activityId = activityId;
+    _resultData['activityId'] = l$activityId;
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$context = context;
+    _resultData['context'] = l$context;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$activityId = activityId;
+    final l$user = user;
+    final l$context = context;
+    final l$createdAt = createdAt;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$activityId,
+      l$user,
+      l$context,
+      l$createdAt,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityLikeNotification) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$activityId = activityId;
+    final lOther$activityId = other.activityId;
+    if (l$activityId != lOther$activityId) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$context = context;
+    final lOther$context = other.context;
+    if (l$context != lOther$context) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityLikeNotification
+    on Fragment$ActivityLikeNotification {
+  CopyWith$Fragment$ActivityLikeNotification<Fragment$ActivityLikeNotification>
+      get copyWith => CopyWith$Fragment$ActivityLikeNotification(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ActivityLikeNotification<TRes> {
+  factory CopyWith$Fragment$ActivityLikeNotification(
+    Fragment$ActivityLikeNotification instance,
+    TRes Function(Fragment$ActivityLikeNotification) then,
+  ) = _CopyWithImpl$Fragment$ActivityLikeNotification;
+
+  factory CopyWith$Fragment$ActivityLikeNotification.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityLikeNotification;
+
+  TRes call({
+    int? id,
+    int? activityId,
+    Fragment$ActivityLikeNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ActivityLikeNotification$user<TRes> get user;
+}
+
+class _CopyWithImpl$Fragment$ActivityLikeNotification<TRes>
+    implements CopyWith$Fragment$ActivityLikeNotification<TRes> {
+  _CopyWithImpl$Fragment$ActivityLikeNotification(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityLikeNotification _instance;
+
+  final TRes Function(Fragment$ActivityLikeNotification) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? activityId = _undefined,
+    Object? user = _undefined,
+    Object? context = _undefined,
+    Object? createdAt = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityLikeNotification(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        activityId: activityId == _undefined || activityId == null
+            ? _instance.activityId
+            : (activityId as int),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$ActivityLikeNotification$user?),
+        context:
+            context == _undefined ? _instance.context : (context as String?),
+        createdAt:
+            createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ActivityLikeNotification$user<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith$Fragment$ActivityLikeNotification$user.stub(_then(_instance))
+        : CopyWith$Fragment$ActivityLikeNotification$user(
+            local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ActivityLikeNotification<TRes>
+    implements CopyWith$Fragment$ActivityLikeNotification<TRes> {
+  _CopyWithStubImpl$Fragment$ActivityLikeNotification(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    int? activityId,
+    Fragment$ActivityLikeNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ActivityLikeNotification$user<TRes> get user =>
+      CopyWith$Fragment$ActivityLikeNotification$user.stub(_res);
+}
+
+const fragmentDefinitionActivityLikeNotification = FragmentDefinitionNode(
+  name: NameNode(value: 'ActivityLikeNotification'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'ActivityLikeNotification'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'activityId'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'user'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'name'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'avatar'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'medium'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'context'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentActivityLikeNotification = DocumentNode(definitions: [
+  fragmentDefinitionActivityLikeNotification,
+]);
+
+extension ClientExtension$Fragment$ActivityLikeNotification
+    on graphql.GraphQLClient {
+  void writeFragment$ActivityLikeNotification({
+    required Fragment$ActivityLikeNotification data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'ActivityLikeNotification',
+            document: documentNodeFragmentActivityLikeNotification,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$ActivityLikeNotification? readFragment$ActivityLikeNotification({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'ActivityLikeNotification',
+          document: documentNodeFragmentActivityLikeNotification,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null
+        ? null
+        : Fragment$ActivityLikeNotification.fromJson(result);
+  }
+}
+
+class Fragment$ActivityLikeNotification$user {
+  Fragment$ActivityLikeNotification$user({
+    required this.id,
+    required this.name,
+    this.avatar,
+    this.$__typename = 'User',
+  });
+
+  factory Fragment$ActivityLikeNotification$user.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$avatar = json['avatar'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityLikeNotification$user(
+      id: (l$id as int),
+      name: (l$name as String),
+      avatar: l$avatar == null
+          ? null
+          : Fragment$ActivityLikeNotification$user$avatar.fromJson(
+              (l$avatar as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String name;
+
+  final Fragment$ActivityLikeNotification$user$avatar? avatar;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$avatar = avatar;
+    _resultData['avatar'] = l$avatar?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$avatar = avatar;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$avatar,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityLikeNotification$user) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$avatar = avatar;
+    final lOther$avatar = other.avatar;
+    if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityLikeNotification$user
+    on Fragment$ActivityLikeNotification$user {
+  CopyWith$Fragment$ActivityLikeNotification$user<
+          Fragment$ActivityLikeNotification$user>
+      get copyWith => CopyWith$Fragment$ActivityLikeNotification$user(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ActivityLikeNotification$user<TRes> {
+  factory CopyWith$Fragment$ActivityLikeNotification$user(
+    Fragment$ActivityLikeNotification$user instance,
+    TRes Function(Fragment$ActivityLikeNotification$user) then,
+  ) = _CopyWithImpl$Fragment$ActivityLikeNotification$user;
+
+  factory CopyWith$Fragment$ActivityLikeNotification$user.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityLikeNotification$user;
+
+  TRes call({
+    int? id,
+    String? name,
+    Fragment$ActivityLikeNotification$user$avatar? avatar,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ActivityLikeNotification$user$avatar<TRes> get avatar;
+}
+
+class _CopyWithImpl$Fragment$ActivityLikeNotification$user<TRes>
+    implements CopyWith$Fragment$ActivityLikeNotification$user<TRes> {
+  _CopyWithImpl$Fragment$ActivityLikeNotification$user(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityLikeNotification$user _instance;
+
+  final TRes Function(Fragment$ActivityLikeNotification$user) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? avatar = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityLikeNotification$user(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        avatar: avatar == _undefined
+            ? _instance.avatar
+            : (avatar as Fragment$ActivityLikeNotification$user$avatar?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ActivityLikeNotification$user$avatar<TRes> get avatar {
+    final local$avatar = _instance.avatar;
+    return local$avatar == null
+        ? CopyWith$Fragment$ActivityLikeNotification$user$avatar.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ActivityLikeNotification$user$avatar(
+            local$avatar, (e) => call(avatar: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ActivityLikeNotification$user<TRes>
+    implements CopyWith$Fragment$ActivityLikeNotification$user<TRes> {
+  _CopyWithStubImpl$Fragment$ActivityLikeNotification$user(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? name,
+    Fragment$ActivityLikeNotification$user$avatar? avatar,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ActivityLikeNotification$user$avatar<TRes> get avatar =>
+      CopyWith$Fragment$ActivityLikeNotification$user$avatar.stub(_res);
+}
+
+class Fragment$ActivityLikeNotification$user$avatar {
+  Fragment$ActivityLikeNotification$user$avatar({
+    this.medium,
+    this.$__typename = 'UserAvatar',
+  });
+
+  factory Fragment$ActivityLikeNotification$user$avatar.fromJson(
+      Map<String, dynamic> json) {
+    final l$medium = json['medium'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityLikeNotification$user$avatar(
+      medium: (l$medium as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? medium;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$medium = medium;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$medium,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityLikeNotification$user$avatar) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityLikeNotification$user$avatar
+    on Fragment$ActivityLikeNotification$user$avatar {
+  CopyWith$Fragment$ActivityLikeNotification$user$avatar<
+          Fragment$ActivityLikeNotification$user$avatar>
+      get copyWith => CopyWith$Fragment$ActivityLikeNotification$user$avatar(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ActivityLikeNotification$user$avatar<TRes> {
+  factory CopyWith$Fragment$ActivityLikeNotification$user$avatar(
+    Fragment$ActivityLikeNotification$user$avatar instance,
+    TRes Function(Fragment$ActivityLikeNotification$user$avatar) then,
+  ) = _CopyWithImpl$Fragment$ActivityLikeNotification$user$avatar;
+
+  factory CopyWith$Fragment$ActivityLikeNotification$user$avatar.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityLikeNotification$user$avatar;
+
+  TRes call({
+    String? medium,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ActivityLikeNotification$user$avatar<TRes>
+    implements CopyWith$Fragment$ActivityLikeNotification$user$avatar<TRes> {
+  _CopyWithImpl$Fragment$ActivityLikeNotification$user$avatar(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityLikeNotification$user$avatar _instance;
+
+  final TRes Function(Fragment$ActivityLikeNotification$user$avatar) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? medium = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityLikeNotification$user$avatar(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ActivityLikeNotification$user$avatar<TRes>
+    implements CopyWith$Fragment$ActivityLikeNotification$user$avatar<TRes> {
+  _CopyWithStubImpl$Fragment$ActivityLikeNotification$user$avatar(this._res);
+
+  TRes _res;
+
+  call({
+    String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$ActivityMessageNotification {
+  Fragment$ActivityMessageNotification({
+    required this.id,
+    required this.activityId,
+    this.user,
+    this.context,
+    this.createdAt,
+    this.$__typename = 'ActivityMessageNotification',
+  });
+
+  factory Fragment$ActivityMessageNotification.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$activityId = json['activityId'];
+    final l$user = json['user'];
+    final l$context = json['context'];
+    final l$createdAt = json['createdAt'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityMessageNotification(
+      id: (l$id as int),
+      activityId: (l$activityId as int),
+      user: l$user == null
+          ? null
+          : Fragment$ActivityMessageNotification$user.fromJson(
+              (l$user as Map<String, dynamic>)),
+      context: (l$context as String?),
+      createdAt: (l$createdAt as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final int activityId;
+
+  final Fragment$ActivityMessageNotification$user? user;
+
+  final String? context;
+
+  final int? createdAt;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$activityId = activityId;
+    _resultData['activityId'] = l$activityId;
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$context = context;
+    _resultData['context'] = l$context;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$activityId = activityId;
+    final l$user = user;
+    final l$context = context;
+    final l$createdAt = createdAt;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$activityId,
+      l$user,
+      l$context,
+      l$createdAt,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityMessageNotification) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$activityId = activityId;
+    final lOther$activityId = other.activityId;
+    if (l$activityId != lOther$activityId) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$context = context;
+    final lOther$context = other.context;
+    if (l$context != lOther$context) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityMessageNotification
+    on Fragment$ActivityMessageNotification {
+  CopyWith$Fragment$ActivityMessageNotification<
+          Fragment$ActivityMessageNotification>
+      get copyWith => CopyWith$Fragment$ActivityMessageNotification(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ActivityMessageNotification<TRes> {
+  factory CopyWith$Fragment$ActivityMessageNotification(
+    Fragment$ActivityMessageNotification instance,
+    TRes Function(Fragment$ActivityMessageNotification) then,
+  ) = _CopyWithImpl$Fragment$ActivityMessageNotification;
+
+  factory CopyWith$Fragment$ActivityMessageNotification.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityMessageNotification;
+
+  TRes call({
+    int? id,
+    int? activityId,
+    Fragment$ActivityMessageNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ActivityMessageNotification$user<TRes> get user;
+}
+
+class _CopyWithImpl$Fragment$ActivityMessageNotification<TRes>
+    implements CopyWith$Fragment$ActivityMessageNotification<TRes> {
+  _CopyWithImpl$Fragment$ActivityMessageNotification(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityMessageNotification _instance;
+
+  final TRes Function(Fragment$ActivityMessageNotification) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? activityId = _undefined,
+    Object? user = _undefined,
+    Object? context = _undefined,
+    Object? createdAt = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityMessageNotification(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        activityId: activityId == _undefined || activityId == null
+            ? _instance.activityId
+            : (activityId as int),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$ActivityMessageNotification$user?),
+        context:
+            context == _undefined ? _instance.context : (context as String?),
+        createdAt:
+            createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ActivityMessageNotification$user<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith$Fragment$ActivityMessageNotification$user.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ActivityMessageNotification$user(
+            local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ActivityMessageNotification<TRes>
+    implements CopyWith$Fragment$ActivityMessageNotification<TRes> {
+  _CopyWithStubImpl$Fragment$ActivityMessageNotification(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    int? activityId,
+    Fragment$ActivityMessageNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ActivityMessageNotification$user<TRes> get user =>
+      CopyWith$Fragment$ActivityMessageNotification$user.stub(_res);
+}
+
+const fragmentDefinitionActivityMessageNotification = FragmentDefinitionNode(
+  name: NameNode(value: 'ActivityMessageNotification'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'ActivityMessageNotification'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'activityId'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'user'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'name'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'avatar'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'medium'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'context'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentActivityMessageNotification =
+    DocumentNode(definitions: [
+  fragmentDefinitionActivityMessageNotification,
+]);
+
+extension ClientExtension$Fragment$ActivityMessageNotification
+    on graphql.GraphQLClient {
+  void writeFragment$ActivityMessageNotification({
+    required Fragment$ActivityMessageNotification data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'ActivityMessageNotification',
+            document: documentNodeFragmentActivityMessageNotification,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$ActivityMessageNotification?
+      readFragment$ActivityMessageNotification({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'ActivityMessageNotification',
+          document: documentNodeFragmentActivityMessageNotification,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null
+        ? null
+        : Fragment$ActivityMessageNotification.fromJson(result);
+  }
+}
+
+class Fragment$ActivityMessageNotification$user {
+  Fragment$ActivityMessageNotification$user({
+    required this.id,
+    required this.name,
+    this.avatar,
+    this.$__typename = 'User',
+  });
+
+  factory Fragment$ActivityMessageNotification$user.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$avatar = json['avatar'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityMessageNotification$user(
+      id: (l$id as int),
+      name: (l$name as String),
+      avatar: l$avatar == null
+          ? null
+          : Fragment$ActivityMessageNotification$user$avatar.fromJson(
+              (l$avatar as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String name;
+
+  final Fragment$ActivityMessageNotification$user$avatar? avatar;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$avatar = avatar;
+    _resultData['avatar'] = l$avatar?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$avatar = avatar;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$avatar,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityMessageNotification$user) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$avatar = avatar;
+    final lOther$avatar = other.avatar;
+    if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityMessageNotification$user
+    on Fragment$ActivityMessageNotification$user {
+  CopyWith$Fragment$ActivityMessageNotification$user<
+          Fragment$ActivityMessageNotification$user>
+      get copyWith => CopyWith$Fragment$ActivityMessageNotification$user(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ActivityMessageNotification$user<TRes> {
+  factory CopyWith$Fragment$ActivityMessageNotification$user(
+    Fragment$ActivityMessageNotification$user instance,
+    TRes Function(Fragment$ActivityMessageNotification$user) then,
+  ) = _CopyWithImpl$Fragment$ActivityMessageNotification$user;
+
+  factory CopyWith$Fragment$ActivityMessageNotification$user.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityMessageNotification$user;
+
+  TRes call({
+    int? id,
+    String? name,
+    Fragment$ActivityMessageNotification$user$avatar? avatar,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ActivityMessageNotification$user$avatar<TRes> get avatar;
+}
+
+class _CopyWithImpl$Fragment$ActivityMessageNotification$user<TRes>
+    implements CopyWith$Fragment$ActivityMessageNotification$user<TRes> {
+  _CopyWithImpl$Fragment$ActivityMessageNotification$user(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityMessageNotification$user _instance;
+
+  final TRes Function(Fragment$ActivityMessageNotification$user) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? avatar = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityMessageNotification$user(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        avatar: avatar == _undefined
+            ? _instance.avatar
+            : (avatar as Fragment$ActivityMessageNotification$user$avatar?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ActivityMessageNotification$user$avatar<TRes> get avatar {
+    final local$avatar = _instance.avatar;
+    return local$avatar == null
+        ? CopyWith$Fragment$ActivityMessageNotification$user$avatar.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ActivityMessageNotification$user$avatar(
+            local$avatar, (e) => call(avatar: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ActivityMessageNotification$user<TRes>
+    implements CopyWith$Fragment$ActivityMessageNotification$user<TRes> {
+  _CopyWithStubImpl$Fragment$ActivityMessageNotification$user(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? name,
+    Fragment$ActivityMessageNotification$user$avatar? avatar,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ActivityMessageNotification$user$avatar<TRes> get avatar =>
+      CopyWith$Fragment$ActivityMessageNotification$user$avatar.stub(_res);
+}
+
+class Fragment$ActivityMessageNotification$user$avatar {
+  Fragment$ActivityMessageNotification$user$avatar({
+    this.medium,
+    this.$__typename = 'UserAvatar',
+  });
+
+  factory Fragment$ActivityMessageNotification$user$avatar.fromJson(
+      Map<String, dynamic> json) {
+    final l$medium = json['medium'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityMessageNotification$user$avatar(
+      medium: (l$medium as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? medium;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$medium = medium;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$medium,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityMessageNotification$user$avatar) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityMessageNotification$user$avatar
+    on Fragment$ActivityMessageNotification$user$avatar {
+  CopyWith$Fragment$ActivityMessageNotification$user$avatar<
+          Fragment$ActivityMessageNotification$user$avatar>
+      get copyWith => CopyWith$Fragment$ActivityMessageNotification$user$avatar(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ActivityMessageNotification$user$avatar<TRes> {
+  factory CopyWith$Fragment$ActivityMessageNotification$user$avatar(
+    Fragment$ActivityMessageNotification$user$avatar instance,
+    TRes Function(Fragment$ActivityMessageNotification$user$avatar) then,
+  ) = _CopyWithImpl$Fragment$ActivityMessageNotification$user$avatar;
+
+  factory CopyWith$Fragment$ActivityMessageNotification$user$avatar.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityMessageNotification$user$avatar;
+
+  TRes call({
+    String? medium,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ActivityMessageNotification$user$avatar<TRes>
+    implements CopyWith$Fragment$ActivityMessageNotification$user$avatar<TRes> {
+  _CopyWithImpl$Fragment$ActivityMessageNotification$user$avatar(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityMessageNotification$user$avatar _instance;
+
+  final TRes Function(Fragment$ActivityMessageNotification$user$avatar) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? medium = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityMessageNotification$user$avatar(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ActivityMessageNotification$user$avatar<TRes>
+    implements CopyWith$Fragment$ActivityMessageNotification$user$avatar<TRes> {
+  _CopyWithStubImpl$Fragment$ActivityMessageNotification$user$avatar(this._res);
+
+  TRes _res;
+
+  call({
+    String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$ActivityMentionNotification {
+  Fragment$ActivityMentionNotification({
+    required this.id,
+    required this.activityId,
+    this.user,
+    this.context,
+    this.createdAt,
+    this.$__typename = 'ActivityMentionNotification',
+  });
+
+  factory Fragment$ActivityMentionNotification.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$activityId = json['activityId'];
+    final l$user = json['user'];
+    final l$context = json['context'];
+    final l$createdAt = json['createdAt'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityMentionNotification(
+      id: (l$id as int),
+      activityId: (l$activityId as int),
+      user: l$user == null
+          ? null
+          : Fragment$ActivityMentionNotification$user.fromJson(
+              (l$user as Map<String, dynamic>)),
+      context: (l$context as String?),
+      createdAt: (l$createdAt as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final int activityId;
+
+  final Fragment$ActivityMentionNotification$user? user;
+
+  final String? context;
+
+  final int? createdAt;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$activityId = activityId;
+    _resultData['activityId'] = l$activityId;
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$context = context;
+    _resultData['context'] = l$context;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$activityId = activityId;
+    final l$user = user;
+    final l$context = context;
+    final l$createdAt = createdAt;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$activityId,
+      l$user,
+      l$context,
+      l$createdAt,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityMentionNotification) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$activityId = activityId;
+    final lOther$activityId = other.activityId;
+    if (l$activityId != lOther$activityId) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$context = context;
+    final lOther$context = other.context;
+    if (l$context != lOther$context) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityMentionNotification
+    on Fragment$ActivityMentionNotification {
+  CopyWith$Fragment$ActivityMentionNotification<
+          Fragment$ActivityMentionNotification>
+      get copyWith => CopyWith$Fragment$ActivityMentionNotification(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ActivityMentionNotification<TRes> {
+  factory CopyWith$Fragment$ActivityMentionNotification(
+    Fragment$ActivityMentionNotification instance,
+    TRes Function(Fragment$ActivityMentionNotification) then,
+  ) = _CopyWithImpl$Fragment$ActivityMentionNotification;
+
+  factory CopyWith$Fragment$ActivityMentionNotification.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityMentionNotification;
+
+  TRes call({
+    int? id,
+    int? activityId,
+    Fragment$ActivityMentionNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ActivityMentionNotification$user<TRes> get user;
+}
+
+class _CopyWithImpl$Fragment$ActivityMentionNotification<TRes>
+    implements CopyWith$Fragment$ActivityMentionNotification<TRes> {
+  _CopyWithImpl$Fragment$ActivityMentionNotification(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityMentionNotification _instance;
+
+  final TRes Function(Fragment$ActivityMentionNotification) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? activityId = _undefined,
+    Object? user = _undefined,
+    Object? context = _undefined,
+    Object? createdAt = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityMentionNotification(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        activityId: activityId == _undefined || activityId == null
+            ? _instance.activityId
+            : (activityId as int),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$ActivityMentionNotification$user?),
+        context:
+            context == _undefined ? _instance.context : (context as String?),
+        createdAt:
+            createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ActivityMentionNotification$user<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith$Fragment$ActivityMentionNotification$user.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ActivityMentionNotification$user(
+            local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ActivityMentionNotification<TRes>
+    implements CopyWith$Fragment$ActivityMentionNotification<TRes> {
+  _CopyWithStubImpl$Fragment$ActivityMentionNotification(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    int? activityId,
+    Fragment$ActivityMentionNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ActivityMentionNotification$user<TRes> get user =>
+      CopyWith$Fragment$ActivityMentionNotification$user.stub(_res);
+}
+
+const fragmentDefinitionActivityMentionNotification = FragmentDefinitionNode(
+  name: NameNode(value: 'ActivityMentionNotification'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'ActivityMentionNotification'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'activityId'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'user'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'name'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'avatar'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'medium'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'context'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentActivityMentionNotification =
+    DocumentNode(definitions: [
+  fragmentDefinitionActivityMentionNotification,
+]);
+
+extension ClientExtension$Fragment$ActivityMentionNotification
+    on graphql.GraphQLClient {
+  void writeFragment$ActivityMentionNotification({
+    required Fragment$ActivityMentionNotification data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'ActivityMentionNotification',
+            document: documentNodeFragmentActivityMentionNotification,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$ActivityMentionNotification?
+      readFragment$ActivityMentionNotification({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'ActivityMentionNotification',
+          document: documentNodeFragmentActivityMentionNotification,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null
+        ? null
+        : Fragment$ActivityMentionNotification.fromJson(result);
+  }
+}
+
+class Fragment$ActivityMentionNotification$user {
+  Fragment$ActivityMentionNotification$user({
+    required this.id,
+    required this.name,
+    this.avatar,
+    this.$__typename = 'User',
+  });
+
+  factory Fragment$ActivityMentionNotification$user.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$avatar = json['avatar'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityMentionNotification$user(
+      id: (l$id as int),
+      name: (l$name as String),
+      avatar: l$avatar == null
+          ? null
+          : Fragment$ActivityMentionNotification$user$avatar.fromJson(
+              (l$avatar as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String name;
+
+  final Fragment$ActivityMentionNotification$user$avatar? avatar;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$avatar = avatar;
+    _resultData['avatar'] = l$avatar?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$avatar = avatar;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$avatar,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityMentionNotification$user) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$avatar = avatar;
+    final lOther$avatar = other.avatar;
+    if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityMentionNotification$user
+    on Fragment$ActivityMentionNotification$user {
+  CopyWith$Fragment$ActivityMentionNotification$user<
+          Fragment$ActivityMentionNotification$user>
+      get copyWith => CopyWith$Fragment$ActivityMentionNotification$user(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ActivityMentionNotification$user<TRes> {
+  factory CopyWith$Fragment$ActivityMentionNotification$user(
+    Fragment$ActivityMentionNotification$user instance,
+    TRes Function(Fragment$ActivityMentionNotification$user) then,
+  ) = _CopyWithImpl$Fragment$ActivityMentionNotification$user;
+
+  factory CopyWith$Fragment$ActivityMentionNotification$user.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityMentionNotification$user;
+
+  TRes call({
+    int? id,
+    String? name,
+    Fragment$ActivityMentionNotification$user$avatar? avatar,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ActivityMentionNotification$user$avatar<TRes> get avatar;
+}
+
+class _CopyWithImpl$Fragment$ActivityMentionNotification$user<TRes>
+    implements CopyWith$Fragment$ActivityMentionNotification$user<TRes> {
+  _CopyWithImpl$Fragment$ActivityMentionNotification$user(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityMentionNotification$user _instance;
+
+  final TRes Function(Fragment$ActivityMentionNotification$user) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? avatar = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityMentionNotification$user(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        avatar: avatar == _undefined
+            ? _instance.avatar
+            : (avatar as Fragment$ActivityMentionNotification$user$avatar?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ActivityMentionNotification$user$avatar<TRes> get avatar {
+    final local$avatar = _instance.avatar;
+    return local$avatar == null
+        ? CopyWith$Fragment$ActivityMentionNotification$user$avatar.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ActivityMentionNotification$user$avatar(
+            local$avatar, (e) => call(avatar: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ActivityMentionNotification$user<TRes>
+    implements CopyWith$Fragment$ActivityMentionNotification$user<TRes> {
+  _CopyWithStubImpl$Fragment$ActivityMentionNotification$user(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? name,
+    Fragment$ActivityMentionNotification$user$avatar? avatar,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ActivityMentionNotification$user$avatar<TRes> get avatar =>
+      CopyWith$Fragment$ActivityMentionNotification$user$avatar.stub(_res);
+}
+
+class Fragment$ActivityMentionNotification$user$avatar {
+  Fragment$ActivityMentionNotification$user$avatar({
+    this.medium,
+    this.$__typename = 'UserAvatar',
+  });
+
+  factory Fragment$ActivityMentionNotification$user$avatar.fromJson(
+      Map<String, dynamic> json) {
+    final l$medium = json['medium'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityMentionNotification$user$avatar(
+      medium: (l$medium as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? medium;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$medium = medium;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$medium,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityMentionNotification$user$avatar) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityMentionNotification$user$avatar
+    on Fragment$ActivityMentionNotification$user$avatar {
+  CopyWith$Fragment$ActivityMentionNotification$user$avatar<
+          Fragment$ActivityMentionNotification$user$avatar>
+      get copyWith => CopyWith$Fragment$ActivityMentionNotification$user$avatar(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ActivityMentionNotification$user$avatar<TRes> {
+  factory CopyWith$Fragment$ActivityMentionNotification$user$avatar(
+    Fragment$ActivityMentionNotification$user$avatar instance,
+    TRes Function(Fragment$ActivityMentionNotification$user$avatar) then,
+  ) = _CopyWithImpl$Fragment$ActivityMentionNotification$user$avatar;
+
+  factory CopyWith$Fragment$ActivityMentionNotification$user$avatar.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityMentionNotification$user$avatar;
+
+  TRes call({
+    String? medium,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ActivityMentionNotification$user$avatar<TRes>
+    implements CopyWith$Fragment$ActivityMentionNotification$user$avatar<TRes> {
+  _CopyWithImpl$Fragment$ActivityMentionNotification$user$avatar(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityMentionNotification$user$avatar _instance;
+
+  final TRes Function(Fragment$ActivityMentionNotification$user$avatar) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? medium = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityMentionNotification$user$avatar(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ActivityMentionNotification$user$avatar<TRes>
+    implements CopyWith$Fragment$ActivityMentionNotification$user$avatar<TRes> {
+  _CopyWithStubImpl$Fragment$ActivityMentionNotification$user$avatar(this._res);
+
+  TRes _res;
+
+  call({
+    String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$ActivityReplyLikeNotification {
+  Fragment$ActivityReplyLikeNotification({
+    required this.id,
+    required this.activityId,
+    this.user,
+    this.context,
+    this.createdAt,
+    this.$__typename = 'ActivityReplyLikeNotification',
+  });
+
+  factory Fragment$ActivityReplyLikeNotification.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$activityId = json['activityId'];
+    final l$user = json['user'];
+    final l$context = json['context'];
+    final l$createdAt = json['createdAt'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityReplyLikeNotification(
+      id: (l$id as int),
+      activityId: (l$activityId as int),
+      user: l$user == null
+          ? null
+          : Fragment$ActivityReplyLikeNotification$user.fromJson(
+              (l$user as Map<String, dynamic>)),
+      context: (l$context as String?),
+      createdAt: (l$createdAt as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final int activityId;
+
+  final Fragment$ActivityReplyLikeNotification$user? user;
+
+  final String? context;
+
+  final int? createdAt;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$activityId = activityId;
+    _resultData['activityId'] = l$activityId;
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$context = context;
+    _resultData['context'] = l$context;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$activityId = activityId;
+    final l$user = user;
+    final l$context = context;
+    final l$createdAt = createdAt;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$activityId,
+      l$user,
+      l$context,
+      l$createdAt,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityReplyLikeNotification) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$activityId = activityId;
+    final lOther$activityId = other.activityId;
+    if (l$activityId != lOther$activityId) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$context = context;
+    final lOther$context = other.context;
+    if (l$context != lOther$context) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityReplyLikeNotification
+    on Fragment$ActivityReplyLikeNotification {
+  CopyWith$Fragment$ActivityReplyLikeNotification<
+          Fragment$ActivityReplyLikeNotification>
+      get copyWith => CopyWith$Fragment$ActivityReplyLikeNotification(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ActivityReplyLikeNotification<TRes> {
+  factory CopyWith$Fragment$ActivityReplyLikeNotification(
+    Fragment$ActivityReplyLikeNotification instance,
+    TRes Function(Fragment$ActivityReplyLikeNotification) then,
+  ) = _CopyWithImpl$Fragment$ActivityReplyLikeNotification;
+
+  factory CopyWith$Fragment$ActivityReplyLikeNotification.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityReplyLikeNotification;
+
+  TRes call({
+    int? id,
+    int? activityId,
+    Fragment$ActivityReplyLikeNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ActivityReplyLikeNotification$user<TRes> get user;
+}
+
+class _CopyWithImpl$Fragment$ActivityReplyLikeNotification<TRes>
+    implements CopyWith$Fragment$ActivityReplyLikeNotification<TRes> {
+  _CopyWithImpl$Fragment$ActivityReplyLikeNotification(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityReplyLikeNotification _instance;
+
+  final TRes Function(Fragment$ActivityReplyLikeNotification) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? activityId = _undefined,
+    Object? user = _undefined,
+    Object? context = _undefined,
+    Object? createdAt = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityReplyLikeNotification(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        activityId: activityId == _undefined || activityId == null
+            ? _instance.activityId
+            : (activityId as int),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$ActivityReplyLikeNotification$user?),
+        context:
+            context == _undefined ? _instance.context : (context as String?),
+        createdAt:
+            createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ActivityReplyLikeNotification$user<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith$Fragment$ActivityReplyLikeNotification$user.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ActivityReplyLikeNotification$user(
+            local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ActivityReplyLikeNotification<TRes>
+    implements CopyWith$Fragment$ActivityReplyLikeNotification<TRes> {
+  _CopyWithStubImpl$Fragment$ActivityReplyLikeNotification(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    int? activityId,
+    Fragment$ActivityReplyLikeNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ActivityReplyLikeNotification$user<TRes> get user =>
+      CopyWith$Fragment$ActivityReplyLikeNotification$user.stub(_res);
+}
+
+const fragmentDefinitionActivityReplyLikeNotification = FragmentDefinitionNode(
+  name: NameNode(value: 'ActivityReplyLikeNotification'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'ActivityReplyLikeNotification'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'activityId'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'user'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'name'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'avatar'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'medium'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'context'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentActivityReplyLikeNotification =
+    DocumentNode(definitions: [
+  fragmentDefinitionActivityReplyLikeNotification,
+]);
+
+extension ClientExtension$Fragment$ActivityReplyLikeNotification
+    on graphql.GraphQLClient {
+  void writeFragment$ActivityReplyLikeNotification({
+    required Fragment$ActivityReplyLikeNotification data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'ActivityReplyLikeNotification',
+            document: documentNodeFragmentActivityReplyLikeNotification,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$ActivityReplyLikeNotification?
+      readFragment$ActivityReplyLikeNotification({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'ActivityReplyLikeNotification',
+          document: documentNodeFragmentActivityReplyLikeNotification,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null
+        ? null
+        : Fragment$ActivityReplyLikeNotification.fromJson(result);
+  }
+}
+
+class Fragment$ActivityReplyLikeNotification$user {
+  Fragment$ActivityReplyLikeNotification$user({
+    required this.id,
+    required this.name,
+    this.avatar,
+    this.$__typename = 'User',
+  });
+
+  factory Fragment$ActivityReplyLikeNotification$user.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$avatar = json['avatar'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityReplyLikeNotification$user(
+      id: (l$id as int),
+      name: (l$name as String),
+      avatar: l$avatar == null
+          ? null
+          : Fragment$ActivityReplyLikeNotification$user$avatar.fromJson(
+              (l$avatar as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String name;
+
+  final Fragment$ActivityReplyLikeNotification$user$avatar? avatar;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$avatar = avatar;
+    _resultData['avatar'] = l$avatar?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$avatar = avatar;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$avatar,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityReplyLikeNotification$user) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$avatar = avatar;
+    final lOther$avatar = other.avatar;
+    if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityReplyLikeNotification$user
+    on Fragment$ActivityReplyLikeNotification$user {
+  CopyWith$Fragment$ActivityReplyLikeNotification$user<
+          Fragment$ActivityReplyLikeNotification$user>
+      get copyWith => CopyWith$Fragment$ActivityReplyLikeNotification$user(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ActivityReplyLikeNotification$user<TRes> {
+  factory CopyWith$Fragment$ActivityReplyLikeNotification$user(
+    Fragment$ActivityReplyLikeNotification$user instance,
+    TRes Function(Fragment$ActivityReplyLikeNotification$user) then,
+  ) = _CopyWithImpl$Fragment$ActivityReplyLikeNotification$user;
+
+  factory CopyWith$Fragment$ActivityReplyLikeNotification$user.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityReplyLikeNotification$user;
+
+  TRes call({
+    int? id,
+    String? name,
+    Fragment$ActivityReplyLikeNotification$user$avatar? avatar,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ActivityReplyLikeNotification$user$avatar<TRes> get avatar;
+}
+
+class _CopyWithImpl$Fragment$ActivityReplyLikeNotification$user<TRes>
+    implements CopyWith$Fragment$ActivityReplyLikeNotification$user<TRes> {
+  _CopyWithImpl$Fragment$ActivityReplyLikeNotification$user(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityReplyLikeNotification$user _instance;
+
+  final TRes Function(Fragment$ActivityReplyLikeNotification$user) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? avatar = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityReplyLikeNotification$user(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        avatar: avatar == _undefined
+            ? _instance.avatar
+            : (avatar as Fragment$ActivityReplyLikeNotification$user$avatar?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ActivityReplyLikeNotification$user$avatar<TRes> get avatar {
+    final local$avatar = _instance.avatar;
+    return local$avatar == null
+        ? CopyWith$Fragment$ActivityReplyLikeNotification$user$avatar.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ActivityReplyLikeNotification$user$avatar(
+            local$avatar, (e) => call(avatar: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ActivityReplyLikeNotification$user<TRes>
+    implements CopyWith$Fragment$ActivityReplyLikeNotification$user<TRes> {
+  _CopyWithStubImpl$Fragment$ActivityReplyLikeNotification$user(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? name,
+    Fragment$ActivityReplyLikeNotification$user$avatar? avatar,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ActivityReplyLikeNotification$user$avatar<TRes>
+      get avatar =>
+          CopyWith$Fragment$ActivityReplyLikeNotification$user$avatar.stub(
+              _res);
+}
+
+class Fragment$ActivityReplyLikeNotification$user$avatar {
+  Fragment$ActivityReplyLikeNotification$user$avatar({
+    this.medium,
+    this.$__typename = 'UserAvatar',
+  });
+
+  factory Fragment$ActivityReplyLikeNotification$user$avatar.fromJson(
+      Map<String, dynamic> json) {
+    final l$medium = json['medium'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityReplyLikeNotification$user$avatar(
+      medium: (l$medium as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? medium;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$medium = medium;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$medium,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityReplyLikeNotification$user$avatar) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityReplyLikeNotification$user$avatar
+    on Fragment$ActivityReplyLikeNotification$user$avatar {
+  CopyWith$Fragment$ActivityReplyLikeNotification$user$avatar<
+          Fragment$ActivityReplyLikeNotification$user$avatar>
+      get copyWith =>
+          CopyWith$Fragment$ActivityReplyLikeNotification$user$avatar(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ActivityReplyLikeNotification$user$avatar<
+    TRes> {
+  factory CopyWith$Fragment$ActivityReplyLikeNotification$user$avatar(
+    Fragment$ActivityReplyLikeNotification$user$avatar instance,
+    TRes Function(Fragment$ActivityReplyLikeNotification$user$avatar) then,
+  ) = _CopyWithImpl$Fragment$ActivityReplyLikeNotification$user$avatar;
+
+  factory CopyWith$Fragment$ActivityReplyLikeNotification$user$avatar.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityReplyLikeNotification$user$avatar;
+
+  TRes call({
+    String? medium,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ActivityReplyLikeNotification$user$avatar<TRes>
+    implements
+        CopyWith$Fragment$ActivityReplyLikeNotification$user$avatar<TRes> {
+  _CopyWithImpl$Fragment$ActivityReplyLikeNotification$user$avatar(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityReplyLikeNotification$user$avatar _instance;
+
+  final TRes Function(Fragment$ActivityReplyLikeNotification$user$avatar) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? medium = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityReplyLikeNotification$user$avatar(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ActivityReplyLikeNotification$user$avatar<TRes>
+    implements
+        CopyWith$Fragment$ActivityReplyLikeNotification$user$avatar<TRes> {
+  _CopyWithStubImpl$Fragment$ActivityReplyLikeNotification$user$avatar(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$ActivityReplyNotification {
+  Fragment$ActivityReplyNotification({
+    required this.id,
+    required this.activityId,
+    this.user,
+    this.context,
+    this.createdAt,
+    this.$__typename = 'ActivityReplyNotification',
+  });
+
+  factory Fragment$ActivityReplyNotification.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$activityId = json['activityId'];
+    final l$user = json['user'];
+    final l$context = json['context'];
+    final l$createdAt = json['createdAt'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityReplyNotification(
+      id: (l$id as int),
+      activityId: (l$activityId as int),
+      user: l$user == null
+          ? null
+          : Fragment$ActivityReplyNotification$user.fromJson(
+              (l$user as Map<String, dynamic>)),
+      context: (l$context as String?),
+      createdAt: (l$createdAt as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final int activityId;
+
+  final Fragment$ActivityReplyNotification$user? user;
+
+  final String? context;
+
+  final int? createdAt;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$activityId = activityId;
+    _resultData['activityId'] = l$activityId;
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$context = context;
+    _resultData['context'] = l$context;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$activityId = activityId;
+    final l$user = user;
+    final l$context = context;
+    final l$createdAt = createdAt;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$activityId,
+      l$user,
+      l$context,
+      l$createdAt,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityReplyNotification) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$activityId = activityId;
+    final lOther$activityId = other.activityId;
+    if (l$activityId != lOther$activityId) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$context = context;
+    final lOther$context = other.context;
+    if (l$context != lOther$context) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityReplyNotification
+    on Fragment$ActivityReplyNotification {
+  CopyWith$Fragment$ActivityReplyNotification<
+          Fragment$ActivityReplyNotification>
+      get copyWith => CopyWith$Fragment$ActivityReplyNotification(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ActivityReplyNotification<TRes> {
+  factory CopyWith$Fragment$ActivityReplyNotification(
+    Fragment$ActivityReplyNotification instance,
+    TRes Function(Fragment$ActivityReplyNotification) then,
+  ) = _CopyWithImpl$Fragment$ActivityReplyNotification;
+
+  factory CopyWith$Fragment$ActivityReplyNotification.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityReplyNotification;
+
+  TRes call({
+    int? id,
+    int? activityId,
+    Fragment$ActivityReplyNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ActivityReplyNotification$user<TRes> get user;
+}
+
+class _CopyWithImpl$Fragment$ActivityReplyNotification<TRes>
+    implements CopyWith$Fragment$ActivityReplyNotification<TRes> {
+  _CopyWithImpl$Fragment$ActivityReplyNotification(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityReplyNotification _instance;
+
+  final TRes Function(Fragment$ActivityReplyNotification) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? activityId = _undefined,
+    Object? user = _undefined,
+    Object? context = _undefined,
+    Object? createdAt = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityReplyNotification(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        activityId: activityId == _undefined || activityId == null
+            ? _instance.activityId
+            : (activityId as int),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$ActivityReplyNotification$user?),
+        context:
+            context == _undefined ? _instance.context : (context as String?),
+        createdAt:
+            createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ActivityReplyNotification$user<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith$Fragment$ActivityReplyNotification$user.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ActivityReplyNotification$user(
+            local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ActivityReplyNotification<TRes>
+    implements CopyWith$Fragment$ActivityReplyNotification<TRes> {
+  _CopyWithStubImpl$Fragment$ActivityReplyNotification(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    int? activityId,
+    Fragment$ActivityReplyNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ActivityReplyNotification$user<TRes> get user =>
+      CopyWith$Fragment$ActivityReplyNotification$user.stub(_res);
+}
+
+const fragmentDefinitionActivityReplyNotification = FragmentDefinitionNode(
+  name: NameNode(value: 'ActivityReplyNotification'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'ActivityReplyNotification'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'activityId'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'user'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'name'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'avatar'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'medium'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'context'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentActivityReplyNotification =
+    DocumentNode(definitions: [
+  fragmentDefinitionActivityReplyNotification,
+]);
+
+extension ClientExtension$Fragment$ActivityReplyNotification
+    on graphql.GraphQLClient {
+  void writeFragment$ActivityReplyNotification({
+    required Fragment$ActivityReplyNotification data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'ActivityReplyNotification',
+            document: documentNodeFragmentActivityReplyNotification,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$ActivityReplyNotification? readFragment$ActivityReplyNotification({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'ActivityReplyNotification',
+          document: documentNodeFragmentActivityReplyNotification,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null
+        ? null
+        : Fragment$ActivityReplyNotification.fromJson(result);
+  }
+}
+
+class Fragment$ActivityReplyNotification$user {
+  Fragment$ActivityReplyNotification$user({
+    required this.id,
+    required this.name,
+    this.avatar,
+    this.$__typename = 'User',
+  });
+
+  factory Fragment$ActivityReplyNotification$user.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$avatar = json['avatar'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityReplyNotification$user(
+      id: (l$id as int),
+      name: (l$name as String),
+      avatar: l$avatar == null
+          ? null
+          : Fragment$ActivityReplyNotification$user$avatar.fromJson(
+              (l$avatar as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String name;
+
+  final Fragment$ActivityReplyNotification$user$avatar? avatar;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$avatar = avatar;
+    _resultData['avatar'] = l$avatar?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$avatar = avatar;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$avatar,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityReplyNotification$user) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$avatar = avatar;
+    final lOther$avatar = other.avatar;
+    if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityReplyNotification$user
+    on Fragment$ActivityReplyNotification$user {
+  CopyWith$Fragment$ActivityReplyNotification$user<
+          Fragment$ActivityReplyNotification$user>
+      get copyWith => CopyWith$Fragment$ActivityReplyNotification$user(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ActivityReplyNotification$user<TRes> {
+  factory CopyWith$Fragment$ActivityReplyNotification$user(
+    Fragment$ActivityReplyNotification$user instance,
+    TRes Function(Fragment$ActivityReplyNotification$user) then,
+  ) = _CopyWithImpl$Fragment$ActivityReplyNotification$user;
+
+  factory CopyWith$Fragment$ActivityReplyNotification$user.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityReplyNotification$user;
+
+  TRes call({
+    int? id,
+    String? name,
+    Fragment$ActivityReplyNotification$user$avatar? avatar,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ActivityReplyNotification$user$avatar<TRes> get avatar;
+}
+
+class _CopyWithImpl$Fragment$ActivityReplyNotification$user<TRes>
+    implements CopyWith$Fragment$ActivityReplyNotification$user<TRes> {
+  _CopyWithImpl$Fragment$ActivityReplyNotification$user(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityReplyNotification$user _instance;
+
+  final TRes Function(Fragment$ActivityReplyNotification$user) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? avatar = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityReplyNotification$user(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        avatar: avatar == _undefined
+            ? _instance.avatar
+            : (avatar as Fragment$ActivityReplyNotification$user$avatar?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ActivityReplyNotification$user$avatar<TRes> get avatar {
+    final local$avatar = _instance.avatar;
+    return local$avatar == null
+        ? CopyWith$Fragment$ActivityReplyNotification$user$avatar.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ActivityReplyNotification$user$avatar(
+            local$avatar, (e) => call(avatar: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ActivityReplyNotification$user<TRes>
+    implements CopyWith$Fragment$ActivityReplyNotification$user<TRes> {
+  _CopyWithStubImpl$Fragment$ActivityReplyNotification$user(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? name,
+    Fragment$ActivityReplyNotification$user$avatar? avatar,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ActivityReplyNotification$user$avatar<TRes> get avatar =>
+      CopyWith$Fragment$ActivityReplyNotification$user$avatar.stub(_res);
+}
+
+class Fragment$ActivityReplyNotification$user$avatar {
+  Fragment$ActivityReplyNotification$user$avatar({
+    this.medium,
+    this.$__typename = 'UserAvatar',
+  });
+
+  factory Fragment$ActivityReplyNotification$user$avatar.fromJson(
+      Map<String, dynamic> json) {
+    final l$medium = json['medium'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityReplyNotification$user$avatar(
+      medium: (l$medium as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? medium;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$medium = medium;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$medium,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityReplyNotification$user$avatar) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityReplyNotification$user$avatar
+    on Fragment$ActivityReplyNotification$user$avatar {
+  CopyWith$Fragment$ActivityReplyNotification$user$avatar<
+          Fragment$ActivityReplyNotification$user$avatar>
+      get copyWith => CopyWith$Fragment$ActivityReplyNotification$user$avatar(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ActivityReplyNotification$user$avatar<TRes> {
+  factory CopyWith$Fragment$ActivityReplyNotification$user$avatar(
+    Fragment$ActivityReplyNotification$user$avatar instance,
+    TRes Function(Fragment$ActivityReplyNotification$user$avatar) then,
+  ) = _CopyWithImpl$Fragment$ActivityReplyNotification$user$avatar;
+
+  factory CopyWith$Fragment$ActivityReplyNotification$user$avatar.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityReplyNotification$user$avatar;
+
+  TRes call({
+    String? medium,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ActivityReplyNotification$user$avatar<TRes>
+    implements CopyWith$Fragment$ActivityReplyNotification$user$avatar<TRes> {
+  _CopyWithImpl$Fragment$ActivityReplyNotification$user$avatar(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityReplyNotification$user$avatar _instance;
+
+  final TRes Function(Fragment$ActivityReplyNotification$user$avatar) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? medium = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityReplyNotification$user$avatar(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ActivityReplyNotification$user$avatar<TRes>
+    implements CopyWith$Fragment$ActivityReplyNotification$user$avatar<TRes> {
+  _CopyWithStubImpl$Fragment$ActivityReplyNotification$user$avatar(this._res);
+
+  TRes _res;
+
+  call({
+    String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$ActivityReplySubscribedNotification {
+  Fragment$ActivityReplySubscribedNotification({
+    required this.id,
+    required this.activityId,
+    this.user,
+    this.context,
+    this.createdAt,
+    this.$__typename = 'ActivityReplySubscribedNotification',
+  });
+
+  factory Fragment$ActivityReplySubscribedNotification.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$activityId = json['activityId'];
+    final l$user = json['user'];
+    final l$context = json['context'];
+    final l$createdAt = json['createdAt'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityReplySubscribedNotification(
+      id: (l$id as int),
+      activityId: (l$activityId as int),
+      user: l$user == null
+          ? null
+          : Fragment$ActivityReplySubscribedNotification$user.fromJson(
+              (l$user as Map<String, dynamic>)),
+      context: (l$context as String?),
+      createdAt: (l$createdAt as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final int activityId;
+
+  final Fragment$ActivityReplySubscribedNotification$user? user;
+
+  final String? context;
+
+  final int? createdAt;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$activityId = activityId;
+    _resultData['activityId'] = l$activityId;
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$context = context;
+    _resultData['context'] = l$context;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$activityId = activityId;
+    final l$user = user;
+    final l$context = context;
+    final l$createdAt = createdAt;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$activityId,
+      l$user,
+      l$context,
+      l$createdAt,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityReplySubscribedNotification) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$activityId = activityId;
+    final lOther$activityId = other.activityId;
+    if (l$activityId != lOther$activityId) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$context = context;
+    final lOther$context = other.context;
+    if (l$context != lOther$context) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityReplySubscribedNotification
+    on Fragment$ActivityReplySubscribedNotification {
+  CopyWith$Fragment$ActivityReplySubscribedNotification<
+          Fragment$ActivityReplySubscribedNotification>
+      get copyWith => CopyWith$Fragment$ActivityReplySubscribedNotification(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ActivityReplySubscribedNotification<TRes> {
+  factory CopyWith$Fragment$ActivityReplySubscribedNotification(
+    Fragment$ActivityReplySubscribedNotification instance,
+    TRes Function(Fragment$ActivityReplySubscribedNotification) then,
+  ) = _CopyWithImpl$Fragment$ActivityReplySubscribedNotification;
+
+  factory CopyWith$Fragment$ActivityReplySubscribedNotification.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityReplySubscribedNotification;
+
+  TRes call({
+    int? id,
+    int? activityId,
+    Fragment$ActivityReplySubscribedNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ActivityReplySubscribedNotification$user<TRes> get user;
+}
+
+class _CopyWithImpl$Fragment$ActivityReplySubscribedNotification<TRes>
+    implements CopyWith$Fragment$ActivityReplySubscribedNotification<TRes> {
+  _CopyWithImpl$Fragment$ActivityReplySubscribedNotification(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityReplySubscribedNotification _instance;
+
+  final TRes Function(Fragment$ActivityReplySubscribedNotification) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? activityId = _undefined,
+    Object? user = _undefined,
+    Object? context = _undefined,
+    Object? createdAt = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityReplySubscribedNotification(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        activityId: activityId == _undefined || activityId == null
+            ? _instance.activityId
+            : (activityId as int),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$ActivityReplySubscribedNotification$user?),
+        context:
+            context == _undefined ? _instance.context : (context as String?),
+        createdAt:
+            createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ActivityReplySubscribedNotification$user<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith$Fragment$ActivityReplySubscribedNotification$user.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ActivityReplySubscribedNotification$user(
+            local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ActivityReplySubscribedNotification<TRes>
+    implements CopyWith$Fragment$ActivityReplySubscribedNotification<TRes> {
+  _CopyWithStubImpl$Fragment$ActivityReplySubscribedNotification(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    int? activityId,
+    Fragment$ActivityReplySubscribedNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ActivityReplySubscribedNotification$user<TRes> get user =>
+      CopyWith$Fragment$ActivityReplySubscribedNotification$user.stub(_res);
+}
+
+const fragmentDefinitionActivityReplySubscribedNotification =
+    FragmentDefinitionNode(
+  name: NameNode(value: 'ActivityReplySubscribedNotification'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'ActivityReplySubscribedNotification'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'activityId'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'user'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'name'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'avatar'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'medium'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'context'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentActivityReplySubscribedNotification =
+    DocumentNode(definitions: [
+  fragmentDefinitionActivityReplySubscribedNotification,
+]);
+
+extension ClientExtension$Fragment$ActivityReplySubscribedNotification
+    on graphql.GraphQLClient {
+  void writeFragment$ActivityReplySubscribedNotification({
+    required Fragment$ActivityReplySubscribedNotification data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'ActivityReplySubscribedNotification',
+            document: documentNodeFragmentActivityReplySubscribedNotification,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$ActivityReplySubscribedNotification?
+      readFragment$ActivityReplySubscribedNotification({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'ActivityReplySubscribedNotification',
+          document: documentNodeFragmentActivityReplySubscribedNotification,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null
+        ? null
+        : Fragment$ActivityReplySubscribedNotification.fromJson(result);
+  }
+}
+
+class Fragment$ActivityReplySubscribedNotification$user {
+  Fragment$ActivityReplySubscribedNotification$user({
+    required this.id,
+    required this.name,
+    this.avatar,
+    this.$__typename = 'User',
+  });
+
+  factory Fragment$ActivityReplySubscribedNotification$user.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$avatar = json['avatar'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityReplySubscribedNotification$user(
+      id: (l$id as int),
+      name: (l$name as String),
+      avatar: l$avatar == null
+          ? null
+          : Fragment$ActivityReplySubscribedNotification$user$avatar.fromJson(
+              (l$avatar as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String name;
+
+  final Fragment$ActivityReplySubscribedNotification$user$avatar? avatar;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$avatar = avatar;
+    _resultData['avatar'] = l$avatar?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$avatar = avatar;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$avatar,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityReplySubscribedNotification$user) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$avatar = avatar;
+    final lOther$avatar = other.avatar;
+    if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityReplySubscribedNotification$user
+    on Fragment$ActivityReplySubscribedNotification$user {
+  CopyWith$Fragment$ActivityReplySubscribedNotification$user<
+          Fragment$ActivityReplySubscribedNotification$user>
+      get copyWith =>
+          CopyWith$Fragment$ActivityReplySubscribedNotification$user(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ActivityReplySubscribedNotification$user<
+    TRes> {
+  factory CopyWith$Fragment$ActivityReplySubscribedNotification$user(
+    Fragment$ActivityReplySubscribedNotification$user instance,
+    TRes Function(Fragment$ActivityReplySubscribedNotification$user) then,
+  ) = _CopyWithImpl$Fragment$ActivityReplySubscribedNotification$user;
+
+  factory CopyWith$Fragment$ActivityReplySubscribedNotification$user.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityReplySubscribedNotification$user;
+
+  TRes call({
+    int? id,
+    String? name,
+    Fragment$ActivityReplySubscribedNotification$user$avatar? avatar,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ActivityReplySubscribedNotification$user$avatar<TRes>
+      get avatar;
+}
+
+class _CopyWithImpl$Fragment$ActivityReplySubscribedNotification$user<TRes>
+    implements
+        CopyWith$Fragment$ActivityReplySubscribedNotification$user<TRes> {
+  _CopyWithImpl$Fragment$ActivityReplySubscribedNotification$user(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityReplySubscribedNotification$user _instance;
+
+  final TRes Function(Fragment$ActivityReplySubscribedNotification$user) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? avatar = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityReplySubscribedNotification$user(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        avatar: avatar == _undefined
+            ? _instance.avatar
+            : (avatar
+                as Fragment$ActivityReplySubscribedNotification$user$avatar?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ActivityReplySubscribedNotification$user$avatar<TRes>
+      get avatar {
+    final local$avatar = _instance.avatar;
+    return local$avatar == null
+        ? CopyWith$Fragment$ActivityReplySubscribedNotification$user$avatar
+            .stub(_then(_instance))
+        : CopyWith$Fragment$ActivityReplySubscribedNotification$user$avatar(
+            local$avatar, (e) => call(avatar: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ActivityReplySubscribedNotification$user<TRes>
+    implements
+        CopyWith$Fragment$ActivityReplySubscribedNotification$user<TRes> {
+  _CopyWithStubImpl$Fragment$ActivityReplySubscribedNotification$user(
+      this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? name,
+    Fragment$ActivityReplySubscribedNotification$user$avatar? avatar,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ActivityReplySubscribedNotification$user$avatar<TRes>
+      get avatar =>
+          CopyWith$Fragment$ActivityReplySubscribedNotification$user$avatar
+              .stub(_res);
+}
+
+class Fragment$ActivityReplySubscribedNotification$user$avatar {
+  Fragment$ActivityReplySubscribedNotification$user$avatar({
+    this.medium,
+    this.$__typename = 'UserAvatar',
+  });
+
+  factory Fragment$ActivityReplySubscribedNotification$user$avatar.fromJson(
+      Map<String, dynamic> json) {
+    final l$medium = json['medium'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ActivityReplySubscribedNotification$user$avatar(
+      medium: (l$medium as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? medium;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$medium = medium;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$medium,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ActivityReplySubscribedNotification$user$avatar) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ActivityReplySubscribedNotification$user$avatar
+    on Fragment$ActivityReplySubscribedNotification$user$avatar {
+  CopyWith$Fragment$ActivityReplySubscribedNotification$user$avatar<
+          Fragment$ActivityReplySubscribedNotification$user$avatar>
+      get copyWith =>
+          CopyWith$Fragment$ActivityReplySubscribedNotification$user$avatar(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ActivityReplySubscribedNotification$user$avatar<
+    TRes> {
+  factory CopyWith$Fragment$ActivityReplySubscribedNotification$user$avatar(
+    Fragment$ActivityReplySubscribedNotification$user$avatar instance,
+    TRes Function(Fragment$ActivityReplySubscribedNotification$user$avatar)
+        then,
+  ) = _CopyWithImpl$Fragment$ActivityReplySubscribedNotification$user$avatar;
+
+  factory CopyWith$Fragment$ActivityReplySubscribedNotification$user$avatar.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$ActivityReplySubscribedNotification$user$avatar;
+
+  TRes call({
+    String? medium,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ActivityReplySubscribedNotification$user$avatar<
+        TRes>
+    implements
+        CopyWith$Fragment$ActivityReplySubscribedNotification$user$avatar<
+            TRes> {
+  _CopyWithImpl$Fragment$ActivityReplySubscribedNotification$user$avatar(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ActivityReplySubscribedNotification$user$avatar _instance;
+
+  final TRes Function(Fragment$ActivityReplySubscribedNotification$user$avatar)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? medium = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ActivityReplySubscribedNotification$user$avatar(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ActivityReplySubscribedNotification$user$avatar<
+        TRes>
+    implements
+        CopyWith$Fragment$ActivityReplySubscribedNotification$user$avatar<
+            TRes> {
+  _CopyWithStubImpl$Fragment$ActivityReplySubscribedNotification$user$avatar(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$AiringNotification {
+  Fragment$AiringNotification({
+    required this.id,
+    this.media,
+    this.contexts,
+    this.createdAt,
+    required this.episode,
+    this.$__typename = 'AiringNotification',
+  });
+
+  factory Fragment$AiringNotification.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$media = json['media'];
+    final l$contexts = json['contexts'];
+    final l$createdAt = json['createdAt'];
+    final l$episode = json['episode'];
+    final l$$__typename = json['__typename'];
+    return Fragment$AiringNotification(
+      id: (l$id as int),
+      media: l$media == null
+          ? null
+          : Fragment$AiringNotification$media.fromJson(
+              (l$media as Map<String, dynamic>)),
+      contexts:
+          (l$contexts as List<dynamic>?)?.map((e) => (e as String?)).toList(),
+      createdAt: (l$createdAt as int?),
+      episode: (l$episode as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Fragment$AiringNotification$media? media;
+
+  final List<String?>? contexts;
+
+  final int? createdAt;
+
+  final int episode;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$media = media;
+    _resultData['media'] = l$media?.toJson();
+    final l$contexts = contexts;
+    _resultData['contexts'] = l$contexts?.map((e) => e).toList();
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$episode = episode;
+    _resultData['episode'] = l$episode;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$media = media;
+    final l$contexts = contexts;
+    final l$createdAt = createdAt;
+    final l$episode = episode;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$media,
+      l$contexts == null ? null : Object.hashAll(l$contexts.map((v) => v)),
+      l$createdAt,
+      l$episode,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$AiringNotification) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$media = media;
+    final lOther$media = other.media;
+    if (l$media != lOther$media) {
+      return false;
+    }
+    final l$contexts = contexts;
+    final lOther$contexts = other.contexts;
+    if (l$contexts != null && lOther$contexts != null) {
+      if (l$contexts.length != lOther$contexts.length) {
+        return false;
+      }
+      for (int i = 0; i < l$contexts.length; i++) {
+        final l$contexts$entry = l$contexts[i];
+        final lOther$contexts$entry = lOther$contexts[i];
+        if (l$contexts$entry != lOther$contexts$entry) {
+          return false;
+        }
+      }
+    } else if (l$contexts != lOther$contexts) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$episode = episode;
+    final lOther$episode = other.episode;
+    if (l$episode != lOther$episode) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$AiringNotification
+    on Fragment$AiringNotification {
+  CopyWith$Fragment$AiringNotification<Fragment$AiringNotification>
+      get copyWith => CopyWith$Fragment$AiringNotification(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$AiringNotification<TRes> {
+  factory CopyWith$Fragment$AiringNotification(
+    Fragment$AiringNotification instance,
+    TRes Function(Fragment$AiringNotification) then,
+  ) = _CopyWithImpl$Fragment$AiringNotification;
+
+  factory CopyWith$Fragment$AiringNotification.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$AiringNotification;
+
+  TRes call({
+    int? id,
+    Fragment$AiringNotification$media? media,
+    List<String?>? contexts,
+    int? createdAt,
+    int? episode,
+    String? $__typename,
+  });
+  CopyWith$Fragment$AiringNotification$media<TRes> get media;
+}
+
+class _CopyWithImpl$Fragment$AiringNotification<TRes>
+    implements CopyWith$Fragment$AiringNotification<TRes> {
+  _CopyWithImpl$Fragment$AiringNotification(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$AiringNotification _instance;
+
+  final TRes Function(Fragment$AiringNotification) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? media = _undefined,
+    Object? contexts = _undefined,
+    Object? createdAt = _undefined,
+    Object? episode = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$AiringNotification(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        media: media == _undefined
+            ? _instance.media
+            : (media as Fragment$AiringNotification$media?),
+        contexts: contexts == _undefined
+            ? _instance.contexts
+            : (contexts as List<String?>?),
+        createdAt:
+            createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
+        episode: episode == _undefined || episode == null
+            ? _instance.episode
+            : (episode as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$AiringNotification$media<TRes> get media {
+    final local$media = _instance.media;
+    return local$media == null
+        ? CopyWith$Fragment$AiringNotification$media.stub(_then(_instance))
+        : CopyWith$Fragment$AiringNotification$media(
+            local$media, (e) => call(media: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$AiringNotification<TRes>
+    implements CopyWith$Fragment$AiringNotification<TRes> {
+  _CopyWithStubImpl$Fragment$AiringNotification(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Fragment$AiringNotification$media? media,
+    List<String?>? contexts,
+    int? createdAt,
+    int? episode,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$AiringNotification$media<TRes> get media =>
+      CopyWith$Fragment$AiringNotification$media.stub(_res);
+}
+
+const fragmentDefinitionAiringNotification = FragmentDefinitionNode(
+  name: NameNode(value: 'AiringNotification'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'AiringNotification'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'media'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'coverImage'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'medium'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: 'title'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'userPreferred'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'contexts'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'episode'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentAiringNotification = DocumentNode(definitions: [
+  fragmentDefinitionAiringNotification,
+]);
+
+extension ClientExtension$Fragment$AiringNotification on graphql.GraphQLClient {
+  void writeFragment$AiringNotification({
+    required Fragment$AiringNotification data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'AiringNotification',
+            document: documentNodeFragmentAiringNotification,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$AiringNotification? readFragment$AiringNotification({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'AiringNotification',
+          document: documentNodeFragmentAiringNotification,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Fragment$AiringNotification.fromJson(result);
+  }
+}
+
+class Fragment$AiringNotification$media {
+  Fragment$AiringNotification$media({
+    required this.id,
+    this.coverImage,
+    this.title,
+    this.$__typename = 'Media',
+  });
+
+  factory Fragment$AiringNotification$media.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$coverImage = json['coverImage'];
+    final l$title = json['title'];
+    final l$$__typename = json['__typename'];
+    return Fragment$AiringNotification$media(
+      id: (l$id as int),
+      coverImage: l$coverImage == null
+          ? null
+          : Fragment$AiringNotification$media$coverImage.fromJson(
+              (l$coverImage as Map<String, dynamic>)),
+      title: l$title == null
+          ? null
+          : Fragment$AiringNotification$media$title.fromJson(
+              (l$title as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Fragment$AiringNotification$media$coverImage? coverImage;
+
+  final Fragment$AiringNotification$media$title? title;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$coverImage = coverImage;
+    _resultData['coverImage'] = l$coverImage?.toJson();
+    final l$title = title;
+    _resultData['title'] = l$title?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$coverImage = coverImage;
+    final l$title = title;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$coverImage,
+      l$title,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$AiringNotification$media) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$coverImage = coverImage;
+    final lOther$coverImage = other.coverImage;
+    if (l$coverImage != lOther$coverImage) {
+      return false;
+    }
+    final l$title = title;
+    final lOther$title = other.title;
+    if (l$title != lOther$title) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$AiringNotification$media
+    on Fragment$AiringNotification$media {
+  CopyWith$Fragment$AiringNotification$media<Fragment$AiringNotification$media>
+      get copyWith => CopyWith$Fragment$AiringNotification$media(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$AiringNotification$media<TRes> {
+  factory CopyWith$Fragment$AiringNotification$media(
+    Fragment$AiringNotification$media instance,
+    TRes Function(Fragment$AiringNotification$media) then,
+  ) = _CopyWithImpl$Fragment$AiringNotification$media;
+
+  factory CopyWith$Fragment$AiringNotification$media.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$AiringNotification$media;
+
+  TRes call({
+    int? id,
+    Fragment$AiringNotification$media$coverImage? coverImage,
+    Fragment$AiringNotification$media$title? title,
+    String? $__typename,
+  });
+  CopyWith$Fragment$AiringNotification$media$coverImage<TRes> get coverImage;
+  CopyWith$Fragment$AiringNotification$media$title<TRes> get title;
+}
+
+class _CopyWithImpl$Fragment$AiringNotification$media<TRes>
+    implements CopyWith$Fragment$AiringNotification$media<TRes> {
+  _CopyWithImpl$Fragment$AiringNotification$media(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$AiringNotification$media _instance;
+
+  final TRes Function(Fragment$AiringNotification$media) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? coverImage = _undefined,
+    Object? title = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$AiringNotification$media(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        coverImage: coverImage == _undefined
+            ? _instance.coverImage
+            : (coverImage as Fragment$AiringNotification$media$coverImage?),
+        title: title == _undefined
+            ? _instance.title
+            : (title as Fragment$AiringNotification$media$title?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$AiringNotification$media$coverImage<TRes> get coverImage {
+    final local$coverImage = _instance.coverImage;
+    return local$coverImage == null
+        ? CopyWith$Fragment$AiringNotification$media$coverImage.stub(
+            _then(_instance))
+        : CopyWith$Fragment$AiringNotification$media$coverImage(
+            local$coverImage, (e) => call(coverImage: e));
+  }
+
+  CopyWith$Fragment$AiringNotification$media$title<TRes> get title {
+    final local$title = _instance.title;
+    return local$title == null
+        ? CopyWith$Fragment$AiringNotification$media$title.stub(
+            _then(_instance))
+        : CopyWith$Fragment$AiringNotification$media$title(
+            local$title, (e) => call(title: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$AiringNotification$media<TRes>
+    implements CopyWith$Fragment$AiringNotification$media<TRes> {
+  _CopyWithStubImpl$Fragment$AiringNotification$media(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Fragment$AiringNotification$media$coverImage? coverImage,
+    Fragment$AiringNotification$media$title? title,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$AiringNotification$media$coverImage<TRes> get coverImage =>
+      CopyWith$Fragment$AiringNotification$media$coverImage.stub(_res);
+
+  CopyWith$Fragment$AiringNotification$media$title<TRes> get title =>
+      CopyWith$Fragment$AiringNotification$media$title.stub(_res);
+}
+
+class Fragment$AiringNotification$media$coverImage {
+  Fragment$AiringNotification$media$coverImage({
+    this.medium,
+    this.$__typename = 'MediaCoverImage',
+  });
+
+  factory Fragment$AiringNotification$media$coverImage.fromJson(
+      Map<String, dynamic> json) {
+    final l$medium = json['medium'];
+    final l$$__typename = json['__typename'];
+    return Fragment$AiringNotification$media$coverImage(
+      medium: (l$medium as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? medium;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$medium = medium;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$medium,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$AiringNotification$media$coverImage) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$AiringNotification$media$coverImage
+    on Fragment$AiringNotification$media$coverImage {
+  CopyWith$Fragment$AiringNotification$media$coverImage<
+          Fragment$AiringNotification$media$coverImage>
+      get copyWith => CopyWith$Fragment$AiringNotification$media$coverImage(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$AiringNotification$media$coverImage<TRes> {
+  factory CopyWith$Fragment$AiringNotification$media$coverImage(
+    Fragment$AiringNotification$media$coverImage instance,
+    TRes Function(Fragment$AiringNotification$media$coverImage) then,
+  ) = _CopyWithImpl$Fragment$AiringNotification$media$coverImage;
+
+  factory CopyWith$Fragment$AiringNotification$media$coverImage.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$AiringNotification$media$coverImage;
+
+  TRes call({
+    String? medium,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$AiringNotification$media$coverImage<TRes>
+    implements CopyWith$Fragment$AiringNotification$media$coverImage<TRes> {
+  _CopyWithImpl$Fragment$AiringNotification$media$coverImage(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$AiringNotification$media$coverImage _instance;
+
+  final TRes Function(Fragment$AiringNotification$media$coverImage) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? medium = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$AiringNotification$media$coverImage(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$AiringNotification$media$coverImage<TRes>
+    implements CopyWith$Fragment$AiringNotification$media$coverImage<TRes> {
+  _CopyWithStubImpl$Fragment$AiringNotification$media$coverImage(this._res);
+
+  TRes _res;
+
+  call({
+    String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$AiringNotification$media$title {
+  Fragment$AiringNotification$media$title({
+    this.userPreferred,
+    this.$__typename = 'MediaTitle',
+  });
+
+  factory Fragment$AiringNotification$media$title.fromJson(
+      Map<String, dynamic> json) {
+    final l$userPreferred = json['userPreferred'];
+    final l$$__typename = json['__typename'];
+    return Fragment$AiringNotification$media$title(
+      userPreferred: (l$userPreferred as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? userPreferred;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$userPreferred = userPreferred;
+    _resultData['userPreferred'] = l$userPreferred;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$userPreferred = userPreferred;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$userPreferred,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$AiringNotification$media$title) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$userPreferred = userPreferred;
+    final lOther$userPreferred = other.userPreferred;
+    if (l$userPreferred != lOther$userPreferred) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$AiringNotification$media$title
+    on Fragment$AiringNotification$media$title {
+  CopyWith$Fragment$AiringNotification$media$title<
+          Fragment$AiringNotification$media$title>
+      get copyWith => CopyWith$Fragment$AiringNotification$media$title(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$AiringNotification$media$title<TRes> {
+  factory CopyWith$Fragment$AiringNotification$media$title(
+    Fragment$AiringNotification$media$title instance,
+    TRes Function(Fragment$AiringNotification$media$title) then,
+  ) = _CopyWithImpl$Fragment$AiringNotification$media$title;
+
+  factory CopyWith$Fragment$AiringNotification$media$title.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$AiringNotification$media$title;
+
+  TRes call({
+    String? userPreferred,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$AiringNotification$media$title<TRes>
+    implements CopyWith$Fragment$AiringNotification$media$title<TRes> {
+  _CopyWithImpl$Fragment$AiringNotification$media$title(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$AiringNotification$media$title _instance;
+
+  final TRes Function(Fragment$AiringNotification$media$title) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? userPreferred = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$AiringNotification$media$title(
+        userPreferred: userPreferred == _undefined
+            ? _instance.userPreferred
+            : (userPreferred as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$AiringNotification$media$title<TRes>
+    implements CopyWith$Fragment$AiringNotification$media$title<TRes> {
+  _CopyWithStubImpl$Fragment$AiringNotification$media$title(this._res);
+
+  TRes _res;
+
+  call({
+    String? userPreferred,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$FollowingNotification {
+  Fragment$FollowingNotification({
+    required this.id,
+    this.user,
+    this.context,
+    this.createdAt,
+    this.$__typename = 'FollowingNotification',
+  });
+
+  factory Fragment$FollowingNotification.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$user = json['user'];
+    final l$context = json['context'];
+    final l$createdAt = json['createdAt'];
+    final l$$__typename = json['__typename'];
+    return Fragment$FollowingNotification(
+      id: (l$id as int),
+      user: l$user == null
+          ? null
+          : Fragment$FollowingNotification$user.fromJson(
+              (l$user as Map<String, dynamic>)),
+      context: (l$context as String?),
+      createdAt: (l$createdAt as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Fragment$FollowingNotification$user? user;
+
+  final String? context;
+
+  final int? createdAt;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$context = context;
+    _resultData['context'] = l$context;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$user = user;
+    final l$context = context;
+    final l$createdAt = createdAt;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$user,
+      l$context,
+      l$createdAt,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$FollowingNotification) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$context = context;
+    final lOther$context = other.context;
+    if (l$context != lOther$context) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$FollowingNotification
+    on Fragment$FollowingNotification {
+  CopyWith$Fragment$FollowingNotification<Fragment$FollowingNotification>
+      get copyWith => CopyWith$Fragment$FollowingNotification(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$FollowingNotification<TRes> {
+  factory CopyWith$Fragment$FollowingNotification(
+    Fragment$FollowingNotification instance,
+    TRes Function(Fragment$FollowingNotification) then,
+  ) = _CopyWithImpl$Fragment$FollowingNotification;
+
+  factory CopyWith$Fragment$FollowingNotification.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$FollowingNotification;
+
+  TRes call({
+    int? id,
+    Fragment$FollowingNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  });
+  CopyWith$Fragment$FollowingNotification$user<TRes> get user;
+}
+
+class _CopyWithImpl$Fragment$FollowingNotification<TRes>
+    implements CopyWith$Fragment$FollowingNotification<TRes> {
+  _CopyWithImpl$Fragment$FollowingNotification(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$FollowingNotification _instance;
+
+  final TRes Function(Fragment$FollowingNotification) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? user = _undefined,
+    Object? context = _undefined,
+    Object? createdAt = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$FollowingNotification(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$FollowingNotification$user?),
+        context:
+            context == _undefined ? _instance.context : (context as String?),
+        createdAt:
+            createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$FollowingNotification$user<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith$Fragment$FollowingNotification$user.stub(_then(_instance))
+        : CopyWith$Fragment$FollowingNotification$user(
+            local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$FollowingNotification<TRes>
+    implements CopyWith$Fragment$FollowingNotification<TRes> {
+  _CopyWithStubImpl$Fragment$FollowingNotification(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Fragment$FollowingNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$FollowingNotification$user<TRes> get user =>
+      CopyWith$Fragment$FollowingNotification$user.stub(_res);
+}
+
+const fragmentDefinitionFollowingNotification = FragmentDefinitionNode(
+  name: NameNode(value: 'FollowingNotification'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'FollowingNotification'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'user'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'name'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'avatar'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'medium'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'context'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentFollowingNotification = DocumentNode(definitions: [
+  fragmentDefinitionFollowingNotification,
+]);
+
+extension ClientExtension$Fragment$FollowingNotification
+    on graphql.GraphQLClient {
+  void writeFragment$FollowingNotification({
+    required Fragment$FollowingNotification data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'FollowingNotification',
+            document: documentNodeFragmentFollowingNotification,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$FollowingNotification? readFragment$FollowingNotification({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'FollowingNotification',
+          document: documentNodeFragmentFollowingNotification,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null
+        ? null
+        : Fragment$FollowingNotification.fromJson(result);
+  }
+}
+
+class Fragment$FollowingNotification$user {
+  Fragment$FollowingNotification$user({
+    required this.id,
+    required this.name,
+    this.avatar,
+    this.$__typename = 'User',
+  });
+
+  factory Fragment$FollowingNotification$user.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$avatar = json['avatar'];
+    final l$$__typename = json['__typename'];
+    return Fragment$FollowingNotification$user(
+      id: (l$id as int),
+      name: (l$name as String),
+      avatar: l$avatar == null
+          ? null
+          : Fragment$FollowingNotification$user$avatar.fromJson(
+              (l$avatar as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String name;
+
+  final Fragment$FollowingNotification$user$avatar? avatar;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$avatar = avatar;
+    _resultData['avatar'] = l$avatar?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$avatar = avatar;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$avatar,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$FollowingNotification$user) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$avatar = avatar;
+    final lOther$avatar = other.avatar;
+    if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$FollowingNotification$user
+    on Fragment$FollowingNotification$user {
+  CopyWith$Fragment$FollowingNotification$user<
+          Fragment$FollowingNotification$user>
+      get copyWith => CopyWith$Fragment$FollowingNotification$user(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$FollowingNotification$user<TRes> {
+  factory CopyWith$Fragment$FollowingNotification$user(
+    Fragment$FollowingNotification$user instance,
+    TRes Function(Fragment$FollowingNotification$user) then,
+  ) = _CopyWithImpl$Fragment$FollowingNotification$user;
+
+  factory CopyWith$Fragment$FollowingNotification$user.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$FollowingNotification$user;
+
+  TRes call({
+    int? id,
+    String? name,
+    Fragment$FollowingNotification$user$avatar? avatar,
+    String? $__typename,
+  });
+  CopyWith$Fragment$FollowingNotification$user$avatar<TRes> get avatar;
+}
+
+class _CopyWithImpl$Fragment$FollowingNotification$user<TRes>
+    implements CopyWith$Fragment$FollowingNotification$user<TRes> {
+  _CopyWithImpl$Fragment$FollowingNotification$user(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$FollowingNotification$user _instance;
+
+  final TRes Function(Fragment$FollowingNotification$user) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? avatar = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$FollowingNotification$user(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        avatar: avatar == _undefined
+            ? _instance.avatar
+            : (avatar as Fragment$FollowingNotification$user$avatar?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$FollowingNotification$user$avatar<TRes> get avatar {
+    final local$avatar = _instance.avatar;
+    return local$avatar == null
+        ? CopyWith$Fragment$FollowingNotification$user$avatar.stub(
+            _then(_instance))
+        : CopyWith$Fragment$FollowingNotification$user$avatar(
+            local$avatar, (e) => call(avatar: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$FollowingNotification$user<TRes>
+    implements CopyWith$Fragment$FollowingNotification$user<TRes> {
+  _CopyWithStubImpl$Fragment$FollowingNotification$user(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? name,
+    Fragment$FollowingNotification$user$avatar? avatar,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$FollowingNotification$user$avatar<TRes> get avatar =>
+      CopyWith$Fragment$FollowingNotification$user$avatar.stub(_res);
+}
+
+class Fragment$FollowingNotification$user$avatar {
+  Fragment$FollowingNotification$user$avatar({
+    this.medium,
+    this.$__typename = 'UserAvatar',
+  });
+
+  factory Fragment$FollowingNotification$user$avatar.fromJson(
+      Map<String, dynamic> json) {
+    final l$medium = json['medium'];
+    final l$$__typename = json['__typename'];
+    return Fragment$FollowingNotification$user$avatar(
+      medium: (l$medium as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? medium;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$medium = medium;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$medium,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$FollowingNotification$user$avatar) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$FollowingNotification$user$avatar
+    on Fragment$FollowingNotification$user$avatar {
+  CopyWith$Fragment$FollowingNotification$user$avatar<
+          Fragment$FollowingNotification$user$avatar>
+      get copyWith => CopyWith$Fragment$FollowingNotification$user$avatar(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$FollowingNotification$user$avatar<TRes> {
+  factory CopyWith$Fragment$FollowingNotification$user$avatar(
+    Fragment$FollowingNotification$user$avatar instance,
+    TRes Function(Fragment$FollowingNotification$user$avatar) then,
+  ) = _CopyWithImpl$Fragment$FollowingNotification$user$avatar;
+
+  factory CopyWith$Fragment$FollowingNotification$user$avatar.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$FollowingNotification$user$avatar;
+
+  TRes call({
+    String? medium,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$FollowingNotification$user$avatar<TRes>
+    implements CopyWith$Fragment$FollowingNotification$user$avatar<TRes> {
+  _CopyWithImpl$Fragment$FollowingNotification$user$avatar(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$FollowingNotification$user$avatar _instance;
+
+  final TRes Function(Fragment$FollowingNotification$user$avatar) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? medium = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$FollowingNotification$user$avatar(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$FollowingNotification$user$avatar<TRes>
+    implements CopyWith$Fragment$FollowingNotification$user$avatar<TRes> {
+  _CopyWithStubImpl$Fragment$FollowingNotification$user$avatar(this._res);
+
+  TRes _res;
+
+  call({
+    String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$ThreadCommentLikeNotification {
+  Fragment$ThreadCommentLikeNotification({
+    required this.id,
+    this.thread,
+    this.user,
+    this.context,
+    this.createdAt,
+    this.$__typename = 'ThreadCommentLikeNotification',
+  });
+
+  factory Fragment$ThreadCommentLikeNotification.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$thread = json['thread'];
+    final l$user = json['user'];
+    final l$context = json['context'];
+    final l$createdAt = json['createdAt'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadCommentLikeNotification(
+      id: (l$id as int),
+      thread: l$thread == null
+          ? null
+          : Fragment$ThreadCommentLikeNotification$thread.fromJson(
+              (l$thread as Map<String, dynamic>)),
+      user: l$user == null
+          ? null
+          : Fragment$ThreadCommentLikeNotification$user.fromJson(
+              (l$user as Map<String, dynamic>)),
+      context: (l$context as String?),
+      createdAt: (l$createdAt as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Fragment$ThreadCommentLikeNotification$thread? thread;
+
+  final Fragment$ThreadCommentLikeNotification$user? user;
+
+  final String? context;
+
+  final int? createdAt;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$thread = thread;
+    _resultData['thread'] = l$thread?.toJson();
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$context = context;
+    _resultData['context'] = l$context;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$thread = thread;
+    final l$user = user;
+    final l$context = context;
+    final l$createdAt = createdAt;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$thread,
+      l$user,
+      l$context,
+      l$createdAt,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadCommentLikeNotification) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$thread = thread;
+    final lOther$thread = other.thread;
+    if (l$thread != lOther$thread) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$context = context;
+    final lOther$context = other.context;
+    if (l$context != lOther$context) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadCommentLikeNotification
+    on Fragment$ThreadCommentLikeNotification {
+  CopyWith$Fragment$ThreadCommentLikeNotification<
+          Fragment$ThreadCommentLikeNotification>
+      get copyWith => CopyWith$Fragment$ThreadCommentLikeNotification(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadCommentLikeNotification<TRes> {
+  factory CopyWith$Fragment$ThreadCommentLikeNotification(
+    Fragment$ThreadCommentLikeNotification instance,
+    TRes Function(Fragment$ThreadCommentLikeNotification) then,
+  ) = _CopyWithImpl$Fragment$ThreadCommentLikeNotification;
+
+  factory CopyWith$Fragment$ThreadCommentLikeNotification.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadCommentLikeNotification;
+
+  TRes call({
+    int? id,
+    Fragment$ThreadCommentLikeNotification$thread? thread,
+    Fragment$ThreadCommentLikeNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ThreadCommentLikeNotification$thread<TRes> get thread;
+  CopyWith$Fragment$ThreadCommentLikeNotification$user<TRes> get user;
+}
+
+class _CopyWithImpl$Fragment$ThreadCommentLikeNotification<TRes>
+    implements CopyWith$Fragment$ThreadCommentLikeNotification<TRes> {
+  _CopyWithImpl$Fragment$ThreadCommentLikeNotification(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadCommentLikeNotification _instance;
+
+  final TRes Function(Fragment$ThreadCommentLikeNotification) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? thread = _undefined,
+    Object? user = _undefined,
+    Object? context = _undefined,
+    Object? createdAt = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadCommentLikeNotification(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        thread: thread == _undefined
+            ? _instance.thread
+            : (thread as Fragment$ThreadCommentLikeNotification$thread?),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$ThreadCommentLikeNotification$user?),
+        context:
+            context == _undefined ? _instance.context : (context as String?),
+        createdAt:
+            createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ThreadCommentLikeNotification$thread<TRes> get thread {
+    final local$thread = _instance.thread;
+    return local$thread == null
+        ? CopyWith$Fragment$ThreadCommentLikeNotification$thread.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ThreadCommentLikeNotification$thread(
+            local$thread, (e) => call(thread: e));
+  }
+
+  CopyWith$Fragment$ThreadCommentLikeNotification$user<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith$Fragment$ThreadCommentLikeNotification$user.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ThreadCommentLikeNotification$user(
+            local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ThreadCommentLikeNotification<TRes>
+    implements CopyWith$Fragment$ThreadCommentLikeNotification<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadCommentLikeNotification(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Fragment$ThreadCommentLikeNotification$thread? thread,
+    Fragment$ThreadCommentLikeNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ThreadCommentLikeNotification$thread<TRes> get thread =>
+      CopyWith$Fragment$ThreadCommentLikeNotification$thread.stub(_res);
+
+  CopyWith$Fragment$ThreadCommentLikeNotification$user<TRes> get user =>
+      CopyWith$Fragment$ThreadCommentLikeNotification$user.stub(_res);
+}
+
+const fragmentDefinitionThreadCommentLikeNotification = FragmentDefinitionNode(
+  name: NameNode(value: 'ThreadCommentLikeNotification'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'ThreadCommentLikeNotification'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'thread'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'user'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'name'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'avatar'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'medium'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'context'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentThreadCommentLikeNotification =
+    DocumentNode(definitions: [
+  fragmentDefinitionThreadCommentLikeNotification,
+]);
+
+extension ClientExtension$Fragment$ThreadCommentLikeNotification
+    on graphql.GraphQLClient {
+  void writeFragment$ThreadCommentLikeNotification({
+    required Fragment$ThreadCommentLikeNotification data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'ThreadCommentLikeNotification',
+            document: documentNodeFragmentThreadCommentLikeNotification,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$ThreadCommentLikeNotification?
+      readFragment$ThreadCommentLikeNotification({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'ThreadCommentLikeNotification',
+          document: documentNodeFragmentThreadCommentLikeNotification,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null
+        ? null
+        : Fragment$ThreadCommentLikeNotification.fromJson(result);
+  }
+}
+
+class Fragment$ThreadCommentLikeNotification$thread {
+  Fragment$ThreadCommentLikeNotification$thread({
+    required this.id,
+    this.$__typename = 'Thread',
+  });
+
+  factory Fragment$ThreadCommentLikeNotification$thread.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadCommentLikeNotification$thread(
+      id: (l$id as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadCommentLikeNotification$thread) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadCommentLikeNotification$thread
+    on Fragment$ThreadCommentLikeNotification$thread {
+  CopyWith$Fragment$ThreadCommentLikeNotification$thread<
+          Fragment$ThreadCommentLikeNotification$thread>
+      get copyWith => CopyWith$Fragment$ThreadCommentLikeNotification$thread(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadCommentLikeNotification$thread<TRes> {
+  factory CopyWith$Fragment$ThreadCommentLikeNotification$thread(
+    Fragment$ThreadCommentLikeNotification$thread instance,
+    TRes Function(Fragment$ThreadCommentLikeNotification$thread) then,
+  ) = _CopyWithImpl$Fragment$ThreadCommentLikeNotification$thread;
+
+  factory CopyWith$Fragment$ThreadCommentLikeNotification$thread.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadCommentLikeNotification$thread;
+
+  TRes call({
+    int? id,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ThreadCommentLikeNotification$thread<TRes>
+    implements CopyWith$Fragment$ThreadCommentLikeNotification$thread<TRes> {
+  _CopyWithImpl$Fragment$ThreadCommentLikeNotification$thread(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadCommentLikeNotification$thread _instance;
+
+  final TRes Function(Fragment$ThreadCommentLikeNotification$thread) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadCommentLikeNotification$thread(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ThreadCommentLikeNotification$thread<TRes>
+    implements CopyWith$Fragment$ThreadCommentLikeNotification$thread<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadCommentLikeNotification$thread(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$ThreadCommentLikeNotification$user {
+  Fragment$ThreadCommentLikeNotification$user({
+    required this.id,
+    required this.name,
+    this.avatar,
+    this.$__typename = 'User',
+  });
+
+  factory Fragment$ThreadCommentLikeNotification$user.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$avatar = json['avatar'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadCommentLikeNotification$user(
+      id: (l$id as int),
+      name: (l$name as String),
+      avatar: l$avatar == null
+          ? null
+          : Fragment$ThreadCommentLikeNotification$user$avatar.fromJson(
+              (l$avatar as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String name;
+
+  final Fragment$ThreadCommentLikeNotification$user$avatar? avatar;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$avatar = avatar;
+    _resultData['avatar'] = l$avatar?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$avatar = avatar;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$avatar,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadCommentLikeNotification$user) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$avatar = avatar;
+    final lOther$avatar = other.avatar;
+    if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadCommentLikeNotification$user
+    on Fragment$ThreadCommentLikeNotification$user {
+  CopyWith$Fragment$ThreadCommentLikeNotification$user<
+          Fragment$ThreadCommentLikeNotification$user>
+      get copyWith => CopyWith$Fragment$ThreadCommentLikeNotification$user(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadCommentLikeNotification$user<TRes> {
+  factory CopyWith$Fragment$ThreadCommentLikeNotification$user(
+    Fragment$ThreadCommentLikeNotification$user instance,
+    TRes Function(Fragment$ThreadCommentLikeNotification$user) then,
+  ) = _CopyWithImpl$Fragment$ThreadCommentLikeNotification$user;
+
+  factory CopyWith$Fragment$ThreadCommentLikeNotification$user.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadCommentLikeNotification$user;
+
+  TRes call({
+    int? id,
+    String? name,
+    Fragment$ThreadCommentLikeNotification$user$avatar? avatar,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ThreadCommentLikeNotification$user$avatar<TRes> get avatar;
+}
+
+class _CopyWithImpl$Fragment$ThreadCommentLikeNotification$user<TRes>
+    implements CopyWith$Fragment$ThreadCommentLikeNotification$user<TRes> {
+  _CopyWithImpl$Fragment$ThreadCommentLikeNotification$user(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadCommentLikeNotification$user _instance;
+
+  final TRes Function(Fragment$ThreadCommentLikeNotification$user) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? avatar = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadCommentLikeNotification$user(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        avatar: avatar == _undefined
+            ? _instance.avatar
+            : (avatar as Fragment$ThreadCommentLikeNotification$user$avatar?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ThreadCommentLikeNotification$user$avatar<TRes> get avatar {
+    final local$avatar = _instance.avatar;
+    return local$avatar == null
+        ? CopyWith$Fragment$ThreadCommentLikeNotification$user$avatar.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ThreadCommentLikeNotification$user$avatar(
+            local$avatar, (e) => call(avatar: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ThreadCommentLikeNotification$user<TRes>
+    implements CopyWith$Fragment$ThreadCommentLikeNotification$user<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadCommentLikeNotification$user(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? name,
+    Fragment$ThreadCommentLikeNotification$user$avatar? avatar,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ThreadCommentLikeNotification$user$avatar<TRes>
+      get avatar =>
+          CopyWith$Fragment$ThreadCommentLikeNotification$user$avatar.stub(
+              _res);
+}
+
+class Fragment$ThreadCommentLikeNotification$user$avatar {
+  Fragment$ThreadCommentLikeNotification$user$avatar({
+    this.medium,
+    this.$__typename = 'UserAvatar',
+  });
+
+  factory Fragment$ThreadCommentLikeNotification$user$avatar.fromJson(
+      Map<String, dynamic> json) {
+    final l$medium = json['medium'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadCommentLikeNotification$user$avatar(
+      medium: (l$medium as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? medium;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$medium = medium;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$medium,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadCommentLikeNotification$user$avatar) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadCommentLikeNotification$user$avatar
+    on Fragment$ThreadCommentLikeNotification$user$avatar {
+  CopyWith$Fragment$ThreadCommentLikeNotification$user$avatar<
+          Fragment$ThreadCommentLikeNotification$user$avatar>
+      get copyWith =>
+          CopyWith$Fragment$ThreadCommentLikeNotification$user$avatar(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadCommentLikeNotification$user$avatar<
+    TRes> {
+  factory CopyWith$Fragment$ThreadCommentLikeNotification$user$avatar(
+    Fragment$ThreadCommentLikeNotification$user$avatar instance,
+    TRes Function(Fragment$ThreadCommentLikeNotification$user$avatar) then,
+  ) = _CopyWithImpl$Fragment$ThreadCommentLikeNotification$user$avatar;
+
+  factory CopyWith$Fragment$ThreadCommentLikeNotification$user$avatar.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadCommentLikeNotification$user$avatar;
+
+  TRes call({
+    String? medium,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ThreadCommentLikeNotification$user$avatar<TRes>
+    implements
+        CopyWith$Fragment$ThreadCommentLikeNotification$user$avatar<TRes> {
+  _CopyWithImpl$Fragment$ThreadCommentLikeNotification$user$avatar(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadCommentLikeNotification$user$avatar _instance;
+
+  final TRes Function(Fragment$ThreadCommentLikeNotification$user$avatar) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? medium = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadCommentLikeNotification$user$avatar(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ThreadCommentLikeNotification$user$avatar<TRes>
+    implements
+        CopyWith$Fragment$ThreadCommentLikeNotification$user$avatar<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadCommentLikeNotification$user$avatar(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$ThreadCommentMentionNotification {
+  Fragment$ThreadCommentMentionNotification({
+    required this.id,
+    this.thread,
+    this.user,
+    this.context,
+    this.createdAt,
+    this.$__typename = 'ThreadCommentMentionNotification',
+  });
+
+  factory Fragment$ThreadCommentMentionNotification.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$thread = json['thread'];
+    final l$user = json['user'];
+    final l$context = json['context'];
+    final l$createdAt = json['createdAt'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadCommentMentionNotification(
+      id: (l$id as int),
+      thread: l$thread == null
+          ? null
+          : Fragment$ThreadCommentMentionNotification$thread.fromJson(
+              (l$thread as Map<String, dynamic>)),
+      user: l$user == null
+          ? null
+          : Fragment$ThreadCommentMentionNotification$user.fromJson(
+              (l$user as Map<String, dynamic>)),
+      context: (l$context as String?),
+      createdAt: (l$createdAt as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Fragment$ThreadCommentMentionNotification$thread? thread;
+
+  final Fragment$ThreadCommentMentionNotification$user? user;
+
+  final String? context;
+
+  final int? createdAt;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$thread = thread;
+    _resultData['thread'] = l$thread?.toJson();
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$context = context;
+    _resultData['context'] = l$context;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$thread = thread;
+    final l$user = user;
+    final l$context = context;
+    final l$createdAt = createdAt;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$thread,
+      l$user,
+      l$context,
+      l$createdAt,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadCommentMentionNotification) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$thread = thread;
+    final lOther$thread = other.thread;
+    if (l$thread != lOther$thread) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$context = context;
+    final lOther$context = other.context;
+    if (l$context != lOther$context) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadCommentMentionNotification
+    on Fragment$ThreadCommentMentionNotification {
+  CopyWith$Fragment$ThreadCommentMentionNotification<
+          Fragment$ThreadCommentMentionNotification>
+      get copyWith => CopyWith$Fragment$ThreadCommentMentionNotification(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadCommentMentionNotification<TRes> {
+  factory CopyWith$Fragment$ThreadCommentMentionNotification(
+    Fragment$ThreadCommentMentionNotification instance,
+    TRes Function(Fragment$ThreadCommentMentionNotification) then,
+  ) = _CopyWithImpl$Fragment$ThreadCommentMentionNotification;
+
+  factory CopyWith$Fragment$ThreadCommentMentionNotification.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadCommentMentionNotification;
+
+  TRes call({
+    int? id,
+    Fragment$ThreadCommentMentionNotification$thread? thread,
+    Fragment$ThreadCommentMentionNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ThreadCommentMentionNotification$thread<TRes> get thread;
+  CopyWith$Fragment$ThreadCommentMentionNotification$user<TRes> get user;
+}
+
+class _CopyWithImpl$Fragment$ThreadCommentMentionNotification<TRes>
+    implements CopyWith$Fragment$ThreadCommentMentionNotification<TRes> {
+  _CopyWithImpl$Fragment$ThreadCommentMentionNotification(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadCommentMentionNotification _instance;
+
+  final TRes Function(Fragment$ThreadCommentMentionNotification) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? thread = _undefined,
+    Object? user = _undefined,
+    Object? context = _undefined,
+    Object? createdAt = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadCommentMentionNotification(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        thread: thread == _undefined
+            ? _instance.thread
+            : (thread as Fragment$ThreadCommentMentionNotification$thread?),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$ThreadCommentMentionNotification$user?),
+        context:
+            context == _undefined ? _instance.context : (context as String?),
+        createdAt:
+            createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ThreadCommentMentionNotification$thread<TRes> get thread {
+    final local$thread = _instance.thread;
+    return local$thread == null
+        ? CopyWith$Fragment$ThreadCommentMentionNotification$thread.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ThreadCommentMentionNotification$thread(
+            local$thread, (e) => call(thread: e));
+  }
+
+  CopyWith$Fragment$ThreadCommentMentionNotification$user<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith$Fragment$ThreadCommentMentionNotification$user.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ThreadCommentMentionNotification$user(
+            local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ThreadCommentMentionNotification<TRes>
+    implements CopyWith$Fragment$ThreadCommentMentionNotification<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadCommentMentionNotification(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Fragment$ThreadCommentMentionNotification$thread? thread,
+    Fragment$ThreadCommentMentionNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ThreadCommentMentionNotification$thread<TRes> get thread =>
+      CopyWith$Fragment$ThreadCommentMentionNotification$thread.stub(_res);
+
+  CopyWith$Fragment$ThreadCommentMentionNotification$user<TRes> get user =>
+      CopyWith$Fragment$ThreadCommentMentionNotification$user.stub(_res);
+}
+
+const fragmentDefinitionThreadCommentMentionNotification =
+    FragmentDefinitionNode(
+  name: NameNode(value: 'ThreadCommentMentionNotification'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'ThreadCommentMentionNotification'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'thread'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'user'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'name'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'avatar'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'medium'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'context'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentThreadCommentMentionNotification =
+    DocumentNode(definitions: [
+  fragmentDefinitionThreadCommentMentionNotification,
+]);
+
+extension ClientExtension$Fragment$ThreadCommentMentionNotification
+    on graphql.GraphQLClient {
+  void writeFragment$ThreadCommentMentionNotification({
+    required Fragment$ThreadCommentMentionNotification data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'ThreadCommentMentionNotification',
+            document: documentNodeFragmentThreadCommentMentionNotification,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$ThreadCommentMentionNotification?
+      readFragment$ThreadCommentMentionNotification({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'ThreadCommentMentionNotification',
+          document: documentNodeFragmentThreadCommentMentionNotification,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null
+        ? null
+        : Fragment$ThreadCommentMentionNotification.fromJson(result);
+  }
+}
+
+class Fragment$ThreadCommentMentionNotification$thread {
+  Fragment$ThreadCommentMentionNotification$thread({
+    required this.id,
+    this.$__typename = 'Thread',
+  });
+
+  factory Fragment$ThreadCommentMentionNotification$thread.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadCommentMentionNotification$thread(
+      id: (l$id as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadCommentMentionNotification$thread) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadCommentMentionNotification$thread
+    on Fragment$ThreadCommentMentionNotification$thread {
+  CopyWith$Fragment$ThreadCommentMentionNotification$thread<
+          Fragment$ThreadCommentMentionNotification$thread>
+      get copyWith => CopyWith$Fragment$ThreadCommentMentionNotification$thread(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadCommentMentionNotification$thread<TRes> {
+  factory CopyWith$Fragment$ThreadCommentMentionNotification$thread(
+    Fragment$ThreadCommentMentionNotification$thread instance,
+    TRes Function(Fragment$ThreadCommentMentionNotification$thread) then,
+  ) = _CopyWithImpl$Fragment$ThreadCommentMentionNotification$thread;
+
+  factory CopyWith$Fragment$ThreadCommentMentionNotification$thread.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadCommentMentionNotification$thread;
+
+  TRes call({
+    int? id,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ThreadCommentMentionNotification$thread<TRes>
+    implements CopyWith$Fragment$ThreadCommentMentionNotification$thread<TRes> {
+  _CopyWithImpl$Fragment$ThreadCommentMentionNotification$thread(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadCommentMentionNotification$thread _instance;
+
+  final TRes Function(Fragment$ThreadCommentMentionNotification$thread) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadCommentMentionNotification$thread(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ThreadCommentMentionNotification$thread<TRes>
+    implements CopyWith$Fragment$ThreadCommentMentionNotification$thread<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadCommentMentionNotification$thread(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$ThreadCommentMentionNotification$user {
+  Fragment$ThreadCommentMentionNotification$user({
+    required this.id,
+    required this.name,
+    this.avatar,
+    this.$__typename = 'User',
+  });
+
+  factory Fragment$ThreadCommentMentionNotification$user.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$avatar = json['avatar'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadCommentMentionNotification$user(
+      id: (l$id as int),
+      name: (l$name as String),
+      avatar: l$avatar == null
+          ? null
+          : Fragment$ThreadCommentMentionNotification$user$avatar.fromJson(
+              (l$avatar as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String name;
+
+  final Fragment$ThreadCommentMentionNotification$user$avatar? avatar;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$avatar = avatar;
+    _resultData['avatar'] = l$avatar?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$avatar = avatar;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$avatar,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadCommentMentionNotification$user) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$avatar = avatar;
+    final lOther$avatar = other.avatar;
+    if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadCommentMentionNotification$user
+    on Fragment$ThreadCommentMentionNotification$user {
+  CopyWith$Fragment$ThreadCommentMentionNotification$user<
+          Fragment$ThreadCommentMentionNotification$user>
+      get copyWith => CopyWith$Fragment$ThreadCommentMentionNotification$user(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadCommentMentionNotification$user<TRes> {
+  factory CopyWith$Fragment$ThreadCommentMentionNotification$user(
+    Fragment$ThreadCommentMentionNotification$user instance,
+    TRes Function(Fragment$ThreadCommentMentionNotification$user) then,
+  ) = _CopyWithImpl$Fragment$ThreadCommentMentionNotification$user;
+
+  factory CopyWith$Fragment$ThreadCommentMentionNotification$user.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadCommentMentionNotification$user;
+
+  TRes call({
+    int? id,
+    String? name,
+    Fragment$ThreadCommentMentionNotification$user$avatar? avatar,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ThreadCommentMentionNotification$user$avatar<TRes>
+      get avatar;
+}
+
+class _CopyWithImpl$Fragment$ThreadCommentMentionNotification$user<TRes>
+    implements CopyWith$Fragment$ThreadCommentMentionNotification$user<TRes> {
+  _CopyWithImpl$Fragment$ThreadCommentMentionNotification$user(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadCommentMentionNotification$user _instance;
+
+  final TRes Function(Fragment$ThreadCommentMentionNotification$user) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? avatar = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadCommentMentionNotification$user(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        avatar: avatar == _undefined
+            ? _instance.avatar
+            : (avatar
+                as Fragment$ThreadCommentMentionNotification$user$avatar?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ThreadCommentMentionNotification$user$avatar<TRes>
+      get avatar {
+    final local$avatar = _instance.avatar;
+    return local$avatar == null
+        ? CopyWith$Fragment$ThreadCommentMentionNotification$user$avatar.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ThreadCommentMentionNotification$user$avatar(
+            local$avatar, (e) => call(avatar: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ThreadCommentMentionNotification$user<TRes>
+    implements CopyWith$Fragment$ThreadCommentMentionNotification$user<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadCommentMentionNotification$user(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? name,
+    Fragment$ThreadCommentMentionNotification$user$avatar? avatar,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ThreadCommentMentionNotification$user$avatar<TRes>
+      get avatar =>
+          CopyWith$Fragment$ThreadCommentMentionNotification$user$avatar.stub(
+              _res);
+}
+
+class Fragment$ThreadCommentMentionNotification$user$avatar {
+  Fragment$ThreadCommentMentionNotification$user$avatar({
+    this.medium,
+    this.$__typename = 'UserAvatar',
+  });
+
+  factory Fragment$ThreadCommentMentionNotification$user$avatar.fromJson(
+      Map<String, dynamic> json) {
+    final l$medium = json['medium'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadCommentMentionNotification$user$avatar(
+      medium: (l$medium as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? medium;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$medium = medium;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$medium,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadCommentMentionNotification$user$avatar) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadCommentMentionNotification$user$avatar
+    on Fragment$ThreadCommentMentionNotification$user$avatar {
+  CopyWith$Fragment$ThreadCommentMentionNotification$user$avatar<
+          Fragment$ThreadCommentMentionNotification$user$avatar>
+      get copyWith =>
+          CopyWith$Fragment$ThreadCommentMentionNotification$user$avatar(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadCommentMentionNotification$user$avatar<
+    TRes> {
+  factory CopyWith$Fragment$ThreadCommentMentionNotification$user$avatar(
+    Fragment$ThreadCommentMentionNotification$user$avatar instance,
+    TRes Function(Fragment$ThreadCommentMentionNotification$user$avatar) then,
+  ) = _CopyWithImpl$Fragment$ThreadCommentMentionNotification$user$avatar;
+
+  factory CopyWith$Fragment$ThreadCommentMentionNotification$user$avatar.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadCommentMentionNotification$user$avatar;
+
+  TRes call({
+    String? medium,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ThreadCommentMentionNotification$user$avatar<TRes>
+    implements
+        CopyWith$Fragment$ThreadCommentMentionNotification$user$avatar<TRes> {
+  _CopyWithImpl$Fragment$ThreadCommentMentionNotification$user$avatar(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadCommentMentionNotification$user$avatar _instance;
+
+  final TRes Function(Fragment$ThreadCommentMentionNotification$user$avatar)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? medium = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadCommentMentionNotification$user$avatar(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ThreadCommentMentionNotification$user$avatar<
+        TRes>
+    implements
+        CopyWith$Fragment$ThreadCommentMentionNotification$user$avatar<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadCommentMentionNotification$user$avatar(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$ThreadCommentReplyNotification {
+  Fragment$ThreadCommentReplyNotification({
+    required this.id,
+    this.thread,
+    this.user,
+    this.context,
+    this.createdAt,
+    this.$__typename = 'ThreadCommentReplyNotification',
+  });
+
+  factory Fragment$ThreadCommentReplyNotification.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$thread = json['thread'];
+    final l$user = json['user'];
+    final l$context = json['context'];
+    final l$createdAt = json['createdAt'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadCommentReplyNotification(
+      id: (l$id as int),
+      thread: l$thread == null
+          ? null
+          : Fragment$ThreadCommentReplyNotification$thread.fromJson(
+              (l$thread as Map<String, dynamic>)),
+      user: l$user == null
+          ? null
+          : Fragment$ThreadCommentReplyNotification$user.fromJson(
+              (l$user as Map<String, dynamic>)),
+      context: (l$context as String?),
+      createdAt: (l$createdAt as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Fragment$ThreadCommentReplyNotification$thread? thread;
+
+  final Fragment$ThreadCommentReplyNotification$user? user;
+
+  final String? context;
+
+  final int? createdAt;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$thread = thread;
+    _resultData['thread'] = l$thread?.toJson();
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$context = context;
+    _resultData['context'] = l$context;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$thread = thread;
+    final l$user = user;
+    final l$context = context;
+    final l$createdAt = createdAt;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$thread,
+      l$user,
+      l$context,
+      l$createdAt,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadCommentReplyNotification) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$thread = thread;
+    final lOther$thread = other.thread;
+    if (l$thread != lOther$thread) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$context = context;
+    final lOther$context = other.context;
+    if (l$context != lOther$context) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadCommentReplyNotification
+    on Fragment$ThreadCommentReplyNotification {
+  CopyWith$Fragment$ThreadCommentReplyNotification<
+          Fragment$ThreadCommentReplyNotification>
+      get copyWith => CopyWith$Fragment$ThreadCommentReplyNotification(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadCommentReplyNotification<TRes> {
+  factory CopyWith$Fragment$ThreadCommentReplyNotification(
+    Fragment$ThreadCommentReplyNotification instance,
+    TRes Function(Fragment$ThreadCommentReplyNotification) then,
+  ) = _CopyWithImpl$Fragment$ThreadCommentReplyNotification;
+
+  factory CopyWith$Fragment$ThreadCommentReplyNotification.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadCommentReplyNotification;
+
+  TRes call({
+    int? id,
+    Fragment$ThreadCommentReplyNotification$thread? thread,
+    Fragment$ThreadCommentReplyNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ThreadCommentReplyNotification$thread<TRes> get thread;
+  CopyWith$Fragment$ThreadCommentReplyNotification$user<TRes> get user;
+}
+
+class _CopyWithImpl$Fragment$ThreadCommentReplyNotification<TRes>
+    implements CopyWith$Fragment$ThreadCommentReplyNotification<TRes> {
+  _CopyWithImpl$Fragment$ThreadCommentReplyNotification(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadCommentReplyNotification _instance;
+
+  final TRes Function(Fragment$ThreadCommentReplyNotification) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? thread = _undefined,
+    Object? user = _undefined,
+    Object? context = _undefined,
+    Object? createdAt = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadCommentReplyNotification(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        thread: thread == _undefined
+            ? _instance.thread
+            : (thread as Fragment$ThreadCommentReplyNotification$thread?),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$ThreadCommentReplyNotification$user?),
+        context:
+            context == _undefined ? _instance.context : (context as String?),
+        createdAt:
+            createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ThreadCommentReplyNotification$thread<TRes> get thread {
+    final local$thread = _instance.thread;
+    return local$thread == null
+        ? CopyWith$Fragment$ThreadCommentReplyNotification$thread.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ThreadCommentReplyNotification$thread(
+            local$thread, (e) => call(thread: e));
+  }
+
+  CopyWith$Fragment$ThreadCommentReplyNotification$user<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith$Fragment$ThreadCommentReplyNotification$user.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ThreadCommentReplyNotification$user(
+            local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ThreadCommentReplyNotification<TRes>
+    implements CopyWith$Fragment$ThreadCommentReplyNotification<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadCommentReplyNotification(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Fragment$ThreadCommentReplyNotification$thread? thread,
+    Fragment$ThreadCommentReplyNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ThreadCommentReplyNotification$thread<TRes> get thread =>
+      CopyWith$Fragment$ThreadCommentReplyNotification$thread.stub(_res);
+
+  CopyWith$Fragment$ThreadCommentReplyNotification$user<TRes> get user =>
+      CopyWith$Fragment$ThreadCommentReplyNotification$user.stub(_res);
+}
+
+const fragmentDefinitionThreadCommentReplyNotification = FragmentDefinitionNode(
+  name: NameNode(value: 'ThreadCommentReplyNotification'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'ThreadCommentReplyNotification'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'thread'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'user'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'name'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'avatar'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'medium'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'context'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentThreadCommentReplyNotification =
+    DocumentNode(definitions: [
+  fragmentDefinitionThreadCommentReplyNotification,
+]);
+
+extension ClientExtension$Fragment$ThreadCommentReplyNotification
+    on graphql.GraphQLClient {
+  void writeFragment$ThreadCommentReplyNotification({
+    required Fragment$ThreadCommentReplyNotification data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'ThreadCommentReplyNotification',
+            document: documentNodeFragmentThreadCommentReplyNotification,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$ThreadCommentReplyNotification?
+      readFragment$ThreadCommentReplyNotification({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'ThreadCommentReplyNotification',
+          document: documentNodeFragmentThreadCommentReplyNotification,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null
+        ? null
+        : Fragment$ThreadCommentReplyNotification.fromJson(result);
+  }
+}
+
+class Fragment$ThreadCommentReplyNotification$thread {
+  Fragment$ThreadCommentReplyNotification$thread({
+    required this.id,
+    this.$__typename = 'Thread',
+  });
+
+  factory Fragment$ThreadCommentReplyNotification$thread.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadCommentReplyNotification$thread(
+      id: (l$id as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadCommentReplyNotification$thread) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadCommentReplyNotification$thread
+    on Fragment$ThreadCommentReplyNotification$thread {
+  CopyWith$Fragment$ThreadCommentReplyNotification$thread<
+          Fragment$ThreadCommentReplyNotification$thread>
+      get copyWith => CopyWith$Fragment$ThreadCommentReplyNotification$thread(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadCommentReplyNotification$thread<TRes> {
+  factory CopyWith$Fragment$ThreadCommentReplyNotification$thread(
+    Fragment$ThreadCommentReplyNotification$thread instance,
+    TRes Function(Fragment$ThreadCommentReplyNotification$thread) then,
+  ) = _CopyWithImpl$Fragment$ThreadCommentReplyNotification$thread;
+
+  factory CopyWith$Fragment$ThreadCommentReplyNotification$thread.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadCommentReplyNotification$thread;
+
+  TRes call({
+    int? id,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ThreadCommentReplyNotification$thread<TRes>
+    implements CopyWith$Fragment$ThreadCommentReplyNotification$thread<TRes> {
+  _CopyWithImpl$Fragment$ThreadCommentReplyNotification$thread(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadCommentReplyNotification$thread _instance;
+
+  final TRes Function(Fragment$ThreadCommentReplyNotification$thread) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadCommentReplyNotification$thread(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ThreadCommentReplyNotification$thread<TRes>
+    implements CopyWith$Fragment$ThreadCommentReplyNotification$thread<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadCommentReplyNotification$thread(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$ThreadCommentReplyNotification$user {
+  Fragment$ThreadCommentReplyNotification$user({
+    required this.id,
+    required this.name,
+    this.avatar,
+    this.$__typename = 'User',
+  });
+
+  factory Fragment$ThreadCommentReplyNotification$user.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$avatar = json['avatar'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadCommentReplyNotification$user(
+      id: (l$id as int),
+      name: (l$name as String),
+      avatar: l$avatar == null
+          ? null
+          : Fragment$ThreadCommentReplyNotification$user$avatar.fromJson(
+              (l$avatar as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String name;
+
+  final Fragment$ThreadCommentReplyNotification$user$avatar? avatar;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$avatar = avatar;
+    _resultData['avatar'] = l$avatar?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$avatar = avatar;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$avatar,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadCommentReplyNotification$user) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$avatar = avatar;
+    final lOther$avatar = other.avatar;
+    if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadCommentReplyNotification$user
+    on Fragment$ThreadCommentReplyNotification$user {
+  CopyWith$Fragment$ThreadCommentReplyNotification$user<
+          Fragment$ThreadCommentReplyNotification$user>
+      get copyWith => CopyWith$Fragment$ThreadCommentReplyNotification$user(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadCommentReplyNotification$user<TRes> {
+  factory CopyWith$Fragment$ThreadCommentReplyNotification$user(
+    Fragment$ThreadCommentReplyNotification$user instance,
+    TRes Function(Fragment$ThreadCommentReplyNotification$user) then,
+  ) = _CopyWithImpl$Fragment$ThreadCommentReplyNotification$user;
+
+  factory CopyWith$Fragment$ThreadCommentReplyNotification$user.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadCommentReplyNotification$user;
+
+  TRes call({
+    int? id,
+    String? name,
+    Fragment$ThreadCommentReplyNotification$user$avatar? avatar,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ThreadCommentReplyNotification$user$avatar<TRes> get avatar;
+}
+
+class _CopyWithImpl$Fragment$ThreadCommentReplyNotification$user<TRes>
+    implements CopyWith$Fragment$ThreadCommentReplyNotification$user<TRes> {
+  _CopyWithImpl$Fragment$ThreadCommentReplyNotification$user(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadCommentReplyNotification$user _instance;
+
+  final TRes Function(Fragment$ThreadCommentReplyNotification$user) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? avatar = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadCommentReplyNotification$user(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        avatar: avatar == _undefined
+            ? _instance.avatar
+            : (avatar as Fragment$ThreadCommentReplyNotification$user$avatar?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ThreadCommentReplyNotification$user$avatar<TRes>
+      get avatar {
+    final local$avatar = _instance.avatar;
+    return local$avatar == null
+        ? CopyWith$Fragment$ThreadCommentReplyNotification$user$avatar.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ThreadCommentReplyNotification$user$avatar(
+            local$avatar, (e) => call(avatar: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ThreadCommentReplyNotification$user<TRes>
+    implements CopyWith$Fragment$ThreadCommentReplyNotification$user<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadCommentReplyNotification$user(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? name,
+    Fragment$ThreadCommentReplyNotification$user$avatar? avatar,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ThreadCommentReplyNotification$user$avatar<TRes>
+      get avatar =>
+          CopyWith$Fragment$ThreadCommentReplyNotification$user$avatar.stub(
+              _res);
+}
+
+class Fragment$ThreadCommentReplyNotification$user$avatar {
+  Fragment$ThreadCommentReplyNotification$user$avatar({
+    this.medium,
+    this.$__typename = 'UserAvatar',
+  });
+
+  factory Fragment$ThreadCommentReplyNotification$user$avatar.fromJson(
+      Map<String, dynamic> json) {
+    final l$medium = json['medium'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadCommentReplyNotification$user$avatar(
+      medium: (l$medium as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? medium;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$medium = medium;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$medium,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadCommentReplyNotification$user$avatar) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadCommentReplyNotification$user$avatar
+    on Fragment$ThreadCommentReplyNotification$user$avatar {
+  CopyWith$Fragment$ThreadCommentReplyNotification$user$avatar<
+          Fragment$ThreadCommentReplyNotification$user$avatar>
+      get copyWith =>
+          CopyWith$Fragment$ThreadCommentReplyNotification$user$avatar(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadCommentReplyNotification$user$avatar<
+    TRes> {
+  factory CopyWith$Fragment$ThreadCommentReplyNotification$user$avatar(
+    Fragment$ThreadCommentReplyNotification$user$avatar instance,
+    TRes Function(Fragment$ThreadCommentReplyNotification$user$avatar) then,
+  ) = _CopyWithImpl$Fragment$ThreadCommentReplyNotification$user$avatar;
+
+  factory CopyWith$Fragment$ThreadCommentReplyNotification$user$avatar.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadCommentReplyNotification$user$avatar;
+
+  TRes call({
+    String? medium,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ThreadCommentReplyNotification$user$avatar<TRes>
+    implements
+        CopyWith$Fragment$ThreadCommentReplyNotification$user$avatar<TRes> {
+  _CopyWithImpl$Fragment$ThreadCommentReplyNotification$user$avatar(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadCommentReplyNotification$user$avatar _instance;
+
+  final TRes Function(Fragment$ThreadCommentReplyNotification$user$avatar)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? medium = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadCommentReplyNotification$user$avatar(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ThreadCommentReplyNotification$user$avatar<
+        TRes>
+    implements
+        CopyWith$Fragment$ThreadCommentReplyNotification$user$avatar<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadCommentReplyNotification$user$avatar(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$ThreadLikeNotification {
+  Fragment$ThreadLikeNotification({
+    required this.id,
+    this.thread,
+    this.user,
+    this.context,
+    this.createdAt,
+    this.$__typename = 'ThreadLikeNotification',
+  });
+
+  factory Fragment$ThreadLikeNotification.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$thread = json['thread'];
+    final l$user = json['user'];
+    final l$context = json['context'];
+    final l$createdAt = json['createdAt'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadLikeNotification(
+      id: (l$id as int),
+      thread: l$thread == null
+          ? null
+          : Fragment$ThreadLikeNotification$thread.fromJson(
+              (l$thread as Map<String, dynamic>)),
+      user: l$user == null
+          ? null
+          : Fragment$ThreadLikeNotification$user.fromJson(
+              (l$user as Map<String, dynamic>)),
+      context: (l$context as String?),
+      createdAt: (l$createdAt as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Fragment$ThreadLikeNotification$thread? thread;
+
+  final Fragment$ThreadLikeNotification$user? user;
+
+  final String? context;
+
+  final int? createdAt;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$thread = thread;
+    _resultData['thread'] = l$thread?.toJson();
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$context = context;
+    _resultData['context'] = l$context;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$thread = thread;
+    final l$user = user;
+    final l$context = context;
+    final l$createdAt = createdAt;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$thread,
+      l$user,
+      l$context,
+      l$createdAt,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadLikeNotification) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$thread = thread;
+    final lOther$thread = other.thread;
+    if (l$thread != lOther$thread) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$context = context;
+    final lOther$context = other.context;
+    if (l$context != lOther$context) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadLikeNotification
+    on Fragment$ThreadLikeNotification {
+  CopyWith$Fragment$ThreadLikeNotification<Fragment$ThreadLikeNotification>
+      get copyWith => CopyWith$Fragment$ThreadLikeNotification(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadLikeNotification<TRes> {
+  factory CopyWith$Fragment$ThreadLikeNotification(
+    Fragment$ThreadLikeNotification instance,
+    TRes Function(Fragment$ThreadLikeNotification) then,
+  ) = _CopyWithImpl$Fragment$ThreadLikeNotification;
+
+  factory CopyWith$Fragment$ThreadLikeNotification.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadLikeNotification;
+
+  TRes call({
+    int? id,
+    Fragment$ThreadLikeNotification$thread? thread,
+    Fragment$ThreadLikeNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ThreadLikeNotification$thread<TRes> get thread;
+  CopyWith$Fragment$ThreadLikeNotification$user<TRes> get user;
+}
+
+class _CopyWithImpl$Fragment$ThreadLikeNotification<TRes>
+    implements CopyWith$Fragment$ThreadLikeNotification<TRes> {
+  _CopyWithImpl$Fragment$ThreadLikeNotification(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadLikeNotification _instance;
+
+  final TRes Function(Fragment$ThreadLikeNotification) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? thread = _undefined,
+    Object? user = _undefined,
+    Object? context = _undefined,
+    Object? createdAt = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadLikeNotification(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        thread: thread == _undefined
+            ? _instance.thread
+            : (thread as Fragment$ThreadLikeNotification$thread?),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$ThreadLikeNotification$user?),
+        context:
+            context == _undefined ? _instance.context : (context as String?),
+        createdAt:
+            createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ThreadLikeNotification$thread<TRes> get thread {
+    final local$thread = _instance.thread;
+    return local$thread == null
+        ? CopyWith$Fragment$ThreadLikeNotification$thread.stub(_then(_instance))
+        : CopyWith$Fragment$ThreadLikeNotification$thread(
+            local$thread, (e) => call(thread: e));
+  }
+
+  CopyWith$Fragment$ThreadLikeNotification$user<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith$Fragment$ThreadLikeNotification$user.stub(_then(_instance))
+        : CopyWith$Fragment$ThreadLikeNotification$user(
+            local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ThreadLikeNotification<TRes>
+    implements CopyWith$Fragment$ThreadLikeNotification<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadLikeNotification(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Fragment$ThreadLikeNotification$thread? thread,
+    Fragment$ThreadLikeNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ThreadLikeNotification$thread<TRes> get thread =>
+      CopyWith$Fragment$ThreadLikeNotification$thread.stub(_res);
+
+  CopyWith$Fragment$ThreadLikeNotification$user<TRes> get user =>
+      CopyWith$Fragment$ThreadLikeNotification$user.stub(_res);
+}
+
+const fragmentDefinitionThreadLikeNotification = FragmentDefinitionNode(
+  name: NameNode(value: 'ThreadLikeNotification'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'ThreadLikeNotification'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'thread'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'user'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'name'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'avatar'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'medium'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'context'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentThreadLikeNotification = DocumentNode(definitions: [
+  fragmentDefinitionThreadLikeNotification,
+]);
+
+extension ClientExtension$Fragment$ThreadLikeNotification
+    on graphql.GraphQLClient {
+  void writeFragment$ThreadLikeNotification({
+    required Fragment$ThreadLikeNotification data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'ThreadLikeNotification',
+            document: documentNodeFragmentThreadLikeNotification,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$ThreadLikeNotification? readFragment$ThreadLikeNotification({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'ThreadLikeNotification',
+          document: documentNodeFragmentThreadLikeNotification,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null
+        ? null
+        : Fragment$ThreadLikeNotification.fromJson(result);
+  }
+}
+
+class Fragment$ThreadLikeNotification$thread {
+  Fragment$ThreadLikeNotification$thread({
+    required this.id,
+    this.$__typename = 'Thread',
+  });
+
+  factory Fragment$ThreadLikeNotification$thread.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadLikeNotification$thread(
+      id: (l$id as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadLikeNotification$thread) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadLikeNotification$thread
+    on Fragment$ThreadLikeNotification$thread {
+  CopyWith$Fragment$ThreadLikeNotification$thread<
+          Fragment$ThreadLikeNotification$thread>
+      get copyWith => CopyWith$Fragment$ThreadLikeNotification$thread(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadLikeNotification$thread<TRes> {
+  factory CopyWith$Fragment$ThreadLikeNotification$thread(
+    Fragment$ThreadLikeNotification$thread instance,
+    TRes Function(Fragment$ThreadLikeNotification$thread) then,
+  ) = _CopyWithImpl$Fragment$ThreadLikeNotification$thread;
+
+  factory CopyWith$Fragment$ThreadLikeNotification$thread.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadLikeNotification$thread;
+
+  TRes call({
+    int? id,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ThreadLikeNotification$thread<TRes>
+    implements CopyWith$Fragment$ThreadLikeNotification$thread<TRes> {
+  _CopyWithImpl$Fragment$ThreadLikeNotification$thread(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadLikeNotification$thread _instance;
+
+  final TRes Function(Fragment$ThreadLikeNotification$thread) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadLikeNotification$thread(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ThreadLikeNotification$thread<TRes>
+    implements CopyWith$Fragment$ThreadLikeNotification$thread<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadLikeNotification$thread(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$ThreadLikeNotification$user {
+  Fragment$ThreadLikeNotification$user({
+    required this.id,
+    required this.name,
+    this.avatar,
+    this.$__typename = 'User',
+  });
+
+  factory Fragment$ThreadLikeNotification$user.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$avatar = json['avatar'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadLikeNotification$user(
+      id: (l$id as int),
+      name: (l$name as String),
+      avatar: l$avatar == null
+          ? null
+          : Fragment$ThreadLikeNotification$user$avatar.fromJson(
+              (l$avatar as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String name;
+
+  final Fragment$ThreadLikeNotification$user$avatar? avatar;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$avatar = avatar;
+    _resultData['avatar'] = l$avatar?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$avatar = avatar;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$avatar,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadLikeNotification$user) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$avatar = avatar;
+    final lOther$avatar = other.avatar;
+    if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadLikeNotification$user
+    on Fragment$ThreadLikeNotification$user {
+  CopyWith$Fragment$ThreadLikeNotification$user<
+          Fragment$ThreadLikeNotification$user>
+      get copyWith => CopyWith$Fragment$ThreadLikeNotification$user(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadLikeNotification$user<TRes> {
+  factory CopyWith$Fragment$ThreadLikeNotification$user(
+    Fragment$ThreadLikeNotification$user instance,
+    TRes Function(Fragment$ThreadLikeNotification$user) then,
+  ) = _CopyWithImpl$Fragment$ThreadLikeNotification$user;
+
+  factory CopyWith$Fragment$ThreadLikeNotification$user.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadLikeNotification$user;
+
+  TRes call({
+    int? id,
+    String? name,
+    Fragment$ThreadLikeNotification$user$avatar? avatar,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ThreadLikeNotification$user$avatar<TRes> get avatar;
+}
+
+class _CopyWithImpl$Fragment$ThreadLikeNotification$user<TRes>
+    implements CopyWith$Fragment$ThreadLikeNotification$user<TRes> {
+  _CopyWithImpl$Fragment$ThreadLikeNotification$user(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadLikeNotification$user _instance;
+
+  final TRes Function(Fragment$ThreadLikeNotification$user) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? avatar = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadLikeNotification$user(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        avatar: avatar == _undefined
+            ? _instance.avatar
+            : (avatar as Fragment$ThreadLikeNotification$user$avatar?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ThreadLikeNotification$user$avatar<TRes> get avatar {
+    final local$avatar = _instance.avatar;
+    return local$avatar == null
+        ? CopyWith$Fragment$ThreadLikeNotification$user$avatar.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ThreadLikeNotification$user$avatar(
+            local$avatar, (e) => call(avatar: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ThreadLikeNotification$user<TRes>
+    implements CopyWith$Fragment$ThreadLikeNotification$user<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadLikeNotification$user(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? name,
+    Fragment$ThreadLikeNotification$user$avatar? avatar,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ThreadLikeNotification$user$avatar<TRes> get avatar =>
+      CopyWith$Fragment$ThreadLikeNotification$user$avatar.stub(_res);
+}
+
+class Fragment$ThreadLikeNotification$user$avatar {
+  Fragment$ThreadLikeNotification$user$avatar({
+    this.medium,
+    this.$__typename = 'UserAvatar',
+  });
+
+  factory Fragment$ThreadLikeNotification$user$avatar.fromJson(
+      Map<String, dynamic> json) {
+    final l$medium = json['medium'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadLikeNotification$user$avatar(
+      medium: (l$medium as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? medium;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$medium = medium;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$medium,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadLikeNotification$user$avatar) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadLikeNotification$user$avatar
+    on Fragment$ThreadLikeNotification$user$avatar {
+  CopyWith$Fragment$ThreadLikeNotification$user$avatar<
+          Fragment$ThreadLikeNotification$user$avatar>
+      get copyWith => CopyWith$Fragment$ThreadLikeNotification$user$avatar(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadLikeNotification$user$avatar<TRes> {
+  factory CopyWith$Fragment$ThreadLikeNotification$user$avatar(
+    Fragment$ThreadLikeNotification$user$avatar instance,
+    TRes Function(Fragment$ThreadLikeNotification$user$avatar) then,
+  ) = _CopyWithImpl$Fragment$ThreadLikeNotification$user$avatar;
+
+  factory CopyWith$Fragment$ThreadLikeNotification$user$avatar.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadLikeNotification$user$avatar;
+
+  TRes call({
+    String? medium,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ThreadLikeNotification$user$avatar<TRes>
+    implements CopyWith$Fragment$ThreadLikeNotification$user$avatar<TRes> {
+  _CopyWithImpl$Fragment$ThreadLikeNotification$user$avatar(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadLikeNotification$user$avatar _instance;
+
+  final TRes Function(Fragment$ThreadLikeNotification$user$avatar) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? medium = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadLikeNotification$user$avatar(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ThreadLikeNotification$user$avatar<TRes>
+    implements CopyWith$Fragment$ThreadLikeNotification$user$avatar<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadLikeNotification$user$avatar(this._res);
+
+  TRes _res;
+
+  call({
+    String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$ThreadCommentSubscribedNotification {
+  Fragment$ThreadCommentSubscribedNotification({
+    required this.id,
+    this.thread,
+    this.user,
+    this.context,
+    this.createdAt,
+    this.$__typename = 'ThreadCommentSubscribedNotification',
+  });
+
+  factory Fragment$ThreadCommentSubscribedNotification.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$thread = json['thread'];
+    final l$user = json['user'];
+    final l$context = json['context'];
+    final l$createdAt = json['createdAt'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadCommentSubscribedNotification(
+      id: (l$id as int),
+      thread: l$thread == null
+          ? null
+          : Fragment$ThreadCommentSubscribedNotification$thread.fromJson(
+              (l$thread as Map<String, dynamic>)),
+      user: l$user == null
+          ? null
+          : Fragment$ThreadCommentSubscribedNotification$user.fromJson(
+              (l$user as Map<String, dynamic>)),
+      context: (l$context as String?),
+      createdAt: (l$createdAt as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Fragment$ThreadCommentSubscribedNotification$thread? thread;
+
+  final Fragment$ThreadCommentSubscribedNotification$user? user;
+
+  final String? context;
+
+  final int? createdAt;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$thread = thread;
+    _resultData['thread'] = l$thread?.toJson();
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$context = context;
+    _resultData['context'] = l$context;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$thread = thread;
+    final l$user = user;
+    final l$context = context;
+    final l$createdAt = createdAt;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$thread,
+      l$user,
+      l$context,
+      l$createdAt,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadCommentSubscribedNotification) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$thread = thread;
+    final lOther$thread = other.thread;
+    if (l$thread != lOther$thread) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$context = context;
+    final lOther$context = other.context;
+    if (l$context != lOther$context) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadCommentSubscribedNotification
+    on Fragment$ThreadCommentSubscribedNotification {
+  CopyWith$Fragment$ThreadCommentSubscribedNotification<
+          Fragment$ThreadCommentSubscribedNotification>
+      get copyWith => CopyWith$Fragment$ThreadCommentSubscribedNotification(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadCommentSubscribedNotification<TRes> {
+  factory CopyWith$Fragment$ThreadCommentSubscribedNotification(
+    Fragment$ThreadCommentSubscribedNotification instance,
+    TRes Function(Fragment$ThreadCommentSubscribedNotification) then,
+  ) = _CopyWithImpl$Fragment$ThreadCommentSubscribedNotification;
+
+  factory CopyWith$Fragment$ThreadCommentSubscribedNotification.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadCommentSubscribedNotification;
+
+  TRes call({
+    int? id,
+    Fragment$ThreadCommentSubscribedNotification$thread? thread,
+    Fragment$ThreadCommentSubscribedNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ThreadCommentSubscribedNotification$thread<TRes> get thread;
+  CopyWith$Fragment$ThreadCommentSubscribedNotification$user<TRes> get user;
+}
+
+class _CopyWithImpl$Fragment$ThreadCommentSubscribedNotification<TRes>
+    implements CopyWith$Fragment$ThreadCommentSubscribedNotification<TRes> {
+  _CopyWithImpl$Fragment$ThreadCommentSubscribedNotification(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadCommentSubscribedNotification _instance;
+
+  final TRes Function(Fragment$ThreadCommentSubscribedNotification) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? thread = _undefined,
+    Object? user = _undefined,
+    Object? context = _undefined,
+    Object? createdAt = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadCommentSubscribedNotification(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        thread: thread == _undefined
+            ? _instance.thread
+            : (thread as Fragment$ThreadCommentSubscribedNotification$thread?),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$ThreadCommentSubscribedNotification$user?),
+        context:
+            context == _undefined ? _instance.context : (context as String?),
+        createdAt:
+            createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ThreadCommentSubscribedNotification$thread<TRes>
+      get thread {
+    final local$thread = _instance.thread;
+    return local$thread == null
+        ? CopyWith$Fragment$ThreadCommentSubscribedNotification$thread.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ThreadCommentSubscribedNotification$thread(
+            local$thread, (e) => call(thread: e));
+  }
+
+  CopyWith$Fragment$ThreadCommentSubscribedNotification$user<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith$Fragment$ThreadCommentSubscribedNotification$user.stub(
+            _then(_instance))
+        : CopyWith$Fragment$ThreadCommentSubscribedNotification$user(
+            local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ThreadCommentSubscribedNotification<TRes>
+    implements CopyWith$Fragment$ThreadCommentSubscribedNotification<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadCommentSubscribedNotification(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Fragment$ThreadCommentSubscribedNotification$thread? thread,
+    Fragment$ThreadCommentSubscribedNotification$user? user,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ThreadCommentSubscribedNotification$thread<TRes>
+      get thread =>
+          CopyWith$Fragment$ThreadCommentSubscribedNotification$thread.stub(
+              _res);
+
+  CopyWith$Fragment$ThreadCommentSubscribedNotification$user<TRes> get user =>
+      CopyWith$Fragment$ThreadCommentSubscribedNotification$user.stub(_res);
+}
+
+const fragmentDefinitionThreadCommentSubscribedNotification =
+    FragmentDefinitionNode(
+  name: NameNode(value: 'ThreadCommentSubscribedNotification'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'ThreadCommentSubscribedNotification'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'thread'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'user'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'name'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'avatar'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'medium'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'context'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentThreadCommentSubscribedNotification =
+    DocumentNode(definitions: [
+  fragmentDefinitionThreadCommentSubscribedNotification,
+]);
+
+extension ClientExtension$Fragment$ThreadCommentSubscribedNotification
+    on graphql.GraphQLClient {
+  void writeFragment$ThreadCommentSubscribedNotification({
+    required Fragment$ThreadCommentSubscribedNotification data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'ThreadCommentSubscribedNotification',
+            document: documentNodeFragmentThreadCommentSubscribedNotification,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$ThreadCommentSubscribedNotification?
+      readFragment$ThreadCommentSubscribedNotification({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'ThreadCommentSubscribedNotification',
+          document: documentNodeFragmentThreadCommentSubscribedNotification,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null
+        ? null
+        : Fragment$ThreadCommentSubscribedNotification.fromJson(result);
+  }
+}
+
+class Fragment$ThreadCommentSubscribedNotification$thread {
+  Fragment$ThreadCommentSubscribedNotification$thread({
+    required this.id,
+    this.$__typename = 'Thread',
+  });
+
+  factory Fragment$ThreadCommentSubscribedNotification$thread.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadCommentSubscribedNotification$thread(
+      id: (l$id as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadCommentSubscribedNotification$thread) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadCommentSubscribedNotification$thread
+    on Fragment$ThreadCommentSubscribedNotification$thread {
+  CopyWith$Fragment$ThreadCommentSubscribedNotification$thread<
+          Fragment$ThreadCommentSubscribedNotification$thread>
+      get copyWith =>
+          CopyWith$Fragment$ThreadCommentSubscribedNotification$thread(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadCommentSubscribedNotification$thread<
+    TRes> {
+  factory CopyWith$Fragment$ThreadCommentSubscribedNotification$thread(
+    Fragment$ThreadCommentSubscribedNotification$thread instance,
+    TRes Function(Fragment$ThreadCommentSubscribedNotification$thread) then,
+  ) = _CopyWithImpl$Fragment$ThreadCommentSubscribedNotification$thread;
+
+  factory CopyWith$Fragment$ThreadCommentSubscribedNotification$thread.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadCommentSubscribedNotification$thread;
+
+  TRes call({
+    int? id,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ThreadCommentSubscribedNotification$thread<TRes>
+    implements
+        CopyWith$Fragment$ThreadCommentSubscribedNotification$thread<TRes> {
+  _CopyWithImpl$Fragment$ThreadCommentSubscribedNotification$thread(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadCommentSubscribedNotification$thread _instance;
+
+  final TRes Function(Fragment$ThreadCommentSubscribedNotification$thread)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadCommentSubscribedNotification$thread(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ThreadCommentSubscribedNotification$thread<
+        TRes>
+    implements
+        CopyWith$Fragment$ThreadCommentSubscribedNotification$thread<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadCommentSubscribedNotification$thread(
+      this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$ThreadCommentSubscribedNotification$user {
+  Fragment$ThreadCommentSubscribedNotification$user({
+    required this.id,
+    required this.name,
+    this.avatar,
+    this.$__typename = 'User',
+  });
+
+  factory Fragment$ThreadCommentSubscribedNotification$user.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$avatar = json['avatar'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadCommentSubscribedNotification$user(
+      id: (l$id as int),
+      name: (l$name as String),
+      avatar: l$avatar == null
+          ? null
+          : Fragment$ThreadCommentSubscribedNotification$user$avatar.fromJson(
+              (l$avatar as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String name;
+
+  final Fragment$ThreadCommentSubscribedNotification$user$avatar? avatar;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$avatar = avatar;
+    _resultData['avatar'] = l$avatar?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$avatar = avatar;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$avatar,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadCommentSubscribedNotification$user) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$avatar = avatar;
+    final lOther$avatar = other.avatar;
+    if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadCommentSubscribedNotification$user
+    on Fragment$ThreadCommentSubscribedNotification$user {
+  CopyWith$Fragment$ThreadCommentSubscribedNotification$user<
+          Fragment$ThreadCommentSubscribedNotification$user>
+      get copyWith =>
+          CopyWith$Fragment$ThreadCommentSubscribedNotification$user(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadCommentSubscribedNotification$user<
+    TRes> {
+  factory CopyWith$Fragment$ThreadCommentSubscribedNotification$user(
+    Fragment$ThreadCommentSubscribedNotification$user instance,
+    TRes Function(Fragment$ThreadCommentSubscribedNotification$user) then,
+  ) = _CopyWithImpl$Fragment$ThreadCommentSubscribedNotification$user;
+
+  factory CopyWith$Fragment$ThreadCommentSubscribedNotification$user.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadCommentSubscribedNotification$user;
+
+  TRes call({
+    int? id,
+    String? name,
+    Fragment$ThreadCommentSubscribedNotification$user$avatar? avatar,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ThreadCommentSubscribedNotification$user$avatar<TRes>
+      get avatar;
+}
+
+class _CopyWithImpl$Fragment$ThreadCommentSubscribedNotification$user<TRes>
+    implements
+        CopyWith$Fragment$ThreadCommentSubscribedNotification$user<TRes> {
+  _CopyWithImpl$Fragment$ThreadCommentSubscribedNotification$user(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadCommentSubscribedNotification$user _instance;
+
+  final TRes Function(Fragment$ThreadCommentSubscribedNotification$user) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? avatar = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadCommentSubscribedNotification$user(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        avatar: avatar == _undefined
+            ? _instance.avatar
+            : (avatar
+                as Fragment$ThreadCommentSubscribedNotification$user$avatar?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ThreadCommentSubscribedNotification$user$avatar<TRes>
+      get avatar {
+    final local$avatar = _instance.avatar;
+    return local$avatar == null
+        ? CopyWith$Fragment$ThreadCommentSubscribedNotification$user$avatar
+            .stub(_then(_instance))
+        : CopyWith$Fragment$ThreadCommentSubscribedNotification$user$avatar(
+            local$avatar, (e) => call(avatar: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ThreadCommentSubscribedNotification$user<TRes>
+    implements
+        CopyWith$Fragment$ThreadCommentSubscribedNotification$user<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadCommentSubscribedNotification$user(
+      this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? name,
+    Fragment$ThreadCommentSubscribedNotification$user$avatar? avatar,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ThreadCommentSubscribedNotification$user$avatar<TRes>
+      get avatar =>
+          CopyWith$Fragment$ThreadCommentSubscribedNotification$user$avatar
+              .stub(_res);
+}
+
+class Fragment$ThreadCommentSubscribedNotification$user$avatar {
+  Fragment$ThreadCommentSubscribedNotification$user$avatar({
+    this.medium,
+    this.$__typename = 'UserAvatar',
+  });
+
+  factory Fragment$ThreadCommentSubscribedNotification$user$avatar.fromJson(
+      Map<String, dynamic> json) {
+    final l$medium = json['medium'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadCommentSubscribedNotification$user$avatar(
+      medium: (l$medium as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? medium;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$medium = medium;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$medium,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadCommentSubscribedNotification$user$avatar) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadCommentSubscribedNotification$user$avatar
+    on Fragment$ThreadCommentSubscribedNotification$user$avatar {
+  CopyWith$Fragment$ThreadCommentSubscribedNotification$user$avatar<
+          Fragment$ThreadCommentSubscribedNotification$user$avatar>
+      get copyWith =>
+          CopyWith$Fragment$ThreadCommentSubscribedNotification$user$avatar(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadCommentSubscribedNotification$user$avatar<
+    TRes> {
+  factory CopyWith$Fragment$ThreadCommentSubscribedNotification$user$avatar(
+    Fragment$ThreadCommentSubscribedNotification$user$avatar instance,
+    TRes Function(Fragment$ThreadCommentSubscribedNotification$user$avatar)
+        then,
+  ) = _CopyWithImpl$Fragment$ThreadCommentSubscribedNotification$user$avatar;
+
+  factory CopyWith$Fragment$ThreadCommentSubscribedNotification$user$avatar.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadCommentSubscribedNotification$user$avatar;
+
+  TRes call({
+    String? medium,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ThreadCommentSubscribedNotification$user$avatar<
+        TRes>
+    implements
+        CopyWith$Fragment$ThreadCommentSubscribedNotification$user$avatar<
+            TRes> {
+  _CopyWithImpl$Fragment$ThreadCommentSubscribedNotification$user$avatar(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadCommentSubscribedNotification$user$avatar _instance;
+
+  final TRes Function(Fragment$ThreadCommentSubscribedNotification$user$avatar)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? medium = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadCommentSubscribedNotification$user$avatar(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ThreadCommentSubscribedNotification$user$avatar<
+        TRes>
+    implements
+        CopyWith$Fragment$ThreadCommentSubscribedNotification$user$avatar<
+            TRes> {
+  _CopyWithStubImpl$Fragment$ThreadCommentSubscribedNotification$user$avatar(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$MediaDeletionNotification {
+  Fragment$MediaDeletionNotification({
+    required this.id,
+    this.deletedMediaTitle,
+    this.reason,
+    this.context,
+    this.createdAt,
+    this.$__typename = 'MediaDeletionNotification',
+  });
+
+  factory Fragment$MediaDeletionNotification.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$deletedMediaTitle = json['deletedMediaTitle'];
+    final l$reason = json['reason'];
+    final l$context = json['context'];
+    final l$createdAt = json['createdAt'];
+    final l$$__typename = json['__typename'];
+    return Fragment$MediaDeletionNotification(
+      id: (l$id as int),
+      deletedMediaTitle: (l$deletedMediaTitle as String?),
+      reason: (l$reason as String?),
+      context: (l$context as String?),
+      createdAt: (l$createdAt as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String? deletedMediaTitle;
+
+  final String? reason;
+
+  final String? context;
+
+  final int? createdAt;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$deletedMediaTitle = deletedMediaTitle;
+    _resultData['deletedMediaTitle'] = l$deletedMediaTitle;
+    final l$reason = reason;
+    _resultData['reason'] = l$reason;
+    final l$context = context;
+    _resultData['context'] = l$context;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$deletedMediaTitle = deletedMediaTitle;
+    final l$reason = reason;
+    final l$context = context;
+    final l$createdAt = createdAt;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$deletedMediaTitle,
+      l$reason,
+      l$context,
+      l$createdAt,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$MediaDeletionNotification) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$deletedMediaTitle = deletedMediaTitle;
+    final lOther$deletedMediaTitle = other.deletedMediaTitle;
+    if (l$deletedMediaTitle != lOther$deletedMediaTitle) {
+      return false;
+    }
+    final l$reason = reason;
+    final lOther$reason = other.reason;
+    if (l$reason != lOther$reason) {
+      return false;
+    }
+    final l$context = context;
+    final lOther$context = other.context;
+    if (l$context != lOther$context) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$MediaDeletionNotification
+    on Fragment$MediaDeletionNotification {
+  CopyWith$Fragment$MediaDeletionNotification<
+          Fragment$MediaDeletionNotification>
+      get copyWith => CopyWith$Fragment$MediaDeletionNotification(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$MediaDeletionNotification<TRes> {
+  factory CopyWith$Fragment$MediaDeletionNotification(
+    Fragment$MediaDeletionNotification instance,
+    TRes Function(Fragment$MediaDeletionNotification) then,
+  ) = _CopyWithImpl$Fragment$MediaDeletionNotification;
+
+  factory CopyWith$Fragment$MediaDeletionNotification.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaDeletionNotification;
+
+  TRes call({
+    int? id,
+    String? deletedMediaTitle,
+    String? reason,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$MediaDeletionNotification<TRes>
+    implements CopyWith$Fragment$MediaDeletionNotification<TRes> {
+  _CopyWithImpl$Fragment$MediaDeletionNotification(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$MediaDeletionNotification _instance;
+
+  final TRes Function(Fragment$MediaDeletionNotification) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? deletedMediaTitle = _undefined,
+    Object? reason = _undefined,
+    Object? context = _undefined,
+    Object? createdAt = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$MediaDeletionNotification(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        deletedMediaTitle: deletedMediaTitle == _undefined
+            ? _instance.deletedMediaTitle
+            : (deletedMediaTitle as String?),
+        reason: reason == _undefined ? _instance.reason : (reason as String?),
+        context:
+            context == _undefined ? _instance.context : (context as String?),
+        createdAt:
+            createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$MediaDeletionNotification<TRes>
+    implements CopyWith$Fragment$MediaDeletionNotification<TRes> {
+  _CopyWithStubImpl$Fragment$MediaDeletionNotification(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? deletedMediaTitle,
+    String? reason,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+const fragmentDefinitionMediaDeletionNotification = FragmentDefinitionNode(
+  name: NameNode(value: 'MediaDeletionNotification'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'MediaDeletionNotification'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'deletedMediaTitle'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'reason'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'context'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentMediaDeletionNotification =
+    DocumentNode(definitions: [
+  fragmentDefinitionMediaDeletionNotification,
+]);
+
+extension ClientExtension$Fragment$MediaDeletionNotification
+    on graphql.GraphQLClient {
+  void writeFragment$MediaDeletionNotification({
+    required Fragment$MediaDeletionNotification data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'MediaDeletionNotification',
+            document: documentNodeFragmentMediaDeletionNotification,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$MediaDeletionNotification? readFragment$MediaDeletionNotification({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'MediaDeletionNotification',
+          document: documentNodeFragmentMediaDeletionNotification,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null
+        ? null
+        : Fragment$MediaDeletionNotification.fromJson(result);
+  }
+}
+
+class Fragment$MediaMergeNotification {
+  Fragment$MediaMergeNotification({
+    required this.id,
+    this.media,
+    this.deletedMediaTitles,
+    this.context,
+    this.createdAt,
+    this.reason,
+    this.$__typename = 'MediaMergeNotification',
+  });
+
+  factory Fragment$MediaMergeNotification.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$media = json['media'];
+    final l$deletedMediaTitles = json['deletedMediaTitles'];
+    final l$context = json['context'];
+    final l$createdAt = json['createdAt'];
+    final l$reason = json['reason'];
+    final l$$__typename = json['__typename'];
+    return Fragment$MediaMergeNotification(
+      id: (l$id as int),
+      media: l$media == null
+          ? null
+          : Fragment$MediaMergeNotification$media.fromJson(
+              (l$media as Map<String, dynamic>)),
+      deletedMediaTitles: (l$deletedMediaTitles as List<dynamic>?)
+          ?.map((e) => (e as String?))
+          .toList(),
+      context: (l$context as String?),
+      createdAt: (l$createdAt as int?),
+      reason: (l$reason as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Fragment$MediaMergeNotification$media? media;
+
+  final List<String?>? deletedMediaTitles;
+
+  final String? context;
+
+  final int? createdAt;
+
+  final String? reason;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$media = media;
+    _resultData['media'] = l$media?.toJson();
+    final l$deletedMediaTitles = deletedMediaTitles;
+    _resultData['deletedMediaTitles'] =
+        l$deletedMediaTitles?.map((e) => e).toList();
+    final l$context = context;
+    _resultData['context'] = l$context;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$reason = reason;
+    _resultData['reason'] = l$reason;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$media = media;
+    final l$deletedMediaTitles = deletedMediaTitles;
+    final l$context = context;
+    final l$createdAt = createdAt;
+    final l$reason = reason;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$media,
+      l$deletedMediaTitles == null
+          ? null
+          : Object.hashAll(l$deletedMediaTitles.map((v) => v)),
+      l$context,
+      l$createdAt,
+      l$reason,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$MediaMergeNotification) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$media = media;
+    final lOther$media = other.media;
+    if (l$media != lOther$media) {
+      return false;
+    }
+    final l$deletedMediaTitles = deletedMediaTitles;
+    final lOther$deletedMediaTitles = other.deletedMediaTitles;
+    if (l$deletedMediaTitles != null && lOther$deletedMediaTitles != null) {
+      if (l$deletedMediaTitles.length != lOther$deletedMediaTitles.length) {
+        return false;
+      }
+      for (int i = 0; i < l$deletedMediaTitles.length; i++) {
+        final l$deletedMediaTitles$entry = l$deletedMediaTitles[i];
+        final lOther$deletedMediaTitles$entry = lOther$deletedMediaTitles[i];
+        if (l$deletedMediaTitles$entry != lOther$deletedMediaTitles$entry) {
+          return false;
+        }
+      }
+    } else if (l$deletedMediaTitles != lOther$deletedMediaTitles) {
+      return false;
+    }
+    final l$context = context;
+    final lOther$context = other.context;
+    if (l$context != lOther$context) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$reason = reason;
+    final lOther$reason = other.reason;
+    if (l$reason != lOther$reason) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$MediaMergeNotification
+    on Fragment$MediaMergeNotification {
+  CopyWith$Fragment$MediaMergeNotification<Fragment$MediaMergeNotification>
+      get copyWith => CopyWith$Fragment$MediaMergeNotification(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$MediaMergeNotification<TRes> {
+  factory CopyWith$Fragment$MediaMergeNotification(
+    Fragment$MediaMergeNotification instance,
+    TRes Function(Fragment$MediaMergeNotification) then,
+  ) = _CopyWithImpl$Fragment$MediaMergeNotification;
+
+  factory CopyWith$Fragment$MediaMergeNotification.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaMergeNotification;
+
+  TRes call({
+    int? id,
+    Fragment$MediaMergeNotification$media? media,
+    List<String?>? deletedMediaTitles,
+    String? context,
+    int? createdAt,
+    String? reason,
+    String? $__typename,
+  });
+  CopyWith$Fragment$MediaMergeNotification$media<TRes> get media;
+}
+
+class _CopyWithImpl$Fragment$MediaMergeNotification<TRes>
+    implements CopyWith$Fragment$MediaMergeNotification<TRes> {
+  _CopyWithImpl$Fragment$MediaMergeNotification(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$MediaMergeNotification _instance;
+
+  final TRes Function(Fragment$MediaMergeNotification) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? media = _undefined,
+    Object? deletedMediaTitles = _undefined,
+    Object? context = _undefined,
+    Object? createdAt = _undefined,
+    Object? reason = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$MediaMergeNotification(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        media: media == _undefined
+            ? _instance.media
+            : (media as Fragment$MediaMergeNotification$media?),
+        deletedMediaTitles: deletedMediaTitles == _undefined
+            ? _instance.deletedMediaTitles
+            : (deletedMediaTitles as List<String?>?),
+        context:
+            context == _undefined ? _instance.context : (context as String?),
+        createdAt:
+            createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
+        reason: reason == _undefined ? _instance.reason : (reason as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$MediaMergeNotification$media<TRes> get media {
+    final local$media = _instance.media;
+    return local$media == null
+        ? CopyWith$Fragment$MediaMergeNotification$media.stub(_then(_instance))
+        : CopyWith$Fragment$MediaMergeNotification$media(
+            local$media, (e) => call(media: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$MediaMergeNotification<TRes>
+    implements CopyWith$Fragment$MediaMergeNotification<TRes> {
+  _CopyWithStubImpl$Fragment$MediaMergeNotification(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Fragment$MediaMergeNotification$media? media,
+    List<String?>? deletedMediaTitles,
+    String? context,
+    int? createdAt,
+    String? reason,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$MediaMergeNotification$media<TRes> get media =>
+      CopyWith$Fragment$MediaMergeNotification$media.stub(_res);
+}
+
+const fragmentDefinitionMediaMergeNotification = FragmentDefinitionNode(
+  name: NameNode(value: 'MediaMergeNotification'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'MediaMergeNotification'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'media'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'title'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'userPreferred'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: 'coverImage'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'medium'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'deletedMediaTitles'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'context'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'reason'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentMediaMergeNotification = DocumentNode(definitions: [
+  fragmentDefinitionMediaMergeNotification,
+]);
+
+extension ClientExtension$Fragment$MediaMergeNotification
+    on graphql.GraphQLClient {
+  void writeFragment$MediaMergeNotification({
+    required Fragment$MediaMergeNotification data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'MediaMergeNotification',
+            document: documentNodeFragmentMediaMergeNotification,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$MediaMergeNotification? readFragment$MediaMergeNotification({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'MediaMergeNotification',
+          document: documentNodeFragmentMediaMergeNotification,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null
+        ? null
+        : Fragment$MediaMergeNotification.fromJson(result);
+  }
+}
+
+class Fragment$MediaMergeNotification$media {
+  Fragment$MediaMergeNotification$media({
+    required this.id,
+    this.title,
+    this.coverImage,
+    this.$__typename = 'Media',
+  });
+
+  factory Fragment$MediaMergeNotification$media.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$title = json['title'];
+    final l$coverImage = json['coverImage'];
+    final l$$__typename = json['__typename'];
+    return Fragment$MediaMergeNotification$media(
+      id: (l$id as int),
+      title: l$title == null
+          ? null
+          : Fragment$MediaMergeNotification$media$title.fromJson(
+              (l$title as Map<String, dynamic>)),
+      coverImage: l$coverImage == null
+          ? null
+          : Fragment$MediaMergeNotification$media$coverImage.fromJson(
+              (l$coverImage as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Fragment$MediaMergeNotification$media$title? title;
+
+  final Fragment$MediaMergeNotification$media$coverImage? coverImage;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$title = title;
+    _resultData['title'] = l$title?.toJson();
+    final l$coverImage = coverImage;
+    _resultData['coverImage'] = l$coverImage?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$title = title;
+    final l$coverImage = coverImage;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$title,
+      l$coverImage,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$MediaMergeNotification$media) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$title = title;
+    final lOther$title = other.title;
+    if (l$title != lOther$title) {
+      return false;
+    }
+    final l$coverImage = coverImage;
+    final lOther$coverImage = other.coverImage;
+    if (l$coverImage != lOther$coverImage) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$MediaMergeNotification$media
+    on Fragment$MediaMergeNotification$media {
+  CopyWith$Fragment$MediaMergeNotification$media<
+          Fragment$MediaMergeNotification$media>
+      get copyWith => CopyWith$Fragment$MediaMergeNotification$media(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$MediaMergeNotification$media<TRes> {
+  factory CopyWith$Fragment$MediaMergeNotification$media(
+    Fragment$MediaMergeNotification$media instance,
+    TRes Function(Fragment$MediaMergeNotification$media) then,
+  ) = _CopyWithImpl$Fragment$MediaMergeNotification$media;
+
+  factory CopyWith$Fragment$MediaMergeNotification$media.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaMergeNotification$media;
+
+  TRes call({
+    int? id,
+    Fragment$MediaMergeNotification$media$title? title,
+    Fragment$MediaMergeNotification$media$coverImage? coverImage,
+    String? $__typename,
+  });
+  CopyWith$Fragment$MediaMergeNotification$media$title<TRes> get title;
+  CopyWith$Fragment$MediaMergeNotification$media$coverImage<TRes>
+      get coverImage;
+}
+
+class _CopyWithImpl$Fragment$MediaMergeNotification$media<TRes>
+    implements CopyWith$Fragment$MediaMergeNotification$media<TRes> {
+  _CopyWithImpl$Fragment$MediaMergeNotification$media(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$MediaMergeNotification$media _instance;
+
+  final TRes Function(Fragment$MediaMergeNotification$media) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? title = _undefined,
+    Object? coverImage = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$MediaMergeNotification$media(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        title: title == _undefined
+            ? _instance.title
+            : (title as Fragment$MediaMergeNotification$media$title?),
+        coverImage: coverImage == _undefined
+            ? _instance.coverImage
+            : (coverImage as Fragment$MediaMergeNotification$media$coverImage?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$MediaMergeNotification$media$title<TRes> get title {
+    final local$title = _instance.title;
+    return local$title == null
+        ? CopyWith$Fragment$MediaMergeNotification$media$title.stub(
+            _then(_instance))
+        : CopyWith$Fragment$MediaMergeNotification$media$title(
+            local$title, (e) => call(title: e));
+  }
+
+  CopyWith$Fragment$MediaMergeNotification$media$coverImage<TRes>
+      get coverImage {
+    final local$coverImage = _instance.coverImage;
+    return local$coverImage == null
+        ? CopyWith$Fragment$MediaMergeNotification$media$coverImage.stub(
+            _then(_instance))
+        : CopyWith$Fragment$MediaMergeNotification$media$coverImage(
+            local$coverImage, (e) => call(coverImage: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$MediaMergeNotification$media<TRes>
+    implements CopyWith$Fragment$MediaMergeNotification$media<TRes> {
+  _CopyWithStubImpl$Fragment$MediaMergeNotification$media(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Fragment$MediaMergeNotification$media$title? title,
+    Fragment$MediaMergeNotification$media$coverImage? coverImage,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$MediaMergeNotification$media$title<TRes> get title =>
+      CopyWith$Fragment$MediaMergeNotification$media$title.stub(_res);
+
+  CopyWith$Fragment$MediaMergeNotification$media$coverImage<TRes>
+      get coverImage =>
+          CopyWith$Fragment$MediaMergeNotification$media$coverImage.stub(_res);
+}
+
+class Fragment$MediaMergeNotification$media$title {
+  Fragment$MediaMergeNotification$media$title({
+    this.userPreferred,
+    this.$__typename = 'MediaTitle',
+  });
+
+  factory Fragment$MediaMergeNotification$media$title.fromJson(
+      Map<String, dynamic> json) {
+    final l$userPreferred = json['userPreferred'];
+    final l$$__typename = json['__typename'];
+    return Fragment$MediaMergeNotification$media$title(
+      userPreferred: (l$userPreferred as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? userPreferred;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$userPreferred = userPreferred;
+    _resultData['userPreferred'] = l$userPreferred;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$userPreferred = userPreferred;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$userPreferred,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$MediaMergeNotification$media$title) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$userPreferred = userPreferred;
+    final lOther$userPreferred = other.userPreferred;
+    if (l$userPreferred != lOther$userPreferred) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$MediaMergeNotification$media$title
+    on Fragment$MediaMergeNotification$media$title {
+  CopyWith$Fragment$MediaMergeNotification$media$title<
+          Fragment$MediaMergeNotification$media$title>
+      get copyWith => CopyWith$Fragment$MediaMergeNotification$media$title(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$MediaMergeNotification$media$title<TRes> {
+  factory CopyWith$Fragment$MediaMergeNotification$media$title(
+    Fragment$MediaMergeNotification$media$title instance,
+    TRes Function(Fragment$MediaMergeNotification$media$title) then,
+  ) = _CopyWithImpl$Fragment$MediaMergeNotification$media$title;
+
+  factory CopyWith$Fragment$MediaMergeNotification$media$title.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaMergeNotification$media$title;
+
+  TRes call({
+    String? userPreferred,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$MediaMergeNotification$media$title<TRes>
+    implements CopyWith$Fragment$MediaMergeNotification$media$title<TRes> {
+  _CopyWithImpl$Fragment$MediaMergeNotification$media$title(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$MediaMergeNotification$media$title _instance;
+
+  final TRes Function(Fragment$MediaMergeNotification$media$title) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? userPreferred = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$MediaMergeNotification$media$title(
+        userPreferred: userPreferred == _undefined
+            ? _instance.userPreferred
+            : (userPreferred as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$MediaMergeNotification$media$title<TRes>
+    implements CopyWith$Fragment$MediaMergeNotification$media$title<TRes> {
+  _CopyWithStubImpl$Fragment$MediaMergeNotification$media$title(this._res);
+
+  TRes _res;
+
+  call({
+    String? userPreferred,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$MediaMergeNotification$media$coverImage {
+  Fragment$MediaMergeNotification$media$coverImage({
+    this.medium,
+    this.$__typename = 'MediaCoverImage',
+  });
+
+  factory Fragment$MediaMergeNotification$media$coverImage.fromJson(
+      Map<String, dynamic> json) {
+    final l$medium = json['medium'];
+    final l$$__typename = json['__typename'];
+    return Fragment$MediaMergeNotification$media$coverImage(
+      medium: (l$medium as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? medium;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$medium = medium;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$medium,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$MediaMergeNotification$media$coverImage) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$MediaMergeNotification$media$coverImage
+    on Fragment$MediaMergeNotification$media$coverImage {
+  CopyWith$Fragment$MediaMergeNotification$media$coverImage<
+          Fragment$MediaMergeNotification$media$coverImage>
+      get copyWith => CopyWith$Fragment$MediaMergeNotification$media$coverImage(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$MediaMergeNotification$media$coverImage<TRes> {
+  factory CopyWith$Fragment$MediaMergeNotification$media$coverImage(
+    Fragment$MediaMergeNotification$media$coverImage instance,
+    TRes Function(Fragment$MediaMergeNotification$media$coverImage) then,
+  ) = _CopyWithImpl$Fragment$MediaMergeNotification$media$coverImage;
+
+  factory CopyWith$Fragment$MediaMergeNotification$media$coverImage.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$MediaMergeNotification$media$coverImage;
+
+  TRes call({
+    String? medium,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$MediaMergeNotification$media$coverImage<TRes>
+    implements CopyWith$Fragment$MediaMergeNotification$media$coverImage<TRes> {
+  _CopyWithImpl$Fragment$MediaMergeNotification$media$coverImage(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$MediaMergeNotification$media$coverImage _instance;
+
+  final TRes Function(Fragment$MediaMergeNotification$media$coverImage) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? medium = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$MediaMergeNotification$media$coverImage(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$MediaMergeNotification$media$coverImage<TRes>
+    implements CopyWith$Fragment$MediaMergeNotification$media$coverImage<TRes> {
+  _CopyWithStubImpl$Fragment$MediaMergeNotification$media$coverImage(this._res);
+
+  TRes _res;
+
+  call({
+    String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$MediaDataChangeNotification {
+  Fragment$MediaDataChangeNotification({
+    required this.id,
+    this.media,
+    this.context,
+    this.reason,
+    this.createdAt,
+    this.$__typename = 'MediaDataChangeNotification',
+  });
+
+  factory Fragment$MediaDataChangeNotification.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$media = json['media'];
+    final l$context = json['context'];
+    final l$reason = json['reason'];
+    final l$createdAt = json['createdAt'];
+    final l$$__typename = json['__typename'];
+    return Fragment$MediaDataChangeNotification(
+      id: (l$id as int),
+      media: l$media == null
+          ? null
+          : Fragment$MediaDataChangeNotification$media.fromJson(
+              (l$media as Map<String, dynamic>)),
+      context: (l$context as String?),
+      reason: (l$reason as String?),
+      createdAt: (l$createdAt as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Fragment$MediaDataChangeNotification$media? media;
+
+  final String? context;
+
+  final String? reason;
+
+  final int? createdAt;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$media = media;
+    _resultData['media'] = l$media?.toJson();
+    final l$context = context;
+    _resultData['context'] = l$context;
+    final l$reason = reason;
+    _resultData['reason'] = l$reason;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$media = media;
+    final l$context = context;
+    final l$reason = reason;
+    final l$createdAt = createdAt;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$media,
+      l$context,
+      l$reason,
+      l$createdAt,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$MediaDataChangeNotification) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$media = media;
+    final lOther$media = other.media;
+    if (l$media != lOther$media) {
+      return false;
+    }
+    final l$context = context;
+    final lOther$context = other.context;
+    if (l$context != lOther$context) {
+      return false;
+    }
+    final l$reason = reason;
+    final lOther$reason = other.reason;
+    if (l$reason != lOther$reason) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$MediaDataChangeNotification
+    on Fragment$MediaDataChangeNotification {
+  CopyWith$Fragment$MediaDataChangeNotification<
+          Fragment$MediaDataChangeNotification>
+      get copyWith => CopyWith$Fragment$MediaDataChangeNotification(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$MediaDataChangeNotification<TRes> {
+  factory CopyWith$Fragment$MediaDataChangeNotification(
+    Fragment$MediaDataChangeNotification instance,
+    TRes Function(Fragment$MediaDataChangeNotification) then,
+  ) = _CopyWithImpl$Fragment$MediaDataChangeNotification;
+
+  factory CopyWith$Fragment$MediaDataChangeNotification.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaDataChangeNotification;
+
+  TRes call({
+    int? id,
+    Fragment$MediaDataChangeNotification$media? media,
+    String? context,
+    String? reason,
+    int? createdAt,
+    String? $__typename,
+  });
+  CopyWith$Fragment$MediaDataChangeNotification$media<TRes> get media;
+}
+
+class _CopyWithImpl$Fragment$MediaDataChangeNotification<TRes>
+    implements CopyWith$Fragment$MediaDataChangeNotification<TRes> {
+  _CopyWithImpl$Fragment$MediaDataChangeNotification(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$MediaDataChangeNotification _instance;
+
+  final TRes Function(Fragment$MediaDataChangeNotification) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? media = _undefined,
+    Object? context = _undefined,
+    Object? reason = _undefined,
+    Object? createdAt = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$MediaDataChangeNotification(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        media: media == _undefined
+            ? _instance.media
+            : (media as Fragment$MediaDataChangeNotification$media?),
+        context:
+            context == _undefined ? _instance.context : (context as String?),
+        reason: reason == _undefined ? _instance.reason : (reason as String?),
+        createdAt:
+            createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$MediaDataChangeNotification$media<TRes> get media {
+    final local$media = _instance.media;
+    return local$media == null
+        ? CopyWith$Fragment$MediaDataChangeNotification$media.stub(
+            _then(_instance))
+        : CopyWith$Fragment$MediaDataChangeNotification$media(
+            local$media, (e) => call(media: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$MediaDataChangeNotification<TRes>
+    implements CopyWith$Fragment$MediaDataChangeNotification<TRes> {
+  _CopyWithStubImpl$Fragment$MediaDataChangeNotification(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Fragment$MediaDataChangeNotification$media? media,
+    String? context,
+    String? reason,
+    int? createdAt,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$MediaDataChangeNotification$media<TRes> get media =>
+      CopyWith$Fragment$MediaDataChangeNotification$media.stub(_res);
+}
+
+const fragmentDefinitionMediaDataChangeNotification = FragmentDefinitionNode(
+  name: NameNode(value: 'MediaDataChangeNotification'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'MediaDataChangeNotification'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'media'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'title'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'userPreferred'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: 'coverImage'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'medium'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'context'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'reason'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentMediaDataChangeNotification =
+    DocumentNode(definitions: [
+  fragmentDefinitionMediaDataChangeNotification,
+]);
+
+extension ClientExtension$Fragment$MediaDataChangeNotification
+    on graphql.GraphQLClient {
+  void writeFragment$MediaDataChangeNotification({
+    required Fragment$MediaDataChangeNotification data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'MediaDataChangeNotification',
+            document: documentNodeFragmentMediaDataChangeNotification,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$MediaDataChangeNotification?
+      readFragment$MediaDataChangeNotification({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'MediaDataChangeNotification',
+          document: documentNodeFragmentMediaDataChangeNotification,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null
+        ? null
+        : Fragment$MediaDataChangeNotification.fromJson(result);
+  }
+}
+
+class Fragment$MediaDataChangeNotification$media {
+  Fragment$MediaDataChangeNotification$media({
+    required this.id,
+    this.title,
+    this.coverImage,
+    this.$__typename = 'Media',
+  });
+
+  factory Fragment$MediaDataChangeNotification$media.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$title = json['title'];
+    final l$coverImage = json['coverImage'];
+    final l$$__typename = json['__typename'];
+    return Fragment$MediaDataChangeNotification$media(
+      id: (l$id as int),
+      title: l$title == null
+          ? null
+          : Fragment$MediaDataChangeNotification$media$title.fromJson(
+              (l$title as Map<String, dynamic>)),
+      coverImage: l$coverImage == null
+          ? null
+          : Fragment$MediaDataChangeNotification$media$coverImage.fromJson(
+              (l$coverImage as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Fragment$MediaDataChangeNotification$media$title? title;
+
+  final Fragment$MediaDataChangeNotification$media$coverImage? coverImage;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$title = title;
+    _resultData['title'] = l$title?.toJson();
+    final l$coverImage = coverImage;
+    _resultData['coverImage'] = l$coverImage?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$title = title;
+    final l$coverImage = coverImage;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$title,
+      l$coverImage,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$MediaDataChangeNotification$media) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$title = title;
+    final lOther$title = other.title;
+    if (l$title != lOther$title) {
+      return false;
+    }
+    final l$coverImage = coverImage;
+    final lOther$coverImage = other.coverImage;
+    if (l$coverImage != lOther$coverImage) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$MediaDataChangeNotification$media
+    on Fragment$MediaDataChangeNotification$media {
+  CopyWith$Fragment$MediaDataChangeNotification$media<
+          Fragment$MediaDataChangeNotification$media>
+      get copyWith => CopyWith$Fragment$MediaDataChangeNotification$media(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$MediaDataChangeNotification$media<TRes> {
+  factory CopyWith$Fragment$MediaDataChangeNotification$media(
+    Fragment$MediaDataChangeNotification$media instance,
+    TRes Function(Fragment$MediaDataChangeNotification$media) then,
+  ) = _CopyWithImpl$Fragment$MediaDataChangeNotification$media;
+
+  factory CopyWith$Fragment$MediaDataChangeNotification$media.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaDataChangeNotification$media;
+
+  TRes call({
+    int? id,
+    Fragment$MediaDataChangeNotification$media$title? title,
+    Fragment$MediaDataChangeNotification$media$coverImage? coverImage,
+    String? $__typename,
+  });
+  CopyWith$Fragment$MediaDataChangeNotification$media$title<TRes> get title;
+  CopyWith$Fragment$MediaDataChangeNotification$media$coverImage<TRes>
+      get coverImage;
+}
+
+class _CopyWithImpl$Fragment$MediaDataChangeNotification$media<TRes>
+    implements CopyWith$Fragment$MediaDataChangeNotification$media<TRes> {
+  _CopyWithImpl$Fragment$MediaDataChangeNotification$media(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$MediaDataChangeNotification$media _instance;
+
+  final TRes Function(Fragment$MediaDataChangeNotification$media) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? title = _undefined,
+    Object? coverImage = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$MediaDataChangeNotification$media(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        title: title == _undefined
+            ? _instance.title
+            : (title as Fragment$MediaDataChangeNotification$media$title?),
+        coverImage: coverImage == _undefined
+            ? _instance.coverImage
+            : (coverImage
+                as Fragment$MediaDataChangeNotification$media$coverImage?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$MediaDataChangeNotification$media$title<TRes> get title {
+    final local$title = _instance.title;
+    return local$title == null
+        ? CopyWith$Fragment$MediaDataChangeNotification$media$title.stub(
+            _then(_instance))
+        : CopyWith$Fragment$MediaDataChangeNotification$media$title(
+            local$title, (e) => call(title: e));
+  }
+
+  CopyWith$Fragment$MediaDataChangeNotification$media$coverImage<TRes>
+      get coverImage {
+    final local$coverImage = _instance.coverImage;
+    return local$coverImage == null
+        ? CopyWith$Fragment$MediaDataChangeNotification$media$coverImage.stub(
+            _then(_instance))
+        : CopyWith$Fragment$MediaDataChangeNotification$media$coverImage(
+            local$coverImage, (e) => call(coverImage: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$MediaDataChangeNotification$media<TRes>
+    implements CopyWith$Fragment$MediaDataChangeNotification$media<TRes> {
+  _CopyWithStubImpl$Fragment$MediaDataChangeNotification$media(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Fragment$MediaDataChangeNotification$media$title? title,
+    Fragment$MediaDataChangeNotification$media$coverImage? coverImage,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$MediaDataChangeNotification$media$title<TRes> get title =>
+      CopyWith$Fragment$MediaDataChangeNotification$media$title.stub(_res);
+
+  CopyWith$Fragment$MediaDataChangeNotification$media$coverImage<TRes>
+      get coverImage =>
+          CopyWith$Fragment$MediaDataChangeNotification$media$coverImage.stub(
+              _res);
+}
+
+class Fragment$MediaDataChangeNotification$media$title {
+  Fragment$MediaDataChangeNotification$media$title({
+    this.userPreferred,
+    this.$__typename = 'MediaTitle',
+  });
+
+  factory Fragment$MediaDataChangeNotification$media$title.fromJson(
+      Map<String, dynamic> json) {
+    final l$userPreferred = json['userPreferred'];
+    final l$$__typename = json['__typename'];
+    return Fragment$MediaDataChangeNotification$media$title(
+      userPreferred: (l$userPreferred as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? userPreferred;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$userPreferred = userPreferred;
+    _resultData['userPreferred'] = l$userPreferred;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$userPreferred = userPreferred;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$userPreferred,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$MediaDataChangeNotification$media$title) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$userPreferred = userPreferred;
+    final lOther$userPreferred = other.userPreferred;
+    if (l$userPreferred != lOther$userPreferred) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$MediaDataChangeNotification$media$title
+    on Fragment$MediaDataChangeNotification$media$title {
+  CopyWith$Fragment$MediaDataChangeNotification$media$title<
+          Fragment$MediaDataChangeNotification$media$title>
+      get copyWith => CopyWith$Fragment$MediaDataChangeNotification$media$title(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$MediaDataChangeNotification$media$title<TRes> {
+  factory CopyWith$Fragment$MediaDataChangeNotification$media$title(
+    Fragment$MediaDataChangeNotification$media$title instance,
+    TRes Function(Fragment$MediaDataChangeNotification$media$title) then,
+  ) = _CopyWithImpl$Fragment$MediaDataChangeNotification$media$title;
+
+  factory CopyWith$Fragment$MediaDataChangeNotification$media$title.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$MediaDataChangeNotification$media$title;
+
+  TRes call({
+    String? userPreferred,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$MediaDataChangeNotification$media$title<TRes>
+    implements CopyWith$Fragment$MediaDataChangeNotification$media$title<TRes> {
+  _CopyWithImpl$Fragment$MediaDataChangeNotification$media$title(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$MediaDataChangeNotification$media$title _instance;
+
+  final TRes Function(Fragment$MediaDataChangeNotification$media$title) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? userPreferred = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$MediaDataChangeNotification$media$title(
+        userPreferred: userPreferred == _undefined
+            ? _instance.userPreferred
+            : (userPreferred as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$MediaDataChangeNotification$media$title<TRes>
+    implements CopyWith$Fragment$MediaDataChangeNotification$media$title<TRes> {
+  _CopyWithStubImpl$Fragment$MediaDataChangeNotification$media$title(this._res);
+
+  TRes _res;
+
+  call({
+    String? userPreferred,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$MediaDataChangeNotification$media$coverImage {
+  Fragment$MediaDataChangeNotification$media$coverImage({
+    this.medium,
+    this.$__typename = 'MediaCoverImage',
+  });
+
+  factory Fragment$MediaDataChangeNotification$media$coverImage.fromJson(
+      Map<String, dynamic> json) {
+    final l$medium = json['medium'];
+    final l$$__typename = json['__typename'];
+    return Fragment$MediaDataChangeNotification$media$coverImage(
+      medium: (l$medium as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? medium;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$medium = medium;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$medium,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$MediaDataChangeNotification$media$coverImage) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$MediaDataChangeNotification$media$coverImage
+    on Fragment$MediaDataChangeNotification$media$coverImage {
+  CopyWith$Fragment$MediaDataChangeNotification$media$coverImage<
+          Fragment$MediaDataChangeNotification$media$coverImage>
+      get copyWith =>
+          CopyWith$Fragment$MediaDataChangeNotification$media$coverImage(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$MediaDataChangeNotification$media$coverImage<
+    TRes> {
+  factory CopyWith$Fragment$MediaDataChangeNotification$media$coverImage(
+    Fragment$MediaDataChangeNotification$media$coverImage instance,
+    TRes Function(Fragment$MediaDataChangeNotification$media$coverImage) then,
+  ) = _CopyWithImpl$Fragment$MediaDataChangeNotification$media$coverImage;
+
+  factory CopyWith$Fragment$MediaDataChangeNotification$media$coverImage.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$MediaDataChangeNotification$media$coverImage;
+
+  TRes call({
+    String? medium,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$MediaDataChangeNotification$media$coverImage<TRes>
+    implements
+        CopyWith$Fragment$MediaDataChangeNotification$media$coverImage<TRes> {
+  _CopyWithImpl$Fragment$MediaDataChangeNotification$media$coverImage(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$MediaDataChangeNotification$media$coverImage _instance;
+
+  final TRes Function(Fragment$MediaDataChangeNotification$media$coverImage)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? medium = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$MediaDataChangeNotification$media$coverImage(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$MediaDataChangeNotification$media$coverImage<
+        TRes>
+    implements
+        CopyWith$Fragment$MediaDataChangeNotification$media$coverImage<TRes> {
+  _CopyWithStubImpl$Fragment$MediaDataChangeNotification$media$coverImage(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$RelatedMediaAdditionNotification {
+  Fragment$RelatedMediaAdditionNotification({
+    required this.id,
+    this.media,
+    this.context,
+    this.createdAt,
+    this.$__typename = 'RelatedMediaAdditionNotification',
+  });
+
+  factory Fragment$RelatedMediaAdditionNotification.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$media = json['media'];
+    final l$context = json['context'];
+    final l$createdAt = json['createdAt'];
+    final l$$__typename = json['__typename'];
+    return Fragment$RelatedMediaAdditionNotification(
+      id: (l$id as int),
+      media: l$media == null
+          ? null
+          : Fragment$RelatedMediaAdditionNotification$media.fromJson(
+              (l$media as Map<String, dynamic>)),
+      context: (l$context as String?),
+      createdAt: (l$createdAt as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Fragment$RelatedMediaAdditionNotification$media? media;
+
+  final String? context;
+
+  final int? createdAt;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$media = media;
+    _resultData['media'] = l$media?.toJson();
+    final l$context = context;
+    _resultData['context'] = l$context;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$media = media;
+    final l$context = context;
+    final l$createdAt = createdAt;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$media,
+      l$context,
+      l$createdAt,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$RelatedMediaAdditionNotification) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$media = media;
+    final lOther$media = other.media;
+    if (l$media != lOther$media) {
+      return false;
+    }
+    final l$context = context;
+    final lOther$context = other.context;
+    if (l$context != lOther$context) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$RelatedMediaAdditionNotification
+    on Fragment$RelatedMediaAdditionNotification {
+  CopyWith$Fragment$RelatedMediaAdditionNotification<
+          Fragment$RelatedMediaAdditionNotification>
+      get copyWith => CopyWith$Fragment$RelatedMediaAdditionNotification(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$RelatedMediaAdditionNotification<TRes> {
+  factory CopyWith$Fragment$RelatedMediaAdditionNotification(
+    Fragment$RelatedMediaAdditionNotification instance,
+    TRes Function(Fragment$RelatedMediaAdditionNotification) then,
+  ) = _CopyWithImpl$Fragment$RelatedMediaAdditionNotification;
+
+  factory CopyWith$Fragment$RelatedMediaAdditionNotification.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$RelatedMediaAdditionNotification;
+
+  TRes call({
+    int? id,
+    Fragment$RelatedMediaAdditionNotification$media? media,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  });
+  CopyWith$Fragment$RelatedMediaAdditionNotification$media<TRes> get media;
+}
+
+class _CopyWithImpl$Fragment$RelatedMediaAdditionNotification<TRes>
+    implements CopyWith$Fragment$RelatedMediaAdditionNotification<TRes> {
+  _CopyWithImpl$Fragment$RelatedMediaAdditionNotification(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$RelatedMediaAdditionNotification _instance;
+
+  final TRes Function(Fragment$RelatedMediaAdditionNotification) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? media = _undefined,
+    Object? context = _undefined,
+    Object? createdAt = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$RelatedMediaAdditionNotification(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        media: media == _undefined
+            ? _instance.media
+            : (media as Fragment$RelatedMediaAdditionNotification$media?),
+        context:
+            context == _undefined ? _instance.context : (context as String?),
+        createdAt:
+            createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$RelatedMediaAdditionNotification$media<TRes> get media {
+    final local$media = _instance.media;
+    return local$media == null
+        ? CopyWith$Fragment$RelatedMediaAdditionNotification$media.stub(
+            _then(_instance))
+        : CopyWith$Fragment$RelatedMediaAdditionNotification$media(
+            local$media, (e) => call(media: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$RelatedMediaAdditionNotification<TRes>
+    implements CopyWith$Fragment$RelatedMediaAdditionNotification<TRes> {
+  _CopyWithStubImpl$Fragment$RelatedMediaAdditionNotification(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Fragment$RelatedMediaAdditionNotification$media? media,
+    String? context,
+    int? createdAt,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$RelatedMediaAdditionNotification$media<TRes> get media =>
+      CopyWith$Fragment$RelatedMediaAdditionNotification$media.stub(_res);
+}
+
+const fragmentDefinitionRelatedMediaAdditionNotification =
+    FragmentDefinitionNode(
+  name: NameNode(value: 'RelatedMediaAdditionNotification'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'RelatedMediaAdditionNotification'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'media'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'title'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'userPreferred'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: 'coverImage'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'medium'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'context'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentRelatedMediaAdditionNotification =
+    DocumentNode(definitions: [
+  fragmentDefinitionRelatedMediaAdditionNotification,
+]);
+
+extension ClientExtension$Fragment$RelatedMediaAdditionNotification
+    on graphql.GraphQLClient {
+  void writeFragment$RelatedMediaAdditionNotification({
+    required Fragment$RelatedMediaAdditionNotification data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'RelatedMediaAdditionNotification',
+            document: documentNodeFragmentRelatedMediaAdditionNotification,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$RelatedMediaAdditionNotification?
+      readFragment$RelatedMediaAdditionNotification({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'RelatedMediaAdditionNotification',
+          document: documentNodeFragmentRelatedMediaAdditionNotification,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null
+        ? null
+        : Fragment$RelatedMediaAdditionNotification.fromJson(result);
+  }
+}
+
+class Fragment$RelatedMediaAdditionNotification$media {
+  Fragment$RelatedMediaAdditionNotification$media({
+    required this.id,
+    this.title,
+    this.coverImage,
+    this.$__typename = 'Media',
+  });
+
+  factory Fragment$RelatedMediaAdditionNotification$media.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$title = json['title'];
+    final l$coverImage = json['coverImage'];
+    final l$$__typename = json['__typename'];
+    return Fragment$RelatedMediaAdditionNotification$media(
+      id: (l$id as int),
+      title: l$title == null
+          ? null
+          : Fragment$RelatedMediaAdditionNotification$media$title.fromJson(
+              (l$title as Map<String, dynamic>)),
+      coverImage: l$coverImage == null
+          ? null
+          : Fragment$RelatedMediaAdditionNotification$media$coverImage.fromJson(
+              (l$coverImage as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Fragment$RelatedMediaAdditionNotification$media$title? title;
+
+  final Fragment$RelatedMediaAdditionNotification$media$coverImage? coverImage;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$title = title;
+    _resultData['title'] = l$title?.toJson();
+    final l$coverImage = coverImage;
+    _resultData['coverImage'] = l$coverImage?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$title = title;
+    final l$coverImage = coverImage;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$title,
+      l$coverImage,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$RelatedMediaAdditionNotification$media) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$title = title;
+    final lOther$title = other.title;
+    if (l$title != lOther$title) {
+      return false;
+    }
+    final l$coverImage = coverImage;
+    final lOther$coverImage = other.coverImage;
+    if (l$coverImage != lOther$coverImage) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$RelatedMediaAdditionNotification$media
+    on Fragment$RelatedMediaAdditionNotification$media {
+  CopyWith$Fragment$RelatedMediaAdditionNotification$media<
+          Fragment$RelatedMediaAdditionNotification$media>
+      get copyWith => CopyWith$Fragment$RelatedMediaAdditionNotification$media(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$RelatedMediaAdditionNotification$media<TRes> {
+  factory CopyWith$Fragment$RelatedMediaAdditionNotification$media(
+    Fragment$RelatedMediaAdditionNotification$media instance,
+    TRes Function(Fragment$RelatedMediaAdditionNotification$media) then,
+  ) = _CopyWithImpl$Fragment$RelatedMediaAdditionNotification$media;
+
+  factory CopyWith$Fragment$RelatedMediaAdditionNotification$media.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$RelatedMediaAdditionNotification$media;
+
+  TRes call({
+    int? id,
+    Fragment$RelatedMediaAdditionNotification$media$title? title,
+    Fragment$RelatedMediaAdditionNotification$media$coverImage? coverImage,
+    String? $__typename,
+  });
+  CopyWith$Fragment$RelatedMediaAdditionNotification$media$title<TRes>
+      get title;
+  CopyWith$Fragment$RelatedMediaAdditionNotification$media$coverImage<TRes>
+      get coverImage;
+}
+
+class _CopyWithImpl$Fragment$RelatedMediaAdditionNotification$media<TRes>
+    implements CopyWith$Fragment$RelatedMediaAdditionNotification$media<TRes> {
+  _CopyWithImpl$Fragment$RelatedMediaAdditionNotification$media(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$RelatedMediaAdditionNotification$media _instance;
+
+  final TRes Function(Fragment$RelatedMediaAdditionNotification$media) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? title = _undefined,
+    Object? coverImage = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$RelatedMediaAdditionNotification$media(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        title: title == _undefined
+            ? _instance.title
+            : (title as Fragment$RelatedMediaAdditionNotification$media$title?),
+        coverImage: coverImage == _undefined
+            ? _instance.coverImage
+            : (coverImage
+                as Fragment$RelatedMediaAdditionNotification$media$coverImage?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$RelatedMediaAdditionNotification$media$title<TRes>
+      get title {
+    final local$title = _instance.title;
+    return local$title == null
+        ? CopyWith$Fragment$RelatedMediaAdditionNotification$media$title.stub(
+            _then(_instance))
+        : CopyWith$Fragment$RelatedMediaAdditionNotification$media$title(
+            local$title, (e) => call(title: e));
+  }
+
+  CopyWith$Fragment$RelatedMediaAdditionNotification$media$coverImage<TRes>
+      get coverImage {
+    final local$coverImage = _instance.coverImage;
+    return local$coverImage == null
+        ? CopyWith$Fragment$RelatedMediaAdditionNotification$media$coverImage
+            .stub(_then(_instance))
+        : CopyWith$Fragment$RelatedMediaAdditionNotification$media$coverImage(
+            local$coverImage, (e) => call(coverImage: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$RelatedMediaAdditionNotification$media<TRes>
+    implements CopyWith$Fragment$RelatedMediaAdditionNotification$media<TRes> {
+  _CopyWithStubImpl$Fragment$RelatedMediaAdditionNotification$media(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Fragment$RelatedMediaAdditionNotification$media$title? title,
+    Fragment$RelatedMediaAdditionNotification$media$coverImage? coverImage,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$RelatedMediaAdditionNotification$media$title<TRes>
+      get title =>
+          CopyWith$Fragment$RelatedMediaAdditionNotification$media$title.stub(
+              _res);
+
+  CopyWith$Fragment$RelatedMediaAdditionNotification$media$coverImage<TRes>
+      get coverImage =>
+          CopyWith$Fragment$RelatedMediaAdditionNotification$media$coverImage
+              .stub(_res);
+}
+
+class Fragment$RelatedMediaAdditionNotification$media$title {
+  Fragment$RelatedMediaAdditionNotification$media$title({
+    this.userPreferred,
+    this.$__typename = 'MediaTitle',
+  });
+
+  factory Fragment$RelatedMediaAdditionNotification$media$title.fromJson(
+      Map<String, dynamic> json) {
+    final l$userPreferred = json['userPreferred'];
+    final l$$__typename = json['__typename'];
+    return Fragment$RelatedMediaAdditionNotification$media$title(
+      userPreferred: (l$userPreferred as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? userPreferred;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$userPreferred = userPreferred;
+    _resultData['userPreferred'] = l$userPreferred;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$userPreferred = userPreferred;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$userPreferred,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$RelatedMediaAdditionNotification$media$title) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$userPreferred = userPreferred;
+    final lOther$userPreferred = other.userPreferred;
+    if (l$userPreferred != lOther$userPreferred) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$RelatedMediaAdditionNotification$media$title
+    on Fragment$RelatedMediaAdditionNotification$media$title {
+  CopyWith$Fragment$RelatedMediaAdditionNotification$media$title<
+          Fragment$RelatedMediaAdditionNotification$media$title>
+      get copyWith =>
+          CopyWith$Fragment$RelatedMediaAdditionNotification$media$title(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$RelatedMediaAdditionNotification$media$title<
+    TRes> {
+  factory CopyWith$Fragment$RelatedMediaAdditionNotification$media$title(
+    Fragment$RelatedMediaAdditionNotification$media$title instance,
+    TRes Function(Fragment$RelatedMediaAdditionNotification$media$title) then,
+  ) = _CopyWithImpl$Fragment$RelatedMediaAdditionNotification$media$title;
+
+  factory CopyWith$Fragment$RelatedMediaAdditionNotification$media$title.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$RelatedMediaAdditionNotification$media$title;
+
+  TRes call({
+    String? userPreferred,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$RelatedMediaAdditionNotification$media$title<TRes>
+    implements
+        CopyWith$Fragment$RelatedMediaAdditionNotification$media$title<TRes> {
+  _CopyWithImpl$Fragment$RelatedMediaAdditionNotification$media$title(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$RelatedMediaAdditionNotification$media$title _instance;
+
+  final TRes Function(Fragment$RelatedMediaAdditionNotification$media$title)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? userPreferred = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$RelatedMediaAdditionNotification$media$title(
+        userPreferred: userPreferred == _undefined
+            ? _instance.userPreferred
+            : (userPreferred as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$RelatedMediaAdditionNotification$media$title<
+        TRes>
+    implements
+        CopyWith$Fragment$RelatedMediaAdditionNotification$media$title<TRes> {
+  _CopyWithStubImpl$Fragment$RelatedMediaAdditionNotification$media$title(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? userPreferred,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$RelatedMediaAdditionNotification$media$coverImage {
+  Fragment$RelatedMediaAdditionNotification$media$coverImage({
+    this.medium,
+    this.$__typename = 'MediaCoverImage',
+  });
+
+  factory Fragment$RelatedMediaAdditionNotification$media$coverImage.fromJson(
+      Map<String, dynamic> json) {
+    final l$medium = json['medium'];
+    final l$$__typename = json['__typename'];
+    return Fragment$RelatedMediaAdditionNotification$media$coverImage(
+      medium: (l$medium as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? medium;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$medium = medium;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$medium,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Fragment$RelatedMediaAdditionNotification$media$coverImage) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$RelatedMediaAdditionNotification$media$coverImage
+    on Fragment$RelatedMediaAdditionNotification$media$coverImage {
+  CopyWith$Fragment$RelatedMediaAdditionNotification$media$coverImage<
+          Fragment$RelatedMediaAdditionNotification$media$coverImage>
+      get copyWith =>
+          CopyWith$Fragment$RelatedMediaAdditionNotification$media$coverImage(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$RelatedMediaAdditionNotification$media$coverImage<
+    TRes> {
+  factory CopyWith$Fragment$RelatedMediaAdditionNotification$media$coverImage(
+    Fragment$RelatedMediaAdditionNotification$media$coverImage instance,
+    TRes Function(Fragment$RelatedMediaAdditionNotification$media$coverImage)
+        then,
+  ) = _CopyWithImpl$Fragment$RelatedMediaAdditionNotification$media$coverImage;
+
+  factory CopyWith$Fragment$RelatedMediaAdditionNotification$media$coverImage.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$RelatedMediaAdditionNotification$media$coverImage;
+
+  TRes call({
+    String? medium,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$RelatedMediaAdditionNotification$media$coverImage<
+        TRes>
+    implements
+        CopyWith$Fragment$RelatedMediaAdditionNotification$media$coverImage<
+            TRes> {
+  _CopyWithImpl$Fragment$RelatedMediaAdditionNotification$media$coverImage(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$RelatedMediaAdditionNotification$media$coverImage _instance;
+
+  final TRes Function(
+      Fragment$RelatedMediaAdditionNotification$media$coverImage) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? medium = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$RelatedMediaAdditionNotification$media$coverImage(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$RelatedMediaAdditionNotification$media$coverImage<
+        TRes>
+    implements
+        CopyWith$Fragment$RelatedMediaAdditionNotification$media$coverImage<
+            TRes> {
+  _CopyWithStubImpl$Fragment$RelatedMediaAdditionNotification$media$coverImage(
+      this._res);
 
   TRes _res;
 

@@ -24,6 +24,7 @@ import 'package:otaku_world/utils/ui_utils.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../bloc/profile/reviews/user_reviews_bloc.dart';
 import '../../../core/ui/appbars/simple_app_bar.dart';
 import '../../../theme/colors.dart';
 import '../../../utils/formatting_utils.dart';
@@ -56,175 +57,173 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
           _onPopInvoked(context);
         }
       },
-      child: SafeArea(
-        child: Scaffold(
-          extendBodyBehindAppBar: true,
-          appBar: const SimpleAppBar(
-            title: '',
-            bgColor: AppColors.transparent,
-          ),
-          body: SingleChildScrollView(
-            child: BlocBuilder<ReviewDetailBloc, ReviewDetailState>(
-              builder: (context, state) {
-                if (state is ReviewDetailInitial) {
-                  context
-                      .read<ReviewDetailBloc>()
-                      .add(LoadReviewDetail(client: client));
-                  return const ReviewDetailShimmer();
-                } else if (state is ReviewDetailLoading) {
-                  return const ReviewDetailShimmer();
-                } else if (state is ReviewDetailLoaded) {
-                  final review = state.review;
-                  reviewId = review.id;
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: const SimpleAppBar(
+          title: '',
+          bgColor: AppColors.transparent,
+        ),
+        body: SingleChildScrollView(
+          child: BlocBuilder<ReviewDetailBloc, ReviewDetailState>(
+            builder: (context, state) {
+              if (state is ReviewDetailInitial) {
+                context
+                    .read<ReviewDetailBloc>()
+                    .add(LoadReviewDetail(client: client));
+                return const ReviewDetailShimmer();
+              } else if (state is ReviewDetailLoading) {
+                return const ReviewDetailShimmer();
+              } else if (state is ReviewDetailLoaded) {
+                final review = state.review;
+                reviewId = review.id;
 
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // cover image
-                      Stack(
-                        children: [
-                          SizedBox(
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // cover image
+                    Stack(
+                      children: [
+                        SizedBox(
+                          height: UIUtils.getWidgetHeight(
+                            targetWidgetHeight: 340,
+                            screenHeight: height,
+                          ),
+                          width: width,
+                          child: BannerImage(
+                            url:
+                                review.media!.coverImage!.extraLarge.toString(),
+                            // placeHolderName: Assets.placeholders340x72,
+                          ),
+                        ),
+                        Positioned(
+                          bottom: -0.5,
+                          child: Container(
                             height: UIUtils.getWidgetHeight(
                               targetWidgetHeight: 340,
                               screenHeight: height,
                             ),
                             width: width,
-                            child: BannerImage(
-                              url: review.media!.coverImage!.extraLarge
-                                  .toString(),
-                              // placeHolderName: Assets.placeholders340x72,
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.transparent,
+                                  AppColors.raisinBlack,
+                                ],
+                              ),
                             ),
                           ),
-                          Positioned(
-                            bottom: -0.5,
-                            child: Container(
-                              height: UIUtils.getWidgetHeight(
-                                targetWidgetHeight: 340,
-                                screenHeight: height,
-                              ),
-                              width: width,
-                              decoration: const BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    Colors.transparent,
-                                    AppColors.raisinBlack,
-                                  ],
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15, bottom: 10),
+                      child: Text(
+                        '${_getMediaType(review.mediaType!)} Review',
+                        style:
+                            Theme.of(context).textTheme.titleMedium!.copyWith(
+                                  fontFamily: 'Roboto',
                                 ),
-                              ),
-                            ),
-                          ),
-                        ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15, bottom: 10),
-                        child: Text(
-                          '${_getMediaType(review.mediaType!)} Review',
-                          style:
-                              Theme.of(context).textTheme.titleMedium!.copyWith(
-                                    fontFamily: 'Roboto',
-                                  ),
-                        ),
+                    ),
+                    _buildTitleSection(
+                      width,
+                      review,
+                      context,
+                      review.mediaId,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15.0),
+                      child: buildSummaryText(
+                        summary: review.summary.toString(),
+                        context: context,
                       ),
-                      _buildTitleSection(
-                        width,
-                        review,
-                        context,
-                        review.mediaId,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15.0),
+                      child: _buildProfileSection(context, review),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: Text(
+                        FormattingUtils.formatUnixTimestamp(review.createdAt)
+                            .toString(),
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontFamily: 'Roboto',
+                                  color: AppColors.white.withOpacity(0.8),
+                                ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15.0),
-                        child: buildSummaryText(
-                          summary: review.summary.toString(),
-                          context: context,
-                        ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15, bottom: 10),
+                      child: Text(
+                        "(Last Updated on ${FormattingUtils.formatUnixTimestamp(review.createdAt).toString()})",
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontFamily: 'Roboto',
+                                  color: AppColors.white.withOpacity(0.8),
+                                ),
                       ),
-                      const SizedBox(
-                        height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 15.0,
+                        right: 15,
+                        bottom: 10,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15.0),
-                        child: _buildProfileSection(context, review),
+                      child: Markdown(data: review.body.toString()),
+                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(
+                    //     left: 15.0,
+                    //     right: 15,
+                    //     bottom: 10,
+                    //   ),
+                    //   child: Text(
+                    //     review.body.toString(),
+                    //     style: Theme.of(context).textTheme.titleLarge,
+                    //   ),
+                    // ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 15,
+                        right: 15,
+                        bottom: 30,
                       ),
-                      const SizedBox(
-                        height: 10,
+                      child: ReviewRating(
+                        review: review,
+                        onRatingUpdated: (userRating) {
+                          _updateReview(
+                            rating: userRating,
+                            id: state.review.id,
+                          );
+                        },
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15),
-                        child: Text(
-                          FormattingUtils.formatUnixTimestamp(review.createdAt)
-                              .toString(),
-                          style:
-                              Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    fontFamily: 'Roboto',
-                                    color: AppColors.white.withOpacity(0.8),
-                                  ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15, bottom: 10),
-                        child: Text(
-                          "(Last Updated on ${FormattingUtils.formatUnixTimestamp(review.createdAt).toString()})",
-                          style:
-                              Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    fontFamily: 'Roboto',
-                                    color: AppColors.white.withOpacity(0.8),
-                                  ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 15.0,
-                          right: 15,
-                          bottom: 10,
-                        ),
-                        child: Markdown(data: review.body.toString()),
-                      ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(
-                      //     left: 15.0,
-                      //     right: 15,
-                      //     bottom: 10,
-                      //   ),
-                      //   child: Text(
-                      //     review.body.toString(),
-                      //     style: Theme.of(context).textTheme.titleLarge,
-                      //   ),
-                      // ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 15,
-                          right: 15,
-                          bottom: 30,
-                        ),
-                        child: ReviewRating(
-                          review: review,
-                          onRatingUpdated: (userRating) {
-                            _updateReview(
-                              rating: userRating,
-                              id: state.review.id,
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  );
-                } else if (state is ReviewDetailError) {
-                  return ErrorText(
-                    message: state.message,
-                    onTryAgain: () {
-                      context
-                          .read<ReviewDetailBloc>()
-                          .add(LoadReviewDetail(client: client));
-                    },
-                  );
-                } else {
-                  return const Text('Unknown State');
-                }
-              },
-            ),
+                    ),
+                  ],
+                );
+              } else if (state is ReviewDetailError) {
+                return ErrorText(
+                  message: state.message,
+                  onTryAgain: () {
+                    context
+                        .read<ReviewDetailBloc>()
+                        .add(LoadReviewDetail(client: client));
+                  },
+                );
+              } else {
+                return const Text('Unknown State');
+              }
+            },
           ),
         ),
       ),
@@ -241,6 +240,11 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
         );
       } else if (widget.bloc is MediaReviewBloc) {
         (widget.bloc as MediaReviewBloc).updateReviewRating(
+          reviewId: id,
+          userRating: rating,
+        );
+      } else if (widget.bloc is UserReviewsBloc) {
+        (widget.bloc as UserReviewsBloc).updateReviewRating(
           reviewId: id,
           userRating: rating,
         );
@@ -299,23 +303,29 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
     BuildContext context,
     Fragment$ReviewDetail review,
   ) {
-    return Row(
-      children: [
-        ReviewProfilePhoto(
-          profilePicUrl: review.user!.avatar!.medium.toString(),
-          radius: 25,
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        Text(
-          review.user!.name.toString(),
-          style: Theme.of(context)
-              .textTheme
-              .headlineSmall!
-              .copyWith(fontWeight: FontWeight.bold),
-        )
-      ],
+    return GestureDetector(
+      onTap: () => NavigationHelper.goToProfileScreen(
+        context: context,
+        userId: review.user!.id,
+      ),
+      child: Row(
+        children: [
+          ReviewProfilePhoto(
+            profilePicUrl: review.user!.avatar!.medium.toString(),
+            radius: 25,
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Text(
+            review.user!.name.toString(),
+            style: Theme.of(context)
+                .textTheme
+                .headlineSmall!
+                .copyWith(fontWeight: FontWeight.bold),
+          )
+        ],
+      ),
     );
   }
 

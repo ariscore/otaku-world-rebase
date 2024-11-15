@@ -26,6 +26,7 @@ class AppColors {
   static const Color darkMagenta = Color(0xFF8E009A);
   static const Color trueBlue = Color(0xFF006FE4);
   static const Color linkColor = Color(0xff0969da);
+
   // Media list status colors
   static const Color toolBox = Color(0xFF6A68C5);
   static const Color americanGreen = Color(0xFF34B53A);
@@ -33,8 +34,26 @@ class AppColors {
   static const Color deepLemon = Color(0xFFF6C619);
   static const Color quickSilver = Color(0xFFAAA3A3);
   static const Color mangoTango = Color(0xFFF87F3C);
-  
+
   static const Color brilliantAzure = Color(0x3332A6F9);
+
+  static const primaryGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      sunsetOrange,
+      japaneseIndigo,
+    ],
+  );
+
+  static const chartGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      Colors.transparent,
+      japaneseIndigo,
+    ],
+  );
 
   static const secondaryGradient = LinearGradient(
     begin: Alignment.topCenter,
@@ -42,6 +61,15 @@ class AppColors {
     colors: [
       AppColors.japaneseIndigo,
       AppColors.darkCharcoal,
+    ],
+  );
+
+  static const secondaryGradientHorizontal = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.topRight,
+    colors: [
+      AppColors.japaneseIndigo,
+      AppColors.raisinBlack,
     ],
   );
 }

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:otaku_world/utils/navigation_helper.dart';
 
 import '../../../core/ui/placeholders/poster_placeholder.dart';
 import '../../../graphql/__generated/graphql/fragments.graphql.dart';
@@ -17,45 +18,51 @@ class ResultUserCard extends StatelessWidget {
     if (user == null) return const SizedBox();
 
     final size = MediaQuery.of(context).size;
-    return Container(
-      height: 110,
-      margin: const EdgeInsets.symmetric(
-        vertical: 5,
+    return GestureDetector(
+      onTap: () => NavigationHelper.goToProfileScreen(
+        context: context,
+        userId: user!.id,
       ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 10,
-      ),
-      decoration: ShapeDecoration(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
+      child: Container(
+        height: 110,
+        margin: const EdgeInsets.symmetric(
+          vertical: 5,
         ),
-        gradient: const LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [AppColors.japaneseIndigo, AppColors.darkCharcoal],
+        padding: const EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 10,
         ),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _buildUserImage(user!.avatar?.large, size),
-          const SizedBox(width: 5),
-          SizedBox(
-            width: UIUtils.getWidgetWidth(
-              targetWidgetWidth: 225,
-              screenWidth: size.width,
-            ),
-            child: Text(
-              user!.name,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontFamily: 'Poppins',
-                  ),
-              maxLines: 5,
-              overflow: TextOverflow.ellipsis,
-            ),
+        decoration: ShapeDecoration(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
           ),
-        ],
+          gradient: const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [AppColors.japaneseIndigo, AppColors.darkCharcoal],
+          ),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _buildUserImage(user!.avatar?.large, size),
+            const SizedBox(width: 5),
+            SizedBox(
+              width: UIUtils.getWidgetWidth(
+                targetWidgetWidth: 225,
+                screenWidth: size.width,
+              ),
+              child: Text(
+                user!.name,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontFamily: 'Poppins',
+                    ),
+                maxLines: 5,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

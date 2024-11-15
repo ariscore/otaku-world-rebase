@@ -1,0 +1,7 @@
+query GetActivity($id: Int) {
+    Activity(id: $id) {
+        ...ListActivity
+        ...MessageActivity
+        ...TextActivity
+    }
+}

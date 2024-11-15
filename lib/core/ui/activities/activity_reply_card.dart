@@ -9,8 +9,10 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:like_button/like_button.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
+import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/markdown/markdown.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
+import 'package:otaku_world/utils/navigation_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../bloc/social/activity_replies/activity_replies_bloc.dart';
@@ -23,9 +25,14 @@ import '../../../utils/ui_utils.dart';
 import '../dialogs/alert_dialog.dart';
 
 class ActivityReplyCard extends StatelessWidget {
-  const ActivityReplyCard({super.key, required this.activityReply});
+  const ActivityReplyCard({
+    super.key,
+    required this.activityReply,
+    required this.onDeleted,
+  });
 
   final Fragment$ActivityReply activityReply;
+  final VoidCallback onDeleted;
 
   @override
   Widget build(BuildContext context) {
@@ -37,80 +44,86 @@ class ActivityReplyCard extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              AppColors.japaneseIndigo,
-              AppColors.darkCharcoal,
-            ],
-          ),
-          borderRadius: BorderRadius.circular(15),
+      child: GestureDetector(
+        onTap: () => NavigationHelper.goToProfileScreen(
+          context: context,
+          userId: activityReply.user?.id ?? 0,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildUser(context),
-            const SizedBox(height: 10),
-            // Main content
-            Markdown(data: activityReply.text!),
-            // Other details
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                LikeButton(
-                  isLiked: activityReply.isLiked,
-                  likeCount: activityReply.likeCount,
-                  size: 25,
-                  likeCountPadding: const EdgeInsets.only(left: 5),
-                  likeBuilder: (isLiked) {
-                    return SvgPicture.asset(
-                      isLiked ? Assets.iconsFavourite : Assets.iconsLike,
-                    );
-                  },
-                  countBuilder: (likeCount, isLiked, text) {
-                    return Text(
-                      likeCount.toString(),
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    );
-                  },
-                  onTap: (isLiked) async {
-                    final client =
-                        context.read<GraphqlClientCubit>().getClient();
-                    if (client != null) {
-                      return await _likeActivity(context, client);
-                    } else {
-                      return isLiked;
-                    }
-                  },
-                ),
-                isCurrentUser
-                    ? IconButton(
-                        onPressed: () => _showOptions(context),
-                        icon: SvgPicture.asset(Assets.iconsMoreHorizontal),
-                      )
-                    : GestureDetector(
-                        onTap: () => _report(context),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: SvgPicture.asset(Assets.iconsAlert),
-                        ),
-                      ),
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                AppColors.japaneseIndigo,
+                AppColors.darkCharcoal,
               ],
             ),
-            const SizedBox(height: 5),
-            Text(
-              FormattingUtils.formatUnixTimestamp(activityReply.createdAt),
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: AppColors.white.withOpacity(0.8),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildUser(context),
+              const SizedBox(height: 10),
+              // Main content
+              Markdown(data: activityReply.text!),
+              // Other details
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  LikeButton(
+                    isLiked: activityReply.isLiked,
+                    likeCount: activityReply.likeCount,
+                    size: 25,
+                    likeCountPadding: const EdgeInsets.only(left: 5),
+                    likeBuilder: (isLiked) {
+                      return SvgPicture.asset(
+                        isLiked ? Assets.iconsFavourite : Assets.iconsLike,
+                      );
+                    },
+                    countBuilder: (likeCount, isLiked, text) {
+                      return Text(
+                        likeCount.toString(),
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      );
+                    },
+                    onTap: (isLiked) async {
+                      final client =
+                          context.read<GraphqlClientCubit>().getClient();
+                      if (client != null) {
+                        return await _likeActivity(context, client);
+                      } else {
+                        return isLiked;
+                      }
+                    },
                   ),
-            ),
-          ],
+                  isCurrentUser
+                      ? IconButton(
+                          onPressed: () => _showOptions(context),
+                          icon: SvgPicture.asset(Assets.iconsMoreHorizontal),
+                        )
+                      : GestureDetector(
+                          onTap: () => _report(context),
+                          child: Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: SvgPicture.asset(Assets.iconsAlert),
+                          ),
+                        ),
+                ],
+              ),
+              const SizedBox(height: 5),
+              Text(
+                FormattingUtils.formatUnixTimestamp(activityReply.createdAt),
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: AppColors.white.withOpacity(0.8),
+                    ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -153,7 +166,7 @@ class ActivityReplyCard extends StatelessWidget {
           BottomSheetComponent(
             iconName: Assets.iconsEditSmall,
             text: 'Edit',
-            onTap: () {},
+            onTap: () => _edit(context),
           ),
         ];
 
@@ -192,6 +205,20 @@ class ActivityReplyCard extends StatelessWidget {
     );
   }
 
+  void _edit(BuildContext context) {
+    context.pop();
+    context.push(
+      '${RouteConstants.editActivityReply}?id=${activityReply.id}&activity_id=${activityReply.activityId}',
+      extra: {
+        'text': activityReply.text,
+        'on_replied': (Fragment$ActivityReply reply) {
+          final bloc = context.read<ActivityRepliesBloc>();
+          bloc.editReply(reply);
+        },
+      },
+    );
+  }
+
   void _delete(BuildContext context) {
     showDialog(
       context: context,
@@ -206,10 +233,18 @@ class ActivityReplyCard extends StatelessWidget {
             final client = context.read<GraphqlClientCubit>().getClient();
             if (client != null) {
               final bloc = context.read<ActivityRepliesBloc>();
-              bloc.deleteActivityReply(
+              bloc
+                  .deleteActivityReply(
                 client,
                 replyId: activityReply.id,
-              );
+              )
+                  .then((e) {
+                if (e != null) {
+                  UIUtils.showSnackBar(context, e);
+                } else {
+                  onDeleted();
+                }
+              });
             } else {
               UIUtils.showSnackBar(context, ActivityConstants.clientError);
             }

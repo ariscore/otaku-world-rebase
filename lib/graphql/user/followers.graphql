@@ -1,0 +1,10 @@
+query Followers($page: Int, $userId: Int!) {
+    Page(page: $page, perPage: 30) {
+        pageInfo {
+            hasNextPage
+        }
+        followers(userId: $userId,sort: [USERNAME]) {
+            ...User
+        }
+    }
+}

@@ -1,0 +1,5 @@
+query UserInfo($id: Int) {
+    User(id: $id) {
+        ...UserInfo
+    }
+}

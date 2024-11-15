@@ -12,8 +12,8 @@ import 'package:otaku_world/features/discover/discover_manga/widgets/discover_ma
 
 import '../../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../../config/router/router_constants.dart';
+import '../../../../core/ui/media_section/scroll_to_top_button.dart';
 import '../../../../graphql/__generated/graphql/schema.graphql.dart';
-import '../../../reviews/widgets/scroll_to_top_fab.dart';
 import '../../widgets/filtered_media_section.dart';
 import '../../widgets/search_option.dart';
 

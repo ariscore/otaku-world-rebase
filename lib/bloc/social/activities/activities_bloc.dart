@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/social/activities.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/social/activity_subscription.graphql.dart';
@@ -217,6 +218,108 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
     ));
   }
 
+  void toggleLike({required int activityId}) {
+    log('Toggling like for id: $activityId');
+    int index = followingList.indexWhere((e) => e.id == activityId);
+
+    if (index != -1) {
+      final activity = followingList[index];
+      if (activity is Fragment$TextActivity && activity.isLiked != null) {
+        if (activity.isLiked!) {
+          followingList[index] = activity.copyWith(
+            isLiked: false,
+            likeCount: activity.likeCount - 1,
+          );
+        } else {
+          followingList[index] = activity.copyWith(
+            isLiked: true,
+            likeCount: activity.likeCount + 1,
+          );
+        }
+      } else if (activity is Fragment$MessageActivity &&
+          activity.isLiked != null) {
+        if (activity.isLiked!) {
+          followingList[index] = activity.copyWith(
+            isLiked: false,
+            likeCount: activity.likeCount - 1,
+          );
+        } else {
+          followingList[index] = activity.copyWith(
+            isLiked: true,
+            likeCount: activity.likeCount + 1,
+          );
+        }
+      } else if (activity is Fragment$ListActivity &&
+          activity.isLiked != null) {
+        if (activity.isLiked!) {
+          followingList[index] = activity.copyWith(
+            isLiked: false,
+            likeCount: activity.likeCount - 1,
+          );
+        } else {
+          followingList[index] = activity.copyWith(
+            isLiked: true,
+            likeCount: activity.likeCount + 1,
+          );
+        }
+      }
+    }
+
+    index = globalList.indexWhere((e) => e.id == activityId);
+
+    if (index != -1) {
+      final activity = globalList[index];
+      if (activity is Fragment$TextActivity && activity.isLiked != null) {
+        if (activity.isLiked!) {
+          globalList[index] = activity.copyWith(
+            isLiked: false,
+            likeCount: activity.likeCount - 1,
+          );
+        } else {
+          globalList[index] = activity.copyWith(
+            isLiked: true,
+            likeCount: activity.likeCount + 1,
+          );
+        }
+      } else if (activity is Fragment$MessageActivity &&
+          activity.isLiked != null) {
+        if (activity.isLiked!) {
+          globalList[index] = activity.copyWith(
+            isLiked: false,
+            likeCount: activity.likeCount - 1,
+          );
+        } else {
+          globalList[index] = activity.copyWith(
+            isLiked: true,
+            likeCount: activity.likeCount + 1,
+          );
+        }
+      } else if (activity is Fragment$ListActivity &&
+          activity.isLiked != null) {
+        if (activity.isLiked!) {
+          globalList[index] = activity.copyWith(
+            isLiked: false,
+            likeCount: activity.likeCount - 1,
+          );
+        } else {
+          globalList[index] = activity.copyWith(
+            isLiked: true,
+            likeCount: activity.likeCount + 1,
+          );
+        }
+      }
+    }
+
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      add(UpdateActivities(
+        followingActivities: followingList,
+        globalActivities: globalList,
+        hasNextPageFollowing: hasNextPageFollowing,
+        hasNextPageGlobal: hasNextPageGlobal,
+      ));
+    });
+  }
+
   Future<String?> toggleActivitySubscription(
     GraphQLClient client, {
     required int activityId,
@@ -290,6 +393,113 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
         ));
         return null;
       }
+    }
+  }
+
+  void updateReplyCount({required int activityId, required bool increase}) {
+    int index = followingList.indexWhere(
+      (e) => e.id == activityId,
+    );
+
+    final inc = increase ? 1 : -1;
+    if (index != -1) {
+      final activity = followingList[index];
+      if (activity is Fragment$TextActivity) {
+        followingList[index] = activity.copyWith(
+          replyCount: activity.replyCount + inc,
+        );
+      } else if (activity is Fragment$ListActivity) {
+        followingList[index] = activity.copyWith(
+          replyCount: activity.replyCount + inc,
+        );
+      } else if (activity is Fragment$MessageActivity) {
+        followingList[index] = activity.copyWith(
+          replyCount: activity.replyCount + inc,
+        );
+      }
+    }
+
+    index = globalList.indexWhere(
+      (e) => e.id == activityId,
+    );
+    if (index != -1) {
+      final activity = globalList[index];
+      if (activity is Query$GetActivities$Page$activities$$TextActivity) {
+        globalList[index] = activity.copyWith(
+          replyCount: activity.replyCount + inc,
+        );
+      } else if (activity
+          is Query$GetActivities$Page$activities$$ListActivity) {
+        globalList[index] = activity.copyWith(
+          replyCount: activity.replyCount + inc,
+        );
+      } else if (activity
+          is Query$GetActivities$Page$activities$$MessageActivity) {
+        globalList[index] = activity.copyWith(
+          replyCount: activity.replyCount + inc,
+        );
+      }
+    }
+
+    add(UpdateActivities(
+      followingActivities: followingList,
+      globalActivities: globalList,
+      hasNextPageFollowing: hasNextPageFollowing,
+      hasNextPageGlobal: hasNextPageGlobal,
+    ));
+  }
+
+  void addTextActivity({required Fragment$TextActivity activity}) {
+    if (types.contains(Enum$ActivityType.TEXT)) {
+      log('Adding text activity');
+      followingList.insert(0, activity);
+      globalList.insert(0, activity);
+      add(
+        UpdateActivities(
+          followingActivities: followingList,
+          globalActivities: globalList,
+          hasNextPageFollowing: hasNextPageFollowing,
+          hasNextPageGlobal: hasNextPageGlobal,
+        ),
+      );
+    }
+  }
+
+  void editActivity(dynamic activity, {required Enum$ActivityType type}) {
+    if (types.contains(type)) {
+      log('Editing activity');
+      int index = followingList.indexWhere((e) => e.id == activity.id);
+
+      if (index != -1) {
+        final oldActivity = followingList[index];
+        if (oldActivity is Fragment$TextActivity) {
+          followingList[index] = oldActivity.copyWith(text: activity.text);
+        } else if (oldActivity is Fragment$MessageActivity) {
+          followingList[index] = oldActivity.copyWith(
+            message: activity.message,
+          );
+        }
+      }
+
+      index = globalList.indexWhere((e) => e.id == activity.id);
+
+      if (index != -1) {
+        final oldActivity = globalList[index];
+        if (oldActivity is Fragment$TextActivity) {
+          globalList[index] = oldActivity.copyWith(text: activity.text);
+        } else if (oldActivity is Fragment$MessageActivity) {
+          globalList[index] = oldActivity.copyWith(
+            message: activity.message,
+          );
+        }
+      }
+
+      add(UpdateActivities(
+        followingActivities: followingList,
+        globalActivities: globalList,
+        hasNextPageFollowing: hasNextPageFollowing,
+        hasNextPageGlobal: hasNextPageGlobal,
+      ));
     }
   }
 

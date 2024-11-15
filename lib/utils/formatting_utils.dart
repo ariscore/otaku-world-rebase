@@ -63,9 +63,13 @@ class FormattingUtils {
     return DateFormat('hh:mm a').format(time);
   }
 
-  static String formatUnixTimestamp(int unixTimestamp) {
-    DateTime dateTime =
-        DateTime.fromMillisecondsSinceEpoch(unixTimestamp * 1000);
+  static String formatUnixTimestamp(
+    int unixTimestamp, {
+    bool isFromAniList = true,
+  }) {
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(
+      isFromAniList ? unixTimestamp * 1000 : unixTimestamp,
+    );
     String formattedDate = DateFormat('E, d MMM yyyy').format(dateTime);
     String formattedTime = DateFormat('h:mm a').format(dateTime);
     return '$formattedDate at $formattedTime';
@@ -76,6 +80,32 @@ class FormattingUtils {
         DateTime.fromMillisecondsSinceEpoch(unixTimestamp * 1000);
     return dateTime.year;
   }
+
+  static String minutesToDays(int minutes) {
+    final days = minutes / (24 * 60);
+    return days.toStringAsFixed(1);
+  }
+
+  static String minutesToHours(int minutes) {
+    final hours = minutes / 60;
+    return hours.truncate().toString();
+  }
+
+  static String formatMinutes(int minutesWatched) {
+    int days = minutesWatched ~/ (24 * 60);
+    int remainingMinutes = minutesWatched % (24 * 60);
+    int hours = remainingMinutes ~/ 60;
+    int minutes = remainingMinutes % 60;
+
+    if (days > 0) {
+      return hours > 0 ? '$days Days $hours Hours' : '$days Days';
+    } else if (hours > 0) {
+      return minutes > 0 ? '$hours Hours $minutes Minutes' : '$hours Hours';
+    } else {
+      return '$minutes Minutes';
+    }
+  }
+
 
   static String getCountryCode(String country) {
     switch (country) {
@@ -104,6 +134,21 @@ class FormattingUtils {
         return 'Taiwan';
       default:
         return 'All';
+    }
+  }
+
+  static Color getCountryColor(String? country) {
+    switch(country) {
+      case 'JP' || 'Japan':
+        return AppColors.toolBox;
+      case 'KR' || 'South Korea':
+        return AppColors.americanGreen;
+      case 'CN' || 'China':
+        return AppColors.pantonePink;
+      case 'TW' || 'Taiwan':
+        return AppColors.deepLemon;
+      default:
+        return AppColors.white;
     }
   }
 
@@ -139,7 +184,7 @@ class FormattingUtils {
     }
   }
 
-  static String getMediaFormatString(Enum$MediaFormat format) {
+  static String getMediaFormatString(Enum$MediaFormat? format) {
     switch (format) {
       case Enum$MediaFormat.TV:
         return 'TV Show';
