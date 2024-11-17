@@ -5,7 +5,7 @@ class CustomCheckBox extends StatefulWidget {
   const CustomCheckBox({
     super.key,
     required this.label,
-    required this.value,
+    this.value = '',
     required this.onChanged,
     required this.initialValue,
   });
@@ -41,12 +41,10 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Checkbox(
-            side: const BorderSide(
-              color: AppColors.sunsetOrange,
-              style: BorderStyle.solid,
-              width: 1,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
             ),
-            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            materialTapTargetSize: MaterialTapTargetSize.padded,
             visualDensity: const VisualDensity(horizontal: -4, vertical: 0),
             checkColor: AppColors.white,
             activeColor: AppColors.sunsetOrange,
@@ -58,9 +56,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
               });
             },
           ),
-          const SizedBox(
-            width: 10,
-          ),
+          const SizedBox(width: 10),
           Text(
             widget.label,
             style: Theme.of(context).textTheme.headlineSmall!.copyWith(

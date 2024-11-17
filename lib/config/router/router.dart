@@ -86,6 +86,9 @@ import 'package:otaku_world/features/profile/screens/user_notifications_screen.d
 import 'package:otaku_world/features/reviews/screens/review_detail_screen.dart';
 import 'package:otaku_world/features/reviews/screens/reviews_screen.dart';
 import 'package:otaku_world/features/search/screens/search_screen.dart';
+import 'package:otaku_world/features/settings/screens/anime_manga_settings_screen.dart';
+import 'package:otaku_world/features/settings/screens/list_settings.dart';
+import 'package:otaku_world/features/settings/screens/notifications_settings_screen.dart';
 import 'package:otaku_world/features/settings/screens/settings_screen.dart';
 import 'package:otaku_world/features/social/screens/activity_screen.dart';
 import 'package:otaku_world/features/social/screens/edit_activity_reply_screen.dart';
@@ -126,6 +129,8 @@ part 'social_routes.dart';
 
 part 'profile_routes.dart';
 
+part 'settings_routes.dart';
+
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorHomeKey = GlobalKey<NavigatorState>();
 final _shellNavigatorDiscoverKey = GlobalKey<NavigatorState>();
@@ -149,6 +154,7 @@ final router = GoRouter(
     ...discoverRoutes,
     ...socialRoutes,
     ...profileRoutes,
+    ...settingsRoutes,
     GoRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: RouteConstants.mediaDetail,

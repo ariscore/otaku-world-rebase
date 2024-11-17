@@ -8,12 +8,14 @@ class CustomTextField extends StatelessWidget {
     this.hintText = 'Type something here...',
     this.textCapitalization = TextCapitalization.sentences,
     this.focusNode,
+    this.maxLines = 25,
   });
 
   final TextEditingController controller;
   final FocusNode? focusNode;
   final String hintText;
   final TextCapitalization textCapitalization;
+  final int maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class CustomTextField extends StatelessWidget {
       ),
       style: Theme.of(context).textTheme.headlineMedium,
       textCapitalization: textCapitalization,
-      maxLines: 25,
+      maxLines: maxLines,
     );
   }
 }
