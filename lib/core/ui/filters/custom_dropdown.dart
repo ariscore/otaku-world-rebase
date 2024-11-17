@@ -9,6 +9,7 @@ class CustomDropdown<T extends Object> extends StatefulWidget {
   const CustomDropdown({
     super.key,
     this.title,
+    this.description,
     this.dropdownItemsValues,
     required this.dropdownItems,
     this.titleStyle,
@@ -19,6 +20,7 @@ class CustomDropdown<T extends Object> extends StatefulWidget {
   });
 
   final String? title;
+  final String? description;
   final TextStyle? titleStyle;
 
   final List<T>?
@@ -60,17 +62,26 @@ class _CustomDropdownState<T extends Object> extends State<CustomDropdown<T>> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (widget.title != null)
-          Text(
-            widget.title!,
-            style: (widget.titleStyle == null)
-                ? Theme.of(context).textTheme.displayMedium!.copyWith(
-                      fontWeight: FontWeight.w600,
-                    )
-                : widget.titleStyle,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Text(
+              widget.title!,
+              style: (widget.titleStyle == null)
+                  ? Theme.of(context).textTheme.displayMedium!.copyWith(
+                        fontFamily: 'Poppins-Medium',
+                      )
+                  : widget.titleStyle,
+            ),
           ),
-        if (widget.title != null)
-          const SizedBox(
-            height: 15,
+        if (widget.description != null)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Text(
+              widget.description!,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                color: Colors.white.withOpacity(0.8),
+              ),
+            ),
           ),
         DropdownButtonFormField<T>(
           decoration: InputDecoration(

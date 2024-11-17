@@ -1,10 +1,13 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../../bloc/auth/auth_cubit.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key, required this.userName});
@@ -20,59 +23,59 @@ class SettingsScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Row(
-          children: [
-            SvgPicture.asset(
-              Assets.iconsLogout,
-              width: 20,
-            ),
-            const SizedBox(width: 10),
-            SizedBox(
-              width: MediaQuery.of(context).size.width - 130,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Log out ',
-                    style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                          fontFamily: 'Poppins',
-                        ),
-                  ),
-                  const SizedBox(height: 5),
-                  Expanded(
-                    child: Text(
-                      userName,
-                      overflow: TextOverflow.ellipsis,
+        child: GestureDetector(
+          onTap: () {
+            context.read<AuthCubit>().logOut();
+          },
+          child: Row(
+            children: [
+              SvgPicture.asset(
+                Assets.iconsLogout,
+                width: 20,
+              ),
+              const SizedBox(width: 10),
+              SizedBox(
+                width: MediaQuery.of(context).size.width - 130,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Log out ',
                       style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                            fontFamily: 'Poppins-Medium',
+                            fontFamily: 'Poppins',
                           ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            const Spacer(),
-            IconButton(
-              onPressed: () {},
-              icon: SvgPicture.asset(
-                Assets.iconsArrowRight,
-                colorFilter: const ColorFilter.mode(
-                  Colors.white,
-                  BlendMode.srcIn,
+                    const SizedBox(height: 5),
+                    Expanded(
+                      child: Text(
+                        userName,
+                        overflow: TextOverflow.ellipsis,
+                        style:
+                            Theme.of(context).textTheme.displaySmall?.copyWith(
+                                  fontFamily: 'Poppins-Medium',
+                                ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ],
+              const Spacer(),
+              IconButton(
+                onPressed: () {
+                  context.read<AuthCubit>().logOut();
+                },
+                icon: SvgPicture.asset(
+                  Assets.iconsArrowRight,
+                  colorFilter: const ColorFilter.mode(
+                    Colors.white,
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-      // body: Center(
-      //   child: ElevatedButton(
-      //     onPressed: () {
-      //       context.read<AuthCubit>().logOut();
-      //     },
-      //     child: Text('Log out'),
-      //   ),
-      // ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -96,7 +99,9 @@ class SettingsScreen extends StatelessWidget {
                 label: 'Anime & Manga',
                 desc:
                     'Title, staff & character language, activity merge time, etc.',
-                onTap: () {},
+                onTap: () {
+                  context.push(RouteConstants.mediaSettings);
+                },
               ),
               _buildOption(
                 context,
@@ -104,14 +109,18 @@ class SettingsScreen extends StatelessWidget {
                 label: 'Notifications',
                 desc:
                     'Manage your notification preferences for timely updates.',
-                onTap: () {},
+                onTap: () {
+                  context.push(RouteConstants.notificationsSettings);
+                },
               ),
               _buildOption(
                 context,
                 asset: Assets.iconsList2,
                 label: 'List',
                 desc: 'Customize your anime and manga list preferences.',
-                onTap: () {},
+                onTap: () {
+                  context.push(RouteConstants.listSettings);
+                },
               ),
               _buildOption(
                 context,
