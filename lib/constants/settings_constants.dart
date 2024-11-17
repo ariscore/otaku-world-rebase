@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 
 class SettingsConstants {

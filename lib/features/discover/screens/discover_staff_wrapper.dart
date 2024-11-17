@@ -4,6 +4,7 @@ import 'package:otaku_world/bloc/discover/staff/birthday_staff_bloc.dart';
 import 'package:otaku_world/bloc/discover/staff/most_favorite_staff_bloc.dart';
 import 'package:otaku_world/bloc/search/search_staff/search_staff_bloc.dart';
 
+// TODO: Remove all discover wrappers, instead use bloc passing
 class DiscoverStaffWrapper extends StatelessWidget {
   const DiscoverStaffWrapper({super.key, required this.child});
 

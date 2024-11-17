@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:otaku_world/constants/filter_constants.dart';
 import 'package:otaku_world/constants/settings_constants.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/filters/custom_check_box.dart';
@@ -14,7 +13,6 @@ import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../widgets/collection_chip.dart';
 
 class ListSettings extends StatefulWidget {
   const ListSettings({super.key});
