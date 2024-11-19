@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/viewer.graphql.dart';
 
 part 'viewer_event.dart';
@@ -14,6 +13,9 @@ class ViewerBloc extends Bloc<ViewerEvent, ViewerState> {
   ViewerBloc() : super(ViewerInitial()) {
     on<LoadViewer>(_onLoadViewer);
   }
+
+  bool showProcess = false;
+  Query$Viewer$Viewer? user;
 
   Future<void> _onLoadViewer(
     LoadViewer event,
@@ -37,7 +39,11 @@ class ViewerBloc extends Bloc<ViewerEvent, ViewerState> {
       if (user == null) {
         emit(const ViewerError('Some Unexpected error occurred!'));
       } else {
-        emit(ViewerLoaded(user));
+        emit(ViewerLoaded(
+          user: user,
+          showProcess: showProcess,
+          error: null,
+        ));
       }
     }
   }
