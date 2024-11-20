@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:otaku_world/constants/font_constants.dart';
 import 'package:otaku_world/theme/colors.dart';
 
 class DateTab extends StatelessWidget {
@@ -24,20 +25,9 @@ class DateTab extends StatelessWidget {
 
     final isSelected = index == tabController.index;
 
-    return Container(
+    return SizedBox(
       width: tabWidth,
       height: tabHeight,
-      decoration: ShapeDecoration(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-          side: BorderSide(
-            width: 1,
-            color: (isSelected)
-                ? AppColors.white.withOpacity(0.0)
-                : AppColors.white.withOpacity(0.8),
-          ),
-        ),
-      ),
       child: (MediaQuery.of(context).size.width < 500)
           ? Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -45,7 +35,9 @@ class DateTab extends StatelessWidget {
                 Text(
                   weekDay,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontFamily: 'Poppins',
+                        fontFamily: isSelected
+                            ? FontConstants.poppinsMedium
+                            : FontConstants.poppins,
                         color: (isSelected)
                             ? AppColors.white
                             : AppColors.white.withOpacity(0.8),
@@ -53,13 +45,13 @@ class DateTab extends StatelessWidget {
                             (isSelected) ? FontWeight.w600 : FontWeight.w400,
                       ),
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 5),
                 Text(
                   date.toString(),
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontFamily: 'Poppins',
+                        fontFamily: isSelected
+                            ? FontConstants.poppinsMedium
+                            : FontConstants.poppins,
                         fontSize: (isSelected) ? 16 : 14,
                         color: (isSelected)
                             ? AppColors.white
@@ -79,29 +71,29 @@ class DateTab extends StatelessWidget {
                   Text(
                     date.toString(),
                     style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                          fontFamily: 'Poppins',
+                          fontFamily: isSelected
+                              ? FontConstants.poppinsMedium
+                              : FontConstants.poppins,
                           fontSize: (isSelected) ? 28 : 26,
                           color: (isSelected)
                               ? AppColors.white
                               : AppColors.white.withOpacity(0.8),
-                          fontWeight: (isSelected)
-                              ? FontWeight.w600
-                              : FontWeight.w400,
+                          fontWeight:
+                              (isSelected) ? FontWeight.w600 : FontWeight.w400,
                         ),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
+                  const SizedBox(width: 10),
                   Text(
                     weekDay,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontFamily: 'Poppins',
+                          fontFamily: isSelected
+                              ? FontConstants.poppinsMedium
+                              : FontConstants.poppins,
                           color: (isSelected)
                               ? AppColors.white
                               : AppColors.white.withOpacity(0.8),
-                          fontWeight: (isSelected)
-                              ? FontWeight.w600
-                              : FontWeight.w400,
+                          fontWeight:
+                              (isSelected) ? FontWeight.w600 : FontWeight.w400,
                         ),
                   ),
                 ],

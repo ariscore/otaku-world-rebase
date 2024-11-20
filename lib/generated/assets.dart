@@ -34,6 +34,8 @@ class Assets {
   static const String iconsArrowUp = 'assets/icons/arrow-up.svg';
   static const String iconsBulletList = 'assets/icons/bullet-list.svg';
   static const String iconsCalendar = 'assets/icons/calendar.svg';
+  static const String iconsCalendar1 = 'assets/icons/calendar-1.svg';
+  static const String iconsCalendar7 = 'assets/icons/calendar-7.svg';
   static const String iconsChatBubble = 'assets/icons/chat-bubble.svg';
   static const String iconsClose = 'assets/icons/close.svg';
   static const String iconsComment = 'assets/icons/comment.svg';
