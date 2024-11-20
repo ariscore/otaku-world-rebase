@@ -19,12 +19,17 @@ class CalendarTabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5),
-      child: AnimatedBuilder(
+    return RepaintBoundary(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        child: AnimatedBuilder(
           animation: tabController,
-          builder: (BuildContext context, Widget? child) {
+          builder: (context, child) {
             return TabBar(
+              splashFactory: NoSplash.splashFactory,
+              overlayColor: const WidgetStatePropertyAll<Color>(
+                Colors.transparent,
+              ),
               isScrollable: false,
               dividerHeight: 0,
               controller: tabController,
@@ -55,7 +60,9 @@ class CalendarTabBar extends StatelessWidget {
                 tabController: tabController,
               ),
             );
-          }),
+          },
+        ),
+      ),
     );
   }
 

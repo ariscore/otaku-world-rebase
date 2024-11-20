@@ -62,7 +62,6 @@ class Reviews extends StatelessWidget {
                     return false;
                   },
                   child: CustomScrollView(
-                    key: const PageStorageKey<String>('Reviews'),
                     slivers: [
                       SliverPadding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),

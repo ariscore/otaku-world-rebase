@@ -9,3 +9,7 @@ class LoadViewer extends ViewerEvent {
 
   final GraphQLClient client;
 }
+
+class UpdateTitleLanguage extends ViewerEvent {
+
+}

@@ -18,17 +18,14 @@ class Characters extends StatefulWidget {
   State<Characters> createState() => _CharactersState();
 }
 
-class _CharactersState extends State<Characters>
-    with AutomaticKeepAliveClientMixin<Characters> {
+class _CharactersState extends State<Characters> {
   List<String> availableLanguages = [];
 
   String selectedLanguage = "Japanese";
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return BlocBuilder<CharactersBloc, PaginatedDataState>(
-      key: const PageStorageKey<String>('Characters'),
       builder: (context, state) {
         if (state is PaginatedDataInitial) {
           final client = (context.read<GraphqlClientCubit>().state
@@ -174,7 +171,7 @@ class _CharactersState extends State<Characters>
     );
   }
 
-  loadLanguages(List<Query$Characters$Media$characters$edges?> characters) {
+  void loadLanguages(List<Query$Characters$Media$characters$edges?> characters) {
     characters.firstOrNull?.voiceActorRoles?.forEach(
       (voiceActor) {
         var language = voiceActor!.voiceActor!.languageV2!;
@@ -186,7 +183,4 @@ class _CharactersState extends State<Characters>
 
     availableLanguages.sort();
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }
