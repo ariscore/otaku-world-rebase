@@ -50,10 +50,10 @@ class MediaDetailScreen extends HookWidget {
         _onPopInvoked(context);
       },
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: Container(),
-        ),
+        //floatingActionButton: FloatingActionButton(
+         // onPressed: () {},
+          //child: Container(),
+        //),
         body: BlocBuilder<MediaDetailBloc, MediaDetailState>(
           builder: (context, state) {
             if (state is MediaDetailInitial) {
