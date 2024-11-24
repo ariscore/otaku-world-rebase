@@ -418,6 +418,56 @@ fragment User on User {
     isFollowing
 }
 
+fragment Settings on User {
+    id
+    name
+    about
+    avatar {
+        large
+    }
+    bannerImage
+    unreadNotificationCount
+    donatorTier
+    donatorBadge
+    moderatorRoles
+    options {
+        titleLanguage
+        staffNameLanguage
+        restrictMessagesToFollowing
+        airingNotifications
+        displayAdultContent
+        profileColor
+        timezone
+        activityMergeTime
+        notificationOptions {
+            type
+            enabled
+        }
+        disabledListActivity {
+            type
+            disabled
+        }
+    }
+    mediaListOptions {
+        scoreFormat
+        rowOrder
+        animeList {
+            customLists
+            sectionOrder
+            splitCompletedSectionByFormat
+            advancedScoring
+            advancedScoringEnabled
+        }
+        mangaList {
+            customLists
+            sectionOrder
+            splitCompletedSectionByFormat
+            advancedScoring
+            advancedScoringEnabled
+        }
+    }
+}
+
 fragment UserInfo on User {
     id
     name

@@ -12,12 +12,18 @@ final class ViewerInitial extends ViewerState {}
 final class ViewerLoading extends ViewerState {}
 
 final class ViewerLoaded extends ViewerState {
-  const ViewerLoaded(this.user);
+  const ViewerLoaded({
+    required this.user,
+    required this.showProcess,
+    required this.error,
+  });
 
-  final Fragment$User user;
+  final Query$Viewer$Viewer user;
+  final bool showProcess;
+  final String? error;
 
   @override
-  List<Object> get props => [user];
+  List<Object> get props => [user, showProcess, error.toString()];
 
   @override
   String toString() {

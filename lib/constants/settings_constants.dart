@@ -141,7 +141,40 @@ class SettingsConstants {
     }
   }
 
-  static String getTitleLanguageString(Enum$UserTitleLanguage language) {
+  static String getMergeTimeFromMinutes(int? minutes) {
+    switch(minutes) {
+      case 0:
+        return 'Never';
+      case 30:
+        return '30 Minutes';
+      case 60:
+        return '1 Hour';
+      case 120:
+        return '2 Hours';
+      case 180:
+        return '3 Hours';
+      case 360:
+        return '6 Hours';
+      case 720:
+        return '12 Hours';
+      case 1440:
+        return '1 Day';
+      case 2880:
+        return '2 Days';
+      case 4320:
+        return '3 Days';
+      case 10080:
+        return '1 Week';
+      case 20160:
+        return '2 Weeks';
+      case 29160:
+        return 'Always';
+      default:
+        return 'Never';
+    }
+  }
+
+  static String getTitleLanguageString(Enum$UserTitleLanguage? language) {
     switch (language) {
       case Enum$UserTitleLanguage.ROMAJI:
         return titleLanguages[0];
@@ -167,7 +200,7 @@ class SettingsConstants {
     }
   }
 
-  static String getStaffLanguageString(Enum$UserStaffNameLanguage language) {
+  static String getStaffLanguageString(Enum$UserStaffNameLanguage? language) {
     switch (language) {
       case Enum$UserStaffNameLanguage.ROMAJI_WESTERN:
         return staffLanguages[0];
