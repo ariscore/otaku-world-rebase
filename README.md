@@ -6,15 +6,15 @@ This [Flutter](https://flutter.dev/)-based mobile app brings [AniList](https://a
 
 ## Features
 
-- [x] **Home** - Gateway to World of Anime & Manga
-- [x] **Search** - Anime, Manga, Characters, Staff & Studios
-- [x] **Reviews** - Anime & Manga reviews by Fans
-- [x] **Calendar** - Anime airing schedule, Plan your next watch
-- [x] **Discover** - Explore anime, manga, characters and more to their fullest
-- [ ] **Anime & Manga Details** - Get all the details, stats, reviews, activities, etc. in one place
-- [x] **Social** - Connect with fellow Otakus and share your activities
-- [ ] **My List** - Keep track of your anime watching and manga reading progress
-- [ ] **Profile** - Personalized analytics of your activity, keep favorites and more
+- [x] [**Home** - Gateway to World of Anime & Manga](#home)
+- [x] [**Search** - Anime, Manga, Characters, Staff & Studios](#search)
+- [x] [**Reviews** - Anime & Manga reviews by Fans](#reviews)
+- [x] [**Calendar** - Anime airing schedule, Plan your next watch](#calendar)
+- [x] [**Discover** - Explore anime, manga, characters and more to their fullest](#discover)
+- [ ] [**Anime & Manga Details** - Get all the details, stats, reviews, activities, etc. in one place](#anime--manga-details)
+- [x] [**Social** - Connect with fellow Otakus and share your activities](#social)
+- [ ] [**My List** - Keep track of your anime watching and manga reading progress](#my-list)
+- [ ] [**Profile** - Personalized analytics of your activity, keep favorites and more](#profile)
 
   ### Home
     Your gateway to the anime world. Track upcoming episodes of popular series, browse trending anime and manga, and get personalized recommendations all in one place. Easily stay updated and discover new content that matches your interests.
@@ -42,19 +42,29 @@ This [Flutter](https://flutter.dev/)-based mobile app brings [AniList](https://a
 
   ### Discover
     Explore a vast collection of anime, manga, characters, staff, and studios. Use powerful filters and search tools to find exactly what interests you and uncover new favorites easily.
-    <div align="center" style="padding: 30px">
+    <div align="center">
       <img src="github_assets/discover.gif" alt="Discover" width="250">
+      &nbsp;&nbsp;&nbsp;
       <img src="github_assets/filters.gif" alt="Filters" width="250">
     </div>
 
   ### Anime & Manga Details
     Access all the essential information about anime, manga, characters, staff, and studios in one place. View titles, stats, trailers, related media, and more with a well-organized layout that keeps everything at your fingertips.
+    <div align="center">
+      <img src="github_assets/details.gif" alt="Anime & Manga Details" width="250">
+    </div>
 
   ### Social
     Stay connected with fellow anime fans by viewing their activities, including what they’re watching or reading, status updates, and messages. Browse both global and following feeds to stay engaged with the community.
+    <div align="center">
+      <img src="github_assets/social.gif" alt="Social" width="250">
+    </div>
 
   ### My List
     Easily track your anime watching and manga reading progress with various tracking options. Stay organized by marking what you’ve completed, paused, or plan to watch, ensuring you never lose track of your progress.
 
   ### Profile
     View and manage your personal profile with ease. Access user stats, favorites, reviews, and social features like followers and followings. Stay engaged by tracking your activity and exploring in-depth insights about your interactions and interests.
+    <div align="center">
+      <img src="github_assets/profile.gif" alt="Profile" width="250">
+    </div>
