@@ -4,6 +4,12 @@
 
 This [Flutter](https://flutter.dev/)-based mobile app brings [AniList](https://anilist.co/) to your pocket. It enables anime and manga enthusiasts to browse a vast library of titles, effortlessly update their watching and reading lists, and connect with fellow fans.
 
+## Built using
+
+The app is built using Flutter and the [AniList API](https://docs.anilist.co/), which is powered by [GraphQL](https://graphql.org/).
+
+![Tech Stack](github_assets/tech.png)
+
 ## Features
 
 - [x] [**Home** - Gateway to World of Anime & Manga](#home)
@@ -11,10 +17,10 @@ This [Flutter](https://flutter.dev/)-based mobile app brings [AniList](https://a
 - [x] [**Reviews** - Anime & Manga reviews by Fans](#reviews)
 - [x] [**Calendar** - Anime airing schedule, Plan your next watch](#calendar)
 - [x] [**Discover** - Explore anime, manga, characters and more to their fullest](#discover)
-- [ ] [**Anime & Manga Details** - Get all the details, stats, reviews, activities, etc. in one place](#anime--manga-details)
+- [x] [**Anime & Manga Details** - Get all the details, stats, reviews, activities, etc. in one place](#anime--manga-details)
 - [x] [**Social** - Connect with fellow Otakus and share your activities](#social)
 - [ ] [**My List** - Keep track of your anime watching and manga reading progress](#my-list)
-- [ ] [**Profile** - Personalized analytics of your activity, keep favorites and more](#profile)
+- [x] [**Profile** - Personalized analytics of your activity, keep favorites and more](#profile)
 
   ### Home
     Your gateway to the anime world. Track upcoming episodes of popular series, browse trending anime and manga, and get personalized recommendations all in one place. Easily stay updated and discover new content that matches your interests.
