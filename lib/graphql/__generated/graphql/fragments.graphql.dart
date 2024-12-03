@@ -20940,6 +20940,13 @@ const fragmentDefinitionSettings = FragmentDefinitionNode(
       directives: [],
       selectionSet: SelectionSetNode(selections: [
         FieldNode(
+          name: NameNode(value: 'medium'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
           name: NameNode(value: 'large'),
           alias: null,
           arguments: [],
@@ -21298,18 +21305,23 @@ extension ClientExtension$Fragment$Settings on graphql.GraphQLClient {
 
 class Fragment$Settings$avatar {
   Fragment$Settings$avatar({
+    this.medium,
     this.large,
     this.$__typename = 'UserAvatar',
   });
 
   factory Fragment$Settings$avatar.fromJson(Map<String, dynamic> json) {
+    final l$medium = json['medium'];
     final l$large = json['large'];
     final l$$__typename = json['__typename'];
     return Fragment$Settings$avatar(
+      medium: (l$medium as String?),
       large: (l$large as String?),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final String? medium;
 
   final String? large;
 
@@ -21317,6 +21329,8 @@ class Fragment$Settings$avatar {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
     final l$large = large;
     _resultData['large'] = l$large;
     final l$$__typename = $__typename;
@@ -21326,9 +21340,11 @@ class Fragment$Settings$avatar {
 
   @override
   int get hashCode {
+    final l$medium = medium;
     final l$large = large;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$medium,
       l$large,
       l$$__typename,
     ]);
@@ -21341,6 +21357,11 @@ class Fragment$Settings$avatar {
     }
     if (!(other is Fragment$Settings$avatar) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
       return false;
     }
     final l$large = large;
@@ -21376,6 +21397,7 @@ abstract class CopyWith$Fragment$Settings$avatar<TRes> {
       _CopyWithStubImpl$Fragment$Settings$avatar;
 
   TRes call({
+    String? medium,
     String? large,
     String? $__typename,
   });
@@ -21395,10 +21417,12 @@ class _CopyWithImpl$Fragment$Settings$avatar<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? medium = _undefined,
     Object? large = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$Settings$avatar(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
         large: large == _undefined ? _instance.large : (large as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -21413,6 +21437,7 @@ class _CopyWithStubImpl$Fragment$Settings$avatar<TRes>
   TRes _res;
 
   call({
+    String? medium,
     String? large,
     String? $__typename,
   }) =>
