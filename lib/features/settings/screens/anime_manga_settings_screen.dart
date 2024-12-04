@@ -11,7 +11,6 @@ import 'package:otaku_world/core/ui/error_text.dart';
 import 'package:otaku_world/core/ui/filters/custom_check_box.dart';
 import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
-import 'package:otaku_world/utils/formatting_utils.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
 
 import '../../../core/ui/buttons/primary_button.dart';

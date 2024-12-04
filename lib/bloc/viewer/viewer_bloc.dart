@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/constants/string_constants.dart';
@@ -28,9 +27,18 @@ class ViewerBloc extends Bloc<ViewerEvent, ViewerState> {
     LoadViewer event,
     Emitter<ViewerState> emit,
   ) async {
-    final response = await event.client.query$Viewer();
+    log('Fetching user data');
+    final response = await event.client.query$Viewer(
+      Options$Query$Viewer(
+        fetchPolicy: FetchPolicy.networkOnly,
+      ),
+    );
+    log('Response: $response');
 
     if (response.hasException) {
+      if (state is ViewerLoaded) {
+        return;
+      }
       final exception = response.exception!;
 
       if (response.exception!.linkException != null) {
@@ -56,6 +64,7 @@ class ViewerBloc extends Bloc<ViewerEvent, ViewerState> {
     Emitter<ViewerState> emit,
   ) async {
     final options = event.user.options;
+    final mediaListOptions = event.user.mediaListOptions;
     log('List options: ${event.user.mediaListOptions?.animeList}');
     log('Options: ${options?.activityMergeTime}');
     emit((state as ViewerLoaded).copyWith(showProcess: true));
@@ -63,26 +72,53 @@ class ViewerBloc extends Bloc<ViewerEvent, ViewerState> {
     final response = await event.client.mutate$UpdateUser(
       Options$Mutation$UpdateUser(
         variables: Variables$Mutation$UpdateUser(
-          animeListOptions: event.user.mediaListOptions?.animeList != null
-              ? Input$MediaListOptionsInput()
+          animeListOptions: mediaListOptions?.animeList != null
+              ? Input$MediaListOptionsInput(
+                  splitCompletedSectionByFormat: mediaListOptions
+                      ?.animeList?.splitCompletedSectionByFormat,
+                  advancedScoringEnabled:
+                      mediaListOptions?.animeList?.advancedScoringEnabled,
+                  advancedScoring: mediaListOptions?.animeList?.advancedScoring,
+                  customLists: mediaListOptions?.animeList?.customLists,
+                  sectionOrder: mediaListOptions?.animeList?.sectionOrder,
+                )
+              : null,
+          mangaListOptions: mediaListOptions?.mangaList != null
+              ? Input$MediaListOptionsInput(
+                  splitCompletedSectionByFormat: mediaListOptions
+                      ?.mangaList?.splitCompletedSectionByFormat,
+                  advancedScoringEnabled:
+                      mediaListOptions?.animeList?.advancedScoringEnabled,
+                  advancedScoring: mediaListOptions?.animeList?.advancedScoring,
+                  customLists: mediaListOptions?.mangaList?.customLists,
+                  sectionOrder: mediaListOptions?.mangaList?.sectionOrder,
+                )
               : null,
           titleLanguage: options?.titleLanguage,
           staffNameLanguage: options?.staffNameLanguage,
           activityMergeTime: options?.activityMergeTime,
           airingNotifications: options?.airingNotifications,
           displayAdultContent: options?.displayAdultContent,
-          notificationOptions: options?.notificationOptions
+          notificationOptions: options?.notificationOptions?.map(
+            (e) {
+              if (e == null) {
+                return null;
+              } else {
+                return Input$NotificationOptionInput(
+                  type: e.type,
+                  enabled: e.enabled,
+                );
+              }
+            },
+          ).toList(),
+          scoreFormat: mediaListOptions?.scoreFormat,
+          rowOrder: mediaListOptions?.rowOrder,
+          disabledListActivity: options?.disabledListActivity
               ?.map(
-                (e) {
-                  if (e == null) {
-                    return null;
-                  } else {
-                    return Input$NotificationOptionInput(
-                      type: e.type,
-                      enabled: e.enabled,
-                    );
-                  }
-                },
+                (e) => Input$ListActivityOptionInput(
+                  type: e?.type,
+                  disabled: e?.disabled,
+                ),
               )
               .toList(),
         ),

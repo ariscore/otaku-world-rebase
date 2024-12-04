@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:otaku_world/constants/filter_constants.dart';
 import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
-import 'package:otaku_world/features/profile/widgets/stats/genre/genre_card.dart';
 import 'package:otaku_world/features/profile/widgets/stats/studios/studio_card.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/user_stats.graphql.dart';

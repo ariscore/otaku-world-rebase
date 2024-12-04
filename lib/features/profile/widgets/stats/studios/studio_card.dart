@@ -6,7 +6,6 @@ import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/bloc/profile/media_posters/media_posters_bloc.dart';
 import 'package:otaku_world/core/ui/image.dart';
 import 'package:otaku_world/generated/assets.dart';
-import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/media_posters.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/user_stats.graphql.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';

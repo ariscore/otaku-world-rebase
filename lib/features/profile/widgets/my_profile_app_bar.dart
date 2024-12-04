@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/profile/my_profile/my_profile_bloc.dart';
+import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/buttons/back_button.dart';
 import 'package:otaku_world/core/ui/image.dart';
@@ -167,6 +169,9 @@ class MyProfileAppBar extends StatelessWidget {
         text: 'Settings',
         onTap: () {
           context.pop();
+          context.read<ViewerBloc>().add(
+                LoadViewer(context.read<GraphqlClientCubit>().getClient()!),
+              );
           context.push('${RouteConstants.settings}?name=${user.name}');
         },
       ),
