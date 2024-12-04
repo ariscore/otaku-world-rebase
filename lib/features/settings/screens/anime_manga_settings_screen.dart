@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
 import 'package:otaku_world/constants/settings_constants.dart';
@@ -9,6 +10,8 @@ import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/error_text.dart';
 import 'package:otaku_world/core/ui/filters/custom_check_box.dart';
 import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
+import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
+import 'package:otaku_world/utils/ui_utils.dart';
 
 import '../../../core/ui/buttons/primary_button.dart';
 
@@ -22,10 +25,12 @@ class AnimeMangaSettingsScreen extends StatefulWidget {
 
 class _AnimeMangaSettingsScreenState extends State<AnimeMangaSettingsScreen> {
   bool isModified = false;
+  Fragment$Settings user = Fragment$Settings(id: 0, name: '');
 
   @override
   Widget build(BuildContext context) {
     final client = context.read<GraphqlClientCubit>().getClient()!;
+    log('Initial user: ${user.options}');
 
     return Scaffold(
       appBar: const SimpleAppBar(
@@ -33,7 +38,15 @@ class _AnimeMangaSettingsScreenState extends State<AnimeMangaSettingsScreen> {
       ),
       floatingActionButton: isModified
           ? PrimaryButton(
-              onTap: () {},
+              onTap: () {
+                log(
+                  'Time to update: ${user.options?.activityMergeTime}',
+                  name: 'Time',
+                );
+                context.read<ViewerBloc>().add(
+                      UpdateUser(client: client, user: user),
+                    );
+              },
               label: 'Save',
               height: 50,
               verticalPadding: 10,
@@ -47,7 +60,28 @@ class _AnimeMangaSettingsScreenState extends State<AnimeMangaSettingsScreen> {
             current is ViewerLoaded &&
             previous.showProcess != current.showProcess,
         listener: (context, state) {
-          log('Listening to changes');
+          log('Listening to changes: $state');
+          if (state is ViewerLoaded) {
+            if (state.showProcess) {
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => const PopScope(
+                  canPop: false,
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+              );
+            } else if (state.showError) {
+              context.pop();
+              UIUtils.showSnackBar(context, state.error!);
+            } else {
+              setState(() {
+                isModified = false;
+                context.pop();
+              });
+              UIUtils.showSnackBar(context, 'Settings Updated!');
+            }
+          }
         },
         builder: (context, state) {
           if (state is ViewerInitial) {
@@ -57,7 +91,23 @@ class _AnimeMangaSettingsScreenState extends State<AnimeMangaSettingsScreen> {
           if (state is ViewerInitial || state is ViewerLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is ViewerLoaded) {
-            final user = state.user;
+            log('User loaded', name: 'Settings');
+            user = isModified
+                ? user
+                : user.copyWith(
+                    id: state.user.id,
+                    name: state.user.name,
+                    options: Fragment$Settings$options(
+                      titleLanguage: state.user.options?.titleLanguage,
+                      staffNameLanguage: state.user.options?.staffNameLanguage,
+                      activityMergeTime: state.user.options?.activityMergeTime,
+                      airingNotifications:
+                          state.user.options?.airingNotifications,
+                      displayAdultContent:
+                          state.user.options?.displayAdultContent,
+                    ),
+                  );
+            // printUser();
 
             return SingleChildScrollView(
               child: Padding(
@@ -74,14 +124,14 @@ class _AnimeMangaSettingsScreenState extends State<AnimeMangaSettingsScreen> {
                         user.options?.titleLanguage,
                       ),
                       onChange: (titleLanguage) {
-                        // if (!isModified) {
-                        //   setState(() {
-                        //     isModified = true;
-                        //   });
-                        // }
-                        setState(() {
-                          isModified = !isModified;
-                        });
+                        user = user.copyWith(
+                          options: user.options?.copyWith(
+                            titleLanguage: SettingsConstants.getTitleLanguage(
+                              titleLanguage,
+                            ),
+                          ),
+                        );
+                        update();
                       },
                     ),
                     const SizedBox(height: 20),
@@ -91,7 +141,17 @@ class _AnimeMangaSettingsScreenState extends State<AnimeMangaSettingsScreen> {
                       initialValue: SettingsConstants.getStaffLanguageString(
                         user.options?.staffNameLanguage,
                       ),
-                      onChange: (p0) {},
+                      onChange: (staffLanguage) {
+                        user = user.copyWith(
+                          options: user.options?.copyWith(
+                            staffNameLanguage:
+                                SettingsConstants.getStaffLanguage(
+                              staffLanguage,
+                            ),
+                          ),
+                        );
+                        update();
+                      },
                     ),
                     const SizedBox(height: 20),
                     CustomDropdown(
@@ -105,20 +165,46 @@ class _AnimeMangaSettingsScreenState extends State<AnimeMangaSettingsScreen> {
                         user.options?.activityMergeTime,
                       ),
                       onChange: (time) {
-                        log('Time: ${SettingsConstants.getMinutesFromMergeTime(time)}');
+                        user = user.copyWith(
+                          options: user.options!.copyWith(
+                            activityMergeTime:
+                                SettingsConstants.getMinutesFromMergeTime(
+                              time,
+                            ),
+                          ),
+                        );
+                        log('Time: ${user.options?.activityMergeTime}',
+                            name: 'Time');
+                        update();
                       },
                     ),
                     const SizedBox(height: 20),
                     CustomCheckBox(
                       label: 'Airing Anime Notification',
                       value: '',
-                      onChanged: () {},
+                      onChanged: () {
+                        user = user.copyWith(
+                          options: user.options?.copyWith(
+                            airingNotifications:
+                                !(user.options?.airingNotifications ?? false),
+                          ),
+                        );
+                        update();
+                      },
                       initialValue: user.options?.airingNotifications ?? false,
                     ),
                     CustomCheckBox(
                       label: '18+ Content',
                       value: '',
-                      onChanged: () {},
+                      onChanged: () {
+                        user = user.copyWith(
+                          options: user.options?.copyWith(
+                            displayAdultContent:
+                                !(user.options?.displayAdultContent ?? false),
+                          ),
+                        );
+                        update();
+                      },
                       initialValue: user.options?.displayAdultContent ?? false,
                     ),
                   ],
@@ -139,6 +225,18 @@ class _AnimeMangaSettingsScreenState extends State<AnimeMangaSettingsScreen> {
       ),
     );
   }
+
+  void update() {
+    if (!isModified) {
+      setState(() {
+        isModified = true;
+      });
+    }
+    log(
+      'Title: ${user.options?.titleLanguage} | Staff: ${user.options?.staffNameLanguage} | \n'
+      'Time: ${user.options?.activityMergeTime} | Notification: ${user.options?.airingNotifications} | Adult: ${user.options?.displayAdultContent}',
+    );
+  }
 }
 
 class ScalingFabAnimator extends FloatingActionButtonAnimator {
@@ -155,7 +253,6 @@ class ScalingFabAnimator extends FloatingActionButtonAnimator {
   Animation<double> getScaleAnimation({Animation<double>? parent}) {
     return parent!;
   }
-
 
   @override
   Animation<double> getRotationAnimation({required Animation<double> parent}) {

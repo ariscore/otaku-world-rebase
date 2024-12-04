@@ -59,7 +59,7 @@ class SettingsConstants {
     }
   }
 
-  static String getListOrderString(String order) {
+  static String getListOrderString(String? order) {
     switch(order) {
       case 'score':
         return 'Score';
@@ -91,7 +91,7 @@ class SettingsConstants {
     }
   }
 
-  static String getScoringSystemString(Enum$ScoreFormat format) {
+  static String getScoringSystemString(Enum$ScoreFormat? format) {
     switch(format) {
       case Enum$ScoreFormat.POINT_100:
         return scoringSystems[0];

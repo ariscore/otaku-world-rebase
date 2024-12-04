@@ -423,6 +423,7 @@ fragment Settings on User {
     name
     about
     avatar {
+        medium
         large
     }
     bannerImage

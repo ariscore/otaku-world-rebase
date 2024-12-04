@@ -16,10 +16,14 @@ class AdvancedScoring extends StatefulWidget {
     super.key,
     required this.list,
     required this.isEnabled,
+    required this.onChangeEnabled,
+    required this.onChangeList,
   });
 
-  final List<String> list;
+  final List<String?> list;
   final bool isEnabled;
+  final void Function(bool value) onChangeEnabled;
+  final void Function(List<String?> list) onChangeList;
 
   @override
   State<AdvancedScoring> createState() => _AdvancedScoringState();
@@ -27,12 +31,12 @@ class AdvancedScoring extends StatefulWidget {
 
 class _AdvancedScoringState extends State<AdvancedScoring> {
   bool isEnabled = false;
-  late List<String> list;
+  late List<String?> list;
   final scoringOptionController = TextEditingController();
 
   @override
   void initState() {
-    list = widget.list;
+    list = List.from(widget.list);
     isEnabled = widget.isEnabled;
     super.initState();
   }
@@ -60,6 +64,7 @@ class _AdvancedScoringState extends State<AdvancedScoring> {
           onChanged: () {
             setState(() {
               isEnabled = !isEnabled;
+              widget.onChangeEnabled(isEnabled);
             });
           },
           initialValue: isEnabled,
@@ -75,6 +80,7 @@ class _AdvancedScoringState extends State<AdvancedScoring> {
                   return _buildAddButton();
                 } else {
                   final e = list[index];
+                  if (e == null) return const SizedBox();
                   return GestureDetector(
                     onTap: () => _editScoringOption(index),
                     child: CollectionChip(
@@ -83,6 +89,7 @@ class _AdvancedScoringState extends State<AdvancedScoring> {
                         setState(() {
                           log('Removing $e');
                           list.removeWhere((item) => item == e);
+                          widget.onChangeList(list);
                         });
                       },
                     ),
@@ -99,6 +106,7 @@ class _AdvancedScoringState extends State<AdvancedScoring> {
     return InkWell(
       borderRadius: BorderRadius.circular(15),
       onTap: () {
+        scoringOptionController.clear();
         _showBottomSheet(
           title: 'Add Scoring Option',
           onSave: _saveScoringOption,
@@ -176,7 +184,7 @@ class _AdvancedScoringState extends State<AdvancedScoring> {
       if (!list.contains(text)) {
         setState(() {
           list.add(text);
-          scoringOptionController.clear();
+          widget.onChangeList(list);
         });
       }
     } else {
@@ -185,7 +193,7 @@ class _AdvancedScoringState extends State<AdvancedScoring> {
   }
 
   void _editScoringOption(int index) {
-    scoringOptionController.text = list[index];
+    scoringOptionController.text = list[index]!;
     _showBottomSheet(
       title: 'Edit Scoring Option',
       onSave: () {
@@ -195,6 +203,7 @@ class _AdvancedScoringState extends State<AdvancedScoring> {
             setState(() {
               list[index] = text;
               scoringOptionController.clear();
+              widget.onChangeList(list);
             });
           }
         } else {
