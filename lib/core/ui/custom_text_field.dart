@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
     this.maxLines = 25,
     this.maxLength,
     this.isShowingCounter = false,
+    this.keyboardType,
   });
 
   final TextEditingController controller;
@@ -21,6 +22,7 @@ class CustomTextField extends StatelessWidget {
   final int maxLines;
   final int? maxLength;
   final bool isShowingCounter;
+  final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +62,7 @@ class CustomTextField extends StatelessWidget {
                   maxLength: maxLength,
                 )
               : const SizedBox(),
-      // keyboardType: ,
+      keyboardType: keyboardType,
     );
   }
 }

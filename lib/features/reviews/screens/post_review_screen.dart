@@ -68,9 +68,13 @@ class PostReviewScreen extends StatelessWidget {
                 isDense: true,
                 contentPadding: const EdgeInsets.all(8),
                 hintText: 'Type something here...',
-                hintStyle: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: AppColors.white.withOpacity(0.6),
-                    ),
+                hintStyle: Theme
+                    .of(context)
+                    .textTheme
+                    .headlineSmall
+                    ?.copyWith(
+                  color: AppColors.white.withOpacity(0.6),
+                ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: const BorderSide(
@@ -81,10 +85,12 @@ class PostReviewScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              style: Theme.of(context).textTheme.headlineSmall,
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .headlineSmall,
               maxLines: 1,
-              buildCounter: (
-                context, {
+              buildCounter: (context, {
                 required currentLength,
                 required isFocused,
                 required maxLength,
@@ -117,7 +123,8 @@ class PostReviewScreen extends StatelessWidget {
               children: [
                 Text(
                   'Score',
-                  style: Theme.of(context)
+                  style: Theme
+                      .of(context)
                       .textTheme
                       .displayMedium!
                       .copyWith(fontSize: 18, fontWeight: FontWeight.w600),
@@ -132,12 +139,13 @@ class PostReviewScreen extends StatelessWidget {
                         hintText: '',
                         maxLines: 1,
                         maxLength: 3,
-
+                        keyboardType: TextInputType.number,
                       ),
                     ),
                     Text(
                       ' / 100',
-                      style: Theme.of(context)
+                      style: Theme
+                          .of(context)
                           .textTheme
                           .displayMedium!
                           .copyWith(fontSize: 18),
