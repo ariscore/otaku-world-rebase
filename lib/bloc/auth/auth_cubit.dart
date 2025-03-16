@@ -4,7 +4,7 @@ import 'dart:developer' as dev;
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uni_links2/uni_links.dart';
+import 'package:uni_links3/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 part 'auth_state.dart';
@@ -49,9 +49,9 @@ class AuthCubit extends Cubit<AuthState> {
       await _launchUrl(_authUri);
 
       _sub?.cancel();
-      _sub = uriLinkStream.listen((uri) async {
+      _sub = linkStream.listen((uri) async {
         dev.log('Uri: $uri', name: 'Auth');
-        if (uri?.scheme == 'otakuworld') {
+        if (uri?.contains('otakuworld') ?? false) {
           var fragment = uri!.toString();
           dev.log('Fragment: $fragment', name: 'Auth');
           var start = fragment.indexOf('=');
@@ -71,7 +71,6 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthError(e.toString()));
     }
   }
-
 
   Future<void> logOut() async {
     emit(LoggingOut());
