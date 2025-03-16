@@ -115,6 +115,7 @@ import '../../features/discover/screens/discover_screen.dart';
 import '../../features/my_list/screens/my_list_screen.dart';
 import '../../features/onboarding/screens/onboarding_screen.dart';
 import '../../features/profile/screens/favorite_manga_slider.dart';
+import '../../features/reviews/screens/post_review_screen.dart';
 import '../../features/social/screens/activity_replies_screen.dart';
 import '../../features/social/screens/social_screen.dart';
 

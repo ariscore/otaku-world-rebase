@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/staff/staff_bloc.dart';
+import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/features/media_detail/widgets/media_app_bar.dart';
 import 'package:otaku_world/features/profile/widgets/keep_alive_tab.dart';
 
@@ -50,10 +51,14 @@ class MediaDetailScreen extends HookWidget {
         _onPopInvoked(context);
       },
       child: Scaffold(
-        //floatingActionButton: FloatingActionButton(
-         // onPressed: () {},
-          //child: Container(),
-        //),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            context.push(
+              RouteConstants.postReview,
+            );
+          },
+          child: Container(),
+        ),
         body: BlocBuilder<MediaDetailBloc, MediaDetailState>(
           builder: (context, state) {
             if (state is MediaDetailInitial) {
