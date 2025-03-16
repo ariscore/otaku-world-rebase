@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:otaku_world/core/ui/texts/counter_text.dart';
 import 'package:otaku_world/theme/colors.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -9,6 +10,8 @@ class CustomTextField extends StatelessWidget {
     this.textCapitalization = TextCapitalization.sentences,
     this.focusNode,
     this.maxLines = 25,
+    this.maxLength,
+    this.isShowingCounter = false,
   });
 
   final TextEditingController controller;
@@ -16,6 +19,8 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final TextCapitalization textCapitalization;
   final int maxLines;
+  final int? maxLength;
+  final bool isShowingCounter;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +30,8 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: Theme.of(context).textTheme.headlineMedium?.copyWith(
-          color: AppColors.white.withOpacity(0.6),
-        ),
+              color: AppColors.white.withOpacity(0.6),
+            ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
           borderSide: const BorderSide(
@@ -44,6 +49,18 @@ class CustomTextField extends StatelessWidget {
       style: Theme.of(context).textTheme.headlineMedium,
       textCapitalization: textCapitalization,
       maxLines: maxLines,
+      maxLength: maxLength,
+      buildCounter: (context,
+              {required currentLength,
+              required isFocused,
+              required maxLength}) =>
+          isShowingCounter
+              ? CounterText(
+                  currentLength: currentLength,
+                  maxLength: maxLength,
+                )
+              : const SizedBox(),
+      // keyboardType: ,
     );
   }
 }
