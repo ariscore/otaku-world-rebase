@@ -49,7 +49,7 @@ class Variables$Query$GetReviewDetail {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$GetReviewDetail) ||
+    if (other is! Variables$Query$GetReviewDetail ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -157,7 +157,7 @@ class Query$GetReviewDetail {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetReviewDetail) || runtimeType != other.runtimeType) {
+    if (other is! Query$GetReviewDetail || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Review = Review;

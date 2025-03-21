@@ -62,8 +62,7 @@ class Fragment$CharacterImage {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$CharacterImage) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Fragment$CharacterImage || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -293,7 +292,7 @@ class Fragment$CharacterImage$image {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$CharacterImage$image) ||
+    if (other is! Fragment$CharacterImage$image ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -429,7 +428,7 @@ class Variables$Query$CharacterImages {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$CharacterImages) ||
+    if (other is! Variables$Query$CharacterImages ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -576,7 +575,7 @@ class Query$CharacterImages {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$CharacterImages) || runtimeType != other.runtimeType) {
+    if (other is! Query$CharacterImages || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -997,7 +996,7 @@ class Query$CharacterImages$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$CharacterImages$Page) ||
+    if (other is! Query$CharacterImages$Page ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1178,7 +1177,7 @@ class Query$CharacterImages$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$CharacterImages$Page$pageInfo) ||
+    if (other is! Query$CharacterImages$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }

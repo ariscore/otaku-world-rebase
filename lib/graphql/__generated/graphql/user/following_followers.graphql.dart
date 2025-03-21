@@ -46,7 +46,7 @@ class Variables$Query$FollowingAndFollowersCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$FollowingAndFollowersCount) ||
+    if (other is! Variables$Query$FollowingAndFollowersCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -164,7 +164,7 @@ class Query$FollowingAndFollowersCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FollowingAndFollowersCount) ||
+    if (other is! Query$FollowingAndFollowersCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -675,7 +675,7 @@ class Query$FollowingAndFollowersCount$following {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FollowingAndFollowersCount$following) ||
+    if (other is! Query$FollowingAndFollowersCount$following ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -865,7 +865,7 @@ class Query$FollowingAndFollowersCount$following$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FollowingAndFollowersCount$following$pageInfo) ||
+    if (other is! Query$FollowingAndFollowersCount$following$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -998,7 +998,7 @@ class Query$FollowingAndFollowersCount$following$following {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FollowingAndFollowersCount$following$following) ||
+    if (other is! Query$FollowingAndFollowersCount$following$following ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1148,7 +1148,7 @@ class Query$FollowingAndFollowersCount$followers {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FollowingAndFollowersCount$followers) ||
+    if (other is! Query$FollowingAndFollowersCount$followers ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1338,7 +1338,7 @@ class Query$FollowingAndFollowersCount$followers$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FollowingAndFollowersCount$followers$pageInfo) ||
+    if (other is! Query$FollowingAndFollowersCount$followers$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1471,7 +1471,7 @@ class Query$FollowingAndFollowersCount$followers$followers {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FollowingAndFollowersCount$followers$followers) ||
+    if (other is! Query$FollowingAndFollowersCount$followers$followers ||
         runtimeType != other.runtimeType) {
       return false;
     }

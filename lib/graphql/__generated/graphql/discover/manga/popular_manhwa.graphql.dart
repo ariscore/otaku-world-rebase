@@ -49,7 +49,7 @@ class Variables$Query$GetPopularManhwa {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$GetPopularManhwa) ||
+    if (other is! Variables$Query$GetPopularManhwa ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -158,8 +158,7 @@ class Query$GetPopularManhwa {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetPopularManhwa) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Query$GetPopularManhwa || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -583,7 +582,7 @@ class Query$GetPopularManhwa$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetPopularManhwa$Page) ||
+    if (other is! Query$GetPopularManhwa$Page ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -761,7 +760,7 @@ class Query$GetPopularManhwa$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetPopularManhwa$Page$pageInfo) ||
+    if (other is! Query$GetPopularManhwa$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }

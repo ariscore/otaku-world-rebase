@@ -63,7 +63,7 @@ class Variables$Query$SearchStaff {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$SearchStaff) ||
+    if (other is! Variables$Query$SearchStaff ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -194,7 +194,7 @@ class Query$SearchStaff {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$SearchStaff) || runtimeType != other.runtimeType) {
+    if (other is! Query$SearchStaff || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -608,8 +608,7 @@ class Query$SearchStaff$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$SearchStaff$Page) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Query$SearchStaff$Page || runtimeType != other.runtimeType) {
       return false;
     }
     final l$pageInfo = pageInfo;
@@ -784,7 +783,7 @@ class Query$SearchStaff$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$SearchStaff$Page$pageInfo) ||
+    if (other is! Query$SearchStaff$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }

@@ -64,7 +64,7 @@ class Variables$Mutation$ToggleFavoriteMedia {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$ToggleFavoriteMedia) ||
+    if (other is! Variables$Mutation$ToggleFavoriteMedia ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -196,7 +196,7 @@ class Mutation$ToggleFavoriteMedia {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleFavoriteMedia) ||
+    if (other is! Mutation$ToggleFavoriteMedia ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -605,7 +605,7 @@ class Mutation$ToggleFavoriteMedia$ToggleFavourite {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleFavoriteMedia$ToggleFavourite) ||
+    if (other is! Mutation$ToggleFavoriteMedia$ToggleFavourite ||
         runtimeType != other.runtimeType) {
       return false;
     }

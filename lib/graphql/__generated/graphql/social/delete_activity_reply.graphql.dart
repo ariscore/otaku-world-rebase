@@ -50,7 +50,7 @@ class Variables$Mutation$DeleteActivityReply {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$DeleteActivityReply) ||
+    if (other is! Variables$Mutation$DeleteActivityReply ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -159,7 +159,7 @@ class Mutation$DeleteActivityReply {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$DeleteActivityReply) ||
+    if (other is! Mutation$DeleteActivityReply ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -575,7 +575,7 @@ class Mutation$DeleteActivityReply$DeleteActivityReply {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$DeleteActivityReply$DeleteActivityReply) ||
+    if (other is! Mutation$DeleteActivityReply$DeleteActivityReply ||
         runtimeType != other.runtimeType) {
       return false;
     }

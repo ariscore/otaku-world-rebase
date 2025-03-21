@@ -21,7 +21,7 @@ class MediaSliderScreen<B extends PaginatedDataBloc> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = CarouselController();
+    final controller = CarouselSliderController();
     final size = MediaQuery.of(context).size;
 
     dev.log('Width: ${size.width} | Height: ${size.height}', name: 'Size');
