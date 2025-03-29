@@ -1469,14 +1469,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.0"
-  uni_links3:
+  uni_links5:
     dependency: "direct main"
     description:
-      name: uni_links3
-      sha256: fc719f055d010538c015dd41f9359c910ca69e413a1acf731fe5541c63ad8814
+      name: uni_links5
+      sha256: f68641c0f1e4040f3e5b7e364d50484b0a4edc8425066353a9d1d2e174bfc1c4
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.3"
+    version: "0.5.4"
   uni_links_platform_interface:
     dependency: transitive
     description:

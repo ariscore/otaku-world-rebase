@@ -1,10 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:otaku_world/bloc/filter/search/search_media_cubit.dart';
-import 'package:otaku_world/bloc/media_list/media_list/media_list_bloc.dart';
 
 import '../../../core/ui/custom_search_bar.dart';
 import '../../../generated/assets.dart';
@@ -64,15 +60,13 @@ class _ListSearchAppBarState extends State<ListSearchAppBar> {
           CustomSearchBar(
             clearSearch: () {},
             onSubmitted: (value) {
-              context.read<MediaListBloc>().add(const ApplyFilter());
+              // context.read<MediaListBloc>().add(const ApplyFilter());
             },
             onChanged: (p0) {},
             searchCubit: SearchMediaCubit(),
             hint: 'Search list...',
           ),
-          const SizedBox(
-            width: 10
-          ),
+          const SizedBox(width: 10),
           GestureDetector(
             onTap: () {},
             child: Container(

@@ -74,7 +74,8 @@ dependencies:
   #Url
   url_launcher: ^6.3.0
 #  uni_links2: ^0.6.0+2
-  uni_links3: ^0.5.3
+#  uni_links3: ^0.5.3
+  uni_links5: ^0.5.4
   share_plus: ^10.0.0
 
   # Persistence

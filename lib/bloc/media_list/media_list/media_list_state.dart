@@ -31,7 +31,8 @@ final class MediaListLoaded extends MediaListState {
 }
 
 final class MediaListError extends MediaListState {
-  const MediaListError(this.message);
+  const MediaListError({required this.type, required this.message});
 
+  final ErrorType type;
   final String message;
 }

@@ -48,7 +48,8 @@ final class ViewerLoaded extends ViewerState {
 }
 
 final class ViewerError extends ViewerState {
-  const ViewerError(this.message);
+  const ViewerError({required this.type, required this.message});
 
+  final ErrorType type;
   final String message;
 }

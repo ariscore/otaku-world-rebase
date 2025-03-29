@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/constants/string_constants.dart';
+import 'package:otaku_world/core/types/enums.dart';
 import 'package:otaku_world/graphql/__generated/graphql/list/media_list.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 
@@ -25,7 +26,7 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
     LoadMediaList event,
     Emitter<MediaListState> emit,
   ) async {
-    emit(MediaListLoading());
+    if (state is! MediaListLoaded) emit(MediaListLoading());
     final response = await event.client.query$MediaList(
       Options$Query$MediaList(
         fetchPolicy: FetchPolicy.networkOnly,
@@ -37,11 +38,31 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
     );
 
     if (response.hasException) {
-      emit(MediaListError(StringConstants.somethingWentWrongError));
+      if (response.exception!.linkException != null &&
+          response.exception!.linkException is ServerException) {
+        emit(
+          const MediaListError(
+            type: ErrorType.noInternet,
+            message: StringConstants.noInternetError,
+          ),
+        );
+      } else {
+        emit(
+          const MediaListError(
+            type: ErrorType.unknown,
+            message: StringConstants.somethingWentWrongError,
+          ),
+        );
+      }
     } else {
       final data = response.parsedData?.MediaListCollection;
       if (data == null) {
-        emit(MediaListError(StringConstants.somethingWentWrongError));
+        emit(
+          const MediaListError(
+            type: ErrorType.unknown,
+            message: StringConstants.somethingWentWrongError,
+          ),
+        );
       } else {
         emit(MediaListLoaded(listCollection: data));
       }
