@@ -63,7 +63,7 @@ class Variables$Query$Characters {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$Characters) ||
+    if (other is! Variables$Query$Characters ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -194,7 +194,7 @@ class Query$Characters {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Characters) || runtimeType != other.runtimeType) {
+    if (other is! Query$Characters || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Media = Media;
@@ -851,8 +851,7 @@ class Query$Characters$Media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Characters$Media) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Query$Characters$Media || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -1025,7 +1024,7 @@ class Query$Characters$Media$characters {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Characters$Media$characters) ||
+    if (other is! Query$Characters$Media$characters ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1226,7 +1225,7 @@ class Query$Characters$Media$characters$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Characters$Media$characters$pageInfo) ||
+    if (other is! Query$Characters$Media$characters$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1415,7 +1414,7 @@ class Query$Characters$Media$characters$edges {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Characters$Media$characters$edges) ||
+    if (other is! Query$Characters$Media$characters$edges ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1645,7 +1644,7 @@ class Query$Characters$Media$characters$edges$node {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Characters$Media$characters$edges$node) ||
+    if (other is! Query$Characters$Media$characters$edges$node ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1836,7 +1835,7 @@ class Query$Characters$Media$characters$edges$node$name {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Characters$Media$characters$edges$node$name) ||
+    if (other is! Query$Characters$Media$characters$edges$node$name ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1987,7 +1986,7 @@ class Query$Characters$Media$characters$edges$node$image {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Characters$Media$characters$edges$node$image) ||
+    if (other is! Query$Characters$Media$characters$edges$node$image ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2140,7 +2139,7 @@ class Query$Characters$Media$characters$edges$voiceActorRoles {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Characters$Media$characters$edges$voiceActorRoles) ||
+    if (other is! Query$Characters$Media$characters$edges$voiceActorRoles ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2353,8 +2352,8 @@ class Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor) ||
+    if (other
+            is! Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2568,8 +2567,8 @@ class Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name) ||
+    if (other
+            is! Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2713,8 +2712,8 @@ class Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image) ||
+    if (other
+            is! Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image ||
         runtimeType != other.runtimeType) {
       return false;
     }

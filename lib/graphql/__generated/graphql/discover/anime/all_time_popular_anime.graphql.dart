@@ -51,7 +51,7 @@ class Variables$Query$GetAllTimePopularAnime {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$GetAllTimePopularAnime) ||
+    if (other is! Variables$Query$GetAllTimePopularAnime ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -160,7 +160,7 @@ class Query$GetAllTimePopularAnime {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetAllTimePopularAnime) ||
+    if (other is! Query$GetAllTimePopularAnime ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -589,7 +589,7 @@ class Query$GetAllTimePopularAnime$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetAllTimePopularAnime$Page) ||
+    if (other is! Query$GetAllTimePopularAnime$Page ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -768,7 +768,7 @@ class Query$GetAllTimePopularAnime$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetAllTimePopularAnime$Page$pageInfo) ||
+    if (other is! Query$GetAllTimePopularAnime$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }

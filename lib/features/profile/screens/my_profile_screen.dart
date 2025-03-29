@@ -65,6 +65,7 @@ class MyProfileScreen extends HookWidget {
                 onlyOneScrollInBody: true,
                 headerSliverBuilder: (context, innerBoxIsScrolled) => [
                   MyProfileAppBar(
+                    key: const PageStorageKey('profile_app_bar'),
                     user: state.user,
                     tabController: tabController,
                   ),

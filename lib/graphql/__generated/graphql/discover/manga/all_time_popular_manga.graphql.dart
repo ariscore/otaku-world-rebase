@@ -51,7 +51,7 @@ class Variables$Query$GetAllTimePopularManga {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$GetAllTimePopularManga) ||
+    if (other is! Variables$Query$GetAllTimePopularManga ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -160,7 +160,7 @@ class Query$GetAllTimePopularManga {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetAllTimePopularManga) ||
+    if (other is! Query$GetAllTimePopularManga ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -589,7 +589,7 @@ class Query$GetAllTimePopularManga$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetAllTimePopularManga$Page) ||
+    if (other is! Query$GetAllTimePopularManga$Page ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -768,7 +768,7 @@ class Query$GetAllTimePopularManga$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetAllTimePopularManga$Page$pageInfo) ||
+    if (other is! Query$GetAllTimePopularManga$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }

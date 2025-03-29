@@ -59,7 +59,7 @@ class Variables$Query$Followers {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$Followers) ||
+    if (other is! Variables$Query$Followers ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -187,7 +187,7 @@ class Query$Followers {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Followers) || runtimeType != other.runtimeType) {
+    if (other is! Query$Followers || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -598,7 +598,7 @@ class Query$Followers$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Followers$Page) || runtimeType != other.runtimeType) {
+    if (other is! Query$Followers$Page || runtimeType != other.runtimeType) {
       return false;
     }
     final l$pageInfo = pageInfo;
@@ -773,7 +773,7 @@ class Query$Followers$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Followers$Page$pageInfo) ||
+    if (other is! Query$Followers$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }

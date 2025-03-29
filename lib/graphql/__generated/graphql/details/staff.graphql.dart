@@ -62,7 +62,7 @@ class Variables$Query$MediaStaff {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$MediaStaff) ||
+    if (other is! Variables$Query$MediaStaff ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -193,7 +193,7 @@ class Query$MediaStaff {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$MediaStaff) || runtimeType != other.runtimeType) {
+    if (other is! Query$MediaStaff || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Media = Media;
@@ -695,8 +695,7 @@ class Query$MediaStaff$Media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$MediaStaff$Media) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Query$MediaStaff$Media || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -857,7 +856,7 @@ class Query$MediaStaff$Media$staff {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$MediaStaff$Media$staff) ||
+    if (other is! Query$MediaStaff$Media$staff ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1048,7 +1047,7 @@ class Query$MediaStaff$Media$staff$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$MediaStaff$Media$staff$pageInfo) ||
+    if (other is! Query$MediaStaff$Media$staff$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1198,7 +1197,7 @@ class Query$MediaStaff$Media$staff$edges {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$MediaStaff$Media$staff$edges) ||
+    if (other is! Query$MediaStaff$Media$staff$edges ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1371,7 +1370,7 @@ class Query$MediaStaff$Media$staff$edges$node {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$MediaStaff$Media$staff$edges$node) ||
+    if (other is! Query$MediaStaff$Media$staff$edges$node ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1544,7 +1543,7 @@ class Query$MediaStaff$Media$staff$edges$node$name {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$MediaStaff$Media$staff$edges$node$name) ||
+    if (other is! Query$MediaStaff$Media$staff$edges$node$name ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1671,7 +1670,7 @@ class Query$MediaStaff$Media$staff$edges$node$image {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$MediaStaff$Media$staff$edges$node$image) ||
+    if (other is! Query$MediaStaff$Media$staff$edges$node$image ||
         runtimeType != other.runtimeType) {
       return false;
     }

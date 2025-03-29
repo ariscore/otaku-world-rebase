@@ -13,6 +13,7 @@ class Assets {
   static const String charactersCigaretteGirl = 'assets/images/characters/cigarette_girl.png';
   static const String charactersErenYeager = 'assets/images/characters/eren_yeager.png';
   static const String charactersGirl1 = 'assets/images/discover/characters/girl_1.svg';
+  static const String charactersNoInternet = 'assets/images/characters/no-internet.png';
   static const String charactersSasuke1 = 'assets/images/discover/characters/sasuke_1.svg';
   static const String charactersSchoolGirl = 'assets/images/characters/school_girl.png';
   static const String charactersTamaiokaSa1 = 'assets/images/discover/characters/Tamaioka_sa_1.svg';
@@ -27,6 +28,7 @@ class Assets {
   static const String iconsAbout = 'assets/icons/about.svg';
   static const String iconsActivity = 'assets/icons/activity.svg';
   static const String iconsAdd = 'assets/icons/add.svg';
+  static const String iconsAdd2 = 'assets/icons/add-2.svg';
   static const String iconsAlert = 'assets/icons/alert.svg';
   static const String iconsArrowDown = 'assets/icons/arrow_down.svg';
   static const String iconsArrowLeft = 'assets/icons/arrow-left.svg';

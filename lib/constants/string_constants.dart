@@ -6,8 +6,11 @@ class StringConstants {
       'Stay Updated with Global Anime Activities and'
       ' \nInteractions';
 
-  static const noInternetError = 'Please check your internet connection!';
-  static const somethingWentWrongError = 'Something went wrong!';
+  static const noInternet = 'No Internet';
+  static const noInternetError = 'Please check your internet connection and try again!';
+  static const somethingWentWrong = 'Something went wrong';
+  static const somethingWentWrongError = 'Something went wrong, Please try again!';
+  static const unexpectedError = 'Some Unexpected error occurred!';
   static const validationError = 'Please enter valid text!';
   static const statsNotAvailable = 'Statistics not available!';
   static const messageConfirmation = 'Are you sure you want to send this message?';

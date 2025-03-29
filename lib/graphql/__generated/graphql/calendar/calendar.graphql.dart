@@ -75,7 +75,7 @@ class Variables$Query$GetCalendarDay {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$GetCalendarDay) ||
+    if (other is! Variables$Query$GetCalendarDay ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -225,7 +225,7 @@ class Query$GetCalendarDay {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetCalendarDay) || runtimeType != other.runtimeType) {
+    if (other is! Query$GetCalendarDay || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -657,7 +657,7 @@ class Query$GetCalendarDay$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetCalendarDay$Page) ||
+    if (other is! Query$GetCalendarDay$Page ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -839,7 +839,7 @@ class Query$GetCalendarDay$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetCalendarDay$Page$pageInfo) ||
+    if (other is! Query$GetCalendarDay$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }

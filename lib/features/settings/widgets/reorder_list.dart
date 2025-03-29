@@ -5,17 +5,23 @@ import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 
 class ReorderList extends StatefulWidget {
-  const ReorderList({super.key, required this.list, required this.type});
+  const ReorderList({
+    super.key,
+    required this.list,
+    required this.type,
+    required this.onChange,
+  });
 
-  final List<String> list;
+  final List<String?> list;
   final Enum$MediaType type;
+  final void Function(List<String?> list) onChange;
 
   @override
   State<ReorderList> createState() => _ReorderListState();
 }
 
 class _ReorderListState extends State<ReorderList> {
-  late List<String> list;
+  late List<String?> list;
 
   @override
   void initState() {
@@ -50,34 +56,39 @@ class _ReorderListState extends State<ReorderList> {
           ],
         ),
         const SizedBox(height: 10),
-        ReorderableListView(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          proxyDecorator: (child, index, animation) => SizedBox(
-            child: child,
-          ),
-          onReorder: (oldIndex, newIndex) {
-            setState(() {
-              if (oldIndex < newIndex) {
-                newIndex -= 1;
-              }
-              final item = list.removeAt(oldIndex);
-              list.insert(newIndex, item);
-            });
-          },
-          children: List.generate(
-            list.length,
-            (index) => _buildList(
-              context,
-              name: list[index],
-            ),
-          ),
-        ),
+        list.isEmpty
+            ? const SizedBox()
+            : ReorderableListView(
+                key: UniqueKey(),
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                proxyDecorator: (child, index, animation) => SizedBox(
+                  child: child,
+                ),
+                onReorder: (oldIndex, newIndex) {
+                  setState(() {
+                    if (oldIndex < newIndex) {
+                      newIndex -= 1;
+                    }
+                    final item = list.removeAt(oldIndex);
+                    list.insert(newIndex, item);
+                    widget.onChange(list);
+                  });
+                },
+                children: List.generate(
+                  list.length,
+                  (index) => _buildList(
+                    context,
+                    name: list[index],
+                  ),
+                ),
+              ),
       ],
     );
   }
 
-  Widget _buildList(BuildContext context, {required String name}) {
+  Widget _buildList(BuildContext context, {required String? name}) {
+    if (name == null) return const SizedBox();
     return Container(
       key: ValueKey<String>(name),
       decoration: BoxDecoration(

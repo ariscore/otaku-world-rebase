@@ -16,7 +16,6 @@ import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/recommended_anime/recommended_anime_bloc.dart';
 import 'package:otaku_world/bloc/recommended_manga/recommended_manga_bloc.dart';
 import 'package:otaku_world/bloc/routes/redirect_route_cubit.dart';
-// import 'package:otaku_world/bloc/text_field/clear_text_cubit.dart';
 
 import 'package:otaku_world/bloc/trending_anime/trending_anime_bloc.dart';
 import 'package:otaku_world/bloc/trending_manga/trending_manga_bloc.dart';

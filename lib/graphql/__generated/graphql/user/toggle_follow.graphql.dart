@@ -49,7 +49,7 @@ class Variables$Mutation$ToggleFollow {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$ToggleFollow) ||
+    if (other is! Variables$Mutation$ToggleFollow ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -157,7 +157,7 @@ class Mutation$ToggleFollow {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleFollow) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$ToggleFollow || runtimeType != other.runtimeType) {
       return false;
     }
     final l$ToggleFollow = ToggleFollow;

@@ -51,7 +51,7 @@ class Variables$Query$GetMostFavoriteStaff {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$GetMostFavoriteStaff) ||
+    if (other is! Variables$Query$GetMostFavoriteStaff ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -160,7 +160,7 @@ class Query$GetMostFavoriteStaff {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetMostFavoriteStaff) ||
+    if (other is! Query$GetMostFavoriteStaff ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -576,7 +576,7 @@ class Query$GetMostFavoriteStaff$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetMostFavoriteStaff$Page) ||
+    if (other is! Query$GetMostFavoriteStaff$Page ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -755,7 +755,7 @@ class Query$GetMostFavoriteStaff$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetMostFavoriteStaff$Page$pageInfo) ||
+    if (other is! Query$GetMostFavoriteStaff$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }

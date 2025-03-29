@@ -49,7 +49,7 @@ class Variables$Mutation$DeleteActivity {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$DeleteActivity) ||
+    if (other is! Variables$Mutation$DeleteActivity ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -160,8 +160,7 @@ class Mutation$DeleteActivity {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$DeleteActivity) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Mutation$DeleteActivity || runtimeType != other.runtimeType) {
       return false;
     }
     final l$DeleteActivity = DeleteActivity;
@@ -565,7 +564,7 @@ class Mutation$DeleteActivity$DeleteActivity {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$DeleteActivity$DeleteActivity) ||
+    if (other is! Mutation$DeleteActivity$DeleteActivity ||
         runtimeType != other.runtimeType) {
       return false;
     }
