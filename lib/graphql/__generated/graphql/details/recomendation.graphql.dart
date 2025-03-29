@@ -64,7 +64,7 @@ class Variables$Query$GetRecommendation {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$GetRecommendation) ||
+    if (other is! Variables$Query$GetRecommendation ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -196,8 +196,7 @@ class Query$GetRecommendation {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetRecommendation) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Query$GetRecommendation || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Media = Media;
@@ -653,7 +652,7 @@ class Query$GetRecommendation$Media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetRecommendation$Media) ||
+    if (other is! Query$GetRecommendation$Media ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -813,7 +812,7 @@ class Query$GetRecommendation$Media$recommendations {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetRecommendation$Media$recommendations) ||
+    if (other is! Query$GetRecommendation$Media$recommendations ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1004,7 +1003,7 @@ class Query$GetRecommendation$Media$recommendations$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetRecommendation$Media$recommendations$pageInfo) ||
+    if (other is! Query$GetRecommendation$Media$recommendations$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1142,7 +1141,7 @@ class Query$GetRecommendation$Media$recommendations$edges {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetRecommendation$Media$recommendations$edges) ||
+    if (other is! Query$GetRecommendation$Media$recommendations$edges ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1298,7 +1297,7 @@ class Query$GetRecommendation$Media$recommendations$edges$node {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetRecommendation$Media$recommendations$edges$node) ||
+    if (other is! Query$GetRecommendation$Media$recommendations$edges$node ||
         runtimeType != other.runtimeType) {
       return false;
     }

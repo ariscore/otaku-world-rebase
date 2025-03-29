@@ -238,7 +238,7 @@ class FormattingUtils {
     }
   }
 
-  static String getMediaStatusString(Enum$MediaStatus status) {
+  static String getMediaStatusString(Enum$MediaStatus? status) {
     switch (status) {
       case Enum$MediaStatus.RELEASING:
         return 'Airing';

@@ -79,7 +79,7 @@ class Variables$Query$MediaReviews {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$MediaReviews) ||
+    if (other is! Variables$Query$MediaReviews ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -227,7 +227,7 @@ class Query$MediaReviews {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$MediaReviews) || runtimeType != other.runtimeType) {
+    if (other is! Query$MediaReviews || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Media = Media;
@@ -662,7 +662,7 @@ class Query$MediaReviews$Media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$MediaReviews$Media) ||
+    if (other is! Query$MediaReviews$Media ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -823,7 +823,7 @@ class Query$MediaReviews$Media$reviews {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$MediaReviews$Media$reviews) ||
+    if (other is! Query$MediaReviews$Media$reviews ||
         runtimeType != other.runtimeType) {
       return false;
     }

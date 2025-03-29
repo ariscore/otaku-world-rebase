@@ -4,7 +4,7 @@ import 'dart:developer' as dev;
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uni_links2/uni_links.dart';
+import 'package:uni_links5/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 part 'auth_state.dart';

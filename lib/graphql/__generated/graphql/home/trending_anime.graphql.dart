@@ -49,7 +49,7 @@ class Variables$Query$GetTrendingAnime {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$GetTrendingAnime) ||
+    if (other is! Variables$Query$GetTrendingAnime ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -158,8 +158,7 @@ class Query$GetTrendingAnime {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetTrendingAnime) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Query$GetTrendingAnime || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -576,7 +575,7 @@ class Query$GetTrendingAnime$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetTrendingAnime$Page) ||
+    if (other is! Query$GetTrendingAnime$Page ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -754,7 +753,7 @@ class Query$GetTrendingAnime$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetTrendingAnime$Page$pageInfo) ||
+    if (other is! Query$GetTrendingAnime$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }

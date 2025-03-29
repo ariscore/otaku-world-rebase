@@ -58,7 +58,7 @@ class Query$GetMediaTags {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetMediaTags) || runtimeType != other.runtimeType) {
+    if (other is! Query$GetMediaTags || runtimeType != other.runtimeType) {
       return false;
     }
     final l$MediaTagCollection = MediaTagCollection;

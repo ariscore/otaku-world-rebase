@@ -81,7 +81,7 @@ class Variables$Query$GetReviews {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$GetReviews) ||
+    if (other is! Variables$Query$GetReviews ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -228,7 +228,7 @@ class Query$GetReviews {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetReviews) || runtimeType != other.runtimeType) {
+    if (other is! Query$GetReviews || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -648,7 +648,7 @@ class Query$GetReviews$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetReviews$Page) || runtimeType != other.runtimeType) {
+    if (other is! Query$GetReviews$Page || runtimeType != other.runtimeType) {
       return false;
     }
     final l$pageInfo = pageInfo;
@@ -823,7 +823,7 @@ class Query$GetReviews$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetReviews$Page$pageInfo) ||
+    if (other is! Query$GetReviews$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }

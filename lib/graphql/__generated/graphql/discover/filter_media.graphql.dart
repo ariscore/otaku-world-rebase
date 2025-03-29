@@ -412,7 +412,7 @@ class Variables$Query$FilterMedia {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$FilterMedia) ||
+    if (other is! Variables$Query$FilterMedia ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1063,7 +1063,7 @@ class Query$FilterMedia {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FilterMedia) || runtimeType != other.runtimeType) {
+    if (other is! Query$FilterMedia || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -1834,8 +1834,7 @@ class Query$FilterMedia$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FilterMedia$Page) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Query$FilterMedia$Page || runtimeType != other.runtimeType) {
       return false;
     }
     final l$pageInfo = pageInfo;
@@ -2010,7 +2009,7 @@ class Query$FilterMedia$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FilterMedia$Page$pageInfo) ||
+    if (other is! Query$FilterMedia$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }

@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/constants/string_constants.dart';
+import 'package:otaku_world/core/types/enums.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/update_user.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/viewer.graphql.dart';
@@ -28,6 +29,7 @@ class ViewerBloc extends Bloc<ViewerEvent, ViewerState> {
     Emitter<ViewerState> emit,
   ) async {
     log('Fetching user data');
+    emit(ViewerLoading());
     final response = await event.client.query$Viewer(
       Options$Query$Viewer(
         fetchPolicy: FetchPolicy.networkOnly,
@@ -39,20 +41,31 @@ class ViewerBloc extends Bloc<ViewerEvent, ViewerState> {
       if (state is ViewerLoaded) {
         return;
       }
-      final exception = response.exception!;
 
       if (response.exception!.linkException != null) {
-        log(exception.toString());
         emit(
-          const ViewerError('Please check your internet connection!'),
+          const ViewerError(
+            type: ErrorType.noInternet,
+            message: StringConstants.noInternetError,
+          ),
         );
       } else {
-        emit(const ViewerError('Some Unexpected error occurred!'));
+        emit(
+          const ViewerError(
+            type: ErrorType.noInternet,
+            message: StringConstants.unexpectedError,
+          ),
+        );
       }
     } else {
       final user = response.parsedData?.Viewer;
       if (user == null) {
-        emit(const ViewerError('Some Unexpected error occurred!'));
+        emit(
+          const ViewerError(
+            type: ErrorType.noInternet,
+            message: StringConstants.unexpectedError,
+          ),
+        );
       } else {
         emit(ViewerLoaded(user: user));
       }
@@ -154,5 +167,9 @@ class ViewerBloc extends Bloc<ViewerEvent, ViewerState> {
   void onTransition(Transition<ViewerEvent, ViewerState> transition) {
     log(transition.toString(), name: 'Viewer');
     super.onTransition(transition);
+  }
+
+  Fragment$Settings getUser() {
+    return (state as ViewerLoaded).user;
   }
 }

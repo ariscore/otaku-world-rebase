@@ -51,7 +51,7 @@ class Variables$Query$GetMostFavoriteCharacters {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$GetMostFavoriteCharacters) ||
+    if (other is! Variables$Query$GetMostFavoriteCharacters ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -160,7 +160,7 @@ class Query$GetMostFavoriteCharacters {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetMostFavoriteCharacters) ||
+    if (other is! Query$GetMostFavoriteCharacters ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -584,7 +584,7 @@ class Query$GetMostFavoriteCharacters$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetMostFavoriteCharacters$Page) ||
+    if (other is! Query$GetMostFavoriteCharacters$Page ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -767,7 +767,7 @@ class Query$GetMostFavoriteCharacters$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetMostFavoriteCharacters$Page$pageInfo) ||
+    if (other is! Query$GetMostFavoriteCharacters$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }

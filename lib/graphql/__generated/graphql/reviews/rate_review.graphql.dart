@@ -66,7 +66,7 @@ class Variables$Mutation$RateReview {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$RateReview) ||
+    if (other is! Variables$Mutation$RateReview ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -199,7 +199,7 @@ class Mutation$RateReview {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$RateReview) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$RateReview || runtimeType != other.runtimeType) {
       return false;
     }
     final l$RateReview = RateReview;
@@ -612,7 +612,7 @@ class Mutation$RateReview$RateReview {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$RateReview$RateReview) ||
+    if (other is! Mutation$RateReview$RateReview ||
         runtimeType != other.runtimeType) {
       return false;
     }

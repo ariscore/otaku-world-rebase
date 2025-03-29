@@ -50,7 +50,7 @@ class Variables$Mutation$ToggleActivityReply {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$ToggleActivityReply) ||
+    if (other is! Variables$Mutation$ToggleActivityReply ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -159,7 +159,7 @@ class Mutation$ToggleActivityReply {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleActivityReply) ||
+    if (other is! Mutation$ToggleActivityReply ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -604,7 +604,7 @@ class Mutation$ToggleActivityReply$ToggleLikeV2 {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleActivityReply$ToggleLikeV2) ||
+    if (other is! Mutation$ToggleActivityReply$ToggleLikeV2 ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -830,7 +830,7 @@ class Mutation$ToggleActivityReply$ToggleLikeV2$$ActivityReply
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleActivityReply$ToggleLikeV2$$ActivityReply) ||
+    if (other is! Mutation$ToggleActivityReply$ToggleLikeV2$$ActivityReply ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -955,7 +955,7 @@ class Mutation$ToggleActivityReply$ToggleLikeV2$$ListActivity
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleActivityReply$ToggleLikeV2$$ListActivity) ||
+    if (other is! Mutation$ToggleActivityReply$ToggleLikeV2$$ListActivity ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1060,8 +1060,7 @@ class Mutation$ToggleActivityReply$ToggleLikeV2$$MessageActivity
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Mutation$ToggleActivityReply$ToggleLikeV2$$MessageActivity) ||
+    if (other is! Mutation$ToggleActivityReply$ToggleLikeV2$$MessageActivity ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1169,7 +1168,7 @@ class Mutation$ToggleActivityReply$ToggleLikeV2$$TextActivity
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleActivityReply$ToggleLikeV2$$TextActivity) ||
+    if (other is! Mutation$ToggleActivityReply$ToggleLikeV2$$TextActivity ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1274,7 +1273,7 @@ class Mutation$ToggleActivityReply$ToggleLikeV2$$Thread
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleActivityReply$ToggleLikeV2$$Thread) ||
+    if (other is! Mutation$ToggleActivityReply$ToggleLikeV2$$Thread ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1376,7 +1375,7 @@ class Mutation$ToggleActivityReply$ToggleLikeV2$$ThreadComment
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ToggleActivityReply$ToggleLikeV2$$ThreadComment) ||
+    if (other is! Mutation$ToggleActivityReply$ToggleLikeV2$$ThreadComment ||
         runtimeType != other.runtimeType) {
       return false;
     }

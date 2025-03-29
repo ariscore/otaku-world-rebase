@@ -64,7 +64,7 @@ class Variables$Mutation$ActivitySubscription {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$ActivitySubscription) ||
+    if (other is! Variables$Mutation$ActivitySubscription ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -200,7 +200,7 @@ class Mutation$ActivitySubscription {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ActivitySubscription) ||
+    if (other is! Mutation$ActivitySubscription ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -631,7 +631,7 @@ class Mutation$ActivitySubscription$ToggleActivitySubscription {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$ActivitySubscription$ToggleActivitySubscription) ||
+    if (other is! Mutation$ActivitySubscription$ToggleActivitySubscription ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -810,8 +810,8 @@ class Mutation$ActivitySubscription$ToggleActivitySubscription$$ListActivity
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Mutation$ActivitySubscription$ToggleActivitySubscription$$ListActivity) ||
+    if (other
+            is! Mutation$ActivitySubscription$ToggleActivitySubscription$$ListActivity ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -923,8 +923,8 @@ class Mutation$ActivitySubscription$ToggleActivitySubscription$$MessageActivity
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Mutation$ActivitySubscription$ToggleActivitySubscription$$MessageActivity) ||
+    if (other
+            is! Mutation$ActivitySubscription$ToggleActivitySubscription$$MessageActivity ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1036,8 +1036,8 @@ class Mutation$ActivitySubscription$ToggleActivitySubscription$$TextActivity
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Mutation$ActivitySubscription$ToggleActivitySubscription$$TextActivity) ||
+    if (other
+            is! Mutation$ActivitySubscription$ToggleActivitySubscription$$TextActivity ||
         runtimeType != other.runtimeType) {
       return false;
     }

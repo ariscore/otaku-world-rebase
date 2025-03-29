@@ -51,7 +51,7 @@ class Variables$Query$GetRecommendedManga {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$GetRecommendedManga) ||
+    if (other is! Variables$Query$GetRecommendedManga ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -160,7 +160,7 @@ class Query$GetRecommendedManga {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetRecommendedManga) ||
+    if (other is! Query$GetRecommendedManga ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -585,7 +585,7 @@ class Query$GetRecommendedManga$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetRecommendedManga$Page) ||
+    if (other is! Query$GetRecommendedManga$Page ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -764,7 +764,7 @@ class Query$GetRecommendedManga$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetRecommendedManga$Page$pageInfo) ||
+    if (other is! Query$GetRecommendedManga$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }
