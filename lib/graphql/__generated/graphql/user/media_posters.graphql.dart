@@ -62,7 +62,7 @@ class Fragment$MediaPoster {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaPoster) || runtimeType != other.runtimeType) {
+    if (other is! Fragment$MediaPoster || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -292,7 +292,7 @@ class Fragment$MediaPoster$coverImage {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaPoster$coverImage) ||
+    if (other is! Fragment$MediaPoster$coverImage ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -428,7 +428,7 @@ class Variables$Query$MediaPosters {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$MediaPosters) ||
+    if (other is! Variables$Query$MediaPosters ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -574,7 +574,7 @@ class Query$MediaPosters {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$MediaPosters) || runtimeType != other.runtimeType) {
+    if (other is! Query$MediaPosters || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -991,8 +991,7 @@ class Query$MediaPosters$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$MediaPosters$Page) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Query$MediaPosters$Page || runtimeType != other.runtimeType) {
       return false;
     }
     final l$pageInfo = pageInfo;
@@ -1168,7 +1167,7 @@ class Query$MediaPosters$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$MediaPosters$Page$pageInfo) ||
+    if (other is! Query$MediaPosters$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }

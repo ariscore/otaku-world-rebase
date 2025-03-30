@@ -1,4 +1,3 @@
-
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,15 +16,17 @@ class AppScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-    appBar: const MainAppBar(),
-    body: DoubleBackToCloseApp(
-      snackBar: const SnackBar(
-        content: Text('Press back again to exit!'),
+    return SafeArea(
+      child: Scaffold(
+        appBar: navigationShell.currentIndex != 3 ? const MainAppBar() : null,
+        body: DoubleBackToCloseApp(
+          snackBar: const SnackBar(
+            content: Text('Press back again to exit!'),
+          ),
+          child: navigationShell,
+        ),
+        bottomNavigationBar: _BottomNavBar(navigationShell),
       ),
-      child: navigationShell,
-    ),
-    bottomNavigationBar: _BottomNavBar(navigationShell),
     );
   }
 }
@@ -41,6 +42,7 @@ class _BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<_BottomNavBar> {
   bool _isBottomBarVisible = true;
+  final bottomBarHeight = 75.0;
 
   @override
   Widget build(BuildContext context) {
@@ -59,11 +61,11 @@ class _BottomNavBarState extends State<_BottomNavBar> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 400),
         curve: Curves.easeIn,
-        height: _isBottomBarVisible ? 75 : 0,
+        height: _isBottomBarVisible ? bottomBarHeight : 0,
         child: Wrap(
           children: [
             SizedBox(
-              height: 75,
+              height: bottomBarHeight,
               child: BottomNavigationBar(
                 type: BottomNavigationBarType.fixed,
                 showUnselectedLabels: true,
@@ -131,4 +133,3 @@ class _BottomNavBarState extends State<_BottomNavBar> {
     );
   }
 }
-

@@ -4,17 +4,18 @@ import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/staff/staff_bloc.dart';
-import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/features/media_detail/widgets/media_app_bar.dart';
 import 'package:otaku_world/features/profile/widgets/keep_alive_tab.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/media_detail/characters/characters_bloc.dart';
 import '../../../bloc/media_detail/media_detail_bloc.dart';
+import '../../../generated/assets.dart';
 import '../../../theme/colors.dart';
 import '../tabs/characters/characters.dart' as ch;
 import '../tabs/overview/overview.dart';
@@ -51,13 +52,25 @@ class MediaDetailScreen extends HookWidget {
         _onPopInvoked(context);
       },
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            context.push(
-              RouteConstants.postReview,
-            );
+        floatingActionButton: BlocBuilder<MediaDetailBloc, MediaDetailState>(
+          builder: (context, state) {
+            if (state is MediaDetailLoaded) {
+              final String icon = state.media.mediaListEntry == null &&
+                      state.media.mediaListEntry?.status == null
+                  ? Assets.iconsMediaAdd
+                  : Assets.iconsMediaEdit;
+              return FloatingActionButton(
+                onPressed: () {},
+                backgroundColor: AppColors.sunsetOrange,
+                child: SvgPicture.asset(
+                  icon,
+                  width: 30,
+                ),
+              );
+            } else {
+              return const SizedBox();
+            }
           },
-          child: Container(),
         ),
         body: BlocBuilder<MediaDetailBloc, MediaDetailState>(
           builder: (context, state) {

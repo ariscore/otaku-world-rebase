@@ -89,7 +89,7 @@ class Variables$Mutation$SaveMessageActivity {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$SaveMessageActivity) ||
+    if (other is! Variables$Mutation$SaveMessageActivity ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -250,7 +250,7 @@ class Mutation$SaveMessageActivity {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$SaveMessageActivity) ||
+    if (other is! Mutation$SaveMessageActivity ||
         runtimeType != other.runtimeType) {
       return false;
     }

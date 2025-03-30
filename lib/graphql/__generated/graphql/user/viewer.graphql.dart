@@ -54,7 +54,7 @@ class Query$Viewer {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Viewer) || runtimeType != other.runtimeType) {
+    if (other is! Query$Viewer || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Viewer = Viewer;
@@ -484,7 +484,7 @@ class Query$Viewer$Viewer implements Fragment$User, Fragment$Settings {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Viewer$Viewer) || runtimeType != other.runtimeType) {
+    if (other is! Query$Viewer$Viewer || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -792,7 +792,7 @@ class Query$Viewer$Viewer$avatar
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Viewer$Viewer$avatar) ||
+    if (other is! Query$Viewer$Viewer$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1032,7 +1032,7 @@ class Query$Viewer$Viewer$options implements Fragment$Settings$options {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Viewer$Viewer$options) ||
+    if (other is! Query$Viewer$Viewer$options ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1343,7 +1343,7 @@ class Query$Viewer$Viewer$options$notificationOptions
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Viewer$Viewer$options$notificationOptions) ||
+    if (other is! Query$Viewer$Viewer$options$notificationOptions ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1493,7 +1493,7 @@ class Query$Viewer$Viewer$options$disabledListActivity
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Viewer$Viewer$options$disabledListActivity) ||
+    if (other is! Query$Viewer$Viewer$options$disabledListActivity ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1668,7 +1668,7 @@ class Query$Viewer$Viewer$mediaListOptions
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Viewer$Viewer$mediaListOptions) ||
+    if (other is! Query$Viewer$Viewer$mediaListOptions ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1904,7 +1904,7 @@ class Query$Viewer$Viewer$mediaListOptions$animeList
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Viewer$Viewer$mediaListOptions$animeList) ||
+    if (other is! Query$Viewer$Viewer$mediaListOptions$animeList ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2163,7 +2163,7 @@ class Query$Viewer$Viewer$mediaListOptions$mangaList
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Viewer$Viewer$mediaListOptions$mangaList) ||
+    if (other is! Query$Viewer$Viewer$mediaListOptions$mangaList ||
         runtimeType != other.runtimeType) {
       return false;
     }

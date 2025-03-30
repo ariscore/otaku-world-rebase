@@ -60,7 +60,7 @@ class Query$GetPublishingPlatforms {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetPublishingPlatforms) ||
+    if (other is! Query$GetPublishingPlatforms ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -463,7 +463,7 @@ class Query$GetPublishingPlatforms$ExternalLinkSourceCollection {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetPublishingPlatforms$ExternalLinkSourceCollection) ||
+    if (other is! Query$GetPublishingPlatforms$ExternalLinkSourceCollection ||
         runtimeType != other.runtimeType) {
       return false;
     }

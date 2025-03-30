@@ -50,7 +50,7 @@ class Variables$Query$GetUpcomingEpisodes {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$GetUpcomingEpisodes) ||
+    if (other is! Variables$Query$GetUpcomingEpisodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -159,7 +159,7 @@ class Query$GetUpcomingEpisodes {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetUpcomingEpisodes) ||
+    if (other is! Query$GetUpcomingEpisodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -701,7 +701,7 @@ class Query$GetUpcomingEpisodes$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetUpcomingEpisodes$Page) ||
+    if (other is! Query$GetUpcomingEpisodes$Page ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -884,7 +884,7 @@ class Query$GetUpcomingEpisodes$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetUpcomingEpisodes$Page$pageInfo) ||
+    if (other is! Query$GetUpcomingEpisodes$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1047,7 +1047,7 @@ class Query$GetUpcomingEpisodes$Page$media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetUpcomingEpisodes$Page$media) ||
+    if (other is! Query$GetUpcomingEpisodes$Page$media ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1269,7 +1269,7 @@ class Query$GetUpcomingEpisodes$Page$media$title {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetUpcomingEpisodes$Page$media$title) ||
+    if (other is! Query$GetUpcomingEpisodes$Page$media$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1413,7 +1413,7 @@ class Query$GetUpcomingEpisodes$Page$media$coverImage {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetUpcomingEpisodes$Page$media$coverImage) ||
+    if (other is! Query$GetUpcomingEpisodes$Page$media$coverImage ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1544,7 +1544,7 @@ class Query$GetUpcomingEpisodes$Page$media$airingSchedule {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetUpcomingEpisodes$Page$media$airingSchedule) ||
+    if (other is! Query$GetUpcomingEpisodes$Page$media$airingSchedule ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1722,7 +1722,7 @@ class Query$GetUpcomingEpisodes$Page$media$airingSchedule$nodes {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetUpcomingEpisodes$Page$media$airingSchedule$nodes) ||
+    if (other is! Query$GetUpcomingEpisodes$Page$media$airingSchedule$nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }

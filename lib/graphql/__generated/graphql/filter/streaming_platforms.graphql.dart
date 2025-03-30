@@ -60,7 +60,7 @@ class Query$GetStreamingPlatforms {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetStreamingPlatforms) ||
+    if (other is! Query$GetStreamingPlatforms ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -444,7 +444,7 @@ class Query$GetStreamingPlatforms$ExternalLinkSourceCollection {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetStreamingPlatforms$ExternalLinkSourceCollection) ||
+    if (other is! Query$GetStreamingPlatforms$ExternalLinkSourceCollection ||
         runtimeType != other.runtimeType) {
       return false;
     }

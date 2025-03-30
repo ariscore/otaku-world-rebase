@@ -60,8 +60,7 @@ class Query$GetMangaPlatforms {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetMangaPlatforms) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Query$GetMangaPlatforms || runtimeType != other.runtimeType) {
       return false;
     }
     final l$ExternalLinkSourceCollection = ExternalLinkSourceCollection;
@@ -455,7 +454,7 @@ class Query$GetMangaPlatforms$ExternalLinkSourceCollection {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetMangaPlatforms$ExternalLinkSourceCollection) ||
+    if (other is! Query$GetMangaPlatforms$ExternalLinkSourceCollection ||
         runtimeType != other.runtimeType) {
       return false;
     }

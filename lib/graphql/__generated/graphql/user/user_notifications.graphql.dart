@@ -86,7 +86,7 @@ class Variables$Query$UserNotifications {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$UserNotifications) ||
+    if (other is! Variables$Query$UserNotifications ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -252,8 +252,7 @@ class Query$UserNotifications {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$UserNotifications) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Query$UserNotifications || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -771,7 +770,7 @@ class Query$UserNotifications$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$UserNotifications$Page) ||
+    if (other is! Query$UserNotifications$Page ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -954,7 +953,7 @@ class Query$UserNotifications$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$UserNotifications$Page$pageInfo) ||
+    if (other is! Query$UserNotifications$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1138,7 +1137,7 @@ class Query$UserNotifications$Page$notifications {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$UserNotifications$Page$notifications) ||
+    if (other is! Query$UserNotifications$Page$notifications ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1611,8 +1610,8 @@ class Query$UserNotifications$Page$notifications$$ActivityLikeNotification
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ActivityLikeNotification) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ActivityLikeNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1840,8 +1839,8 @@ class Query$UserNotifications$Page$notifications$$ActivityLikeNotification$user
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ActivityLikeNotification$user) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ActivityLikeNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2027,8 +2026,8 @@ class Query$UserNotifications$Page$notifications$$ActivityLikeNotification$user$
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ActivityLikeNotification$user$avatar) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ActivityLikeNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2213,8 +2212,8 @@ class Query$UserNotifications$Page$notifications$$ActivityMentionNotification
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ActivityMentionNotification) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ActivityMentionNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2442,8 +2441,8 @@ class Query$UserNotifications$Page$notifications$$ActivityMentionNotification$us
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ActivityMentionNotification$user) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ActivityMentionNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2629,8 +2628,8 @@ class Query$UserNotifications$Page$notifications$$ActivityMentionNotification$us
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ActivityMentionNotification$user$avatar) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ActivityMentionNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2815,8 +2814,8 @@ class Query$UserNotifications$Page$notifications$$ActivityMessageNotification
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ActivityMessageNotification) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ActivityMessageNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3044,8 +3043,8 @@ class Query$UserNotifications$Page$notifications$$ActivityMessageNotification$us
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ActivityMessageNotification$user) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ActivityMessageNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3231,8 +3230,8 @@ class Query$UserNotifications$Page$notifications$$ActivityMessageNotification$us
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ActivityMessageNotification$user$avatar) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ActivityMessageNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3417,8 +3416,8 @@ class Query$UserNotifications$Page$notifications$$ActivityReplyLikeNotification
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ActivityReplyLikeNotification) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ActivityReplyLikeNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3646,8 +3645,8 @@ class Query$UserNotifications$Page$notifications$$ActivityReplyLikeNotification$
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ActivityReplyLikeNotification$user) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ActivityReplyLikeNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3833,8 +3832,8 @@ class Query$UserNotifications$Page$notifications$$ActivityReplyLikeNotification$
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ActivityReplyLikeNotification$user$avatar) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ActivityReplyLikeNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4019,8 +4018,8 @@ class Query$UserNotifications$Page$notifications$$ActivityReplyNotification
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ActivityReplyNotification) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ActivityReplyNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4248,8 +4247,8 @@ class Query$UserNotifications$Page$notifications$$ActivityReplyNotification$user
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ActivityReplyNotification$user) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ActivityReplyNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4435,8 +4434,8 @@ class Query$UserNotifications$Page$notifications$$ActivityReplyNotification$user
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ActivityReplyNotification$user$avatar) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ActivityReplyNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4621,8 +4620,8 @@ class Query$UserNotifications$Page$notifications$$ActivityReplySubscribedNotific
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ActivityReplySubscribedNotification) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ActivityReplySubscribedNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4850,8 +4849,8 @@ class Query$UserNotifications$Page$notifications$$ActivityReplySubscribedNotific
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ActivityReplySubscribedNotification$user) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ActivityReplySubscribedNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5037,8 +5036,8 @@ class Query$UserNotifications$Page$notifications$$ActivityReplySubscribedNotific
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ActivityReplySubscribedNotification$user$avatar) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ActivityReplySubscribedNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5224,8 +5223,8 @@ class Query$UserNotifications$Page$notifications$$AiringNotification
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$AiringNotification) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$AiringNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5464,8 +5463,8 @@ class Query$UserNotifications$Page$notifications$$AiringNotification$media
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$AiringNotification$media) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$AiringNotification$media ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5672,8 +5671,8 @@ class Query$UserNotifications$Page$notifications$$AiringNotification$media$cover
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$AiringNotification$media$coverImage) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$AiringNotification$media$coverImage ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5816,8 +5815,8 @@ class Query$UserNotifications$Page$notifications$$AiringNotification$media$title
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$AiringNotification$media$title) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$AiringNotification$media$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5995,8 +5994,8 @@ class Query$UserNotifications$Page$notifications$$FollowingNotification
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$FollowingNotification) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$FollowingNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6210,8 +6209,8 @@ class Query$UserNotifications$Page$notifications$$FollowingNotification$user
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$FollowingNotification$user) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$FollowingNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6397,8 +6396,8 @@ class Query$UserNotifications$Page$notifications$$FollowingNotification$user$ava
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$FollowingNotification$user$avatar) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$FollowingNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6583,8 +6582,8 @@ class Query$UserNotifications$Page$notifications$$MediaDataChangeNotification
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$MediaDataChangeNotification) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$MediaDataChangeNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6814,8 +6813,8 @@ class Query$UserNotifications$Page$notifications$$MediaDataChangeNotification$me
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$MediaDataChangeNotification$media) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$MediaDataChangeNotification$media ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7022,8 +7021,8 @@ class Query$UserNotifications$Page$notifications$$MediaDataChangeNotification$me
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$MediaDataChangeNotification$media$title) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$MediaDataChangeNotification$media$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7168,8 +7167,8 @@ class Query$UserNotifications$Page$notifications$$MediaDataChangeNotification$me
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$MediaDataChangeNotification$media$coverImage) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$MediaDataChangeNotification$media$coverImage ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7350,8 +7349,8 @@ class Query$UserNotifications$Page$notifications$$MediaDeletionNotification
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$MediaDeletionNotification) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$MediaDeletionNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7590,8 +7589,8 @@ class Query$UserNotifications$Page$notifications$$MediaMergeNotification
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$MediaMergeNotification) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$MediaMergeNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7840,8 +7839,8 @@ class Query$UserNotifications$Page$notifications$$MediaMergeNotification$media
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$MediaMergeNotification$media) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$MediaMergeNotification$media ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8048,8 +8047,8 @@ class Query$UserNotifications$Page$notifications$$MediaMergeNotification$media$t
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$MediaMergeNotification$media$title) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$MediaMergeNotification$media$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8194,8 +8193,8 @@ class Query$UserNotifications$Page$notifications$$MediaMergeNotification$media$c
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$MediaMergeNotification$media$coverImage) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$MediaMergeNotification$media$coverImage ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8371,8 +8370,8 @@ class Query$UserNotifications$Page$notifications$$RelatedMediaAdditionNotificati
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$RelatedMediaAdditionNotification) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$RelatedMediaAdditionNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8593,8 +8592,8 @@ class Query$UserNotifications$Page$notifications$$RelatedMediaAdditionNotificati
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$RelatedMediaAdditionNotification$media) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$RelatedMediaAdditionNotification$media ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8801,8 +8800,8 @@ class Query$UserNotifications$Page$notifications$$RelatedMediaAdditionNotificati
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$RelatedMediaAdditionNotification$media$title) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$RelatedMediaAdditionNotification$media$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8947,8 +8946,8 @@ class Query$UserNotifications$Page$notifications$$RelatedMediaAdditionNotificati
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$RelatedMediaAdditionNotification$media$coverImage) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$RelatedMediaAdditionNotification$media$coverImage ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9137,8 +9136,8 @@ class Query$UserNotifications$Page$notifications$$ThreadCommentLikeNotification
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ThreadCommentLikeNotification) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ThreadCommentLikeNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9365,8 +9364,8 @@ class Query$UserNotifications$Page$notifications$$ThreadCommentLikeNotification$
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ThreadCommentLikeNotification$thread) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ThreadCommentLikeNotification$thread ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9531,8 +9530,8 @@ class Query$UserNotifications$Page$notifications$$ThreadCommentLikeNotification$
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ThreadCommentLikeNotification$user) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ThreadCommentLikeNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9718,8 +9717,8 @@ class Query$UserNotifications$Page$notifications$$ThreadCommentLikeNotification$
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ThreadCommentLikeNotification$user$avatar) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ThreadCommentLikeNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9908,8 +9907,8 @@ class Query$UserNotifications$Page$notifications$$ThreadCommentMentionNotificati
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ThreadCommentMentionNotification) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ThreadCommentMentionNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10136,8 +10135,8 @@ class Query$UserNotifications$Page$notifications$$ThreadCommentMentionNotificati
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ThreadCommentMentionNotification$thread) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ThreadCommentMentionNotification$thread ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10302,8 +10301,8 @@ class Query$UserNotifications$Page$notifications$$ThreadCommentMentionNotificati
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ThreadCommentMentionNotification$user) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ThreadCommentMentionNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10489,8 +10488,8 @@ class Query$UserNotifications$Page$notifications$$ThreadCommentMentionNotificati
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ThreadCommentMentionNotification$user$avatar) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ThreadCommentMentionNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10679,8 +10678,8 @@ class Query$UserNotifications$Page$notifications$$ThreadCommentReplyNotification
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ThreadCommentReplyNotification) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ThreadCommentReplyNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10907,8 +10906,8 @@ class Query$UserNotifications$Page$notifications$$ThreadCommentReplyNotification
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ThreadCommentReplyNotification$thread) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ThreadCommentReplyNotification$thread ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11073,8 +11072,8 @@ class Query$UserNotifications$Page$notifications$$ThreadCommentReplyNotification
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ThreadCommentReplyNotification$user) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ThreadCommentReplyNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11260,8 +11259,8 @@ class Query$UserNotifications$Page$notifications$$ThreadCommentReplyNotification
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ThreadCommentReplyNotification$user$avatar) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ThreadCommentReplyNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11450,8 +11449,8 @@ class Query$UserNotifications$Page$notifications$$ThreadCommentSubscribedNotific
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ThreadCommentSubscribedNotification) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ThreadCommentSubscribedNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11678,8 +11677,8 @@ class Query$UserNotifications$Page$notifications$$ThreadCommentSubscribedNotific
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ThreadCommentSubscribedNotification$thread) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ThreadCommentSubscribedNotification$thread ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11844,8 +11843,8 @@ class Query$UserNotifications$Page$notifications$$ThreadCommentSubscribedNotific
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ThreadCommentSubscribedNotification$user) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ThreadCommentSubscribedNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12031,8 +12030,8 @@ class Query$UserNotifications$Page$notifications$$ThreadCommentSubscribedNotific
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ThreadCommentSubscribedNotification$user$avatar) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ThreadCommentSubscribedNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12221,8 +12220,8 @@ class Query$UserNotifications$Page$notifications$$ThreadLikeNotification
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ThreadLikeNotification) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ThreadLikeNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12446,8 +12445,8 @@ class Query$UserNotifications$Page$notifications$$ThreadLikeNotification$thread
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ThreadLikeNotification$thread) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ThreadLikeNotification$thread ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12612,8 +12611,8 @@ class Query$UserNotifications$Page$notifications$$ThreadLikeNotification$user
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ThreadLikeNotification$user) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ThreadLikeNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12799,8 +12798,8 @@ class Query$UserNotifications$Page$notifications$$ThreadLikeNotification$user$av
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$UserNotifications$Page$notifications$$ThreadLikeNotification$user$avatar) ||
+    if (other
+            is! Query$UserNotifications$Page$notifications$$ThreadLikeNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }

@@ -65,7 +65,7 @@ class Variables$Query$GetActivityReplies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$GetActivityReplies) ||
+    if (other is! Variables$Query$GetActivityReplies ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -198,7 +198,7 @@ class Query$GetActivityReplies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetActivityReplies) ||
+    if (other is! Query$GetActivityReplies ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -622,7 +622,7 @@ class Query$GetActivityReplies$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetActivityReplies$Page) ||
+    if (other is! Query$GetActivityReplies$Page ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -803,7 +803,7 @@ class Query$GetActivityReplies$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetActivityReplies$Page$pageInfo) ||
+    if (other is! Query$GetActivityReplies$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }

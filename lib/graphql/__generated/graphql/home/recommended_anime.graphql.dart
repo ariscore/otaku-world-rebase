@@ -51,7 +51,7 @@ class Variables$Query$GetRecommendedAnime {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$GetRecommendedAnime) ||
+    if (other is! Variables$Query$GetRecommendedAnime ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -160,7 +160,7 @@ class Query$GetRecommendedAnime {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetRecommendedAnime) ||
+    if (other is! Query$GetRecommendedAnime ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -585,7 +585,7 @@ class Query$GetRecommendedAnime$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetRecommendedAnime$Page) ||
+    if (other is! Query$GetRecommendedAnime$Page ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -764,7 +764,7 @@ class Query$GetRecommendedAnime$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetRecommendedAnime$Page$pageInfo) ||
+    if (other is! Query$GetRecommendedAnime$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }

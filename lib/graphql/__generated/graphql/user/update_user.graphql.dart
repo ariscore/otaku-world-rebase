@@ -279,7 +279,7 @@ class Variables$Mutation$UpdateUser {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$UpdateUser) ||
+    if (other is! Variables$Mutation$UpdateUser ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -677,7 +677,7 @@ class Mutation$UpdateUser {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$UpdateUser) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$UpdateUser || runtimeType != other.runtimeType) {
       return false;
     }
     final l$UpdateUser = UpdateUser;

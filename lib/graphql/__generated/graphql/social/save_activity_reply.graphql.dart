@@ -77,7 +77,7 @@ class Variables$Mutation$SaveActivityReply {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$SaveActivityReply) ||
+    if (other is! Variables$Mutation$SaveActivityReply ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -224,7 +224,7 @@ class Mutation$SaveActivityReply {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$SaveActivityReply) ||
+    if (other is! Mutation$SaveActivityReply ||
         runtimeType != other.runtimeType) {
       return false;
     }

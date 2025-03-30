@@ -82,7 +82,7 @@ class Variables$Query$GetActivities {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$GetActivities) ||
+    if (other is! Variables$Query$GetActivities ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -244,7 +244,7 @@ class Query$GetActivities {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetActivities) || runtimeType != other.runtimeType) {
+    if (other is! Query$GetActivities || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -686,7 +686,7 @@ class Query$GetActivities$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetActivities$Page) ||
+    if (other is! Query$GetActivities$Page ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -868,7 +868,7 @@ class Query$GetActivities$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetActivities$Page$pageInfo) ||
+    if (other is! Query$GetActivities$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -993,7 +993,7 @@ class Query$GetActivities$Page$activities {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetActivities$Page$activities) ||
+    if (other is! Query$GetActivities$Page$activities ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1263,7 +1263,7 @@ class Query$GetActivities$Page$activities$$ListActivity
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetActivities$Page$activities$$ListActivity) ||
+    if (other is! Query$GetActivities$Page$activities$$ListActivity ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1564,7 +1564,7 @@ class Query$GetActivities$Page$activities$$ListActivity$user
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetActivities$Page$activities$$ListActivity$user) ||
+    if (other is! Query$GetActivities$Page$activities$$ListActivity$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1749,8 +1749,8 @@ class Query$GetActivities$Page$activities$$ListActivity$user$avatar
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$GetActivities$Page$activities$$ListActivity$user$avatar) ||
+    if (other
+            is! Query$GetActivities$Page$activities$$ListActivity$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1943,7 +1943,7 @@ class Query$GetActivities$Page$activities$$ListActivity$media
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetActivities$Page$activities$$ListActivity$media) ||
+    if (other is! Query$GetActivities$Page$activities$$ListActivity$media ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2168,8 +2168,8 @@ class Query$GetActivities$Page$activities$$ListActivity$media$coverImage
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$GetActivities$Page$activities$$ListActivity$media$coverImage) ||
+    if (other
+            is! Query$GetActivities$Page$activities$$ListActivity$media$coverImage ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2309,8 +2309,8 @@ class Query$GetActivities$Page$activities$$ListActivity$media$title
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$GetActivities$Page$activities$$ListActivity$media$title) ||
+    if (other
+            is! Query$GetActivities$Page$activities$$ListActivity$media$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2548,7 +2548,7 @@ class Query$GetActivities$Page$activities$$MessageActivity
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetActivities$Page$activities$$MessageActivity) ||
+    if (other is! Query$GetActivities$Page$activities$$MessageActivity ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2855,8 +2855,8 @@ class Query$GetActivities$Page$activities$$MessageActivity$messenger
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$GetActivities$Page$activities$$MessageActivity$messenger) ||
+    if (other
+            is! Query$GetActivities$Page$activities$$MessageActivity$messenger ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3050,8 +3050,8 @@ class Query$GetActivities$Page$activities$$MessageActivity$messenger$avatar
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$GetActivities$Page$activities$$MessageActivity$messenger$avatar) ||
+    if (other
+            is! Query$GetActivities$Page$activities$$MessageActivity$messenger$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3216,8 +3216,8 @@ class Query$GetActivities$Page$activities$$MessageActivity$recipient
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$GetActivities$Page$activities$$MessageActivity$recipient) ||
+    if (other
+            is! Query$GetActivities$Page$activities$$MessageActivity$recipient ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3400,8 +3400,8 @@ class Query$GetActivities$Page$activities$$MessageActivity$recipient$avatar
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$GetActivities$Page$activities$$MessageActivity$recipient$avatar) ||
+    if (other
+            is! Query$GetActivities$Page$activities$$MessageActivity$recipient$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3619,7 +3619,7 @@ class Query$GetActivities$Page$activities$$TextActivity
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetActivities$Page$activities$$TextActivity) ||
+    if (other is! Query$GetActivities$Page$activities$$TextActivity ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3881,7 +3881,7 @@ class Query$GetActivities$Page$activities$$TextActivity$user
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetActivities$Page$activities$$TextActivity$user) ||
+    if (other is! Query$GetActivities$Page$activities$$TextActivity$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4066,8 +4066,8 @@ class Query$GetActivities$Page$activities$$TextActivity$user$avatar
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query$GetActivities$Page$activities$$TextActivity$user$avatar) ||
+    if (other
+            is! Query$GetActivities$Page$activities$$TextActivity$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
