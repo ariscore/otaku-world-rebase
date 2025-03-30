@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:otaku_world/bloc/filter/search/search_media_cubit.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/media_list/media_list/media_list_bloc.dart';
 import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
@@ -33,6 +34,8 @@ class MyListScreen extends StatefulHookWidget {
 class _MyListScreenState extends State<MyListScreen> {
   bool isAnime = true;
   MediaListBloc? animeListBloc, mangaListBloc;
+  final searchAnimeCubit = SearchMediaCubit(),
+      searchMangaCubit = SearchMediaCubit();
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,7 @@ class _MyListScreenState extends State<MyListScreen> {
 
     useEffect(() {
       scrollController.addListener(() {
-        log('Min extent: Pixels> ${scrollController.position.pixels} | ${scrollController.position.minScrollExtent}');
+        FocusScope.of(context).unfocus();
         if (scrollController.position.pixels <
                 scrollController.position.minScrollExtent + 150 &&
             bottomBarBloc.state is BottomNavBarNotVisible) {
@@ -72,162 +75,111 @@ class _MyListScreenState extends State<MyListScreen> {
       ),
       body: RefreshIndicator(
         backgroundColor: AppColors.raisinBlack,
-        onRefresh: () {
-          return Future.delayed(const Duration(seconds: 1), () {
-            animeListBloc?.add(LoadMediaList(client));
-            mangaListBloc?.add(LoadMediaList(client));
-          });
-        },
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: ListSearchAppBar(
-                onApplyFilters: () {},
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: SwitchMediaDropdown(
-                initialValue:
-                    isAnime ? Enum$MediaType.ANIME : Enum$MediaType.MANGA,
-                onChanged: (value) {
-                  setState(() {
-                    isAnime = value == Enum$MediaType.ANIME.displayTitle();
-                  });
-                },
-              ),
-            ),
-            BlocBuilder<ViewerBloc, ViewerState>(
-              builder: (context, state) {
-                if (state is ViewerInitial || state is ViewerLoading) {
-                  return const MyListShimmer();
-                } else if (state is ViewerLoaded) {
-                  log('Viewer loaded state');
-                  animeListBloc ??= MediaListBloc(
-                    type: Enum$MediaType.ANIME,
-                    userId: state.user.id,
-                  );
-                  mangaListBloc ??= MediaListBloc(
-                    type: Enum$MediaType.MANGA,
-                    userId: state.user.id,
-                  );
+        onRefresh: () => _refresh(client),
+        child: BlocBuilder<ViewerBloc, ViewerState>(
+          builder: (context, state) {
+            if (state is ViewerInitial || state is ViewerLoading) {
+              return const MyListShimmer(showFilters: true, isSliver: false);
+            } else if (state is ViewerLoaded) {
+              if (animeListBloc == null) {
+                animeListBloc = MediaListBloc(
+                  type: Enum$MediaType.ANIME,
+                  userId: state.user.id,
+                );
+                mangaListBloc = MediaListBloc(
+                  type: Enum$MediaType.MANGA,
+                  userId: state.user.id,
+                );
+              }
 
-                  return isAnime
-                      ? _buildMediaSection(
-                          client,
-                          bloc: animeListBloc!,
-                          type: Enum$MediaType.ANIME,
-                        )
-                      : _buildMediaSection(
-                          client,
-                          bloc: mangaListBloc!,
-                          type: Enum$MediaType.MANGA,
-                        );
-                } else if (state is ViewerError) {
-                  log('Viewer error state');
-                  return _buildErrorWidget(
-                    type: state.type,
-                    onTryAgain: () {
-                      viewerBloc.add(LoadViewer(client));
-                    },
-                    message: state.message,
-                  );
-                } else {
-                  return const SliverToBoxAdapter();
-                }
-              },
-            ),
-          ],
+              return isAnime
+                  ? _buildMediaSection(
+                      client,
+                      scrollController,
+                      bloc: animeListBloc!,
+                      type: Enum$MediaType.ANIME,
+                    )
+                  : _buildMediaSection(
+                      client,
+                      scrollController,
+                      bloc: mangaListBloc!,
+                      type: Enum$MediaType.MANGA,
+                    );
+            } else if (state is ViewerError) {
+              return _buildErrorWidget(
+                type: state.type,
+                onTryAgain: () {
+                  viewerBloc.add(LoadViewer(client));
+                },
+                message: state.message,
+                isSliver: false,
+              );
+            } else {
+              return const SliverToBoxAdapter();
+            }
+          },
         ),
-        // child: SingleChildScrollView(
-        //   controller: scrollController,
-        //   child: Column(
-        //     children: [
-        //       ListSearchAppBar(
-        //         onApplyFilters: () {},
-        //       ),
-        //       SwitchMediaDropdown(
-        //         initialValue:
-        //             isAnime ? Enum$MediaType.ANIME : Enum$MediaType.MANGA,
-        //         onChanged: (value) {
-        //           setState(() {
-        //             isAnime = value == Enum$MediaType.ANIME.displayTitle();
-        //           });
-        //         },
-        //       ),
-        //       const SizedBox(height: 10),
-        //       BlocBuilder<ViewerBloc, ViewerState>(
-        //         builder: (context, state) {
-        //           if (state is ViewerLoading) {
-        //             return const CircularProgressIndicator();
-        //           } else if (state is ViewerLoaded) {
-        //             animeListBloc ??= MediaListBloc(
-        //               type: Enum$MediaType.ANIME,
-        //               userId: state.user.id,
-        //             );
-        //             mangaListBloc ??= MediaListBloc(
-        //               type: Enum$MediaType.MANGA,
-        //               userId: state.user.id,
-        //             );
-        //
-        //             return isAnime
-        //                 ? _buildMediaSection(
-        //                     client,
-        //                     bloc: animeListBloc!,
-        //                     type: Enum$MediaType.ANIME,
-        //                   )
-        //                 : _buildMediaSection(
-        //                     client,
-        //                     bloc: mangaListBloc!,
-        //                     type: Enum$MediaType.MANGA,
-        //                   );
-        //           } else if (state is ViewerError) {
-        //             return ErrorText(
-        //               message: state.message,
-        //               onTryAgain: () {},
-        //             );
-        //           } else {
-        //             return const SizedBox();
-        //           }
-        //         },
-        //       ),
-        //     ],
-        //   ),
-        // ),
       ),
     );
   }
 
   Widget _buildMediaSection(
-    GraphQLClient client, {
+    GraphQLClient client,
+    ScrollController controller, {
     required MediaListBloc bloc,
     required Enum$MediaType type,
   }) {
-    // return const MyListShimmer();
-    return BlocBuilder<MediaListBloc, MediaListState>(
-      bloc: bloc,
-      builder: (context, state) {
-        if (state is MediaListInitial) {
-          bloc.add(LoadMediaList(client));
-        }
-        if (state is MediaListInitial || state is MediaListLoading) {
-          return const MyListShimmer();
-        } else if (state is MediaListLoaded) {
-          return ListSections(
-            sections: state.listCollection.lists,
-            type: type,
-          );
-        } else if (state is MediaListError) {
-          return _buildErrorWidget(
-            type: state.type,
-            onTryAgain: () {
-              bloc.add(LoadMediaList(client));
+    log('Rebuilding media section');
+    return CustomScrollView(
+      controller: controller,
+      slivers: [
+        SliverToBoxAdapter(
+          child: ListSearchAppBar(
+            listBloc: bloc,
+            searchCubit: type == Enum$MediaType.ANIME
+                ? searchAnimeCubit
+                : searchMangaCubit,
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: SwitchMediaDropdown(
+            initialValue: isAnime ? Enum$MediaType.ANIME : Enum$MediaType.MANGA,
+            onChanged: (value) {
+              setState(() {
+                isAnime = value == Enum$MediaType.ANIME.displayTitle();
+              });
             },
-            message: state.message,
-          );
-        } else {
-          return const SizedBox();
-        }
-      },
+          ),
+        ),
+        BlocBuilder<MediaListBloc, MediaListState>(
+          bloc: bloc,
+          builder: (context, state) {
+            if (state is MediaListInitial) {
+              bloc.add(LoadMediaList(client));
+            }
+            if (state is MediaListInitial || state is MediaListLoading) {
+              return const MyListShimmer(showFilters: false, isSliver: true);
+            } else if (state is MediaListLoaded) {
+              log('Media list loaded state');
+              return ListSections(
+                sections: state.listCollection.lists,
+                type: type,
+              );
+            } else if (state is MediaListError) {
+              return _buildErrorWidget(
+                type: state.type,
+                onTryAgain: () {
+                  bloc.add(LoadMediaList(client));
+                },
+                message: state.message,
+                isSliver: true,
+              );
+            } else {
+              return const SizedBox();
+            }
+          },
+        ),
+      ],
     );
   }
 
@@ -235,24 +187,37 @@ class _MyListScreenState extends State<MyListScreen> {
     required ErrorType type,
     required VoidCallback onTryAgain,
     required String message,
+    required bool isSliver,
   }) {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 100),
-        child: AnimeCharacterPlaceholder(
-          asset: type == ErrorType.noInternet
-              ? Assets.charactersNoInternet
-              : Assets.charactersChillBoy,
-          heading: type == ErrorType.noInternet
-              ? StringConstants.noInternet
-              : null,
-          subheading: message,
-          width: 230,
-          height: 230,
-          isError: true,
-          onTryAgain: onTryAgain,
-        ),
+    final widget = Padding(
+      padding: EdgeInsets.only(top: isSliver ? 100 : 0),
+      child: AnimeCharacterPlaceholder(
+        asset: type == ErrorType.noInternet
+            ? Assets.charactersNoInternet
+            : Assets.charactersChillBoy,
+        heading:
+            type == ErrorType.noInternet ? StringConstants.noInternet : null,
+        subheading: message,
+        width: 230,
+        height: 230,
+        isError: true,
+        onTryAgain: onTryAgain,
       ),
     );
+
+    return isSliver
+        ? SliverToBoxAdapter(
+            child: widget,
+          )
+        : widget;
+  }
+
+  Future<void> _refresh(GraphQLClient client) {
+    return Future.delayed(Duration.zero, () {
+      searchAnimeCubit.searchController.clear();
+      searchMangaCubit.searchController.clear();
+      animeListBloc?.add(LoadMediaList(client));
+      mangaListBloc?.add(LoadMediaList(client));
+    });
   }
 }

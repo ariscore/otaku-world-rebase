@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:otaku_world/graphql/__generated/graphql/list/media_list.graphql.dart';
 
@@ -10,7 +12,8 @@ class ListSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (section == null) {
+    log('Rebuilding section: ${section?.name}');
+    if (section == null || (section!.entries?.isEmpty ?? true)) {
       return const SizedBox();
     }
     return Column(

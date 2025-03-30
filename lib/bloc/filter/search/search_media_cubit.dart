@@ -5,7 +5,8 @@ import 'package:flutter/cupertino.dart';
 part 'search_media_state.dart';
 
 class SearchMediaCubit extends Cubit<SearchMediaState> {
-  SearchMediaCubit() : super(SearchContentChanged('')) {
+  SearchMediaCubit({String? initialText}) : super(SearchContentChanged('')) {
+    searchController = TextEditingController(text: initialText);
     searchController.addListener(() {
       emit(SearchContentChanged(searchController.text));
     },);
@@ -17,7 +18,7 @@ class SearchMediaCubit extends Cubit<SearchMediaState> {
     return super.close();
   }
 
-  final searchController = TextEditingController();
+  late final TextEditingController searchController;
   bool searchApplied = false;
 
   String get searchText => (state as SearchContentChanged).content;
