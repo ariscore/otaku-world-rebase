@@ -162,9 +162,13 @@ class MediaListCard extends StatelessWidget {
               onTap: () {
                 log('Add');
               },
-              child: SvgPicture.asset(
-                Assets.iconsAdd2,
+              child: SizedBox(
                 width: 25,
+                height: 25,
+                child: SvgPicture.asset(
+                  Assets.iconsAdd2,
+                  width: 25,
+                ),
               ),
             ),
           ],

@@ -15,3 +15,5 @@ class ApplyFilter extends MediaListEvent {
 
   final String? search;
 }
+
+class ClearSearch extends MediaListEvent {}

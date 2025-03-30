@@ -27,51 +27,53 @@ class AnimeCharacterPlaceholder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: width,
-            height: height,
-            child: Image.asset(
-              asset,
-            ),
-          ),
-          if (heading != null)
-            Padding(
-              padding: const EdgeInsets.only(top: 5),
-              child: Text(
-                heading!,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.displayMedium,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: width,
+              height: height,
+              child: Image.asset(
+                asset,
               ),
             ),
-          const SizedBox(height: 5),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10,
-            ),
-            child: Text(
-              subheading,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontFamily: 'Poppins',
-                    color: AppColors.white.withOpacity(0.8),
-                  ),
-            ),
-          ),
-          if (isError)
-            Padding(
-              padding: const EdgeInsets.only(top: 5),
-              child: TextButton(
-                onPressed: onTryAgain,
+            if (heading != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 5),
                 child: Text(
-                  actionLabel,
-                  style: const TextStyle(color: AppColors.sunsetOrange),
+                  heading!,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.displayMedium,
                 ),
               ),
+            const SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+              ),
+              child: Text(
+                subheading,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontFamily: 'Poppins',
+                      color: AppColors.white.withOpacity(0.8),
+                    ),
+              ),
             ),
-        ],
+            if (isError)
+              Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: TextButton(
+                  onPressed: onTryAgain,
+                  child: Text(
+                    actionLabel,
+                    style: const TextStyle(color: AppColors.sunsetOrange),
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
