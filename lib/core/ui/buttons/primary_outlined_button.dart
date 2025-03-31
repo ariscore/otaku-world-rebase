@@ -4,8 +4,9 @@ import 'package:otaku_world/theme/colors.dart';
 class PrimaryOutlinedButton extends StatelessWidget {
   const PrimaryOutlinedButton({
     super.key,
-    this.horizontalPadding = 12,
-    this.verticalPadding = 14,
+    this.horizontalPadding = 0,
+    this.verticalPadding = 0,
+    this.height,
     this.width,
     this.fontSize,
     required this.onTap,
@@ -16,6 +17,7 @@ class PrimaryOutlinedButton extends StatelessWidget {
   final double horizontalPadding;
   final double verticalPadding;
   final double? width;
+  final double? height;
   final VoidCallback onTap;
   final String label;
   final double? fontSize;
@@ -27,8 +29,9 @@ class PrimaryOutlinedButton extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(isSmall ? 10 : 15),
       child: Container(
-        width: width ??
-            MediaQuery.of(context).size.width - horizontalPadding * 2,
+        height: height,
+        width:
+            width ?? MediaQuery.of(context).size.width - horizontalPadding * 2,
         decoration: ShapeDecoration(
           shape: RoundedRectangleBorder(
             side: BorderSide(width: 1, color: Theme.of(context).primaryColor),
@@ -43,10 +46,10 @@ class PrimaryOutlinedButton extends StatelessWidget {
             child: Text(
               label,
               style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                fontSize: fontSize,
-                color: AppColors.white,
-                fontFamily: 'Poppins',
-              ),
+                    fontSize: fontSize,
+                    color: AppColors.white,
+                    fontFamily: 'Poppins',
+                  ),
             ),
           ),
         ),
