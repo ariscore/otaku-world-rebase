@@ -49,9 +49,7 @@ class ListSections extends StatelessWidget {
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       sliver: SliverList.builder(
-        // shrinkWrap: true,
         itemCount: sections?.length ?? 0,
-        // physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return ListSection(section: sections?[index]);
         },

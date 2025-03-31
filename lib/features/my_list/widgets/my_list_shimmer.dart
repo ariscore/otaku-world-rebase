@@ -3,15 +3,66 @@ import 'package:otaku_world/theme/colors.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 class MyListShimmer extends StatelessWidget {
-  const MyListShimmer({super.key});
+  const MyListShimmer({
+    super.key,
+    required this.showFilters,
+    required this.isSliver,
+  });
+
+  final bool showFilters;
+  final bool isSliver;
 
   @override
   Widget build(BuildContext context) {
-    return SliverPadding(
+    final widget = SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       sliver: SliverList(
         delegate: SliverChildListDelegate(
           [
+            if (showFilters)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Shimmer(
+                          child: Container(
+                            height: 48,
+                            color: AppColors.graniteGray,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Shimmer(
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          color: AppColors.graniteGray,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            if (showFilters)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Shimmer(
+                    child: Container(
+                      height: 48,
+                      color: AppColors.graniteGray,
+                    ),
+                  ),
+                ),
+              ),
+            const SizedBox(height: 5),
             _buildSection(3),
             _buildSection(1),
             _buildSection(2),
@@ -19,6 +70,12 @@ class MyListShimmer extends StatelessWidget {
         ),
       ),
     );
+
+    return isSliver
+        ? widget
+        : CustomScrollView(
+            slivers: [widget],
+          );
   }
 
   Widget _buildSection(int count) {
