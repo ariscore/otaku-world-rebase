@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/buttons/primary_outlined_button.dart';
 
+import '../../../config/router/router_constants.dart';
 import '../../../core/ui/custom_text_field.dart';
 import '../../../core/ui/filters/custom_check_box.dart';
 import '../../../core/ui/texts/counter_text.dart';
@@ -13,7 +15,7 @@ class PostReviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const SimpleAppBar(title: 'Write a New Review'),
+      appBar: const SimpleAppBar(title: 'Post a New Review'),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
@@ -27,7 +29,9 @@ class PostReviewScreen extends StatelessWidget {
                 height: 30,
                 horizontalPadding: 10,
                 isSmall: true,
-                onTap: () {},
+                onTap: () {
+                  context.push(RouteConstants.writeReview);
+                },
                 label: 'Write a Review ',
                 fontSize: 14,
               ),
@@ -68,13 +72,9 @@ class PostReviewScreen extends StatelessWidget {
                 isDense: true,
                 contentPadding: const EdgeInsets.all(8),
                 hintText: 'Type something here...',
-                hintStyle: Theme
-                    .of(context)
-                    .textTheme
-                    .headlineSmall
-                    ?.copyWith(
-                  color: AppColors.white.withOpacity(0.6),
-                ),
+                hintStyle: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: AppColors.white.withOpacity(0.6),
+                    ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: const BorderSide(
@@ -85,12 +85,10 @@ class PostReviewScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .headlineSmall,
+              style: Theme.of(context).textTheme.headlineSmall,
               maxLines: 1,
-              buildCounter: (context, {
+              buildCounter: (
+                context, {
                 required currentLength,
                 required isFocused,
                 required maxLength,
@@ -123,8 +121,7 @@ class PostReviewScreen extends StatelessWidget {
               children: [
                 Text(
                   'Score',
-                  style: Theme
-                      .of(context)
+                  style: Theme.of(context)
                       .textTheme
                       .displayMedium!
                       .copyWith(fontSize: 18, fontWeight: FontWeight.w600),
@@ -144,8 +141,7 @@ class PostReviewScreen extends StatelessWidget {
                     ),
                     Text(
                       ' / 100',
-                      style: Theme
-                          .of(context)
+                      style: Theme.of(context)
                           .textTheme
                           .displayMedium!
                           .copyWith(fontSize: 18),

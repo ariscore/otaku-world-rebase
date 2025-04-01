@@ -10,6 +10,7 @@ import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/staff/staff_bloc.dart';
 import 'package:otaku_world/features/media_detail/widgets/media_app_bar.dart';
+import 'package:otaku_world/features/media_detail/widgets/media_floating_action_button.dart';
 import 'package:otaku_world/features/profile/widgets/keep_alive_tab.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
@@ -52,26 +53,6 @@ class MediaDetailScreen extends HookWidget {
         _onPopInvoked(context);
       },
       child: Scaffold(
-        floatingActionButton: BlocBuilder<MediaDetailBloc, MediaDetailState>(
-          builder: (context, state) {
-            if (state is MediaDetailLoaded) {
-              final String icon = state.media.mediaListEntry == null &&
-                      state.media.mediaListEntry?.status == null
-                  ? Assets.iconsMediaAdd
-                  : Assets.iconsMediaEdit;
-              return FloatingActionButton(
-                onPressed: () {},
-                backgroundColor: AppColors.sunsetOrange,
-                child: SvgPicture.asset(
-                  icon,
-                  width: 30,
-                ),
-              );
-            } else {
-              return const SizedBox();
-            }
-          },
-        ),
         body: BlocBuilder<MediaDetailBloc, MediaDetailState>(
           builder: (context, state) {
             if (state is MediaDetailInitial) {
@@ -151,6 +132,24 @@ class MediaDetailScreen extends HookWidget {
                 ),
               ),
             );
+          },
+        ),
+        floatingActionButton: BlocBuilder<MediaDetailBloc, MediaDetailState>(
+          builder: (context, state) {
+            if (state is MediaDetailLoaded) {
+              final String icon = state.media.mediaListEntry == null &&
+                      state.media.mediaListEntry?.status == null
+                  ? Assets.iconsMediaAdd
+                  : Assets.iconsMediaEdit;
+              return MediaFloatingActionButton(
+                tabController: tabController,
+                isAdd: (state.media.mediaListEntry == null &&
+                    state.media.mediaListEntry?.status == null),
+                reviewIndex: tabs.length - 1,
+              );
+            } else {
+              return const SizedBox();
+            }
           },
         ),
       ),

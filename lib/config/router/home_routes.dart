@@ -51,6 +51,11 @@ final homeRoutes = [
     path: RouteConstants.postReview,
     builder: (context, state) => const PostReviewScreen(),
   ),
+  GoRoute(
+    parentNavigatorKey: _rootNavigatorKey,
+    path: RouteConstants.writeReview,
+    builder: (context, state) => const WriteReviewScreen(),
+  ),
   // Trending Anime
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
