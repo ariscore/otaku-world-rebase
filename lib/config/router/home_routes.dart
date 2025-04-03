@@ -56,6 +56,14 @@ final homeRoutes = [
     path: RouteConstants.writeReview,
     builder: (context, state) => const WriteReviewScreen(),
   ),
+  GoRoute(
+    parentNavigatorKey: _rootNavigatorKey,
+    path: RouteConstants.previewReview,
+    builder: (context, state) {
+      final String data = state.extra != null ? state.extra as String : '';
+      return PreviewReviewScreen(data: data);
+    },
+  ),
   // Trending Anime
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,

@@ -30,7 +30,7 @@ class PostReviewScreen extends StatelessWidget {
                 horizontalPadding: 10,
                 isSmall: true,
                 onTap: () {
-                  context.push(RouteConstants.writeReview);
+                 final result =  context.push(RouteConstants.writeReview);
                 },
                 label: 'Write a Review ',
                 fontSize: 14,
@@ -73,7 +73,7 @@ class PostReviewScreen extends StatelessWidget {
                 contentPadding: const EdgeInsets.all(8),
                 hintText: 'Type something here...',
                 hintStyle: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: AppColors.white.withOpacity(0.6),
+                      color: AppColors.white.withValues(alpha: 0.6),
                     ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),

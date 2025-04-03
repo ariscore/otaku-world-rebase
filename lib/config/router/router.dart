@@ -82,6 +82,7 @@ import 'package:otaku_world/features/profile/screens/stats/start_year_distributi
 import 'package:otaku_world/features/profile/screens/stats/status_distribution_screen.dart';
 import 'package:otaku_world/features/profile/screens/user_activities_screen.dart';
 import 'package:otaku_world/features/profile/screens/user_notifications_screen.dart';
+import 'package:otaku_world/features/reviews/screens/preview_review_screen.dart';
 import 'package:otaku_world/features/reviews/screens/review_detail_screen.dart';
 import 'package:otaku_world/features/reviews/screens/reviews_screen.dart';
 import 'package:otaku_world/features/reviews/screens/write_review_screen.dart';

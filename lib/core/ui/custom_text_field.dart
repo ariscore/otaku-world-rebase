@@ -13,6 +13,7 @@ class CustomTextField extends StatelessWidget {
     this.maxLength,
     this.isShowingCounter = false,
     this.keyboardType,
+    this.counterBuilder,
   });
 
   final TextEditingController controller;
@@ -23,6 +24,8 @@ class CustomTextField extends StatelessWidget {
   final int? maxLength;
   final bool isShowingCounter;
   final TextInputType? keyboardType;
+  final Widget Function(BuildContext, int currentLength, int? maxLength)?
+      counterBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,7 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              color: AppColors.white.withOpacity(0.6),
+              color: AppColors.white.withValues(alpha: 0.6),
             ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
@@ -53,15 +56,18 @@ class CustomTextField extends StatelessWidget {
       maxLines: maxLines,
       maxLength: maxLength,
       buildCounter: (context,
-              {required currentLength,
-              required isFocused,
-              required maxLength}) =>
-          isShowingCounter
-              ? CounterText(
-                  currentLength: currentLength,
-                  maxLength: maxLength,
-                )
-              : const SizedBox(),
+          {required currentLength, required isFocused, required maxLength}) {
+        if (!isShowingCounter) return const SizedBox();
+
+        if (counterBuilder != null) {
+          return counterBuilder!(context, currentLength, maxLength);
+        }
+
+        return CounterText(
+          currentLength: currentLength,
+          maxLength: maxLength,
+        );
+      },
       keyboardType: keyboardType,
     );
   }

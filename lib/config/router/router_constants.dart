@@ -78,7 +78,7 @@ class RouteConstants {
   static const reviewDetail = '/review-detail';
   static const postReview = '/post-review';
   static const writeReview = '/write-review';
-  static const previewReview = 'preview-review';
+  static const previewReview = '/preview-review';
   
   static const calendar = '/calendar';
   static const search = '/search';
