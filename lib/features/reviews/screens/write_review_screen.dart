@@ -52,7 +52,23 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const SimpleAppBar(title: 'Write New Review'),
+      appBar: SimpleAppBar(
+        title: 'Write New Review',
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 0,
+              right: 16,
+            ),
+            child: IconButton(
+              onPressed: () {
+                context.pop(reviewController.text);
+              },
+              icon: SvgPicture.asset(Assets.iconsSave, width: 30),
+            ),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(

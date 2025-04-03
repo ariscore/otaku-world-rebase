@@ -79,6 +79,7 @@ class Assets {
   static const String iconsPostIcon = 'assets/icons/post-icon.svg';
   static const String iconsRemove = 'assets/icons/remove.svg';
   static const String iconsReviewAdd = 'assets/icons/review-add.svg';
+  static const String iconsSave = 'assets/icons/save.svg';
   static const String iconsSearch = 'assets/icons/search.svg';
   static const String iconsSearchSmall = 'assets/icons/search-small.svg';
   static const String iconsSend = 'assets/icons/send.svg';
