@@ -173,6 +173,7 @@ fragment Review on Review {
         avatar {
             medium
         }
+        id
     }
     media {
         bannerImage

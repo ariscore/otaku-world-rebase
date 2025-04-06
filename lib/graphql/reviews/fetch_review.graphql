@@ -1,0 +1,10 @@
+query FetchReviewByUserId( $mediaId: Int, $userId: Int) {
+    Review(mediaId: $mediaId, userId: $userId) {
+        id
+        body
+        private
+        score
+        userRating
+        summary
+    }
+}
