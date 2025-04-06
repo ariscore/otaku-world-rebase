@@ -1,6 +1,5 @@
 part of 'post_review_bloc.dart';
 
-
 abstract class PostReviewEvent extends Equatable {
   const PostReviewEvent();
 }
@@ -8,8 +7,9 @@ abstract class PostReviewEvent extends Equatable {
 class FetchReview extends PostReviewEvent {
   final int userId;
   final int mediaId;
+  final GraphQLClient client;
 
-  const FetchReview(this.userId, this.mediaId);
+  const FetchReview(this.userId, this.mediaId, this.client);
 
   @override
   List<Object> get props => [userId, mediaId];
@@ -22,6 +22,7 @@ class SubmitReview extends PostReviewEvent {
   final String summary;
   final int score;
   final bool isPrivate;
+  final GraphQLClient client;
 
   const SubmitReview({
     this.reviewId,
@@ -29,9 +30,11 @@ class SubmitReview extends PostReviewEvent {
     required this.body,
     required this.summary,
     required this.score,
+    required this.client,
     this.isPrivate = false,
   });
 
   @override
-  List<Object?> get props => [reviewId, mediaId, body, summary, score, isPrivate];
+  List<Object?> get props =>
+      [reviewId, mediaId, body, summary, score, isPrivate];
 }

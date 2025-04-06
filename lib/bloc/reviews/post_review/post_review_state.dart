@@ -13,7 +13,7 @@ class PostReviewInitial extends PostReviewState {}
 class ReviewLoading extends PostReviewState {}
 
 class ReviewLoaded extends PostReviewState {
-  final Map<String, dynamic> review;
+  final Query$FetchReviewByUserId$Review review;
 
   const ReviewLoaded(this.review);
 
@@ -21,9 +21,19 @@ class ReviewLoaded extends PostReviewState {
   List<Object?> get props => [review];
 }
 
-class PostReviewFailure extends PostReviewState {
+class ReviewSaved extends PostReviewState {}
+
+class PostReviewSubmitFailure extends PostReviewState {
   final String error;
-  const PostReviewFailure({required this.error});
+  const PostReviewSubmitFailure({required this.error});
+
+  @override
+  List<Object?> get props => [error];
+}
+
+class PostReviewFetchFailure extends PostReviewState {
+  final String error;
+  const PostReviewFetchFailure({required this.error});
 
   @override
   List<Object?> get props => [error];

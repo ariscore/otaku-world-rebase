@@ -1,8 +1,6 @@
 // GENERATED FILE
 // DO NOT MODIFY
 // ignore_for_file: type=lint
-import 'dart:convert';
-
 import '../fragments.graphql.dart';
 import '../schema.graphql.dart';
 import 'dart:async';
@@ -1743,7 +1741,7 @@ class Query$MediaList$MediaListCollection$user$mediaListOptions$animeList {
           ?.map((e) => (e as String?))
           .toList(),
       splitCompletedSectionByFormat: (l$splitCompletedSectionByFormat as bool?),
-      theme: (jsonEncode(l$theme) as String?),
+      theme: (l$theme as String?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1982,7 +1980,7 @@ class Query$MediaList$MediaListCollection$user$mediaListOptions$mangaList {
           ?.map((e) => (e as String?))
           .toList(),
       splitCompletedSectionByFormat: (l$splitCompletedSectionByFormat as bool?),
-      theme: (jsonEncode(l$theme) as String?),
+      theme: (l$theme as String?),
       $__typename: (l$$__typename as String),
     );
   }

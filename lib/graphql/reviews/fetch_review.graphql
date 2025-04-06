@@ -6,5 +6,6 @@ query FetchReviewByUserId( $mediaId: Int, $userId: Int) {
         score
         userRating
         summary
+
     }
 }

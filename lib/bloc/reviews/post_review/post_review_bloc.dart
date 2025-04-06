@@ -1,5 +1,10 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:otaku_world/graphql/__generated/graphql/reviews/fetch_review.graphql.dart';
+import 'package:otaku_world/graphql/__generated/graphql/reviews/post_review.graphql.dart';
 
 part 'post_review_event.dart';
 
@@ -16,16 +21,44 @@ class PostReviewBloc extends Bloc<PostReviewEvent, PostReviewState> {
     Emitter<PostReviewState> emit,
   ) async {
     emit(ReviewLoading());
-    // try {
-    //   final review = await repository.getReview(event.userId, event.mediaId);
-    //   if (review != null) {
-    //     emit(ReviewLoaded(review));
-    //   } else {
-    //     emit(PostReviewInitial()); // No review yet
-    //   }
-    // } catch (e) {
-    //   emit(ReviewError(e.toString()));
-    // }
+    try {
+      final response = await event.client.query$FetchReviewByUserId(
+        Options$Query$FetchReviewByUserId(
+          variables: Variables$Query$FetchReviewByUserId(
+            userId: event.userId,
+            mediaId: event.mediaId,
+          ),
+        ),
+      );
+
+      if (response.hasException) {
+        final exception = response.exception!;
+        log(exception.toString());
+        if (exception.linkException != null) {
+          emit(
+            const PostReviewFetchFailure(
+              error: 'Please check your internet connection!',
+            ),
+          );
+        } else {
+          emit(
+            const PostReviewFetchFailure(
+              error: 'SomeThing went wrong!',
+            ),
+          );
+        }
+      } else {
+        if (response.parsedData != null) {
+          final Query$FetchReviewByUserId$Review? review =
+              response.parsedData?.Review;
+          if (review != null) {
+            emit(ReviewLoaded(review));
+          }
+        }
+      }
+    } catch (e) {
+      emit(PostReviewFetchFailure(error: e.toString()));
+    }
   }
 
   Future<void> _onSubmitReview(
@@ -33,18 +66,38 @@ class PostReviewBloc extends Bloc<PostReviewEvent, PostReviewState> {
     Emitter<PostReviewState> emit,
   ) async {
     emit(ReviewLoading());
-    // try {
-    //   await repository.saveReview(
-    //     reviewId: event.reviewId,
-    //     mediaId: event.mediaId,
-    //     body: event.body,
-    //     summary: event.summary,
-    //     score: event.score,
-    //     isPrivate: event.isPrivate,
-    //   );
-    //   emit(ReviewSaved());
-    // } catch (e) {
-    //   emit(ReviewError(e.toString()));
-    // }
+    try {
+      final response = await event.client.mutate$SaveReview(
+        Options$Mutation$SaveReview(
+          variables: Variables$Mutation$SaveReview(
+            mediaId: event.mediaId,
+            body: event.body,
+            summary: event.summary,
+            score: event.score,
+          ),
+        ),
+      );
+      log('Response: $response');
+
+      if (response.hasException) {
+        final exception = response.exception!;
+        log(exception.toString());
+        if (exception.linkException != null) {
+          emit(
+            const PostReviewSubmitFailure(
+              error: 'Please check your internet connection!',
+            ),
+          );
+        } else {
+          emit(
+            const PostReviewSubmitFailure(
+              error: 'SomeThing went wrong!',
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      emit(PostReviewSubmitFailure(error: e.toString()));
+    }
   }
 }
