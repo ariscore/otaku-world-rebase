@@ -132,6 +132,7 @@ class _MyListScreenState extends State<MyListScreen> {
     log('Rebuilding media section');
     return CustomScrollView(
       controller: controller,
+      physics: const AlwaysScrollableScrollPhysics(),
       slivers: [
         SliverToBoxAdapter(
           child: ListSearchAppBar(
@@ -139,6 +140,7 @@ class _MyListScreenState extends State<MyListScreen> {
             searchCubit: type == Enum$MediaType.ANIME
                 ? searchAnimeCubit
                 : searchMangaCubit,
+            type: type,
           ),
         ),
         SliverToBoxAdapter(
@@ -160,7 +162,6 @@ class _MyListScreenState extends State<MyListScreen> {
             if (state is MediaListInitial || state is MediaListLoading) {
               return const MyListShimmer(showFilters: false, isSliver: true);
             } else if (state is MediaListLoaded) {
-              log('Media list loaded state');
               return ListSections(
                 sections: state.listCollection.lists,
                 type: type,

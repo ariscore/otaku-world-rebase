@@ -1,8 +1,6 @@
 // GENERATED FILE
 // DO NOT MODIFY
 // ignore_for_file: type=lint
-import 'dart:convert';
-
 import '../fragments.graphql.dart';
 import '../schema.graphql.dart';
 import 'dart:async';
@@ -471,13 +469,6 @@ const documentNodeQueryMediaList = DocumentNode(definitions: [
                         selectionSet: null,
                       ),
                       FieldNode(
-                        name: NameNode(value: 'theme'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                      FieldNode(
                         name: NameNode(value: '__typename'),
                         alias: null,
                         arguments: [],
@@ -508,13 +499,6 @@ const documentNodeQueryMediaList = DocumentNode(definitions: [
                       ),
                       FieldNode(
                         name: NameNode(value: 'splitCompletedSectionByFormat'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                      FieldNode(
-                        name: NameNode(value: 'theme'),
                         alias: null,
                         arguments: [],
                         directives: [],
@@ -1723,7 +1707,6 @@ class Query$MediaList$MediaListCollection$user$mediaListOptions$animeList {
     this.sectionOrder,
     this.customLists,
     this.splitCompletedSectionByFormat,
-    this.theme,
     this.$__typename = 'MediaListTypeOptions',
   });
 
@@ -1733,7 +1716,6 @@ class Query$MediaList$MediaListCollection$user$mediaListOptions$animeList {
     final l$customLists = json['customLists'];
     final l$splitCompletedSectionByFormat =
         json['splitCompletedSectionByFormat'];
-    final l$theme = json['theme'];
     final l$$__typename = json['__typename'];
     return Query$MediaList$MediaListCollection$user$mediaListOptions$animeList(
       sectionOrder: (l$sectionOrder as List<dynamic>?)
@@ -1743,7 +1725,6 @@ class Query$MediaList$MediaListCollection$user$mediaListOptions$animeList {
           ?.map((e) => (e as String?))
           .toList(),
       splitCompletedSectionByFormat: (l$splitCompletedSectionByFormat as bool?),
-      theme: (jsonEncode(l$theme) as String?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1753,10 +1734,6 @@ class Query$MediaList$MediaListCollection$user$mediaListOptions$animeList {
   final List<String?>? customLists;
 
   final bool? splitCompletedSectionByFormat;
-
-  @Deprecated(
-      'This field has not yet been fully implemented and may change without warning')
-  final String? theme;
 
   final String $__typename;
 
@@ -1769,8 +1746,6 @@ class Query$MediaList$MediaListCollection$user$mediaListOptions$animeList {
     final l$splitCompletedSectionByFormat = splitCompletedSectionByFormat;
     _resultData['splitCompletedSectionByFormat'] =
         l$splitCompletedSectionByFormat;
-    final l$theme = theme;
-    _resultData['theme'] = l$theme;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1781,7 +1756,6 @@ class Query$MediaList$MediaListCollection$user$mediaListOptions$animeList {
     final l$sectionOrder = sectionOrder;
     final l$customLists = customLists;
     final l$splitCompletedSectionByFormat = splitCompletedSectionByFormat;
-    final l$theme = theme;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$sectionOrder == null
@@ -1791,7 +1765,6 @@ class Query$MediaList$MediaListCollection$user$mediaListOptions$animeList {
           ? null
           : Object.hashAll(l$customLists.map((v) => v)),
       l$splitCompletedSectionByFormat,
-      l$theme,
       l$$__typename,
     ]);
   }
@@ -1845,11 +1818,6 @@ class Query$MediaList$MediaListCollection$user$mediaListOptions$animeList {
         lOther$splitCompletedSectionByFormat) {
       return false;
     }
-    final l$theme = theme;
-    final lOther$theme = other.theme;
-    if (l$theme != lOther$theme) {
-      return false;
-    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -1888,7 +1856,6 @@ abstract class CopyWith$Query$MediaList$MediaListCollection$user$mediaListOption
     List<String?>? sectionOrder,
     List<String?>? customLists,
     bool? splitCompletedSectionByFormat,
-    String? theme,
     String? $__typename,
   });
 }
@@ -1916,7 +1883,6 @@ class _CopyWithImpl$Query$MediaList$MediaListCollection$user$mediaListOptions$an
     Object? sectionOrder = _undefined,
     Object? customLists = _undefined,
     Object? splitCompletedSectionByFormat = _undefined,
-    Object? theme = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$MediaList$MediaListCollection$user$mediaListOptions$animeList(
@@ -1930,7 +1896,6 @@ class _CopyWithImpl$Query$MediaList$MediaListCollection$user$mediaListOptions$an
             splitCompletedSectionByFormat == _undefined
                 ? _instance.splitCompletedSectionByFormat
                 : (splitCompletedSectionByFormat as bool?),
-        theme: theme == _undefined ? _instance.theme : (theme as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -1951,7 +1916,6 @@ class _CopyWithStubImpl$Query$MediaList$MediaListCollection$user$mediaListOption
     List<String?>? sectionOrder,
     List<String?>? customLists,
     bool? splitCompletedSectionByFormat,
-    String? theme,
     String? $__typename,
   }) =>
       _res;
@@ -1962,7 +1926,6 @@ class Query$MediaList$MediaListCollection$user$mediaListOptions$mangaList {
     this.sectionOrder,
     this.customLists,
     this.splitCompletedSectionByFormat,
-    this.theme,
     this.$__typename = 'MediaListTypeOptions',
   });
 
@@ -1972,7 +1935,6 @@ class Query$MediaList$MediaListCollection$user$mediaListOptions$mangaList {
     final l$customLists = json['customLists'];
     final l$splitCompletedSectionByFormat =
         json['splitCompletedSectionByFormat'];
-    final l$theme = json['theme'];
     final l$$__typename = json['__typename'];
     return Query$MediaList$MediaListCollection$user$mediaListOptions$mangaList(
       sectionOrder: (l$sectionOrder as List<dynamic>?)
@@ -1982,7 +1944,6 @@ class Query$MediaList$MediaListCollection$user$mediaListOptions$mangaList {
           ?.map((e) => (e as String?))
           .toList(),
       splitCompletedSectionByFormat: (l$splitCompletedSectionByFormat as bool?),
-      theme: (jsonEncode(l$theme) as String?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1992,10 +1953,6 @@ class Query$MediaList$MediaListCollection$user$mediaListOptions$mangaList {
   final List<String?>? customLists;
 
   final bool? splitCompletedSectionByFormat;
-
-  @Deprecated(
-      'This field has not yet been fully implemented and may change without warning')
-  final String? theme;
 
   final String $__typename;
 
@@ -2008,8 +1965,6 @@ class Query$MediaList$MediaListCollection$user$mediaListOptions$mangaList {
     final l$splitCompletedSectionByFormat = splitCompletedSectionByFormat;
     _resultData['splitCompletedSectionByFormat'] =
         l$splitCompletedSectionByFormat;
-    final l$theme = theme;
-    _resultData['theme'] = l$theme;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -2020,7 +1975,6 @@ class Query$MediaList$MediaListCollection$user$mediaListOptions$mangaList {
     final l$sectionOrder = sectionOrder;
     final l$customLists = customLists;
     final l$splitCompletedSectionByFormat = splitCompletedSectionByFormat;
-    final l$theme = theme;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$sectionOrder == null
@@ -2030,7 +1984,6 @@ class Query$MediaList$MediaListCollection$user$mediaListOptions$mangaList {
           ? null
           : Object.hashAll(l$customLists.map((v) => v)),
       l$splitCompletedSectionByFormat,
-      l$theme,
       l$$__typename,
     ]);
   }
@@ -2084,11 +2037,6 @@ class Query$MediaList$MediaListCollection$user$mediaListOptions$mangaList {
         lOther$splitCompletedSectionByFormat) {
       return false;
     }
-    final l$theme = theme;
-    final lOther$theme = other.theme;
-    if (l$theme != lOther$theme) {
-      return false;
-    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -2127,7 +2075,6 @@ abstract class CopyWith$Query$MediaList$MediaListCollection$user$mediaListOption
     List<String?>? sectionOrder,
     List<String?>? customLists,
     bool? splitCompletedSectionByFormat,
-    String? theme,
     String? $__typename,
   });
 }
@@ -2155,7 +2102,6 @@ class _CopyWithImpl$Query$MediaList$MediaListCollection$user$mediaListOptions$ma
     Object? sectionOrder = _undefined,
     Object? customLists = _undefined,
     Object? splitCompletedSectionByFormat = _undefined,
-    Object? theme = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$MediaList$MediaListCollection$user$mediaListOptions$mangaList(
@@ -2169,7 +2115,6 @@ class _CopyWithImpl$Query$MediaList$MediaListCollection$user$mediaListOptions$ma
             splitCompletedSectionByFormat == _undefined
                 ? _instance.splitCompletedSectionByFormat
                 : (splitCompletedSectionByFormat as bool?),
-        theme: theme == _undefined ? _instance.theme : (theme as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -2190,7 +2135,6 @@ class _CopyWithStubImpl$Query$MediaList$MediaListCollection$user$mediaListOption
     List<String?>? sectionOrder,
     List<String?>? customLists,
     bool? splitCompletedSectionByFormat,
-    String? theme,
     String? $__typename,
   }) =>
       _res;

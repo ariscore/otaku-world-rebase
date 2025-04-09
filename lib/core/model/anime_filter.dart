@@ -2,17 +2,7 @@ import 'package:otaku_world/core/model/filter_model.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 
 class AnimeFilter extends FilterModel {
-  final List<Enum$MediaSort> sort;
-  final List<String>? genres;
-  final String? startDateGreater;
-  final String? startDateLesser;
-  final bool isLicensed;
-  final Enum$MediaSeason? season;
-  final int? seasonYear;
-  final List<Enum$MediaFormat>? formatIn;
-  final List<Enum$MediaStatus>? statusIn;
   final List<String>? licensedByIn;
-  final String? countryOfOrigin;
   final List<Enum$MediaSource>? sourceIn;
   final int? episodesGreater;
   final int? episodesLesser;
@@ -26,17 +16,18 @@ class AnimeFilter extends FilterModel {
 
   const AnimeFilter({
     super.search,
-    required this.sort,
-    this.genres,
-    this.startDateGreater,
-    this.startDateLesser,
-    this.isLicensed = true,
-    this.season,
-    this.seasonYear,
-    this.formatIn,
-    this.statusIn,
+    required super.sort,
+    super.listSort = Enum$MediaListSort.MEDIA_POPULARITY_DESC,
+    super.genres,
+    super.startDateGreater,
+    super.startDateLesser,
+    super.isLicensed = true,
+    super.season,
+    super.seasonYear,
+    super.formatIn,
+    super.statusIn,
     this.licensedByIn,
-    this.countryOfOrigin,
+    super.countryOfOrigin,
     this.sourceIn,
     this.episodesGreater,
     this.episodesLesser,
@@ -56,7 +47,7 @@ class AnimeFilter extends FilterModel {
 
   @override
   String toString() {
-    return 'AnimeFilter{ search: $search, sort: $sort, genres: $genres, startDateGreater: $startDateGreater, startDateLesser: $startDateLesser, isLicensed: $isLicensed, season: $season, seasonYear: $seasonYear, formatIn: $formatIn, statusIn: $statusIn, licensedByIn: $licensedByIn, countryOfOrigin: $countryOfOrigin, sourceIn: $sourceIn, episodesGreater: $episodesGreater, episodesLesser: $episodesLesser, durationGreater: $durationGreater, durationLesser: $durationLesser, minTagRank: $minTagRank, tagCategoryIn: $tagCategoryIn, tagIn: $tagIn, hideMyAnime: $hideMyAnime, Adult: $isAdult}';
+    return 'AnimeFilter{ search: $search, sort: $sort, listSort: $listSort, genres: $genres, startDateGreater: $startDateGreater, startDateLesser: $startDateLesser, isLicensed: $isLicensed, season: $season, seasonYear: $seasonYear, formatIn: $formatIn, statusIn: $statusIn, licensedByIn: $licensedByIn, countryOfOrigin: $countryOfOrigin, sourceIn: $sourceIn, episodesGreater: $episodesGreater, episodesLesser: $episodesLesser, durationGreater: $durationGreater, durationLesser: $durationLesser, minTagRank: $minTagRank, tagCategoryIn: $tagCategoryIn, tagIn: $tagIn, hideMyAnime: $hideMyAnime, Adult: $isAdult}';
   }
 
   static AnimeFilter copy(AnimeFilter filter) {
@@ -89,6 +80,7 @@ class AnimeFilter extends FilterModel {
   AnimeFilter copyWith({
     String? search,
     List<Enum$MediaSort>? sort,
+    Enum$MediaListSort? listSort,
     List<String>? genres,
     String? startDateGreater,
     String? startDateLesser,
@@ -146,6 +138,7 @@ class AnimeFilter extends FilterModel {
     return AnimeFilter(
       search: search ?? this.search,
       sort: sort ?? this.sort,
+      listSort: listSort ?? this.listSort,
       genres: genres ?? this.genres,
       startDateGreater: startDateGreater ?? this.startDateGreater,
       startDateLesser: startDateLesser ?? this.startDateLesser,

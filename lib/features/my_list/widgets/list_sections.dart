@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
@@ -45,7 +43,6 @@ class ListSections extends StatelessWidget {
       return indexA.compareTo(indexB);
     });
 
-    log('Section order: $sectionOrder', name: 'MediaList');
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       sliver: SliverList.builder(

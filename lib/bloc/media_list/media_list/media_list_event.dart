@@ -11,9 +11,14 @@ class LoadMediaList extends MediaListEvent {
 }
 
 class ApplyFilter extends MediaListEvent {
-  const ApplyFilter({this.search});
+  const ApplyFilter({this.search, this.lists, this.mediaFilter, this.applySearch = false,});
 
   final String? search;
+  final List<String>? lists;
+  final FilterModel? mediaFilter;
+  final bool applySearch;
 }
 
 class ClearSearch extends MediaListEvent {}
+
+class RemoveFilters extends MediaListEvent {}

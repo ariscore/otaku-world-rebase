@@ -1,10 +1,11 @@
 // GENERATED FILE
 // DO NOT MODIFY
 // ignore_for_file: type=lint
+import 'dart:convert';
+
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
 import 'schema.graphql.dart';
-import 'dart:convert';
 
 class Fragment$MediaDetailed implements Fragment$MediaShort {
   Fragment$MediaDetailed({
@@ -36459,6 +36460,7 @@ class Fragment$MediaListEntry {
     this.advancedScores,
     this.notes,
     this.updatedAt,
+    this.createdAt,
     this.startedAt,
     this.completedAt,
     this.media,
@@ -36479,6 +36481,7 @@ class Fragment$MediaListEntry {
     final l$advancedScores = json['advancedScores'];
     final l$notes = json['notes'];
     final l$updatedAt = json['updatedAt'];
+    final l$createdAt = json['createdAt'];
     final l$startedAt = json['startedAt'];
     final l$completedAt = json['completedAt'];
     final l$media = json['media'];
@@ -36499,6 +36502,7 @@ class Fragment$MediaListEntry {
       advancedScores: (jsonEncode(l$advancedScores) as String?),
       notes: (l$notes as String?),
       updatedAt: (l$updatedAt as int?),
+      createdAt: (l$createdAt as int?),
       startedAt: l$startedAt == null
           ? null
           : Fragment$MediaListEntry$startedAt.fromJson(
@@ -36541,6 +36545,8 @@ class Fragment$MediaListEntry {
 
   final int? updatedAt;
 
+  final int? createdAt;
+
   final Fragment$MediaListEntry$startedAt? startedAt;
 
   final Fragment$MediaListEntry$completedAt? completedAt;
@@ -36578,6 +36584,8 @@ class Fragment$MediaListEntry {
     _resultData['notes'] = l$notes;
     final l$updatedAt = updatedAt;
     _resultData['updatedAt'] = l$updatedAt;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$startedAt = startedAt;
     _resultData['startedAt'] = l$startedAt?.toJson();
     final l$completedAt = completedAt;
@@ -36604,6 +36612,7 @@ class Fragment$MediaListEntry {
     final l$advancedScores = advancedScores;
     final l$notes = notes;
     final l$updatedAt = updatedAt;
+    final l$createdAt = createdAt;
     final l$startedAt = startedAt;
     final l$completedAt = completedAt;
     final l$media = media;
@@ -36622,6 +36631,7 @@ class Fragment$MediaListEntry {
       l$advancedScores,
       l$notes,
       l$updatedAt,
+      l$createdAt,
       l$startedAt,
       l$completedAt,
       l$media,
@@ -36702,6 +36712,11 @@ class Fragment$MediaListEntry {
     if (l$updatedAt != lOther$updatedAt) {
       return false;
     }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
     final l$startedAt = startedAt;
     final lOther$startedAt = other.startedAt;
     if (l$startedAt != lOther$startedAt) {
@@ -36757,6 +36772,7 @@ abstract class CopyWith$Fragment$MediaListEntry<TRes> {
     String? advancedScores,
     String? notes,
     int? updatedAt,
+    int? createdAt,
     Fragment$MediaListEntry$startedAt? startedAt,
     Fragment$MediaListEntry$completedAt? completedAt,
     Fragment$MediaListEntry$media? media,
@@ -36794,6 +36810,7 @@ class _CopyWithImpl$Fragment$MediaListEntry<TRes>
     Object? advancedScores = _undefined,
     Object? notes = _undefined,
     Object? updatedAt = _undefined,
+    Object? createdAt = _undefined,
     Object? startedAt = _undefined,
     Object? completedAt = _undefined,
     Object? media = _undefined,
@@ -36826,6 +36843,8 @@ class _CopyWithImpl$Fragment$MediaListEntry<TRes>
         notes: notes == _undefined ? _instance.notes : (notes as String?),
         updatedAt:
             updatedAt == _undefined ? _instance.updatedAt : (updatedAt as int?),
+        createdAt:
+            createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
         startedAt: startedAt == _undefined
             ? _instance.startedAt
             : (startedAt as Fragment$MediaListEntry$startedAt?),
@@ -36885,6 +36904,7 @@ class _CopyWithStubImpl$Fragment$MediaListEntry<TRes>
     String? advancedScores,
     String? notes,
     int? updatedAt,
+    int? createdAt,
     Fragment$MediaListEntry$startedAt? startedAt,
     Fragment$MediaListEntry$completedAt? completedAt,
     Fragment$MediaListEntry$media? media,
@@ -36997,6 +37017,13 @@ const fragmentDefinitionMediaListEntry = FragmentDefinitionNode(
     ),
     FieldNode(
       name: NameNode(value: 'updatedAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
       alias: null,
       arguments: [],
       directives: [],

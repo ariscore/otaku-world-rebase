@@ -756,6 +756,7 @@ fragment MediaListEntry on MediaList {
     advancedScores
     notes
     updatedAt
+    createdAt
     startedAt {
         year
         month
