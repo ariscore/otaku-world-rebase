@@ -63,6 +63,7 @@ dependencies:
   youtube_player_flutter: ^9.0.1
   like_button: ^2.0.5
   extended_nested_scroll_view: ^6.2.1
+  expandable: ^5.0.1
 
   # Navigation
 #  go_router: ^12.1.3
