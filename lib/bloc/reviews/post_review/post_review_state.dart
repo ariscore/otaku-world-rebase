@@ -13,7 +13,7 @@ class PostReviewInitial extends PostReviewState {}
 class ReviewLoading extends PostReviewState {}
 
 class ReviewLoaded extends PostReviewState {
-  final Query$FetchReviewByUserId$Review review;
+  final Query$FetchReviewByUserId$Review? review;
 
   const ReviewLoaded(this.review);
 

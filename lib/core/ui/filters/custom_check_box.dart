@@ -33,7 +33,6 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          widget.onChanged();
           selected = !selected;
         });
       },

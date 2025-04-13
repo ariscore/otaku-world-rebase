@@ -97,7 +97,6 @@ fragment MediaDetailed on Media{
     modNotes
     isFavourite
     ...MediaShort
-
 }
 
 fragment MediaShort on Media {
@@ -753,7 +752,7 @@ fragment MediaListEntry on MediaList {
     priority
     private
     hiddenFromStatusLists
-#    customLists(asArray: true)
+    #    customLists(asArray: true)
     advancedScores
     notes
     updatedAt

@@ -13,11 +13,15 @@ class MediaFloatingActionButton extends HookWidget {
     required this.tabController,
     required this.isAdd,
     required this.reviewIndex,
+    required this.userId,
+    required this.mediaId,
   });
 
   final TabController tabController;
   final bool isAdd;
   final int reviewIndex;
+  final int userId;
+  final int mediaId;
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +44,11 @@ class MediaFloatingActionButton extends HookWidget {
       children: [
         if (showButton.value)
           FloatingActionButton(
+            heroTag: 'postReview',
             onPressed: () {
-              context.push(RouteConstants.postReview);
+              context.push(
+                '${RouteConstants.postReview}?userId=$userId&mediaId=$mediaId',
+              );
             },
             backgroundColor: AppColors.sunsetOrange,
             child: SvgPicture.asset(
@@ -50,6 +57,7 @@ class MediaFloatingActionButton extends HookWidget {
             ),
           ),
         FloatingActionButton(
+          heroTag: 'mediaList',
           onPressed: () {},
           backgroundColor: AppColors.sunsetOrange,
           child: SvgPicture.asset(

@@ -15,6 +15,7 @@ import 'package:otaku_world/features/profile/widgets/keep_alive_tab.dart';
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/media_detail/characters/characters_bloc.dart';
 import '../../../bloc/media_detail/media_detail_bloc.dart';
+import '../../../bloc/viewer/viewer_bloc.dart';
 import '../../../generated/assets.dart';
 import '../../../theme/colors.dart';
 import '../tabs/characters/characters.dart' as ch;
@@ -140,11 +141,15 @@ class MediaDetailScreen extends HookWidget {
                       state.media.mediaListEntry?.status == null
                   ? Assets.iconsMediaAdd
                   : Assets.iconsMediaEdit;
+              final user = context.read<ViewerBloc>().getUser();
+
               return MediaFloatingActionButton(
                 tabController: tabController,
                 isAdd: (state.media.mediaListEntry == null &&
                     state.media.mediaListEntry?.status == null),
                 reviewIndex: tabs.length - 1,
+                userId: user.id,
+                mediaId: mediaId,
               );
             } else {
               return const SizedBox();

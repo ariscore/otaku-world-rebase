@@ -11,9 +11,11 @@ class CustomTextField extends StatelessWidget {
     this.focusNode,
     this.maxLines = 25,
     this.maxLength,
+    this.minLength,
     this.isShowingCounter = false,
     this.keyboardType,
     this.counterBuilder,
+    this.validator,
   });
 
   final TextEditingController controller;
@@ -22,14 +24,17 @@ class CustomTextField extends StatelessWidget {
   final TextCapitalization textCapitalization;
   final int maxLines;
   final int? maxLength;
+  final int? minLength;
   final bool isShowingCounter;
   final TextInputType? keyboardType;
   final Widget Function(BuildContext, int currentLength, int? maxLength)?
       counterBuilder;
+  final FormFieldValidator<String>? validator;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: validator,
       controller: controller,
       focusNode: focusNode,
       decoration: InputDecoration(
@@ -50,6 +55,7 @@ class CustomTextField extends StatelessWidget {
           horizontal: 10,
           vertical: 10,
         ),
+        errorMaxLines: 2,
       ),
       style: Theme.of(context).textTheme.headlineMedium,
       textCapitalization: textCapitalization,
@@ -57,18 +63,52 @@ class CustomTextField extends StatelessWidget {
       maxLength: maxLength,
       buildCounter: (context,
           {required currentLength, required isFocused, required maxLength}) {
-        if (!isShowingCounter) return const SizedBox();
+        if (!isShowingCounter) return null;
+
+        // Get the current error text from validation
+        final String? errorText =
+            validator != null ? validator!(controller.text) : null;
 
         if (counterBuilder != null) {
-          return counterBuilder!(context, currentLength, maxLength);
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              counterBuilder!(context, currentLength, maxLength),
+
+              // Add error text below the counter if there is an error
+              if (errorText != null) _errorText(errorText),
+            ],
+          );
         }
 
-        return CounterText(
-          currentLength: currentLength,
-          maxLength: maxLength,
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CounterText(
+              currentLength: currentLength,
+              maxLength: minLength ?? maxLength ?? 0,
+            ),
+
+            // Add error text below the counter if there is an error
+            if (errorText != null) _errorText(errorText)
+          ],
         );
       },
       keyboardType: keyboardType,
+    );
+  }
+
+  Widget _errorText(String errorText) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 5.0),
+      child: Text(
+        errorText,
+        style: TextStyle(
+          color: Colors.red[300],
+          fontSize: 14.0,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
     );
   }
 }
