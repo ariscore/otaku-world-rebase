@@ -4,7 +4,6 @@
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
 import 'schema.graphql.dart';
-import 'dart:convert';
 
 class Fragment$MediaDetailed implements Fragment$MediaShort {
   Fragment$MediaDetailed({
@@ -8756,6 +8755,13 @@ const fragmentDefinitionReview = FragmentDefinitionNode(
           ]),
         ),
         FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
           name: NameNode(value: '__typename'),
           alias: null,
           arguments: [],
@@ -8860,12 +8866,14 @@ class Fragment$Review$user {
   Fragment$Review$user({
     required this.name,
     this.avatar,
+    required this.id,
     this.$__typename = 'User',
   });
 
   factory Fragment$Review$user.fromJson(Map<String, dynamic> json) {
     final l$name = json['name'];
     final l$avatar = json['avatar'];
+    final l$id = json['id'];
     final l$$__typename = json['__typename'];
     return Fragment$Review$user(
       name: (l$name as String),
@@ -8873,6 +8881,7 @@ class Fragment$Review$user {
           ? null
           : Fragment$Review$user$avatar.fromJson(
               (l$avatar as Map<String, dynamic>)),
+      id: (l$id as int),
       $__typename: (l$$__typename as String),
     );
   }
@@ -8880,6 +8889,8 @@ class Fragment$Review$user {
   final String name;
 
   final Fragment$Review$user$avatar? avatar;
+
+  final int id;
 
   final String $__typename;
 
@@ -8889,6 +8900,8 @@ class Fragment$Review$user {
     _resultData['name'] = l$name;
     final l$avatar = avatar;
     _resultData['avatar'] = l$avatar?.toJson();
+    final l$id = id;
+    _resultData['id'] = l$id;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -8898,10 +8911,12 @@ class Fragment$Review$user {
   int get hashCode {
     final l$name = name;
     final l$avatar = avatar;
+    final l$id = id;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$name,
       l$avatar,
+      l$id,
       l$$__typename,
     ]);
   }
@@ -8922,6 +8937,11 @@ class Fragment$Review$user {
     final l$avatar = avatar;
     final lOther$avatar = other.avatar;
     if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -8953,6 +8973,7 @@ abstract class CopyWith$Fragment$Review$user<TRes> {
   TRes call({
     String? name,
     Fragment$Review$user$avatar? avatar,
+    int? id,
     String? $__typename,
   });
   CopyWith$Fragment$Review$user$avatar<TRes> get avatar;
@@ -8974,6 +8995,7 @@ class _CopyWithImpl$Fragment$Review$user<TRes>
   TRes call({
     Object? name = _undefined,
     Object? avatar = _undefined,
+    Object? id = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$Review$user(
@@ -8983,6 +9005,7 @@ class _CopyWithImpl$Fragment$Review$user<TRes>
         avatar: avatar == _undefined
             ? _instance.avatar
             : (avatar as Fragment$Review$user$avatar?),
+        id: id == _undefined || id == null ? _instance.id : (id as int),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -9006,6 +9029,7 @@ class _CopyWithStubImpl$Fragment$Review$user<TRes>
   call({
     String? name,
     Fragment$Review$user$avatar? avatar,
+    int? id,
     String? $__typename,
   }) =>
       _res;
@@ -36496,7 +36520,7 @@ class Fragment$MediaListEntry {
       priority: (l$priority as int?),
       private: (l$private as bool?),
       hiddenFromStatusLists: (l$hiddenFromStatusLists as bool?),
-      advancedScores: (jsonEncode(l$advancedScores) as String?),
+      advancedScores: (l$advancedScores as String?),
       notes: (l$notes as String?),
       updatedAt: (l$updatedAt as int?),
       startedAt: l$startedAt == null

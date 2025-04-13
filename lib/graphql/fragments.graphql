@@ -97,7 +97,6 @@ fragment MediaDetailed on Media{
     modNotes
     isFavourite
     ...MediaShort
-
 }
 
 fragment MediaShort on Media {
@@ -173,6 +172,7 @@ fragment Review on Review {
         avatar {
             medium
         }
+        id
     }
     media {
         bannerImage
@@ -752,7 +752,7 @@ fragment MediaListEntry on MediaList {
     priority
     private
     hiddenFromStatusLists
-#    customLists(asArray: true)
+    #    customLists(asArray: true)
     advancedScores
     notes
     updatedAt

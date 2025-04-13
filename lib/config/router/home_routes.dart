@@ -49,7 +49,42 @@ final homeRoutes = [
   GoRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.postReview,
-    builder: (context, state) => const PostReviewScreen(),
+    builder: (context, state) {
+      final int userId =
+          int.parse(state.uri.queryParameters['userId'] as String);
+      final int mediaId =
+          int.parse(state.uri.queryParameters['mediaId'] as String);
+      final client =
+          (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
+              .client;
+      return BlocProvider(
+        create: (context) => PostReviewBloc()
+          ..add(FetchReview(
+            userId,
+            mediaId,
+            client,
+          )),
+        child: PostReviewScreen(
+          mediaId: mediaId,
+        ),
+      );
+    },
+  ),
+  GoRoute(
+    parentNavigatorKey: _rootNavigatorKey,
+    path: RouteConstants.writeReview,
+    builder: (context, state) {
+      final commentController = state.extra as TextEditingController;
+      return WriteReviewScreen(controller: commentController);
+    },
+  ),
+  GoRoute(
+    parentNavigatorKey: _rootNavigatorKey,
+    path: RouteConstants.previewReview,
+    builder: (context, state) {
+      final String data = state.extra != null ? state.extra as String : '';
+      return PreviewReviewScreen(data: data);
+    },
   ),
   // Trending Anime
   SlideTransitionRoute(
