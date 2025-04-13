@@ -34,6 +34,7 @@ class Assets {
   static const String iconsArrowLeft = 'assets/icons/arrow-left.svg';
   static const String iconsArrowRight = 'assets/icons/arrow-right.svg';
   static const String iconsArrowUp = 'assets/icons/arrow-up.svg';
+  static const String iconsBold = 'assets/icons/bold.svg';
   static const String iconsBulletList = 'assets/icons/bullet-list.svg';
   static const String iconsCalendar = 'assets/icons/calendar.svg';
   static const String iconsCalendar1 = 'assets/icons/calendar-1.svg';
@@ -52,9 +53,11 @@ class Assets {
   static const String iconsFilterVertical = 'assets/icons/filter-vertical.svg';
   static const String iconsFollow = 'assets/icons/follow.svg';
   static const String iconsHome = 'assets/icons/home.svg';
+  static const String iconsItalic = 'assets/icons/italic.svg';
   static const String iconsLightning = 'assets/icons/lightning.svg';
   static const String iconsLike = 'assets/icons/like.svg';
   static const String iconsLineVertical = 'assets/icons/line_vertical.svg';
+  static const String iconsLinkMarkdown = 'assets/icons/link-markdown.svg';
   static const String iconsLinkSquare = 'assets/icons/link-square.svg';
   static const String iconsList = 'assets/icons/list.svg';
   static const String iconsList2 = 'assets/icons/list-2.svg';
@@ -73,8 +76,10 @@ class Assets {
   static const String iconsNotificationRead = 'assets/icons/notification-read.svg';
   static const String iconsNotificationUnread = 'assets/icons/notification-unread.svg';
   static const String iconsOpenLink2 = 'assets/icons/open-link2.svg';
+  static const String iconsPostIcon = 'assets/icons/post-icon.svg';
   static const String iconsRemove = 'assets/icons/remove.svg';
   static const String iconsReviewAdd = 'assets/icons/review-add.svg';
+  static const String iconsSave = 'assets/icons/save.svg';
   static const String iconsSearch = 'assets/icons/search.svg';
   static const String iconsSearchSmall = 'assets/icons/search-small.svg';
   static const String iconsSend = 'assets/icons/send.svg';
@@ -83,6 +88,7 @@ class Assets {
   static const String iconsShare = 'assets/icons/share.svg';
   static const String iconsStar = 'assets/icons/star.svg';
   static const String iconsStatus = 'assets/icons/status.svg';
+  static const String iconsStrike = 'assets/icons/strike.svg';
   static const String iconsThumbsDown = 'assets/icons/thumbs-down.svg';
   static const String iconsThumbsDownFilled = 'assets/icons/thumbs-down-filled.svg';
   static const String iconsThumbsUp = 'assets/icons/thumbs-up.svg';
@@ -93,6 +99,7 @@ class Assets {
   static const String iconsUserGroup = 'assets/icons/user-group.svg';
   static const String iconsUserGroup2 = 'assets/icons/user-group-2.svg';
   static const String iconsViewSlider = 'assets/icons/view-slider.svg';
+  static const String iconsVisiblity = 'assets/icons/visiblity.svg';
   static const String logosAppLogo = 'assets/logos/app_logo.png';
   static const String logosAppLogo500 = 'assets/logos/app_logo_500.png';
   static const String mangaHorimiya = 'assets/images/discover/manga/horimiya.png';
