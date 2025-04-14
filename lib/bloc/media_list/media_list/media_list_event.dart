@@ -19,6 +19,12 @@ class ApplyFilter extends MediaListEvent {
   final bool applySearch;
 }
 
+class UpdateListEntry extends MediaListEvent {
+  const UpdateListEntry({required this.entry});
+
+  final Fragment$MediaListEntry entry;
+}
+
 class ClearSearch extends MediaListEvent {}
 
 class RemoveFilters extends MediaListEvent {}

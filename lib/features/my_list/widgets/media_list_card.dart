@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:otaku_world/bloc/media_list/save_list_entry/save_list_entry_bloc.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
@@ -18,7 +20,9 @@ class MediaListCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('Building media list card');
     if (entry == null) return const SizedBox();
+    final bloc = context.read<SaveListEntryBloc>();
 
     return Container(
       padding: const EdgeInsets.all(10),
@@ -79,7 +83,7 @@ class MediaListCard extends StatelessWidget {
                 ),
                 _buildScore(context),
                 const Spacer(),
-                _buildProgress(context),
+                _buildProgress(context, listBloc: bloc),
               ],
             ),
           ),
@@ -88,7 +92,10 @@ class MediaListCard extends StatelessWidget {
     );
   }
 
-  Widget _buildProgress(BuildContext context) {
+  Widget _buildProgress(
+    BuildContext context, {
+    required SaveListEntryBloc listBloc,
+  }) {
     final progress = entry?.progress ?? 0;
     final total = entry?.media?.type == Enum$MediaType.ANIME
         ? entry?.media?.episodes
@@ -157,20 +164,30 @@ class MediaListCard extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 10),
-            InkWell(
-              onTap: () {
-                log('Add');
-              },
-              child: SizedBox(
-                width: 25,
-                height: 25,
-                child: SvgPicture.asset(
-                  Assets.iconsAdd2,
-                  width: 25,
+            if (entry?.status != Enum$MediaListStatus.COMPLETED ||
+                (entry?.progress ?? 0) < (total ?? 0))
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: InkWell(
+                  onTap: () {
+                    log('Increment episode');
+                    listBloc.add(
+                      IncreaseProgressCount(
+                        mediaId: entry!.mediaId,
+                        progress: entry?.progress ?? 0,
+                      ),
+                    );
+                  },
+                  child: SizedBox(
+                    width: 25,
+                    height: 25,
+                    child: SvgPicture.asset(
+                      Assets.iconsAdd2,
+                      width: 25,
+                    ),
+                  ),
                 ),
               ),
-            ),
           ],
         ),
       ],

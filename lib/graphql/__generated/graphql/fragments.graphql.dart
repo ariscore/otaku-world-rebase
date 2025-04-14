@@ -36524,7 +36524,7 @@ class Fragment$MediaListEntry {
       priority: (l$priority as int?),
       private: (l$private as bool?),
       hiddenFromStatusLists: (l$hiddenFromStatusLists as bool?),
-      advancedScores: (l$advancedScores as String?),
+      advancedScores: (jsonEncode(l$advancedScores) as String?),
       notes: (l$notes as String?),
       updatedAt: (l$updatedAt as int?),
       createdAt: (l$createdAt as int?),

@@ -9,6 +9,7 @@ import 'package:otaku_world/core/model/anime_filter.dart';
 import 'package:otaku_world/core/model/filter_model.dart';
 import 'package:otaku_world/core/model/manga_filter.dart';
 import 'package:otaku_world/core/types/enums.dart';
+import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/list/media_list.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 
@@ -25,6 +26,7 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
 
     on<LoadMediaList>(_onLoadMediaList);
     on<ApplyFilter>(_onApplyFilter);
+    on<UpdateListEntry>(_onUpdateListEntry);
     on<ClearSearch>(_onClearSearch);
     on<RemoveFilters>(_onRemoveFilters);
   }
@@ -136,17 +138,19 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
             // Anime Filters
             final animeFilter = filter;
 
-            if (animeFilter.genres != null &&
-                animeFilter.genres!.isNotEmpty) {
+            if (animeFilter.genres != null && animeFilter.genres!.isNotEmpty) {
               matches &= entry?.media?.genres
-                  ?.any((genre) => animeFilter.genres!.contains(genre)) ??
+                      ?.any((genre) => animeFilter.genres!.contains(genre)) ??
                   false;
             }
 
-            if (animeFilter.startDateGreater != null && animeFilter.startDateLesser != null) {
+            if (animeFilter.startDateGreater != null &&
+                animeFilter.startDateLesser != null) {
               if (entry?.media?.startDate?.year != null) {
-                matches &= entry!.media!.startDate!.year! >= int.parse(animeFilter.startDateGreater!) &&
-                    entry.media!.startDate!.year! <= int.parse(animeFilter.startDateLesser!);
+                matches &= entry!.media!.startDate!.year! >=
+                        int.parse(animeFilter.startDateGreater!) &&
+                    entry.media!.startDate!.year! <=
+                        int.parse(animeFilter.startDateLesser!);
               }
             }
 
@@ -161,8 +165,8 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
             }
 
             if (animeFilter.countryOfOrigin != null) {
-              matches &= entry?.media?.countryOfOrigin ==
-                  animeFilter.countryOfOrigin;
+              matches &=
+                  entry?.media?.countryOfOrigin == animeFilter.countryOfOrigin;
             }
 
             return matches;
@@ -275,6 +279,52 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
         listCollection: collection!.copyWith(
           lists: filteredCollections,
         ),
+      ),
+    );
+  }
+
+  void _onUpdateListEntry(UpdateListEntry event, Emitter<MediaListState> emit) {
+    final currentCollection = (state as MediaListLoaded).listCollection;
+
+    // Create a new list of collections from the current one.
+    final updatedLists = List<Query$MediaList$MediaListCollection$lists?>.from(
+      currentCollection.lists!,
+    );
+
+    // Iterate over the collections to find the one containing the entry.
+    for (int i = 0; i < updatedLists.length; i++) {
+      final collection = updatedLists[i];
+      if (collection == null) continue;
+
+      // Check if this collection contains an entry with the specified mediaId.
+      final bool containsEntry = collection.entries?.any((entry) {
+            if (entry == null) return false;
+            return entry.media?.id == event.entry.mediaId;
+          }) ??
+          false;
+      log('Found entry: $containsEntry');
+
+      if (containsEntry) {
+        // Found the collection; update its entries list.
+        final updatedEntries = collection.entries?.map((entry) {
+          if (entry?.media?.id == event.entry.mediaId) {
+            return event.entry; // Replace with the updated entry.
+          }
+          return entry;
+        }).toList();
+
+        // Create a new collection instance with the updated entries.
+        updatedLists[i] = collection.copyWith(entries: updatedEntries);
+
+        // Since only one entry in one collection will change, exit the loop.
+        break;
+      }
+    }
+
+    // Emit the new state with the updated collections list.
+    emit(
+      (state as MediaListLoaded).copyWith(
+        listCollection: currentCollection.copyWith(lists: updatedLists),
       ),
     );
   }

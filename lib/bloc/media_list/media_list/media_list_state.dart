@@ -28,6 +28,19 @@ final class MediaListLoaded extends MediaListState {
         isFiltered,
         filteredListCollection ?? Object(),
       ];
+
+  MediaListLoaded copyWith({
+    Query$MediaList$MediaListCollection? listCollection,
+    bool? isFiltered,
+    Query$MediaList$MediaListCollection? filteredListCollection,
+  }) {
+    return MediaListLoaded(
+      listCollection: listCollection ?? this.listCollection,
+      isFiltered: isFiltered ?? this.isFiltered,
+      filteredListCollection:
+          filteredListCollection ?? this.filteredListCollection,
+    );
+  }
 }
 
 final class MediaListError extends MediaListState {
