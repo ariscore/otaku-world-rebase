@@ -88,7 +88,9 @@ class PostReviewScreen extends HookWidget {
                               RouteConstants.writeReview,
                               extra: commentTextField,
                             );
-                            commentTextField.text = result as String;
+                            if (result is String) {
+                              commentTextField.text = result as String;
+                            }
                           },
                           label: 'Write a Review ',
                           fontSize: 14,
@@ -241,6 +243,24 @@ class PostReviewScreen extends HookWidget {
                         },
                         label: 'Post Review',
                       ),
+                      if (state is ReviewLoaded &&
+                          state.review?.id != null) ...[
+                        PrimaryOutlinedButton(
+                          onTap: () {
+                            final client = (context
+                                    .read<GraphqlClientCubit>()
+                                    .state as GraphqlClientInitialized)
+                                .client;
+                            context.read<PostReviewBloc>().add(
+                                  DeleteReview(
+                                    reviewId: state.review!.id,
+                                    client: client,
+                                  ),
+                                );
+                          },
+                          label: 'Delete Review',
+                        ),
+                      ],
                     ],
                   ),
                 ),
