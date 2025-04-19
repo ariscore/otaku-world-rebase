@@ -1,0 +1,39 @@
+mutation UpdateUser(
+    $about: String,
+    $titleLanguage: UserTitleLanguage,
+    $staffNameLanguage: UserStaffNameLanguage,
+    $airingNotifications: Boolean,
+    $displayAdultContent: Boolean,
+    $scoreFormat: ScoreFormat,
+    $rowOrder: String,
+    $profileColor: String,
+    $donatorBadge: String,
+    $notificationOptions: [NotificationOptionInput],
+    $animeListOptions: MediaListOptionsInput,
+    $mangaListOptions: MediaListOptionsInput,
+    $timezone: String,
+    $activityMergeTime: Int,
+    $restrictMessagesToFollowing: Boolean,
+    $disabledListActivity: [ListActivityOptionInput],
+) {
+    UpdateUser(
+        about: $about,
+        titleLanguage: $titleLanguage,
+        staffNameLanguage: $staffNameLanguage,
+        airingNotifications: $airingNotifications,
+        displayAdultContent: $displayAdultContent,
+        scoreFormat: $scoreFormat,
+        rowOrder: $rowOrder,
+        profileColor: $profileColor,
+        donatorBadge: $donatorBadge,
+        notificationOptions: $notificationOptions,
+        animeListOptions: $animeListOptions,
+        mangaListOptions: $mangaListOptions,
+        timezone: $timezone,
+        activityMergeTime: $activityMergeTime,
+        restrictMessagesToFollowing: $restrictMessagesToFollowing,
+        disabledListActivity: $disabledListActivity,
+    ) {
+        ...Settings
+    }
+}
