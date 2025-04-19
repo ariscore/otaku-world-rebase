@@ -51,7 +51,7 @@ class Variables$Query$GetBirthdayCharacters {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$GetBirthdayCharacters) ||
+    if (other is! Variables$Query$GetBirthdayCharacters ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -160,7 +160,7 @@ class Query$GetBirthdayCharacters {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetBirthdayCharacters) ||
+    if (other is! Query$GetBirthdayCharacters ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -580,7 +580,7 @@ class Query$GetBirthdayCharacters$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetBirthdayCharacters$Page) ||
+    if (other is! Query$GetBirthdayCharacters$Page ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -762,7 +762,7 @@ class Query$GetBirthdayCharacters$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetBirthdayCharacters$Page$pageInfo) ||
+    if (other is! Query$GetBirthdayCharacters$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }

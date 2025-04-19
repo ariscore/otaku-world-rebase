@@ -53,7 +53,7 @@ class Query$ViewerInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$ViewerInfo) || runtimeType != other.runtimeType) {
+    if (other is! Query$ViewerInfo || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Viewer = Viewer;

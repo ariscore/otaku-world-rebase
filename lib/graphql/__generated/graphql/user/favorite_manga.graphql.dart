@@ -63,7 +63,7 @@ class Variables$Query$FavoriteManga {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$FavoriteManga) ||
+    if (other is! Variables$Query$FavoriteManga ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -194,7 +194,7 @@ class Query$FavoriteManga {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FavoriteManga) || runtimeType != other.runtimeType) {
+    if (other is! Query$FavoriteManga || runtimeType != other.runtimeType) {
       return false;
     }
     final l$User = User;
@@ -622,7 +622,7 @@ class Query$FavoriteManga$User {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FavoriteManga$User) ||
+    if (other is! Query$FavoriteManga$User ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -763,7 +763,7 @@ class Query$FavoriteManga$User$favourites {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FavoriteManga$User$favourites) ||
+    if (other is! Query$FavoriteManga$User$favourites ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -919,7 +919,7 @@ class Query$FavoriteManga$User$favourites$manga {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FavoriteManga$User$favourites$manga) ||
+    if (other is! Query$FavoriteManga$User$favourites$manga ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1103,7 +1103,7 @@ class Query$FavoriteManga$User$favourites$manga$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FavoriteManga$User$favourites$manga$pageInfo) ||
+    if (other is! Query$FavoriteManga$User$favourites$manga$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }

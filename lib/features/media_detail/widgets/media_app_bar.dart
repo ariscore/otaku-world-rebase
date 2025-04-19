@@ -124,7 +124,7 @@ class _MediaAppBarState extends State<MediaAppBar> {
       children: [
         SizedBox(
           height: UIUtils.getWidgetHeight(
-            targetWidgetHeight: 430,
+            targetWidgetHeight: 420,
             screenHeight: height,
           ),
           child: Stack(

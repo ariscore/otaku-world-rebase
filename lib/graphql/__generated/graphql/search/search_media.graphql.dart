@@ -78,7 +78,7 @@ class Variables$Query$SearchMedia {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$SearchMedia) ||
+    if (other is! Variables$Query$SearchMedia ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -223,7 +223,7 @@ class Query$SearchMedia {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$SearchMedia) || runtimeType != other.runtimeType) {
+    if (other is! Query$SearchMedia || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -656,8 +656,7 @@ class Query$SearchMedia$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$SearchMedia$Page) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Query$SearchMedia$Page || runtimeType != other.runtimeType) {
       return false;
     }
     final l$pageInfo = pageInfo;
@@ -836,7 +835,7 @@ class Query$SearchMedia$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$SearchMedia$Page$pageInfo) ||
+    if (other is! Query$SearchMedia$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }

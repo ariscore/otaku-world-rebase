@@ -1,5 +1,6 @@
 import 'dart:developer' as dev;
 
+import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -8,10 +9,14 @@ import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/staff/staff_bloc.dart';
 import 'package:otaku_world/features/media_detail/widgets/media_app_bar.dart';
+import 'package:otaku_world/features/media_detail/widgets/media_floating_action_button.dart';
+import 'package:otaku_world/features/profile/widgets/keep_alive_tab.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/media_detail/characters/characters_bloc.dart';
 import '../../../bloc/media_detail/media_detail_bloc.dart';
+import '../../../bloc/viewer/viewer_bloc.dart';
+import '../../../generated/assets.dart';
 import '../../../theme/colors.dart';
 import '../tabs/characters/characters.dart' as ch;
 import '../tabs/overview/overview.dart';
@@ -41,93 +46,6 @@ class MediaDetailScreen extends HookWidget {
         (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
             .client;
 
-    // return PopScope(
-    //   canPop: false,
-    //   onPopInvoked: (didPop) => _onPopInvoked(context),
-    //   child: Scaffold(
-    //     appBar: buildAppBar(context),
-    //     extendBodyBehindAppBar: true,
-    //     extendBody: true,
-    //     body: BlocBuilder<MediaDetailBloc, MediaDetailState>(
-    //       builder: (context, state) {
-    //         if (state is MediaDetailInitial) {
-    //           context.read<MediaDetailBloc>().add(
-    //                 LoadMediaDetail(
-    //                   id: mediaId,
-    //                   client: client,
-    //                 ),
-    //               );
-    //         } else if (state is MediaDetailLoading) {
-    //           return _buildLoading(context);
-    //         } else if (state is MediaDetailLoaded) {
-    //           final media = state.media;
-    //
-    //           dev.log(
-    //             "query Id : $mediaId ---> State Id : ${media.id}  Key Id : ---> $key ",
-    //             name: "MediaDetailScreenMatched",
-    //           );
-    //           return NestedScrollView(
-    //             headerSliverBuilder: (context, innerBoxIsScrolled) {
-    //               dev.log("The InnerBox is scrolled : $innerBoxIsScrolled",
-    //                   name: "Scrolling Media Detail Screen");
-    //               return [
-    //                 SliverToBoxAdapter(
-    //                   child: buildPosterContent(
-    //                     context,
-    //                     media,
-    //                     height,
-    //                     width,
-    //                     tabController,
-    //                   ),
-    //                 ),
-    //               ];
-    //             },
-    //             body: MediaQuery.removePadding(
-    //               context: context,
-    //               removeTop: true,
-    //               child: TabBarView(
-    //                 controller: tabController,
-    //                 children: [
-    //                   const Overview(),
-    //                   BlocProvider(
-    //                     create: (context) => CharactersBloc(mediaId: mediaId)..loadData(client),
-    //                     child: const ch.Characters(),
-    //                   ),
-    //                   const Staff(),
-    //                   const Stats(),
-    //                   const Social(),
-    //                   const Reviews(),
-    //                 ],
-    //               ),
-    //             ),
-    //           );
-    //         } else if (state is MediaDetailError) {
-    //           return Center(
-    //             child: ErrorText(
-    //               message: state.message,
-    //               onTryAgain: () => context.read<MediaDetailBloc>().add(
-    //                     LoadMediaDetail(
-    //                       id: mediaId,
-    //                       client: client,
-    //                     ),
-    //                   ),
-    //             ),
-    //           );
-    //         }
-    //
-    //         return const Center(
-    //           child: Text(
-    //             'Unknown State',
-    //             style: TextStyle(
-    //               color: AppColors.white,
-    //             ),
-    //           ),
-    //         );
-    //       },
-    //     ),
-    //   ),
-    // );
-
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
@@ -135,10 +53,6 @@ class MediaDetailScreen extends HookWidget {
         _onPopInvoked(context);
       },
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: Container(),
-        ),
         body: BlocBuilder<MediaDetailBloc, MediaDetailState>(
           builder: (context, state) {
             if (state is MediaDetailInitial) {
@@ -158,7 +72,7 @@ class MediaDetailScreen extends HookWidget {
                 name: "MediaDetailScreenMatched",
               );
 
-              return NestedScrollView(
+              return ExtendedNestedScrollView(
                 headerSliverBuilder: (context, innerBoxIsScrolled) {
                   return [
                     MediaAppBar(
@@ -168,27 +82,43 @@ class MediaDetailScreen extends HookWidget {
                     ),
                   ];
                 },
+                onlyOneScrollInBody: true,
+                pinnedHeaderSliverHeightBuilder: () {
+                  return 50 + kToolbarHeight;
+                },
                 body: TabBarView(
                   controller: tabController,
                   children: [
-                    const Overview(),
-                    BlocProvider(
-                      create: (context) => CharactersBloc(mediaId: mediaId),
-                      child: const ch.Characters(),
+                    const KeepAliveTab(
+                      child: Overview(),
                     ),
-                    BlocProvider(
-                      create: (context) => StaffBloc(mediaId: mediaId),
-                      child: const Staff(),
+                    KeepAliveTab(
+                      child: BlocProvider(
+                        create: (context) => CharactersBloc(mediaId: mediaId),
+                        child: const ch.Characters(),
+                      ),
                     ),
-                    const Stats(),
-                    BlocProvider(
-                      create: (context) => SocialBloc(mediaId: mediaId),
-                      child: const Social(),
+                    KeepAliveTab(
+                      child: BlocProvider(
+                        create: (context) => StaffBloc(mediaId: mediaId),
+                        child: const Staff(),
+                      ),
                     ),
-                    BlocProvider(
-                      create: (context) =>
-                          MediaReviewBloc(mediaId: mediaId)..loadData(client),
-                      child: const Reviews(),
+                    const KeepAliveTab(
+                      child: Stats(),
+                    ),
+                    KeepAliveTab(
+                      child: BlocProvider(
+                        create: (context) => SocialBloc(mediaId: mediaId),
+                        child: const Social(),
+                      ),
+                    ),
+                    KeepAliveTab(
+                      child: BlocProvider(
+                        create: (context) =>
+                            MediaReviewBloc(mediaId: mediaId)..loadData(client),
+                        child: const Reviews(),
+                      ),
                     ),
                   ],
                 ),
@@ -202,6 +132,28 @@ class MediaDetailScreen extends HookWidget {
                 ),
               ),
             );
+          },
+        ),
+        floatingActionButton: BlocBuilder<MediaDetailBloc, MediaDetailState>(
+          builder: (context, state) {
+            if (state is MediaDetailLoaded) {
+              final String icon = state.media.mediaListEntry == null &&
+                      state.media.mediaListEntry?.status == null
+                  ? Assets.iconsMediaAdd
+                  : Assets.iconsMediaEdit;
+              final user = context.read<ViewerBloc>().getUser();
+
+              return MediaFloatingActionButton(
+                tabController: tabController,
+                isAdd: (state.media.mediaListEntry == null &&
+                    state.media.mediaListEntry?.status == null),
+                reviewIndex: tabs.length - 1,
+                userId: user.id,
+                mediaId: mediaId,
+              );
+            } else {
+              return const SizedBox();
+            }
           },
         ),
       ),

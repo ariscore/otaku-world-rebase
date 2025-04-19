@@ -49,7 +49,7 @@ class Variables$Query$GetMediaDetail {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$GetMediaDetail) ||
+    if (other is! Variables$Query$GetMediaDetail ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -157,7 +157,7 @@ class Query$GetMediaDetail {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetMediaDetail) || runtimeType != other.runtimeType) {
+    if (other is! Query$GetMediaDetail || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Media = Media;

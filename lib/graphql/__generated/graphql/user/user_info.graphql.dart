@@ -48,7 +48,7 @@ class Variables$Query$UserInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$UserInfo) ||
+    if (other is! Variables$Query$UserInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -155,7 +155,7 @@ class Query$UserInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$UserInfo) || runtimeType != other.runtimeType) {
+    if (other is! Query$UserInfo || runtimeType != other.runtimeType) {
       return false;
     }
     final l$User = User;

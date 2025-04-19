@@ -118,14 +118,6 @@ final profileRoutes = [
   ),
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
-    path: RouteConstants.settings,
-    directionTween: SlideTransitionRoute.leftToRightTween,
-    builder: (state) {
-      return SettingsScreen(userName: state.uri.queryParameters['name']!);
-    },
-  ),
-  SlideTransitionRoute(
-    parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.userActivities,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {

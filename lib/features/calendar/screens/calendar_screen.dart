@@ -29,35 +29,31 @@ class _CalendarScreenState extends State<CalendarScreen> {
         (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
             .client;
 
-    return DefaultTabController(
-      length: 7,
-      initialIndex: 0,
-      child: Scaffold(
-        appBar: SimpleAppBar(
-          title: 'Calendar',
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 0,
-                right: 16,
-              ),
-              child: IconButton(
-                onPressed: () {
-                  setState(() {
-                    isSingleDayCalendar = !isSingleDayCalendar;
-                  });
-                },
-                icon: isSingleDayCalendar
-                    ? SvgPicture.asset(Assets.iconsViewSlider)
-                    : SvgPicture.asset(Assets.iconsFilterVertical),
-              ),
+    return Scaffold(
+      appBar: SimpleAppBar(
+        title: 'Calendar',
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 0,
+              right: 16,
             ),
-          ],
-        ),
-        body: isSingleDayCalendar
-            ? SingleDayCalendar(client: client)
-            : WeekCalendar(client: client, tabController: tabController),
+            child: IconButton(
+              onPressed: () {
+                setState(() {
+                  isSingleDayCalendar = !isSingleDayCalendar;
+                });
+              },
+              icon: isSingleDayCalendar
+                  ? SvgPicture.asset(Assets.iconsCalendar1, width: 30)
+                  : SvgPicture.asset(Assets.iconsCalendar7, width: 30),
+            ),
+          ),
+        ],
       ),
+      body: isSingleDayCalendar
+          ? SingleDayCalendar(client: client)
+          : WeekCalendar(client: client, tabController: tabController),
     );
   }
 }

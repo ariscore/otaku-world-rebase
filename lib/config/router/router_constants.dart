@@ -26,6 +26,10 @@ class RouteConstants {
   static const lengthDistribution = '/length-distribution';
 
   static const settings = '/settings';
+  static const mediaSettings = '/media-settings';
+  static const notificationsSettings = '/notifications-settings';
+  static const listSettings = '/list-settings';
+
   static const discover = '/discover';
   static const social = '/social';
   static const activity = '/activity';
@@ -72,6 +76,10 @@ class RouteConstants {
 
   static const reviews = '/reviews';
   static const reviewDetail = '/review-detail';
+  static const postReview = '/post-review';
+  static const writeReview = '/write-review';
+  static const previewReview = '/preview-review';
+  
   static const calendar = '/calendar';
   static const search = '/search';
   static const trendingAnime = '/trending-anime';

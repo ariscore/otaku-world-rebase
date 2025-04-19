@@ -97,7 +97,6 @@ fragment MediaDetailed on Media{
     modNotes
     isFavourite
     ...MediaShort
-
 }
 
 fragment MediaShort on Media {
@@ -173,6 +172,7 @@ fragment Review on Review {
         avatar {
             medium
         }
+        id
     }
     media {
         bannerImage
@@ -416,6 +416,57 @@ fragment User on User {
     }
     isFollower
     isFollowing
+}
+
+fragment Settings on User {
+    id
+    name
+    about
+    avatar {
+        medium
+        large
+    }
+    bannerImage
+    unreadNotificationCount
+    donatorTier
+    donatorBadge
+    moderatorRoles
+    options {
+        titleLanguage
+        staffNameLanguage
+        restrictMessagesToFollowing
+        airingNotifications
+        displayAdultContent
+        profileColor
+        timezone
+        activityMergeTime
+        notificationOptions {
+            type
+            enabled
+        }
+        disabledListActivity {
+            type
+            disabled
+        }
+    }
+    mediaListOptions {
+        scoreFormat
+        rowOrder
+        animeList {
+            customLists
+            sectionOrder
+            splitCompletedSectionByFormat
+            advancedScoring
+            advancedScoringEnabled
+        }
+        mangaList {
+            customLists
+            sectionOrder
+            splitCompletedSectionByFormat
+            advancedScoring
+            advancedScoringEnabled
+        }
+    }
 }
 
 fragment UserInfo on User {
@@ -688,4 +739,61 @@ fragment RelatedMediaAdditionNotification on RelatedMediaAdditionNotification {
     }
     context
     createdAt
+}
+
+fragment MediaListEntry on MediaList {
+    id
+    mediaId
+    status
+    score
+    progress
+    progressVolumes
+    repeat
+    priority
+    private
+    hiddenFromStatusLists
+    #    customLists(asArray: true)
+    advancedScores
+    notes
+    updatedAt
+    startedAt {
+        year
+        month
+        day
+    }
+    completedAt {
+        year
+        month
+        day
+    }
+    media {
+        id
+        title {
+            userPreferred
+            romaji
+            english
+            native
+        }
+        coverImage {
+            extraLarge
+            large
+        }
+        type
+        format
+        status(version: 2)
+        episodes
+        volumes
+        chapters
+        averageScore
+        popularity
+        isAdult
+        countryOfOrigin
+        genres
+        bannerImage
+        startDate {
+            year
+            month
+            day
+        }
+    }
 }

@@ -428,8 +428,7 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Fragment$MediaDetailed || runtimeType != other.runtimeType) {
       return false;
     }
     final l$averageScore = averageScore;
@@ -1896,7 +1895,7 @@ class Fragment$MediaDetailed$nextAiringEpisode {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$nextAiringEpisode) ||
+    if (other is! Fragment$MediaDetailed$nextAiringEpisode ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2040,7 +2039,7 @@ class Fragment$MediaDetailed$trailer {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$trailer) ||
+    if (other is! Fragment$MediaDetailed$trailer ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2229,7 +2228,7 @@ class Fragment$MediaDetailed$externalLinks {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$externalLinks) ||
+    if (other is! Fragment$MediaDetailed$externalLinks ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2407,7 +2406,7 @@ class Fragment$MediaDetailed$studios {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$studios) ||
+    if (other is! Fragment$MediaDetailed$studios ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2587,7 +2586,7 @@ class Fragment$MediaDetailed$studios$edges {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$studios$edges) ||
+    if (other is! Fragment$MediaDetailed$studios$edges ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2765,7 +2764,7 @@ class Fragment$MediaDetailed$studios$edges$node {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$studios$edges$node) ||
+    if (other is! Fragment$MediaDetailed$studios$edges$node ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2917,7 +2916,7 @@ class Fragment$MediaDetailed$relations {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$relations) ||
+    if (other is! Fragment$MediaDetailed$relations ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3092,7 +3091,7 @@ class Fragment$MediaDetailed$relations$edges {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$relations$edges) ||
+    if (other is! Fragment$MediaDetailed$relations$edges ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3300,7 +3299,7 @@ class Fragment$MediaDetailed$relations$edges$node {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$relations$edges$node) ||
+    if (other is! Fragment$MediaDetailed$relations$edges$node ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3509,7 +3508,7 @@ class Fragment$MediaDetailed$relations$edges$node$title {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$relations$edges$node$title) ||
+    if (other is! Fragment$MediaDetailed$relations$edges$node$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3651,7 +3650,7 @@ class Fragment$MediaDetailed$relations$edges$node$coverImage {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$relations$edges$node$coverImage) ||
+    if (other is! Fragment$MediaDetailed$relations$edges$node$coverImage ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3800,7 +3799,7 @@ class Fragment$MediaDetailed$recommendations {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$recommendations) ||
+    if (other is! Fragment$MediaDetailed$recommendations ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3960,7 +3959,7 @@ class Fragment$MediaDetailed$recommendations$nodes {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$recommendations$nodes) ||
+    if (other is! Fragment$MediaDetailed$recommendations$nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4129,7 +4128,7 @@ class Fragment$MediaDetailed$tags {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$tags) ||
+    if (other is! Fragment$MediaDetailed$tags ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4349,7 +4348,7 @@ class Fragment$MediaDetailed$rankings {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$rankings) ||
+    if (other is! Fragment$MediaDetailed$rankings ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4549,7 +4548,7 @@ class Fragment$MediaDetailed$stats {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$stats) ||
+    if (other is! Fragment$MediaDetailed$stats ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4765,7 +4764,7 @@ class Fragment$MediaDetailed$stats$scoreDistribution {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$stats$scoreDistribution) ||
+    if (other is! Fragment$MediaDetailed$stats$scoreDistribution ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4912,7 +4911,7 @@ class Fragment$MediaDetailed$stats$statusDistribution {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$stats$statusDistribution) ||
+    if (other is! Fragment$MediaDetailed$stats$statusDistribution ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5075,7 +5074,7 @@ class Fragment$MediaDetailed$title implements Fragment$MediaShort$title {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$title) ||
+    if (other is! Fragment$MediaDetailed$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5248,7 +5247,7 @@ class Fragment$MediaDetailed$coverImage
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$coverImage) ||
+    if (other is! Fragment$MediaDetailed$coverImage ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5398,7 +5397,7 @@ class Fragment$MediaDetailed$airingSchedule
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$airingSchedule) ||
+    if (other is! Fragment$MediaDetailed$airingSchedule ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5568,7 +5567,7 @@ class Fragment$MediaDetailed$airingSchedule$nodes
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$airingSchedule$nodes) ||
+    if (other is! Fragment$MediaDetailed$airingSchedule$nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5720,7 +5719,7 @@ class Fragment$MediaDetailed$mediaListEntry
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDetailed$mediaListEntry) ||
+    if (other is! Fragment$MediaDetailed$mediaListEntry ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6024,7 +6023,7 @@ class Fragment$MediaShort {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaShort) || runtimeType != other.runtimeType) {
+    if (other is! Fragment$MediaShort || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -6759,7 +6758,7 @@ class Fragment$MediaShort$title {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaShort$title) ||
+    if (other is! Fragment$MediaShort$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6930,7 +6929,7 @@ class Fragment$MediaShort$coverImage {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaShort$coverImage) ||
+    if (other is! Fragment$MediaShort$coverImage ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7079,7 +7078,7 @@ class Fragment$MediaShort$airingSchedule {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaShort$airingSchedule) ||
+    if (other is! Fragment$MediaShort$airingSchedule ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7248,7 +7247,7 @@ class Fragment$MediaShort$airingSchedule$nodes {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaShort$airingSchedule$nodes) ||
+    if (other is! Fragment$MediaShort$airingSchedule$nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7399,7 +7398,7 @@ class Fragment$MediaShort$mediaListEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaShort$mediaListEntry) ||
+    if (other is! Fragment$MediaShort$mediaListEntry ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7600,7 +7599,7 @@ class Fragment$SearchResultMedia {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$SearchResultMedia) ||
+    if (other is! Fragment$SearchResultMedia ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7974,7 +7973,7 @@ class Fragment$SearchResultMedia$coverImage {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$SearchResultMedia$coverImage) ||
+    if (other is! Fragment$SearchResultMedia$coverImage ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8098,7 +8097,7 @@ class Fragment$SearchResultMedia$title {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$SearchResultMedia$title) ||
+    if (other is! Fragment$SearchResultMedia$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8224,7 +8223,7 @@ class Fragment$SearchResultMedia$startDate {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$SearchResultMedia$startDate) ||
+    if (other is! Fragment$SearchResultMedia$startDate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8445,7 +8444,7 @@ class Fragment$Review {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$Review) || runtimeType != other.runtimeType) {
+    if (other is! Fragment$Review || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -8756,6 +8755,13 @@ const fragmentDefinitionReview = FragmentDefinitionNode(
           ]),
         ),
         FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
           name: NameNode(value: '__typename'),
           alias: null,
           arguments: [],
@@ -8860,12 +8866,14 @@ class Fragment$Review$user {
   Fragment$Review$user({
     required this.name,
     this.avatar,
+    required this.id,
     this.$__typename = 'User',
   });
 
   factory Fragment$Review$user.fromJson(Map<String, dynamic> json) {
     final l$name = json['name'];
     final l$avatar = json['avatar'];
+    final l$id = json['id'];
     final l$$__typename = json['__typename'];
     return Fragment$Review$user(
       name: (l$name as String),
@@ -8873,6 +8881,7 @@ class Fragment$Review$user {
           ? null
           : Fragment$Review$user$avatar.fromJson(
               (l$avatar as Map<String, dynamic>)),
+      id: (l$id as int),
       $__typename: (l$$__typename as String),
     );
   }
@@ -8880,6 +8889,8 @@ class Fragment$Review$user {
   final String name;
 
   final Fragment$Review$user$avatar? avatar;
+
+  final int id;
 
   final String $__typename;
 
@@ -8889,6 +8900,8 @@ class Fragment$Review$user {
     _resultData['name'] = l$name;
     final l$avatar = avatar;
     _resultData['avatar'] = l$avatar?.toJson();
+    final l$id = id;
+    _resultData['id'] = l$id;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -8898,10 +8911,12 @@ class Fragment$Review$user {
   int get hashCode {
     final l$name = name;
     final l$avatar = avatar;
+    final l$id = id;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$name,
       l$avatar,
+      l$id,
       l$$__typename,
     ]);
   }
@@ -8911,7 +8926,7 @@ class Fragment$Review$user {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$Review$user) || runtimeType != other.runtimeType) {
+    if (other is! Fragment$Review$user || runtimeType != other.runtimeType) {
       return false;
     }
     final l$name = name;
@@ -8922,6 +8937,11 @@ class Fragment$Review$user {
     final l$avatar = avatar;
     final lOther$avatar = other.avatar;
     if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -8953,6 +8973,7 @@ abstract class CopyWith$Fragment$Review$user<TRes> {
   TRes call({
     String? name,
     Fragment$Review$user$avatar? avatar,
+    int? id,
     String? $__typename,
   });
   CopyWith$Fragment$Review$user$avatar<TRes> get avatar;
@@ -8974,6 +8995,7 @@ class _CopyWithImpl$Fragment$Review$user<TRes>
   TRes call({
     Object? name = _undefined,
     Object? avatar = _undefined,
+    Object? id = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$Review$user(
@@ -8983,6 +9005,7 @@ class _CopyWithImpl$Fragment$Review$user<TRes>
         avatar: avatar == _undefined
             ? _instance.avatar
             : (avatar as Fragment$Review$user$avatar?),
+        id: id == _undefined || id == null ? _instance.id : (id as int),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -9006,6 +9029,7 @@ class _CopyWithStubImpl$Fragment$Review$user<TRes>
   call({
     String? name,
     Fragment$Review$user$avatar? avatar,
+    int? id,
     String? $__typename,
   }) =>
       _res;
@@ -9057,7 +9081,7 @@ class Fragment$Review$user$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$Review$user$avatar) ||
+    if (other is! Fragment$Review$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9192,7 +9216,7 @@ class Fragment$Review$media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$Review$media) || runtimeType != other.runtimeType) {
+    if (other is! Fragment$Review$media || runtimeType != other.runtimeType) {
       return false;
     }
     final l$bannerImage = bannerImage;
@@ -9338,7 +9362,7 @@ class Fragment$Review$media$title {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$Review$media$title) ||
+    if (other is! Fragment$Review$media$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9583,7 +9607,7 @@ class Fragment$ReviewDetail {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ReviewDetail) || runtimeType != other.runtimeType) {
+    if (other is! Fragment$ReviewDetail || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -10117,7 +10141,7 @@ class Fragment$ReviewDetail$user {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ReviewDetail$user) ||
+    if (other is! Fragment$ReviewDetail$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10275,7 +10299,7 @@ class Fragment$ReviewDetail$user$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ReviewDetail$user$avatar) ||
+    if (other is! Fragment$ReviewDetail$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10413,7 +10437,7 @@ class Fragment$ReviewDetail$media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ReviewDetail$media) ||
+    if (other is! Fragment$ReviewDetail$media ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10574,7 +10598,7 @@ class Fragment$ReviewDetail$media$title {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ReviewDetail$media$title) ||
+    if (other is! Fragment$ReviewDetail$media$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10700,7 +10724,7 @@ class Fragment$ReviewDetail$media$coverImage {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ReviewDetail$media$coverImage) ||
+    if (other is! Fragment$ReviewDetail$media$coverImage ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10859,7 +10883,7 @@ class Fragment$SearchResultCharacter {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$SearchResultCharacter) ||
+    if (other is! Fragment$SearchResultCharacter ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11158,7 +11182,7 @@ class Fragment$SearchResultCharacter$name {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$SearchResultCharacter$name) ||
+    if (other is! Fragment$SearchResultCharacter$name ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11285,7 +11309,7 @@ class Fragment$SearchResultCharacter$image {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$SearchResultCharacter$image) ||
+    if (other is! Fragment$SearchResultCharacter$image ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11442,7 +11466,7 @@ class Fragment$SearchResultStaff {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$SearchResultStaff) ||
+    if (other is! Fragment$SearchResultStaff ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11737,7 +11761,7 @@ class Fragment$SearchResultStaff$name {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$SearchResultStaff$name) ||
+    if (other is! Fragment$SearchResultStaff$name ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11862,7 +11886,7 @@ class Fragment$SearchResultStaff$image {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$SearchResultStaff$image) ||
+    if (other is! Fragment$SearchResultStaff$image ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12015,7 +12039,7 @@ class Fragment$SearchResultStudio {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$SearchResultStudio) ||
+    if (other is! Fragment$SearchResultStudio ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12338,7 +12362,7 @@ class Fragment$SearchResultStudio$media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$SearchResultStudio$media) ||
+    if (other is! Fragment$SearchResultStudio$media ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12509,7 +12533,7 @@ class Fragment$SearchResultStudio$media$nodes {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$SearchResultStudio$media$nodes) ||
+    if (other is! Fragment$SearchResultStudio$media$nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12663,7 +12687,7 @@ class Fragment$SearchResultStudio$media$nodes$coverImage {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$SearchResultStudio$media$nodes$coverImage) ||
+    if (other is! Fragment$SearchResultStudio$media$nodes$coverImage ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12814,7 +12838,7 @@ class Fragment$SearchResultUser {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$SearchResultUser) ||
+    if (other is! Fragment$SearchResultUser ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -13064,7 +13088,7 @@ class Fragment$SearchResultUser$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$SearchResultUser$avatar) ||
+    if (other is! Fragment$SearchResultUser$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -13226,7 +13250,7 @@ class Fragment$CalendarAiringSchedule {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$CalendarAiringSchedule) ||
+    if (other is! Fragment$CalendarAiringSchedule ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -13624,7 +13648,7 @@ class Fragment$CalendarAiringSchedule$media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$CalendarAiringSchedule$media) ||
+    if (other is! Fragment$CalendarAiringSchedule$media ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -13831,7 +13855,7 @@ class Fragment$CalendarAiringSchedule$media$title {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$CalendarAiringSchedule$media$title) ||
+    if (other is! Fragment$CalendarAiringSchedule$media$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -13971,7 +13995,7 @@ class Fragment$CalendarAiringSchedule$media$mediaListEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$CalendarAiringSchedule$media$mediaListEntry) ||
+    if (other is! Fragment$CalendarAiringSchedule$media$mediaListEntry ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -14141,7 +14165,7 @@ class Fragment$MediaTag {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaTag) || runtimeType != other.runtimeType) {
+    if (other is! Fragment$MediaTag || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -14413,7 +14437,7 @@ class Fragment$FuzzyDate {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$FuzzyDate) || runtimeType != other.runtimeType) {
+    if (other is! Fragment$FuzzyDate || runtimeType != other.runtimeType) {
       return false;
     }
     final l$day = day;
@@ -14663,8 +14687,7 @@ class Fragment$CharacterShort {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$CharacterShort) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Fragment$CharacterShort || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -14957,7 +14980,7 @@ class Fragment$CharacterShort$name {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$CharacterShort$name) ||
+    if (other is! Fragment$CharacterShort$name ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -15082,7 +15105,7 @@ class Fragment$CharacterShort$image {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$CharacterShort$image) ||
+    if (other is! Fragment$CharacterShort$image ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -15237,7 +15260,7 @@ class Fragment$StaffShort {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$StaffShort) || runtimeType != other.runtimeType) {
+    if (other is! Fragment$StaffShort || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -15529,7 +15552,7 @@ class Fragment$StaffShort$name {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$StaffShort$name) ||
+    if (other is! Fragment$StaffShort$name ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -15654,7 +15677,7 @@ class Fragment$StaffShort$image {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$StaffShort$image) ||
+    if (other is! Fragment$StaffShort$image ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -15852,7 +15875,7 @@ class Fragment$TextActivity {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$TextActivity) || runtimeType != other.runtimeType) {
+    if (other is! Fragment$TextActivity || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -16268,7 +16291,7 @@ class Fragment$TextActivity$user {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$TextActivity$user) ||
+    if (other is! Fragment$TextActivity$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -16437,7 +16460,7 @@ class Fragment$TextActivity$user$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$TextActivity$user$avatar) ||
+    if (other is! Fragment$TextActivity$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -16656,7 +16679,7 @@ class Fragment$MessageActivity {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MessageActivity) ||
+    if (other is! Fragment$MessageActivity ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -17169,7 +17192,7 @@ class Fragment$MessageActivity$messenger {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MessageActivity$messenger) ||
+    if (other is! Fragment$MessageActivity$messenger ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -17340,7 +17363,7 @@ class Fragment$MessageActivity$messenger$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MessageActivity$messenger$avatar) ||
+    if (other is! Fragment$MessageActivity$messenger$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -17486,7 +17509,7 @@ class Fragment$MessageActivity$recipient {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MessageActivity$recipient) ||
+    if (other is! Fragment$MessageActivity$recipient ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -17646,7 +17669,7 @@ class Fragment$MessageActivity$recipient$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MessageActivity$recipient$avatar) ||
+    if (other is! Fragment$MessageActivity$recipient$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -17866,7 +17889,7 @@ class Fragment$ListActivity {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ListActivity) || runtimeType != other.runtimeType) {
+    if (other is! Fragment$ListActivity || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -18409,7 +18432,7 @@ class Fragment$ListActivity$user {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ListActivity$user) ||
+    if (other is! Fragment$ListActivity$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -18578,7 +18601,7 @@ class Fragment$ListActivity$user$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ListActivity$user$avatar) ||
+    if (other is! Fragment$ListActivity$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -18755,7 +18778,7 @@ class Fragment$ListActivity$media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ListActivity$media) ||
+    if (other is! Fragment$ListActivity$media ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -18954,7 +18977,7 @@ class Fragment$ListActivity$media$coverImage {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ListActivity$media$coverImage) ||
+    if (other is! Fragment$ListActivity$media$coverImage ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -19079,7 +19102,7 @@ class Fragment$ListActivity$media$title {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ListActivity$media$title) ||
+    if (other is! Fragment$ListActivity$media$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -19261,8 +19284,7 @@ class Fragment$ActivityReply {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityReply) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Fragment$ActivityReply || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -19628,7 +19650,7 @@ class Fragment$ActivityReply$user {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityReply$user) ||
+    if (other is! Fragment$ActivityReply$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -19786,7 +19808,7 @@ class Fragment$ActivityReply$user$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityReply$user$avatar) ||
+    if (other is! Fragment$ActivityReply$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -19919,7 +19941,7 @@ class Fragment$PageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$PageInfo) || runtimeType != other.runtimeType) {
+    if (other is! Fragment$PageInfo || runtimeType != other.runtimeType) {
       return false;
     }
     final l$currentPage = currentPage;
@@ -20162,7 +20184,7 @@ class Fragment$User {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$User) || runtimeType != other.runtimeType) {
+    if (other is! Fragment$User || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -20444,7 +20466,7 @@ class Fragment$User$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$User$avatar) || runtimeType != other.runtimeType) {
+    if (other is! Fragment$User$avatar || runtimeType != other.runtimeType) {
       return false;
     }
     final l$medium = medium;
@@ -20517,6 +20539,2365 @@ class _CopyWithStubImpl$Fragment$User$avatar<TRes>
 
   call({
     String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$Settings {
+  Fragment$Settings({
+    required this.id,
+    required this.name,
+    this.about,
+    this.avatar,
+    this.bannerImage,
+    this.unreadNotificationCount,
+    this.donatorTier,
+    this.donatorBadge,
+    this.moderatorRoles,
+    this.options,
+    this.mediaListOptions,
+    this.$__typename = 'User',
+  });
+
+  factory Fragment$Settings.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$about = json['about'];
+    final l$avatar = json['avatar'];
+    final l$bannerImage = json['bannerImage'];
+    final l$unreadNotificationCount = json['unreadNotificationCount'];
+    final l$donatorTier = json['donatorTier'];
+    final l$donatorBadge = json['donatorBadge'];
+    final l$moderatorRoles = json['moderatorRoles'];
+    final l$options = json['options'];
+    final l$mediaListOptions = json['mediaListOptions'];
+    final l$$__typename = json['__typename'];
+    return Fragment$Settings(
+      id: (l$id as int),
+      name: (l$name as String),
+      about: (l$about as String?),
+      avatar: l$avatar == null
+          ? null
+          : Fragment$Settings$avatar.fromJson(
+              (l$avatar as Map<String, dynamic>)),
+      bannerImage: (l$bannerImage as String?),
+      unreadNotificationCount: (l$unreadNotificationCount as int?),
+      donatorTier: (l$donatorTier as int?),
+      donatorBadge: (l$donatorBadge as String?),
+      moderatorRoles: (l$moderatorRoles as List<dynamic>?)
+          ?.map((e) => e == null ? null : fromJson$Enum$ModRole((e as String)))
+          .toList(),
+      options: l$options == null
+          ? null
+          : Fragment$Settings$options.fromJson(
+              (l$options as Map<String, dynamic>)),
+      mediaListOptions: l$mediaListOptions == null
+          ? null
+          : Fragment$Settings$mediaListOptions.fromJson(
+              (l$mediaListOptions as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String name;
+
+  final String? about;
+
+  final Fragment$Settings$avatar? avatar;
+
+  final String? bannerImage;
+
+  final int? unreadNotificationCount;
+
+  final int? donatorTier;
+
+  final String? donatorBadge;
+
+  final List<Enum$ModRole?>? moderatorRoles;
+
+  final Fragment$Settings$options? options;
+
+  final Fragment$Settings$mediaListOptions? mediaListOptions;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$about = about;
+    _resultData['about'] = l$about;
+    final l$avatar = avatar;
+    _resultData['avatar'] = l$avatar?.toJson();
+    final l$bannerImage = bannerImage;
+    _resultData['bannerImage'] = l$bannerImage;
+    final l$unreadNotificationCount = unreadNotificationCount;
+    _resultData['unreadNotificationCount'] = l$unreadNotificationCount;
+    final l$donatorTier = donatorTier;
+    _resultData['donatorTier'] = l$donatorTier;
+    final l$donatorBadge = donatorBadge;
+    _resultData['donatorBadge'] = l$donatorBadge;
+    final l$moderatorRoles = moderatorRoles;
+    _resultData['moderatorRoles'] = l$moderatorRoles
+        ?.map((e) => e == null ? null : toJson$Enum$ModRole(e))
+        .toList();
+    final l$options = options;
+    _resultData['options'] = l$options?.toJson();
+    final l$mediaListOptions = mediaListOptions;
+    _resultData['mediaListOptions'] = l$mediaListOptions?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$about = about;
+    final l$avatar = avatar;
+    final l$bannerImage = bannerImage;
+    final l$unreadNotificationCount = unreadNotificationCount;
+    final l$donatorTier = donatorTier;
+    final l$donatorBadge = donatorBadge;
+    final l$moderatorRoles = moderatorRoles;
+    final l$options = options;
+    final l$mediaListOptions = mediaListOptions;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$about,
+      l$avatar,
+      l$bannerImage,
+      l$unreadNotificationCount,
+      l$donatorTier,
+      l$donatorBadge,
+      l$moderatorRoles == null
+          ? null
+          : Object.hashAll(l$moderatorRoles.map((v) => v)),
+      l$options,
+      l$mediaListOptions,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$Settings || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$about = about;
+    final lOther$about = other.about;
+    if (l$about != lOther$about) {
+      return false;
+    }
+    final l$avatar = avatar;
+    final lOther$avatar = other.avatar;
+    if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$bannerImage = bannerImage;
+    final lOther$bannerImage = other.bannerImage;
+    if (l$bannerImage != lOther$bannerImage) {
+      return false;
+    }
+    final l$unreadNotificationCount = unreadNotificationCount;
+    final lOther$unreadNotificationCount = other.unreadNotificationCount;
+    if (l$unreadNotificationCount != lOther$unreadNotificationCount) {
+      return false;
+    }
+    final l$donatorTier = donatorTier;
+    final lOther$donatorTier = other.donatorTier;
+    if (l$donatorTier != lOther$donatorTier) {
+      return false;
+    }
+    final l$donatorBadge = donatorBadge;
+    final lOther$donatorBadge = other.donatorBadge;
+    if (l$donatorBadge != lOther$donatorBadge) {
+      return false;
+    }
+    final l$moderatorRoles = moderatorRoles;
+    final lOther$moderatorRoles = other.moderatorRoles;
+    if (l$moderatorRoles != null && lOther$moderatorRoles != null) {
+      if (l$moderatorRoles.length != lOther$moderatorRoles.length) {
+        return false;
+      }
+      for (int i = 0; i < l$moderatorRoles.length; i++) {
+        final l$moderatorRoles$entry = l$moderatorRoles[i];
+        final lOther$moderatorRoles$entry = lOther$moderatorRoles[i];
+        if (l$moderatorRoles$entry != lOther$moderatorRoles$entry) {
+          return false;
+        }
+      }
+    } else if (l$moderatorRoles != lOther$moderatorRoles) {
+      return false;
+    }
+    final l$options = options;
+    final lOther$options = other.options;
+    if (l$options != lOther$options) {
+      return false;
+    }
+    final l$mediaListOptions = mediaListOptions;
+    final lOther$mediaListOptions = other.mediaListOptions;
+    if (l$mediaListOptions != lOther$mediaListOptions) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$Settings on Fragment$Settings {
+  CopyWith$Fragment$Settings<Fragment$Settings> get copyWith =>
+      CopyWith$Fragment$Settings(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Fragment$Settings<TRes> {
+  factory CopyWith$Fragment$Settings(
+    Fragment$Settings instance,
+    TRes Function(Fragment$Settings) then,
+  ) = _CopyWithImpl$Fragment$Settings;
+
+  factory CopyWith$Fragment$Settings.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$Settings;
+
+  TRes call({
+    int? id,
+    String? name,
+    String? about,
+    Fragment$Settings$avatar? avatar,
+    String? bannerImage,
+    int? unreadNotificationCount,
+    int? donatorTier,
+    String? donatorBadge,
+    List<Enum$ModRole?>? moderatorRoles,
+    Fragment$Settings$options? options,
+    Fragment$Settings$mediaListOptions? mediaListOptions,
+    String? $__typename,
+  });
+  CopyWith$Fragment$Settings$avatar<TRes> get avatar;
+  CopyWith$Fragment$Settings$options<TRes> get options;
+  CopyWith$Fragment$Settings$mediaListOptions<TRes> get mediaListOptions;
+}
+
+class _CopyWithImpl$Fragment$Settings<TRes>
+    implements CopyWith$Fragment$Settings<TRes> {
+  _CopyWithImpl$Fragment$Settings(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$Settings _instance;
+
+  final TRes Function(Fragment$Settings) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? about = _undefined,
+    Object? avatar = _undefined,
+    Object? bannerImage = _undefined,
+    Object? unreadNotificationCount = _undefined,
+    Object? donatorTier = _undefined,
+    Object? donatorBadge = _undefined,
+    Object? moderatorRoles = _undefined,
+    Object? options = _undefined,
+    Object? mediaListOptions = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$Settings(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        about: about == _undefined ? _instance.about : (about as String?),
+        avatar: avatar == _undefined
+            ? _instance.avatar
+            : (avatar as Fragment$Settings$avatar?),
+        bannerImage: bannerImage == _undefined
+            ? _instance.bannerImage
+            : (bannerImage as String?),
+        unreadNotificationCount: unreadNotificationCount == _undefined
+            ? _instance.unreadNotificationCount
+            : (unreadNotificationCount as int?),
+        donatorTier: donatorTier == _undefined
+            ? _instance.donatorTier
+            : (donatorTier as int?),
+        donatorBadge: donatorBadge == _undefined
+            ? _instance.donatorBadge
+            : (donatorBadge as String?),
+        moderatorRoles: moderatorRoles == _undefined
+            ? _instance.moderatorRoles
+            : (moderatorRoles as List<Enum$ModRole?>?),
+        options: options == _undefined
+            ? _instance.options
+            : (options as Fragment$Settings$options?),
+        mediaListOptions: mediaListOptions == _undefined
+            ? _instance.mediaListOptions
+            : (mediaListOptions as Fragment$Settings$mediaListOptions?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$Settings$avatar<TRes> get avatar {
+    final local$avatar = _instance.avatar;
+    return local$avatar == null
+        ? CopyWith$Fragment$Settings$avatar.stub(_then(_instance))
+        : CopyWith$Fragment$Settings$avatar(
+            local$avatar, (e) => call(avatar: e));
+  }
+
+  CopyWith$Fragment$Settings$options<TRes> get options {
+    final local$options = _instance.options;
+    return local$options == null
+        ? CopyWith$Fragment$Settings$options.stub(_then(_instance))
+        : CopyWith$Fragment$Settings$options(
+            local$options, (e) => call(options: e));
+  }
+
+  CopyWith$Fragment$Settings$mediaListOptions<TRes> get mediaListOptions {
+    final local$mediaListOptions = _instance.mediaListOptions;
+    return local$mediaListOptions == null
+        ? CopyWith$Fragment$Settings$mediaListOptions.stub(_then(_instance))
+        : CopyWith$Fragment$Settings$mediaListOptions(
+            local$mediaListOptions, (e) => call(mediaListOptions: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$Settings<TRes>
+    implements CopyWith$Fragment$Settings<TRes> {
+  _CopyWithStubImpl$Fragment$Settings(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? name,
+    String? about,
+    Fragment$Settings$avatar? avatar,
+    String? bannerImage,
+    int? unreadNotificationCount,
+    int? donatorTier,
+    String? donatorBadge,
+    List<Enum$ModRole?>? moderatorRoles,
+    Fragment$Settings$options? options,
+    Fragment$Settings$mediaListOptions? mediaListOptions,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$Settings$avatar<TRes> get avatar =>
+      CopyWith$Fragment$Settings$avatar.stub(_res);
+
+  CopyWith$Fragment$Settings$options<TRes> get options =>
+      CopyWith$Fragment$Settings$options.stub(_res);
+
+  CopyWith$Fragment$Settings$mediaListOptions<TRes> get mediaListOptions =>
+      CopyWith$Fragment$Settings$mediaListOptions.stub(_res);
+}
+
+const fragmentDefinitionSettings = FragmentDefinitionNode(
+  name: NameNode(value: 'Settings'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'User'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'name'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'about'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'avatar'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'medium'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'large'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'bannerImage'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'unreadNotificationCount'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'donatorTier'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'donatorBadge'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'moderatorRoles'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'options'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'titleLanguage'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'staffNameLanguage'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'restrictMessagesToFollowing'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'airingNotifications'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'displayAdultContent'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'profileColor'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'timezone'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'activityMergeTime'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'notificationOptions'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'type'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'enabled'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: 'disabledListActivity'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'type'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'disabled'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'mediaListOptions'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'scoreFormat'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'rowOrder'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'animeList'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'customLists'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'sectionOrder'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'splitCompletedSectionByFormat'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'advancedScoring'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'advancedScoringEnabled'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: 'mangaList'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'customLists'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'sectionOrder'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'splitCompletedSectionByFormat'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'advancedScoring'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'advancedScoringEnabled'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentSettings = DocumentNode(definitions: [
+  fragmentDefinitionSettings,
+]);
+
+extension ClientExtension$Fragment$Settings on graphql.GraphQLClient {
+  void writeFragment$Settings({
+    required Fragment$Settings data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'Settings',
+            document: documentNodeFragmentSettings,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$Settings? readFragment$Settings({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'Settings',
+          document: documentNodeFragmentSettings,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Fragment$Settings.fromJson(result);
+  }
+}
+
+class Fragment$Settings$avatar {
+  Fragment$Settings$avatar({
+    this.medium,
+    this.large,
+    this.$__typename = 'UserAvatar',
+  });
+
+  factory Fragment$Settings$avatar.fromJson(Map<String, dynamic> json) {
+    final l$medium = json['medium'];
+    final l$large = json['large'];
+    final l$$__typename = json['__typename'];
+    return Fragment$Settings$avatar(
+      medium: (l$medium as String?),
+      large: (l$large as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? medium;
+
+  final String? large;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$large = large;
+    _resultData['large'] = l$large;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$medium = medium;
+    final l$large = large;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$medium,
+      l$large,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$Settings$avatar ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$large = large;
+    final lOther$large = other.large;
+    if (l$large != lOther$large) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$Settings$avatar
+    on Fragment$Settings$avatar {
+  CopyWith$Fragment$Settings$avatar<Fragment$Settings$avatar> get copyWith =>
+      CopyWith$Fragment$Settings$avatar(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Fragment$Settings$avatar<TRes> {
+  factory CopyWith$Fragment$Settings$avatar(
+    Fragment$Settings$avatar instance,
+    TRes Function(Fragment$Settings$avatar) then,
+  ) = _CopyWithImpl$Fragment$Settings$avatar;
+
+  factory CopyWith$Fragment$Settings$avatar.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$Settings$avatar;
+
+  TRes call({
+    String? medium,
+    String? large,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$Settings$avatar<TRes>
+    implements CopyWith$Fragment$Settings$avatar<TRes> {
+  _CopyWithImpl$Fragment$Settings$avatar(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$Settings$avatar _instance;
+
+  final TRes Function(Fragment$Settings$avatar) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? medium = _undefined,
+    Object? large = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$Settings$avatar(
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        large: large == _undefined ? _instance.large : (large as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$Settings$avatar<TRes>
+    implements CopyWith$Fragment$Settings$avatar<TRes> {
+  _CopyWithStubImpl$Fragment$Settings$avatar(this._res);
+
+  TRes _res;
+
+  call({
+    String? medium,
+    String? large,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$Settings$options {
+  Fragment$Settings$options({
+    this.titleLanguage,
+    this.staffNameLanguage,
+    this.restrictMessagesToFollowing,
+    this.airingNotifications,
+    this.displayAdultContent,
+    this.profileColor,
+    this.timezone,
+    this.activityMergeTime,
+    this.notificationOptions,
+    this.disabledListActivity,
+    this.$__typename = 'UserOptions',
+  });
+
+  factory Fragment$Settings$options.fromJson(Map<String, dynamic> json) {
+    final l$titleLanguage = json['titleLanguage'];
+    final l$staffNameLanguage = json['staffNameLanguage'];
+    final l$restrictMessagesToFollowing = json['restrictMessagesToFollowing'];
+    final l$airingNotifications = json['airingNotifications'];
+    final l$displayAdultContent = json['displayAdultContent'];
+    final l$profileColor = json['profileColor'];
+    final l$timezone = json['timezone'];
+    final l$activityMergeTime = json['activityMergeTime'];
+    final l$notificationOptions = json['notificationOptions'];
+    final l$disabledListActivity = json['disabledListActivity'];
+    final l$$__typename = json['__typename'];
+    return Fragment$Settings$options(
+      titleLanguage: l$titleLanguage == null
+          ? null
+          : fromJson$Enum$UserTitleLanguage((l$titleLanguage as String)),
+      staffNameLanguage: l$staffNameLanguage == null
+          ? null
+          : fromJson$Enum$UserStaffNameLanguage(
+              (l$staffNameLanguage as String)),
+      restrictMessagesToFollowing: (l$restrictMessagesToFollowing as bool?),
+      airingNotifications: (l$airingNotifications as bool?),
+      displayAdultContent: (l$displayAdultContent as bool?),
+      profileColor: (l$profileColor as String?),
+      timezone: (l$timezone as String?),
+      activityMergeTime: (l$activityMergeTime as int?),
+      notificationOptions: (l$notificationOptions as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : Fragment$Settings$options$notificationOptions.fromJson(
+                  (e as Map<String, dynamic>)))
+          .toList(),
+      disabledListActivity: (l$disabledListActivity as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : Fragment$Settings$options$disabledListActivity.fromJson(
+                  (e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Enum$UserTitleLanguage? titleLanguage;
+
+  final Enum$UserStaffNameLanguage? staffNameLanguage;
+
+  final bool? restrictMessagesToFollowing;
+
+  final bool? airingNotifications;
+
+  final bool? displayAdultContent;
+
+  final String? profileColor;
+
+  final String? timezone;
+
+  final int? activityMergeTime;
+
+  final List<Fragment$Settings$options$notificationOptions?>?
+      notificationOptions;
+
+  final List<Fragment$Settings$options$disabledListActivity?>?
+      disabledListActivity;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$titleLanguage = titleLanguage;
+    _resultData['titleLanguage'] = l$titleLanguage == null
+        ? null
+        : toJson$Enum$UserTitleLanguage(l$titleLanguage);
+    final l$staffNameLanguage = staffNameLanguage;
+    _resultData['staffNameLanguage'] = l$staffNameLanguage == null
+        ? null
+        : toJson$Enum$UserStaffNameLanguage(l$staffNameLanguage);
+    final l$restrictMessagesToFollowing = restrictMessagesToFollowing;
+    _resultData['restrictMessagesToFollowing'] = l$restrictMessagesToFollowing;
+    final l$airingNotifications = airingNotifications;
+    _resultData['airingNotifications'] = l$airingNotifications;
+    final l$displayAdultContent = displayAdultContent;
+    _resultData['displayAdultContent'] = l$displayAdultContent;
+    final l$profileColor = profileColor;
+    _resultData['profileColor'] = l$profileColor;
+    final l$timezone = timezone;
+    _resultData['timezone'] = l$timezone;
+    final l$activityMergeTime = activityMergeTime;
+    _resultData['activityMergeTime'] = l$activityMergeTime;
+    final l$notificationOptions = notificationOptions;
+    _resultData['notificationOptions'] =
+        l$notificationOptions?.map((e) => e?.toJson()).toList();
+    final l$disabledListActivity = disabledListActivity;
+    _resultData['disabledListActivity'] =
+        l$disabledListActivity?.map((e) => e?.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$titleLanguage = titleLanguage;
+    final l$staffNameLanguage = staffNameLanguage;
+    final l$restrictMessagesToFollowing = restrictMessagesToFollowing;
+    final l$airingNotifications = airingNotifications;
+    final l$displayAdultContent = displayAdultContent;
+    final l$profileColor = profileColor;
+    final l$timezone = timezone;
+    final l$activityMergeTime = activityMergeTime;
+    final l$notificationOptions = notificationOptions;
+    final l$disabledListActivity = disabledListActivity;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$titleLanguage,
+      l$staffNameLanguage,
+      l$restrictMessagesToFollowing,
+      l$airingNotifications,
+      l$displayAdultContent,
+      l$profileColor,
+      l$timezone,
+      l$activityMergeTime,
+      l$notificationOptions == null
+          ? null
+          : Object.hashAll(l$notificationOptions.map((v) => v)),
+      l$disabledListActivity == null
+          ? null
+          : Object.hashAll(l$disabledListActivity.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$Settings$options ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$titleLanguage = titleLanguage;
+    final lOther$titleLanguage = other.titleLanguage;
+    if (l$titleLanguage != lOther$titleLanguage) {
+      return false;
+    }
+    final l$staffNameLanguage = staffNameLanguage;
+    final lOther$staffNameLanguage = other.staffNameLanguage;
+    if (l$staffNameLanguage != lOther$staffNameLanguage) {
+      return false;
+    }
+    final l$restrictMessagesToFollowing = restrictMessagesToFollowing;
+    final lOther$restrictMessagesToFollowing =
+        other.restrictMessagesToFollowing;
+    if (l$restrictMessagesToFollowing != lOther$restrictMessagesToFollowing) {
+      return false;
+    }
+    final l$airingNotifications = airingNotifications;
+    final lOther$airingNotifications = other.airingNotifications;
+    if (l$airingNotifications != lOther$airingNotifications) {
+      return false;
+    }
+    final l$displayAdultContent = displayAdultContent;
+    final lOther$displayAdultContent = other.displayAdultContent;
+    if (l$displayAdultContent != lOther$displayAdultContent) {
+      return false;
+    }
+    final l$profileColor = profileColor;
+    final lOther$profileColor = other.profileColor;
+    if (l$profileColor != lOther$profileColor) {
+      return false;
+    }
+    final l$timezone = timezone;
+    final lOther$timezone = other.timezone;
+    if (l$timezone != lOther$timezone) {
+      return false;
+    }
+    final l$activityMergeTime = activityMergeTime;
+    final lOther$activityMergeTime = other.activityMergeTime;
+    if (l$activityMergeTime != lOther$activityMergeTime) {
+      return false;
+    }
+    final l$notificationOptions = notificationOptions;
+    final lOther$notificationOptions = other.notificationOptions;
+    if (l$notificationOptions != null && lOther$notificationOptions != null) {
+      if (l$notificationOptions.length != lOther$notificationOptions.length) {
+        return false;
+      }
+      for (int i = 0; i < l$notificationOptions.length; i++) {
+        final l$notificationOptions$entry = l$notificationOptions[i];
+        final lOther$notificationOptions$entry = lOther$notificationOptions[i];
+        if (l$notificationOptions$entry != lOther$notificationOptions$entry) {
+          return false;
+        }
+      }
+    } else if (l$notificationOptions != lOther$notificationOptions) {
+      return false;
+    }
+    final l$disabledListActivity = disabledListActivity;
+    final lOther$disabledListActivity = other.disabledListActivity;
+    if (l$disabledListActivity != null && lOther$disabledListActivity != null) {
+      if (l$disabledListActivity.length != lOther$disabledListActivity.length) {
+        return false;
+      }
+      for (int i = 0; i < l$disabledListActivity.length; i++) {
+        final l$disabledListActivity$entry = l$disabledListActivity[i];
+        final lOther$disabledListActivity$entry =
+            lOther$disabledListActivity[i];
+        if (l$disabledListActivity$entry != lOther$disabledListActivity$entry) {
+          return false;
+        }
+      }
+    } else if (l$disabledListActivity != lOther$disabledListActivity) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$Settings$options
+    on Fragment$Settings$options {
+  CopyWith$Fragment$Settings$options<Fragment$Settings$options> get copyWith =>
+      CopyWith$Fragment$Settings$options(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Fragment$Settings$options<TRes> {
+  factory CopyWith$Fragment$Settings$options(
+    Fragment$Settings$options instance,
+    TRes Function(Fragment$Settings$options) then,
+  ) = _CopyWithImpl$Fragment$Settings$options;
+
+  factory CopyWith$Fragment$Settings$options.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$Settings$options;
+
+  TRes call({
+    Enum$UserTitleLanguage? titleLanguage,
+    Enum$UserStaffNameLanguage? staffNameLanguage,
+    bool? restrictMessagesToFollowing,
+    bool? airingNotifications,
+    bool? displayAdultContent,
+    String? profileColor,
+    String? timezone,
+    int? activityMergeTime,
+    List<Fragment$Settings$options$notificationOptions?>? notificationOptions,
+    List<Fragment$Settings$options$disabledListActivity?>? disabledListActivity,
+    String? $__typename,
+  });
+  TRes notificationOptions(
+      Iterable<Fragment$Settings$options$notificationOptions?>? Function(
+              Iterable<
+                  CopyWith$Fragment$Settings$options$notificationOptions<
+                      Fragment$Settings$options$notificationOptions>?>?)
+          _fn);
+  TRes disabledListActivity(
+      Iterable<Fragment$Settings$options$disabledListActivity?>? Function(
+              Iterable<
+                  CopyWith$Fragment$Settings$options$disabledListActivity<
+                      Fragment$Settings$options$disabledListActivity>?>?)
+          _fn);
+}
+
+class _CopyWithImpl$Fragment$Settings$options<TRes>
+    implements CopyWith$Fragment$Settings$options<TRes> {
+  _CopyWithImpl$Fragment$Settings$options(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$Settings$options _instance;
+
+  final TRes Function(Fragment$Settings$options) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? titleLanguage = _undefined,
+    Object? staffNameLanguage = _undefined,
+    Object? restrictMessagesToFollowing = _undefined,
+    Object? airingNotifications = _undefined,
+    Object? displayAdultContent = _undefined,
+    Object? profileColor = _undefined,
+    Object? timezone = _undefined,
+    Object? activityMergeTime = _undefined,
+    Object? notificationOptions = _undefined,
+    Object? disabledListActivity = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$Settings$options(
+        titleLanguage: titleLanguage == _undefined
+            ? _instance.titleLanguage
+            : (titleLanguage as Enum$UserTitleLanguage?),
+        staffNameLanguage: staffNameLanguage == _undefined
+            ? _instance.staffNameLanguage
+            : (staffNameLanguage as Enum$UserStaffNameLanguage?),
+        restrictMessagesToFollowing: restrictMessagesToFollowing == _undefined
+            ? _instance.restrictMessagesToFollowing
+            : (restrictMessagesToFollowing as bool?),
+        airingNotifications: airingNotifications == _undefined
+            ? _instance.airingNotifications
+            : (airingNotifications as bool?),
+        displayAdultContent: displayAdultContent == _undefined
+            ? _instance.displayAdultContent
+            : (displayAdultContent as bool?),
+        profileColor: profileColor == _undefined
+            ? _instance.profileColor
+            : (profileColor as String?),
+        timezone:
+            timezone == _undefined ? _instance.timezone : (timezone as String?),
+        activityMergeTime: activityMergeTime == _undefined
+            ? _instance.activityMergeTime
+            : (activityMergeTime as int?),
+        notificationOptions: notificationOptions == _undefined
+            ? _instance.notificationOptions
+            : (notificationOptions
+                as List<Fragment$Settings$options$notificationOptions?>?),
+        disabledListActivity: disabledListActivity == _undefined
+            ? _instance.disabledListActivity
+            : (disabledListActivity
+                as List<Fragment$Settings$options$disabledListActivity?>?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  TRes notificationOptions(
+          Iterable<Fragment$Settings$options$notificationOptions?>? Function(
+                  Iterable<
+                      CopyWith$Fragment$Settings$options$notificationOptions<
+                          Fragment$Settings$options$notificationOptions>?>?)
+              _fn) =>
+      call(
+          notificationOptions:
+              _fn(_instance.notificationOptions?.map((e) => e == null
+                  ? null
+                  : CopyWith$Fragment$Settings$options$notificationOptions(
+                      e,
+                      (i) => i,
+                    )))?.toList());
+
+  TRes disabledListActivity(
+          Iterable<Fragment$Settings$options$disabledListActivity?>? Function(
+                  Iterable<
+                      CopyWith$Fragment$Settings$options$disabledListActivity<
+                          Fragment$Settings$options$disabledListActivity>?>?)
+              _fn) =>
+      call(
+          disabledListActivity:
+              _fn(_instance.disabledListActivity?.map((e) => e == null
+                  ? null
+                  : CopyWith$Fragment$Settings$options$disabledListActivity(
+                      e,
+                      (i) => i,
+                    )))?.toList());
+}
+
+class _CopyWithStubImpl$Fragment$Settings$options<TRes>
+    implements CopyWith$Fragment$Settings$options<TRes> {
+  _CopyWithStubImpl$Fragment$Settings$options(this._res);
+
+  TRes _res;
+
+  call({
+    Enum$UserTitleLanguage? titleLanguage,
+    Enum$UserStaffNameLanguage? staffNameLanguage,
+    bool? restrictMessagesToFollowing,
+    bool? airingNotifications,
+    bool? displayAdultContent,
+    String? profileColor,
+    String? timezone,
+    int? activityMergeTime,
+    List<Fragment$Settings$options$notificationOptions?>? notificationOptions,
+    List<Fragment$Settings$options$disabledListActivity?>? disabledListActivity,
+    String? $__typename,
+  }) =>
+      _res;
+
+  notificationOptions(_fn) => _res;
+
+  disabledListActivity(_fn) => _res;
+}
+
+class Fragment$Settings$options$notificationOptions {
+  Fragment$Settings$options$notificationOptions({
+    this.type,
+    this.enabled,
+    this.$__typename = 'NotificationOption',
+  });
+
+  factory Fragment$Settings$options$notificationOptions.fromJson(
+      Map<String, dynamic> json) {
+    final l$type = json['type'];
+    final l$enabled = json['enabled'];
+    final l$$__typename = json['__typename'];
+    return Fragment$Settings$options$notificationOptions(
+      type: l$type == null
+          ? null
+          : fromJson$Enum$NotificationType((l$type as String)),
+      enabled: (l$enabled as bool?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Enum$NotificationType? type;
+
+  final bool? enabled;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$type = type;
+    _resultData['type'] =
+        l$type == null ? null : toJson$Enum$NotificationType(l$type);
+    final l$enabled = enabled;
+    _resultData['enabled'] = l$enabled;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$type = type;
+    final l$enabled = enabled;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$type,
+      l$enabled,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$Settings$options$notificationOptions ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$type = type;
+    final lOther$type = other.type;
+    if (l$type != lOther$type) {
+      return false;
+    }
+    final l$enabled = enabled;
+    final lOther$enabled = other.enabled;
+    if (l$enabled != lOther$enabled) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$Settings$options$notificationOptions
+    on Fragment$Settings$options$notificationOptions {
+  CopyWith$Fragment$Settings$options$notificationOptions<
+          Fragment$Settings$options$notificationOptions>
+      get copyWith => CopyWith$Fragment$Settings$options$notificationOptions(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$Settings$options$notificationOptions<TRes> {
+  factory CopyWith$Fragment$Settings$options$notificationOptions(
+    Fragment$Settings$options$notificationOptions instance,
+    TRes Function(Fragment$Settings$options$notificationOptions) then,
+  ) = _CopyWithImpl$Fragment$Settings$options$notificationOptions;
+
+  factory CopyWith$Fragment$Settings$options$notificationOptions.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$Settings$options$notificationOptions;
+
+  TRes call({
+    Enum$NotificationType? type,
+    bool? enabled,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$Settings$options$notificationOptions<TRes>
+    implements CopyWith$Fragment$Settings$options$notificationOptions<TRes> {
+  _CopyWithImpl$Fragment$Settings$options$notificationOptions(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$Settings$options$notificationOptions _instance;
+
+  final TRes Function(Fragment$Settings$options$notificationOptions) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? type = _undefined,
+    Object? enabled = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$Settings$options$notificationOptions(
+        type: type == _undefined
+            ? _instance.type
+            : (type as Enum$NotificationType?),
+        enabled: enabled == _undefined ? _instance.enabled : (enabled as bool?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$Settings$options$notificationOptions<TRes>
+    implements CopyWith$Fragment$Settings$options$notificationOptions<TRes> {
+  _CopyWithStubImpl$Fragment$Settings$options$notificationOptions(this._res);
+
+  TRes _res;
+
+  call({
+    Enum$NotificationType? type,
+    bool? enabled,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$Settings$options$disabledListActivity {
+  Fragment$Settings$options$disabledListActivity({
+    this.type,
+    this.disabled,
+    this.$__typename = 'ListActivityOption',
+  });
+
+  factory Fragment$Settings$options$disabledListActivity.fromJson(
+      Map<String, dynamic> json) {
+    final l$type = json['type'];
+    final l$disabled = json['disabled'];
+    final l$$__typename = json['__typename'];
+    return Fragment$Settings$options$disabledListActivity(
+      type: l$type == null
+          ? null
+          : fromJson$Enum$MediaListStatus((l$type as String)),
+      disabled: (l$disabled as bool?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Enum$MediaListStatus? type;
+
+  final bool? disabled;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$type = type;
+    _resultData['type'] =
+        l$type == null ? null : toJson$Enum$MediaListStatus(l$type);
+    final l$disabled = disabled;
+    _resultData['disabled'] = l$disabled;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$type = type;
+    final l$disabled = disabled;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$type,
+      l$disabled,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$Settings$options$disabledListActivity ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$type = type;
+    final lOther$type = other.type;
+    if (l$type != lOther$type) {
+      return false;
+    }
+    final l$disabled = disabled;
+    final lOther$disabled = other.disabled;
+    if (l$disabled != lOther$disabled) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$Settings$options$disabledListActivity
+    on Fragment$Settings$options$disabledListActivity {
+  CopyWith$Fragment$Settings$options$disabledListActivity<
+          Fragment$Settings$options$disabledListActivity>
+      get copyWith => CopyWith$Fragment$Settings$options$disabledListActivity(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$Settings$options$disabledListActivity<TRes> {
+  factory CopyWith$Fragment$Settings$options$disabledListActivity(
+    Fragment$Settings$options$disabledListActivity instance,
+    TRes Function(Fragment$Settings$options$disabledListActivity) then,
+  ) = _CopyWithImpl$Fragment$Settings$options$disabledListActivity;
+
+  factory CopyWith$Fragment$Settings$options$disabledListActivity.stub(
+          TRes res) =
+      _CopyWithStubImpl$Fragment$Settings$options$disabledListActivity;
+
+  TRes call({
+    Enum$MediaListStatus? type,
+    bool? disabled,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$Settings$options$disabledListActivity<TRes>
+    implements CopyWith$Fragment$Settings$options$disabledListActivity<TRes> {
+  _CopyWithImpl$Fragment$Settings$options$disabledListActivity(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$Settings$options$disabledListActivity _instance;
+
+  final TRes Function(Fragment$Settings$options$disabledListActivity) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? type = _undefined,
+    Object? disabled = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$Settings$options$disabledListActivity(
+        type: type == _undefined
+            ? _instance.type
+            : (type as Enum$MediaListStatus?),
+        disabled:
+            disabled == _undefined ? _instance.disabled : (disabled as bool?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$Settings$options$disabledListActivity<TRes>
+    implements CopyWith$Fragment$Settings$options$disabledListActivity<TRes> {
+  _CopyWithStubImpl$Fragment$Settings$options$disabledListActivity(this._res);
+
+  TRes _res;
+
+  call({
+    Enum$MediaListStatus? type,
+    bool? disabled,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$Settings$mediaListOptions {
+  Fragment$Settings$mediaListOptions({
+    this.scoreFormat,
+    this.rowOrder,
+    this.animeList,
+    this.mangaList,
+    this.$__typename = 'MediaListOptions',
+  });
+
+  factory Fragment$Settings$mediaListOptions.fromJson(
+      Map<String, dynamic> json) {
+    final l$scoreFormat = json['scoreFormat'];
+    final l$rowOrder = json['rowOrder'];
+    final l$animeList = json['animeList'];
+    final l$mangaList = json['mangaList'];
+    final l$$__typename = json['__typename'];
+    return Fragment$Settings$mediaListOptions(
+      scoreFormat: l$scoreFormat == null
+          ? null
+          : fromJson$Enum$ScoreFormat((l$scoreFormat as String)),
+      rowOrder: (l$rowOrder as String?),
+      animeList: l$animeList == null
+          ? null
+          : Fragment$Settings$mediaListOptions$animeList.fromJson(
+              (l$animeList as Map<String, dynamic>)),
+      mangaList: l$mangaList == null
+          ? null
+          : Fragment$Settings$mediaListOptions$mangaList.fromJson(
+              (l$mangaList as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Enum$ScoreFormat? scoreFormat;
+
+  final String? rowOrder;
+
+  final Fragment$Settings$mediaListOptions$animeList? animeList;
+
+  final Fragment$Settings$mediaListOptions$mangaList? mangaList;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$scoreFormat = scoreFormat;
+    _resultData['scoreFormat'] =
+        l$scoreFormat == null ? null : toJson$Enum$ScoreFormat(l$scoreFormat);
+    final l$rowOrder = rowOrder;
+    _resultData['rowOrder'] = l$rowOrder;
+    final l$animeList = animeList;
+    _resultData['animeList'] = l$animeList?.toJson();
+    final l$mangaList = mangaList;
+    _resultData['mangaList'] = l$mangaList?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$scoreFormat = scoreFormat;
+    final l$rowOrder = rowOrder;
+    final l$animeList = animeList;
+    final l$mangaList = mangaList;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$scoreFormat,
+      l$rowOrder,
+      l$animeList,
+      l$mangaList,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$Settings$mediaListOptions ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$scoreFormat = scoreFormat;
+    final lOther$scoreFormat = other.scoreFormat;
+    if (l$scoreFormat != lOther$scoreFormat) {
+      return false;
+    }
+    final l$rowOrder = rowOrder;
+    final lOther$rowOrder = other.rowOrder;
+    if (l$rowOrder != lOther$rowOrder) {
+      return false;
+    }
+    final l$animeList = animeList;
+    final lOther$animeList = other.animeList;
+    if (l$animeList != lOther$animeList) {
+      return false;
+    }
+    final l$mangaList = mangaList;
+    final lOther$mangaList = other.mangaList;
+    if (l$mangaList != lOther$mangaList) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$Settings$mediaListOptions
+    on Fragment$Settings$mediaListOptions {
+  CopyWith$Fragment$Settings$mediaListOptions<
+          Fragment$Settings$mediaListOptions>
+      get copyWith => CopyWith$Fragment$Settings$mediaListOptions(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$Settings$mediaListOptions<TRes> {
+  factory CopyWith$Fragment$Settings$mediaListOptions(
+    Fragment$Settings$mediaListOptions instance,
+    TRes Function(Fragment$Settings$mediaListOptions) then,
+  ) = _CopyWithImpl$Fragment$Settings$mediaListOptions;
+
+  factory CopyWith$Fragment$Settings$mediaListOptions.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$Settings$mediaListOptions;
+
+  TRes call({
+    Enum$ScoreFormat? scoreFormat,
+    String? rowOrder,
+    Fragment$Settings$mediaListOptions$animeList? animeList,
+    Fragment$Settings$mediaListOptions$mangaList? mangaList,
+    String? $__typename,
+  });
+  CopyWith$Fragment$Settings$mediaListOptions$animeList<TRes> get animeList;
+  CopyWith$Fragment$Settings$mediaListOptions$mangaList<TRes> get mangaList;
+}
+
+class _CopyWithImpl$Fragment$Settings$mediaListOptions<TRes>
+    implements CopyWith$Fragment$Settings$mediaListOptions<TRes> {
+  _CopyWithImpl$Fragment$Settings$mediaListOptions(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$Settings$mediaListOptions _instance;
+
+  final TRes Function(Fragment$Settings$mediaListOptions) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? scoreFormat = _undefined,
+    Object? rowOrder = _undefined,
+    Object? animeList = _undefined,
+    Object? mangaList = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$Settings$mediaListOptions(
+        scoreFormat: scoreFormat == _undefined
+            ? _instance.scoreFormat
+            : (scoreFormat as Enum$ScoreFormat?),
+        rowOrder:
+            rowOrder == _undefined ? _instance.rowOrder : (rowOrder as String?),
+        animeList: animeList == _undefined
+            ? _instance.animeList
+            : (animeList as Fragment$Settings$mediaListOptions$animeList?),
+        mangaList: mangaList == _undefined
+            ? _instance.mangaList
+            : (mangaList as Fragment$Settings$mediaListOptions$mangaList?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$Settings$mediaListOptions$animeList<TRes> get animeList {
+    final local$animeList = _instance.animeList;
+    return local$animeList == null
+        ? CopyWith$Fragment$Settings$mediaListOptions$animeList.stub(
+            _then(_instance))
+        : CopyWith$Fragment$Settings$mediaListOptions$animeList(
+            local$animeList, (e) => call(animeList: e));
+  }
+
+  CopyWith$Fragment$Settings$mediaListOptions$mangaList<TRes> get mangaList {
+    final local$mangaList = _instance.mangaList;
+    return local$mangaList == null
+        ? CopyWith$Fragment$Settings$mediaListOptions$mangaList.stub(
+            _then(_instance))
+        : CopyWith$Fragment$Settings$mediaListOptions$mangaList(
+            local$mangaList, (e) => call(mangaList: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$Settings$mediaListOptions<TRes>
+    implements CopyWith$Fragment$Settings$mediaListOptions<TRes> {
+  _CopyWithStubImpl$Fragment$Settings$mediaListOptions(this._res);
+
+  TRes _res;
+
+  call({
+    Enum$ScoreFormat? scoreFormat,
+    String? rowOrder,
+    Fragment$Settings$mediaListOptions$animeList? animeList,
+    Fragment$Settings$mediaListOptions$mangaList? mangaList,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$Settings$mediaListOptions$animeList<TRes> get animeList =>
+      CopyWith$Fragment$Settings$mediaListOptions$animeList.stub(_res);
+
+  CopyWith$Fragment$Settings$mediaListOptions$mangaList<TRes> get mangaList =>
+      CopyWith$Fragment$Settings$mediaListOptions$mangaList.stub(_res);
+}
+
+class Fragment$Settings$mediaListOptions$animeList {
+  Fragment$Settings$mediaListOptions$animeList({
+    this.customLists,
+    this.sectionOrder,
+    this.splitCompletedSectionByFormat,
+    this.advancedScoring,
+    this.advancedScoringEnabled,
+    this.$__typename = 'MediaListTypeOptions',
+  });
+
+  factory Fragment$Settings$mediaListOptions$animeList.fromJson(
+      Map<String, dynamic> json) {
+    final l$customLists = json['customLists'];
+    final l$sectionOrder = json['sectionOrder'];
+    final l$splitCompletedSectionByFormat =
+        json['splitCompletedSectionByFormat'];
+    final l$advancedScoring = json['advancedScoring'];
+    final l$advancedScoringEnabled = json['advancedScoringEnabled'];
+    final l$$__typename = json['__typename'];
+    return Fragment$Settings$mediaListOptions$animeList(
+      customLists: (l$customLists as List<dynamic>?)
+          ?.map((e) => (e as String?))
+          .toList(),
+      sectionOrder: (l$sectionOrder as List<dynamic>?)
+          ?.map((e) => (e as String?))
+          .toList(),
+      splitCompletedSectionByFormat: (l$splitCompletedSectionByFormat as bool?),
+      advancedScoring: (l$advancedScoring as List<dynamic>?)
+          ?.map((e) => (e as String?))
+          .toList(),
+      advancedScoringEnabled: (l$advancedScoringEnabled as bool?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<String?>? customLists;
+
+  final List<String?>? sectionOrder;
+
+  final bool? splitCompletedSectionByFormat;
+
+  final List<String?>? advancedScoring;
+
+  final bool? advancedScoringEnabled;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$customLists = customLists;
+    _resultData['customLists'] = l$customLists?.map((e) => e).toList();
+    final l$sectionOrder = sectionOrder;
+    _resultData['sectionOrder'] = l$sectionOrder?.map((e) => e).toList();
+    final l$splitCompletedSectionByFormat = splitCompletedSectionByFormat;
+    _resultData['splitCompletedSectionByFormat'] =
+        l$splitCompletedSectionByFormat;
+    final l$advancedScoring = advancedScoring;
+    _resultData['advancedScoring'] = l$advancedScoring?.map((e) => e).toList();
+    final l$advancedScoringEnabled = advancedScoringEnabled;
+    _resultData['advancedScoringEnabled'] = l$advancedScoringEnabled;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$customLists = customLists;
+    final l$sectionOrder = sectionOrder;
+    final l$splitCompletedSectionByFormat = splitCompletedSectionByFormat;
+    final l$advancedScoring = advancedScoring;
+    final l$advancedScoringEnabled = advancedScoringEnabled;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$customLists == null
+          ? null
+          : Object.hashAll(l$customLists.map((v) => v)),
+      l$sectionOrder == null
+          ? null
+          : Object.hashAll(l$sectionOrder.map((v) => v)),
+      l$splitCompletedSectionByFormat,
+      l$advancedScoring == null
+          ? null
+          : Object.hashAll(l$advancedScoring.map((v) => v)),
+      l$advancedScoringEnabled,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$Settings$mediaListOptions$animeList ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$customLists = customLists;
+    final lOther$customLists = other.customLists;
+    if (l$customLists != null && lOther$customLists != null) {
+      if (l$customLists.length != lOther$customLists.length) {
+        return false;
+      }
+      for (int i = 0; i < l$customLists.length; i++) {
+        final l$customLists$entry = l$customLists[i];
+        final lOther$customLists$entry = lOther$customLists[i];
+        if (l$customLists$entry != lOther$customLists$entry) {
+          return false;
+        }
+      }
+    } else if (l$customLists != lOther$customLists) {
+      return false;
+    }
+    final l$sectionOrder = sectionOrder;
+    final lOther$sectionOrder = other.sectionOrder;
+    if (l$sectionOrder != null && lOther$sectionOrder != null) {
+      if (l$sectionOrder.length != lOther$sectionOrder.length) {
+        return false;
+      }
+      for (int i = 0; i < l$sectionOrder.length; i++) {
+        final l$sectionOrder$entry = l$sectionOrder[i];
+        final lOther$sectionOrder$entry = lOther$sectionOrder[i];
+        if (l$sectionOrder$entry != lOther$sectionOrder$entry) {
+          return false;
+        }
+      }
+    } else if (l$sectionOrder != lOther$sectionOrder) {
+      return false;
+    }
+    final l$splitCompletedSectionByFormat = splitCompletedSectionByFormat;
+    final lOther$splitCompletedSectionByFormat =
+        other.splitCompletedSectionByFormat;
+    if (l$splitCompletedSectionByFormat !=
+        lOther$splitCompletedSectionByFormat) {
+      return false;
+    }
+    final l$advancedScoring = advancedScoring;
+    final lOther$advancedScoring = other.advancedScoring;
+    if (l$advancedScoring != null && lOther$advancedScoring != null) {
+      if (l$advancedScoring.length != lOther$advancedScoring.length) {
+        return false;
+      }
+      for (int i = 0; i < l$advancedScoring.length; i++) {
+        final l$advancedScoring$entry = l$advancedScoring[i];
+        final lOther$advancedScoring$entry = lOther$advancedScoring[i];
+        if (l$advancedScoring$entry != lOther$advancedScoring$entry) {
+          return false;
+        }
+      }
+    } else if (l$advancedScoring != lOther$advancedScoring) {
+      return false;
+    }
+    final l$advancedScoringEnabled = advancedScoringEnabled;
+    final lOther$advancedScoringEnabled = other.advancedScoringEnabled;
+    if (l$advancedScoringEnabled != lOther$advancedScoringEnabled) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$Settings$mediaListOptions$animeList
+    on Fragment$Settings$mediaListOptions$animeList {
+  CopyWith$Fragment$Settings$mediaListOptions$animeList<
+          Fragment$Settings$mediaListOptions$animeList>
+      get copyWith => CopyWith$Fragment$Settings$mediaListOptions$animeList(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$Settings$mediaListOptions$animeList<TRes> {
+  factory CopyWith$Fragment$Settings$mediaListOptions$animeList(
+    Fragment$Settings$mediaListOptions$animeList instance,
+    TRes Function(Fragment$Settings$mediaListOptions$animeList) then,
+  ) = _CopyWithImpl$Fragment$Settings$mediaListOptions$animeList;
+
+  factory CopyWith$Fragment$Settings$mediaListOptions$animeList.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$Settings$mediaListOptions$animeList;
+
+  TRes call({
+    List<String?>? customLists,
+    List<String?>? sectionOrder,
+    bool? splitCompletedSectionByFormat,
+    List<String?>? advancedScoring,
+    bool? advancedScoringEnabled,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$Settings$mediaListOptions$animeList<TRes>
+    implements CopyWith$Fragment$Settings$mediaListOptions$animeList<TRes> {
+  _CopyWithImpl$Fragment$Settings$mediaListOptions$animeList(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$Settings$mediaListOptions$animeList _instance;
+
+  final TRes Function(Fragment$Settings$mediaListOptions$animeList) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? customLists = _undefined,
+    Object? sectionOrder = _undefined,
+    Object? splitCompletedSectionByFormat = _undefined,
+    Object? advancedScoring = _undefined,
+    Object? advancedScoringEnabled = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$Settings$mediaListOptions$animeList(
+        customLists: customLists == _undefined
+            ? _instance.customLists
+            : (customLists as List<String?>?),
+        sectionOrder: sectionOrder == _undefined
+            ? _instance.sectionOrder
+            : (sectionOrder as List<String?>?),
+        splitCompletedSectionByFormat:
+            splitCompletedSectionByFormat == _undefined
+                ? _instance.splitCompletedSectionByFormat
+                : (splitCompletedSectionByFormat as bool?),
+        advancedScoring: advancedScoring == _undefined
+            ? _instance.advancedScoring
+            : (advancedScoring as List<String?>?),
+        advancedScoringEnabled: advancedScoringEnabled == _undefined
+            ? _instance.advancedScoringEnabled
+            : (advancedScoringEnabled as bool?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$Settings$mediaListOptions$animeList<TRes>
+    implements CopyWith$Fragment$Settings$mediaListOptions$animeList<TRes> {
+  _CopyWithStubImpl$Fragment$Settings$mediaListOptions$animeList(this._res);
+
+  TRes _res;
+
+  call({
+    List<String?>? customLists,
+    List<String?>? sectionOrder,
+    bool? splitCompletedSectionByFormat,
+    List<String?>? advancedScoring,
+    bool? advancedScoringEnabled,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$Settings$mediaListOptions$mangaList {
+  Fragment$Settings$mediaListOptions$mangaList({
+    this.customLists,
+    this.sectionOrder,
+    this.splitCompletedSectionByFormat,
+    this.advancedScoring,
+    this.advancedScoringEnabled,
+    this.$__typename = 'MediaListTypeOptions',
+  });
+
+  factory Fragment$Settings$mediaListOptions$mangaList.fromJson(
+      Map<String, dynamic> json) {
+    final l$customLists = json['customLists'];
+    final l$sectionOrder = json['sectionOrder'];
+    final l$splitCompletedSectionByFormat =
+        json['splitCompletedSectionByFormat'];
+    final l$advancedScoring = json['advancedScoring'];
+    final l$advancedScoringEnabled = json['advancedScoringEnabled'];
+    final l$$__typename = json['__typename'];
+    return Fragment$Settings$mediaListOptions$mangaList(
+      customLists: (l$customLists as List<dynamic>?)
+          ?.map((e) => (e as String?))
+          .toList(),
+      sectionOrder: (l$sectionOrder as List<dynamic>?)
+          ?.map((e) => (e as String?))
+          .toList(),
+      splitCompletedSectionByFormat: (l$splitCompletedSectionByFormat as bool?),
+      advancedScoring: (l$advancedScoring as List<dynamic>?)
+          ?.map((e) => (e as String?))
+          .toList(),
+      advancedScoringEnabled: (l$advancedScoringEnabled as bool?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<String?>? customLists;
+
+  final List<String?>? sectionOrder;
+
+  final bool? splitCompletedSectionByFormat;
+
+  final List<String?>? advancedScoring;
+
+  final bool? advancedScoringEnabled;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$customLists = customLists;
+    _resultData['customLists'] = l$customLists?.map((e) => e).toList();
+    final l$sectionOrder = sectionOrder;
+    _resultData['sectionOrder'] = l$sectionOrder?.map((e) => e).toList();
+    final l$splitCompletedSectionByFormat = splitCompletedSectionByFormat;
+    _resultData['splitCompletedSectionByFormat'] =
+        l$splitCompletedSectionByFormat;
+    final l$advancedScoring = advancedScoring;
+    _resultData['advancedScoring'] = l$advancedScoring?.map((e) => e).toList();
+    final l$advancedScoringEnabled = advancedScoringEnabled;
+    _resultData['advancedScoringEnabled'] = l$advancedScoringEnabled;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$customLists = customLists;
+    final l$sectionOrder = sectionOrder;
+    final l$splitCompletedSectionByFormat = splitCompletedSectionByFormat;
+    final l$advancedScoring = advancedScoring;
+    final l$advancedScoringEnabled = advancedScoringEnabled;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$customLists == null
+          ? null
+          : Object.hashAll(l$customLists.map((v) => v)),
+      l$sectionOrder == null
+          ? null
+          : Object.hashAll(l$sectionOrder.map((v) => v)),
+      l$splitCompletedSectionByFormat,
+      l$advancedScoring == null
+          ? null
+          : Object.hashAll(l$advancedScoring.map((v) => v)),
+      l$advancedScoringEnabled,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$Settings$mediaListOptions$mangaList ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$customLists = customLists;
+    final lOther$customLists = other.customLists;
+    if (l$customLists != null && lOther$customLists != null) {
+      if (l$customLists.length != lOther$customLists.length) {
+        return false;
+      }
+      for (int i = 0; i < l$customLists.length; i++) {
+        final l$customLists$entry = l$customLists[i];
+        final lOther$customLists$entry = lOther$customLists[i];
+        if (l$customLists$entry != lOther$customLists$entry) {
+          return false;
+        }
+      }
+    } else if (l$customLists != lOther$customLists) {
+      return false;
+    }
+    final l$sectionOrder = sectionOrder;
+    final lOther$sectionOrder = other.sectionOrder;
+    if (l$sectionOrder != null && lOther$sectionOrder != null) {
+      if (l$sectionOrder.length != lOther$sectionOrder.length) {
+        return false;
+      }
+      for (int i = 0; i < l$sectionOrder.length; i++) {
+        final l$sectionOrder$entry = l$sectionOrder[i];
+        final lOther$sectionOrder$entry = lOther$sectionOrder[i];
+        if (l$sectionOrder$entry != lOther$sectionOrder$entry) {
+          return false;
+        }
+      }
+    } else if (l$sectionOrder != lOther$sectionOrder) {
+      return false;
+    }
+    final l$splitCompletedSectionByFormat = splitCompletedSectionByFormat;
+    final lOther$splitCompletedSectionByFormat =
+        other.splitCompletedSectionByFormat;
+    if (l$splitCompletedSectionByFormat !=
+        lOther$splitCompletedSectionByFormat) {
+      return false;
+    }
+    final l$advancedScoring = advancedScoring;
+    final lOther$advancedScoring = other.advancedScoring;
+    if (l$advancedScoring != null && lOther$advancedScoring != null) {
+      if (l$advancedScoring.length != lOther$advancedScoring.length) {
+        return false;
+      }
+      for (int i = 0; i < l$advancedScoring.length; i++) {
+        final l$advancedScoring$entry = l$advancedScoring[i];
+        final lOther$advancedScoring$entry = lOther$advancedScoring[i];
+        if (l$advancedScoring$entry != lOther$advancedScoring$entry) {
+          return false;
+        }
+      }
+    } else if (l$advancedScoring != lOther$advancedScoring) {
+      return false;
+    }
+    final l$advancedScoringEnabled = advancedScoringEnabled;
+    final lOther$advancedScoringEnabled = other.advancedScoringEnabled;
+    if (l$advancedScoringEnabled != lOther$advancedScoringEnabled) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$Settings$mediaListOptions$mangaList
+    on Fragment$Settings$mediaListOptions$mangaList {
+  CopyWith$Fragment$Settings$mediaListOptions$mangaList<
+          Fragment$Settings$mediaListOptions$mangaList>
+      get copyWith => CopyWith$Fragment$Settings$mediaListOptions$mangaList(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$Settings$mediaListOptions$mangaList<TRes> {
+  factory CopyWith$Fragment$Settings$mediaListOptions$mangaList(
+    Fragment$Settings$mediaListOptions$mangaList instance,
+    TRes Function(Fragment$Settings$mediaListOptions$mangaList) then,
+  ) = _CopyWithImpl$Fragment$Settings$mediaListOptions$mangaList;
+
+  factory CopyWith$Fragment$Settings$mediaListOptions$mangaList.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$Settings$mediaListOptions$mangaList;
+
+  TRes call({
+    List<String?>? customLists,
+    List<String?>? sectionOrder,
+    bool? splitCompletedSectionByFormat,
+    List<String?>? advancedScoring,
+    bool? advancedScoringEnabled,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$Settings$mediaListOptions$mangaList<TRes>
+    implements CopyWith$Fragment$Settings$mediaListOptions$mangaList<TRes> {
+  _CopyWithImpl$Fragment$Settings$mediaListOptions$mangaList(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$Settings$mediaListOptions$mangaList _instance;
+
+  final TRes Function(Fragment$Settings$mediaListOptions$mangaList) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? customLists = _undefined,
+    Object? sectionOrder = _undefined,
+    Object? splitCompletedSectionByFormat = _undefined,
+    Object? advancedScoring = _undefined,
+    Object? advancedScoringEnabled = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$Settings$mediaListOptions$mangaList(
+        customLists: customLists == _undefined
+            ? _instance.customLists
+            : (customLists as List<String?>?),
+        sectionOrder: sectionOrder == _undefined
+            ? _instance.sectionOrder
+            : (sectionOrder as List<String?>?),
+        splitCompletedSectionByFormat:
+            splitCompletedSectionByFormat == _undefined
+                ? _instance.splitCompletedSectionByFormat
+                : (splitCompletedSectionByFormat as bool?),
+        advancedScoring: advancedScoring == _undefined
+            ? _instance.advancedScoring
+            : (advancedScoring as List<String?>?),
+        advancedScoringEnabled: advancedScoringEnabled == _undefined
+            ? _instance.advancedScoringEnabled
+            : (advancedScoringEnabled as bool?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$Settings$mediaListOptions$mangaList<TRes>
+    implements CopyWith$Fragment$Settings$mediaListOptions$mangaList<TRes> {
+  _CopyWithStubImpl$Fragment$Settings$mediaListOptions$mangaList(this._res);
+
+  TRes _res;
+
+  call({
+    List<String?>? customLists,
+    List<String?>? sectionOrder,
+    bool? splitCompletedSectionByFormat,
+    List<String?>? advancedScoring,
+    bool? advancedScoringEnabled,
     String? $__typename,
   }) =>
       _res;
@@ -20652,7 +23033,7 @@ class Fragment$UserInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserInfo) || runtimeType != other.runtimeType) {
+    if (other is! Fragment$UserInfo || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -21088,7 +23469,7 @@ class Fragment$UserInfo$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserInfo$avatar) ||
+    if (other is! Fragment$UserInfo$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -21226,7 +23607,7 @@ class Fragment$UserInfo$statistics {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserInfo$statistics) ||
+    if (other is! Fragment$UserInfo$statistics ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -21387,7 +23768,7 @@ class Fragment$UserInfo$statistics$anime {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserInfo$statistics$anime) ||
+    if (other is! Fragment$UserInfo$statistics$anime ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -21514,7 +23895,7 @@ class Fragment$UserInfo$statistics$manga {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserInfo$statistics$manga) ||
+    if (other is! Fragment$UserInfo$statistics$manga ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -21680,7 +24061,7 @@ class Fragment$ActivityLikeNotification {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityLikeNotification) ||
+    if (other is! Fragment$ActivityLikeNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -22018,7 +24399,7 @@ class Fragment$ActivityLikeNotification$user {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityLikeNotification$user) ||
+    if (other is! Fragment$ActivityLikeNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -22178,7 +24559,7 @@ class Fragment$ActivityLikeNotification$user$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityLikeNotification$user$avatar) ||
+    if (other is! Fragment$ActivityLikeNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -22343,7 +24724,7 @@ class Fragment$ActivityMessageNotification {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityMessageNotification) ||
+    if (other is! Fragment$ActivityMessageNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -22685,7 +25066,7 @@ class Fragment$ActivityMessageNotification$user {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityMessageNotification$user) ||
+    if (other is! Fragment$ActivityMessageNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -22845,7 +25226,7 @@ class Fragment$ActivityMessageNotification$user$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityMessageNotification$user$avatar) ||
+    if (other is! Fragment$ActivityMessageNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -23010,7 +25391,7 @@ class Fragment$ActivityMentionNotification {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityMentionNotification) ||
+    if (other is! Fragment$ActivityMentionNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -23352,7 +25733,7 @@ class Fragment$ActivityMentionNotification$user {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityMentionNotification$user) ||
+    if (other is! Fragment$ActivityMentionNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -23512,7 +25893,7 @@ class Fragment$ActivityMentionNotification$user$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityMentionNotification$user$avatar) ||
+    if (other is! Fragment$ActivityMentionNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -23677,7 +26058,7 @@ class Fragment$ActivityReplyLikeNotification {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityReplyLikeNotification) ||
+    if (other is! Fragment$ActivityReplyLikeNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -24019,7 +26400,7 @@ class Fragment$ActivityReplyLikeNotification$user {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityReplyLikeNotification$user) ||
+    if (other is! Fragment$ActivityReplyLikeNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -24181,7 +26562,7 @@ class Fragment$ActivityReplyLikeNotification$user$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityReplyLikeNotification$user$avatar) ||
+    if (other is! Fragment$ActivityReplyLikeNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -24351,7 +26732,7 @@ class Fragment$ActivityReplyNotification {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityReplyNotification) ||
+    if (other is! Fragment$ActivityReplyNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -24692,7 +27073,7 @@ class Fragment$ActivityReplyNotification$user {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityReplyNotification$user) ||
+    if (other is! Fragment$ActivityReplyNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -24852,7 +27233,7 @@ class Fragment$ActivityReplyNotification$user$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityReplyNotification$user$avatar) ||
+    if (other is! Fragment$ActivityReplyNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -25017,7 +27398,7 @@ class Fragment$ActivityReplySubscribedNotification {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityReplySubscribedNotification) ||
+    if (other is! Fragment$ActivityReplySubscribedNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -25360,7 +27741,7 @@ class Fragment$ActivityReplySubscribedNotification$user {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityReplySubscribedNotification$user) ||
+    if (other is! Fragment$ActivityReplySubscribedNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -25531,7 +27912,7 @@ class Fragment$ActivityReplySubscribedNotification$user$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ActivityReplySubscribedNotification$user$avatar) ||
+    if (other is! Fragment$ActivityReplySubscribedNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -25707,7 +28088,7 @@ class Fragment$AiringNotification {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$AiringNotification) ||
+    if (other is! Fragment$AiringNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -26072,7 +28453,7 @@ class Fragment$AiringNotification$media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$AiringNotification$media) ||
+    if (other is! Fragment$AiringNotification$media ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -26244,7 +28625,7 @@ class Fragment$AiringNotification$media$coverImage {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$AiringNotification$media$coverImage) ||
+    if (other is! Fragment$AiringNotification$media$coverImage ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -26369,7 +28750,7 @@ class Fragment$AiringNotification$media$title {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$AiringNotification$media$title) ||
+    if (other is! Fragment$AiringNotification$media$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -26525,7 +28906,7 @@ class Fragment$FollowingNotification {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$FollowingNotification) ||
+    if (other is! Fragment$FollowingNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -26845,7 +29226,7 @@ class Fragment$FollowingNotification$user {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$FollowingNotification$user) ||
+    if (other is! Fragment$FollowingNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -27005,7 +29386,7 @@ class Fragment$FollowingNotification$user$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$FollowingNotification$user$avatar) ||
+    if (other is! Fragment$FollowingNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -27172,7 +29553,7 @@ class Fragment$ThreadCommentLikeNotification {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadCommentLikeNotification) ||
+    if (other is! Fragment$ThreadCommentLikeNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -27521,7 +29902,7 @@ class Fragment$ThreadCommentLikeNotification$thread {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadCommentLikeNotification$thread) ||
+    if (other is! Fragment$ThreadCommentLikeNotification$thread ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -27668,7 +30049,7 @@ class Fragment$ThreadCommentLikeNotification$user {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadCommentLikeNotification$user) ||
+    if (other is! Fragment$ThreadCommentLikeNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -27830,7 +30211,7 @@ class Fragment$ThreadCommentLikeNotification$user$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadCommentLikeNotification$user$avatar) ||
+    if (other is! Fragment$ThreadCommentLikeNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -28003,7 +30384,7 @@ class Fragment$ThreadCommentMentionNotification {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadCommentMentionNotification) ||
+    if (other is! Fragment$ThreadCommentMentionNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -28353,7 +30734,7 @@ class Fragment$ThreadCommentMentionNotification$thread {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadCommentMentionNotification$thread) ||
+    if (other is! Fragment$ThreadCommentMentionNotification$thread ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -28500,7 +30881,7 @@ class Fragment$ThreadCommentMentionNotification$user {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadCommentMentionNotification$user) ||
+    if (other is! Fragment$ThreadCommentMentionNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -28666,7 +31047,7 @@ class Fragment$ThreadCommentMentionNotification$user$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadCommentMentionNotification$user$avatar) ||
+    if (other is! Fragment$ThreadCommentMentionNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -28841,7 +31222,7 @@ class Fragment$ThreadCommentReplyNotification {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadCommentReplyNotification) ||
+    if (other is! Fragment$ThreadCommentReplyNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -29190,7 +31571,7 @@ class Fragment$ThreadCommentReplyNotification$thread {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadCommentReplyNotification$thread) ||
+    if (other is! Fragment$ThreadCommentReplyNotification$thread ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -29337,7 +31718,7 @@ class Fragment$ThreadCommentReplyNotification$user {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadCommentReplyNotification$user) ||
+    if (other is! Fragment$ThreadCommentReplyNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -29500,7 +31881,7 @@ class Fragment$ThreadCommentReplyNotification$user$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadCommentReplyNotification$user$avatar) ||
+    if (other is! Fragment$ThreadCommentReplyNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -29674,7 +32055,7 @@ class Fragment$ThreadLikeNotification {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadLikeNotification) ||
+    if (other is! Fragment$ThreadLikeNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -30018,7 +32399,7 @@ class Fragment$ThreadLikeNotification$thread {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadLikeNotification$thread) ||
+    if (other is! Fragment$ThreadLikeNotification$thread ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -30164,7 +32545,7 @@ class Fragment$ThreadLikeNotification$user {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadLikeNotification$user) ||
+    if (other is! Fragment$ThreadLikeNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -30324,7 +32705,7 @@ class Fragment$ThreadLikeNotification$user$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadLikeNotification$user$avatar) ||
+    if (other is! Fragment$ThreadLikeNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -30491,7 +32872,7 @@ class Fragment$ThreadCommentSubscribedNotification {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadCommentSubscribedNotification) ||
+    if (other is! Fragment$ThreadCommentSubscribedNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -30844,7 +33225,7 @@ class Fragment$ThreadCommentSubscribedNotification$thread {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadCommentSubscribedNotification$thread) ||
+    if (other is! Fragment$ThreadCommentSubscribedNotification$thread ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -30998,7 +33379,7 @@ class Fragment$ThreadCommentSubscribedNotification$user {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadCommentSubscribedNotification$user) ||
+    if (other is! Fragment$ThreadCommentSubscribedNotification$user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -31169,7 +33550,7 @@ class Fragment$ThreadCommentSubscribedNotification$user$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadCommentSubscribedNotification$user$avatar) ||
+    if (other is! Fragment$ThreadCommentSubscribedNotification$user$avatar ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -31342,7 +33723,7 @@ class Fragment$MediaDeletionNotification {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDeletionNotification) ||
+    if (other is! Fragment$MediaDeletionNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -31655,7 +34036,7 @@ class Fragment$MediaMergeNotification {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaMergeNotification) ||
+    if (other is! Fragment$MediaMergeNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -32038,7 +34419,7 @@ class Fragment$MediaMergeNotification$media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaMergeNotification$media) ||
+    if (other is! Fragment$MediaMergeNotification$media ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -32214,7 +34595,7 @@ class Fragment$MediaMergeNotification$media$title {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaMergeNotification$media$title) ||
+    if (other is! Fragment$MediaMergeNotification$media$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -32341,7 +34722,7 @@ class Fragment$MediaMergeNotification$media$coverImage {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaMergeNotification$media$coverImage) ||
+    if (other is! Fragment$MediaMergeNotification$media$coverImage ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -32506,7 +34887,7 @@ class Fragment$MediaDataChangeNotification {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDataChangeNotification) ||
+    if (other is! Fragment$MediaDataChangeNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -32864,7 +35245,7 @@ class Fragment$MediaDataChangeNotification$media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDataChangeNotification$media) ||
+    if (other is! Fragment$MediaDataChangeNotification$media ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -33042,7 +35423,7 @@ class Fragment$MediaDataChangeNotification$media$title {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDataChangeNotification$media$title) ||
+    if (other is! Fragment$MediaDataChangeNotification$media$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -33170,7 +35551,7 @@ class Fragment$MediaDataChangeNotification$media$coverImage {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$MediaDataChangeNotification$media$coverImage) ||
+    if (other is! Fragment$MediaDataChangeNotification$media$coverImage ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -33333,7 +35714,7 @@ class Fragment$RelatedMediaAdditionNotification {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$RelatedMediaAdditionNotification) ||
+    if (other is! Fragment$RelatedMediaAdditionNotification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -33676,7 +36057,7 @@ class Fragment$RelatedMediaAdditionNotification$media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$RelatedMediaAdditionNotification$media) ||
+    if (other is! Fragment$RelatedMediaAdditionNotification$media ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -33859,7 +36240,7 @@ class Fragment$RelatedMediaAdditionNotification$media$title {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$RelatedMediaAdditionNotification$media$title) ||
+    if (other is! Fragment$RelatedMediaAdditionNotification$media$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -33994,8 +36375,7 @@ class Fragment$RelatedMediaAdditionNotification$media$coverImage {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment$RelatedMediaAdditionNotification$media$coverImage) ||
+    if (other is! Fragment$RelatedMediaAdditionNotification$media$coverImage ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -34083,6 +36463,2191 @@ class _CopyWithStubImpl$Fragment$RelatedMediaAdditionNotification$media$coverIma
 
   call({
     String? medium,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$MediaListEntry {
+  Fragment$MediaListEntry({
+    required this.id,
+    required this.mediaId,
+    this.status,
+    this.score,
+    this.progress,
+    this.progressVolumes,
+    this.repeat,
+    this.priority,
+    this.private,
+    this.hiddenFromStatusLists,
+    this.advancedScores,
+    this.notes,
+    this.updatedAt,
+    this.startedAt,
+    this.completedAt,
+    this.media,
+    this.$__typename = 'MediaList',
+  });
+
+  factory Fragment$MediaListEntry.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$mediaId = json['mediaId'];
+    final l$status = json['status'];
+    final l$score = json['score'];
+    final l$progress = json['progress'];
+    final l$progressVolumes = json['progressVolumes'];
+    final l$repeat = json['repeat'];
+    final l$priority = json['priority'];
+    final l$private = json['private'];
+    final l$hiddenFromStatusLists = json['hiddenFromStatusLists'];
+    final l$advancedScores = json['advancedScores'];
+    final l$notes = json['notes'];
+    final l$updatedAt = json['updatedAt'];
+    final l$startedAt = json['startedAt'];
+    final l$completedAt = json['completedAt'];
+    final l$media = json['media'];
+    final l$$__typename = json['__typename'];
+    return Fragment$MediaListEntry(
+      id: (l$id as int),
+      mediaId: (l$mediaId as int),
+      status: l$status == null
+          ? null
+          : fromJson$Enum$MediaListStatus((l$status as String)),
+      score: (l$score as num?)?.toDouble(),
+      progress: (l$progress as int?),
+      progressVolumes: (l$progressVolumes as int?),
+      repeat: (l$repeat as int?),
+      priority: (l$priority as int?),
+      private: (l$private as bool?),
+      hiddenFromStatusLists: (l$hiddenFromStatusLists as bool?),
+      advancedScores: (l$advancedScores as String?),
+      notes: (l$notes as String?),
+      updatedAt: (l$updatedAt as int?),
+      startedAt: l$startedAt == null
+          ? null
+          : Fragment$MediaListEntry$startedAt.fromJson(
+              (l$startedAt as Map<String, dynamic>)),
+      completedAt: l$completedAt == null
+          ? null
+          : Fragment$MediaListEntry$completedAt.fromJson(
+              (l$completedAt as Map<String, dynamic>)),
+      media: l$media == null
+          ? null
+          : Fragment$MediaListEntry$media.fromJson(
+              (l$media as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final int mediaId;
+
+  final Enum$MediaListStatus? status;
+
+  final double? score;
+
+  final int? progress;
+
+  final int? progressVolumes;
+
+  final int? repeat;
+
+  final int? priority;
+
+  final bool? private;
+
+  final bool? hiddenFromStatusLists;
+
+  final String? advancedScores;
+
+  final String? notes;
+
+  final int? updatedAt;
+
+  final Fragment$MediaListEntry$startedAt? startedAt;
+
+  final Fragment$MediaListEntry$completedAt? completedAt;
+
+  final Fragment$MediaListEntry$media? media;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$mediaId = mediaId;
+    _resultData['mediaId'] = l$mediaId;
+    final l$status = status;
+    _resultData['status'] =
+        l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
+    final l$score = score;
+    _resultData['score'] = l$score;
+    final l$progress = progress;
+    _resultData['progress'] = l$progress;
+    final l$progressVolumes = progressVolumes;
+    _resultData['progressVolumes'] = l$progressVolumes;
+    final l$repeat = repeat;
+    _resultData['repeat'] = l$repeat;
+    final l$priority = priority;
+    _resultData['priority'] = l$priority;
+    final l$private = private;
+    _resultData['private'] = l$private;
+    final l$hiddenFromStatusLists = hiddenFromStatusLists;
+    _resultData['hiddenFromStatusLists'] = l$hiddenFromStatusLists;
+    final l$advancedScores = advancedScores;
+    _resultData['advancedScores'] = l$advancedScores;
+    final l$notes = notes;
+    _resultData['notes'] = l$notes;
+    final l$updatedAt = updatedAt;
+    _resultData['updatedAt'] = l$updatedAt;
+    final l$startedAt = startedAt;
+    _resultData['startedAt'] = l$startedAt?.toJson();
+    final l$completedAt = completedAt;
+    _resultData['completedAt'] = l$completedAt?.toJson();
+    final l$media = media;
+    _resultData['media'] = l$media?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$mediaId = mediaId;
+    final l$status = status;
+    final l$score = score;
+    final l$progress = progress;
+    final l$progressVolumes = progressVolumes;
+    final l$repeat = repeat;
+    final l$priority = priority;
+    final l$private = private;
+    final l$hiddenFromStatusLists = hiddenFromStatusLists;
+    final l$advancedScores = advancedScores;
+    final l$notes = notes;
+    final l$updatedAt = updatedAt;
+    final l$startedAt = startedAt;
+    final l$completedAt = completedAt;
+    final l$media = media;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$mediaId,
+      l$status,
+      l$score,
+      l$progress,
+      l$progressVolumes,
+      l$repeat,
+      l$priority,
+      l$private,
+      l$hiddenFromStatusLists,
+      l$advancedScores,
+      l$notes,
+      l$updatedAt,
+      l$startedAt,
+      l$completedAt,
+      l$media,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$MediaListEntry || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$mediaId = mediaId;
+    final lOther$mediaId = other.mediaId;
+    if (l$mediaId != lOther$mediaId) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$score = score;
+    final lOther$score = other.score;
+    if (l$score != lOther$score) {
+      return false;
+    }
+    final l$progress = progress;
+    final lOther$progress = other.progress;
+    if (l$progress != lOther$progress) {
+      return false;
+    }
+    final l$progressVolumes = progressVolumes;
+    final lOther$progressVolumes = other.progressVolumes;
+    if (l$progressVolumes != lOther$progressVolumes) {
+      return false;
+    }
+    final l$repeat = repeat;
+    final lOther$repeat = other.repeat;
+    if (l$repeat != lOther$repeat) {
+      return false;
+    }
+    final l$priority = priority;
+    final lOther$priority = other.priority;
+    if (l$priority != lOther$priority) {
+      return false;
+    }
+    final l$private = private;
+    final lOther$private = other.private;
+    if (l$private != lOther$private) {
+      return false;
+    }
+    final l$hiddenFromStatusLists = hiddenFromStatusLists;
+    final lOther$hiddenFromStatusLists = other.hiddenFromStatusLists;
+    if (l$hiddenFromStatusLists != lOther$hiddenFromStatusLists) {
+      return false;
+    }
+    final l$advancedScores = advancedScores;
+    final lOther$advancedScores = other.advancedScores;
+    if (l$advancedScores != lOther$advancedScores) {
+      return false;
+    }
+    final l$notes = notes;
+    final lOther$notes = other.notes;
+    if (l$notes != lOther$notes) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$startedAt = startedAt;
+    final lOther$startedAt = other.startedAt;
+    if (l$startedAt != lOther$startedAt) {
+      return false;
+    }
+    final l$completedAt = completedAt;
+    final lOther$completedAt = other.completedAt;
+    if (l$completedAt != lOther$completedAt) {
+      return false;
+    }
+    final l$media = media;
+    final lOther$media = other.media;
+    if (l$media != lOther$media) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$MediaListEntry on Fragment$MediaListEntry {
+  CopyWith$Fragment$MediaListEntry<Fragment$MediaListEntry> get copyWith =>
+      CopyWith$Fragment$MediaListEntry(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Fragment$MediaListEntry<TRes> {
+  factory CopyWith$Fragment$MediaListEntry(
+    Fragment$MediaListEntry instance,
+    TRes Function(Fragment$MediaListEntry) then,
+  ) = _CopyWithImpl$Fragment$MediaListEntry;
+
+  factory CopyWith$Fragment$MediaListEntry.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaListEntry;
+
+  TRes call({
+    int? id,
+    int? mediaId,
+    Enum$MediaListStatus? status,
+    double? score,
+    int? progress,
+    int? progressVolumes,
+    int? repeat,
+    int? priority,
+    bool? private,
+    bool? hiddenFromStatusLists,
+    String? advancedScores,
+    String? notes,
+    int? updatedAt,
+    Fragment$MediaListEntry$startedAt? startedAt,
+    Fragment$MediaListEntry$completedAt? completedAt,
+    Fragment$MediaListEntry$media? media,
+    String? $__typename,
+  });
+  CopyWith$Fragment$MediaListEntry$startedAt<TRes> get startedAt;
+  CopyWith$Fragment$MediaListEntry$completedAt<TRes> get completedAt;
+  CopyWith$Fragment$MediaListEntry$media<TRes> get media;
+}
+
+class _CopyWithImpl$Fragment$MediaListEntry<TRes>
+    implements CopyWith$Fragment$MediaListEntry<TRes> {
+  _CopyWithImpl$Fragment$MediaListEntry(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$MediaListEntry _instance;
+
+  final TRes Function(Fragment$MediaListEntry) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? mediaId = _undefined,
+    Object? status = _undefined,
+    Object? score = _undefined,
+    Object? progress = _undefined,
+    Object? progressVolumes = _undefined,
+    Object? repeat = _undefined,
+    Object? priority = _undefined,
+    Object? private = _undefined,
+    Object? hiddenFromStatusLists = _undefined,
+    Object? advancedScores = _undefined,
+    Object? notes = _undefined,
+    Object? updatedAt = _undefined,
+    Object? startedAt = _undefined,
+    Object? completedAt = _undefined,
+    Object? media = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$MediaListEntry(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        mediaId: mediaId == _undefined || mediaId == null
+            ? _instance.mediaId
+            : (mediaId as int),
+        status: status == _undefined
+            ? _instance.status
+            : (status as Enum$MediaListStatus?),
+        score: score == _undefined ? _instance.score : (score as double?),
+        progress:
+            progress == _undefined ? _instance.progress : (progress as int?),
+        progressVolumes: progressVolumes == _undefined
+            ? _instance.progressVolumes
+            : (progressVolumes as int?),
+        repeat: repeat == _undefined ? _instance.repeat : (repeat as int?),
+        priority:
+            priority == _undefined ? _instance.priority : (priority as int?),
+        private: private == _undefined ? _instance.private : (private as bool?),
+        hiddenFromStatusLists: hiddenFromStatusLists == _undefined
+            ? _instance.hiddenFromStatusLists
+            : (hiddenFromStatusLists as bool?),
+        advancedScores: advancedScores == _undefined
+            ? _instance.advancedScores
+            : (advancedScores as String?),
+        notes: notes == _undefined ? _instance.notes : (notes as String?),
+        updatedAt:
+            updatedAt == _undefined ? _instance.updatedAt : (updatedAt as int?),
+        startedAt: startedAt == _undefined
+            ? _instance.startedAt
+            : (startedAt as Fragment$MediaListEntry$startedAt?),
+        completedAt: completedAt == _undefined
+            ? _instance.completedAt
+            : (completedAt as Fragment$MediaListEntry$completedAt?),
+        media: media == _undefined
+            ? _instance.media
+            : (media as Fragment$MediaListEntry$media?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$MediaListEntry$startedAt<TRes> get startedAt {
+    final local$startedAt = _instance.startedAt;
+    return local$startedAt == null
+        ? CopyWith$Fragment$MediaListEntry$startedAt.stub(_then(_instance))
+        : CopyWith$Fragment$MediaListEntry$startedAt(
+            local$startedAt, (e) => call(startedAt: e));
+  }
+
+  CopyWith$Fragment$MediaListEntry$completedAt<TRes> get completedAt {
+    final local$completedAt = _instance.completedAt;
+    return local$completedAt == null
+        ? CopyWith$Fragment$MediaListEntry$completedAt.stub(_then(_instance))
+        : CopyWith$Fragment$MediaListEntry$completedAt(
+            local$completedAt, (e) => call(completedAt: e));
+  }
+
+  CopyWith$Fragment$MediaListEntry$media<TRes> get media {
+    final local$media = _instance.media;
+    return local$media == null
+        ? CopyWith$Fragment$MediaListEntry$media.stub(_then(_instance))
+        : CopyWith$Fragment$MediaListEntry$media(
+            local$media, (e) => call(media: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$MediaListEntry<TRes>
+    implements CopyWith$Fragment$MediaListEntry<TRes> {
+  _CopyWithStubImpl$Fragment$MediaListEntry(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    int? mediaId,
+    Enum$MediaListStatus? status,
+    double? score,
+    int? progress,
+    int? progressVolumes,
+    int? repeat,
+    int? priority,
+    bool? private,
+    bool? hiddenFromStatusLists,
+    String? advancedScores,
+    String? notes,
+    int? updatedAt,
+    Fragment$MediaListEntry$startedAt? startedAt,
+    Fragment$MediaListEntry$completedAt? completedAt,
+    Fragment$MediaListEntry$media? media,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$MediaListEntry$startedAt<TRes> get startedAt =>
+      CopyWith$Fragment$MediaListEntry$startedAt.stub(_res);
+
+  CopyWith$Fragment$MediaListEntry$completedAt<TRes> get completedAt =>
+      CopyWith$Fragment$MediaListEntry$completedAt.stub(_res);
+
+  CopyWith$Fragment$MediaListEntry$media<TRes> get media =>
+      CopyWith$Fragment$MediaListEntry$media.stub(_res);
+}
+
+const fragmentDefinitionMediaListEntry = FragmentDefinitionNode(
+  name: NameNode(value: 'MediaListEntry'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'MediaList'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'mediaId'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'status'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'score'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'progress'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'progressVolumes'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'repeat'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'priority'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'private'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'hiddenFromStatusLists'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'advancedScores'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'notes'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'updatedAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'startedAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'year'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'month'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'day'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'completedAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'year'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'month'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'day'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'media'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'title'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'userPreferred'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'romaji'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'english'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'native'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: 'coverImage'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'extraLarge'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'large'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: 'type'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'format'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'status'),
+          alias: null,
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'version'),
+              value: IntValueNode(value: '2'),
+            )
+          ],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'episodes'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'volumes'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'chapters'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'averageScore'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'popularity'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'isAdult'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'countryOfOrigin'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'genres'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'bannerImage'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'startDate'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FieldNode(
+              name: NameNode(value: 'year'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'month'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'day'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentMediaListEntry = DocumentNode(definitions: [
+  fragmentDefinitionMediaListEntry,
+]);
+
+extension ClientExtension$Fragment$MediaListEntry on graphql.GraphQLClient {
+  void writeFragment$MediaListEntry({
+    required Fragment$MediaListEntry data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'MediaListEntry',
+            document: documentNodeFragmentMediaListEntry,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$MediaListEntry? readFragment$MediaListEntry({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'MediaListEntry',
+          document: documentNodeFragmentMediaListEntry,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Fragment$MediaListEntry.fromJson(result);
+  }
+}
+
+class Fragment$MediaListEntry$startedAt {
+  Fragment$MediaListEntry$startedAt({
+    this.year,
+    this.month,
+    this.day,
+    this.$__typename = 'FuzzyDate',
+  });
+
+  factory Fragment$MediaListEntry$startedAt.fromJson(
+      Map<String, dynamic> json) {
+    final l$year = json['year'];
+    final l$month = json['month'];
+    final l$day = json['day'];
+    final l$$__typename = json['__typename'];
+    return Fragment$MediaListEntry$startedAt(
+      year: (l$year as int?),
+      month: (l$month as int?),
+      day: (l$day as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int? year;
+
+  final int? month;
+
+  final int? day;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$year = year;
+    _resultData['year'] = l$year;
+    final l$month = month;
+    _resultData['month'] = l$month;
+    final l$day = day;
+    _resultData['day'] = l$day;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$year = year;
+    final l$month = month;
+    final l$day = day;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$year,
+      l$month,
+      l$day,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$MediaListEntry$startedAt ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$year = year;
+    final lOther$year = other.year;
+    if (l$year != lOther$year) {
+      return false;
+    }
+    final l$month = month;
+    final lOther$month = other.month;
+    if (l$month != lOther$month) {
+      return false;
+    }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (l$day != lOther$day) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$MediaListEntry$startedAt
+    on Fragment$MediaListEntry$startedAt {
+  CopyWith$Fragment$MediaListEntry$startedAt<Fragment$MediaListEntry$startedAt>
+      get copyWith => CopyWith$Fragment$MediaListEntry$startedAt(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$MediaListEntry$startedAt<TRes> {
+  factory CopyWith$Fragment$MediaListEntry$startedAt(
+    Fragment$MediaListEntry$startedAt instance,
+    TRes Function(Fragment$MediaListEntry$startedAt) then,
+  ) = _CopyWithImpl$Fragment$MediaListEntry$startedAt;
+
+  factory CopyWith$Fragment$MediaListEntry$startedAt.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaListEntry$startedAt;
+
+  TRes call({
+    int? year,
+    int? month,
+    int? day,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$MediaListEntry$startedAt<TRes>
+    implements CopyWith$Fragment$MediaListEntry$startedAt<TRes> {
+  _CopyWithImpl$Fragment$MediaListEntry$startedAt(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$MediaListEntry$startedAt _instance;
+
+  final TRes Function(Fragment$MediaListEntry$startedAt) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? year = _undefined,
+    Object? month = _undefined,
+    Object? day = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$MediaListEntry$startedAt(
+        year: year == _undefined ? _instance.year : (year as int?),
+        month: month == _undefined ? _instance.month : (month as int?),
+        day: day == _undefined ? _instance.day : (day as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$MediaListEntry$startedAt<TRes>
+    implements CopyWith$Fragment$MediaListEntry$startedAt<TRes> {
+  _CopyWithStubImpl$Fragment$MediaListEntry$startedAt(this._res);
+
+  TRes _res;
+
+  call({
+    int? year,
+    int? month,
+    int? day,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$MediaListEntry$completedAt {
+  Fragment$MediaListEntry$completedAt({
+    this.year,
+    this.month,
+    this.day,
+    this.$__typename = 'FuzzyDate',
+  });
+
+  factory Fragment$MediaListEntry$completedAt.fromJson(
+      Map<String, dynamic> json) {
+    final l$year = json['year'];
+    final l$month = json['month'];
+    final l$day = json['day'];
+    final l$$__typename = json['__typename'];
+    return Fragment$MediaListEntry$completedAt(
+      year: (l$year as int?),
+      month: (l$month as int?),
+      day: (l$day as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int? year;
+
+  final int? month;
+
+  final int? day;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$year = year;
+    _resultData['year'] = l$year;
+    final l$month = month;
+    _resultData['month'] = l$month;
+    final l$day = day;
+    _resultData['day'] = l$day;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$year = year;
+    final l$month = month;
+    final l$day = day;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$year,
+      l$month,
+      l$day,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$MediaListEntry$completedAt ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$year = year;
+    final lOther$year = other.year;
+    if (l$year != lOther$year) {
+      return false;
+    }
+    final l$month = month;
+    final lOther$month = other.month;
+    if (l$month != lOther$month) {
+      return false;
+    }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (l$day != lOther$day) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$MediaListEntry$completedAt
+    on Fragment$MediaListEntry$completedAt {
+  CopyWith$Fragment$MediaListEntry$completedAt<
+          Fragment$MediaListEntry$completedAt>
+      get copyWith => CopyWith$Fragment$MediaListEntry$completedAt(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$MediaListEntry$completedAt<TRes> {
+  factory CopyWith$Fragment$MediaListEntry$completedAt(
+    Fragment$MediaListEntry$completedAt instance,
+    TRes Function(Fragment$MediaListEntry$completedAt) then,
+  ) = _CopyWithImpl$Fragment$MediaListEntry$completedAt;
+
+  factory CopyWith$Fragment$MediaListEntry$completedAt.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaListEntry$completedAt;
+
+  TRes call({
+    int? year,
+    int? month,
+    int? day,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$MediaListEntry$completedAt<TRes>
+    implements CopyWith$Fragment$MediaListEntry$completedAt<TRes> {
+  _CopyWithImpl$Fragment$MediaListEntry$completedAt(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$MediaListEntry$completedAt _instance;
+
+  final TRes Function(Fragment$MediaListEntry$completedAt) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? year = _undefined,
+    Object? month = _undefined,
+    Object? day = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$MediaListEntry$completedAt(
+        year: year == _undefined ? _instance.year : (year as int?),
+        month: month == _undefined ? _instance.month : (month as int?),
+        day: day == _undefined ? _instance.day : (day as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$MediaListEntry$completedAt<TRes>
+    implements CopyWith$Fragment$MediaListEntry$completedAt<TRes> {
+  _CopyWithStubImpl$Fragment$MediaListEntry$completedAt(this._res);
+
+  TRes _res;
+
+  call({
+    int? year,
+    int? month,
+    int? day,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$MediaListEntry$media {
+  Fragment$MediaListEntry$media({
+    required this.id,
+    this.title,
+    this.coverImage,
+    this.type,
+    this.format,
+    this.status,
+    this.episodes,
+    this.volumes,
+    this.chapters,
+    this.averageScore,
+    this.popularity,
+    this.isAdult,
+    this.countryOfOrigin,
+    this.genres,
+    this.bannerImage,
+    this.startDate,
+    this.$__typename = 'Media',
+  });
+
+  factory Fragment$MediaListEntry$media.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$title = json['title'];
+    final l$coverImage = json['coverImage'];
+    final l$type = json['type'];
+    final l$format = json['format'];
+    final l$status = json['status'];
+    final l$episodes = json['episodes'];
+    final l$volumes = json['volumes'];
+    final l$chapters = json['chapters'];
+    final l$averageScore = json['averageScore'];
+    final l$popularity = json['popularity'];
+    final l$isAdult = json['isAdult'];
+    final l$countryOfOrigin = json['countryOfOrigin'];
+    final l$genres = json['genres'];
+    final l$bannerImage = json['bannerImage'];
+    final l$startDate = json['startDate'];
+    final l$$__typename = json['__typename'];
+    return Fragment$MediaListEntry$media(
+      id: (l$id as int),
+      title: l$title == null
+          ? null
+          : Fragment$MediaListEntry$media$title.fromJson(
+              (l$title as Map<String, dynamic>)),
+      coverImage: l$coverImage == null
+          ? null
+          : Fragment$MediaListEntry$media$coverImage.fromJson(
+              (l$coverImage as Map<String, dynamic>)),
+      type: l$type == null ? null : fromJson$Enum$MediaType((l$type as String)),
+      format: l$format == null
+          ? null
+          : fromJson$Enum$MediaFormat((l$format as String)),
+      status: l$status == null
+          ? null
+          : fromJson$Enum$MediaStatus((l$status as String)),
+      episodes: (l$episodes as int?),
+      volumes: (l$volumes as int?),
+      chapters: (l$chapters as int?),
+      averageScore: (l$averageScore as int?),
+      popularity: (l$popularity as int?),
+      isAdult: (l$isAdult as bool?),
+      countryOfOrigin: (l$countryOfOrigin as String?),
+      genres: (l$genres as List<dynamic>?)?.map((e) => (e as String?)).toList(),
+      bannerImage: (l$bannerImage as String?),
+      startDate: l$startDate == null
+          ? null
+          : Fragment$MediaListEntry$media$startDate.fromJson(
+              (l$startDate as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Fragment$MediaListEntry$media$title? title;
+
+  final Fragment$MediaListEntry$media$coverImage? coverImage;
+
+  final Enum$MediaType? type;
+
+  final Enum$MediaFormat? format;
+
+  final Enum$MediaStatus? status;
+
+  final int? episodes;
+
+  final int? volumes;
+
+  final int? chapters;
+
+  final int? averageScore;
+
+  final int? popularity;
+
+  final bool? isAdult;
+
+  final String? countryOfOrigin;
+
+  final List<String?>? genres;
+
+  final String? bannerImage;
+
+  final Fragment$MediaListEntry$media$startDate? startDate;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$title = title;
+    _resultData['title'] = l$title?.toJson();
+    final l$coverImage = coverImage;
+    _resultData['coverImage'] = l$coverImage?.toJson();
+    final l$type = type;
+    _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
+    final l$format = format;
+    _resultData['format'] =
+        l$format == null ? null : toJson$Enum$MediaFormat(l$format);
+    final l$status = status;
+    _resultData['status'] =
+        l$status == null ? null : toJson$Enum$MediaStatus(l$status);
+    final l$episodes = episodes;
+    _resultData['episodes'] = l$episodes;
+    final l$volumes = volumes;
+    _resultData['volumes'] = l$volumes;
+    final l$chapters = chapters;
+    _resultData['chapters'] = l$chapters;
+    final l$averageScore = averageScore;
+    _resultData['averageScore'] = l$averageScore;
+    final l$popularity = popularity;
+    _resultData['popularity'] = l$popularity;
+    final l$isAdult = isAdult;
+    _resultData['isAdult'] = l$isAdult;
+    final l$countryOfOrigin = countryOfOrigin;
+    _resultData['countryOfOrigin'] = l$countryOfOrigin;
+    final l$genres = genres;
+    _resultData['genres'] = l$genres?.map((e) => e).toList();
+    final l$bannerImage = bannerImage;
+    _resultData['bannerImage'] = l$bannerImage;
+    final l$startDate = startDate;
+    _resultData['startDate'] = l$startDate?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$title = title;
+    final l$coverImage = coverImage;
+    final l$type = type;
+    final l$format = format;
+    final l$status = status;
+    final l$episodes = episodes;
+    final l$volumes = volumes;
+    final l$chapters = chapters;
+    final l$averageScore = averageScore;
+    final l$popularity = popularity;
+    final l$isAdult = isAdult;
+    final l$countryOfOrigin = countryOfOrigin;
+    final l$genres = genres;
+    final l$bannerImage = bannerImage;
+    final l$startDate = startDate;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$title,
+      l$coverImage,
+      l$type,
+      l$format,
+      l$status,
+      l$episodes,
+      l$volumes,
+      l$chapters,
+      l$averageScore,
+      l$popularity,
+      l$isAdult,
+      l$countryOfOrigin,
+      l$genres == null ? null : Object.hashAll(l$genres.map((v) => v)),
+      l$bannerImage,
+      l$startDate,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$MediaListEntry$media ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$title = title;
+    final lOther$title = other.title;
+    if (l$title != lOther$title) {
+      return false;
+    }
+    final l$coverImage = coverImage;
+    final lOther$coverImage = other.coverImage;
+    if (l$coverImage != lOther$coverImage) {
+      return false;
+    }
+    final l$type = type;
+    final lOther$type = other.type;
+    if (l$type != lOther$type) {
+      return false;
+    }
+    final l$format = format;
+    final lOther$format = other.format;
+    if (l$format != lOther$format) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$episodes = episodes;
+    final lOther$episodes = other.episodes;
+    if (l$episodes != lOther$episodes) {
+      return false;
+    }
+    final l$volumes = volumes;
+    final lOther$volumes = other.volumes;
+    if (l$volumes != lOther$volumes) {
+      return false;
+    }
+    final l$chapters = chapters;
+    final lOther$chapters = other.chapters;
+    if (l$chapters != lOther$chapters) {
+      return false;
+    }
+    final l$averageScore = averageScore;
+    final lOther$averageScore = other.averageScore;
+    if (l$averageScore != lOther$averageScore) {
+      return false;
+    }
+    final l$popularity = popularity;
+    final lOther$popularity = other.popularity;
+    if (l$popularity != lOther$popularity) {
+      return false;
+    }
+    final l$isAdult = isAdult;
+    final lOther$isAdult = other.isAdult;
+    if (l$isAdult != lOther$isAdult) {
+      return false;
+    }
+    final l$countryOfOrigin = countryOfOrigin;
+    final lOther$countryOfOrigin = other.countryOfOrigin;
+    if (l$countryOfOrigin != lOther$countryOfOrigin) {
+      return false;
+    }
+    final l$genres = genres;
+    final lOther$genres = other.genres;
+    if (l$genres != null && lOther$genres != null) {
+      if (l$genres.length != lOther$genres.length) {
+        return false;
+      }
+      for (int i = 0; i < l$genres.length; i++) {
+        final l$genres$entry = l$genres[i];
+        final lOther$genres$entry = lOther$genres[i];
+        if (l$genres$entry != lOther$genres$entry) {
+          return false;
+        }
+      }
+    } else if (l$genres != lOther$genres) {
+      return false;
+    }
+    final l$bannerImage = bannerImage;
+    final lOther$bannerImage = other.bannerImage;
+    if (l$bannerImage != lOther$bannerImage) {
+      return false;
+    }
+    final l$startDate = startDate;
+    final lOther$startDate = other.startDate;
+    if (l$startDate != lOther$startDate) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$MediaListEntry$media
+    on Fragment$MediaListEntry$media {
+  CopyWith$Fragment$MediaListEntry$media<Fragment$MediaListEntry$media>
+      get copyWith => CopyWith$Fragment$MediaListEntry$media(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$MediaListEntry$media<TRes> {
+  factory CopyWith$Fragment$MediaListEntry$media(
+    Fragment$MediaListEntry$media instance,
+    TRes Function(Fragment$MediaListEntry$media) then,
+  ) = _CopyWithImpl$Fragment$MediaListEntry$media;
+
+  factory CopyWith$Fragment$MediaListEntry$media.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaListEntry$media;
+
+  TRes call({
+    int? id,
+    Fragment$MediaListEntry$media$title? title,
+    Fragment$MediaListEntry$media$coverImage? coverImage,
+    Enum$MediaType? type,
+    Enum$MediaFormat? format,
+    Enum$MediaStatus? status,
+    int? episodes,
+    int? volumes,
+    int? chapters,
+    int? averageScore,
+    int? popularity,
+    bool? isAdult,
+    String? countryOfOrigin,
+    List<String?>? genres,
+    String? bannerImage,
+    Fragment$MediaListEntry$media$startDate? startDate,
+    String? $__typename,
+  });
+  CopyWith$Fragment$MediaListEntry$media$title<TRes> get title;
+  CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> get coverImage;
+  CopyWith$Fragment$MediaListEntry$media$startDate<TRes> get startDate;
+}
+
+class _CopyWithImpl$Fragment$MediaListEntry$media<TRes>
+    implements CopyWith$Fragment$MediaListEntry$media<TRes> {
+  _CopyWithImpl$Fragment$MediaListEntry$media(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$MediaListEntry$media _instance;
+
+  final TRes Function(Fragment$MediaListEntry$media) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? title = _undefined,
+    Object? coverImage = _undefined,
+    Object? type = _undefined,
+    Object? format = _undefined,
+    Object? status = _undefined,
+    Object? episodes = _undefined,
+    Object? volumes = _undefined,
+    Object? chapters = _undefined,
+    Object? averageScore = _undefined,
+    Object? popularity = _undefined,
+    Object? isAdult = _undefined,
+    Object? countryOfOrigin = _undefined,
+    Object? genres = _undefined,
+    Object? bannerImage = _undefined,
+    Object? startDate = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$MediaListEntry$media(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        title: title == _undefined
+            ? _instance.title
+            : (title as Fragment$MediaListEntry$media$title?),
+        coverImage: coverImage == _undefined
+            ? _instance.coverImage
+            : (coverImage as Fragment$MediaListEntry$media$coverImage?),
+        type: type == _undefined ? _instance.type : (type as Enum$MediaType?),
+        format: format == _undefined
+            ? _instance.format
+            : (format as Enum$MediaFormat?),
+        status: status == _undefined
+            ? _instance.status
+            : (status as Enum$MediaStatus?),
+        episodes:
+            episodes == _undefined ? _instance.episodes : (episodes as int?),
+        volumes: volumes == _undefined ? _instance.volumes : (volumes as int?),
+        chapters:
+            chapters == _undefined ? _instance.chapters : (chapters as int?),
+        averageScore: averageScore == _undefined
+            ? _instance.averageScore
+            : (averageScore as int?),
+        popularity: popularity == _undefined
+            ? _instance.popularity
+            : (popularity as int?),
+        isAdult: isAdult == _undefined ? _instance.isAdult : (isAdult as bool?),
+        countryOfOrigin: countryOfOrigin == _undefined
+            ? _instance.countryOfOrigin
+            : (countryOfOrigin as String?),
+        genres: genres == _undefined
+            ? _instance.genres
+            : (genres as List<String?>?),
+        bannerImage: bannerImage == _undefined
+            ? _instance.bannerImage
+            : (bannerImage as String?),
+        startDate: startDate == _undefined
+            ? _instance.startDate
+            : (startDate as Fragment$MediaListEntry$media$startDate?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$MediaListEntry$media$title<TRes> get title {
+    final local$title = _instance.title;
+    return local$title == null
+        ? CopyWith$Fragment$MediaListEntry$media$title.stub(_then(_instance))
+        : CopyWith$Fragment$MediaListEntry$media$title(
+            local$title, (e) => call(title: e));
+  }
+
+  CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> get coverImage {
+    final local$coverImage = _instance.coverImage;
+    return local$coverImage == null
+        ? CopyWith$Fragment$MediaListEntry$media$coverImage.stub(
+            _then(_instance))
+        : CopyWith$Fragment$MediaListEntry$media$coverImage(
+            local$coverImage, (e) => call(coverImage: e));
+  }
+
+  CopyWith$Fragment$MediaListEntry$media$startDate<TRes> get startDate {
+    final local$startDate = _instance.startDate;
+    return local$startDate == null
+        ? CopyWith$Fragment$MediaListEntry$media$startDate.stub(
+            _then(_instance))
+        : CopyWith$Fragment$MediaListEntry$media$startDate(
+            local$startDate, (e) => call(startDate: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$MediaListEntry$media<TRes>
+    implements CopyWith$Fragment$MediaListEntry$media<TRes> {
+  _CopyWithStubImpl$Fragment$MediaListEntry$media(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Fragment$MediaListEntry$media$title? title,
+    Fragment$MediaListEntry$media$coverImage? coverImage,
+    Enum$MediaType? type,
+    Enum$MediaFormat? format,
+    Enum$MediaStatus? status,
+    int? episodes,
+    int? volumes,
+    int? chapters,
+    int? averageScore,
+    int? popularity,
+    bool? isAdult,
+    String? countryOfOrigin,
+    List<String?>? genres,
+    String? bannerImage,
+    Fragment$MediaListEntry$media$startDate? startDate,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$MediaListEntry$media$title<TRes> get title =>
+      CopyWith$Fragment$MediaListEntry$media$title.stub(_res);
+
+  CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> get coverImage =>
+      CopyWith$Fragment$MediaListEntry$media$coverImage.stub(_res);
+
+  CopyWith$Fragment$MediaListEntry$media$startDate<TRes> get startDate =>
+      CopyWith$Fragment$MediaListEntry$media$startDate.stub(_res);
+}
+
+class Fragment$MediaListEntry$media$title {
+  Fragment$MediaListEntry$media$title({
+    this.userPreferred,
+    this.romaji,
+    this.english,
+    this.native,
+    this.$__typename = 'MediaTitle',
+  });
+
+  factory Fragment$MediaListEntry$media$title.fromJson(
+      Map<String, dynamic> json) {
+    final l$userPreferred = json['userPreferred'];
+    final l$romaji = json['romaji'];
+    final l$english = json['english'];
+    final l$native = json['native'];
+    final l$$__typename = json['__typename'];
+    return Fragment$MediaListEntry$media$title(
+      userPreferred: (l$userPreferred as String?),
+      romaji: (l$romaji as String?),
+      english: (l$english as String?),
+      native: (l$native as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? userPreferred;
+
+  final String? romaji;
+
+  final String? english;
+
+  final String? native;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$userPreferred = userPreferred;
+    _resultData['userPreferred'] = l$userPreferred;
+    final l$romaji = romaji;
+    _resultData['romaji'] = l$romaji;
+    final l$english = english;
+    _resultData['english'] = l$english;
+    final l$native = native;
+    _resultData['native'] = l$native;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$userPreferred = userPreferred;
+    final l$romaji = romaji;
+    final l$english = english;
+    final l$native = native;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$userPreferred,
+      l$romaji,
+      l$english,
+      l$native,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$MediaListEntry$media$title ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$userPreferred = userPreferred;
+    final lOther$userPreferred = other.userPreferred;
+    if (l$userPreferred != lOther$userPreferred) {
+      return false;
+    }
+    final l$romaji = romaji;
+    final lOther$romaji = other.romaji;
+    if (l$romaji != lOther$romaji) {
+      return false;
+    }
+    final l$english = english;
+    final lOther$english = other.english;
+    if (l$english != lOther$english) {
+      return false;
+    }
+    final l$native = native;
+    final lOther$native = other.native;
+    if (l$native != lOther$native) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$MediaListEntry$media$title
+    on Fragment$MediaListEntry$media$title {
+  CopyWith$Fragment$MediaListEntry$media$title<
+          Fragment$MediaListEntry$media$title>
+      get copyWith => CopyWith$Fragment$MediaListEntry$media$title(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$MediaListEntry$media$title<TRes> {
+  factory CopyWith$Fragment$MediaListEntry$media$title(
+    Fragment$MediaListEntry$media$title instance,
+    TRes Function(Fragment$MediaListEntry$media$title) then,
+  ) = _CopyWithImpl$Fragment$MediaListEntry$media$title;
+
+  factory CopyWith$Fragment$MediaListEntry$media$title.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaListEntry$media$title;
+
+  TRes call({
+    String? userPreferred,
+    String? romaji,
+    String? english,
+    String? native,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$MediaListEntry$media$title<TRes>
+    implements CopyWith$Fragment$MediaListEntry$media$title<TRes> {
+  _CopyWithImpl$Fragment$MediaListEntry$media$title(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$MediaListEntry$media$title _instance;
+
+  final TRes Function(Fragment$MediaListEntry$media$title) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? userPreferred = _undefined,
+    Object? romaji = _undefined,
+    Object? english = _undefined,
+    Object? native = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$MediaListEntry$media$title(
+        userPreferred: userPreferred == _undefined
+            ? _instance.userPreferred
+            : (userPreferred as String?),
+        romaji: romaji == _undefined ? _instance.romaji : (romaji as String?),
+        english:
+            english == _undefined ? _instance.english : (english as String?),
+        native: native == _undefined ? _instance.native : (native as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$MediaListEntry$media$title<TRes>
+    implements CopyWith$Fragment$MediaListEntry$media$title<TRes> {
+  _CopyWithStubImpl$Fragment$MediaListEntry$media$title(this._res);
+
+  TRes _res;
+
+  call({
+    String? userPreferred,
+    String? romaji,
+    String? english,
+    String? native,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$MediaListEntry$media$coverImage {
+  Fragment$MediaListEntry$media$coverImage({
+    this.extraLarge,
+    this.large,
+    this.$__typename = 'MediaCoverImage',
+  });
+
+  factory Fragment$MediaListEntry$media$coverImage.fromJson(
+      Map<String, dynamic> json) {
+    final l$extraLarge = json['extraLarge'];
+    final l$large = json['large'];
+    final l$$__typename = json['__typename'];
+    return Fragment$MediaListEntry$media$coverImage(
+      extraLarge: (l$extraLarge as String?),
+      large: (l$large as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? extraLarge;
+
+  final String? large;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$extraLarge = extraLarge;
+    _resultData['extraLarge'] = l$extraLarge;
+    final l$large = large;
+    _resultData['large'] = l$large;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$extraLarge = extraLarge;
+    final l$large = large;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$extraLarge,
+      l$large,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$MediaListEntry$media$coverImage ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$extraLarge = extraLarge;
+    final lOther$extraLarge = other.extraLarge;
+    if (l$extraLarge != lOther$extraLarge) {
+      return false;
+    }
+    final l$large = large;
+    final lOther$large = other.large;
+    if (l$large != lOther$large) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$MediaListEntry$media$coverImage
+    on Fragment$MediaListEntry$media$coverImage {
+  CopyWith$Fragment$MediaListEntry$media$coverImage<
+          Fragment$MediaListEntry$media$coverImage>
+      get copyWith => CopyWith$Fragment$MediaListEntry$media$coverImage(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> {
+  factory CopyWith$Fragment$MediaListEntry$media$coverImage(
+    Fragment$MediaListEntry$media$coverImage instance,
+    TRes Function(Fragment$MediaListEntry$media$coverImage) then,
+  ) = _CopyWithImpl$Fragment$MediaListEntry$media$coverImage;
+
+  factory CopyWith$Fragment$MediaListEntry$media$coverImage.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaListEntry$media$coverImage;
+
+  TRes call({
+    String? extraLarge,
+    String? large,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$MediaListEntry$media$coverImage<TRes>
+    implements CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> {
+  _CopyWithImpl$Fragment$MediaListEntry$media$coverImage(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$MediaListEntry$media$coverImage _instance;
+
+  final TRes Function(Fragment$MediaListEntry$media$coverImage) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? extraLarge = _undefined,
+    Object? large = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$MediaListEntry$media$coverImage(
+        extraLarge: extraLarge == _undefined
+            ? _instance.extraLarge
+            : (extraLarge as String?),
+        large: large == _undefined ? _instance.large : (large as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$MediaListEntry$media$coverImage<TRes>
+    implements CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> {
+  _CopyWithStubImpl$Fragment$MediaListEntry$media$coverImage(this._res);
+
+  TRes _res;
+
+  call({
+    String? extraLarge,
+    String? large,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$MediaListEntry$media$startDate {
+  Fragment$MediaListEntry$media$startDate({
+    this.year,
+    this.month,
+    this.day,
+    this.$__typename = 'FuzzyDate',
+  });
+
+  factory Fragment$MediaListEntry$media$startDate.fromJson(
+      Map<String, dynamic> json) {
+    final l$year = json['year'];
+    final l$month = json['month'];
+    final l$day = json['day'];
+    final l$$__typename = json['__typename'];
+    return Fragment$MediaListEntry$media$startDate(
+      year: (l$year as int?),
+      month: (l$month as int?),
+      day: (l$day as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int? year;
+
+  final int? month;
+
+  final int? day;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$year = year;
+    _resultData['year'] = l$year;
+    final l$month = month;
+    _resultData['month'] = l$month;
+    final l$day = day;
+    _resultData['day'] = l$day;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$year = year;
+    final l$month = month;
+    final l$day = day;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$year,
+      l$month,
+      l$day,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$MediaListEntry$media$startDate ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$year = year;
+    final lOther$year = other.year;
+    if (l$year != lOther$year) {
+      return false;
+    }
+    final l$month = month;
+    final lOther$month = other.month;
+    if (l$month != lOther$month) {
+      return false;
+    }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (l$day != lOther$day) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$MediaListEntry$media$startDate
+    on Fragment$MediaListEntry$media$startDate {
+  CopyWith$Fragment$MediaListEntry$media$startDate<
+          Fragment$MediaListEntry$media$startDate>
+      get copyWith => CopyWith$Fragment$MediaListEntry$media$startDate(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$MediaListEntry$media$startDate<TRes> {
+  factory CopyWith$Fragment$MediaListEntry$media$startDate(
+    Fragment$MediaListEntry$media$startDate instance,
+    TRes Function(Fragment$MediaListEntry$media$startDate) then,
+  ) = _CopyWithImpl$Fragment$MediaListEntry$media$startDate;
+
+  factory CopyWith$Fragment$MediaListEntry$media$startDate.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaListEntry$media$startDate;
+
+  TRes call({
+    int? year,
+    int? month,
+    int? day,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$MediaListEntry$media$startDate<TRes>
+    implements CopyWith$Fragment$MediaListEntry$media$startDate<TRes> {
+  _CopyWithImpl$Fragment$MediaListEntry$media$startDate(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$MediaListEntry$media$startDate _instance;
+
+  final TRes Function(Fragment$MediaListEntry$media$startDate) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? year = _undefined,
+    Object? month = _undefined,
+    Object? day = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$MediaListEntry$media$startDate(
+        year: year == _undefined ? _instance.year : (year as int?),
+        month: month == _undefined ? _instance.month : (month as int?),
+        day: day == _undefined ? _instance.day : (day as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$MediaListEntry$media$startDate<TRes>
+    implements CopyWith$Fragment$MediaListEntry$media$startDate<TRes> {
+  _CopyWithStubImpl$Fragment$MediaListEntry$media$startDate(this._res);
+
+  TRes _res;
+
+  call({
+    int? year,
+    int? month,
+    int? day,
     String? $__typename,
   }) =>
       _res;

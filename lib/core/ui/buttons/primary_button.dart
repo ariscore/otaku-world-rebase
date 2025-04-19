@@ -7,6 +7,7 @@ class PrimaryButton extends StatelessWidget {
     this.horizontalPadding = 12,
     this.verticalPadding = 14,
     this.width,
+    this.height,
     required this.onTap,
     required this.label,
     this.color = AppColors.sunsetOrange,
@@ -18,6 +19,7 @@ class PrimaryButton extends StatelessWidget {
 
   final double horizontalPadding;
   final double? width;
+  final double? height;
   final VoidCallback onTap;
   final String label;
   final Color color;
@@ -39,6 +41,7 @@ class PrimaryButton extends StatelessWidget {
         child: Container(
           width: width ??
               MediaQuery.of(context).size.width - horizontalPadding * 2,
+          height: height,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(isSmall ? 10 : 15),
             color: color,

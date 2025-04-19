@@ -1,7 +1,7 @@
+import 'package:otaku_world/core/model/filter_model.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 
-class AnimeFilter {
-  final String? search;
+class AnimeFilter extends FilterModel {
   final List<Enum$MediaSort> sort;
   final List<String>? genres;
   final String? startDateGreater;
@@ -25,7 +25,7 @@ class AnimeFilter {
   final bool isAdult;
 
   const AnimeFilter({
-    this.search,
+    super.search,
     required this.sort,
     this.genres,
     this.startDateGreater,
@@ -48,6 +48,11 @@ class AnimeFilter {
     this.hideMyAnime = false,
     this.isAdult = false,
   });
+
+  @override
+  FilterModel reset() {
+    return const AnimeFilter(sort: [Enum$MediaSort.POPULARITY_DESC]);
+  }
 
   @override
   String toString() {

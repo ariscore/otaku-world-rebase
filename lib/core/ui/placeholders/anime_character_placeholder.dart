@@ -5,47 +5,75 @@ class AnimeCharacterPlaceholder extends StatelessWidget {
   const AnimeCharacterPlaceholder({
     super.key,
     required this.asset,
-    required this.heading,
+    this.heading,
     required this.subheading,
+    this.width,
     this.height = 200,
+    this.isError = false,
+    this.onTryAgain,
+    this.actionLabel = 'Try Again',
   });
 
   final String asset;
-  final String heading;
+  final String? heading;
   final String subheading;
+  final double? width;
   final double height;
+  final bool isError;
+  final String actionLabel;
+  final VoidCallback? onTryAgain;
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(
-            height: height,
-            child: Image.asset(
-              asset,
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: width,
+              height: height,
+              child: Image.asset(
+                asset,
+              ),
             ),
-          ),
-          const SizedBox(height: 5),
-          Text(
-            heading,
-            style: Theme.of(context).textTheme.displayMedium,
-          ),
-          const SizedBox(height: 5),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10,
+            if (heading != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: Text(
+                  heading!,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.displayMedium,
+                ),
+              ),
+            const SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+              ),
+              child: Text(
+                subheading,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontFamily: 'Poppins',
+                      color: AppColors.white.withOpacity(0.8),
+                    ),
+              ),
             ),
-            child: Text(
-              subheading,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontFamily: 'Poppins',
-                    color: AppColors.white.withOpacity(0.8),
+            if (isError)
+              Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: TextButton(
+                  onPressed: onTryAgain,
+                  child: Text(
+                    actionLabel,
+                    style: const TextStyle(color: AppColors.sunsetOrange),
                   ),
-            ),
-          ),
-        ],
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

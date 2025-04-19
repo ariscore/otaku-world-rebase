@@ -54,7 +54,7 @@ class Query$GetGenres {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetGenres) || runtimeType != other.runtimeType) {
+    if (other is! Query$GetGenres || runtimeType != other.runtimeType) {
       return false;
     }
     final l$GenreCollection = GenreCollection;

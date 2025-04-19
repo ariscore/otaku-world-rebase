@@ -1,0 +1,28 @@
+mutation SaveReview(
+    $saveReviewId: Int,
+    $mediaId: Int!,
+    $body: String!,
+    $summary: String!,
+    $score: Int!,
+    $private: Boolean
+) {
+    SaveReview(
+        id: $saveReviewId,
+        mediaId: $mediaId,
+        body: $body,
+        summary: $summary,
+        score: $score,
+        private: $private
+    ) {
+        id
+        mediaId
+        body
+        summary
+        score
+        private
+        createdAt
+        updatedAt
+        rating
+        ratingAmount
+    }
+}

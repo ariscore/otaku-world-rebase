@@ -51,7 +51,7 @@ class Variables$Query$GetTopUpcomingAnime {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$GetTopUpcomingAnime) ||
+    if (other is! Variables$Query$GetTopUpcomingAnime ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -160,7 +160,7 @@ class Query$GetTopUpcomingAnime {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetTopUpcomingAnime) ||
+    if (other is! Query$GetTopUpcomingAnime ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -589,7 +589,7 @@ class Query$GetTopUpcomingAnime$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetTopUpcomingAnime$Page) ||
+    if (other is! Query$GetTopUpcomingAnime$Page ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -768,7 +768,7 @@ class Query$GetTopUpcomingAnime$Page$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetTopUpcomingAnime$Page$pageInfo) ||
+    if (other is! Query$GetTopUpcomingAnime$Page$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }

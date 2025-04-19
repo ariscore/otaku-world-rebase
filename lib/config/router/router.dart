@@ -3,6 +3,7 @@ import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/bloc/auth/auth_cubit.dart';
 import 'package:otaku_world/bloc/discover/characters/birthday_characters_bloc.dart';
 import 'package:otaku_world/bloc/discover/characters/most_favorite_characters_bloc.dart';
@@ -18,6 +19,7 @@ import 'package:otaku_world/bloc/profile/my_profile/my_profile_bloc.dart';
 import 'package:otaku_world/bloc/profile/profile/profile_bloc.dart';
 import 'package:otaku_world/bloc/profile/send_message/send_message_cubit.dart';
 import 'package:otaku_world/bloc/recommendations/recommendation_anime_bloc.dart';
+import 'package:otaku_world/bloc/reviews/post_review/post_review_bloc.dart';
 import 'package:otaku_world/bloc/reviews/review_detail/review_detail_bloc.dart';
 import 'package:otaku_world/bloc/routes/redirect_route_cubit.dart';
 import 'package:otaku_world/bloc/search/search_characters/search_characters_bloc.dart';
@@ -57,7 +59,6 @@ import 'package:otaku_world/features/discover/discover_manga/screens/manga_disco
 import 'package:otaku_world/features/discover/discover_characters/screens/characters_discover_screen.dart';
 import 'package:otaku_world/features/discover/discover_staff/screens/staff_discover_screen.dart';
 import 'package:otaku_world/features/discover/discover_studios/screens/studios_discover_screen.dart';
-import 'package:otaku_world/features/discover/screens/discover_characters_wrapper.dart';
 import 'package:otaku_world/features/discover/screens/discover_staff_wrapper.dart';
 import 'package:otaku_world/features/discover/screens/entity_screen.dart';
 import 'package:otaku_world/features/home/screens/home_screen.dart';
@@ -83,9 +84,14 @@ import 'package:otaku_world/features/profile/screens/stats/start_year_distributi
 import 'package:otaku_world/features/profile/screens/stats/status_distribution_screen.dart';
 import 'package:otaku_world/features/profile/screens/user_activities_screen.dart';
 import 'package:otaku_world/features/profile/screens/user_notifications_screen.dart';
+import 'package:otaku_world/features/reviews/screens/preview_review_screen.dart';
 import 'package:otaku_world/features/reviews/screens/review_detail_screen.dart';
 import 'package:otaku_world/features/reviews/screens/reviews_screen.dart';
+import 'package:otaku_world/features/reviews/screens/write_review_screen.dart';
 import 'package:otaku_world/features/search/screens/search_screen.dart';
+import 'package:otaku_world/features/settings/screens/anime_manga_settings_screen.dart';
+import 'package:otaku_world/features/settings/screens/list_settings.dart';
+import 'package:otaku_world/features/settings/screens/notifications_settings_screen.dart';
 import 'package:otaku_world/features/settings/screens/settings_screen.dart';
 import 'package:otaku_world/features/social/screens/activity_screen.dart';
 import 'package:otaku_world/features/social/screens/edit_activity_reply_screen.dart';
@@ -99,6 +105,7 @@ import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/user_stats.graphql.dart';
 import 'package:otaku_world/observers/go_route_observer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../bloc/media_detail/media_detail_bloc.dart';
 import '../../bloc/reviews/reviews/reviews_bloc.dart';
 import '../../bloc/search/search_bloc/search_bloc.dart';
@@ -113,6 +120,7 @@ import '../../features/discover/screens/discover_screen.dart';
 import '../../features/my_list/screens/my_list_screen.dart';
 import '../../features/onboarding/screens/onboarding_screen.dart';
 import '../../features/profile/screens/favorite_manga_slider.dart';
+import '../../features/reviews/screens/post_review_screen.dart';
 import '../../features/social/screens/activity_replies_screen.dart';
 import '../../features/social/screens/social_screen.dart';
 
@@ -125,6 +133,8 @@ part 'home_routes.dart';
 part 'social_routes.dart';
 
 part 'profile_routes.dart';
+
+part 'settings_routes.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorHomeKey = GlobalKey<NavigatorState>();
@@ -149,6 +159,7 @@ final router = GoRouter(
     ...discoverRoutes,
     ...socialRoutes,
     ...profileRoutes,
+    ...settingsRoutes,
     GoRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: RouteConstants.mediaDetail,

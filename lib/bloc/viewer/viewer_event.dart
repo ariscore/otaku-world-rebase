@@ -9,3 +9,10 @@ class LoadViewer extends ViewerEvent {
 
   final GraphQLClient client;
 }
+
+class UpdateUser extends ViewerEvent {
+  const UpdateUser({required this.client, required this.user});
+
+  final GraphQLClient client;
+  final Fragment$Settings user;
+}

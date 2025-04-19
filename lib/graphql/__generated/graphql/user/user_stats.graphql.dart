@@ -58,7 +58,7 @@ class Variables$Fragment$UserStatistics {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Fragment$UserStatistics) ||
+    if (other is! Variables$Fragment$UserStatistics ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -410,8 +410,7 @@ class Fragment$UserStatistics {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Fragment$UserStatistics || runtimeType != other.runtimeType) {
       return false;
     }
     final l$count = count;
@@ -2292,7 +2291,7 @@ class Fragment$UserStatistics$formats {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics$formats) ||
+    if (other is! Fragment$UserStatistics$formats ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2527,7 +2526,7 @@ class Fragment$UserStatistics$statuses {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics$statuses) ||
+    if (other is! Fragment$UserStatistics$statuses ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2759,7 +2758,7 @@ class Fragment$UserStatistics$scores {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics$scores) ||
+    if (other is! Fragment$UserStatistics$scores ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2989,7 +2988,7 @@ class Fragment$UserStatistics$lengths {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics$lengths) ||
+    if (other is! Fragment$UserStatistics$lengths ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3220,7 +3219,7 @@ class Fragment$UserStatistics$releaseYears {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics$releaseYears) ||
+    if (other is! Fragment$UserStatistics$releaseYears ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3454,7 +3453,7 @@ class Fragment$UserStatistics$startYears {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics$startYears) ||
+    if (other is! Fragment$UserStatistics$startYears ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3686,7 +3685,7 @@ class Fragment$UserStatistics$genres {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics$genres) ||
+    if (other is! Fragment$UserStatistics$genres ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3919,7 +3918,7 @@ class Fragment$UserStatistics$tags {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics$tags) ||
+    if (other is! Fragment$UserStatistics$tags ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4127,7 +4126,7 @@ class Fragment$UserStatistics$tags$tag {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics$tags$tag) ||
+    if (other is! Fragment$UserStatistics$tags$tag ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4307,7 +4306,7 @@ class Fragment$UserStatistics$countries {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics$countries) ||
+    if (other is! Fragment$UserStatistics$countries ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4552,7 +4551,7 @@ class Fragment$UserStatistics$voiceActors {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics$voiceActors) ||
+    if (other is! Fragment$UserStatistics$voiceActors ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4797,7 +4796,7 @@ class Fragment$UserStatistics$voiceActors$voiceActor {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics$voiceActors$voiceActor) ||
+    if (other is! Fragment$UserStatistics$voiceActors$voiceActor ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5032,7 +5031,7 @@ class Fragment$UserStatistics$voiceActors$voiceActor$name {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics$voiceActors$voiceActor$name) ||
+    if (other is! Fragment$UserStatistics$voiceActors$voiceActor$name ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5234,7 +5233,7 @@ class Fragment$UserStatistics$voiceActors$voiceActor$image {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics$voiceActors$voiceActor$image) ||
+    if (other is! Fragment$UserStatistics$voiceActors$voiceActor$image ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5414,7 +5413,7 @@ class Fragment$UserStatistics$staff {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics$staff) ||
+    if (other is! Fragment$UserStatistics$staff ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5638,7 +5637,7 @@ class Fragment$UserStatistics$staff$staff {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics$staff$staff) ||
+    if (other is! Fragment$UserStatistics$staff$staff ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5869,7 +5868,7 @@ class Fragment$UserStatistics$staff$staff$name {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics$staff$staff$name) ||
+    if (other is! Fragment$UserStatistics$staff$staff$name ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6063,7 +6062,7 @@ class Fragment$UserStatistics$staff$staff$image {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics$staff$staff$image) ||
+    if (other is! Fragment$UserStatistics$staff$staff$image ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6235,7 +6234,7 @@ class Fragment$UserStatistics$studios {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics$studios) ||
+    if (other is! Fragment$UserStatistics$studios ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6453,7 +6452,7 @@ class Fragment$UserStatistics$studios$studio {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$UserStatistics$studios$studio) ||
+    if (other is! Fragment$UserStatistics$studios$studio ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6619,7 +6618,7 @@ class Variables$Query$GetUserStats {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$GetUserStats) ||
+    if (other is! Variables$Query$GetUserStats ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6766,7 +6765,7 @@ class Query$GetUserStats {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetUserStats) || runtimeType != other.runtimeType) {
+    if (other is! Query$GetUserStats || runtimeType != other.runtimeType) {
       return false;
     }
     final l$User = User;
@@ -7199,8 +7198,7 @@ class Query$GetUserStats$User {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetUserStats$User) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Query$GetUserStats$User || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -7369,7 +7367,7 @@ class Query$GetUserStats$User$statistics {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetUserStats$User$statistics) ||
+    if (other is! Query$GetUserStats$User$statistics ||
         runtimeType != other.runtimeType) {
       return false;
     }

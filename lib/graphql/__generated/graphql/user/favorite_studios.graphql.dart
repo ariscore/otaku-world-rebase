@@ -63,7 +63,7 @@ class Variables$Query$FavoriteStudios {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$FavoriteStudios) ||
+    if (other is! Variables$Query$FavoriteStudios ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -195,7 +195,7 @@ class Query$FavoriteStudios {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FavoriteStudios) || runtimeType != other.runtimeType) {
+    if (other is! Query$FavoriteStudios || runtimeType != other.runtimeType) {
       return false;
     }
     final l$User = User;
@@ -624,7 +624,7 @@ class Query$FavoriteStudios$User {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FavoriteStudios$User) ||
+    if (other is! Query$FavoriteStudios$User ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -765,7 +765,7 @@ class Query$FavoriteStudios$User$favourites {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FavoriteStudios$User$favourites) ||
+    if (other is! Query$FavoriteStudios$User$favourites ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -922,7 +922,7 @@ class Query$FavoriteStudios$User$favourites$studios {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FavoriteStudios$User$favourites$studios) ||
+    if (other is! Query$FavoriteStudios$User$favourites$studios ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1112,7 +1112,7 @@ class Query$FavoriteStudios$User$favourites$studios$pageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FavoriteStudios$User$favourites$studios$pageInfo) ||
+    if (other is! Query$FavoriteStudios$User$favourites$studios$pageInfo ||
         runtimeType != other.runtimeType) {
       return false;
     }

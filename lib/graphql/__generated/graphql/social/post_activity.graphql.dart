@@ -63,7 +63,7 @@ class Variables$Mutation$PostActivity {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$PostActivity) ||
+    if (other is! Variables$Mutation$PostActivity ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -195,7 +195,7 @@ class Mutation$PostActivity {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$PostActivity) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$PostActivity || runtimeType != other.runtimeType) {
       return false;
     }
     final l$SaveTextActivity = SaveTextActivity;
