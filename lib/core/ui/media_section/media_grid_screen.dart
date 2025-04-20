@@ -137,12 +137,19 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
           return const Text('Unknown State');
         },
       ),
-      floatingActionButton: ScrollToTopFAB(controller: scrollController, tag: '',),
+      floatingActionButton: ScrollToTopFAB(
+        controller: scrollController,
+        tag: '',
+      ),
     );
   }
 
   Widget _buildMediaCard(
-      BuildContext context, dynamic media, Size size, int index) {
+    BuildContext context,
+    dynamic media,
+    Size size,
+    int index,
+  ) {
     if (media == null) return const SizedBox();
 
     return Column(

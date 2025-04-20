@@ -1,11 +1,12 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/graphql/__generated/graphql/character-detail/character_media.graphql.dart';
+import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 
 import '../../../graphql/__generated/graphql/schema.graphql.dart';
 
-class CharacterMediaBloc extends PaginatedDataBloc<Query$getCharacterMedia,
-    Query$getCharacterMedia$Character$media$edges> {
+class CharacterMediaBloc
+    extends PaginatedDataBloc<Query$getCharacterMedia, Fragment$MediaShort> {
   final int characterId;
   Enum$MediaSort mediaSort = Enum$MediaSort.POPULARITY_DESC;
   bool isOnMyList = false;
@@ -30,6 +31,7 @@ class CharacterMediaBloc extends PaginatedDataBloc<Query$getCharacterMedia,
   Future<QueryResult<Query$getCharacterMedia>> loadData(GraphQLClient client) {
     return client.query$getCharacterMedia(
       Options$Query$getCharacterMedia(
+        fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$getCharacterMedia(
           characterId: characterId,
           onList: isOnMyList,
@@ -37,6 +39,7 @@ class CharacterMediaBloc extends PaginatedDataBloc<Query$getCharacterMedia,
           sort: [mediaSort],
           type: mediaType,
         ),
+        cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
       ),
     );
   }
@@ -44,9 +47,10 @@ class CharacterMediaBloc extends PaginatedDataBloc<Query$getCharacterMedia,
   @override
   void processData(QueryResult<Query$getCharacterMedia> response) {
     final data = response.parsedData!;
-
     hasNextPage = data.Character?.media?.pageInfo?.hasNextPage ?? false;
     page++;
-    list.addAll(data.Character!.media!.edges!);
+    list.addAll(data.Character!.media!.edges!.map(
+      (e) => e?.node,
+    ));
   }
 }

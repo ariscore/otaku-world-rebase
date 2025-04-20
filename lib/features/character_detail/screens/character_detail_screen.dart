@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:otaku_world/bloc/charcter_detail/media/character_media_bloc.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
+import 'package:otaku_world/core/ui/media_section/media_grid_list.dart';
 import 'package:otaku_world/features/character_detail/screens/widgets/name_widget.dart';
 import 'package:otaku_world/features/media_detail/tabs/overview/widgets/description.dart';
 import 'package:otaku_world/features/media_detail/widgets/simple_loading.dart';
@@ -149,6 +151,18 @@ class CharacterDetailScreen extends StatelessWidget {
                         ),
                       ]
                     ],
+                    fifteenSpacing,
+                    const Text(
+                      'Media',
+                      style: AppTextStyles.titleSectionStyle,
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const MediaGridList<CharacterMediaBloc>(
+                      mediaType: Enum$MediaType.ANIME,
+                      crossAxisCount: 3,
+                    ),
                   ],
                 ),
               );

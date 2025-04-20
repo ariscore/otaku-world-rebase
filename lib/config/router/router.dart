@@ -5,11 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/auth/auth_cubit.dart';
 import 'package:otaku_world/bloc/charcter_detail/character_detail_bloc.dart';
+import 'package:otaku_world/bloc/charcter_detail/media/character_media_bloc.dart';
 import 'package:otaku_world/bloc/discover/characters/birthday_characters_bloc.dart';
 import 'package:otaku_world/bloc/discover/characters/most_favorite_characters_bloc.dart';
 import 'package:otaku_world/bloc/discover/staff/birthday_staff_bloc.dart';
 import 'package:otaku_world/bloc/discover/staff/most_favorite_staff_bloc.dart';
 import 'package:otaku_world/bloc/discover/studios/most_favorite_studios_bloc.dart';
+import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/bloc/profile/favorite_anime/favorite_anime_bloc.dart';
 import 'package:otaku_world/bloc/profile/favorite_characters/favorite_characters_bloc.dart';
 import 'package:otaku_world/bloc/profile/favorite_manga/favorite_manga_bloc.dart';
@@ -226,13 +228,26 @@ final router = GoRouter(
                     as GraphqlClientInitialized)
                 .client;
             return CharacterDetailBloc()
-              ..add(LoadCharacterDetail(
-                id: characterId,
-                client: client,
-              ));
+              ..add(
+                LoadCharacterDetail(
+                  id: characterId,
+                  client: client,
+                ),
+              );
           },
-          child: CharacterDetailScreen(
-            characterId: characterId,
+          child: BlocProvider(
+            create: (context) {
+              final client = (context.read<GraphqlClientCubit>().state
+                      as GraphqlClientInitialized)
+                  .client;
+              return CharacterMediaBloc(characterId: characterId)
+                ..add(
+                  LoadData(client),
+                );
+            },
+            child: CharacterDetailScreen(
+              characterId: characterId,
+            ),
           ),
         );
       },
