@@ -125,7 +125,7 @@ class CharacterDetailScreen extends StatelessWidget {
                         InfoData(
                           iconName: Assets.iconsFavourite,
                           separateWidth: 3,
-                          info: character.favourites.toString() ?? '0',
+                          info: character.favourites.toString(),
                           mainAxisAlignment: MainAxisAlignment.center,
                         ),
                       ],
