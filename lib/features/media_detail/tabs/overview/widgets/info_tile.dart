@@ -6,11 +6,13 @@ class InfoTile extends StatelessWidget {
   const InfoTile({
     super.key,
     required this.title,
-    required this.data,
+    this.data,
+    this.dataWidget,
   });
 
   final String title;
-  final String data;
+  final String? data;
+  final Widget? dataWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +27,17 @@ class InfoTile extends StatelessWidget {
             style: AppTextStyles.infoTitleDataStyle,
           ),
         ),
-        Expanded(
-          child: Text(
-            data,
-            style: AppTextStyles.infoDataStyle,
+        if (data != null)
+          Expanded(
+            child: Text(
+              data!,
+              style: AppTextStyles.infoDataStyle,
+            ),
           ),
-        ),
+        if (dataWidget != null)
+          Expanded(
+            child: dataWidget!,
+          ),
       ],
     );
   }

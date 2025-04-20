@@ -90,4 +90,7 @@ class RouteConstants {
   static const trendingMangaSlider = '/trending-manga-slider';
   static const recommendedManga = '/recommended-manga';
   static const recommendedMangaSlider = '/recommended-manga-slider';
+
+  static const characterDetail = '/character-detail';
+
 }

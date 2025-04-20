@@ -754,7 +754,7 @@ class Mutation$SaveReview$Widget
         );
 }
 
-class   Mutation$SaveReview$SaveReview {
+class Mutation$SaveReview$SaveReview {
   Mutation$SaveReview$SaveReview({
     required this.id,
     required this.mediaId,

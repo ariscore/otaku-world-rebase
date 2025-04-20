@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:otaku_world/core/ui/markdown/markdown.dart';
 import 'package:otaku_world/utils/extensions.dart';
+import 'package:otaku_world/utils/ui_utils.dart';
 
 class Description extends StatelessWidget {
   const Description({
@@ -19,24 +20,7 @@ class Description extends StatelessWidget {
         left: 10,
         right: 10,
       ),
-      decoration: ShapeDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment(0.00, -1.00),
-          end: Alignment(0, 1),
-          colors: [Color(0xFF263749), Color(0xFF404040)],
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        shadows: const [
-          BoxShadow(
-            color: Color(0x3F000000),
-            blurRadius: 4,
-            offset: Offset(0, 4),
-            spreadRadius: 0,
-          )
-        ],
-      ),
+      decoration: UIUtils.getContainerDecoration(),
       child: Markdown(
         data: description?.checkIfEmpty() ?? '*No Description*',
       ),
