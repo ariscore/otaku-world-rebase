@@ -1,7 +1,7 @@
 query getStudioMedia($id:Int, $sort:[MediaSort], $onList:Boolean $page:Int) {
     Studio(id:$id) {
         id
-        media(page:$page, sort:$sort, onList:$onList) {
+        media(page:$page, sort:$sort, onList:$onList, perPage: 24) {
             edges {
                 node {
                 ...MediaShort

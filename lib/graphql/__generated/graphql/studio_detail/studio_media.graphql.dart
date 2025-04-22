@@ -441,6 +441,10 @@ const documentNodeQuerygetStudioMedia = DocumentNode(definitions: [
                 name: NameNode(value: 'onList'),
                 value: VariableNode(name: NameNode(value: 'onList')),
               ),
+              ArgumentNode(
+                name: NameNode(value: 'perPage'),
+                value: IntValueNode(value: '24'),
+              ),
             ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [

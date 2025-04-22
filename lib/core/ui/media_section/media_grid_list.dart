@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
+import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/paginated_data/paginated_data_bloc.dart';
@@ -14,39 +15,20 @@ import '../../../utils/navigation_helper.dart';
 import '../images/cover_image.dart';
 import '../placeholders/poster_placeholder.dart';
 
-class MediaGridList<B extends PaginatedDataBloc> extends HookWidget {
+class MediaGridList<B extends PaginatedDataBloc> extends StatelessWidget {
   const MediaGridList({
     required this.mediaType,
     required this.crossAxisCount,
+    this.isNeedToShowFormatAndYear = false,
     super.key,
   });
 
   final int crossAxisCount;
   final Enum$MediaType mediaType;
+  final bool isNeedToShowFormatAndYear;
 
   @override
   Widget build(BuildContext context) {
-    final scrollController = useScrollController();
-
-    useEffect(() {
-      scrollController.addListener(() {
-        final maxScroll = scrollController.position.maxScrollExtent;
-        final currentScroll = scrollController.position.pixels;
-
-        if (currentScroll == maxScroll) {
-          final bloc = context.read<B>();
-          final hasNextPage = (bloc.state as PaginatedDataLoaded).hasNextPage;
-          if (hasNextPage) {
-            final client = (context.read<GraphqlClientCubit>().state
-                    as GraphqlClientInitialized)
-                .client;
-            bloc.add(LoadData(client));
-          }
-        }
-      });
-      return null;
-    }, const []);
-
     return BlocBuilder<B, PaginatedDataState>(
       builder: (context, state) {
         if (state is PaginatedDataInitial || state is PaginatedDataLoading) {
@@ -55,14 +37,13 @@ class MediaGridList<B extends PaginatedDataBloc> extends HookWidget {
           return Column(
             children: [
               GridView.builder(
-                controller: scrollController,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 150,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
-                  childAspectRatio: 0.5556,
+                  childAspectRatio: isNeedToShowFormatAndYear ? 0.5 : 0.5556,
                 ),
                 itemCount: state.list.length,
                 itemBuilder: (context, index) {
@@ -101,44 +82,42 @@ class MediaGridList<B extends PaginatedDataBloc> extends HookWidget {
 
   Widget _buildMediaCard(
     BuildContext context,
-    dynamic media,
+    Fragment$MediaShort? media,
     Size size,
   ) {
     if (media == null) return const SizedBox();
 
     return Column(
+      mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AspectRatio(
-          aspectRatio: 0.70005,
-          child: ClipRRect(
-            borderRadius: (mediaType == Enum$MediaType.ANIME)
-                ? BorderRadius.circular(15)
-                : BorderRadius.circular(5),
-            child: Stack(
-              children: [
-                GestureDetector(
-                  onTap: () => NavigationHelper.goToMediaDetailScreen(
-                    context: context,
-                    mediaId: media.id,
-                  ),
-                  child: _buildMediaPoster(
-                    media.coverImage?.large,
-                    media?.type ?? Enum$MediaType.$unknown,
-                    size,
-                  ),
+        ClipRRect(
+          borderRadius: (mediaType == Enum$MediaType.ANIME)
+              ? BorderRadius.circular(15)
+              : BorderRadius.circular(5),
+          child: Stack(
+            children: [
+              GestureDetector(
+                onTap: () => NavigationHelper.goToMediaDetailScreen(
+                  context: context,
+                  mediaId: media.id,
                 ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: _buildMeanScore(
-                    context,
-                    media.meanScore,
-                  ),
+                child: _buildMediaPoster(
+                  media.coverImage?.large,
+                  media.type ?? Enum$MediaType.$unknown,
+                  size,
                 ),
-              ],
-            ),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: _buildMeanScore(
+                  context,
+                  media.meanScore,
+                ),
+              ),
+            ],
           ),
         ),
         const SizedBox(
@@ -147,7 +126,7 @@ class MediaGridList<B extends PaginatedDataBloc> extends HookWidget {
         // Manga title
         SizedBox(
           child: Text(
-            media.title.userPreferred,
+            media.title!.userPreferred!,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -155,6 +134,23 @@ class MediaGridList<B extends PaginatedDataBloc> extends HookWidget {
                 ),
           ),
         ),
+
+        if (isNeedToShowFormatAndYear) ...[
+          const SizedBox(
+            height: 5,
+          ),
+          // Manga title
+          SizedBox(
+            child: Text(
+              '${toJson$Enum$MediaFormat(media.format ?? Enum$MediaFormat.$unknown).toString().capitalize()},${media.startDate?.year ?? ''}',
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontFamily: 'Roboto-Condensed',
+                  ),
+            ),
+          ),
+        ],
       ],
     );
   }

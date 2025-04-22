@@ -479,7 +479,7 @@ const documentNodeQuerygetCharacterMedia = DocumentNode(definitions: [
               ),
               ArgumentNode(
                 name: NameNode(value: 'perPage'),
-                value: IntValueNode(value: '30'),
+                value: IntValueNode(value: '24'),
               ),
             ],
             directives: [],

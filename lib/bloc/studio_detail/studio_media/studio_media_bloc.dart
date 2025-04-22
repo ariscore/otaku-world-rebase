@@ -1,3 +1,4 @@
+
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
@@ -45,8 +46,10 @@ class StudioMediaBloc
     final data = response.parsedData!;
     hasNextPage = data.Studio?.media?.pageInfo?.hasNextPage ?? false;
     page++;
-    list.addAll(data.Studio!.media!.edges!.map(
-      (e) => e?.node,
-    ));
+    list.addAll(
+      data.Studio!.media!.edges!.map(
+        (e) => e?.node,
+      ),
+    );
   }
 }
