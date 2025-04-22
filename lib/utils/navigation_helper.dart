@@ -35,6 +35,15 @@ class NavigationHelper {
     );
   }
 
+  static void goToStudioDetailScreen({
+    required BuildContext context,
+    required int studioId,
+  }) {
+    context.push(
+      '${RouteConstants.studioDetail}?id=$studioId',
+    );
+  }
+
   static void goToProfileScreen({
     required BuildContext context,
     required int userId,

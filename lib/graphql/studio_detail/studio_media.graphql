@@ -1,0 +1,16 @@
+query getStudioMedia($id:Int, $sort:[MediaSort], $onList:Boolean $page:Int) {
+    Studio(id:$id) {
+        id
+        media(page:$page, sort:$sort, onList:$onList) {
+            edges {
+                node {
+                ...MediaShort
+                }
+                isMainStudio
+            }
+            pageInfo {
+                ...PageInfo
+            }
+        }
+    }
+}

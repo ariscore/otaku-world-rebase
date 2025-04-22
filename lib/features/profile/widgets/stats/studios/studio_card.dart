@@ -41,111 +41,119 @@ class _StudioCardState extends State<StudioCard>
         ..add(
           LoadData(client),
         ),
-      child: Container(
-        margin: const EdgeInsets.symmetric(
-          // horizontal: 10,
-          vertical: 5,
-        ),
-        padding: const EdgeInsets.symmetric(
-          horizontal: 15,
-          vertical: 20,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          gradient: AppColors.secondaryGradient,
-        ),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  widget.studio!.studio?.name ?? 'Unknown',
-                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                        fontFamily: 'Poppins',
-                      ),
-                ),
-                Text(
-                  '#${widget.index}',
-                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                        fontFamily: 'Poppins',
-                      ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildStat(context,
-                    count: widget.studio!.count, label: 'Count'),
-                _buildSeparator(),
-                _buildStat(
-                  context,
-                  count: FormattingUtils.formatMinutes(
-                    widget.studio!.minutesWatched,
+      child: InkWell(
+        onTap: () {
+          NavigationHelper.goToStudioDetailScreen(
+            context: context,
+            studioId: widget.studio!.studio!.id,
+          );
+        },
+        child: Container(
+          margin: const EdgeInsets.symmetric(
+            // horizontal: 10,
+            vertical: 5,
+          ),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 15,
+            vertical: 20,
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            gradient: AppColors.secondaryGradient,
+          ),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    widget.studio!.studio?.name ?? 'Unknown',
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                          fontFamily: 'Poppins',
+                        ),
                   ),
-                  label: 'Time Watched',
-                ),
-                _buildSeparator(),
-                _buildStat(
-                  context,
-                  count: '${formatDouble(widget.studio!.meanScore)}%',
-                  label: 'Mean Score',
-                ),
-              ],
-            ),
-            BlocBuilder<MediaPostersBloc, PaginatedDataState>(
-              builder: (context, state) {
-                if (state is PaginatedDataLoaded) {
-                  return Container(
-                    height: 120,
-                    margin: const EdgeInsets.only(top: 10),
-                    child: ListView.builder(
-                      clipBehavior: Clip.none,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        final poster =
-                            state.list[index] as Fragment$MediaPoster;
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: GestureDetector(
-                            onTap: () {
-                              NavigationHelper.goToMediaDetailScreen(
-                                context: context,
-                                mediaId: poster.id,
-                              );
-                            },
-                            child: AspectRatio(
-                              aspectRatio: 70 / 100,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: CImage(
-                                  imageUrl: poster.coverImage?.medium ?? '',
-                                  placeholder: (context, url) {
-                                    return Container(
-                                      padding: const EdgeInsets.all(10),
-                                      color: AppColors.darkGray,
-                                      child: SvgPicture.asset(
-                                        Assets.assetsLogoBw,
-                                      ),
-                                    );
-                                  },
+                  Text(
+                    '#${widget.index}',
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                          fontFamily: 'Poppins',
+                        ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildStat(context,
+                      count: widget.studio!.count, label: 'Count'),
+                  _buildSeparator(),
+                  _buildStat(
+                    context,
+                    count: FormattingUtils.formatMinutes(
+                      widget.studio!.minutesWatched,
+                    ),
+                    label: 'Time Watched',
+                  ),
+                  _buildSeparator(),
+                  _buildStat(
+                    context,
+                    count: '${formatDouble(widget.studio!.meanScore)}%',
+                    label: 'Mean Score',
+                  ),
+                ],
+              ),
+              BlocBuilder<MediaPostersBloc, PaginatedDataState>(
+                builder: (context, state) {
+                  if (state is PaginatedDataLoaded) {
+                    return Container(
+                      height: 120,
+                      margin: const EdgeInsets.only(top: 10),
+                      child: ListView.builder(
+                        clipBehavior: Clip.none,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          final poster =
+                              state.list[index] as Fragment$MediaPoster;
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: GestureDetector(
+                              onTap: () {
+                                NavigationHelper.goToMediaDetailScreen(
+                                  context: context,
+                                  mediaId: poster.id,
+                                );
+                              },
+                              child: AspectRatio(
+                                aspectRatio: 70 / 100,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: CImage(
+                                    imageUrl: poster.coverImage?.medium ?? '',
+                                    placeholder: (context, url) {
+                                      return Container(
+                                        padding: const EdgeInsets.all(10),
+                                        color: AppColors.darkGray,
+                                        child: SvgPicture.asset(
+                                          Assets.assetsLogoBw,
+                                        ),
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        );
-                      },
-                      itemCount: state.list.length,
-                    ),
-                  );
-                } else {
-                  return const SizedBox(height: 130);
-                }
-              },
-            ),
-          ],
+                          );
+                        },
+                        itemCount: state.list.length,
+                      ),
+                    );
+                  } else {
+                    return const SizedBox(height: 130);
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

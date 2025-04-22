@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:otaku_world/features/discover/widgets/entity_card.dart';
 
 import '../../../graphql/__generated/graphql/fragments.graphql.dart';
+import '../../../utils/navigation_helper.dart';
 
 class EntityGrid<E> extends StatelessWidget {
   const EntityGrid({
@@ -90,6 +91,12 @@ class EntityGrid<E> extends StatelessWidget {
                         title: studio.name,
                         imageUrl: poster,
                         favorites: studio.favourites,
+                        onTap: () {
+                          NavigationHelper.goToStudioDetailScreen(
+                            context: context,
+                            studioId: studio.id,
+                          );
+                        },
                       );
                     } else {
                       return const SizedBox();

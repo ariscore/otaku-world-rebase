@@ -13,17 +13,19 @@ class EntityCard extends StatelessWidget {
     required this.imageUrl,
     required this.favorites,
     this.rightMargin = 0,
+    this.onTap,
   });
 
   final String title;
   final String? imageUrl;
   final int? favorites;
   final double rightMargin;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         margin: EdgeInsets.only(right: rightMargin),
         child: Column(
