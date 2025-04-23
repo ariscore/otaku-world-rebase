@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:otaku_world/bloc/studio_detail/studio_detail_bloc.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/media_section/media_grid_list.dart';
+import 'package:otaku_world/core/ui/widgets/media_filter_widget.dart';
 import 'package:otaku_world/features/media_detail/widgets/simple_loading.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/utils/extensions.dart';
@@ -37,13 +38,14 @@ class StudioDetailScreen extends HookWidget {
   Widget build(BuildContext context) {
     final scrollController = useScrollController();
 
+    final bloc = context.read<StudioMediaBloc>();
+
     useEffect(() {
       scrollController.addListener(() {
         final maxScroll = scrollController.position.maxScrollExtent;
         final currentScroll = scrollController.position.pixels;
 
         if (currentScroll == maxScroll) {
-          final bloc = context.read<StudioMediaBloc>();
           final hasNextPage = (bloc.state as PaginatedDataLoaded).hasNextPage;
           if (hasNextPage) {
             final client = (context.read<GraphqlClientCubit>().state
@@ -106,6 +108,19 @@ class StudioDetailScreen extends HookWidget {
                           separateWidth: 3,
                           info: studio.favourites.toString(),
                           mainAxisAlignment: MainAxisAlignment.center,
+                        ),
+                        fifteenSpacing,
+                        MediaFilterWidget(
+                          mediaSortNotifier: bloc.mediaSortNotifier,
+                          isOnMyListNotifier: bloc.isOnMyList,
+                          onApplyFilters: () {
+                            final client = (context
+                                    .read<GraphqlClientCubit>()
+                                    .state as GraphqlClientInitialized)
+                                .client;
+                            bloc.applyFilter(client: client);
+                          },
+                          bloc: bloc,
                         ),
                       ],
                     ),

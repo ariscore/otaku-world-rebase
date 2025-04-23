@@ -172,3 +172,29 @@ extension MediaType on Enum$MediaType {
     }
   }
 }
+
+extension MediaSortExtension on Enum$MediaSort {
+  String displayTitle() {
+    switch (this) {
+      case Enum$MediaSort.POPULARITY_DESC:
+        return "Most Popular";
+      case Enum$MediaSort.START_DATE_DESC:
+        return "Newest";
+      case Enum$MediaSort.START_DATE:
+        return "Oldest";
+      case Enum$MediaSort.FAVOURITES_DESC:
+        return "Most Favorites";
+      case Enum$MediaSort.SCORE_DESC:
+        return "Highest Rating";
+      case Enum$MediaSort.TITLE_ROMAJI_DESC:
+        return "Title (Romaji) A-Z";
+      case Enum$MediaSort.TITLE_ENGLISH_DESC:
+        return "Title (English) A-Z";
+      case Enum$MediaSort.TITLE_NATIVE_DESC:
+        return "Title (Native) ";
+      case Enum$MediaSort.$unknown:
+      default:
+        return "Unknown";
+    }
+  }
+}
