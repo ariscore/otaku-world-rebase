@@ -98,4 +98,17 @@ class UIUtils {
       ],
     );
   }
+
+  static BoxDecoration getDetailScreenDecoration() {
+    return const BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment(0.50, -0.00),
+        end: Alignment(0.50, 1.00),
+        colors: [
+          AppColors.japaneseIndigo,
+          AppColors.raisinBlack,
+        ],
+      ),
+    );
+  }
 }

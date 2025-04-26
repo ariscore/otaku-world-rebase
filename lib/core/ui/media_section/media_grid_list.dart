@@ -38,7 +38,7 @@ class MediaGridList<B extends PaginatedDataBloc> extends StatelessWidget {
             children: [
               GridView.builder(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 150,
                   crossAxisSpacing: 10,
