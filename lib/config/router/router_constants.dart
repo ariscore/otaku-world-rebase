@@ -82,7 +82,7 @@ class RouteConstants {
   static const postReview = '/post-review';
   static const writeReview = '/write-review';
   static const previewReview = '/preview-review';
-  
+
   static const calendar = '/calendar';
   static const search = '/search';
   static const trendingAnime = '/trending-anime';
@@ -93,4 +93,7 @@ class RouteConstants {
   static const trendingMangaSlider = '/trending-manga-slider';
   static const recommendedManga = '/recommended-manga';
   static const recommendedMangaSlider = '/recommended-manga-slider';
+
+  static const characterDetail = '/character-detail';
+  static const studioDetail = '/studio-detail';
 }

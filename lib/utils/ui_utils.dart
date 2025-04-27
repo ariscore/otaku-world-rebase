@@ -81,4 +81,38 @@ class UIUtils {
       },
     );
   }
+
+  static ShapeDecoration getContainerDecoration() {
+    return ShapeDecoration(
+      gradient: const LinearGradient(
+        begin: Alignment(0.00, -1.00),
+        end: Alignment(0, 1),
+        colors: [AppColors.japaneseIndigo, AppColors.blackOlive],
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      shadows: const [
+        BoxShadow(
+          color: Color(0x3F000000),
+          blurRadius: 4,
+          offset: Offset(0, 4),
+          spreadRadius: 0,
+        )
+      ],
+    );
+  }
+
+  static BoxDecoration getDetailScreenDecoration() {
+    return const BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment(0.50, -0.00),
+        end: Alignment(0.50, 1.00),
+        colors: [
+          AppColors.japaneseIndigo,
+          AppColors.raisinBlack,
+        ],
+      ),
+    );
+  }
 }

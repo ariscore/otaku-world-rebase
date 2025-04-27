@@ -9,16 +9,18 @@ class InfoData extends StatelessWidget {
     required this.iconName,
     required this.separateWidth,
     required this.info,
+    this.mainAxisAlignment = MainAxisAlignment.end,
   });
 
   final String iconName;
   final double separateWidth;
   final String info;
+  final MainAxisAlignment mainAxisAlignment;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: mainAxisAlignment,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SvgPicture.asset(
