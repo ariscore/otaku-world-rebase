@@ -44,8 +44,3 @@ class ClearSearch extends MediaListEvent {}
 
 class RemoveFilters extends MediaListEvent {}
 
-class UpdateListSettings extends MediaListEvent {
-  const UpdateListSettings({required this.options});
-
-  final Fragment$MediaListOptions? options;
-}

@@ -17,8 +17,6 @@ import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/media_detail/characters/characters_bloc.dart';
 import '../../../bloc/media_detail/media_detail_bloc.dart';
 import '../../../bloc/viewer/viewer_bloc.dart';
-import '../../../generated/assets.dart';
-import '../../../graphql/__generated/graphql/schema.graphql.dart';
 import '../../../theme/colors.dart';
 import '../tabs/characters/characters.dart' as ch;
 import '../tabs/overview/overview.dart';

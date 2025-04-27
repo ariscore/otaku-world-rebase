@@ -40,7 +40,6 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
     on<RemoveListEntry>(_onRemoveListEntry);
     on<ClearSearch>(_onClearSearch);
     on<RemoveFilters>(_onRemoveFilters);
-    on<UpdateListSettings>(_onUpdateListSettings);
   }
 
   final Enum$MediaType type;
@@ -448,15 +447,6 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
     final collection =
         searchApplied ? _masterCollection : _applyFilters(_masterCollection);
     emit(MediaListLoaded(listCollection: collection));
-  }
-
-  void _onUpdateListSettings(UpdateListSettings event, Emitter<MediaListState> emit,) {
-    if (state is! MediaListLoaded) return;
-
-    options = event.options;
-    log('List options updated: $options');
-    // TODO: Update ui also because change in score format
-    emit(MediaListLoaded(listCollection: (state as MediaListLoaded).listCollection),);
   }
 
   void setUserId(int userId) {

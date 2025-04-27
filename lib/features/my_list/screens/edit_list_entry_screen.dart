@@ -20,7 +20,6 @@ import 'package:otaku_world/core/ui/formatters/comma_blocking_formatter.dart';
 import 'package:otaku_world/features/my_list/model/save_entry_model.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
-import 'package:otaku_world/graphql/__generated/graphql/list/media_list.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
