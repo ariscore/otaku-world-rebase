@@ -3,13 +3,15 @@ import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/bloc/auth/auth_cubit.dart';
+import 'package:otaku_world/bloc/charcter_detail/character_detail_bloc.dart';
+import 'package:otaku_world/bloc/charcter_detail/media/character_media_bloc.dart';
 import 'package:otaku_world/bloc/discover/characters/birthday_characters_bloc.dart';
 import 'package:otaku_world/bloc/discover/characters/most_favorite_characters_bloc.dart';
 import 'package:otaku_world/bloc/discover/staff/birthday_staff_bloc.dart';
 import 'package:otaku_world/bloc/discover/staff/most_favorite_staff_bloc.dart';
 import 'package:otaku_world/bloc/discover/studios/most_favorite_studios_bloc.dart';
+import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/bloc/profile/favorite_anime/favorite_anime_bloc.dart';
 import 'package:otaku_world/bloc/profile/favorite_characters/favorite_characters_bloc.dart';
 import 'package:otaku_world/bloc/profile/favorite_manga/favorite_manga_bloc.dart';
@@ -31,6 +33,8 @@ import 'package:otaku_world/bloc/social/edit_message_activity/edit_message_activ
 import 'package:otaku_world/bloc/social/edit_text_activity/edit_text_activity_cubit.dart';
 import 'package:otaku_world/bloc/social/post_activity/post_activity_cubit.dart';
 import 'package:otaku_world/bloc/social/reply_activity/reply_activity_cubit.dart';
+import 'package:otaku_world/bloc/studio_detail/studio_detail_bloc.dart';
+import 'package:otaku_world/bloc/studio_detail/studio_media/studio_media_bloc.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/routes/slide_transition_route.dart';
 import 'package:otaku_world/core/routes/slide_transition_shell_route.dart';
@@ -51,12 +55,13 @@ import 'package:otaku_world/features/anime_lists/view_more_lists/top_manga.dart'
 import 'package:otaku_world/features/anime_lists/view_more_lists/top_upcoming_anime_screen.dart';
 import 'package:otaku_world/features/auth/screens/login_screen.dart';
 import 'package:otaku_world/features/calendar/screens/calendar_screen.dart';
+import 'package:otaku_world/features/character_detail/screens/character_detail_screen.dart';
 import 'package:otaku_world/features/discover/discover_anime/screens/anime_discover_screen.dart';
 import 'package:otaku_world/features/discover/discover_anime/screens/anime_slider_screen.dart';
 import 'package:otaku_world/features/discover/discover_anime/screens/filter_anime_screen.dart';
+import 'package:otaku_world/features/discover/discover_characters/screens/characters_discover_screen.dart';
 import 'package:otaku_world/features/discover/discover_manga/screens/filter_manga_screen.dart';
 import 'package:otaku_world/features/discover/discover_manga/screens/manga_discover_screen.dart';
-import 'package:otaku_world/features/discover/discover_characters/screens/characters_discover_screen.dart';
 import 'package:otaku_world/features/discover/discover_staff/screens/staff_discover_screen.dart';
 import 'package:otaku_world/features/discover/discover_studios/screens/studios_discover_screen.dart';
 import 'package:otaku_world/features/discover/screens/discover_staff_wrapper.dart';
@@ -100,11 +105,13 @@ import 'package:otaku_world/features/social/screens/edit_text_activity_screen.da
 import 'package:otaku_world/features/social/screens/post_actvity_screen.dart';
 import 'package:otaku_world/features/social/screens/reply_activity_screen.dart';
 import 'package:otaku_world/features/splash/screens/splash_screen.dart';
+import 'package:otaku_world/features/studio_detail/screens/studio_detail_screen.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/user_stats.graphql.dart';
 import 'package:otaku_world/observers/go_route_observer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../bloc/media_detail/media_detail_bloc.dart';
 import '../../bloc/reviews/reviews/reviews_bloc.dart';
@@ -125,16 +132,11 @@ import '../../features/social/screens/activity_replies_screen.dart';
 import '../../features/social/screens/social_screen.dart';
 
 part 'bottom_nav_routes.dart';
-
 part 'discover_routes.dart';
-
 part 'home_routes.dart';
-
-part 'social_routes.dart';
-
 part 'profile_routes.dart';
-
 part 'settings_routes.dart';
+part 'social_routes.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorHomeKey = GlobalKey<NavigatorState>();
@@ -217,6 +219,78 @@ final router = GoRouter(
           return null;
         }
       },
+    ),
+    SlideTransitionRoute(
+      parentNavigatorKey: _rootNavigatorKey,
+      path: RouteConstants.characterDetail,
+      builder: (state) {
+        final int characterId = int.parse(state.uri.queryParameters['id']!);
+        return BlocProvider(
+          create: (context) {
+            final client = (context.read<GraphqlClientCubit>().state
+                    as GraphqlClientInitialized)
+                .client;
+            return CharacterDetailBloc()
+              ..add(
+                LoadCharacterDetail(
+                  id: characterId,
+                  client: client,
+                ),
+              );
+          },
+          child: BlocProvider(
+            create: (context) {
+              final client = (context.read<GraphqlClientCubit>().state
+                      as GraphqlClientInitialized)
+                  .client;
+              return CharacterMediaBloc(characterId: characterId)
+                ..add(
+                  LoadData(client),
+                );
+            },
+            child: CharacterDetailScreen(
+              characterId: characterId,
+            ),
+          ),
+        );
+      },
+      directionTween: SlideTransitionRoute.leftToRightTween,
+    ),
+    SlideTransitionRoute(
+      parentNavigatorKey: _rootNavigatorKey,
+      path: RouteConstants.studioDetail,
+      builder: (state) {
+        final int studioId = int.parse(state.uri.queryParameters['id']!);
+        return BlocProvider(
+          create: (context) {
+            final client = (context.read<GraphqlClientCubit>().state
+                    as GraphqlClientInitialized)
+                .client;
+            return StudioDetailBloc()
+              ..add(
+                LoadStudioDetail(
+                  id: studioId,
+                  client: client,
+                ),
+              );
+          },
+          child: BlocProvider(
+            create: (context) {
+              final client = (context.read<GraphqlClientCubit>().state
+                      as GraphqlClientInitialized)
+                  .client;
+              return StudioMediaBloc(studioId: studioId)
+                ..add(
+                  LoadData(client),
+                );
+            },
+            child: StudioDetailScreen(
+              studioId: studioId,
+            ),
+          ),
+        );
+      },
+      directionTween: SlideTransitionRoute.leftToRightTween,
     ),
   ],
   onException: (context, state, router) {

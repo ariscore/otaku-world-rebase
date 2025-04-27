@@ -134,28 +134,28 @@ class MediaDetailScreen extends HookWidget {
             );
           },
         ),
-        floatingActionButton: BlocBuilder<MediaDetailBloc, MediaDetailState>(
-          builder: (context, state) {
-            if (state is MediaDetailLoaded) {
-              final String icon = state.media.mediaListEntry == null &&
-                      state.media.mediaListEntry?.status == null
-                  ? Assets.iconsMediaAdd
-                  : Assets.iconsMediaEdit;
-              final user = context.read<ViewerBloc>().getUser();
-
-              return MediaFloatingActionButton(
-                tabController: tabController,
-                isAdd: (state.media.mediaListEntry == null &&
-                    state.media.mediaListEntry?.status == null),
-                reviewIndex: tabs.length - 1,
-                userId: user.id,
-                mediaId: mediaId,
-              );
-            } else {
-              return const SizedBox();
-            }
-          },
-        ),
+        // floatingActionButton: BlocBuilder<MediaDetailBloc, MediaDetailState>(
+        //   builder: (context, state) {
+        //     if (state is MediaDetailLoaded) {
+        //       final String icon = state.media.mediaListEntry == null &&
+        //               state.media.mediaListEntry?.status == null
+        //           ? Assets.iconsMediaAdd
+        //           : Assets.iconsMediaEdit;
+        //       final user = context.read<ViewerBloc>().getUser();
+        //
+        //       return MediaFloatingActionButton(
+        //         tabController: tabController,
+        //         isAdd: (state.media.mediaListEntry == null &&
+        //             state.media.mediaListEntry?.status == null),
+        //         reviewIndex: tabs.length - 1,
+        //         userId: user.id,
+        //         mediaId: mediaId,
+        //       );
+        //     } else {
+        //       return const SizedBox();
+        //     }
+        //   },
+        // ),
       ),
     );
   }

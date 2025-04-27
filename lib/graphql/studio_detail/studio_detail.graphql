@@ -1,0 +1,11 @@
+query getStudioDetail($id:Int) {
+    Studio(id:$id) {
+        id
+        name
+        isAnimationStudio
+
+        siteUrl
+        isFavourite
+        favourites
+    }
+}

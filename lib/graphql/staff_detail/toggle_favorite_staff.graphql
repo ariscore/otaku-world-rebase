@@ -1,0 +1,5 @@
+mutation ToggleFavoriteStaff($staffId : Int) {
+    ToggleFavourite(staffId: $staffId) {
+        __typename
+    }
+}

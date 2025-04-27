@@ -1,0 +1,28 @@
+query getStaffDetail($staffId: Int) {
+    Staff(id: $staffId) {
+        age
+        bloodType
+        dateOfBirth {
+           ...FuzzyDate
+        }
+        dateOfDeath {
+            ...FuzzyDate
+        }
+        description
+        favourites
+        gender
+        homeTown
+        image {
+            large
+        }
+        languageV2
+        isFavouriteBlocked
+        isFavourite
+        name {
+            native
+            userPreferred
+        }
+        primaryOccupations
+        siteUrl
+    }
+}
