@@ -15,6 +15,11 @@ class StringConstants {
   static const statsNotAvailable = 'Statistics not available!';
   static const messageConfirmation = 'Are you sure you want to send this message?';
   static const unfollowConfirmation = 'Their activities will no longer appear in your Following tab.';
+
+  static const settingsConfirmationHeading = 'Save Settings';
+  static const listSettingsConfirmationWarning = 'Your list will reload to reflect the new settings. Do you want to proceed?';
+  static const deleteListEntryHeading = 'Delete List Entry';
+  static const deleteListEntryWarning = 'Are you sure you want to delete this list entry?';
 }
 
 class LoginConstants {

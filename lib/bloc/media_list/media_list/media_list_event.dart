@@ -5,13 +5,22 @@ sealed class MediaListEvent {
 }
 
 class LoadMediaList extends MediaListEvent {
-  const LoadMediaList(this.client);
+  const LoadMediaList({
+    required this.client,
+    this.loadForSettings = false,
+  });
 
   final GraphQLClient client;
+  final bool loadForSettings;
 }
 
 class ApplyFilter extends MediaListEvent {
-  const ApplyFilter({this.search, this.lists, this.mediaFilter, this.applySearch = false,});
+  const ApplyFilter({
+    this.search,
+    this.lists,
+    this.mediaFilter,
+    this.applySearch = false,
+  });
 
   final String? search;
   final List<String>? lists;
@@ -25,6 +34,18 @@ class UpdateListEntry extends MediaListEvent {
   final Fragment$MediaListEntry entry;
 }
 
+class RemoveListEntry extends MediaListEvent {
+  const RemoveListEntry({required this.id});
+
+  final int id;
+}
+
 class ClearSearch extends MediaListEvent {}
 
 class RemoveFilters extends MediaListEvent {}
+
+class UpdateListSettings extends MediaListEvent {
+  const UpdateListSettings({required this.options});
+
+  final Fragment$MediaListOptions? options;
+}

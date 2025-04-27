@@ -1,7 +1,11 @@
 query GetMediaDetail($id :Int){
     Media(id:$id) {
         ...MediaDetailed
-
+    }
+    Viewer {
+        mediaListOptions {
+            ...MediaListOptions
+        }
     }
 }
 #154587

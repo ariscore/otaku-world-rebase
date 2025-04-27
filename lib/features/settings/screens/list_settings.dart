@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:otaku_world/bloc/media_list/media_list/media_list_bloc.dart';
 import 'package:otaku_world/constants/settings_constants.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/filters/custom_check_box.dart';
@@ -20,7 +22,9 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/viewer/viewer_bloc.dart';
+import '../../../constants/string_constants.dart';
 import '../../../core/ui/buttons/primary_button.dart';
+import '../../../core/ui/dialogs/alert_dialog.dart';
 import '../../../core/ui/error_text.dart';
 import '../../../graphql/__generated/graphql/fragments.graphql.dart';
 import '../../../utils/ui_utils.dart';
@@ -47,11 +51,7 @@ class _ListSettingsState extends State<ListSettings> {
       ),
       floatingActionButton: isModified
           ? PrimaryButton(
-              onTap: () {
-                context.read<ViewerBloc>().add(
-                      UpdateUser(client: client, user: user),
-                    );
-              },
+              onTap: () => _updateSettings(context, client),
               label: 'Save',
               height: 50,
               verticalPadding: 10,
@@ -85,6 +85,24 @@ class _ListSettingsState extends State<ListSettings> {
                 } else {
                   setState(() {
                     isModified = false;
+                    // context.read<AnimeListBloc>().add(
+                    //       UpdateListSettings(
+                    //         options: state.user.mediaListOptions,
+                    //       ),
+                    //     );
+                    // context.read<MangaListBloc>().add(
+                    //       UpdateListSettings(
+                    //         options: state.user.mediaListOptions,
+                    //       ),
+                    //     );
+                    context.read<AnimeListBloc>().add(LoadMediaList(
+                      client: client,
+                      loadForSettings: true,
+                    ));
+                    context.read<MangaListBloc>().add(LoadMediaList(
+                      client: client,
+                      loadForSettings: true,
+                    ));
                     context.pop();
                   });
                   UIUtils.showSnackBar(context, 'Settings Updated!');
@@ -102,7 +120,7 @@ class _ListSettingsState extends State<ListSettings> {
                 user = isModified
                     ? user
                     : user.copyWith(
-                        mediaListOptions: Fragment$Settings$mediaListOptions(
+                        mediaListOptions: Fragment$MediaListOptions(
                           scoreFormat: state.user.mediaListOptions?.scoreFormat,
                           rowOrder: state.user.mediaListOptions?.rowOrder,
                           animeList: state.user.mediaListOptions?.animeList,
@@ -295,10 +313,15 @@ class _ListSettingsState extends State<ListSettings> {
                     ListActivityOptions(
                       options: user.options!,
                       onChange: (status) {
-                        int? index = user.options?.disabledListActivity?.indexWhere((e) => e?.type == status,);
+                        int? index =
+                            user.options?.disabledListActivity?.indexWhere(
+                          (e) => e?.type == status,
+                        );
                         if (index != null && index != -1) {
-                          final activity = user.options?.disabledListActivity?[index];
-                          user.options?.disabledListActivity![index] = Query$Viewer$Viewer$options$disabledListActivity(
+                          final activity =
+                              user.options?.disabledListActivity?[index];
+                          user.options?.disabledListActivity![index] =
+                              Query$Viewer$Viewer$options$disabledListActivity(
                             type: activity?.type,
                             disabled: !(activity?.disabled ?? false),
                           );
@@ -309,12 +332,14 @@ class _ListSettingsState extends State<ListSettings> {
                     ),
                     const SizedBox(height: 20),
                     ReorderList(
-                      list: user.mediaListOptions?.animeList?.sectionOrder ?? [],
+                      list:
+                          user.mediaListOptions?.animeList?.sectionOrder ?? [],
                       type: Enum$MediaType.ANIME,
                       onChange: (list) {
                         user = user.copyWith(
                           mediaListOptions: user.mediaListOptions?.copyWith(
-                            animeList: user.mediaListOptions?.animeList?.copyWith(
+                            animeList:
+                                user.mediaListOptions?.animeList?.copyWith(
                               sectionOrder: list,
                             ),
                           ),
@@ -325,12 +350,14 @@ class _ListSettingsState extends State<ListSettings> {
                     ),
                     const SizedBox(height: 20),
                     ReorderList(
-                      list: user.mediaListOptions?.mangaList?.sectionOrder ?? [],
+                      list:
+                          user.mediaListOptions?.mangaList?.sectionOrder ?? [],
                       type: Enum$MediaType.MANGA,
                       onChange: (list) {
                         user = user.copyWith(
                           mediaListOptions: user.mediaListOptions?.copyWith(
-                            mangaList: user.mediaListOptions?.mangaList?.copyWith(
+                            mangaList:
+                                user.mediaListOptions?.mangaList?.copyWith(
                               sectionOrder: list,
                             ),
                           ),
@@ -358,6 +385,26 @@ class _ListSettingsState extends State<ListSettings> {
           ),
         ),
       ),
+    );
+  }
+
+  void _updateSettings(BuildContext context, GraphQLClient client) {
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return CustomAlertDialog(
+          title: StringConstants.settingsConfirmationHeading,
+          body: StringConstants.listSettingsConfirmationWarning,
+          confirmText: 'Save',
+          onConfirm: () {
+            dialogContext.pop();
+            context.read<ViewerBloc>().add(
+              UpdateUser(client: client, user: user),
+            );
+          },
+          onCancel: dialogContext.pop,
+        );
+      },
     );
   }
 

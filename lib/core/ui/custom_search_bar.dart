@@ -6,7 +6,7 @@ import 'package:otaku_world/bloc/filter/search/search_media_cubit.dart';
 import '../../generated/assets.dart';
 import '../../theme/colors.dart';
 
-class CustomSearchBar extends StatefulWidget {
+class CustomSearchBar extends StatelessWidget {
   const CustomSearchBar({
     super.key,
     required this.clearSearch,
@@ -23,22 +23,10 @@ class CustomSearchBar extends StatefulWidget {
   final String hint;
 
   @override
-  State<CustomSearchBar> createState() => _CustomSearchBarState();
-}
-
-class _CustomSearchBarState extends State<CustomSearchBar> {
-
-  @override
-  void dispose() {
-    widget.searchCubit.searchController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Expanded(
       child: TextField(
-        controller: widget.searchCubit.searchController,
+        controller: searchCubit.searchController,
         style: Theme.of(context).textTheme.headlineMedium,
         textCapitalization: TextCapitalization.words,
         keyboardType: TextInputType.text,
@@ -78,7 +66,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           ),
           fillColor: AppColors.jet,
           filled: true,
-          hintText: widget.hint,
+          hintText: hint,
           hintStyle: Theme.of(context).textTheme.headlineMedium?.copyWith(
             color: AppColors.white.withOpacity(0.5),
           ),
@@ -88,7 +76,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
               right: 10,
             ),
             child: BlocBuilder<SearchMediaCubit, SearchMediaState>(
-              bloc: widget.searchCubit,
+              bloc: searchCubit,
               builder: (context, state) {
                 if (state is SearchContentChanged) {
                   if (state.content.isEmpty || state.content == '') {
@@ -96,8 +84,8 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                   } else {
                     return InkWell(
                       onTap: () {
-                        widget.searchCubit.searchController.clear();
-                        widget.clearSearch();
+                        searchCubit.searchController.clear();
+                        clearSearch();
                       },
                       borderRadius: BorderRadius.circular(15),
                       child: SvgPicture.asset(
@@ -126,9 +114,9 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           // } else {
           //   context.read<ClearTextCubit>().showClearText();
           // }
-          widget.onChanged(value);
+          onChanged(value);
         },
-        onSubmitted: widget.onSubmitted,
+        onSubmitted: onSubmitted,
       ),
     );
   }

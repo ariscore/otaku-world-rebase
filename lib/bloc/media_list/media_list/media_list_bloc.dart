@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
@@ -12,13 +13,22 @@ import 'package:otaku_world/core/types/enums.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/list/media_list.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
+import 'package:otaku_world/utils/formatting_utils.dart';
 
 part 'media_list_event.dart';
 
 part 'media_list_state.dart';
 
+class AnimeListBloc extends MediaListBloc {
+  AnimeListBloc() : super(type: Enum$MediaType.ANIME);
+}
+
+class MangaListBloc extends MediaListBloc {
+  MangaListBloc() : super(type: Enum$MediaType.MANGA);
+}
+
 class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
-  MediaListBloc({required this.type, required this.userId})
+  MediaListBloc({required this.type})
       : super(MediaListInitial()) {
     filter = type == Enum$MediaType.ANIME
         ? const AnimeFilter(sort: [Enum$MediaSort.UPDATED_AT_DESC])
@@ -27,83 +37,298 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
     on<LoadMediaList>(_onLoadMediaList);
     on<ApplyFilter>(_onApplyFilter);
     on<UpdateListEntry>(_onUpdateListEntry);
+    on<RemoveListEntry>(_onRemoveListEntry);
     on<ClearSearch>(_onClearSearch);
     on<RemoveFilters>(_onRemoveFilters);
+    on<UpdateListSettings>(_onUpdateListSettings);
   }
 
   final Enum$MediaType type;
-  final int userId;
+  int? userId;
+
+  /// Master copy of all collections, updated on CRUD operations
+  late Query$MediaList$MediaListCollection _masterCollection;
+  Fragment$MediaListOptions? options;
+
   List<String> _selectedLists = [];
   late FilterModel filter;
   bool searchApplied = false;
   bool filterApplied = false;
-  Query$MediaList$MediaListCollection? collection;
 
   List<String> get selectedLists => _selectedLists;
 
-  void _onLoadMediaList(
+  /// Helper to determine the exact collection name for an entry,
+  /// respecting "split completed list by format" setting.
+  String _collectionNameForEntry(Fragment$MediaListEntry entry) {
+    final base = FormattingUtils.getMediaListStatusString(
+      entry.status,
+      isAnime: type == Enum$MediaType.ANIME,
+    );
+    final isCompleted = entry.status == Enum$MediaListStatus.COMPLETED;
+    final splitCompleted = entry.media?.type == Enum$MediaType.ANIME
+        ? (options?.animeList?.splitCompletedSectionByFormat ?? false)
+        : (options?.mangaList?.splitCompletedSectionByFormat ?? false);
+
+    if (isCompleted && splitCompleted) {
+      final fmt = FormattingUtils.getMediaFormatString(
+        entry.media?.format,
+        forList: true,
+      );
+      return '$base $fmt';
+    }
+    return base;
+  }
+
+  Future<void> _onLoadMediaList(
     LoadMediaList event,
     Emitter<MediaListState> emit,
   ) async {
-    if (state is! MediaListLoaded) emit(MediaListLoading());
+    if (event.loadForSettings && state is! MediaListLoaded) return;
+
+    emit(MediaListLoading());
     filter = filter.reset();
     _selectedLists = [];
     filterApplied = false;
     searchApplied = false;
-    log('Media filters: $filter');
+
     final response = await event.client.query$MediaList(
       Options$Query$MediaList(
         fetchPolicy: FetchPolicy.networkOnly,
+        cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
         variables: Variables$Query$MediaList(
           type: type,
           userId: userId,
         ),
       ),
     );
-    log('Response: $response');
 
-    if (response.hasException) {
-      if (response.exception!.linkException != null &&
-          response.exception!.linkException is ServerException) {
-        emit(
-          const MediaListError(
-            type: ErrorType.noInternet,
-            message: StringConstants.noInternetError,
-          ),
-        );
+    if (response.hasException ||
+        response.parsedData?.MediaListCollection == null) {
+      final linkEx = response.exception?.linkException;
+      if (linkEx != null && linkEx is ServerException) {
+        emit(const MediaListError(
+          type: ErrorType.noInternet,
+          message: StringConstants.noInternetError,
+        ));
       } else {
-        emit(
-          const MediaListError(
-            type: ErrorType.unknown,
-            message: StringConstants.somethingWentWrongError,
-          ),
-        );
+        emit(const MediaListError(
+          type: ErrorType.unknown,
+          message: StringConstants.somethingWentWrongError,
+        ));
       }
-    } else {
-      final data = response.parsedData?.MediaListCollection;
-      if (data == null) {
-        emit(
-          const MediaListError(
-            type: ErrorType.unknown,
-            message: StringConstants.somethingWentWrongError,
-          ),
-        );
-      } else {
-        collection = data;
-        emit(MediaListLoaded(listCollection: collection!));
-      }
+      return;
     }
+
+    final data = response.parsedData!.MediaListCollection!;
+    _masterCollection = data;
+    options = data.user?.mediaListOptions;
+
+    emit(MediaListLoaded(listCollection: _masterCollection));
+  }
+
+  /// Applies current filter/search settings to a given collection
+  Query$MediaList$MediaListCollection _applyFilters(
+    Query$MediaList$MediaListCollection input,
+  ) {
+    final lists = input.lists
+            ?.map(
+              (collection) {
+                if (collection == null) return null;
+
+                // Filter entries
+                final filteredEntries = collection.entries?.where(
+                      (entry) {
+                        bool matches = true;
+                        final media = entry?.media;
+
+                        if (filter.search != null &&
+                            filter.search!.isNotEmpty) {
+                          matches &= media?.title?.userPreferred
+                                  ?.toLowerCase()
+                                  .contains(filter.search!.toLowerCase()) ??
+                              false;
+                          searchApplied = true;
+                        } else {
+                          searchApplied = false;
+                        }
+
+                        if (_selectedLists.isNotEmpty) {
+                          matches &= _selectedLists.contains(collection.name);
+                        }
+
+                        if (type == Enum$MediaType.ANIME) {
+                          final animeFilter = filter as AnimeFilter;
+                          if (animeFilter.startDateGreater != null &&
+                              animeFilter.startDateLesser != null &&
+                              media?.startDate?.year != null) {
+                            matches &= media!.startDate!.year! >=
+                                    int.parse(animeFilter.startDateGreater!) &&
+                                media.startDate!.year! <=
+                                    int.parse(animeFilter.startDateLesser!);
+                          }
+
+                          if (animeFilter.genres != null &&
+                              animeFilter.genres!.isNotEmpty) {
+                            matches &= media?.genres?.any(
+                                    (g) => animeFilter.genres!.contains(g)) ??
+                                false;
+                          }
+                          if (animeFilter.formatIn != null &&
+                              animeFilter.formatIn!.isNotEmpty) {
+                            matches &=
+                                animeFilter.formatIn!.contains(media?.format);
+                          }
+                          if (animeFilter.statusIn != null &&
+                              animeFilter.statusIn!.isNotEmpty) {
+                            matches &=
+                                animeFilter.statusIn!.contains(media?.status);
+                          }
+                          if (animeFilter.countryOfOrigin != null) {
+                            matches &= media?.countryOfOrigin ==
+                                animeFilter.countryOfOrigin;
+                          }
+                        } else {
+                          final mangaFilter = filter as MangaFilter;
+                          if (mangaFilter.startDateGreater != null &&
+                              mangaFilter.startDateLesser != null &&
+                              media?.startDate?.year != null) {
+                            matches &= media!.startDate!.year! >=
+                                    int.parse(mangaFilter.startDateGreater!) &&
+                                media.startDate!.year! <=
+                                    int.parse(mangaFilter.startDateLesser!);
+                          }
+
+                          if (mangaFilter.genres != null &&
+                              mangaFilter.genres!.isNotEmpty) {
+                            matches &= media?.genres?.any(
+                                    (g) => mangaFilter.genres!.contains(g)) ??
+                                false;
+                          }
+                          if (mangaFilter.formatIn != null &&
+                              mangaFilter.formatIn!.isNotEmpty) {
+                            matches &=
+                                mangaFilter.formatIn!.contains(media?.format);
+                          }
+                          if (mangaFilter.statusIn != null &&
+                              mangaFilter.statusIn!.isNotEmpty) {
+                            matches &=
+                                mangaFilter.statusIn!.contains(media?.status);
+                          }
+                          if (mangaFilter.countryOfOrigin != null) {
+                            matches &= media?.countryOfOrigin ==
+                                mangaFilter.countryOfOrigin;
+                          }
+                        }
+
+                        return matches;
+                      },
+                    ).toList() ??
+                    [];
+
+                final sorted = _sortEntries(filteredEntries);
+                return collection.copyWith(entries: sorted);
+              },
+            )
+            .where((c) => (c?.entries ?? []).isNotEmpty)
+            .toList() ??
+        [];
+
+    return input.copyWith(lists: lists);
+  }
+
+  /// Sort logic extracted to reuse across filter and initial load
+  List<Fragment$MediaListEntry?> _sortEntries(
+    List<Fragment$MediaListEntry?> list,
+  ) {
+    if (list.isEmpty) return list;
+
+    final sortOption = type == Enum$MediaType.ANIME
+        ? (filter as AnimeFilter).listSort
+        : (filter as MangaFilter).listSort;
+
+    list.sort((a, b) {
+      int primaryCompare;
+      switch (sortOption) {
+        case Enum$MediaListSort.MEDIA_TITLE_ROMAJI:
+          primaryCompare = (a?.media?.title?.userPreferred ?? '')
+              .compareTo(b?.media?.title?.userPreferred ?? '');
+          break;
+        case Enum$MediaListSort.SCORE_DESC:
+          primaryCompare = (b?.score ?? 0).compareTo(a?.score ?? 0);
+          break;
+        case Enum$MediaListSort.PROGRESS_DESC:
+          primaryCompare = (b?.progress ?? 0).compareTo(a?.progress ?? 0);
+          break;
+        case Enum$MediaListSort.UPDATED_TIME_DESC:
+          primaryCompare = (b?.updatedAt ?? 0).compareTo(a?.updatedAt ?? 0);
+          break;
+        case Enum$MediaListSort.ADDED_TIME_DESC:
+          primaryCompare = (b?.createdAt ?? 0).compareTo(a?.createdAt ?? 0);
+          break;
+        case Enum$MediaListSort.STARTED_ON_DESC:
+          final aTime = DateTime(
+            a?.startedAt?.year ?? FilterConstants.mediaYearMinimum.toInt(),
+            a?.startedAt?.month ?? 1,
+            a?.startedAt?.day ?? 1,
+          );
+          final bTime = DateTime(
+            b?.startedAt?.year ?? FilterConstants.mediaYearMinimum.toInt(),
+            b?.startedAt?.month ?? 1,
+            b?.startedAt?.day ?? 1,
+          );
+          primaryCompare = bTime.compareTo(aTime);
+          break;
+        case Enum$MediaListSort.FINISHED_ON_DESC:
+          final aFinish = DateTime(
+            a?.completedAt?.year ?? FilterConstants.mediaYearMinimum.toInt(),
+            a?.completedAt?.month ?? 1,
+            a?.completedAt?.day ?? 1,
+          );
+          final bFinish = DateTime(
+            b?.completedAt?.year ?? FilterConstants.mediaYearMinimum.toInt(),
+            b?.completedAt?.month ?? 1,
+            b?.completedAt?.day ?? 1,
+          );
+          primaryCompare = bFinish.compareTo(aFinish);
+          break;
+        case Enum$MediaListSort.ADDED_TIME:
+          final aRelease = DateTime(
+            a?.media?.startDate?.year ??
+                FilterConstants.mediaYearMinimum.toInt(),
+            a?.media?.startDate?.month ?? 1,
+            a?.media?.startDate?.day ?? 1,
+          );
+          final bRelease = DateTime(
+            b?.media?.startDate?.year ??
+                FilterConstants.mediaYearMinimum.toInt(),
+            b?.media?.startDate?.month ?? 1,
+            b?.media?.startDate?.day ?? 1,
+          );
+          primaryCompare = bRelease.compareTo(aRelease);
+          break;
+        case Enum$MediaListSort.MEDIA_ID_DESC:
+          primaryCompare = (b?.media?.averageScore ?? 0)
+              .compareTo(a?.media?.averageScore ?? 0);
+          break;
+        case Enum$MediaListSort.MEDIA_POPULARITY_DESC:
+        default:
+          primaryCompare =
+              (b?.media?.popularity ?? 0).compareTo(a?.media?.popularity ?? 0);
+      }
+      if (primaryCompare == 0) {
+        return (a?.media?.title?.userPreferred ?? '')
+            .compareTo(b?.media?.title?.userPreferred ?? '');
+      }
+      return primaryCompare;
+    });
+
+    return list;
   }
 
   void _onApplyFilter(ApplyFilter event, Emitter<MediaListState> emit) {
-    log('Applying filters: ${event.search} | ${event.lists} | ${event.mediaFilter}');
-    List<Query$MediaList$MediaListCollection$lists?>? filteredCollections =
-        collection?.lists;
-
     if (type == Enum$MediaType.ANIME) {
       filter = ((event.mediaFilter ?? filter) as AnimeFilter)
           .copyWith(search: event.search);
-      log('Filters to be applied: $filter');
     } else {
       filter = ((event.mediaFilter ?? filter) as MangaFilter)
           .copyWith(search: event.search);
@@ -112,221 +337,93 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
     if (event.lists != null && event.lists!.isNotEmpty) {
       _selectedLists = event.lists!;
     }
-    log('Lists: $selectedLists');
 
-    filteredCollections = collection?.lists
-        ?.map((collection) {
-          log('Filtering collection: ${collection?.name}');
-          final updatedMediaList = collection?.entries?.where((entry) {
-            bool matches = true;
+    filterApplied =
+        (event.mediaFilter != null) || (event.lists?.isNotEmpty ?? false);
 
-            if (filter.search != null && filter.search!.isNotEmpty) {
-              matches &= entry?.media?.title?.userPreferred
-                      ?.toLowerCase()
-                      .contains(filter.search!.toLowerCase()) ??
-                  false;
-              searchApplied = true;
-            } else {
-              searchApplied = false;
-            }
-
-            // List filters
-            if (selectedLists.isNotEmpty) {
-              matches &= selectedLists.contains(collection.name);
-            }
-
-            // Anime Filters
-            final animeFilter = filter;
-
-            if (animeFilter.genres != null && animeFilter.genres!.isNotEmpty) {
-              matches &= entry?.media?.genres
-                      ?.any((genre) => animeFilter.genres!.contains(genre)) ??
-                  false;
-            }
-
-            if (animeFilter.startDateGreater != null &&
-                animeFilter.startDateLesser != null) {
-              if (entry?.media?.startDate?.year != null) {
-                matches &= entry!.media!.startDate!.year! >=
-                        int.parse(animeFilter.startDateGreater!) &&
-                    entry.media!.startDate!.year! <=
-                        int.parse(animeFilter.startDateLesser!);
-              }
-            }
-
-            if (animeFilter.formatIn != null &&
-                animeFilter.formatIn!.isNotEmpty) {
-              matches &= animeFilter.formatIn!.contains(entry?.media?.format);
-            }
-
-            if (animeFilter.statusIn != null &&
-                animeFilter.statusIn!.isNotEmpty) {
-              matches &= animeFilter.statusIn!.contains(entry?.media?.status);
-            }
-
-            if (animeFilter.countryOfOrigin != null) {
-              matches &=
-                  entry?.media?.countryOfOrigin == animeFilter.countryOfOrigin;
-            }
-
-            return matches;
-          }).toList();
-
-          // Sorting based on filter
-          Enum$MediaListSort sortOption =
-              Enum$MediaListSort.MEDIA_POPULARITY_DESC;
-          if (type == Enum$MediaType.ANIME) {
-            sortOption = (filter as AnimeFilter).listSort;
-            log('Filter for option: $sortOption');
-          } else {
-            sortOption = (filter as MangaFilter).listSort;
-          }
-          updatedMediaList?.sort((a, b) {
-            int primaryCompare = 0;
-            switch (sortOption) {
-              case Enum$MediaListSort.MEDIA_TITLE_ROMAJI:
-                primaryCompare = (a?.media?.title?.userPreferred ?? "")
-                    .compareTo(b?.media?.title?.userPreferred ?? "");
-                break;
-              case Enum$MediaListSort.SCORE_DESC:
-                primaryCompare = (b?.score ?? 0).compareTo(a?.score ?? 0);
-                break;
-              case Enum$MediaListSort.PROGRESS_DESC:
-                primaryCompare = (b?.progress ?? 0).compareTo(a?.progress ?? 0);
-                break;
-              case Enum$MediaListSort.UPDATED_TIME_DESC:
-                primaryCompare =
-                    (b?.updatedAt ?? 0).compareTo(a?.updatedAt ?? 0);
-                break;
-              case Enum$MediaListSort.ADDED_TIME_DESC:
-                primaryCompare =
-                    (b?.createdAt ?? 0).compareTo(a?.createdAt ?? 0);
-                break;
-              case Enum$MediaListSort.STARTED_ON_DESC:
-                final aTime = DateTime(
-                  a?.startedAt?.year ??
-                      FilterConstants.mediaYearMinimum.toInt(),
-                  a?.startedAt?.month ?? 1,
-                  a?.startedAt?.day ?? 1,
-                );
-                final bTime = DateTime(
-                  b?.startedAt?.year ??
-                      FilterConstants.mediaYearMinimum.toInt(),
-                  b?.startedAt?.month ?? 1,
-                  b?.startedAt?.day ?? 1,
-                );
-                primaryCompare = bTime.compareTo(aTime);
-                break;
-              case Enum$MediaListSort.FINISHED_ON_DESC:
-                final aTime = DateTime(
-                  a?.completedAt?.year ??
-                      FilterConstants.mediaYearMinimum.toInt(),
-                  a?.completedAt?.month ?? 1,
-                  a?.completedAt?.day ?? 1,
-                );
-                final bTime = DateTime(
-                  b?.completedAt?.year ??
-                      FilterConstants.mediaYearMinimum.toInt(),
-                  b?.completedAt?.month ?? 1,
-                  b?.completedAt?.day ?? 1,
-                );
-                primaryCompare = bTime.compareTo(aTime);
-                break;
-              case Enum$MediaListSort
-                    .ADDED_TIME: // Assume this is correct for release date
-                final aTime = DateTime(
-                  a?.media?.startDate?.year ??
-                      FilterConstants.mediaYearMinimum.toInt(),
-                  a?.media?.startDate?.month ?? 1,
-                  a?.media?.startDate?.day ?? 1,
-                );
-                final bTime = DateTime(
-                  b?.media?.startDate?.year ??
-                      FilterConstants.mediaYearMinimum.toInt(),
-                  b?.media?.startDate?.month ?? 1,
-                  b?.media?.startDate?.day ?? 1,
-                );
-                primaryCompare = bTime.compareTo(aTime);
-                break;
-              case Enum$MediaListSort
-                    .MEDIA_ID_DESC: // Assume this is correct for average score
-                primaryCompare = (b?.media?.averageScore ?? 0)
-                    .compareTo(a?.media?.averageScore ?? 0);
-                break;
-              case Enum$MediaListSort.MEDIA_POPULARITY_DESC:
-                primaryCompare = (b?.media?.popularity ?? 0)
-                    .compareTo(a?.media?.popularity ?? 0);
-                break;
-              default:
-                primaryCompare = 0;
-            }
-            if (primaryCompare == 0) {
-              return (a?.media?.title?.userPreferred ?? '')
-                  .compareTo(b?.media?.title?.userPreferred ?? '');
-            }
-            return primaryCompare;
-          });
-
-          return collection?.copyWith(entries: updatedMediaList);
-        })
-        .where((collection) => (collection?.entries ?? []).isNotEmpty)
-        .toList();
-
-    if (!event.applySearch) filterApplied = true;
-    log('Filtered collections: ${filteredCollections?.length}');
-    emit(
-      MediaListLoaded(
-        listCollection: collection!.copyWith(
-          lists: filteredCollections,
-        ),
-      ),
-    );
+    final filtered = _applyFilters(_masterCollection);
+    emit(MediaListLoaded(listCollection: filtered));
   }
 
   void _onUpdateListEntry(UpdateListEntry event, Emitter<MediaListState> emit) {
-    final currentCollection = (state as MediaListLoaded).listCollection;
+    if (state is! MediaListLoaded) return;
 
-    // Create a new list of collections from the current one.
-    final updatedLists = List<Query$MediaList$MediaListCollection$lists?>.from(
-      currentCollection.lists!,
-    );
+    // Determine primary bucket based on status/split logic
+    final statusBucket = _collectionNameForEntry(event.entry);
+    // Include any custom lists the entry belongs to
+    Set<String> targetBuckets = {statusBucket};
 
-    // Iterate over the collections to find the one containing the entry.
-    for (int i = 0; i < updatedLists.length; i++) {
-      final collection = updatedLists[i];
-      if (collection == null) continue;
+    if (event.entry.customLists != null) {
+      final customBuckets = (jsonDecode(event.entry.customLists!) as Map<String, dynamic>).entries.where((e) => e.value).map((e) => e.key);
+      targetBuckets.addAll(customBuckets);
+    }
 
-      // Check if this collection contains an entry with the specified mediaId.
-      final bool containsEntry = collection.entries?.any((entry) {
-            if (entry == null) return false;
-            return entry.media?.id == event.entry.mediaId;
-          }) ??
-          false;
-      log('Found entry: $containsEntry');
+    bool foundAny = false;
+    // Update master collection: place entry in all target buckets, remove from others
+    final updatedLists = _masterCollection.lists?.map((collection) {
+      if (collection == null) return null;
+      final entries = List<Fragment$MediaListEntry?>.of(collection.entries ?? []);
 
-      if (containsEntry) {
-        // Found the collection; update its entries list.
-        final updatedEntries = collection.entries?.map((entry) {
-          if (entry?.media?.id == event.entry.mediaId) {
-            return event.entry; // Replace with the updated entry.
-          }
-          return entry;
-        }).toList();
+      if (targetBuckets.contains(collection.name)) {
+        // In a target bucket: update or insert
+        final idx = entries.indexWhere((e) => e?.media?.id == event.entry.mediaId);
+        if (idx != -1) {
+          entries[idx] = event.entry;
+        } else {
+          entries.insert(0, event.entry);
+        }
+        foundAny = true;
+      } else {
+        // Not a target: remove old copies
+        entries.removeWhere((e) => e?.media?.id == event.entry.mediaId);
+      }
 
-        // Create a new collection instance with the updated entries.
-        updatedLists[i] = collection.copyWith(entries: updatedEntries);
+      return collection.copyWith(entries: entries);
+    }).toList() ?? [];
 
-        // Since only one entry in one collection will change, exit the loop.
-        break;
+    // For any custom bucket not in the original lists, create new one
+    for (var bucket in targetBuckets) {
+      if (!updatedLists.any((c) => c?.name == bucket)) {
+        updatedLists.add(
+          Query$MediaList$MediaListCollection$lists(
+            name: bucket,
+            entries: [event.entry],
+          ),
+        );
       }
     }
 
-    // Emit the new state with the updated collections list.
-    emit(
-      (state as MediaListLoaded).copyWith(
-        listCollection: currentCollection.copyWith(lists: updatedLists),
-      ),
-    );
+    // Commit to master
+    _masterCollection = _masterCollection.copyWith(lists: updatedLists);
+
+    // Emit filtered or full view
+    final base = (filterApplied || searchApplied)
+        ? _applyFilters(_masterCollection)
+        : _masterCollection;
+    emit(MediaListLoaded(listCollection: base));
+  }
+
+  void _onRemoveListEntry(RemoveListEntry event, Emitter<MediaListState> emit) {
+    if (state is! MediaListLoaded) return;
+
+    final updatedLists = _masterCollection.lists
+            ?.map((collection) {
+              if (collection == null) return null;
+              final entries = List<Fragment$MediaListEntry?>.of(
+                collection.entries ?? [],
+              );
+              entries.removeWhere((e) => e?.id == event.id);
+              return collection.copyWith(entries: entries);
+            })
+            .where((c) => (c?.entries ?? []).isNotEmpty)
+            .toList() ??
+        [];
+    _masterCollection = _masterCollection.copyWith(lists: updatedLists);
+
+    final base = (filterApplied || searchApplied)
+        ? _applyFilters(_masterCollection)
+        : _masterCollection;
+    emit(MediaListLoaded(listCollection: base));
   }
 
   void _onClearSearch(ClearSearch event, Emitter<MediaListState> emit) {
@@ -335,13 +432,10 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
     } else {
       filter = (filter as MangaFilter).copyWith(search: '');
     }
-
     searchApplied = false;
-    if (filterApplied) {
-      add(const ApplyFilter());
-    } else {
-      emit(MediaListLoaded(listCollection: collection!));
-    }
+    final collection =
+        filterApplied ? _applyFilters(_masterCollection) : _masterCollection;
+    emit(MediaListLoaded(listCollection: collection));
   }
 
   void _onRemoveFilters(RemoveFilters event, Emitter<MediaListState> emit) {
@@ -349,28 +443,33 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
     filterApplied = false;
     final search = filter.search;
     filter = type == Enum$MediaType.ANIME
-        ? AnimeFilter(
-            sort: [Enum$MediaSort.UPDATED_AT_DESC],
-            search: search != null && search.trim().isNotEmpty ? search : null,
-          )
-        : MangaFilter(
-            sort: [Enum$MediaSort.UPDATED_AT_DESC],
-            search: search != null && search.trim().isNotEmpty ? search : null,
-          );
-    if (searchApplied) {
-      add(ApplyFilter(search: filter.search));
-    } else {
-      emit(MediaListLoaded(listCollection: collection!));
-    }
+        ? AnimeFilter(sort: [Enum$MediaSort.UPDATED_AT_DESC], search: search)
+        : MangaFilter(sort: [Enum$MediaSort.UPDATED_AT_DESC], search: search);
+    final collection =
+        searchApplied ? _masterCollection : _applyFilters(_masterCollection);
+    emit(MediaListLoaded(listCollection: collection));
+  }
+
+  void _onUpdateListSettings(UpdateListSettings event, Emitter<MediaListState> emit,) {
+    if (state is! MediaListLoaded) return;
+
+    options = event.options;
+    log('List options updated: $options');
+    // TODO: Update ui also because change in score format
+    emit(MediaListLoaded(listCollection: (state as MediaListLoaded).listCollection),);
+  }
+
+  void setUserId(int userId) {
+    this.userId = userId;
   }
 
   List<String> getUserLists() {
-    return (collection?.lists ?? []).map((e) => e?.name ?? '').toList();
+    return _masterCollection.lists?.map((e) => e?.name ?? '').toList() ?? [];
   }
 
   @override
   void onTransition(Transition<MediaListEvent, MediaListState> transition) {
-    log(transition.toString(), name: 'log');
+    log(transition.toString(), name: 'MediaListBloc');
     super.onTransition(transition);
   }
 }

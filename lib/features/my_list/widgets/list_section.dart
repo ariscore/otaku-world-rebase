@@ -3,14 +3,20 @@ import 'dart:developer';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:otaku_world/graphql/__generated/graphql/list/media_list.graphql.dart';
+import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 
 import 'media_list_card.dart';
 
 class ListSection extends StatefulWidget {
-  const ListSection({super.key, required this.section});
+  const ListSection({
+    super.key,
+    required this.section,
+    required this.scoreFormat,
+  });
 
   final Query$MediaList$MediaListCollection$lists? section;
+  final Enum$ScoreFormat scoreFormat;
 
   @override
   State<ListSection> createState() => _ListSectionState();
@@ -133,7 +139,10 @@ class _ListSectionState extends State<ListSection> {
           // physics: const NeverScrollableScrollPhysics(),
           delegate: SliverChildBuilderDelegate(
             (context, index) {
-              return MediaListCard(entry: widget.section?.entries?[index]);
+              return MediaListCard(
+                entry: widget.section?.entries?[index],
+                scoreFormat: widget.scoreFormat,
+              );
             },
             childCount: length,
           ),

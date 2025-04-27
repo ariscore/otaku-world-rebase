@@ -33,11 +33,13 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
     return GestureDetector(
       onTap: () {
         setState(() {
+          widget.onChanged();
           selected = !selected;
         });
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Checkbox(
             shape: RoundedRectangleBorder(
@@ -55,7 +57,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
               });
             },
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: 5),
           Text(
             widget.label,
             style: Theme.of(context).textTheme.headlineSmall!.copyWith(

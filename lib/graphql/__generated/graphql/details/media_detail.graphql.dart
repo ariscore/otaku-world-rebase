@@ -115,21 +115,29 @@ class _CopyWithStubImpl$Variables$Query$GetMediaDetail<TRes>
 class Query$GetMediaDetail {
   Query$GetMediaDetail({
     this.Media,
+    this.Viewer,
     this.$__typename = 'Query',
   });
 
   factory Query$GetMediaDetail.fromJson(Map<String, dynamic> json) {
     final l$Media = json['Media'];
+    final l$Viewer = json['Viewer'];
     final l$$__typename = json['__typename'];
     return Query$GetMediaDetail(
       Media: l$Media == null
           ? null
           : Fragment$MediaDetailed.fromJson((l$Media as Map<String, dynamic>)),
+      Viewer: l$Viewer == null
+          ? null
+          : Query$GetMediaDetail$Viewer.fromJson(
+              (l$Viewer as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment$MediaDetailed? Media;
+
+  final Query$GetMediaDetail$Viewer? Viewer;
 
   final String $__typename;
 
@@ -137,6 +145,8 @@ class Query$GetMediaDetail {
     final _resultData = <String, dynamic>{};
     final l$Media = Media;
     _resultData['Media'] = l$Media?.toJson();
+    final l$Viewer = Viewer;
+    _resultData['Viewer'] = l$Viewer?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -145,9 +155,11 @@ class Query$GetMediaDetail {
   @override
   int get hashCode {
     final l$Media = Media;
+    final l$Viewer = Viewer;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$Media,
+      l$Viewer,
       l$$__typename,
     ]);
   }
@@ -163,6 +175,11 @@ class Query$GetMediaDetail {
     final l$Media = Media;
     final lOther$Media = other.Media;
     if (l$Media != lOther$Media) {
+      return false;
+    }
+    final l$Viewer = Viewer;
+    final lOther$Viewer = other.Viewer;
+    if (l$Viewer != lOther$Viewer) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -193,9 +210,11 @@ abstract class CopyWith$Query$GetMediaDetail<TRes> {
 
   TRes call({
     Fragment$MediaDetailed? Media,
+    Query$GetMediaDetail$Viewer? Viewer,
     String? $__typename,
   });
   CopyWith$Fragment$MediaDetailed<TRes> get Media;
+  CopyWith$Query$GetMediaDetail$Viewer<TRes> get Viewer;
 }
 
 class _CopyWithImpl$Query$GetMediaDetail<TRes>
@@ -213,12 +232,16 @@ class _CopyWithImpl$Query$GetMediaDetail<TRes>
 
   TRes call({
     Object? Media = _undefined,
+    Object? Viewer = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$GetMediaDetail(
         Media: Media == _undefined
             ? _instance.Media
             : (Media as Fragment$MediaDetailed?),
+        Viewer: Viewer == _undefined
+            ? _instance.Viewer
+            : (Viewer as Query$GetMediaDetail$Viewer?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -230,6 +253,14 @@ class _CopyWithImpl$Query$GetMediaDetail<TRes>
         ? CopyWith$Fragment$MediaDetailed.stub(_then(_instance))
         : CopyWith$Fragment$MediaDetailed(local$Media, (e) => call(Media: e));
   }
+
+  CopyWith$Query$GetMediaDetail$Viewer<TRes> get Viewer {
+    final local$Viewer = _instance.Viewer;
+    return local$Viewer == null
+        ? CopyWith$Query$GetMediaDetail$Viewer.stub(_then(_instance))
+        : CopyWith$Query$GetMediaDetail$Viewer(
+            local$Viewer, (e) => call(Viewer: e));
+  }
 }
 
 class _CopyWithStubImpl$Query$GetMediaDetail<TRes>
@@ -240,12 +271,16 @@ class _CopyWithStubImpl$Query$GetMediaDetail<TRes>
 
   call({
     Fragment$MediaDetailed? Media,
+    Query$GetMediaDetail$Viewer? Viewer,
     String? $__typename,
   }) =>
       _res;
 
   CopyWith$Fragment$MediaDetailed<TRes> get Media =>
       CopyWith$Fragment$MediaDetailed.stub(_res);
+
+  CopyWith$Query$GetMediaDetail$Viewer<TRes> get Viewer =>
+      CopyWith$Query$GetMediaDetail$Viewer.stub(_res);
 }
 
 const documentNodeQueryGetMediaDetail = DocumentNode(definitions: [
@@ -290,6 +325,40 @@ const documentNodeQueryGetMediaDetail = DocumentNode(definitions: [
         ]),
       ),
       FieldNode(
+        name: NameNode(value: 'Viewer'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'mediaListOptions'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'MediaListOptions'),
+                directives: [],
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
         name: NameNode(value: '__typename'),
         alias: null,
         arguments: [],
@@ -301,6 +370,8 @@ const documentNodeQueryGetMediaDetail = DocumentNode(definitions: [
   fragmentDefinitionMediaDetailed,
   fragmentDefinitionMediaShort,
   fragmentDefinitionFuzzyDate,
+  fragmentDefinitionMediaListEntry,
+  fragmentDefinitionMediaListOptions,
 ]);
 Query$GetMediaDetail _parserFn$Query$GetMediaDetail(
         Map<String, dynamic> data) =>
@@ -454,4 +525,144 @@ class Query$GetMediaDetail$Widget
           options: options ?? Options$Query$GetMediaDetail(),
           builder: builder,
         );
+}
+
+class Query$GetMediaDetail$Viewer {
+  Query$GetMediaDetail$Viewer({
+    this.mediaListOptions,
+    this.$__typename = 'User',
+  });
+
+  factory Query$GetMediaDetail$Viewer.fromJson(Map<String, dynamic> json) {
+    final l$mediaListOptions = json['mediaListOptions'];
+    final l$$__typename = json['__typename'];
+    return Query$GetMediaDetail$Viewer(
+      mediaListOptions: l$mediaListOptions == null
+          ? null
+          : Fragment$MediaListOptions.fromJson(
+              (l$mediaListOptions as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Fragment$MediaListOptions? mediaListOptions;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$mediaListOptions = mediaListOptions;
+    _resultData['mediaListOptions'] = l$mediaListOptions?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$mediaListOptions = mediaListOptions;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$mediaListOptions,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query$GetMediaDetail$Viewer ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$mediaListOptions = mediaListOptions;
+    final lOther$mediaListOptions = other.mediaListOptions;
+    if (l$mediaListOptions != lOther$mediaListOptions) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetMediaDetail$Viewer
+    on Query$GetMediaDetail$Viewer {
+  CopyWith$Query$GetMediaDetail$Viewer<Query$GetMediaDetail$Viewer>
+      get copyWith => CopyWith$Query$GetMediaDetail$Viewer(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetMediaDetail$Viewer<TRes> {
+  factory CopyWith$Query$GetMediaDetail$Viewer(
+    Query$GetMediaDetail$Viewer instance,
+    TRes Function(Query$GetMediaDetail$Viewer) then,
+  ) = _CopyWithImpl$Query$GetMediaDetail$Viewer;
+
+  factory CopyWith$Query$GetMediaDetail$Viewer.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetMediaDetail$Viewer;
+
+  TRes call({
+    Fragment$MediaListOptions? mediaListOptions,
+    String? $__typename,
+  });
+  CopyWith$Fragment$MediaListOptions<TRes> get mediaListOptions;
+}
+
+class _CopyWithImpl$Query$GetMediaDetail$Viewer<TRes>
+    implements CopyWith$Query$GetMediaDetail$Viewer<TRes> {
+  _CopyWithImpl$Query$GetMediaDetail$Viewer(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetMediaDetail$Viewer _instance;
+
+  final TRes Function(Query$GetMediaDetail$Viewer) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? mediaListOptions = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetMediaDetail$Viewer(
+        mediaListOptions: mediaListOptions == _undefined
+            ? _instance.mediaListOptions
+            : (mediaListOptions as Fragment$MediaListOptions?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$MediaListOptions<TRes> get mediaListOptions {
+    final local$mediaListOptions = _instance.mediaListOptions;
+    return local$mediaListOptions == null
+        ? CopyWith$Fragment$MediaListOptions.stub(_then(_instance))
+        : CopyWith$Fragment$MediaListOptions(
+            local$mediaListOptions, (e) => call(mediaListOptions: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$GetMediaDetail$Viewer<TRes>
+    implements CopyWith$Query$GetMediaDetail$Viewer<TRes> {
+  _CopyWithStubImpl$Query$GetMediaDetail$Viewer(this._res);
+
+  TRes _res;
+
+  call({
+    Fragment$MediaListOptions? mediaListOptions,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$MediaListOptions<TRes> get mediaListOptions =>
+      CopyWith$Fragment$MediaListOptions.stub(_res);
 }

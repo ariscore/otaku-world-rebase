@@ -42,6 +42,7 @@ class _MyListScreenState extends State<MyListScreen> {
   @override
   Widget build(BuildContext context) {
     final client = context.read<GraphqlClientCubit>().getClient()!;
+
     final viewerBloc = context.read<ViewerBloc>();
     final scrollController = useScrollController();
 
@@ -88,16 +89,14 @@ class _MyListScreenState extends State<MyListScreen> {
                   return const MyListShimmer(
                       showFilters: true, isSliver: false);
                 } else if (state is ViewerLoaded) {
-                  if (animeListBloc == null) {
-                    animeListBloc = MediaListBloc(
-                      type: Enum$MediaType.ANIME,
-                      userId: state.user.id,
+                  animeListBloc ??= context.read<AnimeListBloc>()
+                    ..setUserId(
+                      viewerBloc.getUser().id,
                     );
-                    mangaListBloc = MediaListBloc(
-                      type: Enum$MediaType.MANGA,
-                      userId: state.user.id,
+                  mangaListBloc ??= context.read<MangaListBloc>()
+                    ..setUserId(
+                      viewerBloc.getUser().id,
                     );
-                  }
 
                   return isAnime
                       ? _buildMediaSection(
@@ -166,20 +165,25 @@ class _MyListScreenState extends State<MyListScreen> {
           bloc: bloc,
           builder: (context, state) {
             if (state is MediaListInitial) {
-              bloc.add(LoadMediaList(client));
+              bloc.add(LoadMediaList(client: client));
             }
             if (state is MediaListInitial || state is MediaListLoading) {
               return const MyListShimmer(showFilters: false, isSliver: true);
             } else if (state is MediaListLoaded) {
-              return ListSections(
-                sections: state.listCollection.lists,
-                type: type,
+              return SliverPadding(
+                padding: const EdgeInsets.only(bottom: 48),
+                sliver: ListSections(
+                  sections: state.listCollection.lists,
+                  type: type,
+                  scoreFormat:
+                      bloc.options?.scoreFormat ?? Enum$ScoreFormat.POINT_10,
+                ),
               );
             } else if (state is MediaListError) {
               return _buildErrorWidget(
                 type: state.type,
                 onTryAgain: () {
-                  bloc.add(LoadMediaList(client));
+                  bloc.add(LoadMediaList(client: client));
                 },
                 message: state.message,
                 isSliver: true,
@@ -226,8 +230,8 @@ class _MyListScreenState extends State<MyListScreen> {
     return Future.delayed(Duration.zero, () {
       searchAnimeCubit.searchController.clear();
       searchMangaCubit.searchController.clear();
-      animeListBloc?.add(LoadMediaList(client));
-      mangaListBloc?.add(LoadMediaList(client));
+      animeListBloc?.add(LoadMediaList(client: client));
+      mangaListBloc?.add(LoadMediaList(client: client));
     });
   }
 

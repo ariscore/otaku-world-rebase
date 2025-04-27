@@ -183,10 +183,10 @@ class FormattingUtils {
     }
   }
 
-  static String getMediaFormatString(Enum$MediaFormat? format) {
+  static String getMediaFormatString(Enum$MediaFormat? format, {bool forList = false,}) {
     switch (format) {
       case Enum$MediaFormat.TV:
-        return 'TV Show';
+        return forList ? 'TV' : 'TV Show';
       case Enum$MediaFormat.TV_SHORT:
         return 'TV Short';
       case Enum$MediaFormat.MOVIE:
@@ -202,7 +202,7 @@ class FormattingUtils {
       case Enum$MediaFormat.MANGA:
         return 'Manga';
       case Enum$MediaFormat.NOVEL:
-        return 'Light Novel';
+        return forList ? 'Novel' : 'Light Novel';
       case Enum$MediaFormat.ONE_SHOT:
         return 'One Shot';
       default:
@@ -212,7 +212,7 @@ class FormattingUtils {
 
   static Enum$MediaFormat getMediaFormat(String format) {
     switch (format) {
-      case 'TV Show':
+      case 'TV Show' || 'TV':
         return Enum$MediaFormat.TV;
       case 'TV Short':
         return Enum$MediaFormat.TV_SHORT;
@@ -228,7 +228,7 @@ class FormattingUtils {
         return Enum$MediaFormat.MUSIC;
       case 'Manga':
         return Enum$MediaFormat.MANGA;
-      case 'Light Novel':
+      case 'Light Novel' || 'Novel':
         return Enum$MediaFormat.NOVEL;
       case 'One Shot':
         return Enum$MediaFormat.ONE_SHOT;
@@ -271,6 +271,47 @@ class FormattingUtils {
         return Enum$MediaStatus.HIATUS;
       default:
         return Enum$MediaStatus.$unknown;
+    }
+  }
+
+  static Enum$MediaListStatus getMediaListStatus(String status) {
+    switch (status) {
+      case 'Watching' || 'Reading':
+        return Enum$MediaListStatus.CURRENT;
+      case 'Planning':
+        return Enum$MediaListStatus.PLANNING;
+      case 'Completed':
+        return Enum$MediaListStatus.COMPLETED;
+      case 'Dropped':
+        return Enum$MediaListStatus.DROPPED;
+      case 'Paused':
+        return Enum$MediaListStatus.PAUSED;
+      case 'Rewatching' || 'Rereading':
+        return Enum$MediaListStatus.REPEATING;
+      default:
+        return Enum$MediaListStatus.$unknown;
+    }
+  }
+
+  static String getMediaListStatusString(
+    Enum$MediaListStatus? status, {
+    bool isAnime = true,
+  }) {
+    switch (status) {
+      case Enum$MediaListStatus.CURRENT:
+        return isAnime ? 'Watching' : 'Reading';
+      case Enum$MediaListStatus.PLANNING:
+        return 'Planning';
+      case Enum$MediaListStatus.COMPLETED:
+        return 'Completed';
+      case Enum$MediaListStatus.DROPPED:
+        return 'Dropped';
+      case Enum$MediaListStatus.PAUSED:
+        return 'Paused';
+      case Enum$MediaListStatus.REPEATING:
+        return isAnime ? 'Rewatching' : 'Rereading';
+      default:
+        return 'Unknown';
     }
   }
 

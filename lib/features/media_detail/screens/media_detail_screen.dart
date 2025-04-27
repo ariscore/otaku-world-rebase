@@ -11,12 +11,14 @@ import 'package:otaku_world/bloc/media_detail/staff/staff_bloc.dart';
 import 'package:otaku_world/features/media_detail/widgets/media_app_bar.dart';
 import 'package:otaku_world/features/media_detail/widgets/media_floating_action_button.dart';
 import 'package:otaku_world/features/profile/widgets/keep_alive_tab.dart';
+import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/media_detail/characters/characters_bloc.dart';
 import '../../../bloc/media_detail/media_detail_bloc.dart';
 import '../../../bloc/viewer/viewer_bloc.dart';
 import '../../../generated/assets.dart';
+import '../../../graphql/__generated/graphql/schema.graphql.dart';
 import '../../../theme/colors.dart';
 import '../tabs/characters/characters.dart' as ch;
 import '../tabs/overview/overview.dart';
@@ -137,19 +139,29 @@ class MediaDetailScreen extends HookWidget {
         floatingActionButton: BlocBuilder<MediaDetailBloc, MediaDetailState>(
           builder: (context, state) {
             if (state is MediaDetailLoaded) {
-              final String icon = state.media.mediaListEntry == null &&
-                      state.media.mediaListEntry?.status == null
-                  ? Assets.iconsMediaAdd
-                  : Assets.iconsMediaEdit;
               final user = context.read<ViewerBloc>().getUser();
-
               return MediaFloatingActionButton(
                 tabController: tabController,
-                isAdd: (state.media.mediaListEntry == null &&
-                    state.media.mediaListEntry?.status == null),
+                media: Fragment$MediaShort(
+                  id: mediaId,
+                  title: Fragment$MediaShort$title(
+                    userPreferred: state.media.title?.userPreferred ?? '',
+                    english: state.media.title?.english ?? '',
+                    romaji: state.media.title?.romaji ?? '',
+                    native: state.media.title?.native ?? '',
+                  ),
+                  format: state.media.format,
+                  type: state.media.type,
+                  episodes: state.media.episodes ?? 0,
+                  chapters: state.media.chapters ?? 0,
+                  volumes: state.media.volumes ?? 0,
+                  status: state.media.status,
+                ),
                 reviewIndex: tabs.length - 1,
                 userId: user.id,
                 mediaId: mediaId,
+                options: state.options,
+                entry: state.media.mediaListEntry,
               );
             } else {
               return const SizedBox();

@@ -7,10 +7,16 @@ import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'list_section.dart';
 
 class ListSections extends StatelessWidget {
-  const ListSections({super.key, required this.sections, required this.type});
+  const ListSections({
+    super.key,
+    required this.sections,
+    required this.type,
+    required this.scoreFormat,
+  });
 
   final List<Query$MediaList$MediaListCollection$lists?>? sections;
   final Enum$MediaType type;
+  final Enum$ScoreFormat scoreFormat;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +54,10 @@ class ListSections extends StatelessWidget {
       sliver: SliverList.builder(
         itemCount: sections?.length ?? 0,
         itemBuilder: (context, index) {
-          return ListSection(section: sections?[index]);
+          return ListSection(
+            section: sections?[index],
+            scoreFormat: scoreFormat,
+          );
         },
       ),
     );
