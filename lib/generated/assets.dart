@@ -78,8 +78,10 @@ class Assets {
   static const String iconsOpenLink2 = 'assets/icons/open-link2.svg';
   static const String iconsPostIcon = 'assets/icons/post-icon.svg';
   static const String iconsRemove = 'assets/icons/remove.svg';
+  static const String iconsRemove2 = 'assets/icons/remove-2.svg';
   static const String iconsReviewAdd = 'assets/icons/review-add.svg';
   static const String iconsSave = 'assets/icons/save.svg';
+  static const String iconsSaveTick = 'assets/icons/save-tick.svg';
   static const String iconsSearch = 'assets/icons/search.svg';
   static const String iconsSearchSmall = 'assets/icons/search-small.svg';
   static const String iconsSend = 'assets/icons/send.svg';
@@ -118,6 +120,15 @@ class Assets {
   static const String onBoardingOnBoarding2 = 'assets/images/on_boarding/on_boarding_2.png';
   static const String onBoardingOnBoarding3 = 'assets/images/on_boarding/on_boarding_3.png';
   static const String onBoardingOnBoarding4 = 'assets/images/on_boarding/on_boarding_4.png';
+  static const String smileyHappy = 'assets/icons/smiley/happy.svg';
+  static const String smileyHappyFilled = 'assets/icons/smiley/happy-filled.svg';
+  static const String smileyHappyOutlined = 'assets/icons/smiley/happy-outlined.svg';
+  static const String smileyNormal = 'assets/icons/smiley/normal.svg';
+  static const String smileyNormalFilled = 'assets/icons/smiley/normal-filled.svg';
+  static const String smileyNormalOutlined = 'assets/icons/smiley/normal_outlined.svg';
+  static const String smileySad = 'assets/icons/smiley/sad.svg';
+  static const String smileySadFilled = 'assets/icons/smiley/sad-filled.svg';
+  static const String smileySadOutlined = 'assets/icons/smiley/sad_outlined.svg';
   static const String staffKana = 'assets/images/discover/staff/kana.png';
   static const String staffKenjirou = 'assets/images/discover/staff/kenjirou.jpg';
   static const String staffMamoru = 'assets/images/discover/staff/mamoru.png';

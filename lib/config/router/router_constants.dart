@@ -41,6 +41,9 @@ class RouteConstants {
   static const replyActivity = '/reply-activity';
   static const editActivityReply = '/edit-activity-reply';
   static const myList = '/my-list';
+  static const animeListFilter = '/anime-list-filter';
+  static const mangaListFilter = '/manga-list-filter';
+  static const editMediaList = '/edit-media-list';
   static const discoverAnime = '/discover-anime';
   static const animeFilters = '/anime-filters';
   static const filterAnimeSlider = '/filter-anime-slider';

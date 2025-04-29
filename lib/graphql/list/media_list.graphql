@@ -14,20 +14,7 @@ query MediaList($userId: Int, $type: MediaType) {
                 large
             }
             mediaListOptions {
-                scoreFormat
-                rowOrder
-                animeList {
-                    sectionOrder
-                    customLists
-                    splitCompletedSectionByFormat
-                    theme
-                }
-                mangaList {
-                    sectionOrder
-                    customLists
-                    splitCompletedSectionByFormat
-                    theme
-                }
+                ...MediaListOptions
             }
         }
     }

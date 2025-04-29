@@ -51,20 +51,32 @@ class _ScrollToTopFABState extends State<ScrollToTopFAB> {
 
     return _isVisible
         ? Animate(
-      effects: const [ScaleEffect()],
-      child: FloatingActionButton.small(
-        heroTag: widget.tag,
-        onPressed: () {
-          widget.controller.animateTo(
-            0,
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeInOut,
-          );
-        },
-        backgroundColor: AppColors.sunsetOrange.withOpacity(0.60),
-        child: SvgPicture.asset(Assets.iconsArrowUp),
-      ),
-    )
+            effects: const [ScaleEffect()],
+            child: FloatingActionButton.small(
+              heroTag: widget.tag,
+              onPressed: () {
+                widget.controller
+                    .animateTo(
+                  0,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                )
+                    .then(
+                  (_) {
+                    if (mounted && widget.controller.position.pixels != 0) {
+                      widget.controller.animateTo(
+                        0,
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeInOut,
+                      );
+                    }
+                  },
+                );
+              },
+              backgroundColor: AppColors.sunsetOrange.withOpacity(0.60),
+              child: SvgPicture.asset(Assets.iconsArrowUp),
+            ),
+          )
         : const SizedBox();
   }
 }

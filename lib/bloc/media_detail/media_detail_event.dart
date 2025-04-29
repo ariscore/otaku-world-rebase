@@ -14,6 +14,12 @@ class LoadMediaDetail extends MediaDetailEvent {
   const LoadMediaDetail({required this.id, required this.client});
 }
 
-class ResetMediaData extends MediaDetailEvent{
+class ResetMediaData extends MediaDetailEvent {}
 
+class UpdateDetailListEntry extends MediaDetailEvent {
+  const UpdateDetailListEntry({required this.entry});
+
+  final Fragment$MediaListEntry entry;
 }
+
+class RemoveDetailListEntry extends MediaDetailEvent {}

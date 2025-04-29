@@ -11,6 +11,7 @@ import 'package:otaku_world/bloc/discover/characters/most_favorite_characters_bl
 import 'package:otaku_world/bloc/discover/staff/birthday_staff_bloc.dart';
 import 'package:otaku_world/bloc/discover/staff/most_favorite_staff_bloc.dart';
 import 'package:otaku_world/bloc/discover/studios/most_favorite_studios_bloc.dart';
+import 'package:otaku_world/bloc/media_list/media_list/media_list_bloc.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/bloc/profile/favorite_anime/favorite_anime_bloc.dart';
 import 'package:otaku_world/bloc/profile/favorite_characters/favorite_characters_bloc.dart';
@@ -62,6 +63,7 @@ import 'package:otaku_world/features/discover/discover_anime/screens/filter_anim
 import 'package:otaku_world/features/discover/discover_characters/screens/characters_discover_screen.dart';
 import 'package:otaku_world/features/discover/discover_manga/screens/filter_manga_screen.dart';
 import 'package:otaku_world/features/discover/discover_manga/screens/manga_discover_screen.dart';
+import 'package:otaku_world/features/discover/discover_characters/screens/characters_discover_screen.dart';
 import 'package:otaku_world/features/discover/discover_staff/screens/staff_discover_screen.dart';
 import 'package:otaku_world/features/discover/discover_studios/screens/studios_discover_screen.dart';
 import 'package:otaku_world/features/discover/screens/discover_staff_wrapper.dart';
@@ -71,6 +73,9 @@ import 'package:otaku_world/features/media_detail/models/recommendations_paramet
 import 'package:otaku_world/features/media_detail/screens/media_detail_screen.dart';
 import 'package:otaku_world/features/media_detail/screens/recommendations_grid_screen.dart';
 import 'package:otaku_world/features/media_detail/screens/recommendations_slider_screen.dart';
+import 'package:otaku_world/features/my_list/screens/anime_list_filter_screen.dart';
+import 'package:otaku_world/features/my_list/screens/edit_list_entry_screen.dart';
+import 'package:otaku_world/features/my_list/screens/manga_list_filter_screen.dart';
 import 'package:otaku_world/features/profile/screens/favorite_anime_screen.dart';
 import 'package:otaku_world/features/profile/screens/favorite_anime_slider.dart';
 import 'package:otaku_world/features/profile/screens/favorite_characters_screen.dart';
@@ -111,7 +116,6 @@ import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/user_stats.graphql.dart';
 import 'package:otaku_world/observers/go_route_observer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../bloc/media_detail/media_detail_bloc.dart';
 import '../../bloc/reviews/reviews/reviews_bloc.dart';
@@ -132,11 +136,18 @@ import '../../features/social/screens/activity_replies_screen.dart';
 import '../../features/social/screens/social_screen.dart';
 
 part 'bottom_nav_routes.dart';
+
 part 'discover_routes.dart';
+
 part 'home_routes.dart';
-part 'profile_routes.dart';
-part 'settings_routes.dart';
+
 part 'social_routes.dart';
+
+part 'profile_routes.dart';
+
+part 'settings_routes.dart';
+
+part 'list_routes.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorHomeKey = GlobalKey<NavigatorState>();
@@ -162,6 +173,7 @@ final router = GoRouter(
     ...socialRoutes,
     ...profileRoutes,
     ...settingsRoutes,
+    ...listRoutes,
     GoRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: RouteConstants.mediaDetail,

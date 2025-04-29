@@ -8,6 +8,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/bloc/filter/search/search_media_cubit.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/media_list/media_list/media_list_bloc.dart';
+import 'package:otaku_world/bloc/media_list/save_list_entry/save_list_entry_bloc.dart';
 import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
 import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/types/enums.dart';
@@ -20,6 +21,7 @@ import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/extensions.dart';
+import 'package:otaku_world/utils/ui_utils.dart';
 
 import '../../../bloc/bottom_nav_bar/bottom_nav_bar_cubit.dart';
 import '../widgets/list_sections.dart';
@@ -40,6 +42,7 @@ class _MyListScreenState extends State<MyListScreen> {
   @override
   Widget build(BuildContext context) {
     final client = context.read<GraphqlClientCubit>().getClient()!;
+
     final viewerBloc = context.read<ViewerBloc>();
     final scrollController = useScrollController();
 
@@ -68,56 +71,61 @@ class _MyListScreenState extends State<MyListScreen> {
       return null;
     }, const []);
 
-    return Scaffold(
-      floatingActionButton: ScrollToTopFAB(
-        controller: scrollController,
-        tag: 'my_list',
-      ),
-      body: RefreshIndicator(
-        backgroundColor: AppColors.raisinBlack,
-        onRefresh: () => _refresh(client),
-        child: BlocBuilder<ViewerBloc, ViewerState>(
-          builder: (context, state) {
-            if (state is ViewerInitial || state is ViewerLoading) {
-              return const MyListShimmer(showFilters: true, isSliver: false);
-            } else if (state is ViewerLoaded) {
-              if (animeListBloc == null) {
-                animeListBloc = MediaListBloc(
-                  type: Enum$MediaType.ANIME,
-                  userId: state.user.id,
-                );
-                mangaListBloc = MediaListBloc(
-                  type: Enum$MediaType.MANGA,
-                  userId: state.user.id,
-                );
-              }
-
-              return isAnime
-                  ? _buildMediaSection(
-                      client,
-                      scrollController,
-                      bloc: animeListBloc!,
-                      type: Enum$MediaType.ANIME,
-                    )
-                  : _buildMediaSection(
-                      client,
-                      scrollController,
-                      bloc: mangaListBloc!,
-                      type: Enum$MediaType.MANGA,
+    return BlocProvider(
+      create: (context) => SaveListEntryBloc(client),
+      child: BlocListener<SaveListEntryBloc, SaveListEntryState>(
+        listener: _listBlocListener,
+        child: Scaffold(
+          floatingActionButton: ScrollToTopFAB(
+            controller: scrollController,
+            tag: 'my_list',
+          ),
+          body: RefreshIndicator(
+            backgroundColor: AppColors.raisinBlack,
+            onRefresh: () => _refresh(client),
+            child: BlocBuilder<ViewerBloc, ViewerState>(
+              builder: (context, state) {
+                if (state is ViewerInitial || state is ViewerLoading) {
+                  return const MyListShimmer(
+                      showFilters: true, isSliver: false);
+                } else if (state is ViewerLoaded) {
+                  animeListBloc ??= context.read<AnimeListBloc>()
+                    ..setUserId(
+                      viewerBloc.getUser().id,
                     );
-            } else if (state is ViewerError) {
-              return _buildErrorWidget(
-                type: state.type,
-                onTryAgain: () {
-                  viewerBloc.add(LoadViewer(client));
-                },
-                message: state.message,
-                isSliver: false,
-              );
-            } else {
-              return const SliverToBoxAdapter();
-            }
-          },
+                  mangaListBloc ??= context.read<MangaListBloc>()
+                    ..setUserId(
+                      viewerBloc.getUser().id,
+                    );
+
+                  return isAnime
+                      ? _buildMediaSection(
+                          client,
+                          scrollController,
+                          bloc: animeListBloc!,
+                          type: Enum$MediaType.ANIME,
+                        )
+                      : _buildMediaSection(
+                          client,
+                          scrollController,
+                          bloc: mangaListBloc!,
+                          type: Enum$MediaType.MANGA,
+                        );
+                } else if (state is ViewerError) {
+                  return _buildErrorWidget(
+                    type: state.type,
+                    onTryAgain: () {
+                      viewerBloc.add(LoadViewer(client));
+                    },
+                    message: state.message,
+                    isSliver: false,
+                  );
+                } else {
+                  return const SliverToBoxAdapter();
+                }
+              },
+            ),
+          ),
         ),
       ),
     );
@@ -132,6 +140,7 @@ class _MyListScreenState extends State<MyListScreen> {
     log('Rebuilding media section');
     return CustomScrollView(
       controller: controller,
+      physics: const AlwaysScrollableScrollPhysics(),
       slivers: [
         SliverToBoxAdapter(
           child: ListSearchAppBar(
@@ -139,6 +148,7 @@ class _MyListScreenState extends State<MyListScreen> {
             searchCubit: type == Enum$MediaType.ANIME
                 ? searchAnimeCubit
                 : searchMangaCubit,
+            type: type,
           ),
         ),
         SliverToBoxAdapter(
@@ -155,21 +165,25 @@ class _MyListScreenState extends State<MyListScreen> {
           bloc: bloc,
           builder: (context, state) {
             if (state is MediaListInitial) {
-              bloc.add(LoadMediaList(client));
+              bloc.add(LoadMediaList(client: client));
             }
             if (state is MediaListInitial || state is MediaListLoading) {
               return const MyListShimmer(showFilters: false, isSliver: true);
             } else if (state is MediaListLoaded) {
-              log('Media list loaded state');
-              return ListSections(
-                sections: state.listCollection.lists,
-                type: type,
+              return SliverPadding(
+                padding: const EdgeInsets.only(bottom: 48),
+                sliver: ListSections(
+                  sections: state.listCollection.lists,
+                  type: type,
+                  scoreFormat:
+                      bloc.options?.scoreFormat ?? Enum$ScoreFormat.POINT_10,
+                ),
               );
             } else if (state is MediaListError) {
               return _buildErrorWidget(
                 type: state.type,
                 onTryAgain: () {
-                  bloc.add(LoadMediaList(client));
+                  bloc.add(LoadMediaList(client: client));
                 },
                 message: state.message,
                 isSliver: true,
@@ -216,8 +230,25 @@ class _MyListScreenState extends State<MyListScreen> {
     return Future.delayed(Duration.zero, () {
       searchAnimeCubit.searchController.clear();
       searchMangaCubit.searchController.clear();
-      animeListBloc?.add(LoadMediaList(client));
-      mangaListBloc?.add(LoadMediaList(client));
+      animeListBloc?.add(LoadMediaList(client: client));
+      mangaListBloc?.add(LoadMediaList(client: client));
     });
+  }
+
+  void _listBlocListener(BuildContext context, SaveListEntryState state) {
+    if (state is IncrementingEpisode) {
+      UIUtils.showProgressDialog(context);
+    } else if (state is IncrementEpisodeError) {
+      UIUtils.hideProgressDialog(context);
+      UIUtils.showSnackBar(context, state.message);
+    } else if (state is IncrementedEpisode) {
+      log('Success: ${state.entry}');
+      UIUtils.hideProgressDialog(context);
+      if (isAnime) {
+        animeListBloc?.add(UpdateListEntry(entry: state.entry));
+      } else {
+        mangaListBloc?.add(UpdateListEntry(entry: state.entry));
+      }
+    }
   }
 }

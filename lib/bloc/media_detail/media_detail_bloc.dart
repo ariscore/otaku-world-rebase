@@ -18,9 +18,12 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
   MediaDetailBloc() : super(MediaDetailInitial()) {
     on<LoadMediaDetail>(_onLoadMediaDetail);
     on<ResetMediaData>(_onResetMedia);
+    on<UpdateDetailListEntry>(_onUpdateListEntry);
+    on<RemoveDetailListEntry>(_onRemoveListEntry);
   }
 
   late RecommendationAnimeBloc recommendationAnimeBloc;
+  bool isDeletedEntry = false;
 
   FutureOr<void> _onLoadMediaDetail(
     LoadMediaDetail event,
@@ -43,8 +46,44 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
     if (response.hasException) {
       emit(MediaDetailError(response.exception.toString()));
     } else {
-      emit(MediaDetailLoaded(media: response.parsedData!.Media!));
+      emit(
+        MediaDetailLoaded(
+          media: response.parsedData!.Media!,
+          options: response.parsedData?.Viewer?.mediaListOptions,
+        ),
+      );
     }
+  }
+
+  FutureOr<void> _onUpdateListEntry(
+    UpdateDetailListEntry event,
+    Emitter<MediaDetailState> emit,
+  ) async {
+    final loadedState = state as MediaDetailLoaded;
+    emit(
+      MediaDetailLoaded(
+        media: loadedState.media.copyWith(
+          mediaListEntry: event.entry,
+        ),
+        options: loadedState.options,
+      ),
+    );
+  }
+
+  FutureOr<void> _onRemoveListEntry(
+    RemoveDetailListEntry event,
+    Emitter<MediaDetailState> emit,
+  ) async {
+    isDeletedEntry = true;
+    final loadedState = state as MediaDetailLoaded;
+    emit(
+      MediaDetailLoaded(
+        media: loadedState.media.copyWith(
+          mediaListEntry: null,
+        ),
+        options: loadedState.options,
+      ),
+    );
   }
 
   @override
