@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:otaku_world/graphql/__generated/graphql/list/media_list.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
@@ -22,28 +21,18 @@ class ListSection extends StatefulWidget {
   State<ListSection> createState() => _ListSectionState();
 }
 
-class _ListSectionState extends State<ListSection> {
-  final controller = ExpandableController();
-
-  @override
-  void initState() {
-    controller.addListener(() {
-      log('Expanded: ${controller.expanded}');
-      if (controller.expanded) {
-        // setState(() {
-        //   log('Set state called');
-        // });
-      }
-    });
-    super.initState();
-  }
+class _ListSectionState extends State<ListSection>
+    with TickerProviderStateMixin {
+  bool isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
-    log('Rebuilding section: ${widget.section?.name}');
+    log('Rebuilding section: ${widget.section?.name} | Expanded: $isExpanded');
     if (widget.section == null || (widget.section!.entries?.isEmpty ?? true)) {
       return const SizedBox();
     }
+
+    final isExpandable = widget.section!.entries!.length > 5;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -54,42 +43,28 @@ class _ListSectionState extends State<ListSection> {
               ),
         ),
         const SizedBox(height: 10),
-        (widget.section!.entries!.length < 5)
+        !isExpandable
             ? _buildList(length: widget.section?.entries?.length ?? 0)
-            : ExpandableNotifier(
-                controller: controller,
-                child: Expandable(
-                  collapsed: Column(
-                    children: [
-                      _buildList(length: 4),
-                      _buildExpandButton(isExpanded: false),
-                    ],
-                  ),
-                  expanded: Column(
-                    children: [
-                      _buildList(length: widget.section?.entries?.length ?? 0),
-                      _buildExpandButton(isExpanded: true),
-                    ],
-                  ),
-                ),
-              ),
+        : AnimatedSize(
+          alignment: Alignment.topCenter,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+          child: isExpanded
+              ? _buildList(length: widget.section?.entries?.length ?? 0)
+              : _buildList(length: 4),
+        ),
+        if (isExpandable)
+          _buildExpandButton()
       ],
     );
   }
 
-  Widget _buildExpandButton({required bool isExpanded}) {
+  Widget _buildExpandButton() {
     return TextButton(
-      // theme: ExpandableThemeData(
-      //   inkWellBorderRadius: BorderRadius.circular(10),
-      // ),
       onPressed: () {
-        controller.toggle();
-        // Future.delayed(
-        //   const Duration(seconds: 1),
-        //   () {
-        //     setState(() {});
-        //   },
-        // );
+        setState(() {
+          isExpanded = !isExpanded;
+        });
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -107,26 +82,6 @@ class _ListSectionState extends State<ListSection> {
         ],
       ),
     );
-    // return ExpandableButton(
-    //   theme: ExpandableThemeData(
-    //     inkWellBorderRadius: BorderRadius.circular(10),
-    //   ),
-    //   child: Row(
-    //     mainAxisAlignment: MainAxisAlignment.center,
-    //     children: [
-    //       Text(
-    //         isExpanded ? 'See Fewer' : 'See All',
-    //         style: const TextStyle(color: Colors.white),
-    //       ),
-    //       Icon(
-    //         isExpanded
-    //             ? Icons.keyboard_arrow_up_rounded
-    //             : Icons.keyboard_arrow_down_rounded,
-    //         color: AppColors.sunsetOrange,
-    //       ),
-    //     ],
-    //   ),
-    // );
   }
 
   Widget _buildList({required int length}) {
@@ -146,10 +101,6 @@ class _ListSectionState extends State<ListSection> {
             },
             childCount: length,
           ),
-          // itemCount: length,
-          // itemBuilder: (context, index) {
-          //   return MediaListCard(entry: widget.section?.entries?[index]);
-          // },
         )
       ],
     );
