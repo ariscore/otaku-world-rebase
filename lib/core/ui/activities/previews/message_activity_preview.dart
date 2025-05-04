@@ -47,7 +47,7 @@ class MessageActivityPreview extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             // Main content
-            Markdown(data: text),
+            MarkdownWidget(data: text),
             // Other details
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

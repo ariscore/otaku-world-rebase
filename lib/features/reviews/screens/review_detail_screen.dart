@@ -184,7 +184,7 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                         right: 15,
                         bottom: 10,
                       ),
-                      child: Markdown(data: review.body.toString()),
+                      child: MarkdownWidget(data: review.body.toString()),
                     ),
                     // Padding(
                     //   padding: const EdgeInsets.only(

@@ -79,7 +79,7 @@ class MessageActivityCard extends StatelessWidget {
       //   activity.message!,
       //   style: Theme.of(context).textTheme.headlineSmall,
       // ),
-      child: Markdown(data: activity.message!),
+      child: MarkdownWidget(data: activity.message!),
     );
   }
 }
