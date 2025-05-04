@@ -63,7 +63,7 @@ class TextActivityCard extends StatelessWidget {
       //   activity.text!,
       //   style: Theme.of(context).textTheme.headlineSmall,
       // ),
-      child: Markdown(
+      child: MarkdownWidget(
         data: activity.text!,
       ),
     );

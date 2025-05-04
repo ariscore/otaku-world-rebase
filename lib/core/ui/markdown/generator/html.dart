@@ -39,8 +39,8 @@ List<SpanNode> parseHtml(
   TextStyle? parentStyle,
 }) {
   try {
-    final text =
-        node.textContent.replaceAll(RegExp(r'(\r?\n)|(\r?\t)|(\r)'), '');
+    final text = node.textContent.replaceAll(
+        visitor?.splitRegExp ?? WidgetVisitor.defaultSplitRegExp, '');
     if (!text.contains(htmlRep)) return [TextNode(text: node.text)];
     h.DocumentFragment document = parseFragment(text);
     return HtmlToSpanVisitor(visitor: visitor, parentStyle: parentStyle)
@@ -52,22 +52,45 @@ List<SpanNode> parseHtml(
 }
 
 class HtmlElement extends m.Element {
-  HtmlElement(super.tag, super.children, this.textContent);
-
   @override
   final String textContent;
+
+  HtmlElement(super.tag, super.children, this.textContent);
 }
 
 class HtmlToSpanVisitor extends TreeVisitor {
+  final List<SpanNode> _spans = [];
+  final List<SpanNode> _spansStack = [];
+  final WidgetVisitor visitor;
+  final TextStyle parentStyle;
+
   HtmlToSpanVisitor({WidgetVisitor? visitor, TextStyle? parentStyle})
       : visitor = visitor ?? WidgetVisitor(),
         parentStyle = parentStyle ?? const TextStyle();
 
-  final TextStyle parentStyle;
-  final WidgetVisitor visitor;
+  List<SpanNode> toVisit(List<h.Node> nodes) {
+    _spans.clear();
+    for (final node in nodes) {
+      final emptyNode = ConcreteElementNode(style: parentStyle);
+      _spans.add(emptyNode);
+      _spansStack.add(emptyNode);
+      visit(node);
+      _spansStack.removeLast();
+    }
+    final result = List.of(_spans);
+    _spans.clear();
+    _spansStack.clear();
+    return result;
+  }
 
-  final List<SpanNode> _spans = [];
-  final List<SpanNode> _spansStack = [];
+  @override
+  void visitText(h.Text node) {
+    final last = _spansStack.last;
+    if (last is ElementNode) {
+      final textNode = TextNode(text: node.text);
+      last.accept(textNode);
+    }
+  }
 
   @override
   void visitElement(h.Element node) {
@@ -89,29 +112,5 @@ class HtmlToSpanVisitor extends TreeVisitor {
       visit(child);
     }
     _spansStack.removeLast();
-  }
-
-  @override
-  void visitText(h.Text node) {
-    final last = _spansStack.last;
-    if (last is ElementNode) {
-      final textNode = TextNode(text: node.text);
-      last.accept(textNode);
-    }
-  }
-
-  List<SpanNode> toVisit(List<h.Node> nodes) {
-    _spans.clear();
-    for (final node in nodes) {
-      final emptyNode = ConcreteElementNode(style: parentStyle);
-      _spans.add(emptyNode);
-      _spansStack.add(emptyNode);
-      visit(node);
-      _spansStack.removeLast();
-    }
-    final result = List.of(_spans);
-    _spans.clear();
-    _spansStack.clear();
-    return result;
   }
 }

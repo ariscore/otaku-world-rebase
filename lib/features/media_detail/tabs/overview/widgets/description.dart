@@ -21,7 +21,7 @@ class Description extends StatelessWidget {
         right: 10,
       ),
       decoration: UIUtils.getContainerDecoration(),
-      child: Markdown(
+      child: MarkdownWidget(
         data: description?.checkIfEmpty() ?? '*No Description*',
       ),
     );

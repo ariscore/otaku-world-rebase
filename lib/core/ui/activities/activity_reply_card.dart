@@ -69,7 +69,7 @@ class ActivityReplyCard extends StatelessWidget {
               _buildUser(context),
               const SizedBox(height: 10),
               // Main content
-              Markdown(data: activityReply.text!),
+              MarkdownWidget(data: activityReply.text!),
               // Other details
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
