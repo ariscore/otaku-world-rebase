@@ -93,4 +93,5 @@ class RouteConstants {
 
   static const characterDetail = '/character-detail';
   static const studioDetail = '/studio-detail';
+  static const staffDetail = '/staff-detail';
 }

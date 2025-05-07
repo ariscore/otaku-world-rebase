@@ -280,6 +280,13 @@ const documentNodeQuerygetStaffDetail = DocumentNode(definitions: [
         directives: [],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'age'),
             alias: null,
             arguments: [],
@@ -621,6 +628,7 @@ class Query$getStaffDetail$Widget
 
 class Query$getStaffDetail$Staff {
   Query$getStaffDetail$Staff({
+    required this.id,
     this.age,
     this.bloodType,
     this.dateOfBirth,
@@ -640,6 +648,7 @@ class Query$getStaffDetail$Staff {
   });
 
   factory Query$getStaffDetail$Staff.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
     final l$age = json['age'];
     final l$bloodType = json['bloodType'];
     final l$dateOfBirth = json['dateOfBirth'];
@@ -657,6 +666,7 @@ class Query$getStaffDetail$Staff {
     final l$siteUrl = json['siteUrl'];
     final l$$__typename = json['__typename'];
     return Query$getStaffDetail$Staff(
+      id: (l$id as int),
       age: (l$age as int?),
       bloodType: (l$bloodType as String?),
       dateOfBirth: l$dateOfBirth == null
@@ -689,6 +699,8 @@ class Query$getStaffDetail$Staff {
       $__typename: (l$$__typename as String),
     );
   }
+
+  final int id;
 
   final int? age;
 
@@ -724,6 +736,8 @@ class Query$getStaffDetail$Staff {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
     final l$age = age;
     _resultData['age'] = l$age;
     final l$bloodType = bloodType;
@@ -762,6 +776,7 @@ class Query$getStaffDetail$Staff {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$age = age;
     final l$bloodType = bloodType;
     final l$dateOfBirth = dateOfBirth;
@@ -779,6 +794,7 @@ class Query$getStaffDetail$Staff {
     final l$siteUrl = siteUrl;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$id,
       l$age,
       l$bloodType,
       l$dateOfBirth,
@@ -807,6 +823,11 @@ class Query$getStaffDetail$Staff {
     }
     if (other is! Query$getStaffDetail$Staff ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$age = age;
@@ -923,6 +944,7 @@ abstract class CopyWith$Query$getStaffDetail$Staff<TRes> {
       _CopyWithStubImpl$Query$getStaffDetail$Staff;
 
   TRes call({
+    int? id,
     int? age,
     String? bloodType,
     Fragment$FuzzyDate? dateOfBirth,
@@ -960,6 +982,7 @@ class _CopyWithImpl$Query$getStaffDetail$Staff<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? age = _undefined,
     Object? bloodType = _undefined,
     Object? dateOfBirth = _undefined,
@@ -978,6 +1001,7 @@ class _CopyWithImpl$Query$getStaffDetail$Staff<TRes>
     Object? $__typename = _undefined,
   }) =>
       _then(Query$getStaffDetail$Staff(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
         age: age == _undefined ? _instance.age : (age as int?),
         bloodType: bloodType == _undefined
             ? _instance.bloodType
@@ -1063,6 +1087,7 @@ class _CopyWithStubImpl$Query$getStaffDetail$Staff<TRes>
   TRes _res;
 
   call({
+    int? id,
     int? age,
     String? bloodType,
     Fragment$FuzzyDate? dateOfBirth,

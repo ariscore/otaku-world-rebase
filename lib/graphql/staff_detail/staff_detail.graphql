@@ -1,9 +1,10 @@
 query getStaffDetail($staffId: Int) {
     Staff(id: $staffId) {
+        id
         age
         bloodType
         dateOfBirth {
-           ...FuzzyDate
+            ...FuzzyDate
         }
         dateOfDeath {
             ...FuzzyDate
