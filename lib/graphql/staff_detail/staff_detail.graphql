@@ -25,5 +25,26 @@ query getStaffDetail($staffId: Int) {
         }
         primaryOccupations
         siteUrl
+        characterMedia(page: 1){
+
+            pageInfo {
+                ...PageInfo
+            }
+            edges {
+                characterRole
+            }
+        }
+        staffMedia(page: 1,  ){
+            pageInfo {
+                ...PageInfo
+            }
+            edges {
+                id
+                node {
+                    type
+                }
+            }
+        }
+
     }
 }

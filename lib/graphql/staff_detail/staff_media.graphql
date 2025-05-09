@@ -1,0 +1,29 @@
+query staffMedia(
+    $staffId : Int
+    $sort: [MediaSort]
+    $page: Int
+    $onList: Boolean
+    $type: MediaType
+) {
+    Staff(id: $staffId) {
+        id
+        staffMedia(page: $page, type: $type, sort: $sort, onList: $onList){
+            pageInfo {
+                ...PageInfo
+            }
+            edges {
+                staffRole
+                node {
+                    id
+                    type
+                    title {
+                        userPreferred
+                    }
+                    coverImage {
+                        large
+                    }
+                }
+            }
+        }
+    }
+}
