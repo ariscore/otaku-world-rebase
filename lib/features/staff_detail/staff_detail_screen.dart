@@ -62,11 +62,15 @@ class StaffDetailScreen extends HookWidget {
                 },
                 body: TabBarView(
                   controller: tabController,
-                  children: const [
-                    KeepAliveTab(child: StaffOverviewTab()),
-                    KeepAliveTab(child: StaffVoiceTab()),
-                    KeepAliveTab(child: StaffAnimeTab()),
-                    KeepAliveTab(child: StaffMangaTab()),
+                  children: [
+                    KeepAliveTab(
+                      child: StaffOverviewTab(
+                        staff: staff,
+                      ),
+                    ),
+                    const KeepAliveTab(child: StaffVoiceTab()),
+                    const KeepAliveTab(child: StaffAnimeTab()),
+                    const KeepAliveTab(child: StaffMangaTab()),
                   ],
                 ),
               );

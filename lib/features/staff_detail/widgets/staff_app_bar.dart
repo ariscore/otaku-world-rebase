@@ -1,8 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:like_button/like_button.dart';
+import 'package:otaku_world/bloc/staff_detail/toggle_favorite_staff/toggle_favorite_staff_cubit.dart';
 
+import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../core/ui/buttons/back_button.dart';
 import '../../../core/ui/image_viewer.dart';
 import '../../../core/ui/images/cover_image.dart';
@@ -12,6 +18,7 @@ import '../../../graphql/__generated/graphql/schema.graphql.dart';
 import '../../../graphql/__generated/graphql/staff_detail/staff_detail.graphql.dart';
 import '../../../theme/colors.dart';
 import '../../../utils/ui_utils.dart';
+import '../../media_detail/widgets/info_data.dart';
 
 class StaffAppBar extends StatefulWidget {
   const StaffAppBar({
@@ -43,15 +50,8 @@ class _StaffAppBarState extends State<StaffAppBar> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return SliverAppBar(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(20),
-          bottomRight: Radius.circular(20),
-        ),
-      ),
-      pinned: true,
       expandedHeight: UIUtils.getWidgetHeight(
-        targetWidgetHeight: 420,
+        targetWidgetHeight: 320,
         screenHeight: height,
       ),
       leading: CustomBackButton(
@@ -59,6 +59,7 @@ class _StaffAppBarState extends State<StaffAppBar> {
       ),
       backgroundColor: AppColors.raisinBlack,
       surfaceTintColor: AppColors.raisinBlack,
+      pinned: true,
       actions: [
         LikeButton(
           isLiked: isLiked,
@@ -69,10 +70,10 @@ class _StaffAppBarState extends State<StaffAppBar> {
             );
           },
           onTap: (isLiked) async {
-            // Replace this with your own toggle logic
-            this.isLiked = !isLiked;
-            setState(() {});
-            return !isLiked;
+            final client = (context.read<GraphqlClientCubit>().state
+                    as GraphqlClientInitialized)
+                .client;
+            return toggleFavorite(context, client);
           },
         ),
         IconButton(
@@ -93,73 +94,75 @@ class _StaffAppBarState extends State<StaffAppBar> {
   Widget buildPosterContent(BuildContext context, double width, double height) {
     final staff = widget.staff;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: UIUtils.getWidgetHeight(
-            targetWidgetHeight: 320,
-            screenHeight: height,
-          ),
-          child: Stack(
-            children: [
-              Container(
-                alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.all(16),
-                child: SizedBox(
-                  width: UIUtils.getWidgetWidth(
-                    targetWidgetWidth: 200,
-                    screenWidth: width,
-                  ),
-                  child: GestureDetector(
-                    onTap: () => staff.image?.large != null
-                        ? showImage(context, staff.image!.large!)
-                        : null,
-                    child: Hero(
-                      tag: staff.image?.large ?? '',
-                      child: CoverImage(
-                        imageUrl: staff.image?.large ?? '',
-                        type: Enum$MediaType.ANIME,
-                      ),
-                    ),
-                  ),
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: UIUtils.getDetailScreenDecoration(),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: UIUtils.getWidgetHeight(
+              targetWidgetHeight: 196,
+              screenHeight: height,
+            ),
+            width: UIUtils.getWidgetWidth(
+              targetWidgetWidth: 130,
+              screenWidth: width,
+            ),
+            child: GestureDetector(
+              onTap: () => staff.image?.large != null
+                  ? showImage(
+                      context,
+                      staff.image!.large!.toString(),
+                      tag: staff.image!.large!.toString(),
+                    )
+                  : null,
+              child: Hero(
+                tag: staff.image!.large!.toString(),
+                child: CoverImage(
+                  imageUrl: staff.image!.large!.toString(),
+                  type: Enum$MediaType.ANIME,
+                  // placeHolderName: Assets.placeholders210x310,
                 ),
               ),
-              Positioned(
-                bottom: 16,
-                left: 16,
-                right: 16,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      staff.name?.userPreferred ?? '',
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      maxLines: 1,
-                    ),
-                    const SizedBox(height: 4),
-                    if (staff.name?.native != null)
-                      Text(
-                        staff.name!.native!,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.white60,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        maxLines: 1,
-                      ),
-                  ],
+            ),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Column(
+            spacing: 5,
+            children: [
+              if (staff.name?.userPreferred != null)
+                Text(
+                  staff.name!.userPreferred!,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
+              if (staff.name?.native != null)
+                Text(
+                  staff.name!.native!,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              InfoData(
+                iconName: Assets.iconsFavourite,
+                separateWidth: 3,
+                info: staff.favourites.toString(),
+                mainAxisAlignment: MainAxisAlignment.center,
               ),
             ],
-          ),
-        ),
-      ],
+          )
+        ],
+      ),
     );
   }
 
@@ -169,5 +172,31 @@ class _StaffAppBarState extends State<StaffAppBar> {
     } else {
       context.go('/home');
     }
+  }
+
+  Future<bool?> toggleFavorite(
+    BuildContext context,
+    GraphQLClient client,
+  ) async {
+    final result = await ToggleFavoriteStaffCubit().toggleFavoriteStaff(
+      client,
+      staffId: widget.staff.id,
+      isLiked: isLiked,
+    );
+    return result.fold(
+      (error) {
+        log('Got error: $error', name: 'ActivityLike');
+        UIUtils.showSnackBar(context, error);
+        return null;
+      },
+      (isLiked) {
+        this.isLiked = isLiked;
+        UIUtils.showSnackBar(
+          context,
+          isLiked ? 'Added to Favourites!' : 'Removed from Favourites!',
+        );
+        return isLiked;
+      },
+    );
   }
 }
