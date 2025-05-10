@@ -1,24 +1,22 @@
+import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/graphql/__generated/graphql/staff_detail/staff_voice.graphql.dart';
 
 import '../../../graphql/__generated/graphql/schema.graphql.dart';
 
-class StaffVoiceBloc extends PaginatedDataBloc<
-    Query$staffVoice, Query$staffVoice$Staff$characterMedia$edges> {
+class StaffVoiceBloc extends PaginatedDataBloc<Query$staffVoice,
+    Query$staffVoice$Staff$characterMedia$edges> {
   final int staffId;
-  Enum$MediaSort mediaSort = Enum$MediaSort.POPULARITY_DESC;
-  bool isOnMyList = false;
+  final ValueNotifier<Enum$MediaSort> mediaSortNotifier =
+      ValueNotifier<Enum$MediaSort>(Enum$MediaSort.POPULARITY_DESC);
+  final ValueNotifier<bool> isOnMyList = ValueNotifier(false);
 
   StaffVoiceBloc({required this.staffId});
 
   void applyFilter({
-    required Enum$MediaSort mediaSort,
     required GraphQLClient client,
-    required bool isOnMyList,
   }) {
-    this.mediaSort = mediaSort;
-    this.isOnMyList = isOnMyList;
     add(ResetData());
     add(LoadData(client));
   }
@@ -30,9 +28,9 @@ class StaffVoiceBloc extends PaginatedDataBloc<
         fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$staffVoice(
           staffId: staffId,
-          onList: isOnMyList,
+          onList: isOnMyList.value,
           page: page,
-          sort: [mediaSort],
+          sort: [mediaSortNotifier.value],
         ),
         cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
       ),

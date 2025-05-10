@@ -1,19 +1,20 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
-import 'package:otaku_world/graphql/__generated/graphql/character-detail/character_media.graphql.dart';
-import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
-import 'package:otaku_world/graphql/__generated/graphql/staff_detail/staff_detail.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/staff_detail/staff_media.graphql.dart';
 
 import '../../../graphql/__generated/graphql/schema.graphql.dart';
 
-class StaffMediaBloc<T extends Enum$MediaType> extends PaginatedDataBloc<
-    Query$staffMedia, Query$staffMedia$Staff$staffMedia$edges$node> {
+class StaffMediaBloc extends PaginatedDataBloc<Query$staffMedia,
+    Query$staffMedia$Staff$staffMedia$edges$node> {
   final int staffId;
+  final Enum$MediaType mediaType;
   Enum$MediaSort mediaSort = Enum$MediaSort.POPULARITY_DESC;
   bool isOnMyList = false;
 
-  StaffMediaBloc({required this.staffId});
+  StaffMediaBloc({
+    required this.staffId,
+    required this.mediaType,
+  });
 
   void applyFilter({
     required Enum$MediaSort mediaSort,
@@ -36,7 +37,7 @@ class StaffMediaBloc<T extends Enum$MediaType> extends PaginatedDataBloc<
           onList: isOnMyList,
           page: page,
           sort: [mediaSort],
-          type: T as Enum$MediaType,
+          type: mediaType,
         ),
         cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
       ),
