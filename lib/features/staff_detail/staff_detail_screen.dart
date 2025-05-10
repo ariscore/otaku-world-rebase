@@ -34,6 +34,7 @@ class StaffDetailScreen extends HookWidget {
         _onPopInvoked(context);
       },
       child: Scaffold(
+        extendBodyBehindAppBar: false,
         body: BlocBuilder<StaffDetailBloc, StaffDetailState>(
           builder: (context, state) {
             if (state is StaffDetailInitial || state is StaffDetailLoading) {

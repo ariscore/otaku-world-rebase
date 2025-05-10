@@ -50,6 +50,13 @@ class _StaffAppBarState extends State<StaffAppBar> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return SliverAppBar(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          bottomRight: Radius.circular(20),
+          bottomLeft: Radius.circular(20),
+        ),
+      ),
+      pinned: true,
       expandedHeight: UIUtils.getWidgetHeight(
         targetWidgetHeight: 320,
         screenHeight: height,
@@ -59,7 +66,6 @@ class _StaffAppBarState extends State<StaffAppBar> {
       ),
       backgroundColor: AppColors.raisinBlack,
       surfaceTintColor: AppColors.raisinBlack,
-      pinned: true,
       actions: [
         LikeButton(
           isLiked: isLiked,
@@ -87,6 +93,7 @@ class _StaffAppBarState extends State<StaffAppBar> {
       bottom: CustomTabBar(
         controller: widget.tabController,
         tabs: widget.tabs,
+        tabWidth: 100,
       ),
     );
   }
@@ -97,70 +104,78 @@ class _StaffAppBarState extends State<StaffAppBar> {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: UIUtils.getDetailScreenDecoration(),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Column(
         children: [
-          SizedBox(
-            height: UIUtils.getWidgetHeight(
-              targetWidgetHeight: 196,
-              screenHeight: height,
-            ),
-            width: UIUtils.getWidgetWidth(
-              targetWidgetWidth: 130,
-              screenWidth: width,
-            ),
-            child: GestureDetector(
-              onTap: () => staff.image?.large != null
-                  ? showImage(
-                      context,
-                      staff.image!.large!.toString(),
-                      tag: staff.image!.large!.toString(),
-                    )
-                  : null,
-              child: Hero(
-                tag: staff.image!.large!.toString(),
-                child: CoverImage(
-                  imageUrl: staff.image!.large!.toString(),
-                  type: Enum$MediaType.ANIME,
-                  // placeHolderName: Assets.placeholders210x310,
-                ),
-              ),
-            ),
-          ),
           const SizedBox(
-            width: 10,
+            height: kToolbarHeight + 10,
           ),
-          Column(
-            spacing: 5,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              if (staff.name?.userPreferred != null)
-                Text(
-                  staff.name!.userPreferred!,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
+              SizedBox(
+                height: UIUtils.getWidgetHeight(
+                  targetWidgetHeight: 196,
+                  screenHeight: height,
+                ),
+                width: UIUtils.getWidgetWidth(
+                  targetWidgetWidth: 130,
+                  screenWidth: width,
+                ),
+                child: GestureDetector(
+                  onTap: () => staff.image?.large != null
+                      ? showImage(
+                          context,
+                          staff.image!.large!.toString(),
+                          tag: staff.image!.large!.toString(),
+                        )
+                      : null,
+                  child: Hero(
+                    tag: staff.image!.large!.toString(),
+                    child: CoverImage(
+                      imageUrl: staff.image!.large!.toString(),
+                      type: Enum$MediaType.ANIME,
+                      // placeHolderName: Assets.placeholders210x310,
+                    ),
                   ),
                 ),
-              if (staff.name?.native != null)
-                Text(
-                  staff.name!.native!,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              InfoData(
-                iconName: Assets.iconsFavourite,
-                separateWidth: 3,
-                info: staff.favourites.toString(),
-                mainAxisAlignment: MainAxisAlignment.center,
               ),
+              const SizedBox(
+                width: 10,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 5,
+                children: [
+                  if (staff.name?.userPreferred != null)
+                    Text(
+                      staff.name!.userPreferred!,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  if (staff.name?.native != null)
+                    Text(
+                      staff.name!.native!,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  InfoData(
+                    iconName: Assets.iconsFavourite,
+                    separateWidth: 3,
+                    info: staff.favourites.toString(),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                  ),
+                ],
+              )
             ],
-          )
+          ),
         ],
       ),
     );

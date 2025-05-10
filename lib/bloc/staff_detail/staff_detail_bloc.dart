@@ -5,6 +5,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import '../../graphql/__generated/graphql/staff_detail/staff_detail.graphql.dart';
 
 part 'staff_detail_event.dart';
+
 part 'staff_detail_state.dart';
 
 class StaffDetailBloc extends Bloc<StaffDetailEvent, StaffDetailState> {
@@ -22,7 +23,9 @@ class StaffDetailBloc extends Bloc<StaffDetailEvent, StaffDetailState> {
     try {
       final result = await client.query$getStaffDetail(
         Options$Query$getStaffDetail(
+          fetchPolicy: FetchPolicy.networkOnly,
           variables: Variables$Query$getStaffDetail(staffId: event.staffId),
+          cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
         ),
       );
 
