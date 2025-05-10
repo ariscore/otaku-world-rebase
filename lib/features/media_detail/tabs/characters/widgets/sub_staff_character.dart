@@ -15,42 +15,37 @@ class SubStaffCharacter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        NavigationHelper.goToStaffDetailScreen(
-          context: context,
-          staffId: character.characterId,
-        );
-      },
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                character.characterRole,
-                style: CharacterCard.roleTextStyle,
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              character.characterRole,
+              style: CharacterCard.roleTextStyle,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width - 200,
+              child: Text(
+                textAlign: TextAlign.end,
+                character.characterName,
+                style: CharacterCard.nameTextStyle,
               ),
-              const SizedBox(
-                height: 5,
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width - 200,
-                child: Text(
-                  textAlign: TextAlign.end,
-                  character.characterName,
-                  style: CharacterCard.nameTextStyle,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-          Container(
+            ),
+          ],
+        ),
+        const SizedBox(
+          width: 5,
+        ),
+        GestureDetector(
+          onTap: character.onTap,
+          child: Container(
             width: 80,
             height: 120,
             clipBehavior: Clip.antiAlias,
@@ -66,8 +61,8 @@ class SubStaffCharacter extends StatelessWidget {
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

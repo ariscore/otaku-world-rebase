@@ -29,12 +29,10 @@ class StaffCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        NavigationHelper.goToStaffDetailScreen(
-          context: context,
-          staffId: staff.node?.id ?? 0,
-        );
-      },
+      onTap: () => NavigationHelper.goToStaffDetailScreen(
+        context: context,
+        staffId: staff.node?.id ?? 0,
+      ),
       child: Container(
         height: 130,
         padding: const EdgeInsets.symmetric(
@@ -69,6 +67,10 @@ class StaffCard extends StatelessWidget {
             characterId: staff.node!.id,
             characterName: staff.node!.name?.userPreferred ?? "Unknown",
             characterRole: staff.role ?? "",
+            onTap: () => NavigationHelper.goToStaffDetailScreen(
+              context: context,
+              staffId: staff.node?.id ?? 0,
+            ),
           ),
         ),
       ),

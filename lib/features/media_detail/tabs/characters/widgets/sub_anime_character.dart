@@ -17,18 +17,13 @@ class SubAnimeCharacter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-        onTap: () {
-      NavigationHelper.goToCharacterDetailScreen(
-        context: context,
-        characterId: character.characterId,
-      );
-    },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        GestureDetector(
+          onTap: character.onTap,
+          child: Container(
             width: 78,
             height: 115,
             clipBehavior: Clip.antiAlias,
@@ -44,44 +39,44 @@ class SubAnimeCharacter extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            width: 5,
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 20,
-                width: isStaff
-                    ? MediaQuery.of(context).size.width - 120
-                    : MediaQuery.of(context).size.width - 200,
-                child: Text(
-                  character.characterName,
-                  style: CharacterCard.nameTextStyle,
-                  maxLines: isStaff ? 2 : 1,
-                ),
+        ),
+        const SizedBox(
+          width: 5,
+        ),
+        Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 20,
+              width: isStaff
+                  ? MediaQuery.of(context).size.width - 120
+                  : MediaQuery.of(context).size.width - 200,
+              child: Text(
+                character.characterName,
+                style: CharacterCard.nameTextStyle,
+                maxLines: isStaff ? 2 : 1,
               ),
-              const SizedBox(
-                height: 5,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            SizedBox(
+              height: 50,
+              width: isStaff
+                  ? MediaQuery.of(context).size.width - 120
+                  : MediaQuery.of(context).size.width - 200,
+              child: Text(
+                character.characterRole,
+                textAlign: TextAlign.start,
+                style: CharacterCard.roleTextStyle,
+                maxLines: isStaff ? 3 : 1,
               ),
-              SizedBox(
-                height: 50,
-                width: isStaff
-                    ? MediaQuery.of(context).size.width - 120
-                    : MediaQuery.of(context).size.width - 200,
-                child: Text(
-                  character.characterRole,
-                  textAlign: TextAlign.start,
-                  style: CharacterCard.roleTextStyle,
-                  maxLines: isStaff ? 3 : 1,
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
+            ),
+          ],
+        )
+      ],
     );
   }
 }

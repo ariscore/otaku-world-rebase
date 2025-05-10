@@ -71,6 +71,10 @@ class CharacterCard extends StatelessWidget {
               characterId: animeCharacter.id,
               characterName: animeCharacter.name?.userPreferred ?? "Unknown",
               characterRole: characterRole,
+              onTap: () => NavigationHelper.goToCharacterDetailScreen(
+                context: context,
+                characterId: animeCharacter.id,
+              ),
             ),
           ),
           if (voiceActor != null)
@@ -84,6 +88,10 @@ class CharacterCard extends StatelessWidget {
                   characterName: voiceActor?.name?.userPreferred ?? "Unknown",
                   characterRole: voiceActor?.languageV2 ?? "",
                   characterId: voiceActor?.id ?? 0,
+                  onTap: () => NavigationHelper.goToStaffDetailScreen(
+                    context: context,
+                    staffId: voiceActor?.id ?? 0,
+                  ),
                 ),
               ),
             )
