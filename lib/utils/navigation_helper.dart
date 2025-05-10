@@ -44,6 +44,15 @@ class NavigationHelper {
     );
   }
 
+  static void goToStaffDetailScreen({
+    required BuildContext context,
+    required int staffId,
+  }) {
+    context.push(
+      '${RouteConstants.staffDetail}?id=$staffId',
+    );
+  }
+
   static void goToProfileScreen({
     required BuildContext context,
     required int userId,

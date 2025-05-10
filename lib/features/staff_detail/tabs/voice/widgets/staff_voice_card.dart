@@ -75,7 +75,7 @@ class StaffVoiceCard extends StatelessWidget {
             SubAnimeCharacter(
               character: CharacterParameters(
                 imageUrl: animeCharacter.image?.large ?? "",
-                characterId: animeCharacter.id.toString(),
+                characterId: animeCharacter.id,
                 characterName: animeCharacter.name?.userPreferred ?? "Unknown",
                 characterRole: characterRole,
               ),
@@ -90,7 +90,7 @@ class StaffVoiceCard extends StatelessWidget {
                     imageUrl: voiceActor?.image?.large ?? " ",
                     characterName: voiceActor?.name?.userPreferred ?? "Unknown",
                     characterRole: voiceActor?.languageV2 ?? "",
-                    characterId: voiceActor?.id.toString() ?? "",
+                    characterId: voiceActor?.id ?? 0,
                   ),
                 ),
               )

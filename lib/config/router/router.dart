@@ -33,6 +33,7 @@ import 'package:otaku_world/bloc/social/edit_message_activity/edit_message_activ
 import 'package:otaku_world/bloc/social/edit_text_activity/edit_text_activity_cubit.dart';
 import 'package:otaku_world/bloc/social/post_activity/post_activity_cubit.dart';
 import 'package:otaku_world/bloc/social/reply_activity/reply_activity_cubit.dart';
+import 'package:otaku_world/bloc/staff_detail/staff_detail_bloc.dart';
 import 'package:otaku_world/bloc/studio_detail/studio_detail_bloc.dart';
 import 'package:otaku_world/bloc/studio_detail/studio_media/studio_media_bloc.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
@@ -105,6 +106,7 @@ import 'package:otaku_world/features/social/screens/edit_text_activity_screen.da
 import 'package:otaku_world/features/social/screens/post_actvity_screen.dart';
 import 'package:otaku_world/features/social/screens/reply_activity_screen.dart';
 import 'package:otaku_world/features/splash/screens/splash_screen.dart';
+import 'package:otaku_world/features/staff_detail/staff_detail_screen.dart';
 import 'package:otaku_world/features/studio_detail/screens/studio_detail_screen.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
@@ -132,10 +134,15 @@ import '../../features/social/screens/activity_replies_screen.dart';
 import '../../features/social/screens/social_screen.dart';
 
 part 'bottom_nav_routes.dart';
+
 part 'discover_routes.dart';
+
 part 'home_routes.dart';
+
 part 'profile_routes.dart';
+
 part 'settings_routes.dart';
+
 part 'social_routes.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -287,6 +294,28 @@ final router = GoRouter(
             child: StudioDetailScreen(
               studioId: studioId,
             ),
+          ),
+        );
+      },
+      directionTween: SlideTransitionRoute.leftToRightTween,
+    ),
+    SlideTransitionRoute(
+      parentNavigatorKey: _rootNavigatorKey,
+      path: RouteConstants.staffDetail,
+      builder: (state) {
+        final int staffId = int.parse(state.uri.queryParameters['id']!);
+        return BlocProvider(
+          create: (context) {
+            final client = (context.read<GraphqlClientCubit>().state
+                    as GraphqlClientInitialized)
+                .client;
+            return StaffDetailBloc(client)
+              ..add(
+                FetchStaffDetail(staffId),
+              );
+          },
+          child: StaffDetailScreen(
+            staffId: staffId,
           ),
         );
       },

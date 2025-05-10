@@ -2,7 +2,7 @@ class CharacterParameters {
   final String imageUrl;
   final String characterName;
   final String characterRole;
-  final String characterId;
+  final int characterId;
 
   CharacterParameters({
     required this.imageUrl,
