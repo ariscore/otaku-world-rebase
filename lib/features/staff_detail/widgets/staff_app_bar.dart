@@ -50,12 +50,6 @@ class _StaffAppBarState extends State<StaffAppBar> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return SliverAppBar(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          bottomRight: Radius.circular(20),
-          bottomLeft: Radius.circular(20),
-        ),
-      ),
       pinned: true,
       expandedHeight: UIUtils.getWidgetHeight(
         targetWidgetHeight: 320,

@@ -95,6 +95,7 @@ class StaffMangaTab extends StatelessWidget {
                             context: context,
                             mediaId: media?.id ?? 0,
                           ),
+                          isManga: true,
                         ),
                       );
                     },

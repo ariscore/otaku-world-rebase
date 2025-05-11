@@ -20,21 +20,19 @@ import 'package:otaku_world/theme/colors.dart';
 import '../../bloc/graphql_client/graphql_client_cubit.dart';
 import 'widgets/staff_app_bar.dart';
 
-class StaffDetailScreen extends HookWidget {
+class StaffDetailScreen extends StatelessWidget {
   const StaffDetailScreen({super.key, required this.staffId});
 
   final int staffId;
 
-  static final tabs = ['Overview', 'Voice', 'Anime', 'Manga'];
-
   @override
   Widget build(BuildContext context) {
     dev.log('Key is $key', name: 'Key Value');
-    final tabController = useTabController(initialLength: tabs.length);
 
     final client =
         (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
             .client;
+
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
@@ -48,68 +46,11 @@ class StaffDetailScreen extends HookWidget {
             if (state is StaffDetailInitial || state is StaffDetailLoading) {
               return _buildLoading();
             } else if (state is StaffDetailLoaded) {
-              final staff = state.staff;
-
-              dev.log(
-                "Query Id: $staffId ---> State Id: ${staff.id} ---> Key: $key",
-                name: "StaffDetailScreen",
-              );
-
-              return ExtendedNestedScrollView(
-                headerSliverBuilder: (context, innerBoxIsScrolled) {
-                  return [
-                    StaffAppBar(
-                      staff: staff,
-                      tabController: tabController,
-                      tabs: tabs,
-                    ),
-                  ];
-                },
-                onlyOneScrollInBody: true,
-                pinnedHeaderSliverHeightBuilder: () {
-                  return 45 + kToolbarHeight;
-                },
-                body: TabBarView(
-                  controller: tabController,
-                  children: [
-                    KeepAliveTab(
-                      child: StaffOverviewTab(
-                        staff: staff,
-                      ),
-                    ),
-                    KeepAliveTab(
-                      child: BlocProvider(
-                        create: (context) => StaffVoiceBloc(staffId: staffId)
-                          ..add(
-                            LoadData(client),
-                          ),
-                        child: const StaffVoiceTab(),
-                      ),
-                    ),
-                    KeepAliveTab(
-                      child: BlocProvider(
-                        create: (context) => StaffMediaBloc(
-                          staffId: staffId,
-                          mediaType: Enum$MediaType.ANIME,
-                        )..add(
-                            LoadData(client),
-                          ),
-                        child: const StaffAnimeTab(),
-                      ),
-                    ),
-                    KeepAliveTab(
-                      child: BlocProvider(
-                        create: (context) => StaffMediaBloc(
-                          staffId: staffId,
-                          mediaType: Enum$MediaType.MANGA,
-                        )..add(
-                            LoadData(client),
-                          ),
-                        child: const StaffMangaTab(),
-                      ),
-                    ),
-                  ],
-                ),
+              // Use the _TabManagerWidget for all tab-related logic
+              return _TabManagerWidget(
+                staff: state.staff,
+                staffId: staffId,
+                client: client,
               );
             }
 
@@ -135,5 +76,124 @@ class StaffDetailScreen extends HookWidget {
 
   Widget _buildLoading() {
     return const Center(child: CircularProgressIndicator());
+  }
+}
+
+// Separate widget to manage tabs with hooks
+class _TabManagerWidget extends HookWidget {
+  const _TabManagerWidget({
+    required this.staff,
+    required this.staffId,
+    required this.client,
+  });
+
+  final dynamic staff;
+  final int staffId;
+  final dynamic client;
+
+  @override
+  Widget build(BuildContext context) {
+    // Determine tab structure
+    final bool hasVoiceTabs = staff.characterMedia?.edges?.isNotEmpty == true;
+    final bool hasMediaTabs = staff.staffMedia?.edges?.isNotEmpty == true;
+
+    // Build tabs list
+    final List<String> tabs = ['Overview'];
+    if (hasVoiceTabs) {
+      tabs.add('Voice');
+    }
+    if (hasMediaTabs) {
+      tabs.add('Anime');
+      tabs.add('Manga');
+    }
+
+    // Create tab controller with the correct length
+    final tabController = useTabController(initialLength: tabs.length);
+
+    dev.log(
+      "Query Id: $staffId ---> State Id: ${staff.id} ---> Tabs count: ${tabs.length}",
+      name: "StaffDetailScreen",
+    );
+
+    return ExtendedNestedScrollView(
+      headerSliverBuilder: (context, innerBoxIsScrolled) {
+        return [
+          StaffAppBar(
+            staff: staff,
+            tabController: tabController,
+            tabs: tabs,
+          ),
+        ];
+      },
+      onlyOneScrollInBody: true,
+      pinnedHeaderSliverHeightBuilder: () {
+        return 45 + kToolbarHeight;
+      },
+      body: TabBarView(
+        controller: tabController,
+        children: _buildTabViews(hasVoiceTabs, hasMediaTabs),
+      ),
+    );
+  }
+
+  List<Widget> _buildTabViews(bool hasVoiceTabs, bool hasMediaTabs) {
+    final List<Widget> views = [];
+
+    // Always add Overview tab
+    views.add(
+      KeepAliveTab(
+        child: StaffOverviewTab(
+          staff: staff,
+        ),
+      ),
+    );
+
+    // Add Voice tab if needed
+    if (hasVoiceTabs) {
+      views.add(
+        KeepAliveTab(
+          child: BlocProvider(
+            create: (context) => StaffVoiceBloc(staffId: staffId)
+              ..add(
+                LoadData(client),
+              ),
+            child: const StaffVoiceTab(),
+          ),
+        ),
+      );
+    }
+
+    // Add Media tabs if needed
+    if (hasMediaTabs) {
+      views.add(
+        KeepAliveTab(
+          child: BlocProvider(
+            create: (context) => StaffMediaBloc(
+              staffId: staffId,
+              mediaType: Enum$MediaType.ANIME,
+            )..add(
+              LoadData(client),
+            ),
+            child: const StaffAnimeTab(),
+          ),
+        ),
+      );
+
+      views.add(
+        KeepAliveTab(
+          child: BlocProvider(
+            create: (context) => StaffMediaBloc(
+              staffId: staffId,
+              mediaType: Enum$MediaType.MANGA,
+            )..add(
+              LoadData(client),
+            ),
+            child: const StaffMangaTab(),
+          ),
+        ),
+      );
+    }
+
+    return views;
   }
 }

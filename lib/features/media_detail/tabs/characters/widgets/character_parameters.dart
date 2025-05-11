@@ -4,6 +4,7 @@ class CharacterParameters {
   final String characterRole;
   final int characterId;
   final void Function() onTap;
+  final bool isManga;
 
   CharacterParameters({
     required this.imageUrl,
@@ -11,5 +12,6 @@ class CharacterParameters {
     required this.characterRole,
     required this.characterId,
     required this.onTap,
+    this.isManga = false,
   });
 }
