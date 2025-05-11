@@ -67,7 +67,7 @@ class StaffDetailScreen extends HookWidget {
                 },
                 onlyOneScrollInBody: true,
                 pinnedHeaderSliverHeightBuilder: () {
-                  return 50 + kToolbarHeight;
+                  return 45 + kToolbarHeight;
                 },
                 body: TabBarView(
                   controller: tabController,

@@ -37,7 +37,7 @@ class StaffAppBar extends StatefulWidget {
 }
 
 class _StaffAppBarState extends State<StaffAppBar> {
-  bool isLiked = true;
+  bool isLiked = false;
 
   @override
   void initState() {
