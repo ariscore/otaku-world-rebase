@@ -20,6 +20,10 @@ class UIUtils {
     );
   }
 
+  static void hideProgressDialog(BuildContext context) {
+    context.pop();
+  }
+
   static double getWidgetWidth({
     required double targetWidgetWidth,
     required double screenWidth,

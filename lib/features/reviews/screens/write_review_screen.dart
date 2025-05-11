@@ -25,28 +25,72 @@ class WriteReviewScreen extends StatefulWidget {
 class _WriteReviewScreenState extends State<WriteReviewScreen> {
   final List<MarkdownItemModel> markDownItems = [
     MarkdownItemModel(
-      iconPath: Assets.iconsEdit,
+      iconPath: Assets.markdownBold,
       label: 'Bold',
       onTap: () {},
     ),
     MarkdownItemModel(
-      iconPath: Assets.iconsItalic,
-      label: 'Bold',
+      iconPath: Assets.markdownItalic,
+      label: 'Italic',
       onTap: () {},
     ),
     MarkdownItemModel(
-      iconPath: Assets.iconsStrike,
-      label: 'Bold',
+      iconPath: Assets.markdownStrike,
+      label: 'Strikethrough',
       onTap: () {},
     ),
     MarkdownItemModel(
-      iconPath: Assets.iconsBold,
-      label: 'Bold',
+      iconPath: Assets.markdownEyeSlash,
+      label: 'Spoiler',
       onTap: () {},
     ),
     MarkdownItemModel(
-      iconPath: Assets.iconsBold,
-      label: 'Bold',
+      iconPath: Assets.markdownLink,
+      label: 'Link',
+      onTap: () {},
+    ),
+    MarkdownItemModel(
+      iconPath: Assets.markdownImage,
+      label: 'Image',
+      onTap: () {},
+    ),MarkdownItemModel(
+      iconPath: Assets.markdownYoutube,
+      label: 'Youtube Video',
+      onTap: () {},
+    ),
+    MarkdownItemModel(
+      iconPath: Assets.markdownVideo,
+      label: 'Video',
+      onTap: () {},
+    ),
+    MarkdownItemModel(
+      iconPath: Assets.markdownNumberList,
+      label: 'Number List',
+      onTap: () {},
+    ),
+    MarkdownItemModel(
+      iconPath: Assets.markdownBulletList,
+      label: 'Bullet list',
+      onTap: () {},
+    ),
+    MarkdownItemModel(
+      iconPath: Assets.markdownHeader,
+      label: 'Header',
+      onTap: () {},
+    ),
+    MarkdownItemModel(
+      iconPath: Assets.markdownCenter,
+      label: 'Center',
+      onTap: () {},
+    ),
+    MarkdownItemModel(
+      iconPath: Assets.markdownQuote,
+      label: 'Quote',
+      onTap: () {},
+    ),
+    MarkdownItemModel(
+      iconPath: Assets.markdownQuote,
+      label: 'Code',
       onTap: () {},
     ),
   ];

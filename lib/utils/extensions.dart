@@ -153,7 +153,6 @@ extension ReviewSort on Enum$ReviewSort {
       case Enum$ReviewSort.UPDATED_AT_DESC:
         return "Latest Modified";
       case Enum$ReviewSort.$unknown:
-      default:
         return "Unknown";
     }
   }
@@ -167,7 +166,6 @@ extension MediaType on Enum$MediaType {
       case Enum$MediaType.MANGA:
         return 'Manga';
       case Enum$MediaType.$unknown:
-      default:
         return 'Unknown';
     }
   }

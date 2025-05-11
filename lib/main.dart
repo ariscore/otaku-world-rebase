@@ -12,6 +12,7 @@ import 'package:otaku_world/bloc/filter/collections/tags/media_tags_cubit.dart';
 import 'package:otaku_world/bloc/filter/filter_anime/filter_anime_bloc.dart';
 import 'package:otaku_world/bloc/filter/filter_manga/filter_manga_bloc.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
+import 'package:otaku_world/bloc/media_list/media_list/media_list_bloc.dart';
 
 import 'package:otaku_world/bloc/recommended_anime/recommended_anime_bloc.dart';
 import 'package:otaku_world/bloc/recommended_manga/recommended_manga_bloc.dart';
@@ -125,6 +126,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ViewerBloc(),
+        ),
+        BlocProvider(
+          create: (context) => AnimeListBloc(),
+        ),
+        BlocProvider(
+          create: (context) => MangaListBloc(),
         ),
       ],
       child: MultiBlocListener(

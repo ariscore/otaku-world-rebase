@@ -106,7 +106,6 @@ class FormattingUtils {
     }
   }
 
-
   static String getCountryCode(String country) {
     switch (country) {
       case 'Japan':
@@ -138,7 +137,7 @@ class FormattingUtils {
   }
 
   static Color getCountryColor(String? country) {
-    switch(country) {
+    switch (country) {
       case 'JP' || 'Japan':
         return AppColors.toolBox;
       case 'KR' || 'South Korea':
@@ -184,10 +183,10 @@ class FormattingUtils {
     }
   }
 
-  static String getMediaFormatString(Enum$MediaFormat? format) {
+  static String getMediaFormatString(Enum$MediaFormat? format, {bool forList = false,}) {
     switch (format) {
       case Enum$MediaFormat.TV:
-        return 'TV Show';
+        return forList ? 'TV' : 'TV Show';
       case Enum$MediaFormat.TV_SHORT:
         return 'TV Short';
       case Enum$MediaFormat.MOVIE:
@@ -203,7 +202,7 @@ class FormattingUtils {
       case Enum$MediaFormat.MANGA:
         return 'Manga';
       case Enum$MediaFormat.NOVEL:
-        return 'Light Novel';
+        return forList ? 'Novel' : 'Light Novel';
       case Enum$MediaFormat.ONE_SHOT:
         return 'One Shot';
       default:
@@ -213,7 +212,7 @@ class FormattingUtils {
 
   static Enum$MediaFormat getMediaFormat(String format) {
     switch (format) {
-      case 'TV Show':
+      case 'TV Show' || 'TV':
         return Enum$MediaFormat.TV;
       case 'TV Short':
         return Enum$MediaFormat.TV_SHORT;
@@ -229,7 +228,7 @@ class FormattingUtils {
         return Enum$MediaFormat.MUSIC;
       case 'Manga':
         return Enum$MediaFormat.MANGA;
-      case 'Light Novel':
+      case 'Light Novel' || 'Novel':
         return Enum$MediaFormat.NOVEL;
       case 'One Shot':
         return Enum$MediaFormat.ONE_SHOT;
@@ -238,12 +237,15 @@ class FormattingUtils {
     }
   }
 
-  static String getMediaStatusString(Enum$MediaStatus? status) {
+  static String getMediaStatusString(
+    Enum$MediaStatus? status, {
+    bool anime = true,
+  }) {
     switch (status) {
       case Enum$MediaStatus.RELEASING:
-        return 'Airing';
+        return anime ? 'Airing' : 'Publishing';
       case Enum$MediaStatus.NOT_YET_RELEASED:
-        return 'Not Yet Aired';
+        return anime ? 'Not Yet Aired' : 'Not Yet Published';
       case Enum$MediaStatus.FINISHED:
         return 'Finished';
       case Enum$MediaStatus.CANCELLED:
@@ -257,9 +259,9 @@ class FormattingUtils {
 
   static Enum$MediaStatus getMediaStatus(String status) {
     switch (status) {
-      case 'Airing':
+      case 'Airing' || 'Publishing':
         return Enum$MediaStatus.RELEASING;
-      case 'Not Yet Aired':
+      case 'Not Yet Aired' || 'Not Yet Published':
         return Enum$MediaStatus.NOT_YET_RELEASED;
       case 'Finished':
         return Enum$MediaStatus.FINISHED;
@@ -269,6 +271,47 @@ class FormattingUtils {
         return Enum$MediaStatus.HIATUS;
       default:
         return Enum$MediaStatus.$unknown;
+    }
+  }
+
+  static Enum$MediaListStatus getMediaListStatus(String status) {
+    switch (status) {
+      case 'Watching' || 'Reading':
+        return Enum$MediaListStatus.CURRENT;
+      case 'Planning':
+        return Enum$MediaListStatus.PLANNING;
+      case 'Completed':
+        return Enum$MediaListStatus.COMPLETED;
+      case 'Dropped':
+        return Enum$MediaListStatus.DROPPED;
+      case 'Paused':
+        return Enum$MediaListStatus.PAUSED;
+      case 'Rewatching' || 'Rereading':
+        return Enum$MediaListStatus.REPEATING;
+      default:
+        return Enum$MediaListStatus.$unknown;
+    }
+  }
+
+  static String getMediaListStatusString(
+    Enum$MediaListStatus? status, {
+    bool isAnime = true,
+  }) {
+    switch (status) {
+      case Enum$MediaListStatus.CURRENT:
+        return isAnime ? 'Watching' : 'Reading';
+      case Enum$MediaListStatus.PLANNING:
+        return 'Planning';
+      case Enum$MediaListStatus.COMPLETED:
+        return 'Completed';
+      case Enum$MediaListStatus.DROPPED:
+        return 'Dropped';
+      case Enum$MediaListStatus.PAUSED:
+        return 'Paused';
+      case Enum$MediaListStatus.REPEATING:
+        return isAnime ? 'Rewatching' : 'Rereading';
+      default:
+        return 'Unknown';
     }
   }
 
@@ -364,6 +407,75 @@ class FormattingUtils {
         return Enum$MediaSort.START_DATE_DESC;
       default:
         return Enum$MediaSort.POPULARITY_DESC;
+    }
+  }
+
+  /*
+  'Title',
+    'Score',
+    'Progress',
+    'Last Updated',
+    'Last Added',
+    'Start Date',
+    'Completed Date',
+    'Release Date',
+    'Average Score',
+    'Popularity',
+   */
+
+  static Enum$MediaListSort getMediaListSortOption(String option) {
+    switch (option) {
+      case 'Title':
+        return Enum$MediaListSort.MEDIA_TITLE_ROMAJI;
+      case 'Score':
+        return Enum$MediaListSort.SCORE_DESC;
+      case 'Progress':
+        return Enum$MediaListSort.PROGRESS_DESC;
+      case 'Last Updated':
+        return Enum$MediaListSort.UPDATED_TIME_DESC;
+      case 'Last Added':
+        return Enum$MediaListSort.ADDED_TIME_DESC;
+      case 'Start Date':
+        return Enum$MediaListSort.STARTED_ON_DESC;
+      case 'Completed Date':
+        return Enum$MediaListSort.FINISHED_ON_DESC;
+      case 'Release Date':
+        return Enum$MediaListSort
+            .ADDED_TIME; // Assume this is correct for release date
+      case 'Average Score':
+        return Enum$MediaListSort
+            .MEDIA_ID_DESC; // Assume this is correct for average score
+      case 'Popularity':
+        return Enum$MediaListSort.MEDIA_POPULARITY_DESC;
+      default:
+        return Enum$MediaListSort.MEDIA_POPULARITY_DESC;
+    }
+  }
+
+  static String getMediaListSortOptionString(Enum$MediaListSort option) {
+    switch (option) {
+      case Enum$MediaListSort.MEDIA_TITLE_ROMAJI:
+        return 'Title';
+      case Enum$MediaListSort.SCORE_DESC:
+        return 'Score';
+      case Enum$MediaListSort.PROGRESS_DESC:
+        return 'Progress';
+      case Enum$MediaListSort.UPDATED_TIME_DESC:
+        return 'Last Updated';
+      case Enum$MediaListSort.ADDED_TIME_DESC:
+        return 'Last Added';
+      case Enum$MediaListSort.STARTED_ON_DESC:
+        return 'Start Date';
+      case Enum$MediaListSort.FINISHED_ON_DESC:
+        return 'Completed Date';
+      case Enum$MediaListSort.ADDED_TIME:
+        return 'Release Date';
+      case Enum$MediaListSort.MEDIA_ID_DESC:
+        return 'Average Score';
+      case Enum$MediaListSort.MEDIA_POPULARITY_DESC:
+        return 'Popularity';
+      default:
+        return 'Popularity';
     }
   }
 

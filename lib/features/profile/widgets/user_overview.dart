@@ -51,7 +51,7 @@ class UserOverview extends StatelessWidget {
         SliverPadding(
           padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
           sliver: _buildItem(
-            Markdown(data: user.about ?? '*No Description*'),
+            MarkdownWidget(data: user.about ?? '*No Description*'),
           ),
         ),
       ],

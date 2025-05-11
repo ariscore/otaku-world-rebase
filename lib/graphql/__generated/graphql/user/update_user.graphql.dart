@@ -1023,6 +1023,7 @@ const documentNodeMutationUpdateUser = DocumentNode(definitions: [
     ]),
   ),
   fragmentDefinitionSettings,
+  fragmentDefinitionMediaListOptions,
 ]);
 Mutation$UpdateUser _parserFn$Mutation$UpdateUser(Map<String, dynamic> data) =>
     Mutation$UpdateUser.fromJson(data);

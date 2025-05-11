@@ -2,16 +2,8 @@ import 'package:otaku_world/core/model/filter_model.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 
 class MangaFilter extends FilterModel {
-  final List<Enum$MediaSort> sort;
-  final List<String>? genres;
-  final String? startDateGreater;
-  final String? startDateLesser;
-  final bool isLicensed;
   final int? year;
-  final List<Enum$MediaFormat>? formatIn;
-  final List<Enum$MediaStatus>? statusIn;
   final List<String>? licensedByIn;
-  final String? countryOfOrigin;
   final List<Enum$MediaSource>? sourceIn;
   final int? chaptersGreater;
   final int? chaptersLesser;
@@ -25,16 +17,17 @@ class MangaFilter extends FilterModel {
 
   const MangaFilter({
     super.search,
-    required this.sort,
-    this.genres,
-    this.startDateGreater,
-    this.startDateLesser,
-    this.isLicensed = true,
+    required super.sort,
+    super.listSort = Enum$MediaListSort.MEDIA_POPULARITY_DESC,
+    super.genres,
+    super.startDateGreater,
+    super.startDateLesser,
+    super.isLicensed = true,
     this.year,
-    this.formatIn,
-    this.statusIn,
+    super.formatIn,
+    super.statusIn,
     this.licensedByIn,
-    this.countryOfOrigin,
+    super.countryOfOrigin,
     this.sourceIn,
     this.chaptersGreater,
     this.chaptersLesser,
@@ -86,6 +79,7 @@ class MangaFilter extends FilterModel {
   MangaFilter copyWith({
     String? search,
     List<Enum$MediaSort>? sort,
+    Enum$MediaListSort? listSort,
     String? startDateGreater,
     String? startDateLesser,
     List<String>? genres,
@@ -132,6 +126,7 @@ class MangaFilter extends FilterModel {
     return MangaFilter(
       search: search ?? this.search,
       sort: sort ?? this.sort,
+      listSort: listSort ?? this.listSort,
       genres: genres ?? this.genres,
       startDateGreater: startDateGreater ?? this.startDateGreater,
       startDateLesser: startDateLesser ?? this.startDateLesser,

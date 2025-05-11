@@ -13,6 +13,19 @@ class FilterConstants {
     'Release Date',
   ];
 
+  static const List<String> mediaListSortOptions = [
+    'Title',
+    'Score',
+    'Progress',
+    'Last Updated',
+    'Last Added',
+    'Start Date',
+    'Completed Date',
+    'Release Date',
+    'Average Score',
+    'Popularity',
+  ];
+
   static const List<String> seasons = [
     'All',
     'Winter',
@@ -28,6 +41,8 @@ class FilterConstants {
     'China',
     'Taiwan',
   ];
+
+  static const List<String> countryCodes = ['All', 'JP', 'KR', 'CN', 'TW'];
 
   static const double mediaYearMinimum = 1970;
   static double mediaYearMaximum = DateTime.now().year + 1;
@@ -110,7 +125,7 @@ class FilterConstants {
   static const voiceActorOptions = ['Anime', 'Characters'];
 
   static StatsOption statsOptionFromString(String value) {
-    switch(value) {
+    switch (value) {
       case 'Overview':
         return StatsOption.overview;
       case 'Genres':
@@ -153,9 +168,6 @@ extension StatOptionExtension on StatsOption {
         return 'Studios';
       case StatsOption.staff:
         return 'Staff';
-      default:
-        return '';
     }
   }
 }
-

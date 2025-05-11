@@ -17,7 +17,7 @@ class PreviewReviewScreen extends StatelessWidget {
       appBar: const SimpleAppBar(title: 'Preview'),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Markdown(data: data),
+        child: MarkdownWidget(data: data),
       ),
     );
   }
