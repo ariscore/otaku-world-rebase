@@ -1,9 +1,10 @@
 query getStaffDetail($staffId: Int) {
     Staff(id: $staffId) {
+        id
         age
         bloodType
         dateOfBirth {
-           ...FuzzyDate
+            ...FuzzyDate
         }
         dateOfDeath {
             ...FuzzyDate
@@ -24,5 +25,26 @@ query getStaffDetail($staffId: Int) {
         }
         primaryOccupations
         siteUrl
+        characterMedia(page: 1){
+
+            pageInfo {
+                ...PageInfo
+            }
+            edges {
+                characterRole
+            }
+        }
+        staffMedia(page: 1,  ){
+            pageInfo {
+                ...PageInfo
+            }
+            edges {
+                id
+                node {
+                    type
+                }
+            }
+        }
+
     }
 }

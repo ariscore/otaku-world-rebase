@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:otaku_world/features/media_detail/tabs/characters/widgets/character_parameters.dart';
 
+import '../../../../../utils/navigation_helper.dart';
 import 'character_card.dart';
 
 class SubAnimeCharacter extends StatelessWidget {
@@ -20,19 +21,22 @@ class SubAnimeCharacter extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
-          width: 78,
-          height: 115,
-          clipBehavior: Clip.antiAlias,
-          decoration: ShapeDecoration(
-            image: DecorationImage(
-              image: CachedNetworkImageProvider(
-                character.imageUrl,
+        GestureDetector(
+          onTap: character.onTap,
+          child: Container(
+            width: 78,
+            height: 115,
+            clipBehavior: Clip.antiAlias,
+            decoration: ShapeDecoration(
+              image: DecorationImage(
+                image: CachedNetworkImageProvider(
+                  character.imageUrl,
+                ),
+                fit: BoxFit.fill,
               ),
-              fit: BoxFit.fill,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(character.isManga ? 5 : 10),
+              ),
             ),
           ),
         ),

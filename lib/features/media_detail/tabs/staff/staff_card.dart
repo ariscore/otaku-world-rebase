@@ -4,6 +4,7 @@ import 'package:otaku_world/features/media_detail/tabs/characters/widgets/sub_an
 import 'package:otaku_world/graphql/__generated/graphql/details/staff.graphql.dart';
 
 import '../../../../theme/colors.dart';
+import '../../../../utils/navigation_helper.dart';
 
 class StaffCard extends StatelessWidget {
   const StaffCard({super.key, required this.staff});
@@ -27,40 +28,50 @@ class StaffCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 130,
-      padding: const EdgeInsets.symmetric(
-        horizontal: 8,
-        vertical: 8,
+    return GestureDetector(
+      onTap: () => NavigationHelper.goToStaffDetailScreen(
+        context: context,
+        staffId: staff.node?.id ?? 0,
       ),
-      decoration: ShapeDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment(-1.00, 0.00),
-          end: Alignment(1, 0),
-          colors: [
-            AppColors.darkCharcoal,
-            AppColors.japaneseIndigo,
+      child: Container(
+        height: 130,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 8,
+          vertical: 8,
+        ),
+        decoration: ShapeDecoration(
+          gradient: const LinearGradient(
+            begin: Alignment(-1.00, 0.00),
+            end: Alignment(1, 0),
+            colors: [
+              AppColors.darkCharcoal,
+              AppColors.japaneseIndigo,
+            ],
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          shadows: const [
+            BoxShadow(
+              color: Color(0x3F000000),
+              blurRadius: 4,
+              offset: Offset(0, 4),
+              spreadRadius: 0,
+            )
           ],
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        shadows: const [
-          BoxShadow(
-            color: Color(0x3F000000),
-            blurRadius: 4,
-            offset: Offset(0, 4),
-            spreadRadius: 0,
-          )
-        ],
-      ),
-      child: SubAnimeCharacter(
-        isStaff: true,
-        character: CharacterParameters(
-          imageUrl: staff.node!.image?.large ?? "",
-          characterId: staff.node!.id.toString(),
-          characterName: staff.node!.name?.userPreferred ?? "Unknown",
-          characterRole: staff.role ?? "",
+        child: SubAnimeCharacter(
+          isStaff: true,
+          character: CharacterParameters(
+            imageUrl: staff.node!.image?.large ?? "",
+            characterId: staff.node!.id,
+            characterName: staff.node!.name?.userPreferred ?? "Unknown",
+            characterRole: staff.role ?? "",
+            onTap: () => NavigationHelper.goToStaffDetailScreen(
+              context: context,
+              staffId: staff.node?.id ?? 0,
+            ),
+          ),
         ),
       ),
     );

@@ -2,6 +2,7 @@
 // DO NOT MODIFY
 // ignore_for_file: type=lint
 import '../fragments.graphql.dart';
+import '../schema.graphql.dart';
 import 'dart:async';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
@@ -280,6 +281,13 @@ const documentNodeQuerygetStaffDetail = DocumentNode(definitions: [
         directives: [],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'age'),
             alias: null,
             arguments: [],
@@ -446,6 +454,150 @@ const documentNodeQuerygetStaffDetail = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'characterMedia'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'page'),
+                value: IntValueNode(value: '1'),
+              )
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'pageInfo'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FragmentSpreadNode(
+                    name: NameNode(value: 'PageInfo'),
+                    directives: [],
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: 'edges'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'characterRole'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: 'staffMedia'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'page'),
+                value: IntValueNode(value: '1'),
+              )
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'pageInfo'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FragmentSpreadNode(
+                    name: NameNode(value: 'PageInfo'),
+                    directives: [],
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: 'edges'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'id'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'node'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: SelectionSetNode(selections: [
+                      FieldNode(
+                        name: NameNode(value: 'type'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ]),
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
             name: NameNode(value: '__typename'),
             alias: null,
             arguments: [],
@@ -464,6 +616,7 @@ const documentNodeQuerygetStaffDetail = DocumentNode(definitions: [
     ]),
   ),
   fragmentDefinitionFuzzyDate,
+  fragmentDefinitionPageInfo,
 ]);
 Query$getStaffDetail _parserFn$Query$getStaffDetail(
         Map<String, dynamic> data) =>
@@ -621,6 +774,7 @@ class Query$getStaffDetail$Widget
 
 class Query$getStaffDetail$Staff {
   Query$getStaffDetail$Staff({
+    required this.id,
     this.age,
     this.bloodType,
     this.dateOfBirth,
@@ -636,10 +790,13 @@ class Query$getStaffDetail$Staff {
     this.name,
     this.primaryOccupations,
     this.siteUrl,
+    this.characterMedia,
+    this.staffMedia,
     this.$__typename = 'Staff',
   });
 
   factory Query$getStaffDetail$Staff.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
     final l$age = json['age'];
     final l$bloodType = json['bloodType'];
     final l$dateOfBirth = json['dateOfBirth'];
@@ -655,8 +812,11 @@ class Query$getStaffDetail$Staff {
     final l$name = json['name'];
     final l$primaryOccupations = json['primaryOccupations'];
     final l$siteUrl = json['siteUrl'];
+    final l$characterMedia = json['characterMedia'];
+    final l$staffMedia = json['staffMedia'];
     final l$$__typename = json['__typename'];
     return Query$getStaffDetail$Staff(
+      id: (l$id as int),
       age: (l$age as int?),
       bloodType: (l$bloodType as String?),
       dateOfBirth: l$dateOfBirth == null
@@ -686,9 +846,19 @@ class Query$getStaffDetail$Staff {
           ?.map((e) => (e as String?))
           .toList(),
       siteUrl: (l$siteUrl as String?),
+      characterMedia: l$characterMedia == null
+          ? null
+          : Query$getStaffDetail$Staff$characterMedia.fromJson(
+              (l$characterMedia as Map<String, dynamic>)),
+      staffMedia: l$staffMedia == null
+          ? null
+          : Query$getStaffDetail$Staff$staffMedia.fromJson(
+              (l$staffMedia as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final int id;
 
   final int? age;
 
@@ -720,10 +890,16 @@ class Query$getStaffDetail$Staff {
 
   final String? siteUrl;
 
+  final Query$getStaffDetail$Staff$characterMedia? characterMedia;
+
+  final Query$getStaffDetail$Staff$staffMedia? staffMedia;
+
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
     final l$age = age;
     _resultData['age'] = l$age;
     final l$bloodType = bloodType;
@@ -755,6 +931,10 @@ class Query$getStaffDetail$Staff {
         l$primaryOccupations?.map((e) => e).toList();
     final l$siteUrl = siteUrl;
     _resultData['siteUrl'] = l$siteUrl;
+    final l$characterMedia = characterMedia;
+    _resultData['characterMedia'] = l$characterMedia?.toJson();
+    final l$staffMedia = staffMedia;
+    _resultData['staffMedia'] = l$staffMedia?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -762,6 +942,7 @@ class Query$getStaffDetail$Staff {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$age = age;
     final l$bloodType = bloodType;
     final l$dateOfBirth = dateOfBirth;
@@ -777,8 +958,11 @@ class Query$getStaffDetail$Staff {
     final l$name = name;
     final l$primaryOccupations = primaryOccupations;
     final l$siteUrl = siteUrl;
+    final l$characterMedia = characterMedia;
+    final l$staffMedia = staffMedia;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$id,
       l$age,
       l$bloodType,
       l$dateOfBirth,
@@ -796,6 +980,8 @@ class Query$getStaffDetail$Staff {
           ? null
           : Object.hashAll(l$primaryOccupations.map((v) => v)),
       l$siteUrl,
+      l$characterMedia,
+      l$staffMedia,
       l$$__typename,
     ]);
   }
@@ -807,6 +993,11 @@ class Query$getStaffDetail$Staff {
     }
     if (other is! Query$getStaffDetail$Staff ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$age = age;
@@ -895,6 +1086,16 @@ class Query$getStaffDetail$Staff {
     if (l$siteUrl != lOther$siteUrl) {
       return false;
     }
+    final l$characterMedia = characterMedia;
+    final lOther$characterMedia = other.characterMedia;
+    if (l$characterMedia != lOther$characterMedia) {
+      return false;
+    }
+    final l$staffMedia = staffMedia;
+    final lOther$staffMedia = other.staffMedia;
+    if (l$staffMedia != lOther$staffMedia) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -923,6 +1124,7 @@ abstract class CopyWith$Query$getStaffDetail$Staff<TRes> {
       _CopyWithStubImpl$Query$getStaffDetail$Staff;
 
   TRes call({
+    int? id,
     int? age,
     String? bloodType,
     Fragment$FuzzyDate? dateOfBirth,
@@ -938,12 +1140,16 @@ abstract class CopyWith$Query$getStaffDetail$Staff<TRes> {
     Query$getStaffDetail$Staff$name? name,
     List<String?>? primaryOccupations,
     String? siteUrl,
+    Query$getStaffDetail$Staff$characterMedia? characterMedia,
+    Query$getStaffDetail$Staff$staffMedia? staffMedia,
     String? $__typename,
   });
   CopyWith$Fragment$FuzzyDate<TRes> get dateOfBirth;
   CopyWith$Fragment$FuzzyDate<TRes> get dateOfDeath;
   CopyWith$Query$getStaffDetail$Staff$image<TRes> get image;
   CopyWith$Query$getStaffDetail$Staff$name<TRes> get name;
+  CopyWith$Query$getStaffDetail$Staff$characterMedia<TRes> get characterMedia;
+  CopyWith$Query$getStaffDetail$Staff$staffMedia<TRes> get staffMedia;
 }
 
 class _CopyWithImpl$Query$getStaffDetail$Staff<TRes>
@@ -960,6 +1166,7 @@ class _CopyWithImpl$Query$getStaffDetail$Staff<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? age = _undefined,
     Object? bloodType = _undefined,
     Object? dateOfBirth = _undefined,
@@ -975,9 +1182,12 @@ class _CopyWithImpl$Query$getStaffDetail$Staff<TRes>
     Object? name = _undefined,
     Object? primaryOccupations = _undefined,
     Object? siteUrl = _undefined,
+    Object? characterMedia = _undefined,
+    Object? staffMedia = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$getStaffDetail$Staff(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
         age: age == _undefined ? _instance.age : (age as int?),
         bloodType: bloodType == _undefined
             ? _instance.bloodType
@@ -1018,6 +1228,12 @@ class _CopyWithImpl$Query$getStaffDetail$Staff<TRes>
             : (primaryOccupations as List<String?>?),
         siteUrl:
             siteUrl == _undefined ? _instance.siteUrl : (siteUrl as String?),
+        characterMedia: characterMedia == _undefined
+            ? _instance.characterMedia
+            : (characterMedia as Query$getStaffDetail$Staff$characterMedia?),
+        staffMedia: staffMedia == _undefined
+            ? _instance.staffMedia
+            : (staffMedia as Query$getStaffDetail$Staff$staffMedia?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -1054,6 +1270,23 @@ class _CopyWithImpl$Query$getStaffDetail$Staff<TRes>
         : CopyWith$Query$getStaffDetail$Staff$name(
             local$name, (e) => call(name: e));
   }
+
+  CopyWith$Query$getStaffDetail$Staff$characterMedia<TRes> get characterMedia {
+    final local$characterMedia = _instance.characterMedia;
+    return local$characterMedia == null
+        ? CopyWith$Query$getStaffDetail$Staff$characterMedia.stub(
+            _then(_instance))
+        : CopyWith$Query$getStaffDetail$Staff$characterMedia(
+            local$characterMedia, (e) => call(characterMedia: e));
+  }
+
+  CopyWith$Query$getStaffDetail$Staff$staffMedia<TRes> get staffMedia {
+    final local$staffMedia = _instance.staffMedia;
+    return local$staffMedia == null
+        ? CopyWith$Query$getStaffDetail$Staff$staffMedia.stub(_then(_instance))
+        : CopyWith$Query$getStaffDetail$Staff$staffMedia(
+            local$staffMedia, (e) => call(staffMedia: e));
+  }
 }
 
 class _CopyWithStubImpl$Query$getStaffDetail$Staff<TRes>
@@ -1063,6 +1296,7 @@ class _CopyWithStubImpl$Query$getStaffDetail$Staff<TRes>
   TRes _res;
 
   call({
+    int? id,
     int? age,
     String? bloodType,
     Fragment$FuzzyDate? dateOfBirth,
@@ -1078,6 +1312,8 @@ class _CopyWithStubImpl$Query$getStaffDetail$Staff<TRes>
     Query$getStaffDetail$Staff$name? name,
     List<String?>? primaryOccupations,
     String? siteUrl,
+    Query$getStaffDetail$Staff$characterMedia? characterMedia,
+    Query$getStaffDetail$Staff$staffMedia? staffMedia,
     String? $__typename,
   }) =>
       _res;
@@ -1093,6 +1329,12 @@ class _CopyWithStubImpl$Query$getStaffDetail$Staff<TRes>
 
   CopyWith$Query$getStaffDetail$Staff$name<TRes> get name =>
       CopyWith$Query$getStaffDetail$Staff$name.stub(_res);
+
+  CopyWith$Query$getStaffDetail$Staff$characterMedia<TRes> get characterMedia =>
+      CopyWith$Query$getStaffDetail$Staff$characterMedia.stub(_res);
+
+  CopyWith$Query$getStaffDetail$Staff$staffMedia<TRes> get staffMedia =>
+      CopyWith$Query$getStaffDetail$Staff$staffMedia.stub(_res);
 }
 
 class Query$getStaffDetail$Staff$image {
@@ -1356,6 +1598,822 @@ class _CopyWithStubImpl$Query$getStaffDetail$Staff$name<TRes>
   call({
     String? native,
     String? userPreferred,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$getStaffDetail$Staff$characterMedia {
+  Query$getStaffDetail$Staff$characterMedia({
+    this.pageInfo,
+    this.edges,
+    this.$__typename = 'MediaConnection',
+  });
+
+  factory Query$getStaffDetail$Staff$characterMedia.fromJson(
+      Map<String, dynamic> json) {
+    final l$pageInfo = json['pageInfo'];
+    final l$edges = json['edges'];
+    final l$$__typename = json['__typename'];
+    return Query$getStaffDetail$Staff$characterMedia(
+      pageInfo: l$pageInfo == null
+          ? null
+          : Fragment$PageInfo.fromJson((l$pageInfo as Map<String, dynamic>)),
+      edges: (l$edges as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : Query$getStaffDetail$Staff$characterMedia$edges.fromJson(
+                  (e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Fragment$PageInfo? pageInfo;
+
+  final List<Query$getStaffDetail$Staff$characterMedia$edges?>? edges;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$pageInfo = pageInfo;
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
+    final l$edges = edges;
+    _resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$pageInfo = pageInfo;
+    final l$edges = edges;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$pageInfo,
+      l$edges == null ? null : Object.hashAll(l$edges.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query$getStaffDetail$Staff$characterMedia ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$pageInfo = pageInfo;
+    final lOther$pageInfo = other.pageInfo;
+    if (l$pageInfo != lOther$pageInfo) {
+      return false;
+    }
+    final l$edges = edges;
+    final lOther$edges = other.edges;
+    if (l$edges != null && lOther$edges != null) {
+      if (l$edges.length != lOther$edges.length) {
+        return false;
+      }
+      for (int i = 0; i < l$edges.length; i++) {
+        final l$edges$entry = l$edges[i];
+        final lOther$edges$entry = lOther$edges[i];
+        if (l$edges$entry != lOther$edges$entry) {
+          return false;
+        }
+      }
+    } else if (l$edges != lOther$edges) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$getStaffDetail$Staff$characterMedia
+    on Query$getStaffDetail$Staff$characterMedia {
+  CopyWith$Query$getStaffDetail$Staff$characterMedia<
+          Query$getStaffDetail$Staff$characterMedia>
+      get copyWith => CopyWith$Query$getStaffDetail$Staff$characterMedia(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$getStaffDetail$Staff$characterMedia<TRes> {
+  factory CopyWith$Query$getStaffDetail$Staff$characterMedia(
+    Query$getStaffDetail$Staff$characterMedia instance,
+    TRes Function(Query$getStaffDetail$Staff$characterMedia) then,
+  ) = _CopyWithImpl$Query$getStaffDetail$Staff$characterMedia;
+
+  factory CopyWith$Query$getStaffDetail$Staff$characterMedia.stub(TRes res) =
+      _CopyWithStubImpl$Query$getStaffDetail$Staff$characterMedia;
+
+  TRes call({
+    Fragment$PageInfo? pageInfo,
+    List<Query$getStaffDetail$Staff$characterMedia$edges?>? edges,
+    String? $__typename,
+  });
+  CopyWith$Fragment$PageInfo<TRes> get pageInfo;
+  TRes edges(
+      Iterable<Query$getStaffDetail$Staff$characterMedia$edges?>? Function(
+              Iterable<
+                  CopyWith$Query$getStaffDetail$Staff$characterMedia$edges<
+                      Query$getStaffDetail$Staff$characterMedia$edges>?>?)
+          _fn);
+}
+
+class _CopyWithImpl$Query$getStaffDetail$Staff$characterMedia<TRes>
+    implements CopyWith$Query$getStaffDetail$Staff$characterMedia<TRes> {
+  _CopyWithImpl$Query$getStaffDetail$Staff$characterMedia(
+    this._instance,
+    this._then,
+  );
+
+  final Query$getStaffDetail$Staff$characterMedia _instance;
+
+  final TRes Function(Query$getStaffDetail$Staff$characterMedia) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? pageInfo = _undefined,
+    Object? edges = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$getStaffDetail$Staff$characterMedia(
+        pageInfo: pageInfo == _undefined
+            ? _instance.pageInfo
+            : (pageInfo as Fragment$PageInfo?),
+        edges: edges == _undefined
+            ? _instance.edges
+            : (edges
+                as List<Query$getStaffDetail$Staff$characterMedia$edges?>?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$PageInfo<TRes> get pageInfo {
+    final local$pageInfo = _instance.pageInfo;
+    return local$pageInfo == null
+        ? CopyWith$Fragment$PageInfo.stub(_then(_instance))
+        : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
+  }
+
+  TRes edges(
+          Iterable<Query$getStaffDetail$Staff$characterMedia$edges?>? Function(
+                  Iterable<
+                      CopyWith$Query$getStaffDetail$Staff$characterMedia$edges<
+                          Query$getStaffDetail$Staff$characterMedia$edges>?>?)
+              _fn) =>
+      call(
+          edges: _fn(_instance.edges?.map((e) => e == null
+              ? null
+              : CopyWith$Query$getStaffDetail$Staff$characterMedia$edges(
+                  e,
+                  (i) => i,
+                )))?.toList());
+}
+
+class _CopyWithStubImpl$Query$getStaffDetail$Staff$characterMedia<TRes>
+    implements CopyWith$Query$getStaffDetail$Staff$characterMedia<TRes> {
+  _CopyWithStubImpl$Query$getStaffDetail$Staff$characterMedia(this._res);
+
+  TRes _res;
+
+  call({
+    Fragment$PageInfo? pageInfo,
+    List<Query$getStaffDetail$Staff$characterMedia$edges?>? edges,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
+      CopyWith$Fragment$PageInfo.stub(_res);
+
+  edges(_fn) => _res;
+}
+
+class Query$getStaffDetail$Staff$characterMedia$edges {
+  Query$getStaffDetail$Staff$characterMedia$edges({
+    this.characterRole,
+    this.$__typename = 'MediaEdge',
+  });
+
+  factory Query$getStaffDetail$Staff$characterMedia$edges.fromJson(
+      Map<String, dynamic> json) {
+    final l$characterRole = json['characterRole'];
+    final l$$__typename = json['__typename'];
+    return Query$getStaffDetail$Staff$characterMedia$edges(
+      characterRole: l$characterRole == null
+          ? null
+          : fromJson$Enum$CharacterRole((l$characterRole as String)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Enum$CharacterRole? characterRole;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$characterRole = characterRole;
+    _resultData['characterRole'] = l$characterRole == null
+        ? null
+        : toJson$Enum$CharacterRole(l$characterRole);
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$characterRole = characterRole;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$characterRole,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query$getStaffDetail$Staff$characterMedia$edges ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$characterRole = characterRole;
+    final lOther$characterRole = other.characterRole;
+    if (l$characterRole != lOther$characterRole) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$getStaffDetail$Staff$characterMedia$edges
+    on Query$getStaffDetail$Staff$characterMedia$edges {
+  CopyWith$Query$getStaffDetail$Staff$characterMedia$edges<
+          Query$getStaffDetail$Staff$characterMedia$edges>
+      get copyWith => CopyWith$Query$getStaffDetail$Staff$characterMedia$edges(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$getStaffDetail$Staff$characterMedia$edges<TRes> {
+  factory CopyWith$Query$getStaffDetail$Staff$characterMedia$edges(
+    Query$getStaffDetail$Staff$characterMedia$edges instance,
+    TRes Function(Query$getStaffDetail$Staff$characterMedia$edges) then,
+  ) = _CopyWithImpl$Query$getStaffDetail$Staff$characterMedia$edges;
+
+  factory CopyWith$Query$getStaffDetail$Staff$characterMedia$edges.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$getStaffDetail$Staff$characterMedia$edges;
+
+  TRes call({
+    Enum$CharacterRole? characterRole,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$getStaffDetail$Staff$characterMedia$edges<TRes>
+    implements CopyWith$Query$getStaffDetail$Staff$characterMedia$edges<TRes> {
+  _CopyWithImpl$Query$getStaffDetail$Staff$characterMedia$edges(
+    this._instance,
+    this._then,
+  );
+
+  final Query$getStaffDetail$Staff$characterMedia$edges _instance;
+
+  final TRes Function(Query$getStaffDetail$Staff$characterMedia$edges) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? characterRole = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$getStaffDetail$Staff$characterMedia$edges(
+        characterRole: characterRole == _undefined
+            ? _instance.characterRole
+            : (characterRole as Enum$CharacterRole?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$getStaffDetail$Staff$characterMedia$edges<TRes>
+    implements CopyWith$Query$getStaffDetail$Staff$characterMedia$edges<TRes> {
+  _CopyWithStubImpl$Query$getStaffDetail$Staff$characterMedia$edges(this._res);
+
+  TRes _res;
+
+  call({
+    Enum$CharacterRole? characterRole,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$getStaffDetail$Staff$staffMedia {
+  Query$getStaffDetail$Staff$staffMedia({
+    this.pageInfo,
+    this.edges,
+    this.$__typename = 'MediaConnection',
+  });
+
+  factory Query$getStaffDetail$Staff$staffMedia.fromJson(
+      Map<String, dynamic> json) {
+    final l$pageInfo = json['pageInfo'];
+    final l$edges = json['edges'];
+    final l$$__typename = json['__typename'];
+    return Query$getStaffDetail$Staff$staffMedia(
+      pageInfo: l$pageInfo == null
+          ? null
+          : Fragment$PageInfo.fromJson((l$pageInfo as Map<String, dynamic>)),
+      edges: (l$edges as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : Query$getStaffDetail$Staff$staffMedia$edges.fromJson(
+                  (e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Fragment$PageInfo? pageInfo;
+
+  final List<Query$getStaffDetail$Staff$staffMedia$edges?>? edges;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$pageInfo = pageInfo;
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
+    final l$edges = edges;
+    _resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$pageInfo = pageInfo;
+    final l$edges = edges;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$pageInfo,
+      l$edges == null ? null : Object.hashAll(l$edges.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query$getStaffDetail$Staff$staffMedia ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$pageInfo = pageInfo;
+    final lOther$pageInfo = other.pageInfo;
+    if (l$pageInfo != lOther$pageInfo) {
+      return false;
+    }
+    final l$edges = edges;
+    final lOther$edges = other.edges;
+    if (l$edges != null && lOther$edges != null) {
+      if (l$edges.length != lOther$edges.length) {
+        return false;
+      }
+      for (int i = 0; i < l$edges.length; i++) {
+        final l$edges$entry = l$edges[i];
+        final lOther$edges$entry = lOther$edges[i];
+        if (l$edges$entry != lOther$edges$entry) {
+          return false;
+        }
+      }
+    } else if (l$edges != lOther$edges) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$getStaffDetail$Staff$staffMedia
+    on Query$getStaffDetail$Staff$staffMedia {
+  CopyWith$Query$getStaffDetail$Staff$staffMedia<
+          Query$getStaffDetail$Staff$staffMedia>
+      get copyWith => CopyWith$Query$getStaffDetail$Staff$staffMedia(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$getStaffDetail$Staff$staffMedia<TRes> {
+  factory CopyWith$Query$getStaffDetail$Staff$staffMedia(
+    Query$getStaffDetail$Staff$staffMedia instance,
+    TRes Function(Query$getStaffDetail$Staff$staffMedia) then,
+  ) = _CopyWithImpl$Query$getStaffDetail$Staff$staffMedia;
+
+  factory CopyWith$Query$getStaffDetail$Staff$staffMedia.stub(TRes res) =
+      _CopyWithStubImpl$Query$getStaffDetail$Staff$staffMedia;
+
+  TRes call({
+    Fragment$PageInfo? pageInfo,
+    List<Query$getStaffDetail$Staff$staffMedia$edges?>? edges,
+    String? $__typename,
+  });
+  CopyWith$Fragment$PageInfo<TRes> get pageInfo;
+  TRes edges(
+      Iterable<Query$getStaffDetail$Staff$staffMedia$edges?>? Function(
+              Iterable<
+                  CopyWith$Query$getStaffDetail$Staff$staffMedia$edges<
+                      Query$getStaffDetail$Staff$staffMedia$edges>?>?)
+          _fn);
+}
+
+class _CopyWithImpl$Query$getStaffDetail$Staff$staffMedia<TRes>
+    implements CopyWith$Query$getStaffDetail$Staff$staffMedia<TRes> {
+  _CopyWithImpl$Query$getStaffDetail$Staff$staffMedia(
+    this._instance,
+    this._then,
+  );
+
+  final Query$getStaffDetail$Staff$staffMedia _instance;
+
+  final TRes Function(Query$getStaffDetail$Staff$staffMedia) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? pageInfo = _undefined,
+    Object? edges = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$getStaffDetail$Staff$staffMedia(
+        pageInfo: pageInfo == _undefined
+            ? _instance.pageInfo
+            : (pageInfo as Fragment$PageInfo?),
+        edges: edges == _undefined
+            ? _instance.edges
+            : (edges as List<Query$getStaffDetail$Staff$staffMedia$edges?>?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$PageInfo<TRes> get pageInfo {
+    final local$pageInfo = _instance.pageInfo;
+    return local$pageInfo == null
+        ? CopyWith$Fragment$PageInfo.stub(_then(_instance))
+        : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
+  }
+
+  TRes edges(
+          Iterable<Query$getStaffDetail$Staff$staffMedia$edges?>? Function(
+                  Iterable<
+                      CopyWith$Query$getStaffDetail$Staff$staffMedia$edges<
+                          Query$getStaffDetail$Staff$staffMedia$edges>?>?)
+              _fn) =>
+      call(
+          edges: _fn(_instance.edges?.map((e) => e == null
+              ? null
+              : CopyWith$Query$getStaffDetail$Staff$staffMedia$edges(
+                  e,
+                  (i) => i,
+                )))?.toList());
+}
+
+class _CopyWithStubImpl$Query$getStaffDetail$Staff$staffMedia<TRes>
+    implements CopyWith$Query$getStaffDetail$Staff$staffMedia<TRes> {
+  _CopyWithStubImpl$Query$getStaffDetail$Staff$staffMedia(this._res);
+
+  TRes _res;
+
+  call({
+    Fragment$PageInfo? pageInfo,
+    List<Query$getStaffDetail$Staff$staffMedia$edges?>? edges,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
+      CopyWith$Fragment$PageInfo.stub(_res);
+
+  edges(_fn) => _res;
+}
+
+class Query$getStaffDetail$Staff$staffMedia$edges {
+  Query$getStaffDetail$Staff$staffMedia$edges({
+    this.id,
+    this.node,
+    this.$__typename = 'MediaEdge',
+  });
+
+  factory Query$getStaffDetail$Staff$staffMedia$edges.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$node = json['node'];
+    final l$$__typename = json['__typename'];
+    return Query$getStaffDetail$Staff$staffMedia$edges(
+      id: (l$id as int?),
+      node: l$node == null
+          ? null
+          : Query$getStaffDetail$Staff$staffMedia$edges$node.fromJson(
+              (l$node as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int? id;
+
+  final Query$getStaffDetail$Staff$staffMedia$edges$node? node;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$node = node;
+    _resultData['node'] = l$node?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$node = node;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$node,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query$getStaffDetail$Staff$staffMedia$edges ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$node = node;
+    final lOther$node = other.node;
+    if (l$node != lOther$node) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$getStaffDetail$Staff$staffMedia$edges
+    on Query$getStaffDetail$Staff$staffMedia$edges {
+  CopyWith$Query$getStaffDetail$Staff$staffMedia$edges<
+          Query$getStaffDetail$Staff$staffMedia$edges>
+      get copyWith => CopyWith$Query$getStaffDetail$Staff$staffMedia$edges(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$getStaffDetail$Staff$staffMedia$edges<TRes> {
+  factory CopyWith$Query$getStaffDetail$Staff$staffMedia$edges(
+    Query$getStaffDetail$Staff$staffMedia$edges instance,
+    TRes Function(Query$getStaffDetail$Staff$staffMedia$edges) then,
+  ) = _CopyWithImpl$Query$getStaffDetail$Staff$staffMedia$edges;
+
+  factory CopyWith$Query$getStaffDetail$Staff$staffMedia$edges.stub(TRes res) =
+      _CopyWithStubImpl$Query$getStaffDetail$Staff$staffMedia$edges;
+
+  TRes call({
+    int? id,
+    Query$getStaffDetail$Staff$staffMedia$edges$node? node,
+    String? $__typename,
+  });
+  CopyWith$Query$getStaffDetail$Staff$staffMedia$edges$node<TRes> get node;
+}
+
+class _CopyWithImpl$Query$getStaffDetail$Staff$staffMedia$edges<TRes>
+    implements CopyWith$Query$getStaffDetail$Staff$staffMedia$edges<TRes> {
+  _CopyWithImpl$Query$getStaffDetail$Staff$staffMedia$edges(
+    this._instance,
+    this._then,
+  );
+
+  final Query$getStaffDetail$Staff$staffMedia$edges _instance;
+
+  final TRes Function(Query$getStaffDetail$Staff$staffMedia$edges) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? node = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$getStaffDetail$Staff$staffMedia$edges(
+        id: id == _undefined ? _instance.id : (id as int?),
+        node: node == _undefined
+            ? _instance.node
+            : (node as Query$getStaffDetail$Staff$staffMedia$edges$node?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Query$getStaffDetail$Staff$staffMedia$edges$node<TRes> get node {
+    final local$node = _instance.node;
+    return local$node == null
+        ? CopyWith$Query$getStaffDetail$Staff$staffMedia$edges$node.stub(
+            _then(_instance))
+        : CopyWith$Query$getStaffDetail$Staff$staffMedia$edges$node(
+            local$node, (e) => call(node: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$getStaffDetail$Staff$staffMedia$edges<TRes>
+    implements CopyWith$Query$getStaffDetail$Staff$staffMedia$edges<TRes> {
+  _CopyWithStubImpl$Query$getStaffDetail$Staff$staffMedia$edges(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Query$getStaffDetail$Staff$staffMedia$edges$node? node,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Query$getStaffDetail$Staff$staffMedia$edges$node<TRes> get node =>
+      CopyWith$Query$getStaffDetail$Staff$staffMedia$edges$node.stub(_res);
+}
+
+class Query$getStaffDetail$Staff$staffMedia$edges$node {
+  Query$getStaffDetail$Staff$staffMedia$edges$node({
+    this.type,
+    this.$__typename = 'Media',
+  });
+
+  factory Query$getStaffDetail$Staff$staffMedia$edges$node.fromJson(
+      Map<String, dynamic> json) {
+    final l$type = json['type'];
+    final l$$__typename = json['__typename'];
+    return Query$getStaffDetail$Staff$staffMedia$edges$node(
+      type: l$type == null ? null : fromJson$Enum$MediaType((l$type as String)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Enum$MediaType? type;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$type = type;
+    _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$type = type;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$type,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query$getStaffDetail$Staff$staffMedia$edges$node ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$type = type;
+    final lOther$type = other.type;
+    if (l$type != lOther$type) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$getStaffDetail$Staff$staffMedia$edges$node
+    on Query$getStaffDetail$Staff$staffMedia$edges$node {
+  CopyWith$Query$getStaffDetail$Staff$staffMedia$edges$node<
+          Query$getStaffDetail$Staff$staffMedia$edges$node>
+      get copyWith => CopyWith$Query$getStaffDetail$Staff$staffMedia$edges$node(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$getStaffDetail$Staff$staffMedia$edges$node<TRes> {
+  factory CopyWith$Query$getStaffDetail$Staff$staffMedia$edges$node(
+    Query$getStaffDetail$Staff$staffMedia$edges$node instance,
+    TRes Function(Query$getStaffDetail$Staff$staffMedia$edges$node) then,
+  ) = _CopyWithImpl$Query$getStaffDetail$Staff$staffMedia$edges$node;
+
+  factory CopyWith$Query$getStaffDetail$Staff$staffMedia$edges$node.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$getStaffDetail$Staff$staffMedia$edges$node;
+
+  TRes call({
+    Enum$MediaType? type,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$getStaffDetail$Staff$staffMedia$edges$node<TRes>
+    implements CopyWith$Query$getStaffDetail$Staff$staffMedia$edges$node<TRes> {
+  _CopyWithImpl$Query$getStaffDetail$Staff$staffMedia$edges$node(
+    this._instance,
+    this._then,
+  );
+
+  final Query$getStaffDetail$Staff$staffMedia$edges$node _instance;
+
+  final TRes Function(Query$getStaffDetail$Staff$staffMedia$edges$node) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? type = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$getStaffDetail$Staff$staffMedia$edges$node(
+        type: type == _undefined ? _instance.type : (type as Enum$MediaType?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$getStaffDetail$Staff$staffMedia$edges$node<TRes>
+    implements CopyWith$Query$getStaffDetail$Staff$staffMedia$edges$node<TRes> {
+  _CopyWithStubImpl$Query$getStaffDetail$Staff$staffMedia$edges$node(this._res);
+
+  TRes _res;
+
+  call({
+    Enum$MediaType? type,
     String? $__typename,
   }) =>
       _res;
