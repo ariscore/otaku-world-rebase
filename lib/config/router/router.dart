@@ -152,7 +152,6 @@ part 'settings_routes.dart';
 
 part 'list_routes.dart';
 
-part 'social_routes.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorHomeKey = GlobalKey<NavigatorState>();
