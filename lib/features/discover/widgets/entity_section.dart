@@ -11,6 +11,7 @@ import '../../../core/ui/error_text.dart';
 import '../../../core/ui/list_progress_indicator.dart';
 import '../../../core/ui/media_section/scroll_to_left_button.dart';
 import '../../../core/ui/shimmers/shimmer_loader_list.dart';
+import '../../../utils/navigation_helper.dart';
 import '../../../utils/ui_utils.dart';
 
 class EntitySection<B extends PaginatedDataBloc, E> extends HookWidget {
@@ -205,6 +206,10 @@ class EntitySection<B extends PaginatedDataBloc, E> extends HookWidget {
                         imageUrl: character.image?.large,
                         favorites: character.favourites,
                         rightMargin: 10,
+                        onTap: () => NavigationHelper.goToCharacterDetailScreen(
+                          context: context,
+                          characterId: character.id,
+                        ),
                       );
                     } else if (E == Fragment$StaffShort) {
                       final staff = list[index] as Fragment$StaffShort;
@@ -213,6 +218,10 @@ class EntitySection<B extends PaginatedDataBloc, E> extends HookWidget {
                         imageUrl: staff.image?.large,
                         favorites: staff.favourites,
                         rightMargin: 10,
+                        onTap: () => NavigationHelper.goToStaffDetailScreen(
+                          context: context,
+                          staffId: staff.id,
+                        ),
                       );
                     } else if (E == Fragment$SearchResultStudio) {
                       final studio = list[index] as Fragment$SearchResultStudio;
@@ -223,6 +232,10 @@ class EntitySection<B extends PaginatedDataBloc, E> extends HookWidget {
                             '',
                         favorites: studio.favourites,
                         rightMargin: 10,
+                        onTap: () => NavigationHelper.goToStudioDetailScreen(
+                          context: context,
+                          studioId: studio.id,
+                        ),
                       );
                     } else {
                       return const SizedBox();
