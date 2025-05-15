@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:otaku_world/features/search/widgets/identity_card.dart';
+import 'package:otaku_world/utils/navigation_helper.dart';
 
 import '../../../graphql/__generated/graphql/fragments.graphql.dart';
 
@@ -16,6 +17,10 @@ class ResultCharacterCard extends StatelessWidget {
       imageUrl: character!.image?.large,
       name: character!.name!.userPreferred!,
       favorites: '${character!.favourites ?? '?'}',
+      onTap: () => NavigationHelper.goToCharacterDetailScreen(
+        context: context,
+        characterId: character!.id,
+      ),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:otaku_world/features/search/widgets/identity_card.dart';
 
 import '../../../graphql/__generated/graphql/fragments.graphql.dart';
+import '../../../utils/navigation_helper.dart';
 
 class ResultStaffCard extends StatelessWidget {
   const ResultStaffCard({super.key, required this.staff});
@@ -16,6 +17,10 @@ class ResultStaffCard extends StatelessWidget {
       imageUrl: staff!.image?.large,
       name: staff!.name!.userPreferred!,
       favorites: '${staff!.favourites ?? '?'}',
+      onTap: () => NavigationHelper.goToStaffDetailScreen(
+        context: context,
+        staffId: staff!.id,
+      ),
     );
   }
 }
