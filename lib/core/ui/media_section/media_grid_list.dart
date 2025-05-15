@@ -11,6 +11,7 @@ import '../../../core/ui/shimmers/grid_shimmer.dart';
 import '../../../generated/assets.dart';
 import '../../../graphql/__generated/graphql/schema.graphql.dart';
 import '../../../theme/colors.dart';
+import '../../../utils/formatting_utils.dart';
 import '../../../utils/navigation_helper.dart';
 import '../images/cover_image.dart';
 import '../placeholders/poster_placeholder.dart';
@@ -37,6 +38,7 @@ class MediaGridList<B extends PaginatedDataBloc> extends StatelessWidget {
           return Column(
             children: [
               GridView.builder(
+                padding: const EdgeInsets.all(10),
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -142,7 +144,10 @@ class MediaGridList<B extends PaginatedDataBloc> extends StatelessWidget {
           // Manga title
           SizedBox(
             child: Text(
-              '${toJson$Enum$MediaFormat(media.format ?? Enum$MediaFormat.$unknown).toString().capitalize()},${media.startDate?.year ?? ''}',
+              '${FormattingUtils.getMediaFormatString(
+                media.format,
+                forList: true,
+              )},${media.startDate?.year ?? ''}',
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
