@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:otaku_world/core/ui/markdown/markdown.dart';
 
 import '../constants/dimensions_constants.dart';
 import '../core/ui/buttons/primary_outlined_button.dart';
@@ -77,6 +78,42 @@ class UIUtils {
               fontSize: 14,
             ),
           ],
+        );
+      },
+    );
+  }
+
+  static void showMarkdownDialog(BuildContext context, {required String data}) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          insetPadding: const EdgeInsets.all(10),
+          shape: const OutlineInputBorder(
+            borderSide: BorderSide.none,
+          ),
+          backgroundColor: AppColors.transparent,
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              gradient: AppColors.secondaryGradient,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              spacing: 10,
+              children: [
+                MarkdownWidget(data: data),
+                PrimaryOutlinedButton(
+                  onTap: context.pop,
+                  label: 'Ok',
+                  horizontalPadding: 5,
+                  verticalPadding: 10,
+                  fontSize: 14,
+                ),
+              ],
+            ),
+          ),
         );
       },
     );

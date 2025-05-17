@@ -15,29 +15,35 @@ class AppTexts {
   static const TextStyle displaySmall = TextStyle(
     fontSize: 18,
     color: AppColors.white,
+    decorationColor: Colors.white,
   );
   static const TextStyle headlineMedium = TextStyle(
     fontSize: 16,
     color: AppColors.white,
+    decorationColor: Colors.white,
   );
   static const TextStyle headlineSmall = TextStyle(
     fontSize: 14,
     color: AppColors.white,
+    decorationColor: Colors.white,
   );
   static const TextStyle titleLarge = TextStyle(
     fontSize: 12,
     color: AppColors.white,
+    decorationColor: Colors.white,
   );
   static const TextStyle titleMedium = TextStyle(
     fontSize: 10,
     color: AppColors.white,
+    decorationColor: Colors.white,
   );
 
   static const TextStyle bodySmall = TextStyle(
     fontSize: 12,
     fontFamily: 'Roboto-Condensed',
     color: AppColors.white,
+    decorationColor: Colors.white,
   );
-  static const TextStyle bodyLarge = TextStyle();
-  static const TextStyle bodyMedium = TextStyle();
+  static const TextStyle bodyLarge = TextStyle(color: Colors.white);
+  static const TextStyle bodyMedium = TextStyle(color: Colors.white);
 }

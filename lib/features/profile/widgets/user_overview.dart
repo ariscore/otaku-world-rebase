@@ -103,10 +103,7 @@ class UserOverview extends StatelessWidget {
   Widget _buildItem(Widget child) {
     return SliverToBoxAdapter(
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 15,
-          vertical: 10,
-        ),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           gradient: AppColors.secondaryGradient,
