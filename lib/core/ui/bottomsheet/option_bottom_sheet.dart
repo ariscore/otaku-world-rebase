@@ -8,15 +8,37 @@ import '../../../theme/colors.dart';
 class OptionsBottomSheet extends StatelessWidget {
   final List<BottomSheetComponent>? extraItems;
 
-  final void Function() onShareTap;
-  final void Function() onViewOnAniListTap;
+  final VoidCallback onShareTap;
+  final VoidCallback onViewOnAniListTap;
+  final VoidCallback onCopyLinkTap;
 
   const OptionsBottomSheet({
     super.key,
     this.extraItems,
     required this.onShareTap,
     required this.onViewOnAniListTap,
+    required this.onCopyLinkTap,
   });
+
+  static void showOptionBottomSheet({
+    required BuildContext context,
+    List<BottomSheetComponent>? extraItems,
+    required VoidCallback onShareTap,
+    required VoidCallback onViewOnAniListTap,
+    required VoidCallback onCopyLinkTap,
+  }) {
+    showModalBottomSheet(
+      backgroundColor: AppColors.darkCharcoal,
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => OptionsBottomSheet(
+        onShareTap: onShareTap,
+        onViewOnAniListTap: onViewOnAniListTap,
+        extraItems: extraItems,
+        onCopyLinkTap: onCopyLinkTap,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +81,14 @@ class OptionsBottomSheet extends StatelessWidget {
               },
               iconName: Assets.iconsShare,
               text: 'Share',
+            ),
+            BottomSheetComponent(
+              onTap: () {
+                context.pop();
+                onCopyLinkTap();
+              },
+              iconName: Assets.iconsShare,
+              text: 'Copy Link',
             ),
           ],
         ),

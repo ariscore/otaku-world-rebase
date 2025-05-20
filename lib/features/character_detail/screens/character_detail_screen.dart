@@ -64,7 +64,9 @@ class CharacterDetailScreen extends StatelessWidget {
             //   },
             // ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+
+              },
               icon: SvgPicture.asset(
                 Assets.iconsMoreVertical,
               ),

@@ -17,6 +17,4 @@ class AnilistUriHelpers {
       path: '/character/$characterId',
     );
   }
-
-
 }
