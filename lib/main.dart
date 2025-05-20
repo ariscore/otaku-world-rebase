@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:otaku_world/bloc/auth/auth_cubit.dart';
@@ -36,7 +37,13 @@ import 'bloc/recommendations/recommendation_anime_bloc.dart';
 import 'config/router/router.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ],
+  ).then((value) => runApp(const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

@@ -13,74 +13,79 @@ class IdentityCard extends StatelessWidget {
     required this.imageUrl,
     required this.name,
     required this.favorites,
+    this.onTap,
   });
 
   final String? imageUrl;
   final String name;
   final String favorites;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return Container(
-      height: 150,
-      margin: const EdgeInsets.symmetric(
-        vertical: 5,
-      ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 10,
-      ),
-      decoration: ShapeDecoration(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 150,
+        margin: const EdgeInsets.symmetric(
+          vertical: 5,
         ),
-        gradient: const LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [AppColors.japaneseIndigo, AppColors.darkCharcoal],
+        padding: const EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 10,
         ),
-      ),
-      child: Row(
-        children: [
-          _buildCharacterImage(imageUrl, size),
-          const SizedBox(width: 5),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: size.width - 45 - 90,
-                child: Text(
-                  name,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontFamily: 'Poppins',
-                      ),
-                  maxLines: 5,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    Assets.iconsFavourite,
-                    width: 16,
-                    height: 16,
-                  ),
-                  const SizedBox(width: 2),
-                  Text(
-                    favorites,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+        decoration: ShapeDecoration(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          gradient: const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [AppColors.japaneseIndigo, AppColors.darkCharcoal],
+          ),
+        ),
+        child: Row(
+          children: [
+            _buildCharacterImage(imageUrl, size),
+            const SizedBox(width: 5),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: size.width - 45 - 90,
+                  child: Text(
+                    name,
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           fontFamily: 'Poppins',
                         ),
+                    maxLines: 5,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                ],
-              ),
-            ],
-          ),
-        ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      Assets.iconsFavourite,
+                      width: 16,
+                      height: 16,
+                    ),
+                    const SizedBox(width: 2),
+                    Text(
+                      favorites,
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontFamily: 'Poppins',
+                          ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

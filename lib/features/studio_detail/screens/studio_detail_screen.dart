@@ -11,6 +11,7 @@ import 'package:otaku_world/utils/navigation_helper.dart';
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/paginated_data/paginated_data_bloc.dart';
 import '../../../bloc/studio_detail/studio_media/studio_media_bloc.dart';
+import '../../../core/ui/media_section/scroll_to_top_button.dart';
 import '../../../theme/colors.dart';
 
 class StudioDetailScreen extends HookWidget {
@@ -59,6 +60,10 @@ class StudioDetailScreen extends HookWidget {
         NavigationHelper.onPopInvoked(context);
       },
       child: Scaffold(
+        floatingActionButton: ScrollToTopFAB(
+          controller: scrollController,
+          tag: 'studio_fab',
+        ),
         body: BlocBuilder<StudioDetailBloc, StudioDetailState>(
           builder: (context, state) {
             if (state is StudioDetailInitial || state is StudioDetailLoading) {
@@ -72,7 +77,7 @@ class StudioDetailScreen extends HookWidget {
                     studio: studio,
                     bloc: bloc,
                   ),
-                   SliverToBoxAdapter(
+                  SliverToBoxAdapter(
                     child: MediaQuery.removePadding(
                       context: context,
                       removeTop: true,

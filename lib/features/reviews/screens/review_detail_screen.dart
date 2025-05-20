@@ -407,22 +407,6 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                   ),
                 ],
                 BottomSheetComponent(
-                  onTap: () async {
-                    final Uri reviewUri = Uri(
-                      scheme: 'https',
-                      host: 'anilist.co',
-                      path: 'review/$reviewId',
-                    );
-                    context.pop();
-                    await launchUrl(
-                      reviewUri,
-                      mode: LaunchMode.externalApplication,
-                    );
-                  },
-                  iconName: Assets.iconsLinkSquare,
-                  text: 'View on AniList',
-                ),
-                BottomSheetComponent(
                   onTap: () {
                     context.pop(); //to close the bottom sheet
                     NavigationHelper.goToMediaDetailScreen(
