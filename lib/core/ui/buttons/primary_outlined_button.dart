@@ -4,8 +4,8 @@ import 'package:otaku_world/theme/colors.dart';
 class PrimaryOutlinedButton extends StatelessWidget {
   const PrimaryOutlinedButton({
     super.key,
-    this.horizontalPadding = 0,
-    this.verticalPadding = 0,
+    this.horizontalPadding = 12,
+    this.verticalPadding = 14,
     this.height,
     this.width,
     this.fontSize,
