@@ -13,7 +13,6 @@ import 'package:otaku_world/core/ui/bottomsheet/option_bottom_sheet.dart';
 import 'package:otaku_world/features/media_detail/widgets/status_row.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
-import '../../../core/ui/bottomsheet/helpers/anilist_uri_helpers.dart';
 import '../../../core/ui/buttons/back_button.dart';
 import '../../../core/ui/image_viewer.dart';
 import '../../../core/ui/images/cover_image.dart';
@@ -99,11 +98,13 @@ class _MediaAppBarState extends State<MediaAppBar> {
                 ShareHelpers.mediaShareOptions(widget.media.id);
               },
               onViewOnAniListTap: () {
-                final uri = AnilistUriHelpers.getMediaUri(
-                  mediaId.toString(),
-                  widget.media.type ?? Enum$MediaType.$unknown,
-                );
-                UrlHelpers.launchUri(context, uri);
+                final String? url = widget.media.siteUrl;
+                if (url != null && url.isNotEmpty) {
+                  UrlHelpers.launchUrlLink(
+                    context,
+                    url,
+                  );
+                }
               },
               onCopyLinkTap: () {
                 final url = UrlHelpers.getMediaLocalUrl(mediaId);

@@ -9,7 +9,6 @@ import 'package:like_button/like_button.dart';
 import 'package:otaku_world/bloc/staff_detail/toggle_favorite_staff/toggle_favorite_staff_cubit.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
-import '../../../core/ui/bottomsheet/helpers/anilist_uri_helpers.dart';
 import '../../../core/ui/bottomsheet/helpers/share_helpers.dart';
 import '../../../core/ui/bottomsheet/helpers/url_helpers.dart';
 import '../../../core/ui/bottomsheet/option_bottom_sheet.dart';
@@ -89,10 +88,13 @@ class _StaffAppBarState extends State<StaffAppBar> {
                 ShareHelpers.staffShareOptions(staffId);
               },
               onViewOnAniListTap: () {
-                final uri = AnilistUriHelpers.getStaffUri(
-                  staffId.toString(),
-                );
-                UrlHelpers.launchUri(context, uri);
+                final String? url = widget.staff.siteUrl;
+                if (url != null && url.isNotEmpty) {
+                  UrlHelpers.launchUrlLink(
+                    context,
+                    url,
+                  );
+                }
               },
               onCopyLinkTap: () {
                 final url = UrlHelpers.getStaffLocalUrl(staffId);

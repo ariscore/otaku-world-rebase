@@ -47,6 +47,7 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
     this.endDate,
     this.$__typename = 'Media',
     this.mediaListEntry,
+    this.siteUrl,
   });
 
   factory Fragment$MediaDetailed.fromJson(Map<String, dynamic> json) {
@@ -88,6 +89,7 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
     final l$endDate = json['endDate'];
     final l$$__typename = json['__typename'];
     final l$mediaListEntry = json['mediaListEntry'];
+    final l$siteUrl = json['siteUrl'];
     return Fragment$MediaDetailed(
       averageScore: (l$averageScore as int?),
       bannerImage: (l$bannerImage as String?),
@@ -185,6 +187,7 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
           ? null
           : Fragment$MediaListEntry.fromJson(
               (l$mediaListEntry as Map<String, dynamic>)),
+      siteUrl: (l$siteUrl as String?),
     );
   }
 
@@ -263,6 +266,8 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
   final String $__typename;
 
   final Fragment$MediaListEntry? mediaListEntry;
+
+  final String? siteUrl;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -347,6 +352,8 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
     _resultData['__typename'] = l$$__typename;
     final l$mediaListEntry = mediaListEntry;
     _resultData['mediaListEntry'] = l$mediaListEntry?.toJson();
+    final l$siteUrl = siteUrl;
+    _resultData['siteUrl'] = l$siteUrl;
     return _resultData;
   }
 
@@ -390,6 +397,7 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
     final l$endDate = endDate;
     final l$$__typename = $__typename;
     final l$mediaListEntry = mediaListEntry;
+    final l$siteUrl = siteUrl;
     return Object.hashAll([
       l$averageScore,
       l$bannerImage,
@@ -431,6 +439,7 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
       l$endDate,
       l$$__typename,
       l$mediaListEntry,
+      l$siteUrl,
     ]);
   }
 
@@ -687,6 +696,11 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
     if (l$mediaListEntry != lOther$mediaListEntry) {
       return false;
     }
+    final l$siteUrl = siteUrl;
+    final lOther$siteUrl = other.siteUrl;
+    if (l$siteUrl != lOther$siteUrl) {
+      return false;
+    }
     return true;
   }
 }
@@ -747,6 +761,7 @@ abstract class CopyWith$Fragment$MediaDetailed<TRes> {
     Fragment$FuzzyDate? endDate,
     String? $__typename,
     Fragment$MediaListEntry? mediaListEntry,
+    String? siteUrl,
   });
   CopyWith$Fragment$MediaDetailed$nextAiringEpisode<TRes> get nextAiringEpisode;
   CopyWith$Fragment$MediaDetailed$trailer<TRes> get trailer;
@@ -832,6 +847,7 @@ class _CopyWithImpl$Fragment$MediaDetailed<TRes>
     Object? endDate = _undefined,
     Object? $__typename = _undefined,
     Object? mediaListEntry = _undefined,
+    Object? siteUrl = _undefined,
   }) =>
       _then(Fragment$MediaDetailed(
         averageScore: averageScore == _undefined
@@ -937,6 +953,8 @@ class _CopyWithImpl$Fragment$MediaDetailed<TRes>
         mediaListEntry: mediaListEntry == _undefined
             ? _instance.mediaListEntry
             : (mediaListEntry as Fragment$MediaListEntry?),
+        siteUrl:
+            siteUrl == _undefined ? _instance.siteUrl : (siteUrl as String?),
       ));
 
   CopyWith$Fragment$MediaDetailed$nextAiringEpisode<TRes>
@@ -1124,6 +1142,7 @@ class _CopyWithStubImpl$Fragment$MediaDetailed<TRes>
     Fragment$FuzzyDate? endDate,
     String? $__typename,
     Fragment$MediaListEntry? mediaListEntry,
+    String? siteUrl,
   }) =>
       _res;
 
@@ -1841,6 +1860,13 @@ const fragmentDefinitionMediaDetailed = FragmentDefinitionNode(
           selectionSet: null,
         ),
       ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'siteUrl'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
     ),
     FieldNode(
       name: NameNode(value: '__typename'),

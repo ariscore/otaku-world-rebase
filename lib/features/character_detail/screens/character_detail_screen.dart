@@ -12,7 +12,6 @@ import 'package:otaku_world/utils/extensions.dart';
 import 'package:otaku_world/utils/navigation_helper.dart';
 
 import '../../../bloc/charcter_detail/character_detail_bloc.dart';
-import '../../../core/ui/bottomsheet/helpers/anilist_uri_helpers.dart';
 import '../../../core/ui/bottomsheet/helpers/share_helpers.dart';
 import '../../../core/ui/bottomsheet/helpers/url_helpers.dart';
 import '../../../core/ui/bottomsheet/option_bottom_sheet.dart';
@@ -75,10 +74,16 @@ class CharacterDetailScreen extends StatelessWidget {
                     ShareHelpers.characterShareOptions(characterId);
                   },
                   onViewOnAniListTap: () {
-                    final uri = AnilistUriHelpers.getCharacterUri(
-                      characterId.toString(),
-                    );
-                    UrlHelpers.launchUri(context, uri);
+                    final state = context.read<CharacterDetailBloc>().state;
+                    final String? url = state is CharacterDetailLoaded
+                        ? state.character.siteUrl
+                        : '';
+                    if (url != null && url.isNotEmpty) {
+                      UrlHelpers.launchUrlLink(
+                        context,
+                        url,
+                      );
+                    }
                   },
                   onCopyLinkTap: () {
                     final url = UrlHelpers.getCharacterLocalUrl(characterId);
