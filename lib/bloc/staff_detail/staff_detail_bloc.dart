@@ -23,8 +23,8 @@ class StaffDetailBloc extends Bloc<StaffDetailEvent, StaffDetailState> {
     try {
       final result = await client.query$getStaffDetail(
         Options$Query$getStaffDetail(
-          fetchPolicy: FetchPolicy.networkOnly,
           variables: Variables$Query$getStaffDetail(staffId: event.staffId),
+          fetchPolicy: FetchPolicy.networkOnly,
           cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
         ),
       );

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:otaku_world/bloc/charcter_detail/media/character_media_bloc.dart';
-import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/media_section/media_grid_list.dart';
+import 'package:otaku_world/features/character_detail/screens/widgets/character_app_bar.dart';
 import 'package:otaku_world/features/character_detail/screens/widgets/name_widget.dart';
 import 'package:otaku_world/features/media_detail/tabs/overview/widgets/description.dart';
 import 'package:otaku_world/features/media_detail/widgets/simple_loading.dart';
@@ -12,9 +11,6 @@ import 'package:otaku_world/utils/extensions.dart';
 import 'package:otaku_world/utils/navigation_helper.dart';
 
 import '../../../bloc/charcter_detail/character_detail_bloc.dart';
-import '../../../core/ui/bottomsheet/helpers/share_helpers.dart';
-import '../../../core/ui/bottomsheet/helpers/url_helpers.dart';
-import '../../../core/ui/bottomsheet/option_bottom_sheet.dart';
 import '../../../core/ui/image_viewer.dart';
 import '../../../core/ui/images/cover_image.dart';
 import '../../../generated/assets.dart';
@@ -49,62 +45,18 @@ class CharacterDetailScreen extends StatelessWidget {
         }
         NavigationHelper.onPopInvoked(context);
       },
-      child: Scaffold(
-        appBar: SimpleAppBar(
-          title: '',
-          bgColor: AppColors.raisinBlack,
-          actions: [
-            // LikeButton(
-            //   isLiked: isLiked,
-            //   size: 25,
-            //   likeBuilder: (isLiked) {
-            //     return SvgPicture.asset(
-            //       isLiked ? Assets.iconsFavourite : Assets.iconsLike,
-            //     );
-            //   },
-            //   onTap: (isLiked) async {
-            //     return toggleFavorite(context, client);
-            //   },
-            // ),
-            IconButton(
-              onPressed: () {
-                OptionsBottomSheet.showOptionBottomSheet(
-                  context: context,
-                  onShareTap: () {
-                    ShareHelpers.characterShareOptions(characterId);
-                  },
-                  onViewOnAniListTap: () {
-                    final state = context.read<CharacterDetailBloc>().state;
-                    final String? url = state is CharacterDetailLoaded
-                        ? state.character.siteUrl
-                        : '';
-                    if (url != null && url.isNotEmpty) {
-                      UrlHelpers.launchUrlLink(
-                        context,
-                        url,
-                      );
-                    }
-                  },
-                  onCopyLinkTap: () {
-                    final url = UrlHelpers.getCharacterLocalUrl(characterId);
-                    UrlHelpers.copyUrlToClipboard(context, url);
-                  },
-                );
-              },
-              icon: SvgPicture.asset(
-                Assets.iconsMoreVertical,
+      child: BlocBuilder<CharacterDetailBloc, CharacterDetailState>(
+        builder: (context, state) {
+          if (state is CharacterDetailInitial ||
+              state is CharacterDetailLoading) {
+            return const SimpleLoading();
+          } else if (state is CharacterDetailLoaded) {
+            final character = state.character;
+            return Scaffold(
+              appBar: CharacterAppBar(
+                character: character,
               ),
-            ),
-          ],
-        ),
-        body: BlocBuilder<CharacterDetailBloc, CharacterDetailState>(
-          builder: (context, state) {
-            if (state is CharacterDetailInitial ||
-                state is CharacterDetailLoading) {
-              return const SimpleLoading();
-            } else if (state is CharacterDetailLoaded) {
-              final character = state.character;
-              return SingleChildScrollView(
+              body: SingleChildScrollView(
                 padding: const EdgeInsets.all(15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -191,18 +143,19 @@ class CharacterDetailScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-              );
-            }
-            return const Center(
-              child: Text(
-                'Unknown State',
-                style: TextStyle(
-                  color: AppColors.white,
-                ),
               ),
             );
-          },
-        ),
+          }
+
+          return const Center(
+            child: Text(
+              'Unknown State',
+              style: TextStyle(
+                color: AppColors.white,
+              ),
+            ),
+          );
+        },
       ),
     );
   }
