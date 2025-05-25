@@ -99,7 +99,10 @@ class _MediaAppBarState extends State<MediaAppBar> {
                 ShareHelpers.mediaShareOptions(widget.media.id);
               },
               onViewOnAniListTap: () {
-                final uri = AnilistUriHelpers.getMediaUri(mediaId.toString());
+                final uri = AnilistUriHelpers.getMediaUri(
+                  mediaId.toString(),
+                  widget.media.type ?? Enum$MediaType.$unknown,
+                );
                 UrlHelpers.launchUri(context, uri);
               },
               onCopyLinkTap: () {

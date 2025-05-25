@@ -87,7 +87,7 @@ class OptionsBottomSheet extends StatelessWidget {
                 context.pop();
                 onCopyLinkTap();
               },
-              iconName: Assets.iconsShare,
+              iconName: Assets.iconsCopyLink,
               text: 'Copy Link',
             ),
           ],
