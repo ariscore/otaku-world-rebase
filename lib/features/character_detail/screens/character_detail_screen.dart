@@ -12,6 +12,10 @@ import 'package:otaku_world/utils/extensions.dart';
 import 'package:otaku_world/utils/navigation_helper.dart';
 
 import '../../../bloc/charcter_detail/character_detail_bloc.dart';
+import '../../../core/ui/bottomsheet/helpers/anilist_uri_helpers.dart';
+import '../../../core/ui/bottomsheet/helpers/share_helpers.dart';
+import '../../../core/ui/bottomsheet/helpers/url_helpers.dart';
+import '../../../core/ui/bottomsheet/option_bottom_sheet.dart';
 import '../../../core/ui/image_viewer.dart';
 import '../../../core/ui/images/cover_image.dart';
 import '../../../generated/assets.dart';
@@ -65,7 +69,22 @@ class CharacterDetailScreen extends StatelessWidget {
             // ),
             IconButton(
               onPressed: () {
-
+                OptionsBottomSheet.showOptionBottomSheet(
+                  context: context,
+                  onShareTap: () {
+                    ShareHelpers.characterShareOptions(characterId);
+                  },
+                  onViewOnAniListTap: () {
+                    final uri = AnilistUriHelpers.getCharacterUri(
+                      characterId.toString(),
+                    );
+                    UrlHelpers.launchUri(context, uri);
+                  },
+                  onCopyLinkTap: () {
+                    final url = UrlHelpers.getCharacterLocalUrl(characterId);
+                    UrlHelpers.copyUrlToClipboard(context, url);
+                  },
+                );
               },
               icon: SvgPicture.asset(
                 Assets.iconsMoreVertical,

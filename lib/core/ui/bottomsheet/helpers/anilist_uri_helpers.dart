@@ -24,4 +24,20 @@ class AnilistUriHelpers {
       path: '/character/$characterId',
     );
   }
+
+  static Uri getStaffUri(String staffId) {
+    return Uri(
+      scheme: scheme,
+      host: host,
+      path: '/staff/$staffId',
+    );
+  }
+
+  static Uri getStudioUri(String studioId) {
+    return Uri(
+      scheme: scheme,
+      host: host,
+      path: '/studio/$studioId',
+    );
+  }
 }

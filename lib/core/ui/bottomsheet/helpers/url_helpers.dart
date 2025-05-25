@@ -36,6 +36,17 @@ class UrlHelpers {
     }
   }
 
+  static Future<void> launchUrlLink(BuildContext context, String url) async {
+    try {
+      final uri = Uri.parse(url);
+      await launchUri(context, uri);
+    } catch (e) {
+      if (context.mounted) {
+        UIUtils.showSnackBar(context, 'Invalid URL');
+      }
+    }
+  }
+
   static void copyUrlToClipboard(BuildContext context, String url) {
     Clipboard.setData(ClipboardData(text: url));
     UIUtils.showSnackBar(context, 'URL copied to clipboard');

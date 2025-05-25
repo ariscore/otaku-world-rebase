@@ -9,6 +9,10 @@ import 'package:like_button/like_button.dart';
 import 'package:otaku_world/bloc/staff_detail/toggle_favorite_staff/toggle_favorite_staff_cubit.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
+import '../../../core/ui/bottomsheet/helpers/anilist_uri_helpers.dart';
+import '../../../core/ui/bottomsheet/helpers/share_helpers.dart';
+import '../../../core/ui/bottomsheet/helpers/url_helpers.dart';
+import '../../../core/ui/bottomsheet/option_bottom_sheet.dart';
 import '../../../core/ui/buttons/back_button.dart';
 import '../../../core/ui/image_viewer.dart';
 import '../../../core/ui/images/cover_image.dart';
@@ -77,8 +81,28 @@ class _StaffAppBarState extends State<StaffAppBar> {
           },
         ),
         IconButton(
-          onPressed: () {},
-          icon: SvgPicture.asset(Assets.iconsMoreVertical),
+          onPressed: () {
+            final staffId = widget.staff.id;
+            OptionsBottomSheet.showOptionBottomSheet(
+              context: context,
+              onShareTap: () {
+                ShareHelpers.staffShareOptions(staffId);
+              },
+              onViewOnAniListTap: () {
+                final uri = AnilistUriHelpers.getStaffUri(
+                  staffId.toString(),
+                );
+                UrlHelpers.launchUri(context, uri);
+              },
+              onCopyLinkTap: () {
+                final url = UrlHelpers.getStaffLocalUrl(staffId);
+                UrlHelpers.copyUrlToClipboard(context, url);
+              },
+            );
+          },
+          icon: SvgPicture.asset(
+            Assets.iconsMoreVertical,
+          ),
         ),
       ],
       flexibleSpace: FlexibleSpaceBar(
