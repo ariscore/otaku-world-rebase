@@ -7,17 +7,11 @@ import 'package:otaku_world/features/character_detail/screens/widgets/name_widge
 import 'package:otaku_world/features/media_detail/tabs/overview/widgets/description.dart';
 import 'package:otaku_world/features/media_detail/widgets/simple_loading.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
-import 'package:otaku_world/utils/extensions.dart';
 import 'package:otaku_world/utils/navigation_helper.dart';
 
 import '../../../bloc/charcter_detail/character_detail_bloc.dart';
-import '../../../core/ui/image_viewer.dart';
-import '../../../core/ui/images/cover_image.dart';
-import '../../../generated/assets.dart';
 import '../../../theme/colors.dart';
 import '../../../utils/app_texts.dart';
-import '../../../utils/ui_utils.dart';
-import '../../media_detail/widgets/info_data.dart';
 
 class CharacterDetailScreen extends StatelessWidget {
   const CharacterDetailScreen({
@@ -36,8 +30,6 @@ class CharacterDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) {
@@ -45,117 +37,70 @@ class CharacterDetailScreen extends StatelessWidget {
         }
         NavigationHelper.onPopInvoked(context);
       },
-      child: BlocBuilder<CharacterDetailBloc, CharacterDetailState>(
-        builder: (context, state) {
-          if (state is CharacterDetailInitial ||
-              state is CharacterDetailLoading) {
-            return const SimpleLoading();
-          } else if (state is CharacterDetailLoaded) {
-            final character = state.character;
-            return Scaffold(
-              appBar: CharacterAppBar(
-                character: character,
-              ),
-              body: SingleChildScrollView(
-                padding: const EdgeInsets.all(15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+      child: Scaffold(
+        body: BlocBuilder<CharacterDetailBloc, CharacterDetailState>(
+          builder: (context, state) {
+            if (state is CharacterDetailInitial ||
+                state is CharacterDetailLoading) {
+              return const SimpleLoading();
+            } else if (state is CharacterDetailLoaded) {
+              final character = state.character;
+              return CustomScrollView(
+                slivers: [
+                  CharacterAppBar(
+                    character: character,
+                  ),
+                  SliverFillRemaining(
+                    child: Column(
                       children: [
-                        SizedBox(
-                          height: UIUtils.getWidgetHeight(
-                            targetWidgetHeight: 256,
-                            screenHeight: height,
+                        if (character.name != null) ...[
+                          twentySpacing,
+                          NameWidget(
+                            name: character.name!,
                           ),
-                          width: UIUtils.getWidgetWidth(
-                            targetWidgetWidth: 170,
-                            screenWidth: width,
-                          ),
-                          child: GestureDetector(
-                            onTap: () => character.image?.large != null
-                                ? showImage(
-                                    context,
-                                    character.image!.large!.toString(),
-                                    tag: character.image!.large!.toString(),
-                                  )
-                                : null,
-                            child: Hero(
-                              tag: character.image!.large!.toString(),
-                              child: CoverImage(
-                                imageUrl: character.image!.large!.toString(),
-                                type: Enum$MediaType.ANIME,
-                                // placeHolderName: Assets.placeholders210x310,
-                              ),
+                          if (character.description != null) ...[
+                            twentySpacing,
+                            const Text(
+                              'Description',
+                              style: AppTextStyles.titleSectionStyle,
                             ),
-                          ),
-                        ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Description(
+                              description: character.description,
+                            ),
+                          ]
+                        ],
                         fifteenSpacing,
-                        Text(
-                          character.name!.userPreferred!.checkIfNull(),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        fifteenSpacing,
-                        InfoData(
-                          iconName: Assets.iconsFavourite,
-                          separateWidth: 3,
-                          info: character.favourites.toString(),
-                          mainAxisAlignment: MainAxisAlignment.center,
-                        ),
-                      ],
-                    ),
-                    if (character.name != null) ...[
-                      twentySpacing,
-                      NameWidget(
-                        name: character.name!,
-                      ),
-                      if (character.description != null) ...[
-                        twentySpacing,
                         const Text(
-                          'Description',
+                          'Media',
                           style: AppTextStyles.titleSectionStyle,
                         ),
                         const SizedBox(
                           height: 5,
                         ),
-                        Description(
-                          description: character.description,
+                        const MediaGridList<CharacterMediaBloc>(
+                          mediaType: Enum$MediaType.ANIME,
+                          crossAxisCount: 3,
                         ),
-                      ]
-                    ],
-                    fifteenSpacing,
-                    const Text(
-                      'Media',
-                      style: AppTextStyles.titleSectionStyle,
+                      ],
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const MediaGridList<CharacterMediaBloc>(
-                      mediaType: Enum$MediaType.ANIME,
-                      crossAxisCount: 3,
-                    ),
-                  ],
+                  ),
+                ],
+              );
+            }
+
+            return const Center(
+              child: Text(
+                'Unknown State',
+                style: TextStyle(
+                  color: AppColors.white,
                 ),
               ),
             );
-          }
-
-          return const Center(
-            child: Text(
-              'Unknown State',
-              style: TextStyle(
-                color: AppColors.white,
-              ),
-            ),
-          );
-        },
+          },
+        ),
       ),
     );
   }

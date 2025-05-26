@@ -9,11 +9,13 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     this.actions,
     this.bgColor = AppColors.raisinBlack,
+    this.flexibleSpace,
   });
 
   final String title;
   final List<Widget>? actions;
   final Color bgColor;
+  final Widget? flexibleSpace;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: actions,
       centerTitle: false,
       surfaceTintColor: AppColors.raisinBlack,
+      flexibleSpace: flexibleSpace,
     );
   }
 
