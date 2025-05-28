@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/staff/staff_bloc.dart';
+import 'package:otaku_world/core/ui/shimmers/media_detail_shimmer.dart';
 import 'package:otaku_world/features/media_detail/widgets/media_app_bar.dart';
 import 'package:otaku_world/features/media_detail/widgets/media_floating_action_button.dart';
 import 'package:otaku_world/features/profile/widgets/keep_alive_tab.dart';
@@ -17,7 +18,6 @@ import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/media_detail/characters/characters_bloc.dart';
 import '../../../bloc/media_detail/media_detail_bloc.dart';
 import '../../../bloc/viewer/viewer_bloc.dart';
-import '../../../generated/assets.dart';
 import '../../../theme/colors.dart';
 import '../tabs/characters/characters.dart' as ch;
 import '../tabs/overview/overview.dart';
@@ -49,7 +49,7 @@ class MediaDetailScreen extends HookWidget {
 
     return PopScope(
       canPop: false,
-      onPopInvoked: (didPop) {
+      onPopInvokedWithResult: (didPop, _) {
         if (didPop) return;
         _onPopInvoked(context);
       },
@@ -64,7 +64,7 @@ class MediaDetailScreen extends HookWidget {
                     ),
                   );
             } else if (state is MediaDetailLoading) {
-              return _buildLoading(context);
+              return const MediaDetailShimmer();
             } else if (state is MediaDetailLoaded) {
               final media = state.media;
 
@@ -177,9 +177,5 @@ class MediaDetailScreen extends HookWidget {
     } else {
       context.go('/home');
     }
-  }
-
-  Widget _buildLoading(BuildContext context) {
-    return const Center(child: CircularProgressIndicator());
   }
 }
