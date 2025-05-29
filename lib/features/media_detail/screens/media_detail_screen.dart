@@ -8,7 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/staff/staff_bloc.dart';
-import 'package:otaku_world/core/ui/shimmers/media_detail_shimmer.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/screens/media_detail_shimmer.dart';
 import 'package:otaku_world/features/media_detail/widgets/media_app_bar.dart';
 import 'package:otaku_world/features/media_detail/widgets/media_floating_action_button.dart';
 import 'package:otaku_world/features/profile/widgets/keep_alive_tab.dart';
