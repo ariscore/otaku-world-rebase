@@ -106,8 +106,8 @@ class UIUtils {
   static BoxDecoration getDetailScreenDecoration() {
     return const BoxDecoration(
       gradient: LinearGradient(
-        begin: Alignment(0.50, -0.00),
-        end: Alignment(0.50, 1.00),
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
         colors: [
           AppColors.japaneseIndigo,
           AppColors.raisinBlack,
