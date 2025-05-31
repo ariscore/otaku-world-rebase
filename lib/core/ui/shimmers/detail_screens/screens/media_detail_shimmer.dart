@@ -1,3 +1,5 @@
+import 'package:otaku_world/utils/extensions.dart';
+
 import '../shimmer_details.dart';
 
 class MediaDetailShimmer extends StatelessWidget {
@@ -21,7 +23,7 @@ class MediaDetailShimmer extends StatelessWidget {
             ),
             pinned: true,
             expandedHeight: UIUtils.getWidgetHeight(
-              targetWidgetHeight: 515,
+              targetWidgetHeight: 490,
               screenHeight: height,
             ),
             leading: CustomBackButton(
@@ -36,24 +38,24 @@ class MediaDetailShimmer extends StatelessWidget {
             ),
             bottom: const TabBarShimmer(),
           ),
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SectionTitleShimmer(),
-                  SizedBox(height: 10),
-                  DescriptionShimmer(),
-                  SizedBox(height: 20),
-                  SectionTitleShimmer(),
-                  SizedBox(height: 10),
-                  CharacterGridShimmer(),
-                  SizedBox(height: 20),
-                  SectionTitleShimmer(),
-                  SizedBox(height: 10),
-                  InfoSectionShimmer(),
-                  SizedBox(height: 20),
+                  const SectionTitleShimmer(),
+                  5.height,
+                  const DescriptionShimmer(),
+                  20.height,
+                  const SectionTitleShimmer(),
+                  5.height,
+                  const TrailerCardShimmer(),
+                  20.height,
+                  const SectionTitleShimmer(),
+                  5.height,
+                  const InfoSectionShimmer(),
+                  20.height,
                 ],
               ),
             ),

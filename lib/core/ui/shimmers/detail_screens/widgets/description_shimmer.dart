@@ -1,4 +1,7 @@
+import 'package:otaku_world/core/ui/shimmers/detail_screens/widgets/shimmer_container.dart';
+
 import '../shimmer_details.dart';
+
 class DescriptionShimmer extends StatelessWidget {
   const DescriptionShimmer({super.key});
 
@@ -9,35 +12,31 @@ class DescriptionShimmer extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.htmlGray.withValues(alpha: 0.7),
+        color: AppColors.blackOlive,
         borderRadius: BorderRadius.circular(4),
       ),
       padding: const EdgeInsets.all(10),
       child: Column(
-        children: List.generate(4, (index) {
-          double currentWidth = width - (index * 30) - 50;
-
-          return Padding(
-            padding: EdgeInsets.only(bottom: index < 3 ? 10 : 0),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(4),
-                child: Shimmer(
-                  child: Container(
-                    height: 20,
-                    width: currentWidth,
-                    decoration: BoxDecoration(
-                      color: AppColors.htmlGray,
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          );
-        }),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 5,
+        children: [
+          _buildContentShimmer(width),
+          _buildContentShimmer(width * 0.8),
+          _buildContentShimmer(width * 0.6),
+          _buildContentShimmer(width * 0.4),
+          _buildContentShimmer(width * 0.7),
+          _buildContentShimmer(width * 0.5),
+          _buildContentShimmer(width * 0.3),
+        ],
       ),
+    );
+  }
+
+  Widget _buildContentShimmer(double width) {
+    return ShimmerContainer(
+      height: 15,
+      width: width,
+      radius: 5,
     );
   }
 }

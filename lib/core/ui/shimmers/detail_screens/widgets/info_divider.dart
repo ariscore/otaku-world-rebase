@@ -1,4 +1,5 @@
 import '../shimmer_details.dart';
+
 class InfoDivider extends StatelessWidget {
   const InfoDivider({super.key});
 
@@ -7,7 +8,7 @@ class InfoDivider extends StatelessWidget {
     return Container(
       height: 1,
       width: double.infinity,
-      color: AppColors.htmlGray.withValues(alpha: 0.5),
+      color: AppColors.htmlGray,
     );
   }
 }

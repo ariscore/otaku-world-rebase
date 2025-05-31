@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
@@ -195,4 +194,10 @@ extension MediaSortExtension on Enum$MediaSort {
         return "Unknown";
     }
   }
+}
+
+extension EmptySpace on num {
+  SizedBox get height => SizedBox(height: toDouble());
+
+  SizedBox get width => SizedBox(width: toDouble());
 }

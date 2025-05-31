@@ -1,4 +1,5 @@
 import '../shimmer_details.dart';
+
 class InfoRowShimmer extends StatelessWidget {
   final double width;
   final String iconName;
@@ -12,26 +13,32 @@ class InfoRowShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: 5,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Shimmer(
-          child: Container(
-            height: 15,
-            width: width,
-            decoration: BoxDecoration(
-              color: AppColors.htmlGray,
-              borderRadius: BorderRadius.circular(4),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: Shimmer(
+            child: Container(
+              height: 13,
+              width: width * 0.7,
+              decoration: BoxDecoration(
+                color: AppColors.htmlGray,
+                borderRadius: BorderRadius.circular(5),
+              ),
             ),
           ),
         ),
-        const SizedBox(height: 4),
-        Shimmer(
-          child: Container(
-            height: 12,
-            width: width * 0.8,
-            decoration: BoxDecoration(
-              color: AppColors.htmlGray.withValues(alpha: 0.7),
-              borderRadius: BorderRadius.circular(4),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: Shimmer(
+            child: Container(
+              width: width,
+              height: 15,
+              decoration: BoxDecoration(
+                color: AppColors.htmlGray,
+                borderRadius: BorderRadius.circular(5),
+              ),
             ),
           ),
         ),

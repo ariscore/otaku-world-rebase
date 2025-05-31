@@ -1,4 +1,5 @@
 import '../shimmer_details.dart';
+
 class TabBarShimmer extends StatelessWidget implements PreferredSizeWidget {
   const TabBarShimmer({super.key});
 
@@ -7,17 +8,16 @@ class TabBarShimmer extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       height: 50,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: AppColors.htmlGray.withValues(alpha: 0.7),
+        borderRadius: BorderRadius.circular(15),
+        color: AppColors.blackOlive,
       ),
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Row(
-        children: List.generate(4, (index) {
+        spacing: 10,
+        children: List.generate(3, (index) {
           return const Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              child: TabItemShimmer(),
-            ),
+            child: TabItemShimmer(),
           );
         }),
       ),
@@ -25,5 +25,5 @@ class TabBarShimmer extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(70);
+  Size get preferredSize => const Size.fromHeight(50);
 }

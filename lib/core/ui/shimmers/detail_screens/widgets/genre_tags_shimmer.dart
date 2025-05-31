@@ -1,41 +1,52 @@
 import '../shimmer_details.dart';
+
 class GenreTagsShimmer extends StatelessWidget {
   const GenreTagsShimmer({super.key});
+
+  final BorderRadius borderRadius = const BorderRadius.all(Radius.circular(5));
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: 5,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Shimmer(
-          child: Container(
-            height: 12,
-            width: 60,
-            decoration: BoxDecoration(
-              color: AppColors.htmlGray.withValues(alpha: 0.7),
-              borderRadius: BorderRadius.circular(4),
+        ClipRRect(
+          borderRadius: borderRadius,
+          child: Shimmer(
+            child: Container(
+              height: 15,
+              width: 40,
+              decoration: BoxDecoration(
+                color: AppColors.htmlGray,
+                borderRadius: borderRadius,
+              ),
             ),
           ),
         ),
-        const SizedBox(height: 8),
-        Shimmer(
-          child: Container(
-            height: 12,
-            width: 70,
-            decoration: BoxDecoration(
-              color: AppColors.htmlGray.withValues(alpha: 0.7),
-              borderRadius: BorderRadius.circular(4),
+        ClipRRect(
+          borderRadius: borderRadius,
+          child: Shimmer(
+            child: Container(
+              height: 15,
+              width: 25,
+              decoration: BoxDecoration(
+                color: AppColors.htmlGray,
+                borderRadius: borderRadius,
+              ),
             ),
           ),
         ),
-        const SizedBox(height: 8),
-        Shimmer(
-          child: Container(
-            height: 12,
-            width: 100,
-            decoration: BoxDecoration(
-              color: AppColors.htmlGray.withValues(alpha: 0.7),
-              borderRadius: BorderRadius.circular(4),
+        ClipRRect(
+          borderRadius: borderRadius,
+          child: Shimmer(
+            child: Container(
+              height: 15,
+              width: 90,
+              decoration: BoxDecoration(
+                color: AppColors.htmlGray,
+                borderRadius: borderRadius,
+              ),
             ),
           ),
         ),

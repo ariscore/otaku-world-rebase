@@ -9,7 +9,7 @@ class TabItemShimmer extends StatelessWidget {
       borderRadius: BorderRadius.circular(15),
       child: Shimmer(
         child: Container(
-          height: 32,
+          height: 40,
           decoration: BoxDecoration(
             color: AppColors.htmlGray,
             borderRadius: BorderRadius.circular(15),

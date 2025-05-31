@@ -1,3 +1,6 @@
+import 'package:otaku_world/core/ui/shimmers/detail_screens/widgets/shimmer_container.dart';
+import 'package:otaku_world/utils/extensions.dart';
+
 import '../shimmer_details.dart';
 
 class PosterContentShimmer extends StatelessWidget {
@@ -43,10 +46,15 @@ class PosterContentShimmer extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 20),
+        13.height,
         TitleShimmer(width: width),
-        const SizedBox(height: 10),
-        StatusRowShimmer(width: width),
+        12.height,
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 15,
+          ),
+          child: ShimmerContainer(height: 20, width: width * 0.6),
+        ),
       ],
     );
   }

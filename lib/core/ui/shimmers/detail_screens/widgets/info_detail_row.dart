@@ -1,4 +1,5 @@
 import '../shimmer_details.dart';
+
 class InfoDetailRow extends StatelessWidget {
   final double labelWidth;
   final double contentWidth;
@@ -8,6 +9,13 @@ class InfoDetailRow extends StatelessWidget {
     required this.labelWidth,
     required this.contentWidth,
   });
+
+  final double height = 15;
+  final BorderRadius borderRadius = const BorderRadius.all(
+    Radius.circular(
+      10,
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +27,14 @@ class InfoDetailRow extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(right: 120 - labelWidth),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: borderRadius,
             child: Shimmer(
               child: Container(
-                height: 16,
+                height: height,
                 width: labelWidth,
                 decoration: BoxDecoration(
                   color: AppColors.htmlGray,
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius: borderRadius,
                 ),
               ),
             ),
@@ -38,14 +46,14 @@ class InfoDetailRow extends StatelessWidget {
           child: Align(
             alignment: FractionalOffset.centerLeft,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(4),
+              borderRadius: borderRadius,
               child: Shimmer(
                 child: Container(
-                  height: 16,
+                  height: height,
                   width: contentWidth,
                   decoration: BoxDecoration(
                     color: AppColors.htmlGray,
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: borderRadius,
                   ),
                 ),
               ),

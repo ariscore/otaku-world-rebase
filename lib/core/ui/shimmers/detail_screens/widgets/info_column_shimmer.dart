@@ -7,13 +7,11 @@ class InfoColumnShimmer extends StatelessWidget {
     return const Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisAlignment: MainAxisAlignment.end,
+      spacing: 15,
       children: [
-        InfoRowShimmer(width: 50, iconName: Assets.iconsStar),
-        SizedBox(height: 12),
-        InfoRowShimmer(width: 65, iconName: Assets.iconsFavourite),
-        SizedBox(height: 12),
-        InfoRowShimmer(width: 70, iconName: Assets.iconsTrendUp),
-        SizedBox(height: 30),
+        InfoRowShimmer(width: 40, iconName: Assets.iconsStar),
+        InfoRowShimmer(width: 57, iconName: Assets.iconsFavourite),
+        InfoRowShimmer(width: 72, iconName: Assets.iconsTrendUp),
         GenreTagsShimmer(),
       ],
     );
