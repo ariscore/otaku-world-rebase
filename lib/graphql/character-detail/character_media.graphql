@@ -1,6 +1,6 @@
 query getCharacterMedia($characterId: Int, $sort: [MediaSort], $type: MediaType, $onList: Boolean, $page: Int,) {
     Character(id: $characterId) {
-        media(sort: $sort, page: $page, onList: $onList, type: $type , perPage: 24) {
+        media(sort: $sort, page: $page, onList: $onList, type: $type , perPage: 50) {
             pageInfo {
                 ...PageInfo
             }

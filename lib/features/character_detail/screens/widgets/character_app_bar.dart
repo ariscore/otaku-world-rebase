@@ -120,64 +120,62 @@ class _CharacterAppBarState extends State<CharacterAppBar> {
   ) {
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
-    return SafeArea(
-      child: Container(
-        decoration: UIUtils.getDetailScreenDecoration(),
-        alignment: Alignment.center,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: AppBar().preferredSize.height +
-                  MediaQuery.of(context).padding.top,
+    return Container(
+      decoration: UIUtils.getDetailScreenDecoration(),
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: AppBar().preferredSize.height +
+                MediaQuery.of(context).padding.top,
+          ),
+          SizedBox(
+            height: UIUtils.getWidgetHeight(
+              targetWidgetHeight: 256,
+              screenHeight: height,
             ),
-            SizedBox(
-              height: UIUtils.getWidgetHeight(
-                targetWidgetHeight: 256,
-                screenHeight: height,
-              ),
-              width: UIUtils.getWidgetWidth(
-                targetWidgetWidth: 170,
-                screenWidth: width,
-              ),
-              child: GestureDetector(
-                onTap: () => character.image?.large != null
-                    ? showImage(
-                        context,
-                        character.image!.large!.toString(),
-                        tag: character.image!.large!.toString(),
-                      )
-                    : null,
-                child: Hero(
-                  tag: character.image!.large!.toString(),
-                  child: CoverImage(
-                    imageUrl: character.image!.large!.toString(),
-                    type: Enum$MediaType.ANIME,
-                    // placeHolderName: Assets.placeholders210x310,
-                  ),
+            width: UIUtils.getWidgetWidth(
+              targetWidgetWidth: 170,
+              screenWidth: width,
+            ),
+            child: GestureDetector(
+              onTap: () => character.image?.large != null
+                  ? showImage(
+                      context,
+                      character.image!.large!.toString(),
+                      tag: character.image!.large!.toString(),
+                    )
+                  : null,
+              child: Hero(
+                tag: character.image!.large!.toString(),
+                child: CoverImage(
+                  imageUrl: character.image!.large!.toString(),
+                  type: Enum$MediaType.ANIME,
+                  // placeHolderName: Assets.placeholders210x310,
                 ),
               ),
             ),
-            fifteenSpacing,
-            Text(
-              character.name!.userPreferred!.checkIfNull(),
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w600,
-              ),
+          ),
+          fifteenSpacing,
+          Text(
+            character.name!.userPreferred!.checkIfNull(),
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w600,
             ),
-            fifteenSpacing,
-            InfoData(
-              iconName: Assets.iconsFavourite,
-              separateWidth: 3,
-              info: character.favourites.toString(),
-              mainAxisAlignment: MainAxisAlignment.center,
-            ),
-          ],
-        ),
+          ),
+          fifteenSpacing,
+          InfoData(
+            iconName: Assets.iconsFavourite,
+            separateWidth: 3,
+            info: character.favourites.toString(),
+            mainAxisAlignment: MainAxisAlignment.center,
+          ),
+        ],
       ),
     );
   }

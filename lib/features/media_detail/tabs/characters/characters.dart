@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/characters/characters_bloc.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/widgets/character_list_shimmer.dart';
 import 'package:otaku_world/graphql/__generated/graphql/details/characters.graphql.dart';
 import 'package:otaku_world/utils/extensions.dart';
 
@@ -25,6 +26,7 @@ class _CharactersState extends State<Characters> {
 
   @override
   Widget build(BuildContext context) {
+    // return const CharacterListShimmer();
     return BlocBuilder<CharactersBloc, PaginatedDataState>(
       builder: (context, state) {
         if (state is PaginatedDataInitial) {
@@ -32,9 +34,9 @@ class _CharactersState extends State<Characters> {
                   as GraphqlClientInitialized)
               .client;
           context.read<CharactersBloc>().add(LoadData(client));
-          return const SimpleLoading();
+          return const CharacterListShimmer();
         } else if (state is PaginatedDataLoading) {
-          return const SimpleLoading();
+          return const CharacterListShimmer();
         } else if (state is PaginatedDataLoaded) {
           List<Query$Characters$Media$characters$edges?> characters =
               state.list as List<Query$Characters$Media$characters$edges?>;
