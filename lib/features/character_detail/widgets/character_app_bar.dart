@@ -21,7 +21,7 @@ import '../../../../graphql/__generated/graphql/schema.graphql.dart';
 import '../../../../theme/colors.dart';
 import '../../../../utils/navigation_helper.dart';
 import '../../../../utils/ui_utils.dart';
-import '../../../media_detail/widgets/info_data.dart';
+import '../../media_detail/widgets/info_data.dart';
 
 class CharacterAppBar extends StatefulWidget {
   const CharacterAppBar({

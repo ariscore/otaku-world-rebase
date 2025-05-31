@@ -5,7 +5,7 @@ import 'package:otaku_world/utils/ui_utils.dart';
 
 import '../../../../graphql/__generated/graphql/character-detail/character_detail.graphql.dart';
 import '../../../../utils/app_texts.dart';
-import '../../../media_detail/tabs/overview/widgets/info_tile.dart';
+import '../../media_detail/tabs/overview/widgets/info_tile.dart';
 
 class NameWidget extends StatelessWidget {
   const NameWidget({

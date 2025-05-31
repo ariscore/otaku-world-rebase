@@ -82,7 +82,6 @@ class StudioDetailScreen extends HookWidget {
                       context: context,
                       removeTop: true,
                       child: const MediaGridList<StudioMediaBloc>(
-                        crossAxisCount: 3,
                         mediaType: Enum$MediaType.ANIME,
                         isNeedToShowFormatAndYear: true,
                       ),

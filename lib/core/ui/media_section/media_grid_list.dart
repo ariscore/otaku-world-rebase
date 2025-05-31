@@ -19,12 +19,10 @@ import '../placeholders/poster_placeholder.dart';
 class MediaGridList<B extends PaginatedDataBloc> extends StatelessWidget {
   const MediaGridList({
     required this.mediaType,
-    required this.crossAxisCount,
     this.isNeedToShowFormatAndYear = false,
     super.key,
   });
 
-  final int crossAxisCount;
   final Enum$MediaType mediaType;
   final bool isNeedToShowFormatAndYear;
 

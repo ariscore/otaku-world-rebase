@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/charcter_detail/media/character_media_bloc.dart';
 import 'package:otaku_world/core/ui/media_section/media_grid_list.dart';
-import 'package:otaku_world/features/character_detail/screens/widgets/character_app_bar.dart';
-import 'package:otaku_world/features/character_detail/screens/widgets/name_widget.dart';
 import 'package:otaku_world/features/media_detail/tabs/overview/widgets/description.dart';
 import 'package:otaku_world/features/media_detail/widgets/simple_loading.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
@@ -12,6 +10,8 @@ import 'package:otaku_world/utils/navigation_helper.dart';
 import '../../../bloc/charcter_detail/character_detail_bloc.dart';
 import '../../../theme/colors.dart';
 import '../../../utils/app_texts.dart';
+import '../widgets/character_app_bar.dart';
+import '../widgets/name_widget.dart';
 
 class CharacterDetailScreen extends StatelessWidget {
   const CharacterDetailScreen({
@@ -50,11 +50,12 @@ class CharacterDetailScreen extends StatelessWidget {
                   CharacterAppBar(
                     character: character,
                   ),
-                  SliverFillRemaining(
+                  SliverToBoxAdapter(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         if (character.name != null) ...[
-                          twentySpacing,
+                          // twentySpacing,
                           NameWidget(
                             name: character.name!,
                           ),
@@ -82,7 +83,6 @@ class CharacterDetailScreen extends StatelessWidget {
                         ),
                         const MediaGridList<CharacterMediaBloc>(
                           mediaType: Enum$MediaType.ANIME,
-                          crossAxisCount: 3,
                         ),
                       ],
                     ),
