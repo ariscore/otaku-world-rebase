@@ -13,7 +13,7 @@ class DescriptionShimmer extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.blackOlive,
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(15),
       ),
       padding: const EdgeInsets.all(10),
       child: Column(

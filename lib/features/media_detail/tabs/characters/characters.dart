@@ -3,13 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/characters/characters_bloc.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
+import 'package:otaku_world/core/ui/placeholders/anime_character_placeholder.dart';
 import 'package:otaku_world/core/ui/shimmers/detail_screens/widgets/character_list_shimmer.dart';
 import 'package:otaku_world/graphql/__generated/graphql/details/characters.graphql.dart';
 import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../../bloc/graphql_client/graphql_client_cubit.dart';
+import '../../../../generated/assets.dart';
 import '../../../../graphql/__generated/graphql/schema.graphql.dart';
-import '../../widgets/simple_loading.dart';
 import 'widgets/character_card.dart';
 
 class Characters extends StatefulWidget {
@@ -26,7 +27,6 @@ class _CharactersState extends State<Characters> {
 
   @override
   Widget build(BuildContext context) {
-    // return const CharacterListShimmer();
     return BlocBuilder<CharactersBloc, PaginatedDataState>(
       builder: (context, state) {
         if (state is PaginatedDataInitial) {
@@ -41,6 +41,15 @@ class _CharactersState extends State<Characters> {
           List<Query$Characters$Media$characters$edges?> characters =
               state.list as List<Query$Characters$Media$characters$edges?>;
           loadLanguages(characters);
+          if (characters.isEmpty) {
+            return const AnimeCharacterPlaceholder(
+              asset: Assets.charactersErenYeager,
+              heading: 'No Characters Available',
+              subheading:
+                  'Looks like there aren’t any characters to display right now.',
+              isScrollable: true,
+            );
+          }
           return NotificationListener<ScrollNotification>(
             onNotification: (scrollInfo) {
               if (scrollInfo.metrics.pixels ==
@@ -104,12 +113,10 @@ class _CharactersState extends State<Characters> {
                   ),
                 ),
                 if (state.hasNextPage)
-                  const SliverToBoxAdapter(
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: CircularProgressIndicator(),
-                      ),
+                  const SliverPadding(
+                    padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+                    sliver: SliverToBoxAdapter(
+                      child: CharacterCardShimmer(),
                     ),
                   ),
               ],
@@ -173,7 +180,8 @@ class _CharactersState extends State<Characters> {
     );
   }
 
-  void loadLanguages(List<Query$Characters$Media$characters$edges?> characters) {
+  void loadLanguages(
+      List<Query$Characters$Media$characters$edges?> characters) {
     characters.firstOrNull?.voiceActorRoles?.forEach(
       (voiceActor) {
         var language = voiceActor!.voiceActor!.languageV2!;

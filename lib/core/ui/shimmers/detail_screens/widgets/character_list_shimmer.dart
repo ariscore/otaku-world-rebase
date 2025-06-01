@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/widgets/shimmer_container.dart';
+import 'package:otaku_world/utils/extensions.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:otaku_world/theme/colors.dart';
 
@@ -15,7 +17,7 @@ class CharacterCardShimmer extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: AppColors.htmlGray.withValues(alpha: 0.7),
+        color: AppColors.blackOlive,
       ),
       child: const Stack(
         children: [
@@ -48,6 +50,10 @@ class CharacterSectionShimmer extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.45,
       child: Row(
+        mainAxisAlignment:
+            isLeft ? MainAxisAlignment.start : MainAxisAlignment.end,
+        crossAxisAlignment:
+            isLeft ? CrossAxisAlignment.start : CrossAxisAlignment.end,
         children: [
           if (isLeft) ...[
             const CharacterImageShimmer(),
@@ -97,43 +103,33 @@ class CharacterInfoShimmer extends StatelessWidget {
     this.isRightAligned = false,
   });
 
+  final double nameHeight = 16;
+  final double nameWidth = 100;
+
+  final double roleHeight = 14;
+  final double roleWidth = 80;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment:
+          isRightAligned ? MainAxisAlignment.end : MainAxisAlignment.start,
       crossAxisAlignment:
           isRightAligned ? CrossAxisAlignment.end : CrossAxisAlignment.start,
       children: [
         // Character name shimmer
-        ClipRRect(
-          borderRadius: BorderRadius.circular(4),
-          child: Shimmer(
-            child: Container(
-              height: 16,
-              width: 120,
-              decoration: BoxDecoration(
-                color: AppColors.htmlGray,
-                borderRadius: BorderRadius.circular(4),
-              ),
-            ),
-          ),
+        ShimmerContainer(
+          height: isRightAligned ? roleHeight : nameHeight,
+          width: isRightAligned ? roleWidth : nameWidth,
+          radius: 5,
         ),
-        const SizedBox(height: 8),
-
+        5.height,
         // Character role shimmer
-        ClipRRect(
-          borderRadius: BorderRadius.circular(4),
-          child: Shimmer(
-            child: Container(
-              height: 14,
-              width: 80,
-              decoration: BoxDecoration(
-                color: AppColors.htmlGray.withValues(alpha: 0.7),
-                borderRadius: BorderRadius.circular(4),
-              ),
-            ),
-          ),
+        ShimmerContainer(
+          height: isRightAligned ? nameHeight : roleHeight,
+          width: isRightAligned ? nameWidth : roleWidth,
+          radius: 5,
         ),
       ],
     );
@@ -312,10 +308,12 @@ class CharacterCardShimmerDetailed extends StatelessWidget {
 // For use in character list shimmer
 class CharacterListShimmer extends StatelessWidget {
   final int itemCount;
+  final bool isRightAvailable;
 
   const CharacterListShimmer({
     super.key,
     this.itemCount = 5,
+    this.isRightAvailable = true,
   });
 
   @override
@@ -323,24 +321,25 @@ class CharacterListShimmer extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         // Dropdown shimmer
-        SliverPadding(
-          padding: const EdgeInsets.all(8.0),
-          sliver: SliverToBoxAdapter(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Shimmer(
-                child: Container(
-                  height: 50,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: AppColors.htmlGray.withValues(alpha: 0.7),
-                    borderRadius: BorderRadius.circular(8),
+        if (!isRightAvailable)
+          SliverPadding(
+            padding: const EdgeInsets.all(8.0),
+            sliver: SliverToBoxAdapter(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Shimmer(
+                  child: Container(
+                    height: 50,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: AppColors.blackOlive,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
 
         // Character cards shimmer
         SliverPadding(

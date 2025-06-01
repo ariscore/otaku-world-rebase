@@ -11,7 +11,7 @@ class TabBarShimmer extends StatelessWidget implements PreferredSizeWidget {
         borderRadius: BorderRadius.circular(15),
         color: AppColors.blackOlive,
       ),
-      margin: const EdgeInsets.symmetric(horizontal: 10),
+      margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Row(
         spacing: 10,

@@ -12,6 +12,7 @@ class AnimeCharacterPlaceholder extends StatelessWidget {
     this.isError = false,
     this.onTryAgain,
     this.actionLabel = 'Try Again',
+    this.isScrollable = false,
   });
 
   final String asset;
@@ -22,9 +23,19 @@ class AnimeCharacterPlaceholder extends StatelessWidget {
   final bool isError;
   final String actionLabel;
   final VoidCallback? onTryAgain;
+  final bool isScrollable;
 
   @override
   Widget build(BuildContext context) {
+    if (isScrollable) {
+      return SingleChildScrollView(
+        child: _buildContent(context),
+      );
+    }
+    return _buildContent(context);
+  }
+
+  Widget _buildContent(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Center(
@@ -57,7 +68,7 @@ class AnimeCharacterPlaceholder extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontFamily: 'Poppins',
-                      color: AppColors.white.withOpacity(0.8),
+                      color: AppColors.white.withValues(alpha: 0.8),
                     ),
               ),
             ),
