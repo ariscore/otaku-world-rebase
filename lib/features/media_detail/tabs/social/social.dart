@@ -80,9 +80,23 @@ class Social extends StatelessWidget {
                   ),
                 );
               }
-              return const Text(
-                'Unknown State',
-                style: TextStyle(color: Colors.white),
+              return AnimeCharacterPlaceholder(
+                asset: Assets.charactersNoInternet,
+                height: 300,
+                heading: 'Something went wrong!',
+                subheading:
+                    'Please check your internet connection or try again later.',
+                onTryAgain: () {
+                  context.read<SocialBloc>().add(
+                        LoadData(
+                          (context.read<GraphqlClientCubit>().state
+                                  as GraphqlClientInitialized)
+                              .client,
+                        ),
+                      );
+                },
+                isError: true,
+                isScrollable: true,
               );
             },
           ),

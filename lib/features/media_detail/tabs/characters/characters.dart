@@ -4,11 +4,11 @@ import 'package:otaku_world/bloc/media_detail/characters/characters_bloc.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
 import 'package:otaku_world/core/ui/placeholders/anime_character_placeholder.dart';
-import 'package:otaku_world/core/ui/shimmers/detail_screens/widgets/character_list_shimmer.dart';
 import 'package:otaku_world/graphql/__generated/graphql/details/characters.graphql.dart';
 import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../../bloc/graphql_client/graphql_client_cubit.dart';
+import '../../../../core/ui/shimmers/detail_screens/list/character_list_shimmer.dart';
 import '../../../../generated/assets.dart';
 import '../../../../graphql/__generated/graphql/schema.graphql.dart';
 import 'widgets/character_card.dart';
@@ -122,59 +122,24 @@ class _CharactersState extends State<Characters> {
               ],
             ),
           );
-
-          // return ListView.separated(
-          //   controller: characterScrollController,
-          //   physics: ClampingScrollPhysics(),
-          //   separatorBuilder: (context, index) => const SizedBox(
-          //     height: 10,
-          //   ),
-          //   shrinkWrap: true,
-          //   // physics: const ClampingScrollPhysics(),
-          //   itemCount: state.list.length,
-          //   itemBuilder: (context, index) {
-          //     return CharacterCard(
-          //       animeCharacter: characters[index]!.node!,
-          //       characterRole: toJson$Enum$CharacterRole(
-          //         characters[index]?.role ?? Enum$CharacterRole.$unknown,
-          //       ).toString().capitalize(),
-          //       voiceActor: characters[index]!.voiceActorRoles!.isEmpty
-          //           ? null
-          //           : characters[index]!.voiceActorRoles!.first!.voiceActor,
-          //     );
-          //   },
-          // );
-          // return Column(
-          //   children: [
-          //     SizedBox(height: 50),
-          //     Expanded(
-          //       child: ListView.separated(
-          //         controller: characterScrollController,
-          //         separatorBuilder: (context, index) => const SizedBox(
-          //           height: 10,
-          //         ),
-          //         shrinkWrap: true,
-          //         // physics: const ClampingScrollPhysics(),
-          //         itemCount: state.list.length,
-          //         itemBuilder: (context, index) {
-          //           return CharacterCard(
-          //             animeCharacter: characters[index]!.node!,
-          //             characterRole: toJson$Enum$CharacterRole(
-          //               characters[index]?.role ?? Enum$CharacterRole.$unknown,
-          //             ).toString().capitalize(),
-          //             voiceActor: characters[index]!.voiceActorRoles!.isEmpty
-          //                 ? null
-          //                 : characters[index]!.voiceActorRoles!.first!.voiceActor,
-          //           );
-          //         },
-          //       ),
-          //     ),
-          //   ],
-          // );
         }
-        return const Text(
-          'Unknown State',
-          style: TextStyle(color: Colors.white),
+        return AnimeCharacterPlaceholder(
+          asset: Assets.charactersNoInternet,
+          height: 300,
+          heading: 'Something went wrong!',
+          subheading:
+              'Please check your internet connection or try again later.',
+          onTryAgain: () {
+            context.read<CharactersBloc>().add(
+                  LoadData(
+                    (context.read<GraphqlClientCubit>().state
+                            as GraphqlClientInitialized)
+                        .client,
+                  ),
+                );
+          },
+          isError: true,
+          isScrollable: true,
         );
       },
     );

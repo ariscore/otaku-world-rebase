@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/staff/staff_bloc.dart';
-import 'package:otaku_world/core/ui/shimmers/detail_screens/widgets/staff_list_shimmer.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/list/staff_list_shimmer.dart';
 import 'package:otaku_world/features/media_detail/tabs/staff/staff_card.dart';
 import 'package:otaku_world/graphql/__generated/graphql/details/staff.graphql.dart';
 
@@ -74,9 +74,23 @@ class Staff extends StatelessWidget {
             ),
           );
         }
-        return const Text(
-          'Unknown State',
-          style: TextStyle(color: Colors.white),
+        return AnimeCharacterPlaceholder(
+          asset: Assets.charactersNoInternet,
+          height: 300,
+          heading: 'Something went wrong!',
+          subheading:
+              'Please check your internet connection or try again later.',
+          onTryAgain: () {
+            context.read<StaffBloc>().add(
+                  LoadData(
+                    (context.read<GraphqlClientCubit>().state
+                            as GraphqlClientInitialized)
+                        .client,
+                  ),
+                );
+          },
+          isError: true,
+          isScrollable: true,
         );
       },
     );
