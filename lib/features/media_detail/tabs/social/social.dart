@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
 import 'package:otaku_world/features/media_detail/tabs/social/widgets/social_card.dart';
 
 import '../../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../../bloc/paginated_data/paginated_data_bloc.dart';
+import '../../../../core/ui/placeholders/anime_character_placeholder.dart';
+import '../../../../core/ui/shimmers/activity_shimmer_card.dart';
+import '../../../../generated/assets.dart';
 import '../../../../theme/colors.dart';
-import '../../widgets/simple_loading.dart';
+import '../../../social/widgets/activity_shimmer_list.dart';
 
 class Social extends StatelessWidget {
   const Social({super.key});
@@ -18,93 +20,74 @@ class Social extends StatelessWidget {
         (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
             .client;
 
-    return BlocListener<SocialBloc, PaginatedDataState>(
-      listenWhen: (previous, current) =>
-          current is PaginatedDataLoaded &&
-          previous is PaginatedDataLoaded &&
-          previous.showProgress != current.showProgress,
-      listener: (context, state) {
-        if (state is PaginatedDataLoaded && state.showProgress) {
-          showDialog(
-            context: context,
-            barrierDismissible: false,
-            useRootNavigator: true,
-            builder: (context) {
-              return WillPopScope(
-                onWillPop: () async => false,
-                child: const Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            },
-          );
-        } else {
-          context.pop();
-        }
-      },
-      child: Column(
-        children: [
-          const SwitchWidget(),
-          Expanded(
-            child: BlocBuilder<SocialBloc, PaginatedDataState>(
-              builder: (context, state) {
-                if (state is PaginatedDataInitial) {
-                  context.read<SocialBloc>().add(LoadData(client));
-                  return const SimpleLoading();
-                } else if (state is PaginatedDataLoading) {
-                  return const SimpleLoading();
-                } else if (state is PaginatedDataLoaded) {
-                  final activities = state.list;
-                  return NotificationListener<ScrollNotification>(
-                    onNotification: (scrollInfo) {
-                      if (scrollInfo.metrics.pixels ==
-                          scrollInfo.metrics.maxScrollExtent) {
-                        final hasNextPage = (context.read<SocialBloc>().state
-                                as PaginatedDataLoaded)
-                            .hasNextPage;
-                        if (hasNextPage) {
-                          context.read<SocialBloc>().add(LoadData(client));
-                        }
-                      }
-                      return false;
-                    },
-                    child: CustomScrollView(
-                      slivers: [
-                        SliverPadding(
-                          padding: const EdgeInsets.all(10),
-                          sliver: SliverList.separated(
-                            itemCount: activities.length,
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(height: 10),
-                            itemBuilder: (context, index) {
-                              return SocialCard(
-                                activity: activities[index]!,
-                              );
-                            },
-                          ),
-                        ),
-                        if (state.hasNextPage)
-                          const SliverToBoxAdapter(
-                            child: Center(
-                              child: Padding(
-                                padding: EdgeInsets.all(5.0),
-                                child: CircularProgressIndicator(),
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
+    final socialBloc = context.read<SocialBloc>();
+    return Column(
+      children: [
+        const SwitchWidget(),
+        Expanded(
+          child: BlocBuilder<SocialBloc, PaginatedDataState>(
+            builder: (context, state) {
+              if (state is PaginatedDataInitial) {
+                context.read<SocialBloc>().add(LoadData(client));
+                return const ActivityShimmerList();
+              } else if (state is PaginatedDataLoading) {
+                return const ActivityShimmerList();
+              } else if (state is PaginatedDataLoaded) {
+                final activities = state.list;
+                if (activities.isEmpty) {
+                  return AnimeCharacterPlaceholder(
+                    asset: Assets.charactersChillBoy,
+                    heading: 'No Activity Yet',
+                    subheading: socialBloc.isFollowing
+                        ? 'No activity from friends yet — maybe recommend it to them?'
+                        : 'Nobody has interacted with this yet.',
+                    isScrollable: true,
                   );
                 }
-                return const Text(
-                  'Unknown State',
-                  style: TextStyle(color: Colors.white),
+                return NotificationListener<ScrollNotification>(
+                  onNotification: (scrollInfo) {
+                    if (scrollInfo.metrics.pixels ==
+                        scrollInfo.metrics.maxScrollExtent) {
+                      final hasNextPage = (context.read<SocialBloc>().state
+                              as PaginatedDataLoaded)
+                          .hasNextPage;
+                      if (hasNextPage) {
+                        context.read<SocialBloc>().add(LoadData(client));
+                      }
+                    }
+                    return false;
+                  },
+                  child: CustomScrollView(
+                    slivers: [
+                      SliverPadding(
+                        padding: const EdgeInsets.all(10),
+                        sliver: SliverList.separated(
+                          itemCount: activities.length,
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(height: 10),
+                          itemBuilder: (context, index) {
+                            return SocialCard(
+                              activity: activities[index]!,
+                            );
+                          },
+                        ),
+                      ),
+                      if (state.hasNextPage)
+                        const SliverToBoxAdapter(
+                          child: ActivityShimmerCard(),
+                        ),
+                    ],
+                  ),
                 );
-              },
-            ),
+              }
+              return const Text(
+                'Unknown State',
+                style: TextStyle(color: Colors.white),
+              );
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
