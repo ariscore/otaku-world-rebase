@@ -23,7 +23,7 @@ class MediaDetailShimmer extends StatelessWidget {
             ),
             pinned: true,
             expandedHeight: UIUtils.getWidgetHeight(
-              targetWidgetHeight: 490,
+              targetWidgetHeight: 500,
               screenHeight: height,
             ),
             leading: CustomBackButton(
@@ -40,7 +40,7 @@ class MediaDetailShimmer extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.symmetric(horizontal: 10,),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
