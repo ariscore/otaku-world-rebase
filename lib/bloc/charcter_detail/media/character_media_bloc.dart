@@ -1,31 +1,26 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/graphql/__generated/graphql/character-detail/character_media.graphql.dart';
-import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 
+import '../../../core/ui/shimmers/detail_screens/shimmer_details.dart';
 import '../../../graphql/__generated/graphql/schema.graphql.dart';
 
-class CharacterMediaBloc
-    extends PaginatedDataBloc<Query$getCharacterMedia, Fragment$MediaShort> {
+class CharacterMediaBloc extends PaginatedDataBloc<Query$getCharacterMedia,
+    Query$getCharacterMedia$Character$media$edges> {
   final int characterId;
-  Enum$MediaSort mediaSort = Enum$MediaSort.POPULARITY_DESC;
-  bool isOnMyList = false;
-  Enum$MediaType? mediaType;
+  final ValueNotifier<Enum$MediaSort> mediaSortNotifier =
+      ValueNotifier<Enum$MediaSort>(Enum$MediaSort.POPULARITY_DESC);
+  final ValueNotifier<bool> isOnMyList = ValueNotifier(false);
 
   CharacterMediaBloc({required this.characterId});
 
   void applyFilter({
-    required Enum$MediaSort mediaSort,
     required GraphQLClient client,
-    required bool isOnMyList,
-    Enum$MediaType? mediaType,
   }) {
-    this.mediaSort = mediaSort;
-    this.isOnMyList = isOnMyList;
-    this.mediaType = mediaType;
     add(ResetData());
     add(LoadData(client));
   }
+
 
   @override
   Future<QueryResult<Query$getCharacterMedia>> loadData(GraphQLClient client) {
@@ -34,10 +29,9 @@ class CharacterMediaBloc
         fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$getCharacterMedia(
           characterId: characterId,
-          onList: isOnMyList,
+          onList: isOnMyList.value,
           page: page,
-          sort: [mediaSort],
-          type: mediaType,
+          sort: [mediaSortNotifier.value],
         ),
         cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
       ),
@@ -49,8 +43,6 @@ class CharacterMediaBloc
     final data = response.parsedData!;
     hasNextPage = data.Character?.media?.pageInfo?.hasNextPage ?? false;
     page++;
-    list.addAll(data.Character!.media!.edges!.map(
-      (e) => e?.node,
-    ));
+    list.addAll(data.Character!.media!.edges!);
   }
 }

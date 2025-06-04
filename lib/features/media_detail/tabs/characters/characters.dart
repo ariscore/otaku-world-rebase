@@ -147,14 +147,16 @@ class _CharactersState extends State<Characters> {
 
   void loadLanguages(
       List<Query$Characters$Media$characters$edges?> characters) {
-    characters.firstOrNull?.voiceActorRoles?.forEach(
-      (voiceActor) {
-        var language = voiceActor!.voiceActor!.languageV2!;
-        if (!availableLanguages.contains(language)) {
-          availableLanguages.add(language);
-        }
-      },
-    );
+    for (var character in characters) {
+      character?.voiceActorRoles?.forEach(
+            (voiceActorRole) {
+          var language = voiceActorRole!.voiceActor!.languageV2!;
+          if (!availableLanguages.contains(language)) {
+            availableLanguages.add(language);
+          }
+        },
+      );
+    }
 
     availableLanguages.sort();
   }
