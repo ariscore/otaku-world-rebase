@@ -58,6 +58,7 @@ import 'package:otaku_world/features/anime_lists/view_more_lists/top_upcoming_an
 import 'package:otaku_world/features/auth/screens/login_screen.dart';
 import 'package:otaku_world/features/calendar/screens/calendar_screen.dart';
 import 'package:otaku_world/features/character_detail/screens/character_detail_screen.dart';
+import 'package:otaku_world/features/character_detail/screens/character_media_view_all_list_screen.dart';
 import 'package:otaku_world/features/discover/discover_anime/screens/anime_discover_screen.dart';
 import 'package:otaku_world/features/discover/discover_anime/screens/anime_slider_screen.dart';
 import 'package:otaku_world/features/discover/discover_anime/screens/filter_anime_screen.dart';
@@ -143,7 +144,6 @@ part 'discover_routes.dart';
 
 part 'home_routes.dart';
 
-
 part 'social_routes.dart';
 
 part 'profile_routes.dart';
@@ -151,7 +151,6 @@ part 'profile_routes.dart';
 part 'settings_routes.dart';
 
 part 'list_routes.dart';
-
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorHomeKey = GlobalKey<NavigatorState>();
@@ -326,6 +325,18 @@ final router = GoRouter(
           child: StaffDetailScreen(
             staffId: staffId,
           ),
+        );
+      },
+      directionTween: SlideTransitionRoute.leftToRightTween,
+    ),
+    SlideTransitionRoute(
+      parentNavigatorKey: _rootNavigatorKey,
+      path: RouteConstants.characterMediaViewList,
+      builder: (state) {
+        final characterMediaBloc = state.extra as CharacterMediaBloc;
+        return BlocProvider.value(
+          value: characterMediaBloc,
+          child: const CharacterMediaViewAllListScreen(),
         );
       },
       directionTween: SlideTransitionRoute.leftToRightTween,

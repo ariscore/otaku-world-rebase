@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/charcter_detail/media/character_media_bloc.dart';
+import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/features/character_detail/widgets/character_media_short_list.dart';
 import 'package:otaku_world/features/media_detail/tabs/overview/widgets/description.dart';
@@ -94,8 +96,15 @@ class CharacterDetailScreen extends StatelessWidget {
                                       : false,
                               builder: (context, hasNextPage) {
                                 if (hasNextPage) {
+                                  final bloc =
+                                      context.read<CharacterMediaBloc>();
                                   return IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      context.push(
+                                        RouteConstants.characterMediaViewList,
+                                        extra: bloc,
+                                      );
+                                    },
                                     icon: Padding(
                                       padding: const EdgeInsets.only(
                                         left: 12,
