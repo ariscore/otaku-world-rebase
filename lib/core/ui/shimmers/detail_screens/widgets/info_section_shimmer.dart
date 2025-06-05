@@ -9,7 +9,7 @@ class InfoSectionShimmer extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.blackOlive,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(15),
       ),
       padding: const EdgeInsets.all(16),
       child: const Column(

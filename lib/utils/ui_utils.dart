@@ -115,4 +115,17 @@ class UIUtils {
       ),
     );
   }
+
+  static BoxDecoration getShimmerDetailScreenDecoration() {
+    return const BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          AppColors.graniteGray,
+          AppColors.raisinBlack,
+        ],
+      ),
+    );
+  }
 }

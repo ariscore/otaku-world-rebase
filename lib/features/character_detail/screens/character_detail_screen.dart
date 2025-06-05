@@ -5,9 +5,9 @@ import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/charcter_detail/media/character_media_bloc.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/screens/character_detail_shimmer.dart';
 import 'package:otaku_world/features/character_detail/widgets/character_media_short_list.dart';
 import 'package:otaku_world/features/media_detail/tabs/overview/widgets/description.dart';
-import 'package:otaku_world/features/media_detail/widgets/simple_loading.dart';
 import 'package:otaku_world/utils/navigation_helper.dart';
 
 import '../../../bloc/charcter_detail/character_detail_bloc.dart';
@@ -46,7 +46,7 @@ class CharacterDetailScreen extends StatelessWidget {
         builder: (context, state) {
           if (state is CharacterDetailInitial ||
               state is CharacterDetailLoading) {
-            return const SimpleLoading();
+            return const CharacterDetailShimmer();
           } else if (state is CharacterDetailLoaded) {
             final character = state.character;
             return CustomScrollView(
