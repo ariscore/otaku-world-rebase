@@ -447,6 +447,13 @@ const documentNodeQuerygetStaffDetail = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'yearsActive'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'siteUrl'),
             alias: null,
             arguments: [],
@@ -789,6 +796,7 @@ class Query$getStaffDetail$Staff {
     required this.isFavourite,
     this.name,
     this.primaryOccupations,
+    this.yearsActive,
     this.siteUrl,
     this.characterMedia,
     this.staffMedia,
@@ -811,6 +819,7 @@ class Query$getStaffDetail$Staff {
     final l$isFavourite = json['isFavourite'];
     final l$name = json['name'];
     final l$primaryOccupations = json['primaryOccupations'];
+    final l$yearsActive = json['yearsActive'];
     final l$siteUrl = json['siteUrl'];
     final l$characterMedia = json['characterMedia'];
     final l$staffMedia = json['staffMedia'];
@@ -845,6 +854,8 @@ class Query$getStaffDetail$Staff {
       primaryOccupations: (l$primaryOccupations as List<dynamic>?)
           ?.map((e) => (e as String?))
           .toList(),
+      yearsActive:
+          (l$yearsActive as List<dynamic>?)?.map((e) => (e as int?)).toList(),
       siteUrl: (l$siteUrl as String?),
       characterMedia: l$characterMedia == null
           ? null
@@ -888,6 +899,8 @@ class Query$getStaffDetail$Staff {
 
   final List<String?>? primaryOccupations;
 
+  final List<int?>? yearsActive;
+
   final String? siteUrl;
 
   final Query$getStaffDetail$Staff$characterMedia? characterMedia;
@@ -929,6 +942,8 @@ class Query$getStaffDetail$Staff {
     final l$primaryOccupations = primaryOccupations;
     _resultData['primaryOccupations'] =
         l$primaryOccupations?.map((e) => e).toList();
+    final l$yearsActive = yearsActive;
+    _resultData['yearsActive'] = l$yearsActive?.map((e) => e).toList();
     final l$siteUrl = siteUrl;
     _resultData['siteUrl'] = l$siteUrl;
     final l$characterMedia = characterMedia;
@@ -957,6 +972,7 @@ class Query$getStaffDetail$Staff {
     final l$isFavourite = isFavourite;
     final l$name = name;
     final l$primaryOccupations = primaryOccupations;
+    final l$yearsActive = yearsActive;
     final l$siteUrl = siteUrl;
     final l$characterMedia = characterMedia;
     final l$staffMedia = staffMedia;
@@ -979,6 +995,9 @@ class Query$getStaffDetail$Staff {
       l$primaryOccupations == null
           ? null
           : Object.hashAll(l$primaryOccupations.map((v) => v)),
+      l$yearsActive == null
+          ? null
+          : Object.hashAll(l$yearsActive.map((v) => v)),
       l$siteUrl,
       l$characterMedia,
       l$staffMedia,
@@ -1081,6 +1100,22 @@ class Query$getStaffDetail$Staff {
     } else if (l$primaryOccupations != lOther$primaryOccupations) {
       return false;
     }
+    final l$yearsActive = yearsActive;
+    final lOther$yearsActive = other.yearsActive;
+    if (l$yearsActive != null && lOther$yearsActive != null) {
+      if (l$yearsActive.length != lOther$yearsActive.length) {
+        return false;
+      }
+      for (int i = 0; i < l$yearsActive.length; i++) {
+        final l$yearsActive$entry = l$yearsActive[i];
+        final lOther$yearsActive$entry = lOther$yearsActive[i];
+        if (l$yearsActive$entry != lOther$yearsActive$entry) {
+          return false;
+        }
+      }
+    } else if (l$yearsActive != lOther$yearsActive) {
+      return false;
+    }
     final l$siteUrl = siteUrl;
     final lOther$siteUrl = other.siteUrl;
     if (l$siteUrl != lOther$siteUrl) {
@@ -1139,6 +1174,7 @@ abstract class CopyWith$Query$getStaffDetail$Staff<TRes> {
     bool? isFavourite,
     Query$getStaffDetail$Staff$name? name,
     List<String?>? primaryOccupations,
+    List<int?>? yearsActive,
     String? siteUrl,
     Query$getStaffDetail$Staff$characterMedia? characterMedia,
     Query$getStaffDetail$Staff$staffMedia? staffMedia,
@@ -1181,6 +1217,7 @@ class _CopyWithImpl$Query$getStaffDetail$Staff<TRes>
     Object? isFavourite = _undefined,
     Object? name = _undefined,
     Object? primaryOccupations = _undefined,
+    Object? yearsActive = _undefined,
     Object? siteUrl = _undefined,
     Object? characterMedia = _undefined,
     Object? staffMedia = _undefined,
@@ -1226,6 +1263,9 @@ class _CopyWithImpl$Query$getStaffDetail$Staff<TRes>
         primaryOccupations: primaryOccupations == _undefined
             ? _instance.primaryOccupations
             : (primaryOccupations as List<String?>?),
+        yearsActive: yearsActive == _undefined
+            ? _instance.yearsActive
+            : (yearsActive as List<int?>?),
         siteUrl:
             siteUrl == _undefined ? _instance.siteUrl : (siteUrl as String?),
         characterMedia: characterMedia == _undefined
@@ -1311,6 +1351,7 @@ class _CopyWithStubImpl$Query$getStaffDetail$Staff<TRes>
     bool? isFavourite,
     Query$getStaffDetail$Staff$name? name,
     List<String?>? primaryOccupations,
+    List<int?>? yearsActive,
     String? siteUrl,
     Query$getStaffDetail$Staff$characterMedia? characterMedia,
     Query$getStaffDetail$Staff$staffMedia? staffMedia,

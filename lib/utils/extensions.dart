@@ -45,13 +45,17 @@ extension FuzzyToDate on Fragment$FuzzyDate {
   }
 
   String toDateString() {
-    if (day == null && month == null && year == null) {
-      return StringConstants.nullStringConstant;
-    }
-    if (day == null || month == null || year == null) {
+    // Return null constant if any required field is missing
+    if (day == null || month == null) {
       return StringConstants.nullStringConstant;
     }
 
+    // If year is null, format as day and month only
+    if (year == null) {
+      return DateFormat('dd MMM').format(DateTime(0, month!, day!));
+    }
+
+    // Format with full date including year
     DateTime dateTime = DateTime(year!, month!, day!);
     String formattedDate = DateFormat('dd MMM yyyy').format(dateTime);
 

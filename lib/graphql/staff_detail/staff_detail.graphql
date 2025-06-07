@@ -24,6 +24,7 @@ query getStaffDetail($staffId: Int) {
             userPreferred
         }
         primaryOccupations
+        yearsActive
         siteUrl
         characterMedia(page: 1){
 
