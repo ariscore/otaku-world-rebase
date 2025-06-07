@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:otaku_world/bloc/studio_detail/studio_detail_bloc.dart';
 import 'package:otaku_world/core/ui/media_section/media_grid_list.dart';
-import 'package:otaku_world/features/media_detail/widgets/simple_loading.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/screens/studio_detail_shimmer.dart';
 import 'package:otaku_world/features/studio_detail/widgets/studio_app_bar.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/utils/navigation_helper.dart';
@@ -52,6 +52,7 @@ class StudioDetailScreen extends HookWidget {
       });
       return null;
     }, const []);
+
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) {
@@ -59,18 +60,18 @@ class StudioDetailScreen extends HookWidget {
         }
         NavigationHelper.onPopInvoked(context);
       },
-      child: Scaffold(
-        floatingActionButton: ScrollToTopFAB(
-          controller: scrollController,
-          tag: 'studio_fab',
-        ),
-        body: BlocBuilder<StudioDetailBloc, StudioDetailState>(
-          builder: (context, state) {
-            if (state is StudioDetailInitial || state is StudioDetailLoading) {
-              return const SimpleLoading();
-            } else if (state is StudioDetailLoaded) {
-              final studio = state.studio;
-              return CustomScrollView(
+      child: BlocBuilder<StudioDetailBloc, StudioDetailState>(
+        builder: (context, state) {
+          if (state is StudioDetailInitial || state is StudioDetailLoading) {
+            return const StudioDetailShimmer();
+          } else if (state is StudioDetailLoaded) {
+            final studio = state.studio;
+            return Scaffold(
+              floatingActionButton: ScrollToTopFAB(
+                controller: scrollController,
+                tag: 'studio_fab',
+              ),
+              body: CustomScrollView(
                 controller: scrollController,
                 slivers: [
                   StudioAppBar(
@@ -88,18 +89,18 @@ class StudioDetailScreen extends HookWidget {
                     ),
                   ),
                 ],
-              );
-            }
-            return const Center(
-              child: Text(
-                'Unknown State',
-                style: TextStyle(
-                  color: AppColors.white,
-                ),
               ),
             );
-          },
-        ),
+          }
+          return const Center(
+            child: Text(
+              'Unknown State',
+              style: TextStyle(
+                color: AppColors.white,
+              ),
+            ),
+          );
+        },
       ),
     );
   }

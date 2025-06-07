@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:like_button/like_button.dart';
 import 'package:otaku_world/bloc/staff_detail/toggle_favorite_staff/toggle_favorite_staff_cubit.dart';
+import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../core/ui/bottomsheet/helpers/share_helpers.dart';
@@ -130,7 +131,7 @@ class _StaffAppBarState extends State<StaffAppBar> {
             height: kToolbarHeight + 10,
           ),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
                 height: UIUtils.getWidgetHeight(
@@ -166,6 +167,7 @@ class _StaffAppBarState extends State<StaffAppBar> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: 5,
                 children: [
+                  20.height,
                   if (staff.name?.userPreferred != null)
                     Text(
                       staff.name!.userPreferred!,

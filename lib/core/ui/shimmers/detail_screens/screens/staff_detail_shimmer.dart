@@ -7,16 +7,18 @@ class StaffDetailShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomScrollView(
-      slivers: [
-        StaffAppBarShimmer(),
-        SliverPadding(
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          sliver: SliverToBoxAdapter(
-            child: DescriptionStaffShimmer(),
+    return const Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          StaffAppBarShimmer(),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            sliver: SliverToBoxAdapter(
+              child: DescriptionStaffShimmer(),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

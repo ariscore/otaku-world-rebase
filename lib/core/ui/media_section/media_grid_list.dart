@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
-import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/paginated_data/paginated_data_bloc.dart';
 import '../../../core/ui/error_text.dart';
-import '../../../core/ui/shimmers/grid_shimmer.dart';
 import '../../../generated/assets.dart';
 import '../../../graphql/__generated/graphql/schema.graphql.dart';
 import '../../../theme/colors.dart';
@@ -15,6 +13,7 @@ import '../../../utils/formatting_utils.dart';
 import '../../../utils/navigation_helper.dart';
 import '../images/cover_image.dart';
 import '../placeholders/poster_placeholder.dart';
+import '../shimmers/detail_screens/widgets/media_grid_shimmer.dart';
 
 class MediaGridList<B extends PaginatedDataBloc> extends StatelessWidget {
   const MediaGridList({
@@ -31,7 +30,7 @@ class MediaGridList<B extends PaginatedDataBloc> extends StatelessWidget {
     return BlocBuilder<B, PaginatedDataState>(
       builder: (context, state) {
         if (state is PaginatedDataInitial || state is PaginatedDataLoading) {
-          return GridShimmer(mediaType: mediaType);
+          return const MediaGridShimmer();
         } else if (state is PaginatedDataLoaded) {
           return Column(
             children: [
