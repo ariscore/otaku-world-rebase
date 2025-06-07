@@ -98,4 +98,6 @@ class RouteConstants {
   static const characterMediaViewList = '/character-media-view-list';
   static const studioDetail = '/studio-detail';
   static const staffDetail = '/staff-detail';
+
+  static const youtubePlayer = '/youtube-player';
 }
