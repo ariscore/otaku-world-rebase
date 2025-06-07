@@ -6,6 +6,7 @@ import 'package:otaku_world/features/character_detail/widgets/character_media_ca
 
 import '../../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/paginated_data/paginated_data_bloc.dart';
+import '../../../constants/string_constants.dart';
 import '../../../core/ui/placeholders/anime_character_placeholder.dart';
 import '../../../core/ui/shimmers/detail_screens/list/character_list_shimmer.dart';
 import '../../../core/ui/widgets/media_filter_widget.dart';
@@ -21,7 +22,7 @@ class CharacterMediaList extends StatefulWidget {
 
 class _CharacterMediaListState extends State<CharacterMediaList> {
   List<String> availableLanguages = [];
-  String selectedLanguage = "Japanese";
+  String selectedLanguage = StringConstants.defaultLanguageDropdown;
 
   @override
   Widget build(BuildContext context) {

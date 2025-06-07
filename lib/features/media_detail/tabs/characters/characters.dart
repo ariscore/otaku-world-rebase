@@ -8,6 +8,7 @@ import 'package:otaku_world/graphql/__generated/graphql/details/characters.graph
 import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../../bloc/graphql_client/graphql_client_cubit.dart';
+import '../../../../constants/string_constants.dart';
 import '../../../../core/ui/shimmers/detail_screens/list/character_list_shimmer.dart';
 import '../../../../generated/assets.dart';
 import '../../../../graphql/__generated/graphql/schema.graphql.dart';
@@ -23,7 +24,7 @@ class Characters extends StatefulWidget {
 class _CharactersState extends State<Characters> {
   List<String> availableLanguages = [];
 
-  String selectedLanguage = "Japanese";
+  String selectedLanguage = StringConstants.defaultLanguageDropdown;
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +150,7 @@ class _CharactersState extends State<Characters> {
       List<Query$Characters$Media$characters$edges?> characters) {
     for (var character in characters) {
       character?.voiceActorRoles?.forEach(
-            (voiceActorRole) {
+        (voiceActorRole) {
           var language = voiceActorRole!.voiceActor!.languageV2!;
           if (!availableLanguages.contains(language)) {
             availableLanguages.add(language);

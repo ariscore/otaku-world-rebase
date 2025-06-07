@@ -4,9 +4,11 @@ import 'package:otaku_world/bloc/charcter_detail/media/character_media_bloc.dart
 import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
 import 'package:otaku_world/core/ui/widgets/media_filter_widget.dart';
 import 'package:otaku_world/features/character_detail/widgets/character_media_card.dart';
+import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/paginated_data/paginated_data_bloc.dart';
+import '../../../constants/string_constants.dart';
 import '../../../core/ui/placeholders/anime_character_placeholder.dart';
 import '../../../core/ui/shimmers/detail_screens/list/character_list_shimmer.dart';
 import '../../../generated/assets.dart';
@@ -22,104 +24,114 @@ class CharacterMediaShortList extends StatefulWidget {
 
 class _CharacterMediaShortListState extends State<CharacterMediaShortList> {
   List<String> availableLanguages = [];
-  String selectedLanguage = "Japanese";
+  String selectedLanguage = StringConstants.defaultLanguageDropdown;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CharacterMediaBloc, PaginatedDataState>(
-      builder: (context, state) {
-        if (state is PaginatedDataInitial || state is PaginatedDataLoading) {
-          return _buildListLoading();
-        } else if (state is PaginatedDataLoaded) {
-          List<Query$getCharacterMedia$Character$media$edges?> characters =
-              state.list
-                  as List<Query$getCharacterMedia$Character$media$edges?>;
-          loadLanguages(characters);
-
-          int totalItems = characters.length + 2; // +2 for dropdown and filters
-          if (characters.isEmpty) {
-            totalItems += 1; // +1 for the placeholder
-          }
-          return SliverList.separated(
-            itemCount: totalItems,
-            // +1 for the dropdown +1 for filters
-            separatorBuilder: (context, index) => const SizedBox(height: 10),
-            itemBuilder: (context, index) {
-              if (index == 0) {
-                // Dropdown as the first item
-                return CustomDropdown(
-                  dropdownItems: availableLanguages,
-                  initialValue: selectedLanguage,
-                  onChange: (language) {
-                    setState(() {
-                      selectedLanguage = language;
-                    });
-                  },
-                );
-              }
-              if (index == 1) {
-                final bloc = context.read<CharacterMediaBloc>();
-                return MediaFilterWidget(
-                  mediaSortNotifier: bloc.mediaSortNotifier,
-                  isOnMyListNotifier: bloc.isOnMyList,
-                  onApplyFilters: () {
-                    final client = (context.read<GraphqlClientCubit>().state
-                            as GraphqlClientInitialized)
-                        .client;
-                    bloc.applyFilter(client: client);
-                  },
-                  bloc: bloc,
-                );
-              }
-
-              if (characters.isEmpty && index == 2) {
-                return const AnimeCharacterPlaceholder(
-                  asset: Assets.charactersErenYeager,
-                  heading: 'No Characters Available',
-                  subheading:
-                      'Looks like there aren’t any characters to display right now.',
-                  isScrollable: true,
-                );
-              }
-
-              final media = characters[index - 2]!.node!;
-              final voiceActor = characters[index - 2]!
-                  .voiceActorRoles!
-                  .where((voiceActorRole) =>
-                      voiceActorRole!.voiceActor!.languageV2 ==
-                      selectedLanguage)
-                  .toList();
-
-              return CharacterMediaCard(
-                media: media,
-                voiceActor:
-                    voiceActor.isNotEmpty ? voiceActor.first?.voiceActor : null,
-              );
-            },
-          );
-        }
-
-        return SliverToBoxAdapter(
-          child: AnimeCharacterPlaceholder(
-            asset: Assets.charactersNoInternet,
-            height: 300,
-            heading: 'Something went wrong!',
-            subheading:
-                'Please check your internet connection or try again later.',
-            onTryAgain: () {
-              context.read<CharacterMediaBloc>().add(
-                    LoadData(
-                      (context.read<GraphqlClientCubit>().state
-                              as GraphqlClientInitialized)
-                          .client,
-                    ),
-                  );
-            },
-            isError: true,
-            isScrollable: true,
+    final bloc = context.read<CharacterMediaBloc>();
+    return SliverMainAxisGroup(
+      slivers: [
+        if (availableLanguages.isNotEmpty) ...[
+          SliverToBoxAdapter(
+            child: CustomDropdown(
+              dropdownItems: availableLanguages,
+              initialValue: selectedLanguage,
+              onChange: (language) {
+                setState(() {
+                  selectedLanguage = language;
+                });
+              },
+            ),
           ),
-        );
-      },
+          SliverToBoxAdapter(
+            child: 10.height,
+          ),
+        ],
+        SliverToBoxAdapter(
+          child: MediaFilterWidget(
+            mediaSortNotifier: bloc.mediaSortNotifier,
+            isOnMyListNotifier: bloc.isOnMyList,
+            onApplyFilters: () {
+              final client = (context.read<GraphqlClientCubit>().state
+                      as GraphqlClientInitialized)
+                  .client;
+              bloc.applyFilter(client: client);
+            },
+            bloc: bloc,
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: 5.height,
+        ),
+        BlocBuilder<CharacterMediaBloc, PaginatedDataState>(
+          builder: (context, state) {
+            if (state is PaginatedDataInitial ||
+                state is PaginatedDataLoading) {
+              return _buildListLoading();
+            } else if (state is PaginatedDataLoaded) {
+              List<Query$getCharacterMedia$Character$media$edges?> characters =
+                  state.list
+                      as List<Query$getCharacterMedia$Character$media$edges?>;
+              loadLanguages(characters);
+
+              if (characters.isEmpty) {
+                return const SliverToBoxAdapter(
+                  child: AnimeCharacterPlaceholder(
+                    asset: Assets.charactersErenYeager,
+                    heading: 'No Characters Available',
+                    subheading:
+                        'Looks like there aren’t any characters to display right now.',
+                    isScrollable: true,
+                  ),
+                );
+              }
+              return SliverList.separated(
+                itemCount: characters.length,
+                // +1 for the dropdown +1 for filters
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 10),
+                itemBuilder: (context, index) {
+                  final media = characters[index]!.node!;
+                  final voiceActor = characters[index]!
+                      .voiceActorRoles!
+                      .where((voiceActorRole) =>
+                          voiceActorRole!.voiceActor!.languageV2 ==
+                          selectedLanguage)
+                      .toList();
+
+                  return CharacterMediaCard(
+                    media: media,
+                    voiceActor: voiceActor.isNotEmpty
+                        ? voiceActor.first?.voiceActor
+                        : null,
+                  );
+                },
+              );
+            }
+
+            return SliverToBoxAdapter(
+              child: AnimeCharacterPlaceholder(
+                asset: Assets.charactersNoInternet,
+                height: 300,
+                heading: 'Something went wrong!',
+                subheading:
+                    'Please check your internet connection or try again later.',
+                onTryAgain: () {
+                  context.read<CharacterMediaBloc>().add(
+                        LoadData(
+                          (context.read<GraphqlClientCubit>().state
+                                  as GraphqlClientInitialized)
+                              .client,
+                        ),
+                      );
+                },
+                isError: true,
+                isScrollable: true,
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 
