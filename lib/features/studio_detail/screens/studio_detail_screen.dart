@@ -12,7 +12,8 @@ import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/paginated_data/paginated_data_bloc.dart';
 import '../../../bloc/studio_detail/studio_media/studio_media_bloc.dart';
 import '../../../core/ui/media_section/scroll_to_top_button.dart';
-import '../../../theme/colors.dart';
+import '../../../core/ui/placeholders/anime_character_placeholder.dart';
+import '../../../generated/assets.dart';
 
 class StudioDetailScreen extends HookWidget {
   const StudioDetailScreen({
@@ -92,13 +93,23 @@ class StudioDetailScreen extends HookWidget {
               ),
             );
           }
-          return const Center(
-            child: Text(
-              'Unknown State',
-              style: TextStyle(
-                color: AppColors.white,
-              ),
-            ),
+          return AnimeCharacterPlaceholder(
+            asset: Assets.charactersNoInternet,
+            heading: 'Something went wrong!',
+            subheading:
+                'Please check your internet connection or try again later.',
+            onTryAgain: () {
+              context.read<StudioDetailBloc>().add(
+                    LoadStudioDetail(
+                      id: studioId,
+                      client: (context.read<GraphqlClientCubit>().state
+                              as GraphqlClientInitialized)
+                          .client,
+                    ),
+                  );
+            },
+            isError: true,
+            isScrollable: true,
           );
         },
       ),
