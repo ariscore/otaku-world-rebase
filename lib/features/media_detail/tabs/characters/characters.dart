@@ -126,7 +126,6 @@ class _CharactersState extends State<Characters> {
         }
         return AnimeCharacterPlaceholder(
           asset: Assets.charactersNoInternet,
-          height: 300,
           heading: 'Something went wrong!',
           subheading:
               'Please check your internet connection or try again later.',

@@ -1,24 +1,23 @@
 import 'dart:developer' as dev;
 
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/bloc/staff_detail/media/staff_media_bloc.dart';
 import 'package:otaku_world/bloc/staff_detail/staff_detail_bloc.dart';
 import 'package:otaku_world/bloc/staff_detail/voice/staff_voice_bloc.dart';
 import 'package:otaku_world/core/ui/shimmers/detail_screens/screens/staff_detail_shimmer.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/shimmer_details.dart';
 import 'package:otaku_world/features/profile/widgets/keep_alive_tab.dart';
 import 'package:otaku_world/features/staff_detail/tabs/anime/staff_anime_tab.dart';
 import 'package:otaku_world/features/staff_detail/tabs/manga/staff_manga_tab.dart';
 import 'package:otaku_world/features/staff_detail/tabs/overview/staff_overview_tab.dart';
 import 'package:otaku_world/features/staff_detail/tabs/voice/staff_voice_tab.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
-import 'package:otaku_world/theme/colors.dart';
 
 import '../../bloc/graphql_client/graphql_client_cubit.dart';
+import '../../core/ui/placeholders/anime_character_placeholder.dart';
 import 'widgets/staff_app_bar.dart';
 
 class StaffDetailScreen extends StatelessWidget {
@@ -38,7 +37,7 @@ class StaffDetailScreen extends StatelessWidget {
       canPop: false,
       onPopInvokedWithResult: (didPop, _) {
         if (didPop) return;
-        _onPopInvoked(context);
+        NavigationHelper.onPopInvoked(context);
       },
       child: BlocBuilder<StaffDetailBloc, StaffDetailState>(
         builder: (context, state) {
@@ -53,23 +52,20 @@ class StaffDetailScreen extends StatelessWidget {
             );
           }
 
-          return const Center(
-            child: Text(
-              'Unknown State',
-              style: TextStyle(color: AppColors.white),
-            ),
+          return AnimeCharacterPlaceholder(
+            asset: Assets.charactersNoInternet,
+            heading: 'Something went wrong!',
+            subheading:
+                'Please check your internet connection or try again later.',
+            onTryAgain: () {
+              context.read<StaffDetailBloc>().add(FetchStaffDetail(staffId));
+            },
+            isError: true,
+            isScrollable: true,
           );
         },
       ),
     );
-  }
-
-  void _onPopInvoked(BuildContext context) {
-    if (context.canPop()) {
-      context.pop();
-    } else {
-      context.go('/home');
-    }
   }
 }
 

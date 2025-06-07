@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/staff_detail/media/staff_media_bloc.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/list/staff_list_shimmer.dart';
 import 'package:otaku_world/features/media_detail/tabs/characters/widgets/character_parameters.dart';
 import 'package:otaku_world/graphql/__generated/graphql/staff_detail/staff_media.graphql.dart';
 import 'package:otaku_world/utils/navigation_helper.dart';
 
 import '../../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../../bloc/paginated_data/paginated_data_bloc.dart';
+import '../../../../core/ui/placeholders/anime_character_placeholder.dart';
 import '../../../../core/ui/widgets/media_filter_widget.dart';
-import '../../../media_detail/widgets/simple_loading.dart';
+import '../../../../generated/assets.dart';
 import '../../widgets/staff_media_card.dart';
 
 class StaffAnimeTab extends StatelessWidget {
@@ -38,7 +40,7 @@ class StaffAnimeTab extends StatelessWidget {
         slivers: [
           // Filter Widget
           SliverPadding(
-            padding: const EdgeInsets.all( 10),
+            padding: const EdgeInsets.all(10),
             sliver: SliverToBoxAdapter(
               child: MediaFilterWidget(
                 mediaSortNotifier: bloc.mediaSortNotifier,
@@ -59,20 +61,22 @@ class StaffAnimeTab extends StatelessWidget {
             builder: (context, state) {
               if (state is PaginatedDataInitial ||
                   state is PaginatedDataLoading) {
-                return const SliverToBoxAdapter(
-                  child: Center(child: SimpleLoading()),
-                );
-              } else if (state is PaginatedDataError) {
-                return SliverToBoxAdapter(
-                  child: Center(child: Text('Error: ${state.message}')),
+                return const SliverFillRemaining(
+                  child: StaffListShimmer(),
                 );
               } else if (state is PaginatedDataLoaded) {
                 final staffMediaEdges = state.list
                     as List<Query$staffMedia$Staff$staffMedia$edges?>;
 
                 if (staffMediaEdges.isEmpty) {
-                  return const SliverToBoxAdapter(
-                    child: Center(child: Text('No anime found')),
+                  return const SliverFillRemaining(
+                    child: AnimeCharacterPlaceholder(
+                      asset: Assets.charactersCigaretteGirl,
+                      heading: 'No Anime Available',
+                      subheading:
+                          'Looks like there aren’t any Anime to display right now.',
+                      isScrollable: true,
+                    ),
                   );
                 }
 
@@ -102,8 +106,24 @@ class StaffAnimeTab extends StatelessWidget {
                   ),
                 );
               } else {
-                return const SliverFillRemaining(
-                  child: Center(child: Text('No data available')),
+                return SliverFillRemaining(
+                  child: AnimeCharacterPlaceholder(
+                    asset: Assets.charactersNoInternet,
+                    heading: 'Something went wrong!',
+                    subheading:
+                        'Please check your internet connection or try again later.',
+                    onTryAgain: () {
+                      context.read<StaffMediaBloc>().add(
+                            LoadData(
+                              (context.read<GraphqlClientCubit>().state
+                                      as GraphqlClientInitialized)
+                                  .client,
+                            ),
+                          );
+                    },
+                    isError: true,
+                    isScrollable: true,
+                  ),
                 );
               }
             },
@@ -113,10 +133,10 @@ class StaffAnimeTab extends StatelessWidget {
           BlocBuilder<StaffMediaBloc, PaginatedDataState>(
             builder: (context, state) {
               if (state is PaginatedDataLoaded && state.hasNextPage) {
-                return const SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
-                    child: Center(child: CircularProgressIndicator()),
+                return const SliverPadding(
+                  padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+                  sliver: SliverToBoxAdapter(
+                    child: StaffCardShimmer(),
                   ),
                 );
               }

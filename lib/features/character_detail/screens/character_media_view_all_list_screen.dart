@@ -9,7 +9,9 @@ class CharacterMediaViewAllListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: SimpleAppBar(),
+      appBar: SimpleAppBar(
+        title: 'Character Media',
+      ),
       body: CharacterMediaList(),
     );
   }
