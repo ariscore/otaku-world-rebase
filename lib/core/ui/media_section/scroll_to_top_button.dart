@@ -73,7 +73,7 @@ class _ScrollToTopFABState extends State<ScrollToTopFAB> {
                   },
                 );
               },
-              backgroundColor: AppColors.sunsetOrange.withOpacity(0.60),
+              backgroundColor: AppColors.sunsetOrange.withValues(alpha:0.60),
               child: SvgPicture.asset(Assets.iconsArrowUp),
             ),
           )

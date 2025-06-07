@@ -81,7 +81,7 @@ class _CustomDropdownState<T extends Object> extends State<CustomDropdown<T>> {
             child: Text(
               widget.description!,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Colors.white.withOpacity(0.8),
+                    color: Colors.white.withValues(alpha:0.8),
                   ),
             ),
           ),

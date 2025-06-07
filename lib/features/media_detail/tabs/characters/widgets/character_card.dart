@@ -28,7 +28,7 @@ class CharacterCard extends StatelessWidget {
   );
 
   static final roleTextStyle = TextStyle(
-    color: AppColors.white.withOpacity(0.8),
+    color: AppColors.white.withValues(alpha:0.8),
     fontSize: 12,
     fontFamily: 'Roboto Condensed',
     fontWeight: FontWeight.w400,

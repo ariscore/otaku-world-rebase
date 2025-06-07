@@ -68,7 +68,7 @@ class CustomSearchBar extends StatelessWidget {
           filled: true,
           hintText: hint,
           hintStyle: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            color: AppColors.white.withOpacity(0.5),
+            color: AppColors.white.withValues(alpha:0.5),
           ),
           suffixIcon: Padding(
             padding: const EdgeInsets.only(

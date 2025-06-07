@@ -77,7 +77,7 @@ class ResultMediaCard extends StatelessWidget {
                       '${media!.startDate?.year == null ? '?' : media!.startDate!.year},'
                       ' ${media!.format == null ? 'Unknown' : toJson$Enum$MediaFormat(media!.format!)}',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            color: AppColors.white.withOpacity(0.8),
+                            color: AppColors.white.withValues(alpha:0.8),
                             fontFamily: 'Poppins',
                           ),
                     ),

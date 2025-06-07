@@ -218,7 +218,7 @@ class Genres extends StatelessWidget {
       textSpans.add(TextSpan(
         text: genre,
         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: AppColors.white.withOpacity(0.7),
+              color: AppColors.white.withValues(alpha:0.7),
               fontWeight: FontWeight.w500,
               fontFamily: 'Poppins',
             ),
@@ -229,7 +229,7 @@ class Genres extends StatelessWidget {
           TextSpan(
             text: ' | ',
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: AppColors.white.withOpacity(0.7),
+                  color: AppColors.white.withValues(alpha:0.7),
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Poppins',
                 ),

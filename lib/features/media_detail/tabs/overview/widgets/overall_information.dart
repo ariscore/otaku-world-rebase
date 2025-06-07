@@ -71,7 +71,7 @@ class OverallInfo extends StatelessWidget {
           ),
           tenHeightSizedBox,
           Container(
-            color: AppColors.white.withOpacity(0.5),
+            color: AppColors.white.withValues(alpha:0.5),
             height: 1,
           ),
           tenHeightSizedBox,
@@ -147,7 +147,7 @@ class OverallInfo extends StatelessWidget {
             tenHeightSizedBox,
             if (media.studios?.edges != null) ...[
               Container(
-                color: AppColors.white.withOpacity(0.5),
+                color: AppColors.white.withValues(alpha:0.5),
                 height: 1,
               ),
               tenHeightSizedBox,

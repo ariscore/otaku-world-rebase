@@ -93,7 +93,7 @@ class ListActivityCard extends StatelessWidget {
                       )}',
                       style:
                           Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                color: AppColors.white.withOpacity(0.7),
+                                color: AppColors.white.withValues(alpha:0.7),
                               ),
                     ),
                   ],

@@ -170,7 +170,7 @@ class SettingsScreen extends StatelessWidget {
                   Text(
                     desc,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          color: Colors.white.withOpacity(0.8),
+                          color: Colors.white.withValues(alpha:0.8),
                         ),
                   ),
                 ],

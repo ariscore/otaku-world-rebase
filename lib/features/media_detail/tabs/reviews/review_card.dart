@@ -83,7 +83,7 @@ class ReviewCard extends StatelessWidget {
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontSize: 12,
                     fontFamily: 'Roboto',
-                    color: AppColors.white.withOpacity(0.8),
+                    color: AppColors.white.withValues(alpha:0.8),
                   ),
             ),
           ],

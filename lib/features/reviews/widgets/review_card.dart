@@ -24,7 +24,7 @@ class ReviewCard extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.25),
+              color: Colors.black.withValues(alpha:0.25),
               blurRadius: 4,
               offset: const Offset(0, 4),
             )
@@ -107,7 +107,7 @@ class ReviewCard extends StatelessWidget {
                           .toString(),
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontFamily: 'Roboto',
-                            color: AppColors.white.withOpacity(0.8),
+                            color: AppColors.white.withValues(alpha:0.8),
                           ),
                     ),
                   ),
@@ -118,7 +118,7 @@ class ReviewCard extends StatelessWidget {
                       "${FormattingUtils.formatUnixTimestamp(review.createdAt)})",
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontFamily: 'Roboto',
-                            color: AppColors.white.withOpacity(0.8),
+                            color: AppColors.white.withValues(alpha:0.8),
                           ),
                     ),
                   ),

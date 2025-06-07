@@ -29,7 +29,7 @@ class PerformanceItem extends StatelessWidget {
         Text(
           category,
           style: TextStyle(
-              color: AppColors.white.withOpacity(0.6),
+              color: AppColors.white.withValues(alpha:0.6),
               fontSize: 12,
               fontFamily: 'Roboto Condensed',
               fontWeight: FontWeight.w400),

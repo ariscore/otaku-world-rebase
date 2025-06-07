@@ -110,7 +110,7 @@ class MediaCarouselCard extends StatelessWidget {
                       genres: media!.genres,
                       genreStyle:
                           Theme.of(context).textTheme.titleLarge?.copyWith(
-                                color: AppColors.white.withOpacity(0.7),
+                                color: AppColors.white.withValues(alpha:0.7),
                                 fontWeight: FontWeight.w500,
                                 fontFamily: 'Poppins',
                               ),
@@ -246,7 +246,7 @@ class MediaCarouselCard extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
-                color: AppColors.white.withOpacity(0.5),
+                color: AppColors.white.withValues(alpha:0.5),
               ),
         ),
       ],

@@ -28,7 +28,7 @@ class ListActivityOptions extends StatelessWidget {
         Text(
           'Create an entry on your activity feed when your list updates.',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Colors.white.withOpacity(0.8),
+                color: Colors.white.withValues(alpha:0.8),
               ),
         ),
         const SizedBox(height: 10),
