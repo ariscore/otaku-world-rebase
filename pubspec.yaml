@@ -60,7 +60,7 @@ dependencies:
   #  media_kit_libs_video:
   flutter_native_splash: ^2.4.1
   media_kit_video: ^1.2.4
-  youtube_player_flutter: ^9.0.1
+  youtube_player_flutter: ^9.1.1
   like_button: ^2.0.5
   extended_nested_scroll_view: ^6.2.1
   flutter_rating_bar: ^4.0.1

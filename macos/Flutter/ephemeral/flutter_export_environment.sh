@@ -1,6 +1,6 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=C:\Flutter Sdks\flutter"
+export "FLUTTER_ROOT=D:\Coding\Flutter Sdks\flutter"
 export "FLUTTER_APPLICATION_PATH=D:\Coding\Work\otaku-world-rebase"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
