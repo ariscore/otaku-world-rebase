@@ -7,19 +7,27 @@ class StringConstants {
       ' \nInteractions';
 
   static const noInternet = 'No Internet';
-  static const noInternetError = 'Please check your internet connection and try again!';
+  static const noInternetError =
+      'Please check your internet connection and try again!';
   static const somethingWentWrong = 'Something went wrong';
-  static const somethingWentWrongError = 'Something went wrong, Please try again!';
+  static const somethingWentWrongError =
+      'Something went wrong, Please try again!';
   static const unexpectedError = 'Some Unexpected error occurred!';
   static const validationError = 'Please enter valid text!';
   static const statsNotAvailable = 'Statistics not available!';
-  static const messageConfirmation = 'Are you sure you want to send this message?';
-  static const unfollowConfirmation = 'Their activities will no longer appear in your Following tab.';
+  static const messageConfirmation =
+      'Are you sure you want to send this message?';
+  static const unfollowConfirmation =
+      'Their activities will no longer appear in your Following tab.';
 
   static const settingsConfirmationHeading = 'Save Settings';
-  static const listSettingsConfirmationWarning = 'Your list will reload to reflect the new settings. Do you want to proceed?';
+  static const listSettingsConfirmationWarning =
+      'Your list will reload to reflect the new settings. Do you want to proceed?';
   static const deleteListEntryHeading = 'Delete List Entry';
-  static const deleteListEntryWarning = 'Are you sure you want to delete this list entry?';
+  static const deleteListEntryWarning =
+      'Are you sure you want to delete this list entry?';
+
+  static const defaultLanguageDropdown = 'Japanese';
 }
 
 class LoginConstants {
@@ -101,7 +109,8 @@ class DiscoverConstants {
 }
 
 class ActivityConstants {
-  static const notFound = 'Oops! It looks like this activity is no longer available. It may have been removed or deleted.';
+  static const notFound =
+      'Oops! It looks like this activity is no longer available. It may have been removed or deleted.';
   static const clientError = 'Something went wrong, Please restart the app!';
   static const somethingWrong = 'Something went wrong!';
 

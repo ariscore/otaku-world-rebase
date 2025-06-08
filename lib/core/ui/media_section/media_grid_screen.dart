@@ -251,7 +251,7 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
         vertical: 3,
       ),
       decoration: ShapeDecoration(
-        color: AppColors.raisinBlack.withOpacity(0.6),
+        color: AppColors.raisinBlack.withValues(alpha:0.6),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(5),

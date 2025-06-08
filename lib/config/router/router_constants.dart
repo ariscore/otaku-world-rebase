@@ -95,6 +95,9 @@ class RouteConstants {
   static const recommendedMangaSlider = '/recommended-manga-slider';
 
   static const characterDetail = '/character-detail';
+  static const characterMediaViewList = '/character-media-view-list';
   static const studioDetail = '/studio-detail';
   static const staffDetail = '/staff-detail';
+
+  static const youtubePlayer = '/youtube-player';
 }

@@ -72,7 +72,7 @@ class ActivityReplyPreview extends StatelessWidget {
                 isFromAniList: false,
               ),
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: AppColors.white.withOpacity(0.8),
+                    color: AppColors.white.withValues(alpha:0.8),
                   ),
             ),
           ],

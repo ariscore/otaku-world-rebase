@@ -90,7 +90,7 @@ class _CustomRangeSliderState extends State<CustomRangeSlider> {
                   inactiveTickMarkColor: AppColors.transparent,
                   trackHeight: 10,
                   trackShape: const RoundedRectSliderTrackShape(),
-                  overlayColor: AppColors.sunsetOrange.withOpacity(0.1),
+                  overlayColor: AppColors.sunsetOrange.withValues(alpha:0.1),
                   valueIndicatorColor: AppColors.sunsetOrange,
                   valueIndicatorTextStyle:
                       Theme.of(context).textTheme.titleLarge,

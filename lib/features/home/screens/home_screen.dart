@@ -197,7 +197,7 @@ class HomeScreen extends HookWidget {
                 ),
                 shadows: [
                   BoxShadow(
-                    color: AppColors.black.withOpacity(0.25),
+                    color: AppColors.black.withValues(alpha:0.25),
                     blurRadius: 4,
                     offset: const Offset(0, 4),
                   ),
@@ -215,7 +215,7 @@ class HomeScreen extends HookWidget {
                   Text(
                     HomeConstants.discover,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: AppColors.white.withOpacity(0.5),
+                          color: AppColors.white.withValues(alpha:0.5),
                           fontFamily: 'Poppins',
                         ),
                   ),

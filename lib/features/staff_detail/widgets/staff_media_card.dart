@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:otaku_world/features/media_detail/tabs/characters/widgets/character_parameters.dart';
 import 'package:otaku_world/features/media_detail/tabs/characters/widgets/sub_anime_character.dart';
-import 'package:otaku_world/graphql/__generated/graphql/details/staff.graphql.dart';
 
 import '../../../../theme/colors.dart';
-import '../../../../utils/navigation_helper.dart';
 
 class StaffMediaCard extends StatelessWidget {
   const StaffMediaCard({super.key, required this.staffParams});
@@ -19,7 +17,7 @@ class StaffMediaCard extends StatelessWidget {
   );
 
   static final roleTextStyle = TextStyle(
-    color: AppColors.white.withOpacity(0.8),
+    color: AppColors.white.withValues(alpha: 0.8),
     fontSize: 12,
     fontFamily: 'Roboto Condensed',
     fontWeight: FontWeight.w400,

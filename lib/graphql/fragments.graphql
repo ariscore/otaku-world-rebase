@@ -93,6 +93,7 @@ fragment MediaDetailed on Media {
     mediaListEntry {
         ...MediaListEntry
     }
+    siteUrl
 }
 
 fragment MediaShort on Media {

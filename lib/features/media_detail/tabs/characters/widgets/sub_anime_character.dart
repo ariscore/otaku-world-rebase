@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:otaku_world/features/media_detail/tabs/characters/widgets/character_parameters.dart';
 
-import '../../../../../utils/navigation_helper.dart';
 import 'character_card.dart';
 
 class SubAnimeCharacter extends StatelessWidget {
@@ -49,14 +48,13 @@ class SubAnimeCharacter extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(
-              height: 20,
               width: isStaff
                   ? MediaQuery.of(context).size.width - 120
-                  : MediaQuery.of(context).size.width - 200,
+                  : MediaQuery.of(context).size.width - 220,
               child: Text(
                 character.characterName,
                 style: CharacterCard.nameTextStyle,
-                maxLines: isStaff ? 2 : 1,
+                maxLines: 2,
               ),
             ),
             const SizedBox(

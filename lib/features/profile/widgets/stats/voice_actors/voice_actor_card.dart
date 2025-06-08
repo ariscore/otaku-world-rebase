@@ -245,7 +245,7 @@ class _VoiceActorCardState extends State<VoiceActorCard>
           label,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: AppColors.white.withOpacity(0.7),
+                color: AppColors.white.withValues(alpha:0.7),
                 fontFamily: 'Poppins',
               ),
         ),

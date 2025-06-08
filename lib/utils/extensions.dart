@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
@@ -46,13 +45,17 @@ extension FuzzyToDate on Fragment$FuzzyDate {
   }
 
   String toDateString() {
-    if (day == null && month == null && year == null) {
-      return StringConstants.nullStringConstant;
-    }
-    if (day == null || month == null || year == null) {
+    // Return null constant if any required field is missing
+    if (day == null || month == null) {
       return StringConstants.nullStringConstant;
     }
 
+    // If year is null, format as day and month only
+    if (year == null) {
+      return DateFormat('dd MMM').format(DateTime(0, month!, day!));
+    }
+
+    // Format with full date including year
     DateTime dateTime = DateTime(year!, month!, day!);
     String formattedDate = DateFormat('dd MMM yyyy').format(dateTime);
 
@@ -195,4 +198,10 @@ extension MediaSortExtension on Enum$MediaSort {
         return "Unknown";
     }
   }
+}
+
+extension EmptySpace on num {
+  SizedBox get height => SizedBox(height: toDouble());
+
+  SizedBox get width => SizedBox(width: toDouble());
 }

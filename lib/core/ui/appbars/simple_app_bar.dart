@@ -6,14 +6,16 @@ import '../buttons/back_button.dart';
 class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SimpleAppBar({
     super.key,
-    required this.title,
+    this.title,
     this.actions,
     this.bgColor = AppColors.raisinBlack,
+    this.flexibleSpace,
   });
 
-  final String title;
+  final String? title;
   final List<Widget>? actions;
   final Color bgColor;
+  final Widget? flexibleSpace;
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +29,18 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
           }
         },
       ),
-      title: Text(title, style: Theme.of(context).textTheme.displayMedium),
+      title: (title != null && title!.isNotEmpty)
+          ? Text(
+              title!,
+              style: Theme.of(context).textTheme.displayMedium,
+            )
+          : null,
       backgroundColor: bgColor,
       elevation: 0,
       actions: actions,
       centerTitle: false,
       surfaceTintColor: AppColors.raisinBlack,
+      flexibleSpace: flexibleSpace,
     );
   }
 

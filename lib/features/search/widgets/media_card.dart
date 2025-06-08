@@ -9,6 +9,7 @@ import '../../../generated/assets.dart';
 import '../../../graphql/__generated/graphql/fragments.graphql.dart';
 import '../../../services/caching/image_cache_manager.dart';
 import '../../../theme/colors.dart';
+import '../../../utils/formatting_utils.dart';
 import '../../../utils/navigation_helper.dart';
 
 class ResultMediaCard extends StatelessWidget {
@@ -75,9 +76,9 @@ class ResultMediaCard extends StatelessWidget {
                     Text(
                       // '2020, TV',
                       '${media!.startDate?.year == null ? '?' : media!.startDate!.year},'
-                      ' ${media!.format == null ? 'Unknown' : toJson$Enum$MediaFormat(media!.format!)}',
+                      ' ${media!.format == null ? 'Unknown' : FormattingUtils.getMediaFormatString(media!.format!)}',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            color: AppColors.white.withOpacity(0.8),
+                            color: AppColors.white.withValues(alpha: 0.8),
                             fontFamily: 'Poppins',
                           ),
                     ),

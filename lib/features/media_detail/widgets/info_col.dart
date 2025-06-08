@@ -4,6 +4,7 @@ import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../generated/assets.dart';
 import '../../../theme/colors.dart';
+import '../../../utils/formatting_utils.dart';
 import 'info_data.dart';
 
 class InfoColumn extends StatelessWidget {
@@ -84,9 +85,9 @@ class InfoColumn extends StatelessWidget {
             ),
           ),
         Text(
-          toJson$Enum$MediaFormat(
+          FormattingUtils.getMediaFormatString(
             format ?? Enum$MediaFormat.$unknown,
-          ).capitalize(),
+          ),
           style: const TextStyle(
             fontSize: 14,
             color: AppColors.white,

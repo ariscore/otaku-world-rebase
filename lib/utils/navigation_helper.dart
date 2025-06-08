@@ -75,6 +75,15 @@ class NavigationHelper {
     }
   }
 
+  static void goToYoutubePlayer({
+    required BuildContext context,
+    required youtubeVideoId,
+  }) {
+    context.push(
+      '${RouteConstants.youtubePlayer}?id=$youtubeVideoId',
+    );
+  }
+
   static void onPopInvoked(BuildContext context) {
     if (context.canPop()) {
       context.pop();

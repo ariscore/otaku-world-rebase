@@ -197,7 +197,7 @@ class UpcomingEpisodesSection extends HookWidget {
             ),
             shadows: [
               BoxShadow(
-                color: AppColors.black.withOpacity(0.25),
+                color: AppColors.black.withValues(alpha:0.25),
                 blurRadius: 4,
                 offset: const Offset(0, 4),
               ),

@@ -1,23 +1,23 @@
 import 'dart:developer' as dev;
 
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/bloc/staff_detail/media/staff_media_bloc.dart';
 import 'package:otaku_world/bloc/staff_detail/staff_detail_bloc.dart';
 import 'package:otaku_world/bloc/staff_detail/voice/staff_voice_bloc.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/screens/staff_detail_shimmer.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/shimmer_details.dart';
 import 'package:otaku_world/features/profile/widgets/keep_alive_tab.dart';
 import 'package:otaku_world/features/staff_detail/tabs/anime/staff_anime_tab.dart';
 import 'package:otaku_world/features/staff_detail/tabs/manga/staff_manga_tab.dart';
 import 'package:otaku_world/features/staff_detail/tabs/overview/staff_overview_tab.dart';
 import 'package:otaku_world/features/staff_detail/tabs/voice/staff_voice_tab.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
-import 'package:otaku_world/theme/colors.dart';
 
 import '../../bloc/graphql_client/graphql_client_cubit.dart';
+import '../../core/ui/placeholders/anime_character_placeholder.dart';
 import 'widgets/staff_app_bar.dart';
 
 class StaffDetailScreen extends StatelessWidget {
@@ -35,47 +35,37 @@ class StaffDetailScreen extends StatelessWidget {
 
     return PopScope(
       canPop: false,
-      onPopInvoked: (didPop) {
+      onPopInvokedWithResult: (didPop, _) {
         if (didPop) return;
-        _onPopInvoked(context);
+        NavigationHelper.onPopInvoked(context);
       },
-      child: Scaffold(
-        extendBodyBehindAppBar: false,
-        body: BlocBuilder<StaffDetailBloc, StaffDetailState>(
-          builder: (context, state) {
-            if (state is StaffDetailInitial || state is StaffDetailLoading) {
-              return _buildLoading();
-            } else if (state is StaffDetailLoaded) {
-              // Use the _TabManagerWidget for all tab-related logic
-              return _TabManagerWidget(
-                staff: state.staff,
-                staffId: staffId,
-                client: client,
-              );
-            }
-
-            return const Center(
-              child: Text(
-                'Unknown State',
-                style: TextStyle(color: AppColors.white),
-              ),
+      child: BlocBuilder<StaffDetailBloc, StaffDetailState>(
+        builder: (context, state) {
+          if (state is StaffDetailInitial || state is StaffDetailLoading) {
+            return const StaffDetailShimmer();
+          } else if (state is StaffDetailLoaded) {
+            // Use the _TabManagerWidget for all tab-related logic
+            return _TabManagerWidget(
+              staff: state.staff,
+              staffId: staffId,
+              client: client,
             );
-          },
-        ),
+          }
+
+          return AnimeCharacterPlaceholder(
+            asset: Assets.charactersNoInternet,
+            heading: 'Something went wrong!',
+            subheading:
+                'Please check your internet connection or try again later.',
+            onTryAgain: () {
+              context.read<StaffDetailBloc>().add(FetchStaffDetail(staffId));
+            },
+            isError: true,
+            isScrollable: true,
+          );
+        },
       ),
     );
-  }
-
-  void _onPopInvoked(BuildContext context) {
-    if (context.canPop()) {
-      context.pop();
-    } else {
-      context.go('/home');
-    }
-  }
-
-  Widget _buildLoading() {
-    return const Center(child: CircularProgressIndicator());
   }
 }
 
@@ -115,23 +105,26 @@ class _TabManagerWidget extends HookWidget {
       name: "StaffDetailScreen",
     );
 
-    return ExtendedNestedScrollView(
-      headerSliverBuilder: (context, innerBoxIsScrolled) {
-        return [
-          StaffAppBar(
-            staff: staff,
-            tabController: tabController,
-            tabs: tabs,
-          ),
-        ];
-      },
-      onlyOneScrollInBody: true,
-      pinnedHeaderSliverHeightBuilder: () {
-        return 45 + kToolbarHeight;
-      },
-      body: TabBarView(
-        controller: tabController,
-        children: _buildTabViews(hasVoiceTabs, hasMediaTabs),
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      body: ExtendedNestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+            StaffAppBar(
+              staff: staff,
+              tabController: tabController,
+              tabs: tabs,
+            ),
+          ];
+        },
+        onlyOneScrollInBody: true,
+        pinnedHeaderSliverHeightBuilder: () {
+          return 45 + kToolbarHeight;
+        },
+        body: TabBarView(
+          controller: tabController,
+          children: _buildTabViews(hasVoiceTabs, hasMediaTabs),
+        ),
       ),
     );
   }
@@ -172,8 +165,8 @@ class _TabManagerWidget extends HookWidget {
               staffId: staffId,
               mediaType: Enum$MediaType.ANIME,
             )..add(
-              LoadData(client),
-            ),
+                LoadData(client),
+              ),
             child: const StaffAnimeTab(),
           ),
         ),
@@ -186,8 +179,8 @@ class _TabManagerWidget extends HookWidget {
               staffId: staffId,
               mediaType: Enum$MediaType.MANGA,
             )..add(
-              LoadData(client),
-            ),
+                LoadData(client),
+              ),
             child: const StaffMangaTab(),
           ),
         ),

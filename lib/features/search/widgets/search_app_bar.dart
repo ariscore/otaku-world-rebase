@@ -114,7 +114,7 @@ class _SearchTextFieldState extends State<_SearchTextField> {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
           borderSide: BorderSide(
-            color: AppColors.sunsetOrange.withOpacity(0.3),
+            color: AppColors.sunsetOrange.withValues(alpha:0.3),
           ),
         ),
         focusedBorder: OutlineInputBorder(

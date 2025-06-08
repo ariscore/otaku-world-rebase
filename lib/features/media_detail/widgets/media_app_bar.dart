@@ -7,6 +7,9 @@ import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:like_button/like_button.dart';
 import 'package:otaku_world/bloc/media_detail/toggle_favorite_media/toggle_favorite_media_cubit.dart';
+import 'package:otaku_world/core/ui/bottomsheet/helpers/share_helpers.dart';
+import 'package:otaku_world/core/ui/bottomsheet/helpers/url_helpers.dart';
+import 'package:otaku_world/core/ui/bottomsheet/option_bottom_sheet.dart';
 import 'package:otaku_world/features/media_detail/widgets/status_row.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
@@ -87,7 +90,28 @@ class _MediaAppBarState extends State<MediaAppBar> {
           },
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            final mediaId = widget.media.id;
+            OptionsBottomSheet.showOptionBottomSheet(
+              context: context,
+              onShareTap: () {
+                ShareHelpers.mediaShareOptions(widget.media.id);
+              },
+              onViewOnAniListTap: () {
+                final String? url = widget.media.siteUrl;
+                if (url != null && url.isNotEmpty) {
+                  UrlHelpers.launchUrlLink(
+                    context,
+                    url,
+                  );
+                }
+              },
+              onCopyLinkTap: () {
+                final url = UrlHelpers.getMediaLocalUrl(mediaId);
+                UrlHelpers.copyUrlToClipboard(context, url);
+              },
+            );
+          },
           icon: SvgPicture.asset(
             Assets.iconsMoreVertical,
           ),

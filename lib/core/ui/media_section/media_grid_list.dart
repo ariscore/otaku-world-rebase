@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:otaku_world/bloc/staff_detail/media/staff_media_bloc.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
-import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/paginated_data/paginated_data_bloc.dart';
-import '../../../core/ui/error_text.dart';
-import '../../../core/ui/shimmers/grid_shimmer.dart';
 import '../../../generated/assets.dart';
 import '../../../graphql/__generated/graphql/schema.graphql.dart';
 import '../../../theme/colors.dart';
 import '../../../utils/formatting_utils.dart';
 import '../../../utils/navigation_helper.dart';
 import '../images/cover_image.dart';
+import '../placeholders/anime_character_placeholder.dart';
 import '../placeholders/poster_placeholder.dart';
+import '../shimmers/detail_screens/widgets/media_grid_shimmer.dart';
 
 class MediaGridList<B extends PaginatedDataBloc> extends StatelessWidget {
   const MediaGridList({
     required this.mediaType,
-    required this.crossAxisCount,
     this.isNeedToShowFormatAndYear = false,
     super.key,
   });
 
-  final int crossAxisCount;
   final Enum$MediaType mediaType;
   final bool isNeedToShowFormatAndYear;
 
@@ -33,7 +31,7 @@ class MediaGridList<B extends PaginatedDataBloc> extends StatelessWidget {
     return BlocBuilder<B, PaginatedDataState>(
       builder: (context, state) {
         if (state is PaginatedDataInitial || state is PaginatedDataLoading) {
-          return GridShimmer(mediaType: mediaType);
+          return const MediaGridShimmer();
         } else if (state is PaginatedDataLoaded) {
           return Column(
             children: [
@@ -59,25 +57,27 @@ class MediaGridList<B extends PaginatedDataBloc> extends StatelessWidget {
               ),
               if (state.hasNextPage)
                 const Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(10),
                   child: CircularProgressIndicator(),
                 ),
             ],
           );
-        } else if (state is PaginatedDataError) {
-          return Center(
-            child: ErrorText(
-              message: state.message,
-              onTryAgain: () {
-                final client = (context.read<GraphqlClientCubit>().state
-                        as GraphqlClientInitialized)
-                    .client;
-                context.read<B>().add(LoadData(client));
-              },
-            ),
-          );
         }
-        return const SizedBox.shrink();
+        return AnimeCharacterPlaceholder(
+          asset: Assets.charactersNoInternet,
+          heading: 'Something went wrong!',
+          subheading:
+              'Please check your internet connection or try again later.',
+          onTryAgain: () {
+            context.read<StaffMediaBloc>().add(
+                  LoadData((context.read<GraphqlClientCubit>().state
+                          as GraphqlClientInitialized)
+                      .client),
+                );
+          },
+          isError: true,
+          isScrollable: true,
+        );
       },
     );
   }

@@ -1,48 +1,30 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
+import 'package:otaku_world/core/ui/images/cover_image.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/shimmer_details.dart';
 import 'package:otaku_world/features/media_detail/models/recommendations_parameters.dart';
 import 'package:otaku_world/features/media_detail/tabs/overview/widgets/description.dart';
 import 'package:otaku_world/features/media_detail/tabs/overview/widgets/relations.dart';
 import 'package:otaku_world/features/media_detail/tabs/overview/widgets/tags.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../../bloc/media_detail/media_detail_bloc.dart';
 import '../../../../bloc/recommendations/recommendation_anime_bloc.dart';
 import '../../../../core/ui/media_section/media_section.dart';
-import '../../../../theme/colors.dart';
 import '../../../../utils/app_texts.dart';
 import 'widgets/links_section.dart';
 import 'widgets/overall_information.dart';
 
-class Overview extends StatefulHookWidget {
+class Overview extends StatelessWidget {
   const Overview({super.key});
-
-  @override
-  State<Overview> createState() => _OverviewState();
-}
-
-class _OverviewState extends State<Overview> {
-
-  late YoutubePlayerController youtubePlayerController;
-  late String youtubeId;
-
-  @override
-  void dispose() {
-    super.dispose();
-    youtubePlayerController.dispose();
-    youtubeId = "";
-  }
 
   @override
   Widget build(BuildContext context) {
     final media =
         (context.read<MediaDetailBloc>().state as MediaDetailLoaded).media;
-    youtubeId = media.trailer == null ? "" : media.trailer!.id.toString();
 
     final client =
         (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
@@ -50,13 +32,6 @@ class _OverviewState extends State<Overview> {
     final recommendationBloc =
         context.read<MediaDetailBloc>().recommendationAnimeBloc;
 
-    youtubePlayerController = YoutubePlayerController(
-      initialVideoId: youtubeId,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-        showLiveFullscreenButton: false,
-      ),
-    );
     return ListView(
       padding: const EdgeInsets.symmetric(
         horizontal: 10,
@@ -78,36 +53,40 @@ class _OverviewState extends State<Overview> {
               ? "No description"
               : media.description.toString(),
         ),
-        SizedBox(
-          height: youtubeId == "" ? 0 : 20,
-        ),
-        youtubeId == ""
-            ? const SizedBox()
-            : const Text(
-                "Trailer",
-                style: AppTextStyles.titleSectionStyle,
-              ),
-        SizedBox(
-          height: youtubeId == "" ? 0 : 5,
-        ),
-        // youtubeId == ""
-        //     ? const SizedBox()
-        //     : YoutubePlayer(
-        //         aspectRatio: 16 / 9,
-        //         bottomActions: [
-        //           CurrentPosition(),
-        //           ProgressBar(
-        //             controller: youtubePlayerController,
-        //             colors: const ProgressBarColors(
-        //               handleColor: AppColors.sunsetOrange,
-        //               playedColor: AppColors.sunsetOrange,
-        //             ),
-        //             isExpanded: true,
-        //           ),
-        //           RemainingDuration(),
-        //         ],
-        //         controller: youtubePlayerController,
-        //       ),
+        if (media.trailer?.id != null && media.trailer!.id!.isNotEmpty) ...[
+          20.height,
+          const Text(
+            "Trailer",
+            style: AppTextStyles.titleSectionStyle,
+          ),
+          5.height,
+          GestureDetector(
+            onTap: () {
+              NavigationHelper.goToYoutubePlayer(
+                context: context,
+                youtubeVideoId: media.trailer!.id!,
+              );
+            },
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: CoverImage(
+                    type: Enum$MediaType.MANGA,
+                    imageUrl: media.trailer!.thumbnail ?? '',
+                  ),
+                ),
+                const Icon(
+                  Icons.play_arrow,
+                  size: 64,
+                  color: Colors.white,
+                ),
+              ],
+            ),
+          ),
+        ],
+
         const SizedBox(
           height: 20,
         ),
@@ -128,9 +107,7 @@ class _OverviewState extends State<Overview> {
             height: 150,
             child: Relations(),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          20.height,
         ],
 
         // Recommendations
@@ -161,9 +138,7 @@ class _OverviewState extends State<Overview> {
               leftPadding: 0,
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          20.height,
         ],
         if (media.tags!.isNotEmpty)
           Tags(
@@ -174,9 +149,7 @@ class _OverviewState extends State<Overview> {
             "External & Streaming Links",
             style: AppTextStyles.titleSectionStyle,
           ),
-          const SizedBox(
-            height: 5,
-          ),
+          5.height,
           Wrap(
             runSpacing: 5,
             spacing: 5,

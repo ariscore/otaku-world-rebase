@@ -8,6 +8,8 @@ import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/staff/staff_bloc.dart';
+import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/screens/media_detail_shimmer.dart';
 import 'package:otaku_world/features/media_detail/widgets/media_app_bar.dart';
 import 'package:otaku_world/features/media_detail/widgets/media_floating_action_button.dart';
 import 'package:otaku_world/features/profile/widgets/keep_alive_tab.dart';
@@ -17,8 +19,8 @@ import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/media_detail/characters/characters_bloc.dart';
 import '../../../bloc/media_detail/media_detail_bloc.dart';
 import '../../../bloc/viewer/viewer_bloc.dart';
+import '../../../core/ui/placeholders/anime_character_placeholder.dart';
 import '../../../generated/assets.dart';
-import '../../../theme/colors.dart';
 import '../tabs/characters/characters.dart' as ch;
 import '../tabs/overview/overview.dart';
 import '../tabs/reviews/reviews.dart';
@@ -49,31 +51,31 @@ class MediaDetailScreen extends HookWidget {
 
     return PopScope(
       canPop: false,
-      onPopInvoked: (didPop) {
+      onPopInvokedWithResult: (didPop, _) {
         if (didPop) return;
         _onPopInvoked(context);
       },
-      child: Scaffold(
-        body: BlocBuilder<MediaDetailBloc, MediaDetailState>(
-          builder: (context, state) {
-            if (state is MediaDetailInitial) {
-              context.read<MediaDetailBloc>().add(
-                    LoadMediaDetail(
-                      id: mediaId,
-                      client: client,
-                    ),
-                  );
-            } else if (state is MediaDetailLoading) {
-              return _buildLoading(context);
-            } else if (state is MediaDetailLoaded) {
-              final media = state.media;
+      child: BlocBuilder<MediaDetailBloc, MediaDetailState>(
+        builder: (context, state) {
+          if (state is MediaDetailInitial) {
+            context.read<MediaDetailBloc>().add(
+                  LoadMediaDetail(
+                    id: mediaId,
+                    client: client,
+                  ),
+                );
+          } else if (state is MediaDetailLoading) {
+            return const MediaDetailShimmer();
+          } else if (state is MediaDetailLoaded) {
+            final media = state.media;
 
-              dev.log(
-                "query Id : $mediaId ---> State Id : ${media.id}  Key Id : ---> $key ",
-                name: "MediaDetailScreenMatched",
-              );
+            dev.log(
+              "query Id : $mediaId ---> State Id : ${media.id}  Key Id : ---> $key ",
+              name: "MediaDetailScreenMatched",
+            );
 
-              return ExtendedNestedScrollView(
+            return Scaffold(
+              body: ExtendedNestedScrollView(
                 headerSliverBuilder: (context, innerBoxIsScrolled) {
                   return [
                     MediaAppBar(
@@ -123,50 +125,62 @@ class MediaDetailScreen extends HookWidget {
                     ),
                   ],
                 ),
-              );
-            }
-            return const Center(
-              child: Text(
-                'Unknown State',
-                style: TextStyle(
-                  color: AppColors.white,
-                ),
+              ),
+              floatingActionButton:
+                  BlocBuilder<MediaDetailBloc, MediaDetailState>(
+                builder: (context, state) {
+                  if (state is MediaDetailLoaded) {
+                    final user = context.read<ViewerBloc>().getUser();
+                    return MediaFloatingActionButton(
+                      tabController: tabController,
+                      media: Fragment$MediaShort(
+                        id: mediaId,
+                        title: Fragment$MediaShort$title(
+                          userPreferred: state.media.title?.userPreferred ?? '',
+                          english: state.media.title?.english ?? '',
+                          romaji: state.media.title?.romaji ?? '',
+                          native: state.media.title?.native ?? '',
+                        ),
+                        format: state.media.format,
+                        type: state.media.type,
+                        episodes: state.media.episodes ?? 0,
+                        chapters: state.media.chapters ?? 0,
+                        volumes: state.media.volumes ?? 0,
+                        status: state.media.status,
+                      ),
+                      reviewIndex: tabs.length - 1,
+                      userId: user.id,
+                      mediaId: mediaId,
+                      options: state.options,
+                      entry: state.media.mediaListEntry,
+                    );
+                  } else {
+                    return const SizedBox();
+                  }
+                },
               ),
             );
-          },
-        ),
-        floatingActionButton: BlocBuilder<MediaDetailBloc, MediaDetailState>(
-          builder: (context, state) {
-            if (state is MediaDetailLoaded) {
-              final user = context.read<ViewerBloc>().getUser();
-              return MediaFloatingActionButton(
-                tabController: tabController,
-                media: Fragment$MediaShort(
-                  id: mediaId,
-                  title: Fragment$MediaShort$title(
-                    userPreferred: state.media.title?.userPreferred ?? '',
-                    english: state.media.title?.english ?? '',
-                    romaji: state.media.title?.romaji ?? '',
-                    native: state.media.title?.native ?? '',
-                  ),
-                  format: state.media.format,
-                  type: state.media.type,
-                  episodes: state.media.episodes ?? 0,
-                  chapters: state.media.chapters ?? 0,
-                  volumes: state.media.volumes ?? 0,
-                  status: state.media.status,
-                ),
-                reviewIndex: tabs.length - 1,
-                userId: user.id,
-                mediaId: mediaId,
-                options: state.options,
-                entry: state.media.mediaListEntry,
-              );
-            } else {
-              return const SizedBox();
-            }
-          },
-        ),
+          }
+          return Scaffold(
+            appBar: const SimpleAppBar(),
+            body: AnimeCharacterPlaceholder(
+              asset: Assets.charactersCigaretteGirl,
+              height: 300,
+              heading: 'Something went wrong!',
+              subheading:
+                  'Please check your internet connection or try again later.',
+              onTryAgain: () {
+                context.read<MediaDetailBloc>().add(
+                      LoadMediaDetail(
+                        id: mediaId,
+                        client: client,
+                      ),
+                    );
+              },
+              isError: true,
+            ),
+          );
+        },
       ),
     );
   }
@@ -177,9 +191,5 @@ class MediaDetailScreen extends HookWidget {
     } else {
       context.go('/home');
     }
-  }
-
-  Widget _buildLoading(BuildContext context) {
-    return const Center(child: CircularProgressIndicator());
   }
 }

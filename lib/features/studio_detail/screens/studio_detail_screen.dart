@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:otaku_world/bloc/studio_detail/studio_detail_bloc.dart';
 import 'package:otaku_world/core/ui/media_section/media_grid_list.dart';
-import 'package:otaku_world/features/media_detail/widgets/simple_loading.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/screens/studio_detail_shimmer.dart';
 import 'package:otaku_world/features/studio_detail/widgets/studio_app_bar.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/utils/navigation_helper.dart';
@@ -12,7 +12,8 @@ import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/paginated_data/paginated_data_bloc.dart';
 import '../../../bloc/studio_detail/studio_media/studio_media_bloc.dart';
 import '../../../core/ui/media_section/scroll_to_top_button.dart';
-import '../../../theme/colors.dart';
+import '../../../core/ui/placeholders/anime_character_placeholder.dart';
+import '../../../generated/assets.dart';
 
 class StudioDetailScreen extends HookWidget {
   const StudioDetailScreen({
@@ -52,6 +53,7 @@ class StudioDetailScreen extends HookWidget {
       });
       return null;
     }, const []);
+
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) {
@@ -59,18 +61,18 @@ class StudioDetailScreen extends HookWidget {
         }
         NavigationHelper.onPopInvoked(context);
       },
-      child: Scaffold(
-        floatingActionButton: ScrollToTopFAB(
-          controller: scrollController,
-          tag: 'studio_fab',
-        ),
-        body: BlocBuilder<StudioDetailBloc, StudioDetailState>(
-          builder: (context, state) {
-            if (state is StudioDetailInitial || state is StudioDetailLoading) {
-              return const SimpleLoading();
-            } else if (state is StudioDetailLoaded) {
-              final studio = state.studio;
-              return CustomScrollView(
+      child: BlocBuilder<StudioDetailBloc, StudioDetailState>(
+        builder: (context, state) {
+          if (state is StudioDetailInitial || state is StudioDetailLoading) {
+            return const StudioDetailShimmer();
+          } else if (state is StudioDetailLoaded) {
+            final studio = state.studio;
+            return Scaffold(
+              floatingActionButton: ScrollToTopFAB(
+                controller: scrollController,
+                tag: 'studio_fab',
+              ),
+              body: CustomScrollView(
                 controller: scrollController,
                 slivers: [
                   StudioAppBar(
@@ -82,25 +84,34 @@ class StudioDetailScreen extends HookWidget {
                       context: context,
                       removeTop: true,
                       child: const MediaGridList<StudioMediaBloc>(
-                        crossAxisCount: 3,
                         mediaType: Enum$MediaType.ANIME,
                         isNeedToShowFormatAndYear: true,
                       ),
                     ),
                   ),
                 ],
-              );
-            }
-            return const Center(
-              child: Text(
-                'Unknown State',
-                style: TextStyle(
-                  color: AppColors.white,
-                ),
               ),
             );
-          },
-        ),
+          }
+          return AnimeCharacterPlaceholder(
+            asset: Assets.charactersNoInternet,
+            heading: 'Something went wrong!',
+            subheading:
+                'Please check your internet connection or try again later.',
+            onTryAgain: () {
+              context.read<StudioDetailBloc>().add(
+                    LoadStudioDetail(
+                      id: studioId,
+                      client: (context.read<GraphqlClientCubit>().state
+                              as GraphqlClientInitialized)
+                          .client,
+                    ),
+                  );
+            },
+            isError: true,
+            isScrollable: true,
+          );
+        },
       ),
     );
   }

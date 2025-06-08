@@ -1,13 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/media_detail_bloc.dart';
 import 'package:otaku_world/constants/string_constants.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/shimmer_details.dart';
 import 'package:otaku_world/features/media_detail/tabs/overview/widgets/info_tile.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/utils/extensions.dart';
-
-import '../../../../../theme/colors.dart';
+import 'package:otaku_world/utils/formatting_utils.dart';
 
 class OverallInfo extends StatelessWidget {
   const OverallInfo({super.key});
@@ -71,16 +70,14 @@ class OverallInfo extends StatelessWidget {
           ),
           tenHeightSizedBox,
           Container(
-            color: AppColors.white.withOpacity(0.5),
+            color: AppColors.white.withValues(alpha:0.5),
             height: 1,
           ),
           tenHeightSizedBox,
           InfoTile(
             title: 'Format',
-            data: toJson$Enum$MediaFormat(
+            data: FormattingUtils.getMediaFormatString(
                 media.format ?? Enum$MediaFormat.$unknown)
-                .toString()
-                .capitalize(),
           ),
           if (media.type == Enum$MediaType.ANIME) ...[
             tenHeightSizedBox,
@@ -147,7 +144,7 @@ class OverallInfo extends StatelessWidget {
             tenHeightSizedBox,
             if (media.studios?.edges != null) ...[
               Container(
-                color: AppColors.white.withOpacity(0.5),
+                color: AppColors.white.withValues(alpha:0.5),
                 height: 1,
               ),
               tenHeightSizedBox,
