@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:otaku_world/constants/string_constants.dart';
-import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/placeholders/anime_character_placeholder.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../../generated/assets.dart';
+import '../../../theme/colors.dart';
 
-class YouTubePlayerScreen extends StatefulWidget {
+class YouTubePlayer extends StatefulWidget {
   final String? youtubeId;
 
-  const YouTubePlayerScreen({
+  const YouTubePlayer({
     super.key,
     required this.youtubeId,
   });
 
   @override
-  State<YouTubePlayerScreen> createState() => _YouTubePlayerScreenState();
+  State<YouTubePlayer> createState() => _YouTubePlayerState();
 }
 
-class _YouTubePlayerScreenState extends State<YouTubePlayerScreen> {
+class _YouTubePlayerState extends State<YouTubePlayer> {
   YoutubePlayerController? _controller;
 
   @override
@@ -31,7 +31,6 @@ class _YouTubePlayerScreenState extends State<YouTubePlayerScreen> {
         flags: const YoutubePlayerFlags(
           autoPlay: true,
           mute: false,
-          showLiveFullscreenButton: false,
         ),
       );
     }
@@ -45,19 +44,61 @@ class _YouTubePlayerScreenState extends State<YouTubePlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const SimpleAppBar(),
-      body: _controller != null
-          ? Center(
+    return _controller != null
+        ? ClipRRect(
+            borderRadius: BorderRadius.circular(5),
+            child: AspectRatio(
+              aspectRatio: 16 / 9,
               child: YoutubePlayer(
                 controller: _controller!,
-                showVideoProgressIndicator: true,
+                bottomActions: const [
+                  CurrentPosition(),
+                  ProgressBar(
+                    isExpanded: true,
+                    colors: ProgressBarColors(
+                      playedColor: AppColors.sunsetOrange,
+                      handleColor: AppColors.chineseWhite,
+                    ),
+                  ),
+                  RemainingDuration(),
+                ],
+                topActions: const [
+                  Spacer(),
+                  CloseButton(
+                    color: AppColors.chineseWhite,
+                  ),
+                ],
               ),
-            )
-          : const AnimeCharacterPlaceholder(
-              asset: Assets.charactersCigaretteGirl,
-              subheading: StringConstants.somethingWentWrong,
             ),
+          )
+        : const AnimeCharacterPlaceholder(
+            asset: Assets.charactersCigaretteGirl,
+            subheading: StringConstants.somethingWentWrong,
+          );
+  }
+}
+
+class YoutubePlayerDialog {
+  static void showYoutubePlayerDialog({
+    required BuildContext context,
+    required String youtubeId,
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          alignment: Alignment.center,
+          insetPadding: const EdgeInsets.all(10),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              gradient: AppColors.secondaryGradient,
+            ),
+            padding: const EdgeInsets.all(10),
+            child: YouTubePlayer(youtubeId: youtubeId),
+          ),
+        );
+      },
     );
   }
 }

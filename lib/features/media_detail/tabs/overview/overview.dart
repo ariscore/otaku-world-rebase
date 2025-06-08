@@ -15,6 +15,7 @@ import '../../../../bloc/media_detail/media_detail_bloc.dart';
 import '../../../../bloc/recommendations/recommendation_anime_bloc.dart';
 import '../../../../core/ui/media_section/media_section.dart';
 import '../../../../utils/app_texts.dart';
+import '../../screens/youtube_player_screen.dart';
 import 'widgets/links_section.dart';
 import 'widgets/overall_information.dart';
 
@@ -62,9 +63,9 @@ class Overview extends StatelessWidget {
           5.height,
           GestureDetector(
             onTap: () {
-              NavigationHelper.goToYoutubePlayer(
+              YoutubePlayerDialog.showYoutubePlayerDialog(
                 context: context,
-                youtubeVideoId: media.trailer!.id!,
+                youtubeId: media.trailer!.id!,
               );
             },
             child: Stack(

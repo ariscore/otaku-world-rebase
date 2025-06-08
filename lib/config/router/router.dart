@@ -74,7 +74,6 @@ import 'package:otaku_world/features/media_detail/models/recommendations_paramet
 import 'package:otaku_world/features/media_detail/screens/media_detail_screen.dart';
 import 'package:otaku_world/features/media_detail/screens/recommendations_grid_screen.dart';
 import 'package:otaku_world/features/media_detail/screens/recommendations_slider_screen.dart';
-import 'package:otaku_world/features/media_detail/screens/youtube_player_screen.dart';
 import 'package:otaku_world/features/my_list/screens/anime_list_filter_screen.dart';
 import 'package:otaku_world/features/my_list/screens/edit_list_entry_screen.dart';
 import 'package:otaku_world/features/my_list/screens/manga_list_filter_screen.dart';
@@ -335,18 +334,6 @@ final router = GoRouter(
         );
       },
       directionTween: SlideTransitionRoute.leftToRightTween,
-    ),
-    SlideTransitionRoute(
-      parentNavigatorKey: _rootNavigatorKey,
-      path: RouteConstants.youtubePlayer,
-      builder: (state) {
-        final String? youtubeId = state.uri.queryParameters['id'];
-        return YouTubePlayerScreen(youtubeId: youtubeId);
-      },
-      directionTween: Tween<Offset>(
-        begin: const Offset(0, 1), // From bottom
-        end: Offset.zero,
-      ),
     ),
   ],
   onException: (context, state, router) {
