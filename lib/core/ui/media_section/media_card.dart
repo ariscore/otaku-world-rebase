@@ -267,7 +267,7 @@ class SummaryText extends StatelessWidget {
 
     textSpans.add(
       TextSpan(
-        text: "${toJson$Enum$MediaFormat(
+        text: "${FormattingUtils.getMediaFormatString(
           media.format ?? Enum$MediaFormat.$unknown,
         )}, Episodes ${media.episodes}, ",
         style: Theme.of(context).textTheme.titleMedium?.copyWith(
