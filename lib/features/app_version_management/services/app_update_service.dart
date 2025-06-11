@@ -1,14 +1,14 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:in_app_update/in_app_update.dart';
 
 import '../../../config/app_config.dart';
 
 class AppUpdateService {
   static Future<void> checkForAppUpdate() async {
-    if (true) {
-      //
+    if (kReleaseMode) {
       if (Platform.isAndroid) {
         await _checkAndroidUpdate();
       } else if (Platform.isIOS) {
