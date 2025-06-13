@@ -1,5 +1,6 @@
 import 'dart:developer' as dev;
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -155,7 +156,10 @@ final _shellNavigatorMyListKey = GlobalKey<NavigatorState>();
 final router = GoRouter(
   initialLocation: RouteConstants.splash,
   navigatorKey: _rootNavigatorKey,
-  observers: [CustomRouteObserver()],
+  observers: [
+    CustomRouteObserver(),
+    FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
+  ],
   routes: [
     // Splash Screen
     GoRoute(
