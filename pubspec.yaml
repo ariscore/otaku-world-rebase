@@ -88,10 +88,14 @@ dependencies:
 
   # Firebase
   firebase_core: ^3.3.0
+  cloud_firestore: ^5.6.8
 
   # Utility
   dartz: ^0.10.1
-
+  package_info_plus: ^8.3.0
+  in_app_update: ^4.2.3
+  firebase_analytics: ^11.5.0
+  firebase_crashlytics: ^4.3.7
 dev_dependencies:
   flutter_test:
     sdk: flutter

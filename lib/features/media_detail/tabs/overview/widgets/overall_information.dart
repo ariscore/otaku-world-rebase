@@ -70,15 +70,14 @@ class OverallInfo extends StatelessWidget {
           ),
           tenHeightSizedBox,
           Container(
-            color: AppColors.white.withValues(alpha:0.5),
+            color: AppColors.white.withValues(alpha: 0.5),
             height: 1,
           ),
           tenHeightSizedBox,
           InfoTile(
-            title: 'Format',
-            data: FormattingUtils.getMediaFormatString(
-                media.format ?? Enum$MediaFormat.$unknown)
-          ),
+              title: 'Format',
+              data: FormattingUtils.getMediaFormatString(
+                  media.format ?? Enum$MediaFormat.$unknown)),
           if (media.type == Enum$MediaType.ANIME) ...[
             tenHeightSizedBox,
             InfoTile(
@@ -108,16 +107,16 @@ class OverallInfo extends StatelessWidget {
           tenHeightSizedBox,
           InfoTile(
             title: 'Source',
-            data: toJson$Enum$MediaSource(
+            data: FormattingUtils.getMediaSourceString(
               media.source ?? Enum$MediaSource.$unknown,
-            ).toString().capitalize(),
+            ),
           ),
           tenHeightSizedBox,
           InfoTile(
             title: 'Status',
-            data: toJson$Enum$MediaStatus(
+            data: FormattingUtils.getMediaStatusString(
               media.status ?? Enum$MediaStatus.$unknown,
-            ).toString().capitalize(),
+            ),
           ),
           tenHeightSizedBox,
           InfoTile(
@@ -137,14 +136,14 @@ class OverallInfo extends StatelessWidget {
             tenHeightSizedBox,
             InfoTile(
               title: 'Season',
-              data: "${toJson$Enum$MediaSeason(
+              data: "${FormattingUtils.getSeasonString(
                 media.season ?? Enum$MediaSeason.$unknown,
-              ).capitalize()} ${media.seasonYear.toString() == 'null' ? '' : media.seasonYear.toString()}",
+              )} ${media.seasonYear.toString() == 'null' ? '' : media.seasonYear.toString()}",
             ),
             tenHeightSizedBox,
             if (media.studios?.edges != null) ...[
               Container(
-                color: AppColors.white.withValues(alpha:0.5),
+                color: AppColors.white.withValues(alpha: 0.5),
                 height: 1,
               ),
               tenHeightSizedBox,

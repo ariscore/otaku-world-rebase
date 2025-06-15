@@ -5,6 +5,7 @@ import 'package:otaku_world/core/ui/images/cover_image.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/utils/extensions.dart';
+import 'package:otaku_world/utils/formatting_utils.dart';
 
 import '../../../../../bloc/media_detail/media_detail_bloc.dart';
 import '../../../../../theme/colors.dart';
@@ -103,11 +104,11 @@ class Relation extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  "${toJson$Enum$MediaFormat(
+                  "${FormattingUtils.getMediaFormatString(
                     relation.node?.format ?? Enum$MediaFormat.$unknown,
-                  ).toString().capitalize()}, ${toJson$Enum$MediaStatus(
+                  )}, ${FormattingUtils.getMediaStatusString(
                     relation.node?.status ?? Enum$MediaStatus.$unknown,
-                  ).toString().capitalize()}",
+                  )}",
                   style: const TextStyle(
                     fontSize: 12,
                     fontFamily: 'Roboto',
