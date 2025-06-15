@@ -41,8 +41,10 @@ class ListSections extends StatelessWidget {
       int indexA = sectionOrder?.indexOf(a?.name) ?? -1;
       int indexB = sectionOrder?.indexOf(b?.name) ?? -1;
 
-      int maxInt = 0x7FFFFFFFFFFFFFFF;
-
+      // const int maxInt = kIsWeb
+      //     ? 9007199254740991 // Max safe int for JS (2^53 - 1)
+      //     : 9223372036854775807;
+      int maxInt = 9007199254740991;
       indexA = indexA == -1 ? maxInt : indexA;
       indexB = indexB == -1 ? maxInt : indexB;
 
