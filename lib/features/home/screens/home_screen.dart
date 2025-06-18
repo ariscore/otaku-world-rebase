@@ -108,10 +108,16 @@ class HomeScreen extends HookWidget {
             MediaSection<TrendingAnimeBloc>(
               label: 'Trending Anime',
               onMorePressed: () {
-                context.push(RouteConstants.trendingAnime);
+                context.push(
+                  RouteConstants.trendingAnime,
+                  extra: context.read<TrendingAnimeBloc>(),
+                );
               },
               onSliderPressed: () {
-                context.push(RouteConstants.trendingAnimeSlider);
+                context.push(
+                  RouteConstants.trendingAnimeSlider,
+                  extra: context.read<TrendingAnimeBloc>(),
+                );
               },
               heroTag: 'trending_anime',
             ),
@@ -121,10 +127,16 @@ class HomeScreen extends HookWidget {
             MediaSection<RecommendedAnimeBloc>(
               label: 'Recommended Anime',
               onMorePressed: () {
-                context.push(RouteConstants.recommendedAnime);
+                context.push(
+                  RouteConstants.recommendedAnime,
+                  extra: context.read<RecommendedAnimeBloc>(),
+                );
               },
               onSliderPressed: () {
-                context.push(RouteConstants.recommendedAnimeSlider);
+                context.push(
+                  RouteConstants.recommendedAnimeSlider,
+                  extra: context.read<RecommendedAnimeBloc>(),
+                );
               },
               heroTag: 'recommended_anime',
             ),
@@ -134,10 +146,16 @@ class HomeScreen extends HookWidget {
             MediaSection<TrendingMangaBloc>(
               label: 'Trending Manga',
               onMorePressed: () {
-                context.push(RouteConstants.trendingManga);
+                context.push(
+                  RouteConstants.trendingManga,
+                  extra: context.read<TrendingMangaBloc>(),
+                );
               },
               onSliderPressed: () {
-                context.push(RouteConstants.trendingMangaSlider);
+                context.push(
+                  RouteConstants.trendingMangaSlider,
+                  extra: context.read<TrendingMangaBloc>(),
+                );
               },
               heroTag: 'trending_manga',
             ),
@@ -147,10 +165,16 @@ class HomeScreen extends HookWidget {
             MediaSection<RecommendedMangaBloc>(
               label: 'Recommended Manga',
               onMorePressed: () {
-                context.push(RouteConstants.recommendedManga);
+                context.push(
+                  RouteConstants.recommendedManga,
+                  extra: context.read<RecommendedMangaBloc>(),
+                );
               },
               onSliderPressed: () {
-                context.push(RouteConstants.recommendedMangaSlider);
+                context.push(
+                  RouteConstants.recommendedMangaSlider,
+                  extra: context.read<RecommendedMangaBloc>(),
+                );
               },
               heroTag: 'recommended_manga',
             ),
@@ -197,7 +221,7 @@ class HomeScreen extends HookWidget {
                 ),
                 shadows: [
                   BoxShadow(
-                    color: AppColors.black.withValues(alpha:0.25),
+                    color: AppColors.black.withValues(alpha: 0.25),
                     blurRadius: 4,
                     offset: const Offset(0, 4),
                   ),
@@ -215,7 +239,7 @@ class HomeScreen extends HookWidget {
                   Text(
                     HomeConstants.discover,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: AppColors.white.withValues(alpha:0.5),
+                          color: AppColors.white.withValues(alpha: 0.5),
                           fontFamily: 'Poppins',
                         ),
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../bloc/discover/anime/all_time_popular_anime/all_time_popular_anime_bloc.dart';
@@ -21,10 +22,16 @@ class DiscoverAnimeSection extends StatelessWidget {
         MediaSection<TrendingAnimeBloc>(
           label: 'Trending now',
           onMorePressed: () {
-            context.push(RouteConstants.trendingAnime);
+            context.push(
+              RouteConstants.trendingAnime,
+              extra: context.read<TrendingAnimeBloc>(),
+            );
           },
           onSliderPressed: () {
-            context.push(RouteConstants.trendingAnimeSlider);
+            context.push(
+              RouteConstants.trendingAnimeSlider,
+              extra: context.read<TrendingAnimeBloc>(),
+            );
           },
           heroTag: 'trending_anime',
         ),
@@ -34,10 +41,16 @@ class DiscoverAnimeSection extends StatelessWidget {
         MediaSection<RecommendedAnimeBloc>(
           label: 'Recommended',
           onMorePressed: () {
-            context.push(RouteConstants.recommendedAnime);
+            context.push(
+              RouteConstants.recommendedAnime,
+              extra: context.read<RecommendedAnimeBloc>(),
+            );
           },
           onSliderPressed: () {
-            context.push(RouteConstants.recommendedAnimeSlider);
+            context.push(
+              RouteConstants.recommendedAnimeSlider,
+              extra: context.read<RecommendedAnimeBloc>(),
+            );
           },
           heroTag: 'recommended_anime',
         ),
@@ -47,10 +60,16 @@ class DiscoverAnimeSection extends StatelessWidget {
         MediaSection<TopAiringAnimeBloc>(
           label: 'Top Airing',
           onMorePressed: () {
-            context.push(RouteConstants.topAiringAnime);
+            context.push(
+              RouteConstants.topAiringAnime,
+              extra: context.read<TopAiringAnimeBloc>(),
+            );
           },
           onSliderPressed: () {
-            context.push(RouteConstants.topAiringAnimeSlider);
+            context.push(
+              RouteConstants.topAiringAnimeSlider,
+              extra: context.read<TopAiringAnimeBloc>(),
+            );
           },
           heroTag: 'top_airing_anime',
         ),
@@ -60,10 +79,16 @@ class DiscoverAnimeSection extends StatelessWidget {
         MediaSection<TopUpcomingAnimeBloc>(
           label: 'Top Upcoming',
           onMorePressed: () {
-            context.push(RouteConstants.topUpcomingAnime);
+            context.push(
+              RouteConstants.topUpcomingAnime,
+              extra: context.read<TopUpcomingAnimeBloc>(),
+            );
           },
           onSliderPressed: () {
-            context.push(RouteConstants.topUpcomingAnimeSlider);
+            context.push(
+              RouteConstants.topUpcomingAnimeSlider,
+              extra: context.read<TopUpcomingAnimeBloc>(),
+            );
           },
           heroTag: 'top_upcoming_anime',
         ),
@@ -73,10 +98,16 @@ class DiscoverAnimeSection extends StatelessWidget {
         MediaSection<AllTimePopularAnimeBloc>(
           label: 'All Time Popular',
           onMorePressed: () {
-            context.push(RouteConstants.allTimePopularAnime);
+            context.push(
+              RouteConstants.allTimePopularAnime,
+              extra: context.read<AllTimePopularAnimeBloc>(),
+            );
           },
           onSliderPressed: () {
-            context.push(RouteConstants.allTimePopularAnimeSlider);
+            context.push(
+              RouteConstants.allTimePopularAnimeSlider,
+              extra: context.read<AllTimePopularAnimeBloc>(),
+            );
           },
           heroTag: 'all_time_popular_anime',
         ),
@@ -86,7 +117,10 @@ class DiscoverAnimeSection extends StatelessWidget {
         MediaCards<Top100AnimeBloc>(
           label: 'Top 100 Anime',
           onMorePressed: () {
-            context.push(RouteConstants.topAnime);
+            context.push(
+              RouteConstants.topAnime,
+              extra: context.read<Top100AnimeBloc>(),
+            );
           },
           heroTag: 'top_100_anime',
         ),
