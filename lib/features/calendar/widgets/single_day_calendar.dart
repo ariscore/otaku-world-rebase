@@ -46,6 +46,15 @@ class SingleDayCalendar extends StatelessWidget {
                     _buildCalendar(
                       context,
                       context.read<DayBloc>().day,
+                      (selectedDay) {
+                        if (!isSameDay(date, selectedDay)) {
+                          context.read<DayBloc>().add(SetDay(
+                                client: client,
+                                day: selectedDay,
+                              ));
+                          context.pop();
+                        }
+                      },
                     );
                   },
                   child: Row(
@@ -105,7 +114,11 @@ class SingleDayCalendar extends StatelessWidget {
     );
   }
 
-  void _buildCalendar(BuildContext context, DateTime date) {
+  void _buildCalendar(
+    BuildContext context,
+    DateTime date,
+    void Function(DateTime selectedDay) onDaySelected,
+  ) {
     showDialog(
       context: context,
       builder: (context) {
@@ -127,16 +140,7 @@ class SingleDayCalendar extends StatelessWidget {
                 return (isSameDay(date, currentSelectedDate));
               },
               onDaySelected: (selectedDay, focusedDay) {
-                if (!isSameDay(date, selectedDay)) {
-                  // setState(() {
-                  //   selectedCalendarDay = selectedDay;
-                  // });
-                  context.read<DayBloc>().add(SetDay(
-                        client: client,
-                        day: selectedDay,
-                      ));
-                  context.pop();
-                }
+                onDaySelected(selectedDay);
               },
               startingDayOfWeek: StartingDayOfWeek.monday,
               rowHeight: 40,
@@ -198,7 +202,6 @@ class SingleDayCalendar extends StatelessWidget {
                           fontFamily: 'Poppins',
                         ),
               ),
-              weekendDays: const [],
               daysOfWeekStyle: DaysOfWeekStyle(
                 weekdayStyle:
                     Theme.of(context).textTheme.headlineMedium!.copyWith(
