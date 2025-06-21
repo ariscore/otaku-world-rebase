@@ -6,6 +6,7 @@ import '../../../../generated/assets.dart';
 import '../../../../theme/colors.dart';
 import '../../../../utils/formatting_utils.dart';
 import '../../markdown/markdown.dart';
+import '../../markdown_v2/markdown.dart';
 
 class MessageActivityPreview extends StatelessWidget {
   const MessageActivityPreview({
@@ -47,7 +48,8 @@ class MessageActivityPreview extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             // Main content
-            MarkdownWidget(data: text),
+            // MarkdownWidget(data: text),
+            MyMarkdownWidgetV2(data: text),
             // Other details
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

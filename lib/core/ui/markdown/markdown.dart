@@ -89,14 +89,14 @@ var markdownGenerator = md.MarkdownGenerator(
 );
 
 class MarkdownWidget extends StatelessWidget {
-  const MarkdownWidget({
-    super.key,
-    required this.data,
-    this.padding = const EdgeInsets.all(0),
-    this.body = false,
-    this.selectable = true,
-    this.shrinkWrap,
-  });
+  // const MarkdownWidget({
+  //   super.key,
+  //   required this.data,
+  //   this.padding = const EdgeInsets.all(0),
+  //   this.body = false,
+  //   this.selectable = true,
+  //   this.shrinkWrap,
+  // });
 
   final String data;
   final bool body;

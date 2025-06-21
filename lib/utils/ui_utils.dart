@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/core/ui/markdown/markdown.dart';
+import 'package:otaku_world/core/ui/markdown_v2/markdown.dart';
 
 import '../constants/dimensions_constants.dart';
 import '../core/ui/buttons/primary_outlined_button.dart';
@@ -103,7 +104,8 @@ class UIUtils {
               mainAxisSize: MainAxisSize.min,
               spacing: 10,
               children: [
-                MarkdownWidget(data: data),
+                // MarkdownWidget(data: data),
+                MyMarkdownWidgetV2(data: data),
                 PrimaryOutlinedButton(
                   onTap: context.pop,
                   label: 'Ok',
