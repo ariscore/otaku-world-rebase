@@ -43,7 +43,7 @@ class CalendarTabBar extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   side: BorderSide(
                     width: 1,
-                    color: AppColors.white.withOpacity(0.0),
+                    color: AppColors.white.withValues(alpha:0.0),
                   ),
                 ),
                 gradient: const LinearGradient(

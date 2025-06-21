@@ -28,7 +28,7 @@ class CharacterCard extends StatelessWidget {
   );
 
   static final roleTextStyle = TextStyle(
-    color: AppColors.white.withOpacity(0.8),
+    color: AppColors.white.withValues(alpha:0.8),
     fontSize: 12,
     fontFamily: 'Roboto Condensed',
     fontWeight: FontWeight.w400,
@@ -36,66 +36,66 @@ class CharacterCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        NavigationHelper.goToCharacterDetailScreen(
-          context: context,
-          characterId: animeCharacter.id,
-        );
-      },
-      child: Container(
-        height: 130,
-        padding: const EdgeInsets.symmetric(
-          horizontal: 8,
-          vertical: 8,
-        ),
-        decoration: ShapeDecoration(
-          gradient: const LinearGradient(
-            begin: Alignment(-1.00, 0.00),
-            end: Alignment(1, 0),
-            colors: [
-              AppColors.darkCharcoal,
-              AppColors.japaneseIndigo,
-            ],
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          shadows: const [
-            BoxShadow(
-              color: Color(0x3F000000),
-              blurRadius: 4,
-              offset: Offset(0, 4),
-              spreadRadius: 0,
-            )
+    return Container(
+      height: 130,
+      padding: const EdgeInsets.symmetric(
+        horizontal: 8,
+        vertical: 8,
+      ),
+      decoration: ShapeDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment(-1.00, 0.00),
+          end: Alignment(1, 0),
+          colors: [
+            AppColors.darkCharcoal,
+            AppColors.japaneseIndigo,
           ],
         ),
-        child: Stack(
-          children: [
-            SubAnimeCharacter(
-              character: CharacterParameters(
-                imageUrl: animeCharacter.image?.large ?? "",
-                characterId: animeCharacter.id.toString(),
-                characterName: animeCharacter.name?.userPreferred ?? "Unknown",
-                characterRole: characterRole,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        shadows: const [
+          BoxShadow(
+            color: Color(0x3F000000),
+            blurRadius: 4,
+            offset: Offset(0, 4),
+            spreadRadius: 0,
+          )
+        ],
+      ),
+      child: Stack(
+        children: [
+          SubAnimeCharacter(
+            character: CharacterParameters(
+              imageUrl: animeCharacter.image?.large ?? "",
+              characterId: animeCharacter.id,
+              characterName: animeCharacter.name?.userPreferred ?? "Unknown",
+              characterRole: characterRole,
+              onTap: () => NavigationHelper.goToCharacterDetailScreen(
+                context: context,
+                characterId: animeCharacter.id,
               ),
             ),
-            if (voiceActor != null)
-              Positioned(
-                top: 0,
-                bottom: 0,
-                right: 0,
-                child: SubStaffCharacter(
-                  character: CharacterParameters(
-                    imageUrl: voiceActor?.image?.large ?? " ",
-                    characterName: voiceActor?.name?.userPreferred ?? "Unknown",
-                    characterRole: voiceActor?.languageV2 ?? "",
-                    characterId: voiceActor?.id.toString() ?? "",
+          ),
+          if (voiceActor != null)
+            Positioned(
+              top: 0,
+              bottom: 0,
+              right: 0,
+              child: SubStaffCharacter(
+                character: CharacterParameters(
+                  imageUrl: voiceActor?.image?.large ?? " ",
+                  characterName: voiceActor?.name?.userPreferred ?? "Unknown",
+                  characterRole: voiceActor?.languageV2 ?? "",
+                  characterId: voiceActor?.id ?? 0,
+                  onTap: () => NavigationHelper.goToStaffDetailScreen(
+                    context: context,
+                    staffId: voiceActor?.id ?? 0,
                   ),
                 ),
-              )
-          ],
-        ),
+              ),
+            )
+        ],
       ),
     );
   }

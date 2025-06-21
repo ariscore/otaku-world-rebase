@@ -20,19 +20,22 @@ class SubAnimeCharacter extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
-          width: 78,
-          height: 115,
-          clipBehavior: Clip.antiAlias,
-          decoration: ShapeDecoration(
-            image: DecorationImage(
-              image: CachedNetworkImageProvider(
-                character.imageUrl,
+        GestureDetector(
+          onTap: character.onTap,
+          child: Container(
+            width: 78,
+            height: 115,
+            clipBehavior: Clip.antiAlias,
+            decoration: ShapeDecoration(
+              image: DecorationImage(
+                image: CachedNetworkImageProvider(
+                  character.imageUrl,
+                ),
+                fit: BoxFit.fill,
               ),
-              fit: BoxFit.fill,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(character.isManga ? 5 : 10),
+              ),
             ),
           ),
         ),
@@ -45,14 +48,13 @@ class SubAnimeCharacter extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(
-              height: 20,
               width: isStaff
                   ? MediaQuery.of(context).size.width - 120
-                  : MediaQuery.of(context).size.width - 200,
+                  : MediaQuery.of(context).size.width - 220,
               child: Text(
                 character.characterName,
                 style: CharacterCard.nameTextStyle,
-                maxLines: isStaff ? 2 : 1,
+                maxLines: 2,
               ),
             ),
             const SizedBox(

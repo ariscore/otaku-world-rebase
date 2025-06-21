@@ -1,9 +1,0 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "com.ternaryminds.otaku_world",
-    "sha256_cert_fingerprints":
-    ["74:97:5C:E0:C7:0F:80:26:69:71:4A:1C:09:63:F4:F1:42:7D:EB:80:E6:79:48:FB:46:8C:6C:43:38:B4:76:A9","74:97:5C:E0:C7:0F:80:26:69:71:4A:1C:09:63:F4:F1:42:7D:EB:80:E6:79:48:FB:46:8C:6C:43:38:B4:76:A9"]
-  }
-}]

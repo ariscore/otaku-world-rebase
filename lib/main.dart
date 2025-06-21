@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:otaku_world/bloc/auth/auth_cubit.dart';
 import 'package:otaku_world/bloc/bottom_nav_bar/bottom_nav_bar_cubit.dart';
 import 'package:otaku_world/bloc/calendar/week_calendar/day/day_bloc.dart';
@@ -13,17 +17,19 @@ import 'package:otaku_world/bloc/filter/filter_anime/filter_anime_bloc.dart';
 import 'package:otaku_world/bloc/filter/filter_manga/filter_manga_bloc.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/media_list/media_list/media_list_bloc.dart';
-
 import 'package:otaku_world/bloc/recommended_anime/recommended_anime_bloc.dart';
 import 'package:otaku_world/bloc/recommended_manga/recommended_manga_bloc.dart';
 import 'package:otaku_world/bloc/routes/redirect_route_cubit.dart';
-
 import 'package:otaku_world/bloc/trending_anime/trending_anime_bloc.dart';
 import 'package:otaku_world/bloc/trending_manga/trending_manga_bloc.dart';
 import 'package:otaku_world/bloc/upcoming_episodes/upcoming_episodes_bloc.dart';
 import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
+import 'package:otaku_world/features/app_version_management/services/app_update_service.dart';
+import 'package:otaku_world/features/app_version_management/services/app_version_service.dart';
+import 'package:otaku_world/firebase_options.dart';
 import 'package:otaku_world/theme/app_theme.dart';
 
+import 'bloc/app_version/app_version_bloc.dart';
 import 'bloc/discover/anime/all_time_popular_anime/all_time_popular_anime_bloc.dart';
 import 'bloc/discover/anime/top_100_anime/top_100_anime_bloc.dart';
 import 'bloc/discover/anime/top_airing_anime/top_airing_anime_bloc.dart';
@@ -35,8 +41,28 @@ import 'bloc/paginated_data/paginated_data_bloc.dart';
 import 'bloc/recommendations/recommendation_anime_bloc.dart';
 import 'config/router/router.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  if (kReleaseMode) {
+    // Enable Crashlytics in release mode
+    FlutterError.onError = (errorDetails) {
+      FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+    };
+    // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+    PlatformDispatcher.instance.onError = (error, stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      return true;
+    };
+  }
+  SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ],
+  ).then((value) => runApp(const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -46,6 +72,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) => AppVersionBloc(
+            service: AppVersionService(
+              firestore: FirebaseFirestore.instance,
+            ),
+          )..add(CheckAppVersionEvent()),
+        ),
         BlocProvider(
           create: (context) => AuthCubit()..authenticate(),
         ),
@@ -174,6 +207,13 @@ class MyApp extends StatelessWidget {
                 //     .add(LoadData(state.client));
 
                 context.read<ViewerBloc>().add(LoadViewer(state.client));
+              }
+            },
+          ),
+          BlocListener<AppVersionBloc, AppVersionState>(
+            listener: (context, state) {
+              if (state is AppForceUpdate) {
+                AppUpdateService.checkForAppUpdate();
               }
             },
           ),

@@ -12,6 +12,9 @@ import 'package:otaku_world/utils/ui_utils.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/studio_detail/studio_media/studio_media_bloc.dart';
+import '../../../core/ui/bottomsheet/helpers/share_helpers.dart';
+import '../../../core/ui/bottomsheet/helpers/url_helpers.dart';
+import '../../../core/ui/bottomsheet/option_bottom_sheet.dart';
 import '../../../core/ui/buttons/back_button.dart';
 import '../../../core/ui/widgets/media_filter_widget.dart';
 import '../../../generated/assets.dart';
@@ -70,7 +73,28 @@ class _StudioAppBarState extends State<StudioAppBar> {
           },
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            final studioId = widget.studio.id;
+            OptionsBottomSheet.showOptionBottomSheet(
+              context: context,
+              onShareTap: () {
+                ShareHelpers.studioShareOptions(studioId);
+              },
+              onViewOnAniListTap: () {
+                final String? url = widget.studio.siteUrl;
+                if (url != null && url.isNotEmpty) {
+                  UrlHelpers.launchUrlLink(
+                    context,
+                    url,
+                  );
+                }
+              },
+              onCopyLinkTap: () {
+                final url = UrlHelpers.getStudioLocalUrl(studioId);
+                UrlHelpers.copyUrlToClipboard(context, url);
+              },
+            );
+          },
           icon: SvgPicture.asset(
             Assets.iconsMoreVertical,
           ),

@@ -829,7 +829,7 @@ class _EditListEntryScreenState extends State<EditListEntryScreen> {
             anime: isAnime,
           ),
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: AppColors.white.withOpacity(0.8),
+                color: AppColors.white.withValues(alpha:0.8),
               ),
         ),
       ],

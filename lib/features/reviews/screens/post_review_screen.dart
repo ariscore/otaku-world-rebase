@@ -80,8 +80,7 @@ class PostReviewScreen extends HookWidget {
                       ),
                       Center(
                         child: PrimaryOutlinedButton(
-                          height: 30,
-                          horizontalPadding: 10,
+                          verticalPadding: 5,
                           isSmall: true,
                           onTap: () {
                             final result = context.push(
@@ -92,7 +91,7 @@ class PostReviewScreen extends HookWidget {
                               commentTextField.text = result as String;
                             }
                           },
-                          label: 'Write a Review ',
+                          label: 'Write a Review',
                           fontSize: 14,
                         ),
                       ),

@@ -220,7 +220,7 @@ class AnimeFilters extends HookWidget {
                         begin: const Alignment(0, -1),
                         end: const Alignment(0, 1),
                         colors: [
-                          AppColors.raisinBlack.withOpacity(0.4),
+                          AppColors.raisinBlack.withValues(alpha:0.4),
                           AppColors.raisinBlack,
                         ],
                       ),

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../utils/navigation_helper.dart';
 import 'character_card.dart';
 import 'character_parameters.dart';
 
@@ -42,19 +43,22 @@ class SubStaffCharacter extends StatelessWidget {
         const SizedBox(
           width: 5,
         ),
-        Container(
-          width: 80,
-          height: 120,
-          clipBehavior: Clip.antiAlias,
-          decoration: ShapeDecoration(
-            image: DecorationImage(
-              image: CachedNetworkImageProvider(
-                character.imageUrl,
+        GestureDetector(
+          onTap: character.onTap,
+          child: Container(
+            width: 80,
+            height: 120,
+            clipBehavior: Clip.antiAlias,
+            decoration: ShapeDecoration(
+              image: DecorationImage(
+                image: CachedNetworkImageProvider(
+                  character.imageUrl,
+                ),
+                fit: BoxFit.cover,
               ),
-              fit: BoxFit.cover,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
           ),
         ),

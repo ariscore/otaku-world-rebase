@@ -1,0 +1,43 @@
+query staffVoice(
+    $staffId: Int
+    $sort: [MediaSort]
+    $page: Int
+    $onList: Boolean
+
+) {
+    Staff(id: $staffId) {
+        characterMedia(page: $page, sort: $sort, onList: $onList){
+
+            pageInfo {
+                ...PageInfo
+            }
+            edges {
+                characterRole
+                node {
+                    id
+                    type
+                    title {
+                        userPreferred
+                    }
+                    coverImage {
+                        large
+                    }
+                    startDate {
+                        year
+                    }
+                    format
+                }
+                characters {
+                    id
+                    name {
+                        userPreferred
+                    }
+                    image {
+                        large
+                    }
+                }
+            }
+        }
+
+    }
+}

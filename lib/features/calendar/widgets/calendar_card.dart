@@ -35,7 +35,7 @@ class CalendarCard extends StatelessWidget {
             ),
             shadows: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.25),
+                color: Colors.black.withValues(alpha:0.25),
                 blurRadius: 4,
                 offset: const Offset(0, 4),
               )
@@ -136,7 +136,7 @@ class CalendarCard extends StatelessWidget {
                               Theme.of(context).textTheme.titleLarge?.copyWith(
                                     fontWeight: FontWeight.w400,
                                     fontFamily: 'Poppins',
-                                    color: AppColors.white.withOpacity(0.8),
+                                    color: AppColors.white.withValues(alpha:0.8),
                                   ),
                         ),
                       ],

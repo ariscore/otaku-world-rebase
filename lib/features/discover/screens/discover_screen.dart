@@ -261,7 +261,7 @@ class DiscoverCardImage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(radius),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.7),
+                      color: Colors.black.withValues(alpha:0.7),
                       blurRadius: 3,
                       offset: const Offset(0, 0),
                     ),
@@ -286,7 +286,7 @@ class DiscoverCardImage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(radius),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.7),
+                      color: Colors.black.withValues(alpha:0.7),
                       blurRadius: 3,
                       offset: Offset.zero,
                     ),
@@ -308,7 +308,7 @@ class DiscoverCardImage extends StatelessWidget {
             borderRadius: BorderRadius.circular(radius),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.7),
+                color: Colors.black.withValues(alpha:0.7),
                 blurRadius: 3,
                 offset: Offset.zero,
               ),

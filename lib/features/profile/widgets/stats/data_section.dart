@@ -63,7 +63,7 @@ class DataSection extends StatelessWidget {
             label,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: AppColors.white.withOpacity(0.7),
+                  color: AppColors.white.withValues(alpha:0.7),
                   fontFamily: 'Poppins',
                 ),
           ),
@@ -77,7 +77,7 @@ class DataSection extends StatelessWidget {
       height: 45,
       width: 2,
       decoration: BoxDecoration(
-        color: AppColors.white.withOpacity(0.5),
+        color: AppColors.white.withValues(alpha:0.5),
         borderRadius: BorderRadius.circular(10),
       ),
     );

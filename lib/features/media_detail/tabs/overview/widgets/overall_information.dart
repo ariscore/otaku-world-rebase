@@ -1,13 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/media_detail_bloc.dart';
 import 'package:otaku_world/constants/string_constants.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/shimmer_details.dart';
 import 'package:otaku_world/features/media_detail/tabs/overview/widgets/info_tile.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/utils/extensions.dart';
-
-import '../../../../../theme/colors.dart';
+import 'package:otaku_world/utils/formatting_utils.dart';
 
 class OverallInfo extends StatelessWidget {
   const OverallInfo({super.key});
@@ -71,17 +70,14 @@ class OverallInfo extends StatelessWidget {
           ),
           tenHeightSizedBox,
           Container(
-            color: AppColors.white.withOpacity(0.5),
+            color: AppColors.white.withValues(alpha: 0.5),
             height: 1,
           ),
           tenHeightSizedBox,
           InfoTile(
-            title: 'Format',
-            data: toJson$Enum$MediaFormat(
-                media.format ?? Enum$MediaFormat.$unknown)
-                .toString()
-                .capitalize(),
-          ),
+              title: 'Format',
+              data: FormattingUtils.getMediaFormatString(
+                  media.format ?? Enum$MediaFormat.$unknown)),
           if (media.type == Enum$MediaType.ANIME) ...[
             tenHeightSizedBox,
             InfoTile(
@@ -111,16 +107,16 @@ class OverallInfo extends StatelessWidget {
           tenHeightSizedBox,
           InfoTile(
             title: 'Source',
-            data: toJson$Enum$MediaSource(
+            data: FormattingUtils.getMediaSourceString(
               media.source ?? Enum$MediaSource.$unknown,
-            ).toString().capitalize(),
+            ),
           ),
           tenHeightSizedBox,
           InfoTile(
             title: 'Status',
-            data: toJson$Enum$MediaStatus(
+            data: FormattingUtils.getMediaStatusString(
               media.status ?? Enum$MediaStatus.$unknown,
-            ).toString().capitalize(),
+            ),
           ),
           tenHeightSizedBox,
           InfoTile(
@@ -140,14 +136,14 @@ class OverallInfo extends StatelessWidget {
             tenHeightSizedBox,
             InfoTile(
               title: 'Season',
-              data: "${toJson$Enum$MediaSeason(
+              data: "${FormattingUtils.getSeasonString(
                 media.season ?? Enum$MediaSeason.$unknown,
-              ).capitalize()} ${media.seasonYear.toString() == 'null' ? '' : media.seasonYear.toString()}",
+              )} ${media.seasonYear.toString() == 'null' ? '' : media.seasonYear.toString()}",
             ),
             tenHeightSizedBox,
             if (media.studios?.edges != null) ...[
               Container(
-                color: AppColors.white.withOpacity(0.5),
+                color: AppColors.white.withValues(alpha: 0.5),
                 height: 1,
               ),
               tenHeightSizedBox,

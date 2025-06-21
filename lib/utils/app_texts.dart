@@ -16,7 +16,7 @@ class AppTextStyles {
   );
 
   static final TextStyle infoTitleDataStyle = TextStyle(
-    color: AppColors.white.withOpacity(0.8),
+    color: AppColors.white.withValues(alpha:0.8),
     fontFamily: 'Roboto',
     fontSize: 12,
   );

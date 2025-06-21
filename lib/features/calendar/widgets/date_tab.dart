@@ -40,7 +40,7 @@ class DateTab extends StatelessWidget {
                             : FontConstants.poppins,
                         color: (isSelected)
                             ? AppColors.white
-                            : AppColors.white.withOpacity(0.8),
+                            : AppColors.white.withValues(alpha:0.8),
                         fontWeight:
                             (isSelected) ? FontWeight.w600 : FontWeight.w400,
                       ),
@@ -55,7 +55,7 @@ class DateTab extends StatelessWidget {
                         fontSize: (isSelected) ? 16 : 14,
                         color: (isSelected)
                             ? AppColors.white
-                            : AppColors.white.withOpacity(0.8),
+                            : AppColors.white.withValues(alpha:0.8),
                         fontWeight:
                             (isSelected) ? FontWeight.w600 : FontWeight.w400,
                       ),
@@ -77,7 +77,7 @@ class DateTab extends StatelessWidget {
                           fontSize: (isSelected) ? 28 : 26,
                           color: (isSelected)
                               ? AppColors.white
-                              : AppColors.white.withOpacity(0.8),
+                              : AppColors.white.withValues(alpha:0.8),
                           fontWeight:
                               (isSelected) ? FontWeight.w600 : FontWeight.w400,
                         ),
@@ -91,7 +91,7 @@ class DateTab extends StatelessWidget {
                               : FontConstants.poppins,
                           color: (isSelected)
                               ? AppColors.white
-                              : AppColors.white.withOpacity(0.8),
+                              : AppColors.white.withValues(alpha:0.8),
                           fontWeight:
                               (isSelected) ? FontWeight.w600 : FontWeight.w400,
                         ),

@@ -275,7 +275,7 @@ class ActivityActions extends StatelessWidget {
                   },
                 ),
                 Container(
-                  color: AppColors.white.withOpacity(0.5),
+                  color: AppColors.white.withValues(alpha:0.5),
                   height: 1,
                 ),
                 const SizedBox(height: 20),

@@ -7,6 +7,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/graphql/__generated/graphql/character-detail/character_detail.graphql.dart';
 
 part 'character_detail_event.dart';
+
 part 'character_detail_state.dart';
 
 class CharacterDetailBloc
@@ -27,6 +28,8 @@ class CharacterDetailBloc
         variables: Variables$Query$getCharacterDetails(
           characterId: event.id,
         ),
+        fetchPolicy: FetchPolicy.networkOnly,
+        cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
       ),
     );
 

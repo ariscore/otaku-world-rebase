@@ -89,9 +89,9 @@ class OnBoardingScreen extends HookWidget {
                   end: Alignment.bottomCenter,
                   stops: const [0.0, 0.1, 1.0],
                   colors: [
-                    AppColors.raisinBlack.withOpacity(0.0),
-                    AppColors.raisinBlack.withOpacity(0.6),
-                    AppColors.raisinBlack.withOpacity(0.8),
+                    AppColors.raisinBlack.withValues(alpha:0.0),
+                    AppColors.raisinBlack.withValues(alpha:0.6),
+                    AppColors.raisinBlack.withValues(alpha:0.8),
                   ],
                 ),
               ),

@@ -100,7 +100,7 @@ class MyProfileAppBar extends StatelessWidget {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        AppColors.raisinBlack.withOpacity(0.3),
+                        AppColors.raisinBlack.withValues(alpha:0.3),
                         AppColors.raisinBlack,
                       ],
                     ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/list/media_reviews_shimmer_list.dart';
 import 'package:otaku_world/features/media_detail/tabs/reviews/review_card.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/utils/extensions.dart';
@@ -8,8 +9,9 @@ import 'package:otaku_world/utils/extensions.dart';
 import '../../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../../bloc/paginated_data/paginated_data_bloc.dart';
 import '../../../../core/ui/filters/custom_dropdown.dart';
+import '../../../../core/ui/placeholders/anime_character_placeholder.dart';
+import '../../../../generated/assets.dart';
 import '../../../../graphql/__generated/graphql/fragments.graphql.dart';
-import '../../widgets/simple_loading.dart';
 
 class Reviews extends StatelessWidget {
   const Reviews({super.key});
@@ -28,7 +30,7 @@ class Reviews extends StatelessWidget {
     return Column(
       children: [
         const Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(10),
           child: ReviewSortDropdown(),
         ),
         Expanded(
@@ -39,12 +41,21 @@ class Reviews extends StatelessWidget {
                         as GraphqlClientInitialized)
                     .client;
                 context.read<MediaReviewBloc>().add(LoadData(client));
-                return const SimpleLoading();
+                return const MediaReviewsShimmerList();
               } else if (state is PaginatedDataLoading) {
-                return const SimpleLoading();
+                return const MediaReviewsShimmerList();
               } else if (state is PaginatedDataLoaded) {
                 final List<Fragment$Review?> reviews =
                     state.list as List<Fragment$Review?>;
+                if (reviews.isEmpty) {
+                  return const AnimeCharacterPlaceholder(
+                    asset: Assets.charactersCigaretteGirl,
+                    heading: 'No Reviews Yet',
+                    subheading:
+                        'This hasn’t been reviewed yet. You can be the first to add one.',
+                    isScrollable: true,
+                  );
+                }
                 return NotificationListener<ScrollNotification>(
                   onNotification: (scrollInfo) {
                     if (scrollInfo.metrics.pixels ==
@@ -64,7 +75,7 @@ class Reviews extends StatelessWidget {
                   child: CustomScrollView(
                     slivers: [
                       SliverPadding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         sliver: SliverList.separated(
                           itemCount: reviews.length,
                           separatorBuilder: (context, index) => const SizedBox(
@@ -78,21 +89,33 @@ class Reviews extends StatelessWidget {
                         ),
                       ),
                       if (state.hasNextPage)
-                        const SliverToBoxAdapter(
-                          child: Center(
-                            child: Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: CircularProgressIndicator(),
-                            ),
+                        const SliverPadding(
+                          padding: EdgeInsets.all(10),
+                          sliver: SliverToBoxAdapter(
+                            child: ReviewCardShimmer(),
                           ),
                         ),
                     ],
                   ),
                 );
               }
-              return const Text(
-                'Unknown State',
-                style: TextStyle(color: Colors.white),
+              return AnimeCharacterPlaceholder(
+                asset: Assets.charactersNoInternet,
+                height: 300,
+                heading: 'Something went wrong!',
+                subheading:
+                    'Please check your internet connection or try again later.',
+                onTryAgain: () {
+                  context.read<MediaReviewBloc>().add(
+                        LoadData(
+                          (context.read<GraphqlClientCubit>().state
+                                  as GraphqlClientInitialized)
+                              .client,
+                        ),
+                      );
+                },
+                isError: true,
+                isScrollable: true,
               );
             },
           ),

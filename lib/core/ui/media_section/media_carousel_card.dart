@@ -110,7 +110,7 @@ class MediaCarouselCard extends StatelessWidget {
                       genres: media!.genres,
                       genreStyle:
                           Theme.of(context).textTheme.titleLarge?.copyWith(
-                                color: AppColors.white.withOpacity(0.7),
+                                color: AppColors.white.withValues(alpha:0.7),
                                 fontWeight: FontWeight.w500,
                                 fontFamily: 'Poppins',
                               ),
@@ -186,7 +186,7 @@ class MediaCarouselCard extends StatelessWidget {
         children: [
           _buildMediaDetail(
             context,
-            toJson$Enum$MediaFormat(media.format ?? Enum$MediaFormat.$unknown),
+            FormattingUtils.getMediaFormatString(media.format ?? Enum$MediaFormat.$unknown),
             (media.episodes == null) ? '? ep' : '${media.episodes} ep',
           ),
           SvgPicture.asset(Assets.iconsLineVertical),
@@ -209,7 +209,7 @@ class MediaCarouselCard extends StatelessWidget {
         children: [
           _buildMediaDetail(
             context,
-            toJson$Enum$MediaFormat(media.format!),
+            FormattingUtils.getMediaFormatString(media.format!),
             (media.chapters == null) ? '? chap' : '${media.chapters} chap',
           ),
           SvgPicture.asset(Assets.iconsLineVertical),
@@ -246,7 +246,7 @@ class MediaCarouselCard extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
-                color: AppColors.white.withOpacity(0.5),
+                color: AppColors.white.withValues(alpha:0.5),
               ),
         ),
       ],

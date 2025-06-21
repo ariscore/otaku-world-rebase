@@ -45,7 +45,7 @@ class MediaListCard extends StatelessWidget {
         gradient: AppColors.secondaryGradient,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.25),
+            color: Colors.black.withValues(alpha:0.25),
             blurRadius: 4,
             offset: const Offset(0, 4),
           )
@@ -90,7 +90,7 @@ class MediaListCard extends StatelessWidget {
                     anime: entry?.media?.type == Enum$MediaType.ANIME,
                   )}',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: AppColors.white.withOpacity(0.8),
+                        color: AppColors.white.withValues(alpha:0.8),
                       ),
                 ),
                 _buildScore(context),
@@ -143,7 +143,7 @@ class MediaListCard extends StatelessWidget {
                         ' / ${total ?? '?'} ${entry?.media?.type == Enum$MediaType.ANIME ? 'ep' : 'vol'}',
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           fontFamily: 'Poppins',
-                          color: AppColors.white.withOpacity(0.8),
+                          color: AppColors.white.withValues(alpha:0.8),
                         ),
                   ),
                 ],
