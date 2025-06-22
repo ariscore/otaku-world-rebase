@@ -64,9 +64,11 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => AuthCubit()..authenticate(),
+          lazy: false,
         ),
         BlocProvider(
           create: (context) => GraphqlClientCubit(),
+          lazy: false,
         ),
         BlocProvider(
           create: (context) => RedirectRouteCubit(),
