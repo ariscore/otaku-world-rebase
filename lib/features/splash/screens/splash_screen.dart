@@ -18,21 +18,8 @@ class SplashScreen extends StatelessWidget {
           context.go('/login');
         }
       },
-
       child: Scaffold(
         body: Center(
-          // child: Column(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
-          //     Text(
-          //       'This is Splash Screen',
-          //       style: Theme.of(context).textTheme.headlineMedium,
-          //     ),
-          //     const SizedBox(
-          //       height: 5,
-          //     ),
-          //     const CircularProgressIndicator(),
-          //   ],
           child: SizedBox(
             height: 128,
             width: 128,

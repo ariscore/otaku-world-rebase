@@ -12,7 +12,8 @@ class NavigationHelper {
     required BuildContext context,
     required mediaId,
   }) {
-    context.push('${RouteConstants.mediaDetail}?id=$mediaId');
+    context.push(RouteConstants.splash);
+    // context.push('${RouteConstants.mediaDetail}?id=$mediaId');
   }
 
   static void goToReviewDetailScreen({
