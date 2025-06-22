@@ -149,11 +149,10 @@ class _CharacterAppBarState extends State<CharacterAppBar> {
                     )
                   : null,
               child: Hero(
-                tag: character.image!.large!.toString(),
+                tag: character.image!.large!,
                 child: CoverImage(
-                  imageUrl: character.image!.large!.toString(),
+                  imageUrl: character.image!.large!,
                   type: Enum$MediaType.ANIME,
-                  // placeHolderName: Assets.placeholders210x310,
                 ),
               ),
             ),
@@ -167,6 +166,8 @@ class _CharacterAppBarState extends State<CharacterAppBar> {
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w600,
             ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
           fifteenSpacing,
           InfoData(

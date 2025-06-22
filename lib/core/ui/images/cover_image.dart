@@ -10,11 +10,13 @@ class CoverImage extends StatelessWidget {
     super.key,
     required this.imageUrl,
     required this.type,
+    this.animeRadius = 15,
     // required this.placeHolderName,
   });
 
   final String imageUrl;
   final Enum$MediaType type;
+  final double animeRadius;
 
   // final String placeHolderName;
 
@@ -22,25 +24,13 @@ class CoverImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: (type == Enum$MediaType.ANIME)
-          ? BorderRadius.circular(15)
+          ? BorderRadius.circular(animeRadius)
           : BorderRadius.circular(5),
       child: CachedNetworkImage(
         cacheManager: ImageCacheManager.instance,
         imageUrl: imageUrl,
         useOldImageOnUrlChange: true,
-        // width: 115,
-        // height: 169,
-
         imageBuilder: (context, imageProvider) {
-          // return ClipRRect(
-          //   borderRadius: (type == Enum$MediaType.ANIME)
-          //       ? BorderRadius.circular(15)
-          //       : BorderRadius.circular(5),
-          //   child: Image(
-          //     image: imageProvider,
-          //     fit: BoxFit.cover,
-          //   ),
-          // );
           return Image(
             image: imageProvider,
             fit: BoxFit.cover,
