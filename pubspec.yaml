@@ -64,6 +64,8 @@ dependencies:
   like_button: ^2.0.5
   extended_nested_scroll_view: ^6.2.1
   flutter_rating_bar: ^4.0.1
+  chewie: ^1.11.3
+  video_player: ^2.10.0
 
   # Navigation
 #  go_router: ^12.1.3
