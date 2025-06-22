@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:otaku_world/core/ui/shimmers/detail_screens/widgets/shimmer_container.dart';
+import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/extensions.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
-import 'package:otaku_world/theme/colors.dart';
 
 class CharacterCardShimmer extends StatelessWidget {
   const CharacterCardShimmer({super.key});
@@ -48,7 +48,7 @@ class CharacterSectionShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.45,
+      width: MediaQuery.of(context).size.width * 0.55,
       child: Row(
         mainAxisAlignment:
             isLeft ? MainAxisAlignment.start : MainAxisAlignment.end,
@@ -104,13 +104,15 @@ class CharacterInfoShimmer extends StatelessWidget {
   });
 
   final double nameHeight = 16;
-  final double nameWidth = 100;
 
   final double roleHeight = 14;
-  final double roleWidth = 80;
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
+
+    double nameWidth = width * 0.3;
+    double roleWidth = width * 0.2;
     return Column(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment:
