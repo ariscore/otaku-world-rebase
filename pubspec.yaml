@@ -129,6 +129,7 @@ flutter:
     - assets/images/
     - assets/images/on_boarding/
     - assets/images/discover/
+    - assets/images/discover_placeholders/
     - assets/images/discover/anime/
     - assets/images/discover/manga/
     - assets/images/discover/staff/

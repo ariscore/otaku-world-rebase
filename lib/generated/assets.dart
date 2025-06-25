@@ -17,6 +17,11 @@ class Assets {
   static const String charactersSasuke1 = 'assets/images/discover/characters/sasuke_1.svg';
   static const String charactersSchoolGirl = 'assets/images/characters/school_girl.png';
   static const String charactersTamaiokaSa1 = 'assets/images/discover/characters/Tamaioka_sa_1.svg';
+  static const String discoverPlaceholdersAnime = 'assets/images/discover_placeholders/anime.png';
+  static const String discoverPlaceholdersCharacters = 'assets/images/discover_placeholders/characters.png';
+  static const String discoverPlaceholdersManga = 'assets/images/discover_placeholders/manga.png';
+  static const String discoverPlaceholdersStaff = 'assets/images/discover_placeholders/staff.png';
+  static const String discoverPlaceholdersStudios = 'assets/images/discover_placeholders/studios.png';
   static const String fontsPoppinsMedium = 'assets/fonts/Poppins-Medium.ttf';
   static const String fontsPoppinsRegular = 'assets/fonts/Poppins-Regular.ttf';
   static const String fontsPoppinsSemiBold = 'assets/fonts/Poppins-SemiBold.ttf';
