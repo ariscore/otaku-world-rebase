@@ -55,6 +55,12 @@ class EntityGrid<E> extends StatelessWidget {
                         title: character.name?.userPreferred ?? ' - - ',
                         imageUrl: character.image?.large,
                         favorites: character.favourites,
+                        onTap: () {
+                          NavigationHelper.goToCharacterDetailScreen(
+                            context: context,
+                            characterId: character.id,
+                          );
+                        },
                       );
                     } else if (E == Fragment$CharacterShort) {
                       final character = list[index] as Fragment$CharacterShort;
@@ -62,6 +68,12 @@ class EntityGrid<E> extends StatelessWidget {
                         title: character.name?.userPreferred ?? ' - - ',
                         imageUrl: character.image?.large,
                         favorites: character.favourites,
+                        onTap: () {
+                          NavigationHelper.goToCharacterDetailScreen(
+                            context: context,
+                            characterId: character.id,
+                          );
+                        },
                       );
                     } else if (E == Fragment$SearchResultStaff) {
                       final staff = list[index] as Fragment$SearchResultStaff;
@@ -69,6 +81,12 @@ class EntityGrid<E> extends StatelessWidget {
                         title: staff.name?.userPreferred ?? ' - - ',
                         imageUrl: staff.image?.large,
                         favorites: staff.favourites,
+                        onTap: () {
+                          NavigationHelper.goToStaffDetailScreen(
+                            context: context,
+                            staffId: staff.id,
+                          );
+                        },
                       );
                     } else if (E == Fragment$StaffShort) {
                       final staff = list[index] as Fragment$StaffShort;
@@ -76,6 +94,12 @@ class EntityGrid<E> extends StatelessWidget {
                         title: staff.name?.userPreferred ?? ' - - ',
                         imageUrl: staff.image?.large,
                         favorites: staff.favourites,
+                        onTap: () {
+                          NavigationHelper.goToStaffDetailScreen(
+                            context: context,
+                            staffId: staff.id,
+                          );
+                        },
                       );
                     } else if (E == Fragment$SearchResultStudio) {
                       final studio = list[index] as Fragment$SearchResultStudio;

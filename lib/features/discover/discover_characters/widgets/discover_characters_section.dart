@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
 
@@ -18,7 +19,9 @@ class DiscoverCharactersSection extends StatelessWidget {
           label: 'Birthdays',
           heroTag: 'birthday_characters',
           onViewAll: () {
-            context.push(RouteConstants.birthdayCharacters);
+            context.push(RouteConstants.birthdayCharacters,
+            extra: context.read<BirthdayCharactersBloc>()
+            );
           },
         ),
         // const SizedBox(height: 15),
@@ -26,7 +29,9 @@ class DiscoverCharactersSection extends StatelessWidget {
           label: 'Most Favorite Characters',
           heroTag: 'favorite_characters',
           onViewAll: () {
-            context.push(RouteConstants.mostFavoriteCharacters);
+            context.push(RouteConstants.mostFavoriteCharacters,
+            extra: context.read<MostFavoriteCharactersBloc>()
+            );
           },
         ),
         const SizedBox(height: 15),

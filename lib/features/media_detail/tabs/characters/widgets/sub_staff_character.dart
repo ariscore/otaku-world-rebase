@@ -1,7 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../utils/navigation_helper.dart';
+import '../../../../../core/ui/images/cover_image.dart';
+import '../../../../../graphql/__generated/graphql/schema.graphql.dart';
 import 'character_card.dart';
 import 'character_parameters.dart';
 
@@ -45,20 +45,15 @@ class SubStaffCharacter extends StatelessWidget {
         ),
         GestureDetector(
           onTap: character.onTap,
-          child: Container(
+          child: SizedBox(
             width: 80,
             height: 120,
-            clipBehavior: Clip.antiAlias,
-            decoration: ShapeDecoration(
-              image: DecorationImage(
-                image: CachedNetworkImageProvider(
-                  character.imageUrl,
-                ),
-                fit: BoxFit.cover,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
+            child: CoverImage(
+              imageUrl: character.imageUrl,
+              type: character.isManga
+                  ? Enum$MediaType.MANGA
+                  : Enum$MediaType.ANIME,
+              animeRadius: 10,
             ),
           ),
         ),

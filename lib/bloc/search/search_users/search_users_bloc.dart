@@ -15,6 +15,8 @@ class SearchUsersBloc
       ) {
     return client.query$SearchUsers(
       Options$Query$SearchUsers(
+        cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
+        fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$SearchUsers(
           page: page,
           search: search,

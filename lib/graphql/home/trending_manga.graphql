@@ -3,7 +3,7 @@ query GetTrendingManga($page: Int) {
         pageInfo {
             hasNextPage
         }
-        media(sort: [TRENDING_DESC], type: MANGA, isAdult: false) {
+        media(sort: [TRENDING_DESC], type: MANGA) {
             ...MediaShort
         }
     }

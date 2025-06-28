@@ -11,7 +11,6 @@ import '../../../../graphql/__generated/graphql/fragments.graphql.dart';
 import '../../../../utils/formatting_utils.dart';
 
 part 'day_event.dart';
-
 part 'day_state.dart';
 
 class DayBloc extends Bloc<DayEvent, DayState> {

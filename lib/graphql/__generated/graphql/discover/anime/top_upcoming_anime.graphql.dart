@@ -323,10 +323,6 @@ const documentNodeQueryGetTopUpcomingAnime = DocumentNode(definitions: [
                 value: EnumValueNode(name: NameNode(value: 'ANIME')),
               ),
               ArgumentNode(
-                name: NameNode(value: 'isAdult'),
-                value: BooleanValueNode(value: false),
-              ),
-              ArgumentNode(
                 name: NameNode(value: 'status'),
                 value: EnumValueNode(name: NameNode(value: 'NOT_YET_RELEASED')),
               ),

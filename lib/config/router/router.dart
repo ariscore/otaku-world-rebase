@@ -4,9 +4,9 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:otaku_world/bloc/auth/auth_cubit.dart';
 import 'package:otaku_world/bloc/charcter_detail/character_detail_bloc.dart';
 import 'package:otaku_world/bloc/charcter_detail/media/character_media_bloc.dart';
+import 'package:otaku_world/bloc/discover/anime/top_100_anime/top_100_anime_bloc.dart';
 import 'package:otaku_world/bloc/discover/characters/birthday_characters_bloc.dart';
 import 'package:otaku_world/bloc/discover/characters/most_favorite_characters_bloc.dart';
 import 'package:otaku_world/bloc/discover/staff/birthday_staff_bloc.dart';
@@ -38,6 +38,7 @@ import 'package:otaku_world/bloc/social/reply_activity/reply_activity_cubit.dart
 import 'package:otaku_world/bloc/staff_detail/staff_detail_bloc.dart';
 import 'package:otaku_world/bloc/studio_detail/studio_detail_bloc.dart';
 import 'package:otaku_world/bloc/studio_detail/studio_media/studio_media_bloc.dart';
+import 'package:otaku_world/bloc/upcoming_episodes/upcoming_episodes_bloc.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/routes/slide_transition_route.dart';
 import 'package:otaku_world/core/routes/slide_transition_shell_route.dart';
@@ -118,12 +119,26 @@ import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/user_stats.graphql.dart';
 import 'package:otaku_world/observers/go_route_observer.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:otaku_world/utils/shared_preference_utils.dart';
 
+import '../../bloc/auth/auth_cubit.dart';
+import '../../bloc/bottom_nav_bar/bottom_nav_bar_cubit.dart';
+import '../../bloc/calendar/week_calendar/day/day_bloc.dart';
+import '../../bloc/calendar/week_calendar/week_calendar_bloc.dart';
+import '../../bloc/discover/anime/all_time_popular_anime/all_time_popular_anime_bloc.dart';
+import '../../bloc/discover/anime/top_airing_anime/top_airing_anime_bloc.dart';
+import '../../bloc/discover/anime/top_upcoming_anime/top_upcoming_anime_bloc.dart';
+import '../../bloc/discover/manga/all_time_popular_manga/all_time_popular_manga_bloc.dart';
+import '../../bloc/discover/manga/all_time_popular_manga/popular_manhwa_bloc.dart';
+import '../../bloc/discover/manga/top_100_manga/top_100_manga.dart';
 import '../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../bloc/media_detail/media_detail_bloc.dart';
+import '../../bloc/recommended_anime/recommended_anime_bloc.dart';
+import '../../bloc/recommended_manga/recommended_manga_bloc.dart';
 import '../../bloc/reviews/reviews/reviews_bloc.dart';
 import '../../bloc/search/search_bloc/search_bloc.dart';
+import '../../bloc/trending_anime/trending_anime_bloc.dart';
+import '../../bloc/trending_manga/trending_manga_bloc.dart';
 import '../../core/ui/app_scaffold.dart';
 import '../../features/anime_lists/slider_lists/recommended_manga_slider.dart';
 import '../../features/anime_lists/slider_lists/trending_manga_slider.dart';
@@ -182,8 +197,15 @@ final router = GoRouter(
         final mediaId = int.parse(
           state.uri.queryParameters['id']!,
         );
-        return BlocProvider(
-          create: (context) => MediaDetailBloc(),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => MediaDetailBloc(),
+            ),
+            BlocProvider(
+              create: (context) => RecommendationAnimeBloc(),
+            ),
+          ],
           child: MediaDetailScreen(
             key: ValueKey<int>(mediaId),
             mediaId: mediaId,
@@ -224,9 +246,8 @@ final router = GoRouter(
       builder: (_) => const LoginScreen(),
       directionTween: SlideTransitionRoute.leftToRightTween,
       redirect: (context, state) async {
-        final sharedPrefs = await SharedPreferences.getInstance();
-        final firstTime = sharedPrefs.getBool('is_first_time');
-        if (firstTime == null) {
+        final bool firstTime = SharedPreferenceUtils.getIsFirstTime();
+        if (firstTime) {
           return RouteConstants.onBoarding;
         } else {
           return null;

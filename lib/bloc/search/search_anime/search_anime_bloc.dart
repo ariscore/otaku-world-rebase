@@ -7,9 +7,13 @@ import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/search/search_media.graphql.dart';
 
-class SearchAnimeBloc extends SearchBaseBloc<Query$SearchMedia, Fragment$SearchResultMedia> {
+class SearchAnimeBloc
+    extends SearchBaseBloc<Query$SearchMedia, Fragment$SearchResultMedia> {
   @override
-  Future<QueryResult<Query$SearchMedia>> loadData(GraphQLClient client, String search,) {
+  Future<QueryResult<Query$SearchMedia>> loadData(
+    GraphQLClient client,
+    String search,
+  ) {
     return client.query$SearchMedia(
       Options$Query$SearchMedia(
         variables: Variables$Query$SearchMedia(
@@ -17,6 +21,8 @@ class SearchAnimeBloc extends SearchBaseBloc<Query$SearchMedia, Fragment$SearchR
           search: search,
           type: Enum$MediaType.ANIME,
         ),
+        cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
+        fetchPolicy: FetchPolicy.networkOnly,
       ),
     );
   }
@@ -36,5 +42,4 @@ class SearchAnimeBloc extends SearchBaseBloc<Query$SearchMedia, Fragment$SearchR
     dev.log(transition.toString(), name: 'SearchAnimeBloc');
     super.onTransition(transition);
   }
-
 }

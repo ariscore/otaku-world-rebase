@@ -4,14 +4,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
-import 'package:otaku_world/constants/color_constants.dart';
-import 'package:otaku_world/constants/image_constants.dart';
 import 'package:otaku_world/core/ui/discover_header.dart';
-import 'package:otaku_world/features/discover/widgets/discover_card.dart';
+import 'package:otaku_world/features/discover/widgets/discover_image_placeholder_card.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/services/caching/image_cache_manager.dart';
-import 'package:otaku_world/theme/colors.dart';
-import 'package:otaku_world/utils/poster_utils.dart';
 
 import '../../../config/router/router_constants.dart';
 
@@ -23,22 +19,53 @@ class DiscoverScreen extends HookWidget {
     log('Building discover screen', name: 'Discover');
 
     return SingleChildScrollView(
+      padding: const EdgeInsets.all(10),
+      physics: const BouncingScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 15,
-            ),
-            child: DiscoverHeader(
-              title: "Ignite your Anime \nAdventure",
-              subtitle:
-                  "Immerse Yourself in a World of Discovery, Uncovering Exciting"
-                  " Anime, Fascinating Mangas, and Iconic Characters.",
-            ),
+          const DiscoverHeader(
+            title: "Ignite your Anime \nAdventure",
+            subtitle:
+                "Immerse Yourself in a World of Discovery, Uncovering Exciting"
+                " Anime, Fascinating Mangas, and Iconic Characters.",
           ),
           const SizedBox(height: 10),
-          DiscoverCard(
+          DiscoverImagePlaceholderCard(
+            onTap: () {
+              context.push(RouteConstants.discoverAnime);
+            },
+            assetName: Assets.discoverPlaceholdersAnime,
+          ),
+          const SizedBox(height: 20),
+          DiscoverImagePlaceholderCard(
+            onTap: () {
+              context.push(RouteConstants.discoverManga);
+            },
+            assetName: Assets.discoverPlaceholdersManga,
+          ),
+          const SizedBox(height: 20),
+          DiscoverImagePlaceholderCard(
+            onTap: () {
+              context.push(RouteConstants.discoverCharacters);
+            },
+            assetName: Assets.discoverPlaceholdersCharacters,
+          ),
+          const SizedBox(height: 20),
+          DiscoverImagePlaceholderCard(
+            onTap: () {
+              context.push(RouteConstants.discoverStaff);
+            },
+            assetName: Assets.discoverPlaceholdersStaff,
+          ),
+          const SizedBox(height: 20),
+          DiscoverImagePlaceholderCard(
+            onTap: () {
+              context.push(RouteConstants.discoverStudios);
+            },
+            assetName: Assets.discoverPlaceholdersStudios,
+          ),
+          /* DiscoverCard(
             onTap: () {
               context.push(RouteConstants.discoverAnime);
             },
@@ -54,7 +81,6 @@ class DiscoverScreen extends HookWidget {
               type: 'Anime',
             ),
           ),
-          const SizedBox(height: 20),
           DiscoverCard(
             onTap: () {
               context.push(RouteConstants.discoverManga);
@@ -71,7 +97,6 @@ class DiscoverScreen extends HookWidget {
               type: 'Manga',
             ),
           ),
-          const SizedBox(height: 20),
           DiscoverCard(
             onTap: () {
               context.push(RouteConstants.discoverCharacters);
@@ -81,7 +106,6 @@ class DiscoverScreen extends HookWidget {
             endColors: ColorConstants.discoverColors[2],
             child: const DiscoverCharacterPosters(),
           ),
-          const SizedBox(height: 20),
           DiscoverCard(
             onTap: () {
               context.push(RouteConstants.discoverStaff);
@@ -98,7 +122,6 @@ class DiscoverScreen extends HookWidget {
               type: 'Staff',
             ),
           ),
-          const SizedBox(height: 20),
           DiscoverCard(
             onTap: () {
               context.push(RouteConstants.discoverStudios);
@@ -107,8 +130,7 @@ class DiscoverScreen extends HookWidget {
             beginColors: AppColors.raisinBlack,
             endColors: ColorConstants.discoverColors[4],
             child: const DiscoverStudiosPosters(),
-          ),
-          const SizedBox(height: 10),
+          ),*/
         ],
       ),
     );
@@ -261,7 +283,7 @@ class DiscoverCardImage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(radius),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withValues(alpha:0.7),
+                      color: Colors.black.withValues(alpha: 0.7),
                       blurRadius: 3,
                       offset: const Offset(0, 0),
                     ),
@@ -286,7 +308,7 @@ class DiscoverCardImage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(radius),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withValues(alpha:0.7),
+                      color: Colors.black.withValues(alpha: 0.7),
                       blurRadius: 3,
                       offset: Offset.zero,
                     ),
@@ -308,7 +330,7 @@ class DiscoverCardImage extends StatelessWidget {
             borderRadius: BorderRadius.circular(radius),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha:0.7),
+                color: Colors.black.withValues(alpha: 0.7),
                 blurRadius: 3,
                 offset: Offset.zero,
               ),

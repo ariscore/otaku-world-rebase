@@ -14,7 +14,6 @@ import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
 
 part 'filter_anime_event.dart';
-
 part 'filter_anime_state.dart';
 
 class FilterAnimeBloc extends Bloc<FilterAnimeEvent, FilterAnimeState> {
@@ -114,6 +113,7 @@ class FilterAnimeBloc extends Bloc<FilterAnimeEvent, FilterAnimeState> {
     final response = await event.client.query$FilterMedia(
       Options$Query$FilterMedia(
         cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
+        fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$FilterMedia(
           page: page,
           type: Enum$MediaType.ANIME,

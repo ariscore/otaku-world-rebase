@@ -319,10 +319,6 @@ const documentNodeQueryGetPopularManhwa = DocumentNode(definitions: [
                 value: EnumValueNode(name: NameNode(value: 'MANGA')),
               ),
               ArgumentNode(
-                name: NameNode(value: 'isAdult'),
-                value: BooleanValueNode(value: false),
-              ),
-              ArgumentNode(
                 name: NameNode(value: 'countryOfOrigin'),
                 value: StringValueNode(
                   value: 'KR',

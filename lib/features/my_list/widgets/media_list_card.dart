@@ -1,20 +1,18 @@
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/media_list/media_list/media_list_bloc.dart';
 import 'package:otaku_world/bloc/media_list/save_list_entry/save_list_entry_bloc.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/shimmer_details.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
 
 import '../../../core/ui/image.dart';
 import '../../../core/ui/placeholders/poster_placeholder.dart';
-import '../../../generated/assets.dart';
-import '../../../theme/colors.dart';
 
 class MediaListCard extends StatelessWidget {
   const MediaListCard({
@@ -35,75 +33,83 @@ class MediaListCard extends StatelessWidget {
         ? context.read<AnimeListBloc>()
         : context.read<MangaListBloc>();
 
-    return Container(
-      padding: const EdgeInsets.all(10),
-      // width: MediaQuery.of(context).size.width - 20,
-      height: 165,
-      margin: const EdgeInsets.only(bottom: 10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        gradient: AppColors.secondaryGradient,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha:0.25),
-            blurRadius: 4,
-            offset: const Offset(0, 4),
-          )
-        ],
-      ),
-      child: Row(
-        children: [
-          SizedBox(
-            height: 145,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(
-                entry?.media?.type == Enum$MediaType.ANIME ? 10 : 5,
-              ),
-              child: AspectRatio(
-                aspectRatio: 85 / 130,
-                child: CImage(
-                  imageUrl: entry!.media?.coverImage?.large ?? '',
-                  placeholder: (context, url) => _buildPlaceholder(context),
-                  errorWidget: (context, url, error) =>
-                      _buildPlaceholder(context),
+    return GestureDetector(
+      onTap: () {
+        NavigationHelper.goToMediaDetailScreen(
+          context: context,
+          mediaId: entry?.mediaId,
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        // width: MediaQuery.of(context).size.width - 20,
+        height: 165,
+        margin: const EdgeInsets.only(bottom: 10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          gradient: AppColors.secondaryGradient,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.25),
+              blurRadius: 4,
+              offset: const Offset(0, 4),
+            )
+          ],
+        ),
+        child: Row(
+          children: [
+            SizedBox(
+              height: 145,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(
+                  entry?.media?.type == Enum$MediaType.ANIME ? 10 : 5,
+                ),
+                child: AspectRatio(
+                  aspectRatio: 85 / 130,
+                  child: CImage(
+                    imageUrl: entry!.media?.coverImage?.large ?? '',
+                    placeholder: (context, url) => _buildPlaceholder(context),
+                    errorWidget: (context, url, error) =>
+                        _buildPlaceholder(context),
+                  ),
                 ),
               ),
             ),
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  entry?.media?.title?.userPreferred ?? '',
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontFamily: 'Poppins',
-                      ),
-                ),
-                Text(
-                  '${FormattingUtils.getMediaFormatString(entry?.media?.format)}, '
-                  '${FormattingUtils.getMediaStatusString(
-                    entry?.media?.status,
-                    anime: entry?.media?.type == Enum$MediaType.ANIME,
-                  )}',
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: AppColors.white.withValues(alpha:0.8),
-                      ),
-                ),
-                _buildScore(context),
-                const Spacer(),
-                _buildProgress(
-                  context,
-                  listEntryBloc: listEntryBloc,
-                  listBloc: listBloc,
-                ),
-              ],
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    entry?.media?.title?.userPreferred ?? '',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          fontFamily: 'Poppins',
+                        ),
+                  ),
+                  Text(
+                    '${FormattingUtils.getMediaFormatString(entry?.media?.format)}, '
+                    '${FormattingUtils.getMediaStatusString(
+                      entry?.media?.status,
+                      anime: entry?.media?.type == Enum$MediaType.ANIME,
+                    )}',
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          color: AppColors.white.withValues(alpha: 0.8),
+                        ),
+                  ),
+                  _buildScore(context),
+                  const Spacer(),
+                  _buildProgress(
+                    context,
+                    listEntryBloc: listEntryBloc,
+                    listBloc: listBloc,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -143,7 +149,7 @@ class MediaListCard extends StatelessWidget {
                         ' / ${total ?? '?'} ${entry?.media?.type == Enum$MediaType.ANIME ? 'ep' : 'vol'}',
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           fontFamily: 'Poppins',
-                          color: AppColors.white.withValues(alpha:0.8),
+                          color: AppColors.white.withValues(alpha: 0.8),
                         ),
                   ),
                 ],

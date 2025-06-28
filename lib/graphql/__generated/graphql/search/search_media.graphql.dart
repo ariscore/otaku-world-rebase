@@ -405,10 +405,6 @@ const documentNodeQuerySearchMedia = DocumentNode(definitions: [
                   EnumValueNode(name: NameNode(value: 'TRENDING_DESC')),
                 ]),
               ),
-              ArgumentNode(
-                name: NameNode(value: 'isAdult'),
-                value: BooleanValueNode(value: false),
-              ),
             ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [

@@ -2,18 +2,39 @@ part of 'router.dart';
 
 final bottomNavRoutes = StatefulShellRoute.indexedStack(
   builder: (context, state, navigationShell) {
-    return AppScaffold(navigationShell: navigationShell);
+    return BlocProvider(
+      create: (context) => BottomNavBarCubit(),
+      child: AppScaffold(navigationShell: navigationShell),
+    );
   },
   branches: [
-
     StatefulShellBranch(
       navigatorKey: _shellNavigatorHomeKey,
       routes: [
         GoRoute(
           path: RouteConstants.home,
           pageBuilder: (context, state) {
-            return const NoTransitionPage(
-              child: HomeScreen(),
+            return NoTransitionPage(
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create: (context) => UpcomingEpisodesBloc(),
+                  ),
+                  BlocProvider(
+                    create: (context) => TrendingAnimeBloc(),
+                  ),
+                  BlocProvider(
+                    create: (context) => RecommendedAnimeBloc(),
+                  ),
+                  BlocProvider(
+                    create: (context) => TrendingMangaBloc(),
+                  ),
+                  BlocProvider(
+                    create: (context) => RecommendedMangaBloc(),
+                  ),
+                ],
+                child: const HomeScreen(),
+              ),
             );
           },
         ),

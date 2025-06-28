@@ -3,7 +3,7 @@ query GetTop100Manga($page: Int) {
         pageInfo {
             hasNextPage
         }
-        media(sort: [SCORE_DESC], type: MANGA, isAdult: false,) {
+        media(sort: [SCORE_DESC], type: MANGA) {
             ...MediaShort
         }
     }

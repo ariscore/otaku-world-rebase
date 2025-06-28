@@ -4,6 +4,7 @@ import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../../core/ui/widgets/common_overview_widget.dart';
 import '../../../../graphql/__generated/graphql/staff_detail/staff_detail.graphql.dart';
+import '../../../../utils/app_texts.dart';
 
 class StaffOverviewTab extends StatelessWidget {
   const StaffOverviewTab({super.key, required this.staff});
@@ -27,6 +28,13 @@ class StaffOverviewTab extends StatelessWidget {
           gender: staff.gender,
         ),
         20.height,
+        const Text(
+          'Description',
+          style: AppTextStyles.titleSectionStyle,
+        ),
+        const SizedBox(
+          height: 5,
+        ),
         Description(
           description: staff.description,
         ),

@@ -97,13 +97,14 @@ class MyListShimmer extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: count,
-          itemBuilder: (context, index) => _buildCard(),
+          itemBuilder: (context, index) => _buildCard(context),
         ),
       ],
     );
   }
 
-  Widget _buildCard() {
+  Widget _buildCard(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
     return Container(
       padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.only(
@@ -141,7 +142,7 @@ class MyListShimmer extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                     child: Shimmer(
                       child: Container(
-                        width: 230,
+                        width:width * 0.58,
                         height: 20,
                         color: AppColors.htmlGray,
                       ),
@@ -151,7 +152,7 @@ class MyListShimmer extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                     child: Shimmer(
                       child: Container(
-                        width: 150,
+                        width: width * 0.4,
                         height: 20,
                         color: AppColors.htmlGray,
                       ),
@@ -161,7 +162,7 @@ class MyListShimmer extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                     child: Shimmer(
                       child: Container(
-                        width: 120,
+                        width: width * 0.34,
                         height: 15,
                         color: AppColors.htmlGray,
                       ),
@@ -173,7 +174,7 @@ class MyListShimmer extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
                 child: Shimmer(
                   child: Container(
-                    width: 200,
+                    width: width * 0.58,
                     height: 22,
                     color: AppColors.htmlGray,
                   ),

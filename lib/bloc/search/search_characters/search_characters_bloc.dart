@@ -15,6 +15,8 @@ class SearchCharactersBloc extends SearchBaseBloc<Query$SearchCharacters,
   ) {
     return client.query$SearchCharacters(
       Options$Query$SearchCharacters(
+        cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
+        fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$SearchCharacters(
           page: page,
           search: search,

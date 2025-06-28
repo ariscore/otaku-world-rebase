@@ -3,7 +3,7 @@ import 'dart:developer' as dev;
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:otaku_world/utils/shared_preference_utils.dart';
 import 'package:uni_links5/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -28,8 +28,8 @@ class AuthCubit extends Cubit<AuthState> {
   StreamSubscription? _sub;
 
   Future<void> authenticate() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    final token = sharedPreferences.getString('access_token');
+    await Future.delayed(const Duration(milliseconds: 500));
+    final token = SharedPreferenceUtils.getAccessToken();
     if (token == null) {
       emit(UnAuthenticated());
     } else {
@@ -38,8 +38,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<bool> isLoggedIn() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    final token = sharedPreferences.getString('access_token');
+    final token = SharedPreferenceUtils.getAccessToken();
     return token != null;
   }
 
@@ -60,9 +59,7 @@ class AuthCubit extends Cubit<AuthState> {
           dev.log('Access token: $accessToken', name: 'Auth');
 
           dev.log('Storing access token', name: 'Auth');
-          final sharedPrefs = await SharedPreferences.getInstance();
-          sharedPrefs.setString('access_token', accessToken);
-
+          await SharedPreferenceUtils.setAccessToken(accessToken);
           emit(Authenticated(accessToken));
         }
       });
@@ -72,12 +69,9 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-
   Future<void> logOut() async {
     emit(LoggingOut());
-    final sharedPrefs = await SharedPreferences.getInstance();
-    sharedPrefs.remove('access_token');
-
+    SharedPreferenceUtils.clearData();
     emit(UnAuthenticated());
   }
 
