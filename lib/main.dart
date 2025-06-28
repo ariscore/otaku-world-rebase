@@ -20,6 +20,7 @@ import 'package:otaku_world/features/app_version_management/services/app_update_
 import 'package:otaku_world/features/app_version_management/services/app_version_service.dart';
 import 'package:otaku_world/firebase_options.dart';
 import 'package:otaku_world/theme/app_theme.dart';
+import 'package:otaku_world/utils/shared_preference_utils.dart';
 
 import 'bloc/app_version/app_version_bloc.dart';
 import 'config/router/router.dart';
@@ -29,6 +30,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await SharedPreferenceUtils.init();
   if (kReleaseMode) {
     // Enable Crashlytics in release mode
     FlutterError.onError = (errorDetails) {
@@ -56,19 +58,17 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
+          create: (context) => GraphqlClientCubit(),
+        ),
+        BlocProvider(
+          create: (context) => AuthCubit()..authenticate(),
+        ),
+        BlocProvider(
           create: (context) => AppVersionBloc(
             service: AppVersionService(
               firestore: FirebaseFirestore.instance,
             ),
           )..add(CheckAppVersionEvent()),
-        ),
-        BlocProvider(
-          create: (context) => AuthCubit()..authenticate(),
-          lazy: false,
-        ),
-        BlocProvider(
-          create: (context) => GraphqlClientCubit(),
-          lazy: false,
         ),
         BlocProvider(
           create: (context) => RedirectRouteCubit(),

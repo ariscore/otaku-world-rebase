@@ -12,6 +12,8 @@ class SearchMangaBloc extends SearchBaseBloc<Query$SearchMedia, Fragment$SearchR
   Future<QueryResult<Query$SearchMedia>> loadData(GraphQLClient client, String search,) {
     return client.query$SearchMedia(
       Options$Query$SearchMedia(
+        cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
+        fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$SearchMedia(
           page: page,
           search: search,

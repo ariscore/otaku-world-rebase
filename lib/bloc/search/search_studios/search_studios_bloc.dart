@@ -15,6 +15,8 @@ class SearchStudiosBloc
       ) {
     return client.query$SearchStudios(
       Options$Query$SearchStudios(
+        cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
+        fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$SearchStudios(
           page: page,
           search: search,

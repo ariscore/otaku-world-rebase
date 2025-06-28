@@ -14,7 +14,6 @@ import '../../../graphql/__generated/graphql/fragments.graphql.dart';
 import '../../../utils/formatting_utils.dart';
 
 part 'filter_manga_event.dart';
-
 part 'filter_manga_state.dart';
 
 class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
@@ -166,6 +165,7 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
     return client.query$FilterMedia(
       Options$Query$FilterMedia(
         cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
+        fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$FilterMedia(
           page: page,
           type: Enum$MediaType.MANGA,

@@ -15,6 +15,8 @@ class SearchStaffBloc
   ) {
     return client.query$SearchStaff(
       Options$Query$SearchStaff(
+        cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
+        fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$SearchStaff(
           page: page,
           search: search,

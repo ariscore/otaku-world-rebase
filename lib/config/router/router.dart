@@ -119,7 +119,7 @@ import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/user_stats.graphql.dart';
 import 'package:otaku_world/observers/go_route_observer.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:otaku_world/utils/shared_preference_utils.dart';
 
 import '../../bloc/auth/auth_cubit.dart';
 import '../../bloc/bottom_nav_bar/bottom_nav_bar_cubit.dart';
@@ -246,9 +246,8 @@ final router = GoRouter(
       builder: (_) => const LoginScreen(),
       directionTween: SlideTransitionRoute.leftToRightTween,
       redirect: (context, state) async {
-        final sharedPrefs = await SharedPreferences.getInstance();
-        final firstTime = sharedPrefs.getBool('is_first_time');
-        if (firstTime == null) {
+        final bool firstTime = SharedPreferenceUtils.getIsFirstTime();
+        if (firstTime) {
           return RouteConstants.onBoarding;
         } else {
           return null;
