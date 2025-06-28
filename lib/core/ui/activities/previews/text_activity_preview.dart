@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:otaku_world/core/ui/markdown_v2/markdown.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../../theme/colors.dart';
 import '../../../../utils/formatting_utils.dart';
-import '../../markdown/markdown.dart';
 
 class TextActivityPreview extends StatelessWidget {
   const TextActivityPreview({
@@ -23,7 +23,7 @@ class TextActivityPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        margin: const EdgeInsets.symmetric(vertical: 10),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           gradient: const LinearGradient(
@@ -43,7 +43,8 @@ class TextActivityPreview extends StatelessWidget {
             _buildUser(context),
             const SizedBox(height: 10),
             // Main content
-            MarkdownWidget(data: text),
+            // MarkdownWidget(data: text),
+            MyMarkdownWidgetV2(data: text),
             // Other details
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:otaku_world/core/ui/markdown/markdown.dart';
+import 'package:otaku_world/core/ui/markdown_v2/markdown.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 
@@ -51,7 +52,8 @@ class UserOverview extends StatelessWidget {
         SliverPadding(
           padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
           sliver: _buildItem(
-            MarkdownWidget(data: user.about ?? '*No Description*'),
+            // MarkdownWidget(data: user.about ?? '*No Description*'),
+            MyMarkdownWidgetV2(data: user.about ?? '*No Description*'),
           ),
         ),
       ],
@@ -103,10 +105,7 @@ class UserOverview extends StatelessWidget {
   Widget _buildItem(Widget child) {
     return SliverToBoxAdapter(
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 15,
-          vertical: 10,
-        ),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           gradient: AppColors.secondaryGradient,

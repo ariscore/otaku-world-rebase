@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import "package:markdown/markdown.dart" as md2;
 import 'package:markdown_widget/markdown_widget.dart' as md;
 import 'package:otaku_world/config/router/router.dart';
+import 'package:otaku_world/utils/ui_utils.dart';
 
 md.SpanNodeGeneratorWithTag spoilerTag = md.SpanNodeGeneratorWithTag(
   tag: "spoiler",
@@ -10,39 +13,56 @@ md.SpanNodeGeneratorWithTag spoilerTag = md.SpanNodeGeneratorWithTag(
 );
 
 class SpoilerSyntax extends md2.InlineSyntax {
-  SpoilerSyntax() : super(r"~!([^]*?)!~");
+  // SpoilerSyntax() : super(r'~!([\s\S]*?)!~');
+  SpoilerSyntax() : super(r'~!([^][\s\S]*?)!~');
 
   @override
   bool onMatch(md2.InlineParser parser, Match match) {
-    var spoiler = match.group(1);
-
-    if (spoiler != null) {
-      md2.Element el = md2.Element.text(spoilerTag.tag, spoiler);
-      parser.addNode(el);
-    }
-
+    log('Spoiler match: ${match.groupCount} | ${match.group(0)} | ${match.group(1)}');
+    final content = match.group(1)!;
+    final el = md2.Element.text('spoiler', content);
+    parser.addNode(el);
     return true;
   }
 }
 
+final spoilerFenceOpen = RegExp(r'^([ ]{0,3})~!(.*)\s*$');
+
+final spoilerFenceClose = RegExp(r'^([ ]{0,3})!~(.*)\s*$');
+
 class SpoilerBlockSyntax extends md2.BlockSyntax {
-  @override
-  get pattern => RegExp(r'^~!([\s\S]+?)!~$', multiLine: true);
-  SpoilerBlockSyntax() : super();
 
   @override
-  bool canParse(md2.BlockParser parser) {
-    // print(parser.);
-    return super.canParse(parser);
-  }
+  RegExp get pattern => spoilerFenceOpen;
 
   @override
-  md2.Node? parse(md2.BlockParser parser) {
-    var text = pattern.firstMatch(parser.current.content)!.group(1)!;
+  md2.Node parse(md2.BlockParser parser) {
+    log('Parsing spoiler syntax');
+    final openMatch = pattern.firstMatch(parser.current.content)!;
+    log('Open match: ${openMatch.groupNames}');
+    parser.advance();
 
-    var element = md2.Element.text(spoilerTag.tag, text);
+    // Collect all lines until we hit a closing fence
+    final buffer = StringBuffer();
+    while (!parser.isDone && !spoilerFenceClose.hasMatch(parser.current.content)) {
+      log('Spoiler match: ${parser.current.content}');
+      buffer.writeln(parser.current.content);
+      parser.advance();
+    }
 
-    return element;
+    // Optionally consume the closing fence
+    if (!parser.isDone && spoilerFenceClose.hasMatch(parser.current.content)) {
+      parser.advance();
+    }
+
+    // Parse the inner text with all inline syntaxes
+    final el = md2.Element.text('spoiler', buffer.toString());
+    log('Parsing buffer: ${buffer.toString()}');
+    // el.children!.addAll(parser.document.parseInline(buffer.toString()));
+
+    parser.advance();
+
+    return el;
   }
 }
 
@@ -58,22 +78,15 @@ class SpoilerNode extends md.ElementNode {
 
   @override
   InlineSpan build() {
+    log('Building spoiler node: $spoiler');
+
     return TextSpan(
       text: "[Spoiler]",
       style: style,
       recognizer: TapGestureRecognizer()
-        ..onTap = () => showDialog(
-              context: router.configuration.navigatorKey.currentContext!,
-              builder: (context) => Dialog(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 50),
-                  child: md.MarkdownWidget(
-                    data: spoiler,
-                    shrinkWrap: true,
-                  ),
-                ),
-              ),
+        ..onTap = () => UIUtils.showMarkdownDialog(
+              router.configuration.navigatorKey.currentContext!,
+              data: spoiler,
             ),
     );
   }

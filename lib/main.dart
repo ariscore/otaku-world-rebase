@@ -220,6 +220,7 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp.router(
           theme: AppTheme.getTheme(),
+          themeMode: ThemeMode.dark,
           routerConfig: router,
           showSemanticsDebugger: false,
         ),
