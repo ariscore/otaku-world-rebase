@@ -1,16 +1,12 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import "package:markdown/markdown.dart" as md2;
 import 'package:markdown_widget/markdown_widget.dart' as md;
 import 'package:markdown_widget/widget/span_node.dart';
 import 'package:otaku_world/core/ui/image.dart';
-import 'package:otaku_world/core/ui/markdown/generator/bold.dart';
 import 'package:otaku_world/core/ui/markdown/generator/center_block.dart';
-import 'package:otaku_world/core/ui/markdown/generator/italic.dart';
 import 'package:otaku_world/core/ui/markdown/generator/strike.dart';
-import 'package:otaku_world/theme/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // import 'generator/center.dart';
@@ -18,7 +14,6 @@ import 'generator/hr.dart';
 import 'generator/html.dart';
 import 'generator/image.dart';
 import 'generator/link.dart';
-import 'generator/media_card.dart';
 import 'generator/spoiler.dart';
 
 RegExp removeFromMarkdown = RegExp("<BR>|<br>|~~~|```");

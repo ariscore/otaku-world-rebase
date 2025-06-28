@@ -98,20 +98,12 @@ class ImageNode2 extends mw.SpanNode {
           //     ),
           //   ),
           // ),
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minWidth: minWidth,
-              minHeight: minHeight,
-              maxWidth: maxWidth,
-              maxHeight: maxHeight,
-            ),
-            child: CImage(
-              imageUrl: imageUrl,
-              width: math.min(width ?? double.maxFinite, maxWidth),
-              // height: maxHeight,
-              viewer: true,
-              fit: BoxFit.fitHeight,
-            ),
+          child: CImage(
+            imageUrl: imageUrl,
+            width: math.min(width ?? double.maxFinite, maxWidth),
+            // height: maxHeight,
+            viewer: true,
+            fit: BoxFit.fitHeight,
           ),
         );
       }),

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/buttons/primary_button.dart';
 import 'package:otaku_world/core/ui/custom_text_field.dart';
+import 'package:otaku_world/core/ui/markdown_v2/markdown_editor.dart';
 
 import '../../../core/ui/appbars/simple_app_bar.dart';
 import '../../../core/ui/texts/counter_text.dart';
@@ -53,7 +54,8 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
       iconPath: Assets.markdownImage,
       label: 'Image',
       onTap: () {},
-    ),MarkdownItemModel(
+    ),
+    MarkdownItemModel(
       iconPath: Assets.markdownYoutube,
       label: 'Youtube Video',
       onTap: () {},
@@ -119,67 +121,69 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 10,
-            children: [
-              Builder(
-                builder: (context) {
-                  return CustomTextField(
-                    controller: widget.controller,
-                    isShowingCounter: true,
-                    minLength: 2200,
-                    counterBuilder: (_, currentLength, maxLength) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CounterText(
-                              currentLength: currentLength,
-                              maxLength: 2200,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            PrimaryButton(
-                              onTap: () {
-                                context.push(
-                                  RouteConstants.previewReview,
-                                  extra: widget.controller.text,
-                                );
-                              },
-                              label: 'Preview',
-                              width: UIUtils.getWidgetWidth(
-                                targetWidgetWidth: 100,
-                                screenWidth: MediaQuery.sizeOf(context).width,
-                              ),
-                              fontSize: 14,
-                              horizontalPadding: 0,
-                              verticalPadding: 7,
-                              radius: 8,
-                              isSmall: true,
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                    validator: (value) {
-                      if (value == null && value!.isEmpty) {
-                        return 'The text can not be empty';
-                      } else if (value.length < 2200) {
-                        return 'The text must be at least 2200 characters.';
-                      } else {
-                        return null;
-                      }
-                    },
-                  );
-                },
-              ),
-            ],
-          ),
+      body: Form(
+        key: _formKey,
+        child: Builder(
+          builder: (context) {
+            return MarkdownEditor(
+              onShowPreview: (content) {
+                context.push(
+                  RouteConstants.previewReview,
+                  extra: content,
+                );
+              },
+              textController: widget.controller,
+              minLength: 2200,
+              showCounter: true,
+            );
+            // return CustomTextField(
+            //   controller: widget.controller,
+            //   isShowingCounter: true,
+            //   minLength: 2200,
+            //   counterBuilder: (_, currentLength, maxLength) {
+            //     return Padding(
+            //       padding: const EdgeInsets.symmetric(vertical: 15),
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           CounterText(
+            //             currentLength: currentLength,
+            //             maxLength: 2200,
+            //             fontWeight: FontWeight.w600,
+            //           ),
+            //           PrimaryButton(
+            //             onTap: () {
+            //               context.push(
+            //                 RouteConstants.previewReview,
+            //                 extra: widget.controller.text,
+            //               );
+            //             },
+            //             label: 'Preview',
+            //             width: UIUtils.getWidgetWidth(
+            //               targetWidgetWidth: 100,
+            //               screenWidth: MediaQuery.sizeOf(context).width,
+            //             ),
+            //             fontSize: 14,
+            //             horizontalPadding: 0,
+            //             verticalPadding: 7,
+            //             radius: 8,
+            //             isSmall: true,
+            //           ),
+            //         ],
+            //       ),
+            //     );
+            //   },
+            //   validator: (value) {
+            //     if (value == null && value!.isEmpty) {
+            //       return 'The text can not be empty';
+            //     } else if (value.length < 2200) {
+            //       return 'The text must be at least 2200 characters.';
+            //     } else {
+            //       return null;
+            //     }
+            //   },
+            // );
+          },
         ),
       ),
       // bottomSheet: SafeArea(

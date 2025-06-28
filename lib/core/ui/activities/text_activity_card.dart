@@ -5,7 +5,6 @@ import 'package:otaku_world/bloc/profile/user_activities_bloc/user_activities_bl
 import 'package:otaku_world/bloc/social/activities/activities_bloc.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/activities/activity_base_card.dart';
-import 'package:otaku_world/core/ui/markdown/markdown.dart';
 import 'package:otaku_world/core/ui/markdown_v2/markdown.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';

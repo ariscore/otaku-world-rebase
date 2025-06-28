@@ -139,6 +139,7 @@ flutter:
     - assets/my_refresh_indicator/
     - assets/logos/
     - assets/icons/smiley/
+    - assets/icons/markdown/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -29,7 +29,6 @@ class CenterSyntax extends m.DelimiterSyntax {
 
     // B) Re‑parse the inner text via Document.parseInline
     //    parser.document is the Document instance passed to InlineParser
-    log('Center match: ${match.groupCount} | ${match.start} | ${match.input} | ${match.pattern}');
     final inner = parser.document.parseInline(match.group(1)!);
     for (final node in inner) {
       el.children!.add(node);

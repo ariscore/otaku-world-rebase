@@ -5,7 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../generated/assets.dart';
 import '../../../../theme/colors.dart';
 import '../../../../utils/formatting_utils.dart';
-import '../../markdown/markdown.dart';
 import '../../markdown_v2/markdown.dart';
 
 class MessageActivityPreview extends StatelessWidget {

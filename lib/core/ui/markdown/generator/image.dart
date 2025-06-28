@@ -1,14 +1,11 @@
 import 'dart:developer';
-import 'dart:math' as math;
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import "package:markdown/markdown.dart" as md2;
 import 'package:markdown_widget/markdown_widget.dart' as md;
 import 'package:markdown_widget/widget/span_node.dart';
-import 'package:otaku_world/core/ui/image.dart';
 import 'package:otaku_world/core/ui/image_viewer.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 // overwrite default link generator because the default one for some reason adds a space at the end of the link
 md.SpanNodeGeneratorWithTag imageGeneratorWithTag = md.SpanNodeGeneratorWithTag(
@@ -70,7 +67,7 @@ class ImageNode2 extends SpanNode {
     final tag = UniqueKey().toString();
     return WidgetSpan(
       child: Builder(builder: (context) {
-        log('Image width: $width | height: $height');
+        // log('Image width: $width | height: $height');
         // return const SizedBox();
         return SizedBox(
           width: width,

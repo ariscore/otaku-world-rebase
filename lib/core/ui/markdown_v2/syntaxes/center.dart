@@ -24,9 +24,6 @@ class CenterSyntax extends md.InlineSyntax {
 
   @override
   bool onMatch(md.InlineParser parser, Match match) {
-    log(
-      'Center match: ${match.groupCount} | ${match.group(0)} | ${match.group(1)}',
-    );
     final content = match.group(1)!;
     final el = md.Element('center', [...parser.document.parseInline(content)]);
     // final el = md.Element('center', [md.UnparsedContent(content)]);
@@ -85,7 +82,6 @@ class CenterBlockSyntax extends md.BlockSyntax {
       );
       parser.advance();
     }
-    log('Inner lines: ${innerLines.map((e) => e.content)}');
 
     // final innerParser = md.BlockParser(innerLines, parser.document);
     final innerParser = CenterBlockParser(innerLines, parser.document);
@@ -108,8 +104,6 @@ class CustomCenterNode extends ElementNode {
 
   @override
   InlineSpan build() {
-    log('Elements: ${element.children?.map((e) => e.textContent,)}');
-    log('Children center span style: ${childrenSpan.children?.map((e) => e.style)}');
     return WidgetSpan(
       child: Center(
         child: CustomProxyRichText(

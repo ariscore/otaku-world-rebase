@@ -27,7 +27,6 @@ class CenterSyntax extends m.InlineSyntax {
 
     // 2️⃣ Parse the inner content with all inline rules
     final innerText = match.group(1)!;
-    log('Center match: $innerText');
     el.children!.addAll(parser.document.parseInline(innerText));
 
     // 3️⃣ Add it into the AST

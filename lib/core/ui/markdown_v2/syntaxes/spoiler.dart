@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:markdown_widget/markdown_widget.dart';
 
+import '../../../../config/router/router.dart';
+import '../../../../utils/ui_utils.dart';
+
 final spoilerFenceOpen = RegExp(r'^( {0,3})~!(?!.*!~)(.*)\s*$');
 
 final spoilerFenceClose = RegExp(r'^( {0,3})!~(.*)\s*$');
@@ -126,7 +129,10 @@ class SpoilerNode extends ElementNode {
       text: "[Spoiler]",
       style: style,
       recognizer: TapGestureRecognizer()
-        ..onTap = () => log('Spoiler: $spoiler'),
+        ..onTap = () => UIUtils.showMarkdownDialog(
+          router.configuration.navigatorKey.currentContext!,
+          data: spoiler,
+        ),
     );
   }
 }

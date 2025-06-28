@@ -6,7 +6,6 @@ import 'package:otaku_world/core/ui/markdown_v2/markdown.dart';
 import '../../../../generated/assets.dart';
 import '../../../../theme/colors.dart';
 import '../../../../utils/formatting_utils.dart';
-import '../../markdown/markdown.dart';
 
 class ActivityReplyPreview extends StatelessWidget {
   const ActivityReplyPreview({
