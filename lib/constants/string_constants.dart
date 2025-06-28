@@ -28,6 +28,9 @@ class StringConstants {
       'Are you sure you want to delete this list entry?';
 
   static const defaultLanguageDropdown = 'Japanese';
+
+  static const urlValidationError = 'Please enter valid url';
+  static const imageUrlValidationError = 'Please enter valid image url';
 }
 
 class LoginConstants {
