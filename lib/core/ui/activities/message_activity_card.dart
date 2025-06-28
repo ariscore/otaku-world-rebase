@@ -5,7 +5,7 @@ import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/social/activities/activities_bloc.dart';
 import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
-import 'package:otaku_world/core/ui/markdown/markdown.dart';
+import 'package:otaku_world/core/ui/markdown_v2/markdown.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 
@@ -79,7 +79,8 @@ class MessageActivityCard extends StatelessWidget {
       //   activity.message!,
       //   style: Theme.of(context).textTheme.headlineSmall,
       // ),
-      child: MarkdownWidget(data: activity.message!),
+      // child: MarkdownWidget(data: activity.message!),
+      child: MyMarkdownWidgetV2(data: activity.message!),
     );
   }
 }

@@ -1,38 +1,45 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import "package:markdown/markdown.dart" as md2;
 import 'package:markdown_widget/markdown_widget.dart' as md;
 import 'package:markdown_widget/widget/span_node.dart';
 import 'package:otaku_world/core/ui/image.dart';
-import 'package:otaku_world/theme/colors.dart';
+import 'package:otaku_world/core/ui/markdown/generator/center_block.dart';
+import 'package:otaku_world/core/ui/markdown/generator/strike.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'generator/center.dart';
+// import 'generator/center.dart';
 import 'generator/hr.dart';
 import 'generator/html.dart';
 import 'generator/image.dart';
 import 'generator/link.dart';
-import 'generator/media_card.dart';
 import 'generator/spoiler.dart';
 
 RegExp removeFromMarkdown = RegExp("<BR>|<br>|~~~|```");
 
 String stripHTML(String data) {
   return data
-      .replaceAll(removeFromMarkdown, "")
+      // .replaceAll(removeFromMarkdown, "")
+      // .replaceAllMapped(
+      //   RegExp(r'~~~([\s\S]*?)~~~'),
+      //   (match) => '<center>${match.group(1)}</center>',
+      // )
       .replaceAll(RegExp(r"</?(B|b)>"), "**")
       .replaceAll(RegExp("</?(i|I)>"), "*")
       .replaceAllMapped(
         RegExp(r"youtube\((.*?)\)", dotAll: true),
         (match) => match.group(1) ?? '',
-      )
-      .replaceAll(removeFromMarkdown, "");
+      );
 }
 
 var markdownConfig = md.MarkdownConfig(
   configs: [
     const md.PConfig(
-      textStyle: TextStyle(),
+      textStyle: TextStyle(
+        decorationColor: Colors.white,
+        decoration: TextDecoration.lineThrough,
+      ),
     ),
     CustomH1Config(),
     CustomH2Config(),
@@ -46,38 +53,45 @@ var markdownConfig = md.MarkdownConfig(
     ),
   ],
 );
+
 var markdownGenerator = md.MarkdownGenerator(
   linesMargin: const EdgeInsets.all(0),
-  extensionSet: md2.ExtensionSet.gitHubWeb,
+  extensionSet: md2.ExtensionSet.none,
   generators: [
+    // strikeGenerator,
     linkGeneratorWithTag,
-    centerSpanWithTag,
+    centerBlockSpanWithTag,
+    // centerSpanWithTag,
     // mediaCardGenerator,
     imageGeneratorWithTag,
     spoilerTag,
     hrGeneratorWithTag,
   ],
   inlineSyntaxList: [
-    CenterSyntax(),
+    // md2.StrikethroughSyntax(),
+    // CenterSyntax(),
+    StrikeSyntax(),
     AnilistImageSyntax(),
-    SpoilerSyntax(),
+    // SpoilerSyntax(),
   ],
   blockSyntaxList: [
     const md2.HtmlBlockSyntax(),
+    CenterBlockSyntax(),
+    SpoilerBlockSyntax(),
   ],
   textGenerator: (node, config, visitor) =>
       CustomTextNode(node.textContent, config, visitor),
 );
 
 class MarkdownWidget extends StatelessWidget {
-  const MarkdownWidget({
-    super.key,
-    required this.data,
-    this.padding = const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-    this.body = false,
-    this.selectable,
-    this.shrinkWrap,
-  });
+  // const MarkdownWidget({
+  //   super.key,
+  //   required this.data,
+  //   this.padding = const EdgeInsets.all(0),
+  //   this.body = false,
+  //   this.selectable = true,
+  //   this.shrinkWrap,
+  // });
 
   final String data;
   final bool body;
@@ -89,8 +103,8 @@ class MarkdownWidget extends StatelessWidget {
     super.key,
     required this.data,
     this.body = true,
-    this.padding = const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-    this.selectable,
+    this.padding = const EdgeInsets.all(0),
+    this.selectable = true,
     this.shrinkWrap,
   });
 
@@ -183,6 +197,8 @@ class MarkdownWidget extends StatelessWidget {
       );
     }
 
+    final stripData = stripHTML(data);
+    log('Data: $stripData');
     return md.MarkdownWidget(
       data: stripHTML(data),
       padding: padding,
@@ -215,15 +231,36 @@ class EmbedMediaCardSyntax extends md2.InlineSyntax {
 
 class CustomH1Config extends md.H1Config {
   @override
+  TextStyle get style => const TextStyle(
+        fontFamily: 'Poppins',
+        fontWeight: FontWeight.w600,
+        fontSize: 22,
+      );
+
+  @override
   md.HeadingDivider? get divider => null;
 }
 
 class CustomH2Config extends md.H2Config {
   @override
+  TextStyle get style => const TextStyle(
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w500,
+    fontSize: 18,
+  );
+
+  @override
   md.HeadingDivider? get divider => null;
 }
 
 class CustomH3Config extends md.H3Config {
+  @override
+  TextStyle get style => const TextStyle(
+    fontFamily: 'Roboto',
+    fontWeight: FontWeight.w500,
+    fontSize: 20,
+  );
+
   @override
   md.HeadingDivider? get divider => null;
 }
@@ -255,9 +292,7 @@ class CustomTextNode extends md.ElementNode {
 
   @override
   void onAccepted(SpanNode parent) {
-    final textStyle = config.p.textStyle.merge(parentStyle).copyWith(
-          color: AppColors.white,
-        );
+    final textStyle = config.p.textStyle.merge(parentStyle);
     children.clear();
     if (!text.contains(htmlRep)) {
       accept(TextNode(text: text, style: textStyle));

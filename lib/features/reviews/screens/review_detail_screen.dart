@@ -10,6 +10,7 @@ import 'package:otaku_world/bloc/reviews/review_detail/review_detail_bloc.dart';
 import 'package:otaku_world/bloc/reviews/reviews/reviews_bloc.dart';
 import 'package:otaku_world/core/ui/error_text.dart';
 import 'package:otaku_world/core/ui/markdown/markdown.dart';
+import 'package:otaku_world/core/ui/markdown_v2/markdown.dart';
 import 'package:otaku_world/core/ui/shimmers/review_detail_shimmer.dart';
 import 'package:otaku_world/features/media_detail/widgets/banner_image.dart';
 import 'package:otaku_world/features/reviews/widgets/bottom_sheet_component.dart';
@@ -184,7 +185,8 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                         right: 15,
                         bottom: 10,
                       ),
-                      child: MarkdownWidget(data: review.body.toString()),
+                      // child: MarkdownWidget(data: review.body.toString()),
+                      child: MyMarkdownWidgetV2(data: review.body.toString()),
                     ),
                     // Padding(
                     //   padding: const EdgeInsets.only(

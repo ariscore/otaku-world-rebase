@@ -12,6 +12,7 @@ import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/types/types.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/custom_text_field.dart';
+import 'package:otaku_world/core/ui/markdown_v2/markdown_editor.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
 
@@ -79,22 +80,22 @@ class _EditActivityReplyScreenState extends State<EditActivityReplyScreen> {
         }
       },
       child: Scaffold(
-        floatingActionButton: FloatingActionButton.extended(
-          backgroundColor: AppColors.sunsetOrange,
-          onPressed: _showPreview,
-          label: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 10,
-            ),
-            child: Text(
-              'Preview',
-              style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                fontFamily: 'Poppins',
-              ),
-            ),
-          ),
-        ),
+        // floatingActionButton: FloatingActionButton.extended(
+        //   backgroundColor: AppColors.sunsetOrange,
+        //   onPressed: _showPreview,
+        //   label: Padding(
+        //     padding: const EdgeInsets.symmetric(
+        //       horizontal: 10,
+        //       vertical: 10,
+        //     ),
+        //     child: Text(
+        //       'Preview',
+        //       style: Theme.of(context).textTheme.displaySmall?.copyWith(
+        //         fontFamily: 'Poppins',
+        //       ),
+        //     ),
+        //   ),
+        // ),
         appBar: SimpleAppBar(
           title: 'Edit Activity Reply',
           actions: [
@@ -120,31 +121,35 @@ class _EditActivityReplyScreenState extends State<EditActivityReplyScreen> {
             )
           ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 15,
-          ),
-          child: Stack(
-            children: [
-              CustomTextField(
-                focusNode: focusNode,
-                controller: textController,
-              ),
-            ],
-          ),
-        ),
+        // body: Padding(
+        //   padding: const EdgeInsets.symmetric(
+        //     horizontal: 15,
+        //   ),
+        //   child: Stack(
+        //     children: [
+        //       CustomTextField(
+        //         focusNode: focusNode,
+        //         controller: textController,
+        //       ),
+        //     ],
+        //   ),
+        // ),
+        body: MarkdownEditor(onShowPreview: _showPreview, textController: textController,),
       ),
     );
   }
 
-  void _showPreview() {
+  void _showPreview(String content) {
     focusNode.unfocus();
     final state = context.read<ViewerBloc>().state;
     if (state is ViewerLoaded) {
       showDialog(
         context: context,
         builder: (context) {
-          return Center(
+          return Dialog(
+            alignment: Alignment.center,
+            backgroundColor: Colors.transparent,
+            insetPadding: const EdgeInsets.all(10),
             child: ActivityReplyPreview(
               text: textController.text.trim(),
               userAvatar: state.user.avatar?.medium ?? '',

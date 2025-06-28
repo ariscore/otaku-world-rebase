@@ -1,5 +1,3 @@
-import 'package:otaku_world/config/app_config.dart';
-import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/bottomsheet/helpers/url_helpers.dart';
 import 'package:share_plus/share_plus.dart';
 

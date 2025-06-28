@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:otaku_world/core/ui/markdown_v2/markdown.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../../theme/colors.dart';
 import '../../../../utils/formatting_utils.dart';
-import '../../markdown/markdown.dart';
 
 class ActivityReplyPreview extends StatelessWidget {
   const ActivityReplyPreview({
@@ -43,7 +43,8 @@ class ActivityReplyPreview extends StatelessWidget {
             _buildUser(context),
             const SizedBox(height: 10),
             // Main content
-            MarkdownWidget(data: text),
+            MyMarkdownWidgetV2(data: text),
+            // MarkdownWidget(data: text),
             // Other details
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
