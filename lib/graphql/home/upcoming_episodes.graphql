@@ -3,7 +3,7 @@
         pageInfo {
             hasNextPage
         }
-        media(status: RELEASING, sort: [POPULARITY_DESC], type: ANIME, isAdult: false) {
+        media(status: RELEASING, sort: [POPULARITY_DESC], type: ANIME) {
             id
             title {
                 romaji

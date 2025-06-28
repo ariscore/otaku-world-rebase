@@ -146,16 +146,15 @@ class _StaffAppBarState extends State<StaffAppBar> {
                   onTap: () => staff.image?.large != null
                       ? showImage(
                           context,
-                          staff.image!.large!.toString(),
-                          tag: staff.image!.large!.toString(),
+                          staff.image!.large!,
+                          tag: staff.image!.large!,
                         )
                       : null,
                   child: Hero(
-                    tag: staff.image!.large!.toString(),
+                    tag: staff.image!.large!,
                     child: CoverImage(
-                      imageUrl: staff.image!.large!.toString(),
+                      imageUrl: staff.image!.large!,
                       type: Enum$MediaType.ANIME,
-                      // placeHolderName: Assets.placeholders210x310,
                     ),
                   ),
                 ),
@@ -169,23 +168,33 @@ class _StaffAppBarState extends State<StaffAppBar> {
                 children: [
                   20.height,
                   if (staff.name?.userPreferred != null)
-                    Text(
-                      staff.name!.userPreferred!,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w600,
+                    SizedBox(
+                      width: MediaQuery.sizeOf(context).width * 0.5,
+                      child: Text(
+                        staff.name!.userPreferred!,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w600,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   if (staff.name?.native != null)
-                    Text(
-                      staff.name!.native!,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w400,
+                    SizedBox(
+                      width: MediaQuery.sizeOf(context).width * 0.5,
+                      child: Text(
+                        staff.name!.native!,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w400,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   InfoData(

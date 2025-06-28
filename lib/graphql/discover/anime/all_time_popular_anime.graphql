@@ -3,7 +3,7 @@ query GetAllTimePopularAnime($page: Int) {
         pageInfo {
             hasNextPage
         }
-        media(sort: [POPULARITY_DESC], type: ANIME, isAdult: false) {
+        media(sort: [POPULARITY_DESC], type: ANIME) {
             ...MediaShort
         }
     }

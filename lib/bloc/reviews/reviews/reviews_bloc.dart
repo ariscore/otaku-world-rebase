@@ -55,6 +55,7 @@ class ReviewsBloc extends PaginatedDataBloc<Query$GetReviews, Fragment$Review> {
   Future<QueryResult<Query$GetReviews>> loadData(GraphQLClient client) {
     return client.query$GetReviews(
       Options$Query$GetReviews(
+        cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
         fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$GetReviews(
           page: page,

@@ -112,13 +112,18 @@ class _StudioAppBarState extends State<StudioAppBar> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               StudioAppBar.fifteenSpacing,
-              Text(
-                widget.studio.name.checkIfNull(),
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w600,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Text(
+                  widget.studio.name.checkIfNull(),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w600,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               StudioAppBar.fifteenSpacing,

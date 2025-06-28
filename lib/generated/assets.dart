@@ -17,6 +17,11 @@ class Assets {
   static const String charactersSasuke1 = 'assets/images/discover/characters/sasuke_1.svg';
   static const String charactersSchoolGirl = 'assets/images/characters/school_girl.png';
   static const String charactersTamaiokaSa1 = 'assets/images/discover/characters/Tamaioka_sa_1.svg';
+  static const String discoverPlaceholdersAnime = 'assets/images/discover_placeholders/anime.png';
+  static const String discoverPlaceholdersCharacters = 'assets/images/discover_placeholders/characters.png';
+  static const String discoverPlaceholdersManga = 'assets/images/discover_placeholders/manga.png';
+  static const String discoverPlaceholdersStaff = 'assets/images/discover_placeholders/staff.png';
+  static const String discoverPlaceholdersStudios = 'assets/images/discover_placeholders/studios.png';
   static const String fontsPoppinsMedium = 'assets/fonts/Poppins-Medium.ttf';
   static const String fontsPoppinsRegular = 'assets/fonts/Poppins-Regular.ttf';
   static const String fontsPoppinsSemiBold = 'assets/fonts/Poppins-SemiBold.ttf';
@@ -97,6 +102,8 @@ class Assets {
   static const String iconsUserGroup = 'assets/icons/user-group.svg';
   static const String iconsUserGroup2 = 'assets/icons/user-group-2.svg';
   static const String iconsViewSlider = 'assets/icons/view-slider.svg';
+  static const String launcherIconsIcLauncherBackground = 'assets/logos/launcher_icons/ic_launcher_background.png';
+  static const String launcherIconsIcLauncherForeground = 'assets/logos/launcher_icons/ic_launcher_foreground.png';
   static const String logosAppLogo = 'assets/logos/app_logo.png';
   static const String logosAppLogo500 = 'assets/logos/app_logo_500.png';
   static const String mangaHorimiya = 'assets/images/discover/manga/horimiya.png';
@@ -138,6 +145,7 @@ class Assets {
   static const String smileySad = 'assets/icons/smiley/sad.svg';
   static const String smileySadFilled = 'assets/icons/smiley/sad-filled.svg';
   static const String smileySadOutlined = 'assets/icons/smiley/sad_outlined.svg';
+  static const String splashSplashLogo = 'assets/logos/splash/splash_logo.png';
   static const String staffKana = 'assets/images/discover/staff/kana.png';
   static const String staffKenjirou = 'assets/images/discover/staff/kenjirou.jpg';
   static const String staffMamoru = 'assets/images/discover/staff/mamoru.png';

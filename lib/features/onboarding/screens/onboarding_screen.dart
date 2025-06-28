@@ -3,11 +3,11 @@ import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/buttons/primary_button.dart';
 import 'package:otaku_world/features/onboarding/widgets/next_button.dart';
-
 import 'package:otaku_world/theme/colors.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:otaku_world/utils/shared_preference_utils.dart';
 
 import '../../../constants/string_constants.dart';
 import '../../../generated/assets.dart';
@@ -89,9 +89,9 @@ class OnBoardingScreen extends HookWidget {
                   end: Alignment.bottomCenter,
                   stops: const [0.0, 0.1, 1.0],
                   colors: [
-                    AppColors.raisinBlack.withValues(alpha:0.0),
-                    AppColors.raisinBlack.withValues(alpha:0.6),
-                    AppColors.raisinBlack.withValues(alpha:0.8),
+                    AppColors.raisinBlack.withValues(alpha: 0.0),
+                    AppColors.raisinBlack.withValues(alpha: 0.6),
+                    AppColors.raisinBlack.withValues(alpha: 0.8),
                   ],
                 ),
               ),
@@ -169,10 +169,13 @@ class _BottomAreaState extends State<_BottomArea> {
             bottom: 45,
             child: PrimaryButton(
               onTap: () async {
-                SharedPreferences.getInstance().then((sharedPrefs) {
-                  sharedPrefs.setBool('is_first_time', false);
-                  context.go('/login');
-                });
+                await SharedPreferenceUtils.setIsFirstTime(false).then(
+                  (_) {
+                    if (context.mounted) {
+                      context.go(RouteConstants.login);
+                    }
+                  },
+                );
               },
               label: 'Get Started',
             ),

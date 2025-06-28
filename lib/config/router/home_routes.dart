@@ -33,7 +33,17 @@ final homeRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.calendar,
-    builder: (state) => const CalendarScreen(),
+    builder: (state) => MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => WeekCalendarBloc()..add(InitializeCalendar()),
+        ),
+        BlocProvider(
+          create: (context) => DayBloc(DateTime.now()),
+        ),
+      ],
+      child: const CalendarScreen(),
+    ),
     directionTween: SlideTransitionRoute.leftToRightTween,
   ),
   // Search Screen
@@ -90,56 +100,104 @@ final homeRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.trendingAnime,
-    builder: (state) => const TrendingAnimeScreen(),
+    builder: (state) {
+      final bloc = state.extra as TrendingAnimeBloc;
+      return BlocProvider.value(
+        value: bloc,
+        child: const TrendingAnimeScreen(),
+      );
+    },
     directionTween: SlideTransitionRoute.bottomToTopTween,
   ),
   // Trending Anime Slider
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.trendingAnimeSlider,
-    builder: (state) => const TrendingAnimeSlider(),
+    builder: (state) {
+      final bloc = state.extra as TrendingAnimeBloc;
+      return BlocProvider.value(
+        value: bloc,
+        child: const TrendingAnimeSlider(),
+      );
+    },
     directionTween: SlideTransitionRoute.bottomToTopTween,
   ),
   // Recommended Anime
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.recommendedAnime,
-    builder: (state) => const RecommendedAnimeScreen(),
+    builder: (state) {
+      final bloc = state.extra as RecommendedAnimeBloc;
+      return BlocProvider.value(
+        value: bloc,
+        child: const RecommendedAnimeScreen(),
+      );
+    },
     directionTween: SlideTransitionRoute.bottomToTopTween,
   ),
   // Recommended Anime Slider
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.recommendedAnimeSlider,
-    builder: (state) => const RecommendedAnimeSlider(),
+    builder: (state) {
+      final bloc = state.extra as RecommendedAnimeBloc;
+      return BlocProvider.value(
+        value: bloc,
+        child: const RecommendedAnimeSlider(),
+      );
+    },
     directionTween: SlideTransitionRoute.bottomToTopTween,
   ),
   // Trending Manga
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.trendingManga,
-    builder: (state) => const TrendingMangaScreen(),
+    builder: (state) {
+      final bloc = state.extra as TrendingMangaBloc;
+      return BlocProvider.value(
+        value: bloc,
+        child: const TrendingMangaScreen(),
+      );
+    },
     directionTween: SlideTransitionRoute.bottomToTopTween,
   ),
   // Trending Manga Slider
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.trendingMangaSlider,
-    builder: (state) => const TrendingMangaSlider(),
+    builder: (state) {
+      final bloc = state.extra as TrendingMangaBloc;
+      return BlocProvider.value(
+        value: bloc,
+        child: const TrendingMangaSlider(),
+      );
+    },
     directionTween: SlideTransitionRoute.bottomToTopTween,
   ),
   // Recommended Manga
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.recommendedManga,
-    builder: (state) => const RecommendedMangaScreen(),
+    builder: (state) {
+      final bloc = state.extra as RecommendedMangaBloc;
+      return BlocProvider.value(
+        value: bloc,
+        child: const RecommendedMangaScreen(),
+      );
+    },
     directionTween: SlideTransitionRoute.bottomToTopTween,
   ),
   // Recommended Manga Slider
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.recommendedMangaSlider,
-    builder: (state) => const RecommendedMangaSlider(),
+    builder: (state) {
+      final bloc = state.extra as RecommendedMangaBloc;
+      return BlocProvider.value(
+        value: bloc,
+        child: const RecommendedMangaSlider(),
+      );
+    },
     directionTween: SlideTransitionRoute.bottomToTopTween,
   ),
 ];

@@ -317,10 +317,6 @@ const documentNodeQueryGetTop100Anime = DocumentNode(definitions: [
                 name: NameNode(value: 'type'),
                 value: EnumValueNode(name: NameNode(value: 'ANIME')),
               ),
-              ArgumentNode(
-                name: NameNode(value: 'isAdult'),
-                value: BooleanValueNode(value: false),
-              ),
             ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [

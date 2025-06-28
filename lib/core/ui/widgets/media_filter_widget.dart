@@ -38,9 +38,6 @@ class MediaFilterWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SizedBox(
-          height: UIUtils.getWidgetHeight(
-              targetWidgetHeight: 45,
-              screenHeight: MediaQuery.sizeOf(context).height),
           width: UIUtils.getWidgetWidth(
               targetWidgetWidth: 170,
               screenWidth: MediaQuery.sizeOf(context).width),

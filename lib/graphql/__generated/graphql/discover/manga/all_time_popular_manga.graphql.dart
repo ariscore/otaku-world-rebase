@@ -322,10 +322,6 @@ const documentNodeQueryGetAllTimePopularManga = DocumentNode(definitions: [
                 name: NameNode(value: 'type'),
                 value: EnumValueNode(name: NameNode(value: 'MANGA')),
               ),
-              ArgumentNode(
-                name: NameNode(value: 'isAdult'),
-                value: BooleanValueNode(value: false),
-              ),
             ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [

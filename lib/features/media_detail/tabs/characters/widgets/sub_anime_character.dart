@@ -1,7 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:otaku_world/features/media_detail/tabs/characters/widgets/character_parameters.dart';
 
+import '../../../../../core/ui/images/cover_image.dart';
+import '../../../../../graphql/__generated/graphql/schema.graphql.dart';
 import 'character_card.dart';
 
 class SubAnimeCharacter extends StatelessWidget {
@@ -22,20 +23,15 @@ class SubAnimeCharacter extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: character.onTap,
-          child: Container(
+          child: SizedBox(
             width: 78,
             height: 115,
-            clipBehavior: Clip.antiAlias,
-            decoration: ShapeDecoration(
-              image: DecorationImage(
-                image: CachedNetworkImageProvider(
-                  character.imageUrl,
-                ),
-                fit: BoxFit.fill,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(character.isManga ? 5 : 10),
-              ),
+            child: CoverImage(
+              imageUrl: character.imageUrl,
+              type: character.isManga
+                  ? Enum$MediaType.MANGA
+                  : Enum$MediaType.ANIME,
+              animeRadius: 10,
             ),
           ),
         ),

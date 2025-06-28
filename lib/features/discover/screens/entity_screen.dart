@@ -13,6 +13,7 @@ import '../../../core/ui/appbars/simple_sliver_app_bar.dart';
 import '../../../core/ui/error_text.dart';
 import '../../../core/ui/shimmers/grid_shimmer.dart';
 import '../../../graphql/__generated/graphql/fragments.graphql.dart';
+import '../../../utils/navigation_helper.dart';
 import '../widgets/entity_card.dart';
 
 class EntityScreen<B extends PaginatedDataBloc> extends HookWidget {
@@ -99,6 +100,12 @@ class EntityScreen<B extends PaginatedDataBloc> extends HookWidget {
                             title: character.name?.userPreferred ?? ' - - ',
                             imageUrl: character.image?.large,
                             favorites: character.favourites,
+                            onTap: () {
+                              NavigationHelper.goToCharacterDetailScreen(
+                                context: context,
+                                characterId: character.id,
+                              );
+                            },
                           );
                         } else if (item is Fragment$StaffShort) {
                           final staff = list[index] as Fragment$StaffShort;
@@ -106,6 +113,12 @@ class EntityScreen<B extends PaginatedDataBloc> extends HookWidget {
                             title: staff.name?.userPreferred ?? ' - - ',
                             imageUrl: staff.image?.large,
                             favorites: staff.favourites,
+                            onTap: () {
+                              NavigationHelper.goToStaffDetailScreen(
+                                context: context,
+                                staffId: staff.id,
+                              );
+                            },
                           );
                         } else if (item is Fragment$SearchResultStudio) {
                           final studio =
@@ -122,6 +135,12 @@ class EntityScreen<B extends PaginatedDataBloc> extends HookWidget {
                             title: studio.name,
                             imageUrl: poster,
                             favorites: studio.favourites,
+                            onTap: () {
+                              NavigationHelper.goToStudioDetailScreen(
+                                context: context,
+                                studioId: studio.id,
+                              );
+                            },
                           );
                         } else {
                           return const SizedBox();
