@@ -135,7 +135,7 @@ class _PostActivityScreenState extends State<PostActivityScreen> {
             backgroundColor: Colors.transparent,
             insetPadding: const EdgeInsets.all(10),
             child: TextActivityPreview(
-              text: content,
+              text: content.replaceAll('\n', '<br>'),
               userAvatar: state.user.avatar?.medium ?? '',
               userName: state.user.name,
             ),
@@ -149,7 +149,7 @@ class _PostActivityScreenState extends State<PostActivityScreen> {
 
   void _postActivity() {
     log('Posting activity: ${textController.text}');
-    final text = textController.text.trim();
+    final text = textController.text.trim().replaceAll('\n', '<br>');
     if (text.isEmpty) {
       UIUtils.showSnackBar(context, 'Activity can\'t be empty!');
     } else {

@@ -149,7 +149,7 @@ class _EditMessageActivityScreenState extends State<EditMessageActivityScreen> {
             backgroundColor: Colors.transparent,
             insetPadding: const EdgeInsets.all(10),
             child: MessageActivityPreview(
-              text: content,
+              text: content.replaceAll('\n', '<br>'),
               senderAvatar: widget.activity.messenger?.avatar?.medium ?? '',
               senderName: widget.activity.messenger?.name ?? '',
             ),
@@ -163,7 +163,7 @@ class _EditMessageActivityScreenState extends State<EditMessageActivityScreen> {
 
   void _editActivity() {
     log('Editing activity');
-    final text = textController.text.trim();
+    final text = textController.text.trim().replaceAll('\n', '<br>');
     if (text.isEmpty) {
       UIUtils.showSnackBar(context, 'Activity can\'t be empty!');
     } else {

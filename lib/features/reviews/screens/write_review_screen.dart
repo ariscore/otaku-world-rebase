@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
-import 'package:otaku_world/core/ui/buttons/primary_button.dart';
-import 'package:otaku_world/core/ui/custom_text_field.dart';
 import 'package:otaku_world/core/ui/markdown_v2/markdown_editor.dart';
 
 import '../../../core/ui/appbars/simple_app_bar.dart';
-import '../../../core/ui/texts/counter_text.dart';
 import '../../../generated/assets.dart';
-import '../../../utils/ui_utils.dart';
 
 class WriteReviewScreen extends StatefulWidget {
   const WriteReviewScreen({
@@ -24,78 +20,6 @@ class WriteReviewScreen extends StatefulWidget {
 }
 
 class _WriteReviewScreenState extends State<WriteReviewScreen> {
-  final List<MarkdownItemModel> markDownItems = [
-    MarkdownItemModel(
-      iconPath: Assets.markdownBold,
-      label: 'Bold',
-      onTap: () {},
-    ),
-    MarkdownItemModel(
-      iconPath: Assets.markdownItalic,
-      label: 'Italic',
-      onTap: () {},
-    ),
-    MarkdownItemModel(
-      iconPath: Assets.markdownStrike,
-      label: 'Strikethrough',
-      onTap: () {},
-    ),
-    MarkdownItemModel(
-      iconPath: Assets.markdownEyeSlash,
-      label: 'Spoiler',
-      onTap: () {},
-    ),
-    MarkdownItemModel(
-      iconPath: Assets.markdownLink,
-      label: 'Link',
-      onTap: () {},
-    ),
-    MarkdownItemModel(
-      iconPath: Assets.markdownImage,
-      label: 'Image',
-      onTap: () {},
-    ),
-    MarkdownItemModel(
-      iconPath: Assets.markdownYoutube,
-      label: 'Youtube Video',
-      onTap: () {},
-    ),
-    MarkdownItemModel(
-      iconPath: Assets.markdownVideo,
-      label: 'Video',
-      onTap: () {},
-    ),
-    MarkdownItemModel(
-      iconPath: Assets.markdownNumberList,
-      label: 'Number List',
-      onTap: () {},
-    ),
-    MarkdownItemModel(
-      iconPath: Assets.markdownBulletList,
-      label: 'Bullet list',
-      onTap: () {},
-    ),
-    MarkdownItemModel(
-      iconPath: Assets.markdownHeader,
-      label: 'Header',
-      onTap: () {},
-    ),
-    MarkdownItemModel(
-      iconPath: Assets.markdownCenter,
-      label: 'Center',
-      onTap: () {},
-    ),
-    MarkdownItemModel(
-      iconPath: Assets.markdownQuote,
-      label: 'Quote',
-      onTap: () {},
-    ),
-    MarkdownItemModel(
-      iconPath: Assets.markdownQuote,
-      label: 'Code',
-      onTap: () {},
-    ),
-  ];
 
   final _formKey = GlobalKey<FormState>();
 
@@ -129,7 +53,7 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
               onShowPreview: (content) {
                 context.push(
                   RouteConstants.previewReview,
-                  extra: content,
+                  extra: content.replaceAll('\n', '<br>'),
                 );
               },
               textController: widget.controller,
@@ -217,16 +141,4 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
       // ),
     );
   }
-}
-
-class MarkdownItemModel {
-  final String iconPath;
-  final String label;
-  final VoidCallback onTap;
-
-  MarkdownItemModel({
-    required this.iconPath,
-    required this.label,
-    required this.onTap,
-  });
 }

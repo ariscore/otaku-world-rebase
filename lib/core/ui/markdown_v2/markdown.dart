@@ -32,6 +32,7 @@ class MyMarkdownWidgetV2 extends StatelessWidget {
       UrlLinkSyntax(),
       AnilistImageSyntax(),
       BrSyntax(),
+      CustomLineBreakSyntax(),
       YoutubeSyntax(),
       WebmSyntax(),
       BareLinkSyntax(),
@@ -63,6 +64,8 @@ class MyMarkdownWidgetV2 extends StatelessWidget {
       return '[$text]($url)';
     });
 
+    // output = output.replaceAll('\n', '');
+
     // 2️⃣ Convert <a>text</a> → [text](text)
     // final bareLinkPattern = RegExp(
     //   r'''<a\s*>([\s\S]*?)</a>''',
@@ -72,7 +75,6 @@ class MyMarkdownWidgetV2 extends StatelessWidget {
     // output = output.replaceAllMapped(bareLinkPattern, (match) {
     //   final text = match.group(1)!.trim();
     //   return '[$text]($text)';
-    // });
 
     // 3️⃣ Other inline HTML → Markdown
     final tagMap = {

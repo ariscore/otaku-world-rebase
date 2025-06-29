@@ -140,7 +140,7 @@ class _ReplyActivityScreenState extends State<ReplyActivityScreen> {
             backgroundColor: Colors.transparent,
             insetPadding: const EdgeInsets.all(10),
             child: ActivityReplyPreview(
-              text: content,
+              text: content.replaceAll('\n', '<br>'),
               userAvatar: state.user.avatar?.medium ?? '',
               userName: state.user.name,
             ),
@@ -154,7 +154,7 @@ class _ReplyActivityScreenState extends State<ReplyActivityScreen> {
 
   void _replyActivity() {
     log('Replying activity');
-    final text = textController.text.trim();
+    final text = textController.text.trim().replaceAll('\n', '<br>');
     if (text.isEmpty) {
       UIUtils.showSnackBar(context, 'Reply can\'t be empty!');
     } else {

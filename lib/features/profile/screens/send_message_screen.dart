@@ -143,7 +143,7 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
             backgroundColor: Colors.transparent,
             insetPadding: const EdgeInsets.all(10),
             child: MessageActivityPreview(
-              text: content,
+              text: content.replaceAll('\n', '<br>'),
               senderAvatar: state.user.avatar?.medium ?? '',
               senderName: state.user.name,
             ),
@@ -183,7 +183,7 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
 
   void _sendMessage() {
     log('Sending message');
-    final text = textController.text.trim();
+    final text = textController.text.trim().replaceAll('\n', '<br>');
     if (text.isEmpty) {
       UIUtils.showSnackBar(context, 'Message can\'t be empty!');
     } else {

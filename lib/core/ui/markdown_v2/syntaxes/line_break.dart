@@ -25,11 +25,13 @@ class CustomLineBreakSyntax extends InlineSyntax {
 }
 
 class BrSyntax extends InlineSyntax {
-  BrSyntax() : super(r'<\/br>');
+  BrSyntax() : super(r'<\/?br\s*\/?>', caseSensitive: false);
 
   @override
   bool onMatch(InlineParser parser, Match match) {
-    parser.addNode(Element.empty('br'));
+    log('Line break match: ${match.group(0)}');
+    // parser.addNode(Element.empty('br'));
+    parser.addNode(Element.text('p', '\n'));
     return true;
   }
 }
