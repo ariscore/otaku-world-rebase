@@ -20,6 +20,7 @@ import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 
 import '../../../bloc/bottom_nav_bar/bottom_nav_bar_cubit.dart';
+import '../../../core/ui/widgets/double_back_pop_widget.dart';
 
 class SocialScreen extends StatefulHookWidget {
   const SocialScreen({super.key});
@@ -106,142 +107,145 @@ class _SocialScreenState extends State<SocialScreen>
       return null;
     }, const []);
 
-    return BlocListener<ActivitiesBloc, ActivitiesState>(
-      listenWhen: (previous, current) =>
-          current is ActivitiesLoaded &&
-          previous is ActivitiesLoaded &&
-          previous.showProgress != current.showProgress,
-      listener: (context, state) {
-        if (state is ActivitiesLoaded && state.showProgress) {
-          showDialog(
-            context: context,
-            barrierDismissible: false,
-            useRootNavigator: true,
-            builder: (context) {
-              return WillPopScope(
-                onWillPop: () async => false,
-                child: const Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            },
-          );
-        } else {
-          context.pop();
-        }
-      },
-      child: Scaffold(
-        floatingActionButton: PrimaryFAB(
-          controller: ScrollController(),
-          onPressed: () {
-            context.push(
-              RouteConstants.postNewActivity,
-              extra: (Fragment$TextActivity activity) {
-                log('Posted new activity');
-                activitiesBloc.addTextActivity(activity: activity);
+    return DoubleBackPopWidget(
+      child: BlocListener<ActivitiesBloc, ActivitiesState>(
+        listenWhen: (previous, current) =>
+            current is ActivitiesLoaded &&
+            previous is ActivitiesLoaded &&
+            previous.showProgress != current.showProgress,
+        listener: (context, state) {
+          if (state is ActivitiesLoaded && state.showProgress) {
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              useRootNavigator: true,
+              builder: (context) {
+                return WillPopScope(
+                  onWillPop: () async => false,
+                  child: const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
               },
             );
-          },
-        ),
-        body: ExtendedNestedScrollView(
-          // controller: scrollController,
-          key: scrollViewKey,
-          onlyOneScrollInBody: true,
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
-            return [
-              SliverAppBar(
-                expandedHeight: 210,
-                pinned: true,
-                backgroundColor: AppColors.raisinBlack,
-                flexibleSpace: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: DiscoverHeader(
-                    title: StringConstants.socialHeading,
-                    subtitle: StringConstants.socialSubheading,
-                  ),
-                ),
-                bottom: PreferredSize(
-                  preferredSize: const Size.fromHeight(60),
-                  child: Container(
-                    color: AppColors.raisinBlack,
-                    padding: const EdgeInsets.only(
-                      bottom: 10,
+          } else {
+            context.pop();
+          }
+        },
+        child: Scaffold(
+          floatingActionButton: PrimaryFAB(
+            controller: ScrollController(),
+            onPressed: () {
+              context.push(
+                RouteConstants.postNewActivity,
+                extra: (Fragment$TextActivity activity) {
+                  log('Posted new activity');
+                  activitiesBloc.addTextActivity(activity: activity);
+                },
+              );
+            },
+          ),
+          body: ExtendedNestedScrollView(
+            // controller: scrollController,
+            key: scrollViewKey,
+            onlyOneScrollInBody: true,
+            headerSliverBuilder: (context, innerBoxIsScrolled) {
+              return [
+                SliverAppBar(
+                  expandedHeight: 210,
+                  pinned: true,
+                  backgroundColor: AppColors.raisinBlack,
+                  flexibleSpace: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: DiscoverHeader(
+                      title: StringConstants.socialHeading,
+                      subtitle: StringConstants.socialSubheading,
                     ),
-                    child: Column(
-                      children: [
-                        CustomTabBar(
-                          tabs: const [
-                            'Following',
-                            'Global',
-                          ],
-                          controller: tabController,
-                          tabWidth: size.width / 2 - 45,
-                        ),
-                        const SizedBox(height: 5),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Activity',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .displayMedium
-                                    ?.copyWith(
-                                        // fontFamily: 'Roboto-Condensed',
-                                        ),
-                              ),
-                              const SizedBox(width: 100),
-                              Expanded(
-                                child: CustomDropdown(
-                                  dropdownItems:
-                                      FilterConstants.activitiesOptions,
-                                  initialValue:
-                                      FilterConstants.activitiesOptions[0],
-                                  borderRadius: 20,
-                                  onChange: (option) {
-                                    activitiesBloc.add(
-                                      SelectActivityType(
-                                        client: client,
-                                        type: option,
-                                      ),
-                                    );
-                                    // scrollController.jumpTo(0);
-                                    scrollViewKey.currentState!.outerController
-                                        .animateTo(
-                                      0,
-                                      duration: const Duration(seconds: 1),
-                                      curve: Curves.ease,
-                                    );
-                                  },
-                                ),
-                              ),
+                  ),
+                  bottom: PreferredSize(
+                    preferredSize: const Size.fromHeight(60),
+                    child: Container(
+                      color: AppColors.raisinBlack,
+                      padding: const EdgeInsets.only(
+                        bottom: 10,
+                      ),
+                      child: Column(
+                        children: [
+                          CustomTabBar(
+                            tabs: const [
+                              'Following',
+                              'Global',
                             ],
+                            controller: tabController,
+                            tabWidth: size.width / 2 - 45,
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 5),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Activity',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .displayMedium
+                                      ?.copyWith(
+                                          // fontFamily: 'Roboto-Condensed',
+                                          ),
+                                ),
+                                const SizedBox(width: 100),
+                                Expanded(
+                                  child: CustomDropdown(
+                                    dropdownItems:
+                                        FilterConstants.activitiesOptions,
+                                    initialValue:
+                                        FilterConstants.activitiesOptions[0],
+                                    borderRadius: 20,
+                                    onChange: (option) {
+                                      activitiesBloc.add(
+                                        SelectActivityType(
+                                          client: client,
+                                          type: option,
+                                        ),
+                                      );
+                                      // scrollController.jumpTo(0);
+                                      scrollViewKey
+                                          .currentState!.outerController
+                                          .animateTo(
+                                        0,
+                                        duration: const Duration(seconds: 1),
+                                        curve: Curves.ease,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ];
-          },
-          pinnedHeaderSliverHeightBuilder: () {
-            return 120;
-          },
-          body: TabBarView(
-            controller: tabController,
-            children: const [
-              ActivitiesList(
-                // key: PageStorageKey<String>('following'),
-                isFollowing: true,
-              ),
-              ActivitiesList(
-                // key: PageStorageKey<String>('global'),
-                isFollowing: false,
-              ),
-            ],
+              ];
+            },
+            pinnedHeaderSliverHeightBuilder: () {
+              return 120;
+            },
+            body: TabBarView(
+              controller: tabController,
+              children: const [
+                ActivitiesList(
+                  // key: PageStorageKey<String>('following'),
+                  isFollowing: true,
+                ),
+                ActivitiesList(
+                  // key: PageStorageKey<String>('global'),
+                  isFollowing: false,
+                ),
+              ],
+            ),
           ),
         ),
       ),

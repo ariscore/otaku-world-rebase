@@ -24,6 +24,7 @@ import 'package:otaku_world/utils/extensions.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
 
 import '../../../bloc/bottom_nav_bar/bottom_nav_bar_cubit.dart';
+import '../../../core/ui/widgets/double_back_pop_widget.dart';
 import '../widgets/list_sections.dart';
 
 class MyListScreen extends StatefulHookWidget {
@@ -71,59 +72,61 @@ class _MyListScreenState extends State<MyListScreen> {
       return null;
     }, const []);
 
-    return BlocProvider(
-      create: (context) => SaveListEntryBloc(client),
-      child: BlocListener<SaveListEntryBloc, SaveListEntryState>(
-        listener: _listBlocListener,
-        child: Scaffold(
-          floatingActionButton: ScrollToTopFAB(
-            controller: scrollController,
-            tag: 'my_list',
-          ),
-          body: RefreshIndicator(
-            backgroundColor: AppColors.raisinBlack,
-            onRefresh: () => _refresh(client),
-            child: BlocBuilder<ViewerBloc, ViewerState>(
-              builder: (context, state) {
-                if (state is ViewerInitial || state is ViewerLoading) {
-                  return const MyListShimmer(
-                      showFilters: true, isSliver: false);
-                } else if (state is ViewerLoaded) {
-                  animeListBloc ??= context.read<AnimeListBloc>()
-                    ..setUserId(
-                      viewerBloc.getUser().id,
-                    );
-                  mangaListBloc ??= context.read<MangaListBloc>()
-                    ..setUserId(
-                      viewerBloc.getUser().id,
-                    );
+    return DoubleBackPopWidget(
+      child: BlocProvider(
+        create: (context) => SaveListEntryBloc(client),
+        child: BlocListener<SaveListEntryBloc, SaveListEntryState>(
+          listener: _listBlocListener,
+          child: Scaffold(
+            floatingActionButton: ScrollToTopFAB(
+              controller: scrollController,
+              tag: 'my_list',
+            ),
+            body: RefreshIndicator(
+              backgroundColor: AppColors.raisinBlack,
+              onRefresh: () => _refresh(client),
+              child: BlocBuilder<ViewerBloc, ViewerState>(
+                builder: (context, state) {
+                  if (state is ViewerInitial || state is ViewerLoading) {
+                    return const MyListShimmer(
+                        showFilters: true, isSliver: false);
+                  } else if (state is ViewerLoaded) {
+                    animeListBloc ??= context.read<AnimeListBloc>()
+                      ..setUserId(
+                        viewerBloc.getUser().id,
+                      );
+                    mangaListBloc ??= context.read<MangaListBloc>()
+                      ..setUserId(
+                        viewerBloc.getUser().id,
+                      );
 
-                  return isAnime
-                      ? _buildMediaSection(
-                          client,
-                          scrollController,
-                          bloc: animeListBloc!,
-                          type: Enum$MediaType.ANIME,
-                        )
-                      : _buildMediaSection(
-                          client,
-                          scrollController,
-                          bloc: mangaListBloc!,
-                          type: Enum$MediaType.MANGA,
-                        );
-                } else if (state is ViewerError) {
-                  return _buildErrorWidget(
-                    type: state.type,
-                    onTryAgain: () {
-                      viewerBloc.add(LoadViewer(client));
-                    },
-                    message: state.message,
-                    isSliver: false,
-                  );
-                } else {
-                  return const SliverToBoxAdapter();
-                }
-              },
+                    return isAnime
+                        ? _buildMediaSection(
+                            client,
+                            scrollController,
+                            bloc: animeListBloc!,
+                            type: Enum$MediaType.ANIME,
+                          )
+                        : _buildMediaSection(
+                            client,
+                            scrollController,
+                            bloc: mangaListBloc!,
+                            type: Enum$MediaType.MANGA,
+                          );
+                  } else if (state is ViewerError) {
+                    return _buildErrorWidget(
+                      type: state.type,
+                      onTryAgain: () {
+                        viewerBloc.add(LoadViewer(client));
+                      },
+                      message: state.message,
+                      isSliver: false,
+                    );
+                  } else {
+                    return const SliverToBoxAdapter();
+                  }
+                },
+              ),
             ),
           ),
         ),

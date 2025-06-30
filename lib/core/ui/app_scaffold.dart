@@ -1,9 +1,9 @@
-import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/bottom_nav_bar/bottom_nav_bar_cubit.dart';
+import 'package:otaku_world/core/ui/widgets/double_back_pop_widget.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/theme/colors.dart';
 
@@ -17,15 +17,12 @@ class AppScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        appBar: navigationShell.currentIndex != 3 ? const MainAppBar() : null,
-        body: DoubleBackToCloseApp(
-          snackBar: const SnackBar(
-            content: Text('Press back again to exit!'),
-          ),
-          child: navigationShell,
+      child: DoubleBackPopWidget(
+        child: Scaffold(
+          appBar: navigationShell.currentIndex != 3 ? const MainAppBar() : null,
+          body: navigationShell,
+          bottomNavigationBar: _BottomNavBar(navigationShell),
         ),
-        bottomNavigationBar: _BottomNavBar(navigationShell),
       ),
     );
   }

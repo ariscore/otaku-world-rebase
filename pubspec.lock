@@ -377,22 +377,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.2"
-  double_back_to_close:
-    dependency: "direct main"
-    description:
-      name: double_back_to_close
-      sha256: "87146341b36e9f04da54e8f5ffcaafa96b11cc09551c0fca2075eca51d32d6f9"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.0"
-  double_back_to_close_app:
-    dependency: "direct main"
-    description:
-      name: double_back_to_close_app
-      sha256: d19ce4e2f8d2cb9f35bdbc90eecd5c731cc0e6216f5e8f14e7d1e076dafb344a
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
   equatable:
     dependency: "direct main"
     description:
@@ -692,10 +676,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: f02fd7d2a4dc512fec615529824fdd217fecb3a3d3de68360293a551f21634b3
+      sha256: ac294be30ba841830cfa146e5a3b22bb09f8dc5a0fdd9ca9332b04b0bde99ebf
       url: "https://pub.dev"
     source: hosted
-    version: "14.8.1"
+    version: "15.2.4"
   gql:
     dependency: transitive
     description:

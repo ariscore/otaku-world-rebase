@@ -75,9 +75,7 @@ class SettingsScreen extends StatelessWidget {
                     ),
                     const Spacer(),
                     IconButton(
-                      onPressed: () {
-                        context.read<AuthCubit>().logOut();
-                      },
+                      onPressed: () => _showLogOutConfirmationDialog(context),
                       icon: SvgPicture.asset(
                         Assets.iconsArrowRight,
                         colorFilter: const ColorFilter.mode(
@@ -161,7 +159,9 @@ class SettingsScreen extends StatelessWidget {
                   asset: Assets.iconsAbout,
                   label: 'About',
                   desc: 'Get to know more about Otaku World',
-                  onTap: () {},
+                  onTap: () {
+                    context.push(RouteConstants.aboutUs);
+                  },
                 ),
               ],
             ),
