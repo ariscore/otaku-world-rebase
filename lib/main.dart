@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:media_kit/media_kit.dart';
 import 'package:otaku_world/bloc/auth/auth_cubit.dart';
 import 'package:otaku_world/bloc/filter/collections/external_links/anime/anime_platforms_cubit.dart';
 import 'package:otaku_world/bloc/filter/collections/external_links/manga/manga_platforms_cubit.dart';
@@ -27,6 +28,7 @@ import 'config/router/router.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MediaKit.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -61,7 +63,7 @@ class MyApp extends StatelessWidget {
           create: (context) => GraphqlClientCubit(),
         ),
         BlocProvider(
-          create: (context) => AuthCubit()..authenticate(),
+          create: (context) => AuthCubit(),
         ),
         BlocProvider(
           create: (context) => AppVersionBloc(
@@ -108,12 +110,13 @@ class MyApp extends StatelessWidget {
         listeners: [
           BlocListener<AuthCubit, AuthState>(
             listener: (context, state) {
-              router.refresh();
-              if (state is Authenticated) {
-                context
-                    .read<GraphqlClientCubit>()
-                    .initializeGraphqlClient(state.token);
-              }
+              // print('Auth state listening');
+              // // router.refresh();
+              // if (state is Authenticated) {
+              //   context
+              //       .read<GraphqlClientCubit>()
+              //       .initializeGraphqlClient(state.token);
+              // }
             },
           ),
           BlocListener<GraphqlClientCubit, GraphqlClientState>(

@@ -11,10 +11,8 @@ import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/types/types.dart';
 import 'package:otaku_world/core/ui/activities/previews/activity_reply_preview.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
-import 'package:otaku_world/core/ui/custom_text_field.dart';
 import 'package:otaku_world/core/ui/markdown_v2/markdown_editor.dart';
 import 'package:otaku_world/generated/assets.dart';
-import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
 
 class ReplyActivityScreen extends StatefulWidget {

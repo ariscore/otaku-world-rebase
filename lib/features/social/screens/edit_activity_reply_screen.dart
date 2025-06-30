@@ -11,14 +11,12 @@ import 'package:otaku_world/bloc/social/edit_activity_reply/edit_activity_reply_
 import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/types/types.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
-import 'package:otaku_world/core/ui/custom_text_field.dart';
 import 'package:otaku_world/core/ui/markdown_v2/markdown_editor.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
 
 import '../../../bloc/viewer/viewer_bloc.dart';
 import '../../../core/ui/activities/previews/activity_reply_preview.dart';
-import '../../../theme/colors.dart';
 
 class EditActivityReplyScreen extends StatefulWidget {
   const EditActivityReplyScreen({

@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:markdown/markdown.dart' as md;
-import 'package:markdown_widget/markdown_widget.dart';
 
 // final SpanNodeGeneratorWithTag header1SpanWithTag = SpanNodeGeneratorWithTag(
 //   tag: 'h1',
@@ -54,6 +53,5 @@ class AniListHeaderSyntax extends md.BlockSyntax {
 
     // Produce an AST element like <hN> with UnparsedContent
     return md.Element('h$level', [...parser.document.parseInline(contentText)]);
-    return md.Element('h$level', [md.UnparsedContent(contentText)]);
   }
 }

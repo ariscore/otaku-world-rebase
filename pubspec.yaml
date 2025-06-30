@@ -55,17 +55,18 @@ dependencies:
   markdown_widget: ^2.3.2+6
   html: ^0.15.4
   swipe_to: ^1.0.6
-  media_kit: ^1.1.10+1
+  media_kit: ^1.1.11 # Primary package.
+  media_kit_video: ^1.2.5 # For video rendering.
+  media_kit_libs_video: ^1.0.5 # Native video dependencies.
   syncfusion_flutter_charts: ^26.2.10
   #  media_kit_libs_video:
   flutter_native_splash: ^2.4.1
-  media_kit_video: ^1.2.4
   youtube_player_flutter: ^9.1.1
   like_button: ^2.0.5
   extended_nested_scroll_view: ^6.2.1
   flutter_rating_bar: ^4.0.1
-  chewie: ^1.11.3
-  video_player: ^2.10.0
+#  chewie: 1.0.0
+#  video_player: 2.1.5
 
   # Navigation
   #  go_router: ^12.1.3
