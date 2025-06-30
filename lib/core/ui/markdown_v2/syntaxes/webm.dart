@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:markdown_widget/markdown_widget.dart';
 
-import 'package:markdown/markdown.dart' as md;
 import 'package:otaku_world/core/ui/video_player_screen.dart';
 
 import '../../../../config/router/router.dart';

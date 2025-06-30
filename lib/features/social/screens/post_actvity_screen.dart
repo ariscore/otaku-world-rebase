@@ -11,10 +11,8 @@ import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/types/types.dart';
 import 'package:otaku_world/core/ui/activities/previews/text_activity_preview.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
-import 'package:otaku_world/core/ui/custom_text_field.dart';
 import 'package:otaku_world/core/ui/markdown_v2/markdown_editor.dart';
 import 'package:otaku_world/generated/assets.dart';
-import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
 
 class PostActivityScreen extends StatefulWidget {
@@ -135,7 +133,7 @@ class _PostActivityScreenState extends State<PostActivityScreen> {
             backgroundColor: Colors.transparent,
             insetPadding: const EdgeInsets.all(10),
             child: TextActivityPreview(
-              text: content,
+              text: content.replaceAll('\n', '<br>'),
               userAvatar: state.user.avatar?.medium ?? '',
               userName: state.user.name,
             ),
@@ -149,7 +147,7 @@ class _PostActivityScreenState extends State<PostActivityScreen> {
 
   void _postActivity() {
     log('Posting activity: ${textController.text}');
-    final text = textController.text.trim();
+    final text = textController.text.trim().replaceAll('\n', '<br>');
     if (text.isEmpty) {
       UIUtils.showSnackBar(context, 'Activity can\'t be empty!');
     } else {

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:markdown_widget/markdown_widget.dart';
@@ -131,6 +129,10 @@ class CustomProxyRichText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return richTextBuilder?.call(textSpan) ??
-        Text.rich(textSpan, textAlign: textAlign, style: textSpan.style,);
+        Text.rich(
+          textSpan,
+          textAlign: textAlign,
+          style: textSpan.style,
+        );
   }
 }

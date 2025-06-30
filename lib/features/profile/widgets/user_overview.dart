@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:otaku_world/core/ui/markdown/markdown.dart';
 import 'package:otaku_world/core/ui/markdown_v2/markdown.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';

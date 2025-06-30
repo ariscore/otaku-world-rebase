@@ -156,11 +156,17 @@ import '../../features/social/screens/activity_replies_screen.dart';
 import '../../features/social/screens/social_screen.dart';
 
 part 'bottom_nav_routes.dart';
+
 part 'discover_routes.dart';
+
 part 'home_routes.dart';
+
 part 'list_routes.dart';
+
 part 'profile_routes.dart';
+
 part 'settings_routes.dart';
+
 part 'social_routes.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -374,7 +380,22 @@ final router = GoRouter(
     final authState = context.read<AuthCubit>().state;
     final routeCubit = context.read<RedirectRouteCubit>();
 
-    if (authState is UnAuthenticated) {
+    if (authState is AuthInitial) {
+      print('Auth state is auth initial');
+      if ((!routeCubit.isDesiredRouteSet() &&
+              state.matchedLocation != RouteConstants.login) ||
+          (state.matchedLocation != RouteConstants.home &&
+              state.matchedLocation != RouteConstants.login &&
+              state.matchedLocation != RouteConstants.onBoarding)) {
+        print('Setting desired route: ${state.matchedLocation}');
+        routeCubit.setDesiredRoute(
+          state.matchedLocation,
+          state.uri.queryParameters,
+        );
+      }
+
+      return RouteConstants.splash;
+    } else if (authState is UnAuthenticated) {
       if ((!routeCubit.isDesiredRouteSet() &&
               state.matchedLocation != RouteConstants.login) ||
           (state.matchedLocation != RouteConstants.home &&
@@ -387,15 +408,16 @@ final router = GoRouter(
       }
       return RouteConstants.login;
     } else {
-      if (state.matchedLocation == RouteConstants.home &&
-          routeCubit.isDesiredRouteSet()) {
-        final route = routeCubit.getDesiredRoute();
-        routeCubit.resetDesiredRoute();
-        dev.log('Going to desired route: $route', name: 'RouterRedirect');
-        return route;
-      } else {
-        return null;
-      }
+      // if (state.matchedLocation == RouteConstants.home &&
+      //     routeCubit.isDesiredRouteSet()) {
+      //   final route = routeCubit.getDesiredRoute();
+      //   routeCubit.resetDesiredRoute();
+      //   dev.log('Going to desired route: $route', name: 'RouterRedirect');
+      //   return route;
+      // } else {
+      //   return null;
+      // }
     }
+    return null;
   },
 );
