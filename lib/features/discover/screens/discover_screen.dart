@@ -10,6 +10,7 @@ import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/services/caching/image_cache_manager.dart';
 
 import '../../../config/router/router_constants.dart';
+import '../../../core/ui/widgets/double_back_pop_widget.dart';
 
 class DiscoverScreen extends HookWidget {
   const DiscoverScreen({super.key});
@@ -18,120 +19,122 @@ class DiscoverScreen extends HookWidget {
   Widget build(BuildContext context) {
     log('Building discover screen', name: 'Discover');
 
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(10),
-      physics: const BouncingScrollPhysics(),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const DiscoverHeader(
-            title: "Ignite your Anime \nAdventure",
-            subtitle:
-                "Immerse Yourself in a World of Discovery, Uncovering Exciting"
-                " Anime, Fascinating Mangas, and Iconic Characters.",
-          ),
-          const SizedBox(height: 10),
-          DiscoverImagePlaceholderCard(
-            onTap: () {
-              context.push(RouteConstants.discoverAnime);
-            },
-            assetName: Assets.discoverPlaceholdersAnime,
-          ),
-          const SizedBox(height: 20),
-          DiscoverImagePlaceholderCard(
-            onTap: () {
-              context.push(RouteConstants.discoverManga);
-            },
-            assetName: Assets.discoverPlaceholdersManga,
-          ),
-          const SizedBox(height: 20),
-          DiscoverImagePlaceholderCard(
-            onTap: () {
-              context.push(RouteConstants.discoverCharacters);
-            },
-            assetName: Assets.discoverPlaceholdersCharacters,
-          ),
-          const SizedBox(height: 20),
-          DiscoverImagePlaceholderCard(
-            onTap: () {
-              context.push(RouteConstants.discoverStaff);
-            },
-            assetName: Assets.discoverPlaceholdersStaff,
-          ),
-          const SizedBox(height: 20),
-          DiscoverImagePlaceholderCard(
-            onTap: () {
-              context.push(RouteConstants.discoverStudios);
-            },
-            assetName: Assets.discoverPlaceholdersStudios,
-          ),
-          /* DiscoverCard(
-            onTap: () {
-              context.push(RouteConstants.discoverAnime);
-            },
-            title: 'Anime',
-            beginColors: AppColors.raisinBlack,
-            endColors: ColorConstants.discoverColors[0],
-            child: DiscoverCardImage(
-              radius: 15.0,
-              angle: 0.11,
-              posters: PosterUtils.getRandomImages(
-                AnimeImageConstants.animePosters,
-              ),
-              type: 'Anime',
+    return DoubleBackPopWidget(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(10),
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const DiscoverHeader(
+              title: "Ignite your Anime \nAdventure",
+              subtitle:
+                  "Immerse Yourself in a World of Discovery, Uncovering Exciting"
+                  " Anime, Fascinating Mangas, and Iconic Characters.",
             ),
-          ),
-          DiscoverCard(
-            onTap: () {
-              context.push(RouteConstants.discoverManga);
-            },
-            title: 'Manga',
-            beginColors: AppColors.raisinBlack,
-            endColors: ColorConstants.discoverColors[1],
-            child: DiscoverCardImage(
-              radius: 5.0,
-              angle: 0.11,
-              posters: PosterUtils.getRandomImages(
-                MangaImageConstants.mangaPosters,
-              ),
-              type: 'Manga',
+            const SizedBox(height: 10),
+            DiscoverImagePlaceholderCard(
+              onTap: () {
+                context.push(RouteConstants.discoverAnime);
+              },
+              assetName: Assets.discoverPlaceholdersAnime,
             ),
-          ),
-          DiscoverCard(
-            onTap: () {
-              context.push(RouteConstants.discoverCharacters);
-            },
-            title: "Characters",
-            beginColors: AppColors.raisinBlack,
-            endColors: ColorConstants.discoverColors[2],
-            child: const DiscoverCharacterPosters(),
-          ),
-          DiscoverCard(
-            onTap: () {
-              context.push(RouteConstants.discoverStaff);
-            },
-            title: 'Staff',
-            beginColors: AppColors.raisinBlack,
-            endColors: ColorConstants.discoverColors[3],
-            child: DiscoverCardImage(
-              radius: 15.0,
-              angle: 0.11,
-              posters: PosterUtils.getRandomImages(
-                StaffImageConstants.staffPosters,
-              ),
-              type: 'Staff',
+            const SizedBox(height: 20),
+            DiscoverImagePlaceholderCard(
+              onTap: () {
+                context.push(RouteConstants.discoverManga);
+              },
+              assetName: Assets.discoverPlaceholdersManga,
             ),
-          ),
-          DiscoverCard(
-            onTap: () {
-              context.push(RouteConstants.discoverStudios);
-            },
-            title: "Studios",
-            beginColors: AppColors.raisinBlack,
-            endColors: ColorConstants.discoverColors[4],
-            child: const DiscoverStudiosPosters(),
-          ),*/
-        ],
+            const SizedBox(height: 20),
+            DiscoverImagePlaceholderCard(
+              onTap: () {
+                context.push(RouteConstants.discoverCharacters);
+              },
+              assetName: Assets.discoverPlaceholdersCharacters,
+            ),
+            const SizedBox(height: 20),
+            DiscoverImagePlaceholderCard(
+              onTap: () {
+                context.push(RouteConstants.discoverStaff);
+              },
+              assetName: Assets.discoverPlaceholdersStaff,
+            ),
+            const SizedBox(height: 20),
+            DiscoverImagePlaceholderCard(
+              onTap: () {
+                context.push(RouteConstants.discoverStudios);
+              },
+              assetName: Assets.discoverPlaceholdersStudios,
+            ),
+            /* DiscoverCard(
+              onTap: () {
+                context.push(RouteConstants.discoverAnime);
+              },
+              title: 'Anime',
+              beginColors: AppColors.raisinBlack,
+              endColors: ColorConstants.discoverColors[0],
+              child: DiscoverCardImage(
+                radius: 15.0,
+                angle: 0.11,
+                posters: PosterUtils.getRandomImages(
+                  AnimeImageConstants.animePosters,
+                ),
+                type: 'Anime',
+              ),
+            ),
+            DiscoverCard(
+              onTap: () {
+                context.push(RouteConstants.discoverManga);
+              },
+              title: 'Manga',
+              beginColors: AppColors.raisinBlack,
+              endColors: ColorConstants.discoverColors[1],
+              child: DiscoverCardImage(
+                radius: 5.0,
+                angle: 0.11,
+                posters: PosterUtils.getRandomImages(
+                  MangaImageConstants.mangaPosters,
+                ),
+                type: 'Manga',
+              ),
+            ),
+            DiscoverCard(
+              onTap: () {
+                context.push(RouteConstants.discoverCharacters);
+              },
+              title: "Characters",
+              beginColors: AppColors.raisinBlack,
+              endColors: ColorConstants.discoverColors[2],
+              child: const DiscoverCharacterPosters(),
+            ),
+            DiscoverCard(
+              onTap: () {
+                context.push(RouteConstants.discoverStaff);
+              },
+              title: 'Staff',
+              beginColors: AppColors.raisinBlack,
+              endColors: ColorConstants.discoverColors[3],
+              child: DiscoverCardImage(
+                radius: 15.0,
+                angle: 0.11,
+                posters: PosterUtils.getRandomImages(
+                  StaffImageConstants.staffPosters,
+                ),
+                type: 'Staff',
+              ),
+            ),
+            DiscoverCard(
+              onTap: () {
+                context.push(RouteConstants.discoverStudios);
+              },
+              title: "Studios",
+              beginColors: AppColors.raisinBlack,
+              endColors: ColorConstants.discoverColors[4],
+              child: const DiscoverStudiosPosters(),
+            ),*/
+          ],
+        ),
       ),
     );
   }
