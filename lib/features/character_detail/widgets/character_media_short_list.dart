@@ -8,7 +8,6 @@ import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/paginated_data/paginated_data_bloc.dart';
-import '../../../constants/string_constants.dart';
 import '../../../core/ui/placeholders/anime_character_placeholder.dart';
 import '../../../core/ui/shimmers/detail_screens/list/character_list_shimmer.dart';
 import '../../../generated/assets.dart';
@@ -24,18 +23,20 @@ class CharacterMediaShortList extends StatefulWidget {
 
 class _CharacterMediaShortListState extends State<CharacterMediaShortList> {
   List<String> availableLanguages = [];
-  String selectedLanguage = StringConstants.defaultLanguageDropdown;
+  String? selectedLanguage;
 
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<CharacterMediaBloc>();
     return SliverMainAxisGroup(
       slivers: [
-        if (availableLanguages.isNotEmpty) ...[
+        if (selectedLanguage != null &&
+            availableLanguages.isNotEmpty &&
+            availableLanguages.length > 1) ...[
           SliverToBoxAdapter(
             child: CustomDropdown(
               dropdownItems: availableLanguages,
-              initialValue: selectedLanguage,
+              initialValue: selectedLanguage!,
               onChange: (language) {
                 setState(() {
                   selectedLanguage = language;
@@ -148,7 +149,10 @@ class _CharacterMediaShortListState extends State<CharacterMediaShortList> {
       );
     }
 
-    availableLanguages.sort();
+    if (availableLanguages.isNotEmpty) {
+      selectedLanguage = availableLanguages.first;
+      availableLanguages.sort();
+    }
   }
 
   Widget _buildListLoading() {

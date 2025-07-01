@@ -8,7 +8,6 @@ import 'package:otaku_world/graphql/__generated/graphql/details/characters.graph
 import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../../bloc/graphql_client/graphql_client_cubit.dart';
-import '../../../../constants/string_constants.dart';
 import '../../../../core/ui/shimmers/detail_screens/list/character_list_shimmer.dart';
 import '../../../../generated/assets.dart';
 import '../../../../graphql/__generated/graphql/schema.graphql.dart';
@@ -24,7 +23,7 @@ class Characters extends StatefulWidget {
 class _CharactersState extends State<Characters> {
   List<String> availableLanguages = [];
 
-  String selectedLanguage = StringConstants.defaultLanguageDropdown;
+  String? selectedLanguage;
 
   @override
   Widget build(BuildContext context) {
@@ -69,13 +68,15 @@ class _CharactersState extends State<Characters> {
             },
             child: CustomScrollView(
               slivers: [
-                if (availableLanguages.isNotEmpty)
+                if (selectedLanguage != null &&
+                    availableLanguages.isNotEmpty &&
+                    availableLanguages.length > 1)
                   SliverPadding(
                     padding: const EdgeInsets.all(8.0),
                     sliver: SliverToBoxAdapter(
                       child: CustomDropdown(
                         dropdownItems: availableLanguages,
-                        initialValue: selectedLanguage,
+                        initialValue: selectedLanguage!,
                         onChange: (language) {
                           setState(() {
                             selectedLanguage = language;
@@ -157,7 +158,9 @@ class _CharactersState extends State<Characters> {
         },
       );
     }
-
-    availableLanguages.sort();
+    if (availableLanguages.isNotEmpty) {
+      selectedLanguage = availableLanguages.first;
+      availableLanguages.sort();
+    }
   }
 }

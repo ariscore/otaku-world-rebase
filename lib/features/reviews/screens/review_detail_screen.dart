@@ -8,8 +8,6 @@ import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/bloc/reviews/review_detail/review_detail_bloc.dart';
 import 'package:otaku_world/bloc/reviews/reviews/reviews_bloc.dart';
-import 'package:otaku_world/core/ui/error_text.dart';
-import 'package:otaku_world/core/ui/markdown/markdown.dart';
 import 'package:otaku_world/core/ui/markdown_v2/markdown.dart';
 import 'package:otaku_world/core/ui/shimmers/review_detail_shimmer.dart';
 import 'package:otaku_world/features/media_detail/widgets/banner_image.dart';
@@ -29,6 +27,7 @@ import '../../../bloc/profile/reviews/user_reviews_bloc.dart';
 import '../../../bloc/viewer/viewer_bloc.dart';
 import '../../../config/router/router_constants.dart';
 import '../../../core/ui/appbars/simple_app_bar.dart';
+import '../../../core/ui/placeholders/anime_character_placeholder.dart';
 import '../../../graphql/__generated/graphql/reviews/post_review.graphql.dart';
 import '../../../theme/colors.dart';
 import '../../../utils/formatting_utils.dart';
@@ -65,24 +64,24 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: const SimpleAppBar(
-          title: '',
+
           bgColor: AppColors.transparent,
         ),
-        body: SingleChildScrollView(
-          child: BlocBuilder<ReviewDetailBloc, ReviewDetailState>(
-            builder: (context, state) {
-              if (state is ReviewDetailInitial) {
-                context
-                    .read<ReviewDetailBloc>()
-                    .add(LoadReviewDetail(client: client));
-                return const ReviewDetailShimmer();
-              } else if (state is ReviewDetailLoading) {
-                return const ReviewDetailShimmer();
-              } else if (state is ReviewDetailLoaded) {
-                final review = state.review;
-                reviewId = review.id;
+        body: BlocBuilder<ReviewDetailBloc, ReviewDetailState>(
+          builder: (context, state) {
+            if (state is ReviewDetailInitial) {
+              context
+                  .read<ReviewDetailBloc>()
+                  .add(LoadReviewDetail(client: client));
+              return const ReviewDetailShimmer();
+            } else if (state is ReviewDetailLoading) {
+              return const ReviewDetailShimmer();
+            } else if (state is ReviewDetailLoaded) {
+              final review = state.review;
+              reviewId = review.id;
 
-                return Column(
+              return SingleChildScrollView(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -97,7 +96,7 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                           width: width,
                           child: BannerImage(
                             url:
-                                review.media!.coverImage!.extraLarge.toString(),
+                            review.media!.coverImage!.extraLarge.toString(),
                             // placeHolderName: Assets.placeholders340x72,
                           ),
                         ),
@@ -128,9 +127,9 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                       child: Text(
                         '${_getMediaType(review.mediaType!)} Review',
                         style:
-                            Theme.of(context).textTheme.titleMedium!.copyWith(
-                                  fontFamily: 'Roboto',
-                                ),
+                        Theme.of(context).textTheme.titleMedium!.copyWith(
+                          fontFamily: 'Roboto',
+                        ),
                       ),
                     ),
                     _buildTitleSection(
@@ -162,10 +161,10 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                         FormattingUtils.formatUnixTimestamp(review.createdAt)
                             .toString(),
                         style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontFamily: 'Roboto',
-                                  color: AppColors.white.withValues(alpha: 0.8),
-                                ),
+                        Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontFamily: 'Roboto',
+                          color: AppColors.white.withValues(alpha: 0.8),
+                        ),
                       ),
                     ),
                     Padding(
@@ -173,10 +172,10 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                       child: Text(
                         "(Last Updated on ${FormattingUtils.formatUnixTimestamp(review.createdAt).toString()})",
                         style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontFamily: 'Roboto',
-                                  color: AppColors.white.withValues(alpha: 0.8),
-                                ),
+                        Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontFamily: 'Roboto',
+                          color: AppColors.white.withValues(alpha: 0.8),
+                        ),
                       ),
                     ),
                     Padding(
@@ -216,21 +215,26 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                       ),
                     ),
                   ],
-                );
-              } else if (state is ReviewDetailError) {
-                return ErrorText(
-                  message: state.message,
-                  onTryAgain: () {
-                    context
-                        .read<ReviewDetailBloc>()
-                        .add(LoadReviewDetail(client: client));
-                  },
-                );
-              } else {
-                return const Text('Unknown State');
-              }
-            },
-          ),
+                ),
+              );
+            }
+
+            return Center(
+              child: AnimeCharacterPlaceholder(
+                asset: Assets.charactersErenYeager,
+                height: 300,
+                heading: 'Something went wrong!',
+                subheading:
+                'Please check your internet connection or try again later.',
+                onTryAgain: () {
+                  context
+                      .read<ReviewDetailBloc>()
+                      .add(LoadReviewDetail(client: client));
+                },
+                isError: true,
+              ),
+            );
+          },
         ),
       ),
     );

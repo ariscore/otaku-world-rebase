@@ -6,7 +6,6 @@ import 'package:otaku_world/features/character_detail/widgets/character_media_ca
 
 import '../../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/paginated_data/paginated_data_bloc.dart';
-import '../../../constants/string_constants.dart';
 import '../../../core/ui/placeholders/anime_character_placeholder.dart';
 import '../../../core/ui/shimmers/detail_screens/list/character_list_shimmer.dart';
 import '../../../core/ui/widgets/media_filter_widget.dart';
@@ -22,7 +21,7 @@ class CharacterMediaList extends StatefulWidget {
 
 class _CharacterMediaListState extends State<CharacterMediaList> {
   List<String> availableLanguages = [];
-  String selectedLanguage = StringConstants.defaultLanguageDropdown;
+  String? selectedLanguage;
 
   @override
   Widget build(BuildContext context) {
@@ -45,20 +44,23 @@ class _CharacterMediaListState extends State<CharacterMediaList> {
       child: CustomScrollView(
         slivers: [
           // Language Dropdown
-          SliverPadding(
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-            sliver: SliverToBoxAdapter(
-              child: CustomDropdown<String>(
-                dropdownItems: availableLanguages,
-                initialValue: selectedLanguage,
-                onChange: (language) {
-                  setState(() {
-                    selectedLanguage = language;
-                  });
-                },
+          if (selectedLanguage != null &&
+              availableLanguages.isNotEmpty &&
+              availableLanguages.length > 1)
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+              sliver: SliverToBoxAdapter(
+                child: CustomDropdown<String>(
+                  dropdownItems: availableLanguages,
+                  initialValue: selectedLanguage!,
+                  onChange: (language) {
+                    setState(() {
+                      selectedLanguage = language;
+                    });
+                  },
+                ),
               ),
             ),
-          ),
           // Media Filter Widget
           SliverPadding(
             padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
@@ -191,6 +193,7 @@ class _CharacterMediaListState extends State<CharacterMediaList> {
     if (newLanguages.isNotEmpty) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         setState(() {
+          selectedLanguage = newLanguages.first;
           availableLanguages = newLanguages.toList()..sort();
         });
       });
