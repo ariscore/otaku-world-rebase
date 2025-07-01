@@ -79,9 +79,9 @@ class _CharacterMediaShortListState extends State<CharacterMediaShortList> {
                 return const SliverToBoxAdapter(
                   child: AnimeCharacterPlaceholder(
                     asset: Assets.charactersErenYeager,
-                    heading: 'No Characters Available',
+                    heading: 'No Anime/Manga Available',
                     subheading:
-                        'Looks like there aren’t any characters to display right now.',
+                        'Looks like there aren’t any Anime/Manga to display right now.',
                     isScrollable: true,
                   ),
                 );
