@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/shimmer_details.dart';
 
 class CopyrightText extends StatelessWidget {
   final String year;
@@ -17,7 +17,8 @@ class CopyrightText extends StatelessWidget {
     return Text(
       '© $year $parentCompany ($productName)',
       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-        color: Colors.grey,
+        color: AppColors.americanSilver,
+        fontFamily: 'Roboto',
       ),
       textAlign: TextAlign.center,
     );
