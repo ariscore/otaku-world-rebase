@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:markdown/markdown.dart';
 import 'package:markdown_widget/markdown_widget.dart';
@@ -97,6 +99,14 @@ class MyMarkdownWidgetV2 extends StatelessWidget {
         return '$mdMarker${m.group(1)!}$mdMarker';
       });
     });
+    output = output.replaceAll('<center>', '~~~');
+    output = output.replaceAll('</center>', '~~~');
+
+    // output = output.replaceAll('\n\n', '<br>');
+    // output = output.replaceAll('\n<br>', '<br>');
+    // output = output.replaceAll('<br>\n<br>', '<br>');
+    // output = output.replaceAll('<br>\n', '<br>');
+    // output = output.replaceAll('\n', '<br>');
 
     return output;
   }
@@ -105,7 +115,7 @@ class MyMarkdownWidgetV2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return MarkdownWidget(
       data: htmlToMarkdown(data),
-      // padding: const EdgeInsets.all(10),
+      padding: EdgeInsets.zero,
       shrinkWrap: true,
       markdownGenerator: markdownGenerator,
       config: MarkdownConfig.darkConfig.copy(

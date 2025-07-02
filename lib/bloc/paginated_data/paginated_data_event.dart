@@ -27,6 +27,18 @@ class UpdateData<E> extends PaginatedDataEvent {
   final List<E?> list;
 }
 
+class UpdateListEntry<E> extends PaginatedDataEvent {
+  const UpdateListEntry({required this.entry});
+
+  final Fragment$MediaListEntry entry;
+}
+
+class RemoveListEntry extends PaginatedDataEvent {
+  const RemoveListEntry({required this.id});
+
+  final int id;
+}
+
 class UpdateLoading extends PaginatedDataEvent {
   const UpdateLoading(this.showProgress);
 

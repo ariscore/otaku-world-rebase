@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 
 part 'paginated_data_event.dart';
 
@@ -22,6 +23,7 @@ abstract class PaginatedDataBloc<Q, E>
       transformer: droppable(),
     );
     on<UpdateData<E>>(_onUpdateData);
+    on<RemoveListEntry>(_onRemoveListEntry);
     on<ResetData>(_onResetData);
     on<UpdateLoading>(_onUpdateLoading);
   }
@@ -48,6 +50,12 @@ abstract class PaginatedDataBloc<Q, E>
     dev.log('Updating data');
     emit(PaginatedDataLoading());
     emit(PaginatedDataLoaded(list: event.list, hasNextPage: hasNextPage));
+  }
+
+  void _onRemoveListEntry(RemoveListEntry event, Emitter<PaginatedDataState> emit) {
+    dev.log('Removing list entry: ${event.id}');
+    // list.removeWhere((element) => element?.id == event.id);
+    // emit(PaginatedDataLoaded(list: list, hasNextPage: hasNextPage));
   }
 
   Future<void> _onLoadData(

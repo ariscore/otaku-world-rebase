@@ -80,6 +80,7 @@ class MangaSliderScreen extends StatelessWidget {
                     screenWidth: size.width,
                     color: cardColors[index % cardColors.length],
                     media: media,
+                    mediaListEntry: media?.mediaListEntry,
                   );
                 }).toList(),
               ),

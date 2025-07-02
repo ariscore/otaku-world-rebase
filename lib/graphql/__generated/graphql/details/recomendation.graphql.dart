@@ -446,6 +446,8 @@ const documentNodeQueryGetRecommendation = DocumentNode(definitions: [
   ),
   fragmentDefinitionMediaShort,
   fragmentDefinitionFuzzyDate,
+  fragmentDefinitionMediaListEntry,
+  fragmentDefinitionListEntryMedia,
 ]);
 Query$GetRecommendation _parserFn$Query$GetRecommendation(
         Map<String, dynamic> data) =>

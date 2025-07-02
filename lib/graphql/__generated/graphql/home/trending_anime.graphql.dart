@@ -354,6 +354,8 @@ const documentNodeQueryGetTrendingAnime = DocumentNode(definitions: [
   ),
   fragmentDefinitionMediaShort,
   fragmentDefinitionFuzzyDate,
+  fragmentDefinitionMediaListEntry,
+  fragmentDefinitionListEntryMedia,
 ]);
 Query$GetTrendingAnime _parserFn$Query$GetTrendingAnime(
         Map<String, dynamic> data) =>

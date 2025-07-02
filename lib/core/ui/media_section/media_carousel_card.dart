@@ -1,9 +1,16 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:otaku_world/bloc/media_list/media_list/media_list_bloc.dart';
+import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
 import 'package:otaku_world/core/ui/texts/genre_text.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 
+import '../../../config/router/router_constants.dart';
 import '../../../generated/assets.dart';
 import '../../../graphql/__generated/graphql/schema.graphql.dart';
 import '../../../services/caching/image_cache_manager.dart';
@@ -21,12 +28,14 @@ class MediaCarouselCard extends StatelessWidget {
     required this.screenWidth,
     required this.color,
     required this.media,
+    required this.mediaListEntry,
   });
 
   final double width;
   final double screenWidth;
   final Color color;
   final Fragment$MediaShort? media;
+  final Fragment$MediaListEntry? mediaListEntry;
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +119,7 @@ class MediaCarouselCard extends StatelessWidget {
                       genres: media!.genres,
                       genreStyle:
                           Theme.of(context).textTheme.titleLarge?.copyWith(
-                                color: AppColors.white.withValues(alpha:0.7),
+                                color: AppColors.white.withValues(alpha: 0.7),
                                 fontWeight: FontWeight.w500,
                                 fontFamily: 'Poppins',
                               ),
@@ -142,12 +151,49 @@ class MediaCarouselCard extends StatelessWidget {
   }
 
   Widget _buildButtonOptions(double screenWidth, BuildContext context, int id) {
+    final label = mediaListEntry == null ? 'Add to List' : 'Edit List';
+    final options = context.read<ViewerBloc>().getUser().mediaListOptions;
+    final listBloc = media?.type == Enum$MediaType.MANGA
+        ? context.read<MangaListBloc>()
+        : context.read<AnimeListBloc>();
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         PrimaryButton(
-          onTap: () {},
-          label: 'Add to List',
+          onTap: () {
+            context.push(RouteConstants.editMediaList, extra: {
+              'media': Fragment$ListEntryMedia(
+                id: media?.id ?? 0,
+                title: Fragment$ListEntryMedia$title(
+                  userPreferred: media?.title?.userPreferred ?? '',
+                  english: media?.title?.english ?? '',
+                  romaji: media?.title?.romaji ?? '',
+                  native: media?.title?.native ?? '',
+                ),
+                format: media?.format,
+                type: media?.type,
+                episodes: media?.episodes ?? 0,
+                chapters: media?.chapters ?? 0,
+                volumes: media?.volumes ?? 0,
+              ),
+              'options': options,
+              'mediaListEntry': media?.mediaListEntry,
+              // 'mediaListEntry': bloc.isDeletedEntry ? null : entry,
+              'onEdited': (entry) {
+                log('edited: $entry');
+                // bloc.add(UpdateDetailListEntry(entry: entry));
+
+                listBloc.add(UpdateListEntry(entry: entry));
+              },
+              'onDeleted': (id) {
+                log('Deleted: $id');
+                // bloc.add(RemoveDetailListEntry());
+                listBloc.add(RemoveListEntry(id: id));
+              },
+            });
+          },
+          label: label,
           color: AppColors.darkCharcoal,
           width: UIUtils.getWidgetWidth(
             targetWidgetWidth: 100,
@@ -186,7 +232,8 @@ class MediaCarouselCard extends StatelessWidget {
         children: [
           _buildMediaDetail(
             context,
-            FormattingUtils.getMediaFormatString(media.format ?? Enum$MediaFormat.$unknown),
+            FormattingUtils.getMediaFormatString(
+                media.format ?? Enum$MediaFormat.$unknown),
             (media.episodes == null) ? '? ep' : '${media.episodes} ep',
           ),
           SvgPicture.asset(Assets.iconsLineVertical),
@@ -246,7 +293,7 @@ class MediaCarouselCard extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
-                color: AppColors.white.withValues(alpha:0.5),
+                color: AppColors.white.withValues(alpha: 0.5),
               ),
         ),
       ],

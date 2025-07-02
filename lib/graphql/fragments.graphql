@@ -135,6 +135,9 @@ fragment MediaShort on Media {
     endDate {
         ...FuzzyDate
     }
+    mediaListEntry {
+        ...MediaListEntry
+    }
 }
 
 fragment SearchResultMedia on Media {
@@ -749,8 +752,43 @@ fragment MediaListEntry on MediaList {
         day
     }
     media {
-        ...MediaShort
+        ...ListEntryMedia
     }
+}
+
+fragment ListEntryMedia on Media {
+    id
+    title {
+        userPreferred
+        english
+        native
+        romaji
+    }
+    type
+    episodes
+    chapters
+    volumes
+    status
+    coverImage {
+        large
+        medium
+        extraLarge
+    }
+    format
+    startDate {
+        day
+        month
+        year
+    }
+    endDate {
+        day
+        month
+        year
+    }
+    genres
+    countryOfOrigin
+    averageScore
+    popularity
 }
 
 fragment MediaListOptions on MediaListOptions {

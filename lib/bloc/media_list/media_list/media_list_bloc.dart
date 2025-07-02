@@ -357,7 +357,6 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
       targetBuckets.addAll(customBuckets);
     }
 
-    bool foundAny = false;
     // Update master collection: place entry in all target buckets, remove from others
     final updatedLists = _masterCollection.lists?.map((collection) {
       if (collection == null) return null;
@@ -371,7 +370,6 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
         } else {
           entries.insert(0, event.entry);
         }
-        foundAny = true;
       } else {
         // Not a target: remove old copies
         entries.removeWhere((e) => e?.media?.id == event.entry.mediaId);

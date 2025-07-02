@@ -7,7 +7,6 @@ import '../../graphql/__generated/graphql/fragments.graphql.dart';
 
 import '../paginated_data/paginated_data_bloc.dart';
 
-
 class TrendingAnimeBloc
     extends PaginatedDataBloc<Query$GetTrendingAnime, Fragment$MediaShort> {
   @override

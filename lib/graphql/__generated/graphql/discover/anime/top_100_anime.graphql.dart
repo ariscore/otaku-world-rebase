@@ -353,6 +353,8 @@ const documentNodeQueryGetTop100Anime = DocumentNode(definitions: [
   ),
   fragmentDefinitionMediaShort,
   fragmentDefinitionFuzzyDate,
+  fragmentDefinitionMediaListEntry,
+  fragmentDefinitionListEntryMedia,
 ]);
 Query$GetTop100Anime _parserFn$Query$GetTop100Anime(
         Map<String, dynamic> data) =>
