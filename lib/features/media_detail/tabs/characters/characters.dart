@@ -158,9 +158,12 @@ class _CharactersState extends State<Characters> {
         },
       );
     }
-    if (availableLanguages.isNotEmpty) {
+    if (availableLanguages.isNotEmpty && selectedLanguage == null) {
       selectedLanguage = availableLanguages.first;
-      availableLanguages.sort();
     }
+    availableLanguages.sort();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {});
+    });
   }
 }

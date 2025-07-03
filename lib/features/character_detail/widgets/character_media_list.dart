@@ -190,13 +190,12 @@ class _CharacterMediaListState extends State<CharacterMediaList> {
       );
     }
 
-    if (newLanguages.isNotEmpty) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        setState(() {
-          selectedLanguage = newLanguages.first;
-          availableLanguages = newLanguages.toList()..sort();
-        });
-      });
+    if (newLanguages.isNotEmpty && selectedLanguage == null) {
+      selectedLanguage = newLanguages.first;
     }
+    availableLanguages = newLanguages.toList()..sort();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {});
+    });
   }
 }

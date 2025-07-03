@@ -137,7 +137,8 @@ class _CharacterMediaShortListState extends State<CharacterMediaShortList> {
   }
 
   void loadLanguages(
-      List<Query$getCharacterMedia$Character$media$edges?> characters) {
+    List<Query$getCharacterMedia$Character$media$edges?> characters,
+  ) {
     for (var character in characters) {
       character?.voiceActorRoles?.forEach(
         (voiceActorRole) {
@@ -151,8 +152,11 @@ class _CharacterMediaShortListState extends State<CharacterMediaShortList> {
 
     if (availableLanguages.isNotEmpty) {
       selectedLanguage = availableLanguages.first;
-      availableLanguages.sort();
     }
+    availableLanguages.sort();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {});
+    });
   }
 
   Widget _buildListLoading() {
