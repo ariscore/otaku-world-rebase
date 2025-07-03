@@ -355,7 +355,7 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
     int mediaId,
     int? reviewUserId,
   ) {
-    final userId = context.read<ViewerBloc>().getUser().id;
+    final userId = context.read<ViewerBloc>().getNullableUser()?.id;
 
     showModalBottomSheet(
       backgroundColor: AppColors.darkCharcoal,

@@ -121,21 +121,14 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
               ],
             );
           } else if (state is PaginatedDataError) {
-            return AnimeCharacterPlaceholder(
-              asset: Assets.charactersSchoolGirl,
-              height: 300,
-              heading: StringConstants.somethingWentWrong,
-              subheading: state.message,
-              isScrollable: true,
+            return _buildErrorScaffold(
+              message: state.message,
+              context: context,
             );
           } else {
-            return const Center(
-              child: AnimeCharacterPlaceholder(
-                height: 300,
-                asset: Assets.charactersCigaretteGirl,
-                subheading: StringConstants.somethingWentWrongError,
-                isScrollable: true,
-              ),
+            return _buildErrorScaffold(
+              message: StringConstants.somethingWentWrongError,
+              context: context,
             );
           }
         },
@@ -143,6 +136,32 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
       floatingActionButton: ScrollToTopFAB(
         controller: scrollController,
         tag: '',
+      ),
+    );
+  }
+
+  Widget _buildErrorScaffold({
+    required String message,
+    required BuildContext context,
+  }) {
+    return Scaffold(
+      appBar: SimpleAppBar(title: appbarTitle),
+      body: Center(
+        child: AnimeCharacterPlaceholder(
+          height: 300,
+          asset: Assets.charactersCigaretteGirl,
+          subheading: message,
+          isScrollable: true,
+          isError: true,
+          onTryAgain: () {
+            final bloc = context.read<B>();
+            final client = (context.read<GraphqlClientCubit>().state
+                    as GraphqlClientInitialized)
+                .client;
+
+            bloc.add(LoadData(client));
+          },
+        ),
       ),
     );
   }
@@ -254,7 +273,7 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
         vertical: 3,
       ),
       decoration: ShapeDecoration(
-        color: AppColors.raisinBlack.withValues(alpha:0.6),
+        color: AppColors.raisinBlack.withValues(alpha: 0.6),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(5),
