@@ -16,10 +16,11 @@ import 'package:otaku_world/utils/formatting_utils.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/paginated_data/paginated_data_bloc.dart';
+import '../../../constants/string_constants.dart';
 import '../../../generated/assets.dart';
 import '../../../graphql/__generated/graphql/schema.graphql.dart';
 import '../../../utils/navigation_helper.dart';
-import '../error_text.dart';
+import '../placeholders/anime_character_placeholder.dart';
 
 class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
   const MediaGridScreen({
@@ -120,21 +121,23 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
               ],
             );
           } else if (state is PaginatedDataError) {
-            return Center(
-              child: ErrorText(
-                message: state.message,
-                onTryAgain: () {
-                  final client = (context.read<GraphqlClientCubit>().state
-                          as GraphqlClientInitialized)
-                      .client;
-                  context.read<B>().add(
-                        LoadData(client),
-                      );
-                },
+            return AnimeCharacterPlaceholder(
+              asset: Assets.charactersSchoolGirl,
+              height: 300,
+              heading: StringConstants.somethingWentWrong,
+              subheading: state.message,
+              isScrollable: true,
+            );
+          } else {
+            return const Center(
+              child: AnimeCharacterPlaceholder(
+                height: 300,
+                asset: Assets.charactersCigaretteGirl,
+                subheading: StringConstants.somethingWentWrongError,
+                isScrollable: true,
               ),
             );
           }
-          return const Text('Unknown State');
         },
       ),
       floatingActionButton: ScrollToTopFAB(
