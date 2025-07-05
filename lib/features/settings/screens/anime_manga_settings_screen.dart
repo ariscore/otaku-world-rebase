@@ -118,6 +118,7 @@ class _AnimeMangaSettingsScreenState extends State<AnimeMangaSettingsScreen> {
                   vertical: 10,
                 ),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomDropdown(
                       title: 'Title Language',

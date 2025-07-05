@@ -8,6 +8,7 @@ import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/profile/user_social_bloc/user_social_bloc.dart';
 import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
 import 'package:otaku_world/constants/filter_constants.dart';
+import 'package:otaku_world/core/ui/bottomsheet/helpers/url_helpers.dart';
 import 'package:otaku_world/core/ui/error_text.dart';
 import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
 import 'package:otaku_world/core/ui/placeholders/anime_character_placeholder.dart';
@@ -16,7 +17,6 @@ import 'package:otaku_world/features/profile/widgets/user_card.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../constants/string_constants.dart';
 import '../../../core/ui/dialogs/alert_dialog.dart';
@@ -193,15 +193,17 @@ class UserSocial extends StatelessWidget {
                       ),
                     );
                   } else {
-                    return ErrorText(
-                      message: StringConstants.somethingWentWrongError,
-                      onTryAgain: () {
-                        if (client != null) {
-                          context.read<UserSocialBloc>().add(
-                                LoadSocialData(client),
-                              );
-                        }
-                      },
+                    return SliverToBoxAdapter(
+                      child: ErrorText(
+                        message: StringConstants.somethingWentWrongError,
+                        onTryAgain: () {
+                          if (client != null) {
+                            context.read<UserSocialBloc>().add(
+                                  LoadSocialData(client),
+                                );
+                          }
+                        },
+                      ),
                     );
                   }
                 },
@@ -374,18 +376,9 @@ class UserSocial extends StatelessWidget {
       host: 'anilist.co',
       path: 'user/$userName',
     );
-    launchUrl(
+    UrlHelpers.launchUri(
+      context,
       reviewUri,
-      mode: LaunchMode.externalApplication,
-    ).then(
-      (isSuccess) {
-        if (!isSuccess) {
-          UIUtils.showSnackBar(context, 'Can\'t open the link!');
-        }
-      },
-      onError: (e) {
-        UIUtils.showSnackBar(context, 'Can\'t open the link!');
-      },
     );
   }
 }
