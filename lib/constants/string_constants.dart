@@ -1,5 +1,6 @@
 class StringConstants {
   static const String nullStringConstant = ' - - ';
+  static const String nullStringPlaceHolder = ' - ';
 
   static const socialHeading = 'Connect, Share, and \nDiscover';
   static const socialSubheading =
