@@ -88,7 +88,8 @@ class PostReviewScreen extends HookWidget {
                               extra: commentTextField,
                             );
                             if (result is String) {
-                              commentTextField.text = result as String;
+                              commentTextField.text =
+                                  (result as String).replaceAll('\n', '<br>');
                             }
                           },
                           label: 'Write a Review',

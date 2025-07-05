@@ -16,7 +16,7 @@ class AuthCubit extends Cubit<AuthState> {
     scheme: 'https',
     host: 'anilist.co',
     path: '/api/v2/oauth/authorize',
-    query: 'client_id=13595&response_type=token',
+    query: 'client_id=28065&response_type=token',
   );
 
   final Uri _registerUri = Uri(
