@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/characters/characters_bloc.dart';
@@ -36,7 +34,6 @@ class _CharactersState extends State<Characters> with LanguageSelectionMixin {
         } else if (state is PaginatedDataLoading) {
           return const CharacterListShimmer();
         } else if (state is PaginatedDataLoaded) {
-          log('I am building again');
           List<Query$Characters$Media$characters$edges?> characters =
               state.list as List<Query$Characters$Media$characters$edges?>;
           loadLanguagesFromVoiceActors(characters);
@@ -67,8 +64,11 @@ class _CharactersState extends State<Characters> with LanguageSelectionMixin {
             },
             child: CustomScrollView(
               slivers: [
-                SliverToBoxAdapter(
-                  child: buildLanguageDropdown(),
+                SliverPadding(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  sliver: SliverToBoxAdapter(
+                    child: buildLanguageDropdown(),
+                  ),
                 ),
                 SliverPadding(
                   padding: const EdgeInsets.all(10),
@@ -130,5 +130,4 @@ class _CharactersState extends State<Characters> with LanguageSelectionMixin {
       },
     );
   }
-
 }

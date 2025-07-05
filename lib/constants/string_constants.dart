@@ -29,6 +29,8 @@ class StringConstants {
 
   static const urlValidationError = 'Please enter valid url';
   static const imageUrlValidationError = 'Please enter valid image url';
+
+  static const defaultLanguageDropdown = 'Japanese';
 }
 
 class LoginConstants {

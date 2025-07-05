@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/charcter_detail/media/character_media_bloc.dart';
-import 'package:otaku_world/core/ui/filters/custom_dropdown.dart';
+import 'package:otaku_world/core/ui/widgets/language_selection_mixin.dart';
 import 'package:otaku_world/core/ui/widgets/media_filter_widget.dart';
 import 'package:otaku_world/features/character_detail/widgets/character_media_card.dart';
 import 'package:otaku_world/utils/extensions.dart';
@@ -21,33 +21,19 @@ class CharacterMediaShortList extends StatefulWidget {
       _CharacterMediaShortListState();
 }
 
-class _CharacterMediaShortListState extends State<CharacterMediaShortList> {
-  List<String> availableLanguages = [];
-  String? selectedLanguage;
-
+class _CharacterMediaShortListState extends State<CharacterMediaShortList>
+    with LanguageSelectionMixin {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<CharacterMediaBloc>();
     return SliverMainAxisGroup(
       slivers: [
-        if (selectedLanguage != null &&
-            availableLanguages.isNotEmpty &&
-            availableLanguages.length > 1) ...[
-          SliverToBoxAdapter(
-            child: CustomDropdown(
-              dropdownItems: availableLanguages,
-              initialValue: selectedLanguage!,
-              onChange: (language) {
-                setState(() {
-                  selectedLanguage = language;
-                });
-              },
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: 10.height,
-          ),
-        ],
+        SliverToBoxAdapter(
+          child: buildLanguageDropdown(),
+        ),
+        SliverToBoxAdapter(
+          child: 10.height,
+        ),
         SliverToBoxAdapter(
           child: MediaFilterWidget(
             mediaSortNotifier: bloc.mediaSortNotifier,
@@ -73,7 +59,7 @@ class _CharacterMediaShortListState extends State<CharacterMediaShortList> {
               List<Query$getCharacterMedia$Character$media$edges?> characters =
                   state.list
                       as List<Query$getCharacterMedia$Character$media$edges?>;
-              loadLanguages(characters);
+              loadLanguagesFromVoiceActors(characters);
 
               if (characters.isEmpty) {
                 return const SliverToBoxAdapter(
@@ -134,29 +120,6 @@ class _CharacterMediaShortListState extends State<CharacterMediaShortList> {
         ),
       ],
     );
-  }
-
-  void loadLanguages(
-    List<Query$getCharacterMedia$Character$media$edges?> characters,
-  ) {
-    for (var character in characters) {
-      character?.voiceActorRoles?.forEach(
-        (voiceActorRole) {
-          var language = voiceActorRole!.voiceActor!.languageV2!;
-          if (!availableLanguages.contains(language)) {
-            availableLanguages.add(language);
-          }
-        },
-      );
-    }
-
-    if (availableLanguages.isNotEmpty) {
-      selectedLanguage = availableLanguages.first;
-    }
-    availableLanguages.sort();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      setState(() {});
-    });
   }
 
   Widget _buildListLoading() {
