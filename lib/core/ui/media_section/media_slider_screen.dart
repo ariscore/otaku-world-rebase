@@ -4,14 +4,16 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
+import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/ui/media_section/media_carousel_card.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
+import '../../../generated/assets.dart';
 import '../../../utils/ui_utils.dart';
 import '../appbars/simple_app_bar.dart';
-import '../error_text.dart';
+import '../placeholders/anime_character_placeholder.dart';
 
 class MediaSliderScreen<B extends PaginatedDataBloc> extends StatelessWidget {
   const MediaSliderScreen({
@@ -88,24 +90,43 @@ class MediaSliderScreen<B extends PaginatedDataBloc> extends StatelessWidget {
                 }).toList(),
               ),
             );
-          }
-
-          else if (state is PaginatedDataError) {
+          } else if (state is PaginatedDataError) {
             return Center(
-              child: ErrorText(
-                message: state.message,
+              child: AnimeCharacterPlaceholder(
+                asset: Assets.charactersChillBoy,
+                height: 300,
+                subheading: state.message,
                 onTryAgain: () {
-                  final client = (context.read<GraphqlClientCubit>().state
-                          as GraphqlClientInitialized)
-                      .client;
-                  context.read<B>().add(
-                        LoadData(client),
-                      );
+                  final client = context.read<GraphqlClientCubit>().getClient();
+                  if (client != null) {
+                    context.read<B>().add(
+                          LoadData(client),
+                        );
+                  }
                 },
+                isError: true,
+                isScrollable: true,
+              ),
+            );
+          } else {
+            return Center(
+              child: AnimeCharacterPlaceholder(
+                asset: Assets.charactersNoInternet,
+                height: 300,
+                subheading: StringConstants.somethingWentWrongError,
+                onTryAgain: () {
+                  final client = context.read<GraphqlClientCubit>().getClient();
+                  if (client != null) {
+                    context.read<B>().add(
+                          LoadData(client),
+                        );
+                  }
+                },
+                isError: true,
+                isScrollable: true,
               ),
             );
           }
-          return const Text('Unknown State');
         },
       ),
     );
