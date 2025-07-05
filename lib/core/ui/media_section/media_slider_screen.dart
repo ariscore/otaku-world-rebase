@@ -1,3 +1,5 @@
+import 'dart:developer' as dev;
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,7 +7,7 @@ import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/core/ui/media_section/media_carousel_card.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
-import 'dart:developer' as dev;
+
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../utils/ui_utils.dart';
 import '../appbars/simple_app_bar.dart';
@@ -86,7 +88,9 @@ class MediaSliderScreen<B extends PaginatedDataBloc> extends StatelessWidget {
                 }).toList(),
               ),
             );
-          } else if (state is PaginatedDataError) {
+          }
+
+          else if (state is PaginatedDataError) {
             return Center(
               child: ErrorText(
                 message: state.message,

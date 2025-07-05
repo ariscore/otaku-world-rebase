@@ -60,8 +60,13 @@ class UserSocial extends StatelessWidget {
                 barrierDismissible: false,
                 useRootNavigator: true,
                 builder: (context) {
-                  return WillPopScope(
-                    onWillPop: () async => false,
+                  return PopScope(
+                    canPop: false,
+                    onPopInvokedWithResult: (didPop, result) {
+                      if (didPop) {
+                        return;
+                      }
+                    },
                     child: const Center(
                       child: CircularProgressIndicator(),
                     ),
@@ -174,9 +179,29 @@ class UserSocial extends StatelessWidget {
                         onTryAgain: () {},
                       ),
                     );
+                  } else if (state is UserSocialError) {
+                    return SliverToBoxAdapter(
+                      child: ErrorText(
+                        message: state.message,
+                        onTryAgain: () {
+                          if (client != null) {
+                            context.read<UserSocialBloc>().add(
+                                  LoadSocialData(client),
+                                );
+                          }
+                        },
+                      ),
+                    );
                   } else {
-                    return const SliverToBoxAdapter(
-                      child: Text('Unknown State'),
+                    return ErrorText(
+                      message: StringConstants.somethingWentWrongError,
+                      onTryAgain: () {
+                        if (client != null) {
+                          context.read<UserSocialBloc>().add(
+                                LoadSocialData(client),
+                              );
+                        }
+                      },
                     );
                   }
                 },
@@ -317,11 +342,11 @@ class UserSocial extends StatelessWidget {
           onConfirm: () {
             dialogContext.pop();
             context.read<UserSocialBloc>().add(
-              UnfollowUser(
-                client: context.read<GraphqlClientCubit>().getClient()!,
-                userId: userId,
-              ),
-            );
+                  UnfollowUser(
+                    client: context.read<GraphqlClientCubit>().getClient()!,
+                    userId: userId,
+                  ),
+                );
           },
           onCancel: dialogContext.pop,
         );
