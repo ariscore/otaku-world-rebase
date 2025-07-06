@@ -94,7 +94,7 @@ class UpcomingEpisodesSection extends HookWidget {
                 ),
               ],
             );
-          }else if (state is PaginatedDataError) {
+          } else if (state is PaginatedDataError) {
             return ErrorText(
               message: state.message,
               onTryAgain: () {
@@ -181,6 +181,8 @@ class UpcomingEpisodesSection extends HookWidget {
     required Query$GetUpcomingEpisodes$Page$media? media,
     required Color color,
   }) {
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final double targetWidgetWidth = screenWidth > 600 ? 150 : 220;
     if (media == null) return const SizedBox();
 
     try {
@@ -190,7 +192,10 @@ class UpcomingEpisodesSection extends HookWidget {
           mediaId: media.id,
         ),
         child: Container(
-          width: 215,
+          width: UIUtils.getWidgetWidth(
+            targetWidgetWidth: targetWidgetWidth,
+            screenWidth: screenWidth,
+          ),
           margin: const EdgeInsets.only(right: 15),
           padding: const EdgeInsets.only(
             left: 8,
@@ -207,7 +212,7 @@ class UpcomingEpisodesSection extends HookWidget {
             ),
             shadows: [
               BoxShadow(
-                color: AppColors.black.withValues(alpha:0.25),
+                color: AppColors.black.withValues(alpha: 0.25),
                 blurRadius: 4,
                 offset: const Offset(0, 4),
               ),
@@ -252,24 +257,27 @@ class UpcomingEpisodesSection extends HookWidget {
                 padding: const EdgeInsets.only(top: 7, right: 7),
                 child: media.coverImage?.large == null
                     ? _buildPlaceholderImage85x120()
-                    : CachedNetworkImage(
-                        cacheManager: ImageCacheManager.instance,
-                        imageUrl: media.coverImage!.large!,
-                        width: 85,
-                        height: 120,
-                        imageBuilder: (context, imageProvider) {
-                          return ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Image(
-                              image: imageProvider,
-                              fit: BoxFit.cover,
-                            ),
-                          );
-                        },
-                        placeholder: (context, url) =>
-                            _buildPlaceholderImage85x120(),
-                        errorWidget: (context, url, error) =>
-                            _buildPlaceholderImage85x120(),
+                    : AspectRatio(
+                        aspectRatio: 85 / 120,
+                        child: CachedNetworkImage(
+                          cacheManager: ImageCacheManager.instance,
+                          imageUrl: media.coverImage!.large!,
+                          // width: 85,
+                          // height: 120,
+                          imageBuilder: (context, imageProvider) {
+                            return ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                              ),
+                            );
+                          },
+                          placeholder: (context, url) =>
+                              _buildPlaceholderImage85x120(),
+                          errorWidget: (context, url, error) =>
+                              _buildPlaceholderImage85x120(),
+                        ),
                       ),
               ),
             ],
