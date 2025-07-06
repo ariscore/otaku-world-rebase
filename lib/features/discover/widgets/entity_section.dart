@@ -193,7 +193,7 @@ class EntitySection<B extends PaginatedDataBloc, E> extends HookWidget {
     ScrollController controller,
   ) {
     return SizedBox(
-      height: 220,
+      height: 200,
       child: Stack(
         children: [
           CustomScrollView(

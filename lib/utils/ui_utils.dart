@@ -166,4 +166,18 @@ class UIUtils {
       ),
     );
   }
+
+  static SliverGridDelegateWithMaxCrossAxisExtent getResponsiveDelegate(
+    BuildContext context,
+  ) {
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final height = screenWidth > 600 ? 155 : 170;
+
+    return SliverGridDelegateWithMaxCrossAxisExtent(
+      maxCrossAxisExtent: 150,
+      childAspectRatio: 100 / height,
+      mainAxisSpacing: 10,
+      crossAxisSpacing: screenWidth > 600 ? 0 : 10,
+    );
+  }
 }

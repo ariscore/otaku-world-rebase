@@ -27,8 +27,11 @@ class EntityCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.only(right: rightMargin),
+        margin: EdgeInsets.only(
+          right: rightMargin,
+        ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
@@ -63,7 +66,7 @@ class EntityCard extends StatelessWidget {
               width: 115,
               child: Text(
                 title,
-                maxLines: 2,
+                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontFamily: 'Roboto-Condensed',
@@ -83,7 +86,7 @@ class EntityCard extends StatelessWidget {
         vertical: 3,
       ),
       decoration: ShapeDecoration(
-        color: AppColors.raisinBlack.withValues(alpha:0.6),
+        color: AppColors.raisinBlack.withValues(alpha: 0.6),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(5),
