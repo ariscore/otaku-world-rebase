@@ -59,6 +59,7 @@ class ResultStudiosList extends HookWidget {
               heading: 'Find what interests you!',
               subheading:
                   'Browse through our extensive library and find your next favorite.',
+              isScrollable: true,
             );
           } else if (state is SearchResultLoading) {
             return const Center(
@@ -76,6 +77,7 @@ class ResultStudiosList extends HookWidget {
                     asset: Assets.charactersErenYeager,
                     heading: 'Oops! No matches found!',
                     subheading: 'Try searching something else.',
+                    isScrollable: true,
                   )
                 : CustomScrollView(
                     scrollDirection: Axis.vertical,

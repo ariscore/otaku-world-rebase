@@ -51,8 +51,6 @@ class ResultUsersList extends HookWidget {
       child: BlocBuilder<SearchUsersBloc, SearchBaseState>(
         bloc: searchUsersBloc as SearchUsersBloc,
         builder: (context, state) {
-          final client = (context.read<GraphqlClientCubit>()).getClient();
-
           if (state is SearchInitial) {
             return const AnimeCharacterPlaceholder(
               asset: Assets.charactersSchoolGirl,
@@ -60,6 +58,7 @@ class ResultUsersList extends HookWidget {
               heading: 'Find what interests you!',
               subheading:
                   'Browse through our extensive library and find your next favorite.',
+              isScrollable: true,
             );
           } else if (state is SearchResultLoading) {
             return const Center(
@@ -74,6 +73,7 @@ class ResultUsersList extends HookWidget {
                     asset: Assets.charactersErenYeager,
                     heading: 'Oops! No matches found!',
                     subheading: 'Try searching something else.',
+                    isScrollable: true,
                   )
                 : CustomScrollView(
                     scrollDirection: Axis.vertical,
