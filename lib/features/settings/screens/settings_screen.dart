@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/dialogs/alert_dialog.dart';
-import 'package:otaku_world/features/app_version_management/services/app_version_service.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -31,81 +30,56 @@ class SettingsScreen extends StatelessWidget {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              GestureDetector(
-                onTap: () => _showLogOutConfirmationDialog(context),
-                child: Row(
-                  children: [
-                    SvgPicture.asset(
-                      Assets.iconsLogout,
-                      width: 20,
-                    ),
-                    const SizedBox(width: 10),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width - 130,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Log out ',
-                            style: Theme.of(context)
-                                .textTheme
-                                .displaySmall
-                                ?.copyWith(
+          child: GestureDetector(
+            onTap: () => _showLogOutConfirmationDialog(context),
+            child: Row(
+              children: [
+                SvgPicture.asset(
+                  Assets.iconsLogout,
+                  width: 20,
+                ),
+                const SizedBox(width: 10),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width - 130,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Log out ',
+                        style:
+                            Theme.of(context).textTheme.displaySmall?.copyWith(
                                   fontFamily: 'Poppins',
                                 ),
-                          ),
-                          const SizedBox(height: 5),
-                          Expanded(
-                            child: Text(
-                              userName,
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displaySmall
-                                  ?.copyWith(
-                                    fontFamily: 'Poppins-Medium',
-                                  ),
-                            ),
-                          ),
-                        ],
                       ),
-                    ),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () => _showLogOutConfirmationDialog(context),
-                      icon: SvgPicture.asset(
-                        Assets.iconsArrowRight,
-                        colorFilter: const ColorFilter.mode(
-                          Colors.white,
-                          BlendMode.srcIn,
+                      const SizedBox(height: 5),
+                      Expanded(
+                        child: Text(
+                          userName,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context)
+                              .textTheme
+                              .displaySmall
+                              ?.copyWith(
+                                fontFamily: 'Poppins-Medium',
+                              ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              FutureBuilder(
-                future: AppVersionService.getVersionNameAndBuildNumber(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const SizedBox.shrink();
-                  }
-                  if (snapshot.hasError) {
-                    return const SizedBox.shrink();
-                  }
-                  final versionInfo = snapshot.data;
-                  return Text(
-                    versionInfo ?? '',
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          color: Colors.white.withValues(alpha: 0.8),
-                        ),
-                  );
-                },
-              ),
-            ],
+                const Spacer(),
+                IconButton(
+                  onPressed: () => _showLogOutConfirmationDialog(context),
+                  icon: SvgPicture.asset(
+                    Assets.iconsArrowRight,
+                    colorFilter: const ColorFilter.mode(
+                      Colors.white,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         body: SingleChildScrollView(
