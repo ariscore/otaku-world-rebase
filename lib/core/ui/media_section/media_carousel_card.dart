@@ -29,6 +29,8 @@ class MediaCarouselCard extends StatelessWidget {
     required this.color,
     required this.media,
     required this.mediaListEntry,
+    required this.onListEntryUpdated,
+    required this.onListEntryDeleted,
   });
 
   final double width;
@@ -36,6 +38,8 @@ class MediaCarouselCard extends StatelessWidget {
   final Color color;
   final Fragment$MediaShort? media;
   final Fragment$MediaListEntry? mediaListEntry;
+  final void Function(Fragment$MediaListEntry entry) onListEntryUpdated;
+  final void Function(int id) onListEntryDeleted;
 
   @override
   Widget build(BuildContext context) {
@@ -183,12 +187,13 @@ class MediaCarouselCard extends StatelessWidget {
               'onEdited': (entry) {
                 log('edited: $entry');
                 // bloc.add(UpdateDetailListEntry(entry: entry));
-
+                onListEntryUpdated(entry);
                 listBloc.add(UpdateListEntry(entry: entry));
               },
               'onDeleted': (id) {
                 log('Deleted: $id');
-                // bloc.add(RemoveDetailListEntry());
+                // bloc.add(RemoveListEntryFromMedia(id: id));
+                onListEntryDeleted(id);
                 listBloc.add(RemoveListEntry(id: id));
               },
             });

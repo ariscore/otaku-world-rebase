@@ -166,3 +166,15 @@ class SetTagRank extends FilterAnimeEvent {
 
   final int tagRank;
 }
+
+class UpdateListEntryForAnime extends FilterAnimeEvent {
+  const UpdateListEntryForAnime({required this.entry});
+
+  final Fragment$MediaListEntry entry;
+}
+
+class RemoveListEntryFromAnime extends FilterAnimeEvent {
+  const RemoveListEntryFromAnime({required this.id});
+
+  final int id;
+}

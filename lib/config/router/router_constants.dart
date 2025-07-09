@@ -57,6 +57,7 @@ class RouteConstants {
   static const topAnime = '/top-anime';
   static const discoverManga = '/discover-manga';
   static const mangaFilters = '/manga-filters';
+  static const filterMangaSlider = '/filter-manga-slider';
   static const allTimePopularManga = '/all-time-popular-manga';
   static const allTimePopularMangaSlider = '/all-time-popular-manga-slider';
   static const popularManhwa = '/popular-manhwa';

@@ -27,14 +27,14 @@ class UpdateData<E> extends PaginatedDataEvent {
   final List<E?> list;
 }
 
-class UpdateListEntry<E> extends PaginatedDataEvent {
-  const UpdateListEntry({required this.entry});
+class UpdateListEntryForMedia<E> extends PaginatedDataEvent {
+  const UpdateListEntryForMedia({required this.entry});
 
   final Fragment$MediaListEntry entry;
 }
 
-class RemoveListEntry extends PaginatedDataEvent {
-  const RemoveListEntry({required this.id});
+class RemoveListEntryFromMedia extends PaginatedDataEvent {
+  const RemoveListEntryFromMedia({required this.id});
 
   final int id;
 }

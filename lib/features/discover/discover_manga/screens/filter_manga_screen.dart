@@ -49,9 +49,9 @@ class MangaFilters extends HookWidget {
           'All',
           ...List<String>.generate(
             (FilterConstants.mediaYearMaximum.toInt() -
-                FilterConstants.mediaYearMinimum.toInt()) +
+                    FilterConstants.mediaYearMinimum.toInt()) +
                 1,
-                (index) =>
+            (index) =>
                 (FilterConstants.mediaYearMaximum.toInt() - index).toString(),
           ),
         ],
@@ -71,14 +71,14 @@ class MangaFilters extends HookWidget {
       ),
       MangaFormatChips(
         selectedFormats: bloc.appliedFilter.formatIn
-            ?.map((f) => FormattingUtils.getMediaFormatString(f))
-            .toList() ??
+                ?.map((f) => FormattingUtils.getMediaFormatString(f))
+                .toList() ??
             const [],
       ),
       MangaPublishingStatusChips(
         selectedStatuses: bloc.appliedFilter.statusIn
-            ?.map((s) => FormattingUtils.getMediaStatusString(s))
-            .toList() ??
+                ?.map((s) => FormattingUtils.getMediaStatusString(s))
+                .toList() ??
             const [],
       ),
       CustomRangeSlider(
@@ -127,8 +127,8 @@ class MangaFilters extends HookWidget {
       const MangaCheckBoxOptions(),
       SourceMaterialChips(
         selectedSources: bloc.appliedFilter.sourceIn
-            ?.map((s) => FormattingUtils.getMediaSourceString(s))
-            .toList() ??
+                ?.map((s) => FormattingUtils.getMediaSourceString(s))
+                .toList() ??
             const [],
         onSelected: (source) {
           bloc.add(SelectSource(source));
@@ -210,7 +210,7 @@ class MangaFilters extends HookWidget {
                         begin: const Alignment(0, -1),
                         end: const Alignment(0, 1),
                         colors: [
-                          AppColors.raisinBlack.withValues(alpha:0.4),
+                          AppColors.raisinBlack.withValues(alpha: 0.4),
                           AppColors.raisinBlack,
                         ],
                       ),

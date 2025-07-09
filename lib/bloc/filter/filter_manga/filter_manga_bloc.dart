@@ -12,6 +12,7 @@ import '../../../constants/filter_constants.dart';
 import '../../../graphql/__generated/graphql/discover/filter_media.graphql.dart';
 import '../../../graphql/__generated/graphql/fragments.graphql.dart';
 import '../../../utils/formatting_utils.dart';
+import '../../../utils/model_utils.dart';
 
 part 'filter_manga_event.dart';
 part 'filter_manga_state.dart';
@@ -46,6 +47,8 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
     on<SelectMangaTag>(_onSelectMangaTag);
     on<UnselectMangaTag>(_onUnselectMangaTag);
     on<SetTagRank>(_onSetTagRank);
+    on<UpdateListEntryForManga>(_onUpdateListEntryForManga);
+    on<RemoveListEntryFromManga>(_onRemoveListEntryFromManga);
   }
 
   MangaFilter appliedFilter = const MangaFilter(
@@ -494,6 +497,45 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
       minTagRank: event.tagRank,
     );
     log('Tag rank: ${filter.minTagRank}', name: 'FilterManga');
+  }
+
+  void _onUpdateListEntryForManga(
+      UpdateListEntryForManga event,
+      Emitter<FilterMangaState> emit,
+      ) {
+    log('Updating list entry: ${event.entry.id} | ${event.entry.progress}');
+    final index = list.indexWhere(
+          (e) => e?.id == event.entry.mediaId,
+    );
+    log('Update list entry index: $index');
+    if (index != -1) {
+      list[index] = list[index]?.copyWith(mediaListEntry: event.entry);
+      emit(
+        ResultsLoaded(
+          list: List<Fragment$MediaShort?>.from(list),
+          hasNextPage: hasNextPage,
+        ),
+      );
+      log('Updated list entry');
+    }
+  }
+
+  void _onRemoveListEntryFromManga(
+      RemoveListEntryFromManga event,
+      Emitter<FilterMangaState> emit,
+      ) {
+    log('Removing list entry: ${event.id}');
+    final index = list.indexWhere(
+          (e) => e?.mediaListEntry?.id == event.id,
+    );
+    log('Remove list entry index: $index');
+    list[index] = ModelUtils.getMediaShort(list[index], removeListEntry: true);
+    emit(
+      ResultsLoaded(
+        list: List<Fragment$MediaShort?>.from(list),
+        hasNextPage: hasNextPage,
+      ),
+    );
   }
 
   @override

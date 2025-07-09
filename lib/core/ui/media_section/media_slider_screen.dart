@@ -83,6 +83,14 @@ class MediaSliderScreen<B extends PaginatedDataBloc> extends StatelessWidget {
                     color: cardColors[index % cardColors.length],
                     media: media,
                     mediaListEntry: media?.mediaListEntry,
+                    onListEntryUpdated: (entry) {
+                      context.read<B>().add(
+                            UpdateListEntryForMedia(entry: entry),
+                          );
+                    },
+                    onListEntryDeleted: (id) {
+                      context.read<B>().add(RemoveListEntryFromMedia(id: id));
+                    },
                   );
                 }).toList(),
               ),

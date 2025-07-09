@@ -81,6 +81,16 @@ class AnimeSliderScreen extends StatelessWidget {
                     color: cardColors[index % cardColors.length],
                     media: media,
                     mediaListEntry: media?.mediaListEntry,
+                    onListEntryUpdated: (entry) {
+                      context
+                          .read<FilterAnimeBloc>()
+                          .add(UpdateListEntryForAnime(entry: entry));
+                    },
+                    onListEntryDeleted: (id) {
+                      context
+                          .read<FilterAnimeBloc>()
+                          .add(RemoveListEntryFromAnime(id: id));
+                    },
                   );
                 }).toList(),
               ),

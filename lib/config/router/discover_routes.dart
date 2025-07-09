@@ -31,6 +31,12 @@ final discoverRoutes = [
   ),
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
+    path: RouteConstants.filterMangaSlider,
+    builder: (context) => const MangaSliderScreen(),
+    directionTween: SlideTransitionRoute.bottomToTopTween,
+  ),
+  SlideTransitionRoute(
+    parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.topAiringAnime,
     builder: (state) {
       final bloc = state.extra as TopAiringAnimeBloc;
