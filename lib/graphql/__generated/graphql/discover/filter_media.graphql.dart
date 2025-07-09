@@ -1623,6 +1623,8 @@ const documentNodeQueryFilterMedia = DocumentNode(definitions: [
   ),
   fragmentDefinitionMediaShort,
   fragmentDefinitionFuzzyDate,
+  fragmentDefinitionMediaListEntry,
+  fragmentDefinitionListEntryMedia,
 ]);
 Query$FilterMedia _parserFn$Query$FilterMedia(Map<String, dynamic> data) =>
     Query$FilterMedia.fromJson(data);

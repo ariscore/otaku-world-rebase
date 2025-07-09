@@ -13,7 +13,7 @@ class ImportantLinksSection extends StatelessWidget {
   final List<LinkModel> links = [
     LinkModel(url: AppConfig.gitHubLink, icon: Assets.aboutUsGithub),
     LinkModel(url: AppConfig.gmailLink, icon: Assets.aboutUsGmail),
-    LinkModel(url: AppConfig.anilistLink, icon: Assets.aboutUsAnilist),
+    LinkModel(url: AppConfig.aniListLink, icon: Assets.aboutUsAnilist),
     LinkModel(url: AppConfig.playStoreLink, icon: Assets.aboutUsPlaystore),
   ];
 

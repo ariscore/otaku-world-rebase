@@ -889,8 +889,7 @@ const documentNodeMutationSaveListEntry = DocumentNode(definitions: [
     ]),
   ),
   fragmentDefinitionMediaListEntry,
-  fragmentDefinitionMediaShort,
-  fragmentDefinitionFuzzyDate,
+  fragmentDefinitionListEntryMedia,
 ]);
 Mutation$SaveListEntry _parserFn$Mutation$SaveListEntry(
         Map<String, dynamic> data) =>

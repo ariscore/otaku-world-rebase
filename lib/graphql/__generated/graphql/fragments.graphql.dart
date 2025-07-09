@@ -45,8 +45,8 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
     this.countryOfOrigin,
     this.startDate,
     this.endDate,
-    this.$__typename = 'Media',
     this.mediaListEntry,
+    this.$__typename = 'Media',
     this.siteUrl,
   });
 
@@ -87,8 +87,8 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
     final l$countryOfOrigin = json['countryOfOrigin'];
     final l$startDate = json['startDate'];
     final l$endDate = json['endDate'];
-    final l$$__typename = json['__typename'];
     final l$mediaListEntry = json['mediaListEntry'];
+    final l$$__typename = json['__typename'];
     final l$siteUrl = json['siteUrl'];
     return Fragment$MediaDetailed(
       averageScore: (l$averageScore as int?),
@@ -182,11 +182,11 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
       endDate: l$endDate == null
           ? null
           : Fragment$FuzzyDate.fromJson((l$endDate as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
       mediaListEntry: l$mediaListEntry == null
           ? null
           : Fragment$MediaListEntry.fromJson(
               (l$mediaListEntry as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
       siteUrl: (l$siteUrl as String?),
     );
   }
@@ -263,9 +263,9 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
 
   final Fragment$FuzzyDate? endDate;
 
-  final String $__typename;
-
   final Fragment$MediaListEntry? mediaListEntry;
+
+  final String $__typename;
 
   final String? siteUrl;
 
@@ -348,10 +348,10 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
     _resultData['startDate'] = l$startDate?.toJson();
     final l$endDate = endDate;
     _resultData['endDate'] = l$endDate?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     final l$mediaListEntry = mediaListEntry;
     _resultData['mediaListEntry'] = l$mediaListEntry?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
     final l$siteUrl = siteUrl;
     _resultData['siteUrl'] = l$siteUrl;
     return _resultData;
@@ -395,8 +395,8 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
     final l$countryOfOrigin = countryOfOrigin;
     final l$startDate = startDate;
     final l$endDate = endDate;
-    final l$$__typename = $__typename;
     final l$mediaListEntry = mediaListEntry;
+    final l$$__typename = $__typename;
     final l$siteUrl = siteUrl;
     return Object.hashAll([
       l$averageScore,
@@ -437,8 +437,8 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
       l$countryOfOrigin,
       l$startDate,
       l$endDate,
-      l$$__typename,
       l$mediaListEntry,
+      l$$__typename,
       l$siteUrl,
     ]);
   }
@@ -686,14 +686,14 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
     if (l$endDate != lOther$endDate) {
       return false;
     }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
     final l$mediaListEntry = mediaListEntry;
     final lOther$mediaListEntry = other.mediaListEntry;
     if (l$mediaListEntry != lOther$mediaListEntry) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     final l$siteUrl = siteUrl;
@@ -759,8 +759,8 @@ abstract class CopyWith$Fragment$MediaDetailed<TRes> {
     String? countryOfOrigin,
     Fragment$FuzzyDate? startDate,
     Fragment$FuzzyDate? endDate,
-    String? $__typename,
     Fragment$MediaListEntry? mediaListEntry,
+    String? $__typename,
     String? siteUrl,
   });
   CopyWith$Fragment$MediaDetailed$nextAiringEpisode<TRes> get nextAiringEpisode;
@@ -845,8 +845,8 @@ class _CopyWithImpl$Fragment$MediaDetailed<TRes>
     Object? countryOfOrigin = _undefined,
     Object? startDate = _undefined,
     Object? endDate = _undefined,
-    Object? $__typename = _undefined,
     Object? mediaListEntry = _undefined,
+    Object? $__typename = _undefined,
     Object? siteUrl = _undefined,
   }) =>
       _then(Fragment$MediaDetailed(
@@ -947,12 +947,12 @@ class _CopyWithImpl$Fragment$MediaDetailed<TRes>
         endDate: endDate == _undefined
             ? _instance.endDate
             : (endDate as Fragment$FuzzyDate?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
         mediaListEntry: mediaListEntry == _undefined
             ? _instance.mediaListEntry
             : (mediaListEntry as Fragment$MediaListEntry?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
         siteUrl:
             siteUrl == _undefined ? _instance.siteUrl : (siteUrl as String?),
       ));
@@ -1140,8 +1140,8 @@ class _CopyWithStubImpl$Fragment$MediaDetailed<TRes>
     String? countryOfOrigin,
     Fragment$FuzzyDate? startDate,
     Fragment$FuzzyDate? endDate,
-    String? $__typename,
     Fragment$MediaListEntry? mediaListEntry,
+    String? $__typename,
     String? siteUrl,
   }) =>
       _res;
@@ -1882,6 +1882,7 @@ const documentNodeFragmentMediaDetailed = DocumentNode(definitions: [
   fragmentDefinitionMediaShort,
   fragmentDefinitionFuzzyDate,
   fragmentDefinitionMediaListEntry,
+  fragmentDefinitionListEntryMedia,
 ]);
 
 extension ClientExtension$Fragment$MediaDetailed on graphql.GraphQLClient {
@@ -5752,6 +5753,7 @@ class Fragment$MediaShort {
     this.popularity,
     this.startDate,
     this.endDate,
+    this.mediaListEntry,
     this.$__typename = 'Media',
   });
 
@@ -5776,6 +5778,7 @@ class Fragment$MediaShort {
     final l$popularity = json['popularity'];
     final l$startDate = json['startDate'];
     final l$endDate = json['endDate'];
+    final l$mediaListEntry = json['mediaListEntry'];
     final l$$__typename = json['__typename'];
     return Fragment$MediaShort(
       id: (l$id as int),
@@ -5817,6 +5820,10 @@ class Fragment$MediaShort {
       endDate: l$endDate == null
           ? null
           : Fragment$FuzzyDate.fromJson((l$endDate as Map<String, dynamic>)),
+      mediaListEntry: l$mediaListEntry == null
+          ? null
+          : Fragment$MediaListEntry.fromJson(
+              (l$mediaListEntry as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -5860,6 +5867,8 @@ class Fragment$MediaShort {
   final Fragment$FuzzyDate? startDate;
 
   final Fragment$FuzzyDate? endDate;
+
+  final Fragment$MediaListEntry? mediaListEntry;
 
   final String $__typename;
 
@@ -5908,6 +5917,8 @@ class Fragment$MediaShort {
     _resultData['startDate'] = l$startDate?.toJson();
     final l$endDate = endDate;
     _resultData['endDate'] = l$endDate?.toJson();
+    final l$mediaListEntry = mediaListEntry;
+    _resultData['mediaListEntry'] = l$mediaListEntry?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -5935,6 +5946,7 @@ class Fragment$MediaShort {
     final l$popularity = popularity;
     final l$startDate = startDate;
     final l$endDate = endDate;
+    final l$mediaListEntry = mediaListEntry;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
@@ -5957,6 +5969,7 @@ class Fragment$MediaShort {
       l$popularity,
       l$startDate,
       l$endDate,
+      l$mediaListEntry,
       l$$__typename,
     ]);
   }
@@ -6080,6 +6093,11 @@ class Fragment$MediaShort {
     if (l$endDate != lOther$endDate) {
       return false;
     }
+    final l$mediaListEntry = mediaListEntry;
+    final lOther$mediaListEntry = other.mediaListEntry;
+    if (l$mediaListEntry != lOther$mediaListEntry) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -6127,6 +6145,7 @@ abstract class CopyWith$Fragment$MediaShort<TRes> {
     int? popularity,
     Fragment$FuzzyDate? startDate,
     Fragment$FuzzyDate? endDate,
+    Fragment$MediaListEntry? mediaListEntry,
     String? $__typename,
   });
   CopyWith$Fragment$MediaShort$title<TRes> get title;
@@ -6134,6 +6153,7 @@ abstract class CopyWith$Fragment$MediaShort<TRes> {
   CopyWith$Fragment$MediaShort$airingSchedule<TRes> get airingSchedule;
   CopyWith$Fragment$FuzzyDate<TRes> get startDate;
   CopyWith$Fragment$FuzzyDate<TRes> get endDate;
+  CopyWith$Fragment$MediaListEntry<TRes> get mediaListEntry;
 }
 
 class _CopyWithImpl$Fragment$MediaShort<TRes>
@@ -6170,6 +6190,7 @@ class _CopyWithImpl$Fragment$MediaShort<TRes>
     Object? popularity = _undefined,
     Object? startDate = _undefined,
     Object? endDate = _undefined,
+    Object? mediaListEntry = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$MediaShort(
@@ -6224,6 +6245,9 @@ class _CopyWithImpl$Fragment$MediaShort<TRes>
         endDate: endDate == _undefined
             ? _instance.endDate
             : (endDate as Fragment$FuzzyDate?),
+        mediaListEntry: mediaListEntry == _undefined
+            ? _instance.mediaListEntry
+            : (mediaListEntry as Fragment$MediaListEntry?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -6267,6 +6291,14 @@ class _CopyWithImpl$Fragment$MediaShort<TRes>
         ? CopyWith$Fragment$FuzzyDate.stub(_then(_instance))
         : CopyWith$Fragment$FuzzyDate(local$endDate, (e) => call(endDate: e));
   }
+
+  CopyWith$Fragment$MediaListEntry<TRes> get mediaListEntry {
+    final local$mediaListEntry = _instance.mediaListEntry;
+    return local$mediaListEntry == null
+        ? CopyWith$Fragment$MediaListEntry.stub(_then(_instance))
+        : CopyWith$Fragment$MediaListEntry(
+            local$mediaListEntry, (e) => call(mediaListEntry: e));
+  }
 }
 
 class _CopyWithStubImpl$Fragment$MediaShort<TRes>
@@ -6296,6 +6328,7 @@ class _CopyWithStubImpl$Fragment$MediaShort<TRes>
     int? popularity,
     Fragment$FuzzyDate? startDate,
     Fragment$FuzzyDate? endDate,
+    Fragment$MediaListEntry? mediaListEntry,
     String? $__typename,
   }) =>
       _res;
@@ -6314,6 +6347,9 @@ class _CopyWithStubImpl$Fragment$MediaShort<TRes>
 
   CopyWith$Fragment$FuzzyDate<TRes> get endDate =>
       CopyWith$Fragment$FuzzyDate.stub(_res);
+
+  CopyWith$Fragment$MediaListEntry<TRes> get mediaListEntry =>
+      CopyWith$Fragment$MediaListEntry.stub(_res);
 }
 
 const fragmentDefinitionMediaShort = FragmentDefinitionNode(
@@ -6601,6 +6637,25 @@ const fragmentDefinitionMediaShort = FragmentDefinitionNode(
       ]),
     ),
     FieldNode(
+      name: NameNode(value: 'mediaListEntry'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FragmentSpreadNode(
+          name: NameNode(value: 'MediaListEntry'),
+          directives: [],
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
       name: NameNode(value: '__typename'),
       alias: null,
       arguments: [],
@@ -6612,6 +6667,8 @@ const fragmentDefinitionMediaShort = FragmentDefinitionNode(
 const documentNodeFragmentMediaShort = DocumentNode(definitions: [
   fragmentDefinitionMediaShort,
   fragmentDefinitionFuzzyDate,
+  fragmentDefinitionMediaListEntry,
+  fragmentDefinitionListEntryMedia,
 ]);
 
 extension ClientExtension$Fragment$MediaShort on graphql.GraphQLClient {
@@ -35508,7 +35565,7 @@ class Fragment$MediaListEntry {
               (l$completedAt as Map<String, dynamic>)),
       media: l$media == null
           ? null
-          : Fragment$MediaShort.fromJson((l$media as Map<String, dynamic>)),
+          : Fragment$ListEntryMedia.fromJson((l$media as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -35547,7 +35604,7 @@ class Fragment$MediaListEntry {
 
   final Fragment$MediaListEntry$completedAt? completedAt;
 
-  final Fragment$MediaShort? media;
+  final Fragment$ListEntryMedia? media;
 
   final String $__typename;
 
@@ -35781,12 +35838,12 @@ abstract class CopyWith$Fragment$MediaListEntry<TRes> {
     int? createdAt,
     Fragment$MediaListEntry$startedAt? startedAt,
     Fragment$MediaListEntry$completedAt? completedAt,
-    Fragment$MediaShort? media,
+    Fragment$ListEntryMedia? media,
     String? $__typename,
   });
   CopyWith$Fragment$MediaListEntry$startedAt<TRes> get startedAt;
   CopyWith$Fragment$MediaListEntry$completedAt<TRes> get completedAt;
-  CopyWith$Fragment$MediaShort<TRes> get media;
+  CopyWith$Fragment$ListEntryMedia<TRes> get media;
 }
 
 class _CopyWithImpl$Fragment$MediaListEntry<TRes>
@@ -35863,7 +35920,7 @@ class _CopyWithImpl$Fragment$MediaListEntry<TRes>
             : (completedAt as Fragment$MediaListEntry$completedAt?),
         media: media == _undefined
             ? _instance.media
-            : (media as Fragment$MediaShort?),
+            : (media as Fragment$ListEntryMedia?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -35885,11 +35942,11 @@ class _CopyWithImpl$Fragment$MediaListEntry<TRes>
             local$completedAt, (e) => call(completedAt: e));
   }
 
-  CopyWith$Fragment$MediaShort<TRes> get media {
+  CopyWith$Fragment$ListEntryMedia<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
-        ? CopyWith$Fragment$MediaShort.stub(_then(_instance))
-        : CopyWith$Fragment$MediaShort(local$media, (e) => call(media: e));
+        ? CopyWith$Fragment$ListEntryMedia.stub(_then(_instance))
+        : CopyWith$Fragment$ListEntryMedia(local$media, (e) => call(media: e));
   }
 }
 
@@ -35917,7 +35974,7 @@ class _CopyWithStubImpl$Fragment$MediaListEntry<TRes>
     int? createdAt,
     Fragment$MediaListEntry$startedAt? startedAt,
     Fragment$MediaListEntry$completedAt? completedAt,
-    Fragment$MediaShort? media,
+    Fragment$ListEntryMedia? media,
     String? $__typename,
   }) =>
       _res;
@@ -35928,8 +35985,8 @@ class _CopyWithStubImpl$Fragment$MediaListEntry<TRes>
   CopyWith$Fragment$MediaListEntry$completedAt<TRes> get completedAt =>
       CopyWith$Fragment$MediaListEntry$completedAt.stub(_res);
 
-  CopyWith$Fragment$MediaShort<TRes> get media =>
-      CopyWith$Fragment$MediaShort.stub(_res);
+  CopyWith$Fragment$ListEntryMedia<TRes> get media =>
+      CopyWith$Fragment$ListEntryMedia.stub(_res);
 }
 
 const fragmentDefinitionMediaListEntry = FragmentDefinitionNode(
@@ -36125,7 +36182,7 @@ const fragmentDefinitionMediaListEntry = FragmentDefinitionNode(
       directives: [],
       selectionSet: SelectionSetNode(selections: [
         FragmentSpreadNode(
-          name: NameNode(value: 'MediaShort'),
+          name: NameNode(value: 'ListEntryMedia'),
           directives: [],
         ),
         FieldNode(
@@ -36148,8 +36205,7 @@ const fragmentDefinitionMediaListEntry = FragmentDefinitionNode(
 );
 const documentNodeFragmentMediaListEntry = DocumentNode(definitions: [
   fragmentDefinitionMediaListEntry,
-  fragmentDefinitionMediaShort,
-  fragmentDefinitionFuzzyDate,
+  fragmentDefinitionListEntryMedia,
 ]);
 
 extension ClientExtension$Fragment$MediaListEntry on graphql.GraphQLClient {
@@ -36503,6 +36559,1425 @@ class _CopyWithStubImpl$Fragment$MediaListEntry$completedAt<TRes>
     int? year,
     int? month,
     int? day,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$ListEntryMedia {
+  Fragment$ListEntryMedia({
+    required this.id,
+    this.title,
+    this.type,
+    this.episodes,
+    this.chapters,
+    this.volumes,
+    this.status,
+    this.coverImage,
+    this.format,
+    this.startDate,
+    this.endDate,
+    this.genres,
+    this.countryOfOrigin,
+    this.averageScore,
+    this.popularity,
+    this.$__typename = 'Media',
+  });
+
+  factory Fragment$ListEntryMedia.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$title = json['title'];
+    final l$type = json['type'];
+    final l$episodes = json['episodes'];
+    final l$chapters = json['chapters'];
+    final l$volumes = json['volumes'];
+    final l$status = json['status'];
+    final l$coverImage = json['coverImage'];
+    final l$format = json['format'];
+    final l$startDate = json['startDate'];
+    final l$endDate = json['endDate'];
+    final l$genres = json['genres'];
+    final l$countryOfOrigin = json['countryOfOrigin'];
+    final l$averageScore = json['averageScore'];
+    final l$popularity = json['popularity'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ListEntryMedia(
+      id: (l$id as int),
+      title: l$title == null
+          ? null
+          : Fragment$ListEntryMedia$title.fromJson(
+              (l$title as Map<String, dynamic>)),
+      type: l$type == null ? null : fromJson$Enum$MediaType((l$type as String)),
+      episodes: (l$episodes as int?),
+      chapters: (l$chapters as int?),
+      volumes: (l$volumes as int?),
+      status: l$status == null
+          ? null
+          : fromJson$Enum$MediaStatus((l$status as String)),
+      coverImage: l$coverImage == null
+          ? null
+          : Fragment$ListEntryMedia$coverImage.fromJson(
+              (l$coverImage as Map<String, dynamic>)),
+      format: l$format == null
+          ? null
+          : fromJson$Enum$MediaFormat((l$format as String)),
+      startDate: l$startDate == null
+          ? null
+          : Fragment$ListEntryMedia$startDate.fromJson(
+              (l$startDate as Map<String, dynamic>)),
+      endDate: l$endDate == null
+          ? null
+          : Fragment$ListEntryMedia$endDate.fromJson(
+              (l$endDate as Map<String, dynamic>)),
+      genres: (l$genres as List<dynamic>?)?.map((e) => (e as String?)).toList(),
+      countryOfOrigin: (l$countryOfOrigin as String?),
+      averageScore: (l$averageScore as int?),
+      popularity: (l$popularity as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Fragment$ListEntryMedia$title? title;
+
+  final Enum$MediaType? type;
+
+  final int? episodes;
+
+  final int? chapters;
+
+  final int? volumes;
+
+  final Enum$MediaStatus? status;
+
+  final Fragment$ListEntryMedia$coverImage? coverImage;
+
+  final Enum$MediaFormat? format;
+
+  final Fragment$ListEntryMedia$startDate? startDate;
+
+  final Fragment$ListEntryMedia$endDate? endDate;
+
+  final List<String?>? genres;
+
+  final String? countryOfOrigin;
+
+  final int? averageScore;
+
+  final int? popularity;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$title = title;
+    _resultData['title'] = l$title?.toJson();
+    final l$type = type;
+    _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
+    final l$episodes = episodes;
+    _resultData['episodes'] = l$episodes;
+    final l$chapters = chapters;
+    _resultData['chapters'] = l$chapters;
+    final l$volumes = volumes;
+    _resultData['volumes'] = l$volumes;
+    final l$status = status;
+    _resultData['status'] =
+        l$status == null ? null : toJson$Enum$MediaStatus(l$status);
+    final l$coverImage = coverImage;
+    _resultData['coverImage'] = l$coverImage?.toJson();
+    final l$format = format;
+    _resultData['format'] =
+        l$format == null ? null : toJson$Enum$MediaFormat(l$format);
+    final l$startDate = startDate;
+    _resultData['startDate'] = l$startDate?.toJson();
+    final l$endDate = endDate;
+    _resultData['endDate'] = l$endDate?.toJson();
+    final l$genres = genres;
+    _resultData['genres'] = l$genres?.map((e) => e).toList();
+    final l$countryOfOrigin = countryOfOrigin;
+    _resultData['countryOfOrigin'] = l$countryOfOrigin;
+    final l$averageScore = averageScore;
+    _resultData['averageScore'] = l$averageScore;
+    final l$popularity = popularity;
+    _resultData['popularity'] = l$popularity;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$title = title;
+    final l$type = type;
+    final l$episodes = episodes;
+    final l$chapters = chapters;
+    final l$volumes = volumes;
+    final l$status = status;
+    final l$coverImage = coverImage;
+    final l$format = format;
+    final l$startDate = startDate;
+    final l$endDate = endDate;
+    final l$genres = genres;
+    final l$countryOfOrigin = countryOfOrigin;
+    final l$averageScore = averageScore;
+    final l$popularity = popularity;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$title,
+      l$type,
+      l$episodes,
+      l$chapters,
+      l$volumes,
+      l$status,
+      l$coverImage,
+      l$format,
+      l$startDate,
+      l$endDate,
+      l$genres == null ? null : Object.hashAll(l$genres.map((v) => v)),
+      l$countryOfOrigin,
+      l$averageScore,
+      l$popularity,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$ListEntryMedia || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$title = title;
+    final lOther$title = other.title;
+    if (l$title != lOther$title) {
+      return false;
+    }
+    final l$type = type;
+    final lOther$type = other.type;
+    if (l$type != lOther$type) {
+      return false;
+    }
+    final l$episodes = episodes;
+    final lOther$episodes = other.episodes;
+    if (l$episodes != lOther$episodes) {
+      return false;
+    }
+    final l$chapters = chapters;
+    final lOther$chapters = other.chapters;
+    if (l$chapters != lOther$chapters) {
+      return false;
+    }
+    final l$volumes = volumes;
+    final lOther$volumes = other.volumes;
+    if (l$volumes != lOther$volumes) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$coverImage = coverImage;
+    final lOther$coverImage = other.coverImage;
+    if (l$coverImage != lOther$coverImage) {
+      return false;
+    }
+    final l$format = format;
+    final lOther$format = other.format;
+    if (l$format != lOther$format) {
+      return false;
+    }
+    final l$startDate = startDate;
+    final lOther$startDate = other.startDate;
+    if (l$startDate != lOther$startDate) {
+      return false;
+    }
+    final l$endDate = endDate;
+    final lOther$endDate = other.endDate;
+    if (l$endDate != lOther$endDate) {
+      return false;
+    }
+    final l$genres = genres;
+    final lOther$genres = other.genres;
+    if (l$genres != null && lOther$genres != null) {
+      if (l$genres.length != lOther$genres.length) {
+        return false;
+      }
+      for (int i = 0; i < l$genres.length; i++) {
+        final l$genres$entry = l$genres[i];
+        final lOther$genres$entry = lOther$genres[i];
+        if (l$genres$entry != lOther$genres$entry) {
+          return false;
+        }
+      }
+    } else if (l$genres != lOther$genres) {
+      return false;
+    }
+    final l$countryOfOrigin = countryOfOrigin;
+    final lOther$countryOfOrigin = other.countryOfOrigin;
+    if (l$countryOfOrigin != lOther$countryOfOrigin) {
+      return false;
+    }
+    final l$averageScore = averageScore;
+    final lOther$averageScore = other.averageScore;
+    if (l$averageScore != lOther$averageScore) {
+      return false;
+    }
+    final l$popularity = popularity;
+    final lOther$popularity = other.popularity;
+    if (l$popularity != lOther$popularity) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ListEntryMedia on Fragment$ListEntryMedia {
+  CopyWith$Fragment$ListEntryMedia<Fragment$ListEntryMedia> get copyWith =>
+      CopyWith$Fragment$ListEntryMedia(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Fragment$ListEntryMedia<TRes> {
+  factory CopyWith$Fragment$ListEntryMedia(
+    Fragment$ListEntryMedia instance,
+    TRes Function(Fragment$ListEntryMedia) then,
+  ) = _CopyWithImpl$Fragment$ListEntryMedia;
+
+  factory CopyWith$Fragment$ListEntryMedia.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ListEntryMedia;
+
+  TRes call({
+    int? id,
+    Fragment$ListEntryMedia$title? title,
+    Enum$MediaType? type,
+    int? episodes,
+    int? chapters,
+    int? volumes,
+    Enum$MediaStatus? status,
+    Fragment$ListEntryMedia$coverImage? coverImage,
+    Enum$MediaFormat? format,
+    Fragment$ListEntryMedia$startDate? startDate,
+    Fragment$ListEntryMedia$endDate? endDate,
+    List<String?>? genres,
+    String? countryOfOrigin,
+    int? averageScore,
+    int? popularity,
+    String? $__typename,
+  });
+  CopyWith$Fragment$ListEntryMedia$title<TRes> get title;
+  CopyWith$Fragment$ListEntryMedia$coverImage<TRes> get coverImage;
+  CopyWith$Fragment$ListEntryMedia$startDate<TRes> get startDate;
+  CopyWith$Fragment$ListEntryMedia$endDate<TRes> get endDate;
+}
+
+class _CopyWithImpl$Fragment$ListEntryMedia<TRes>
+    implements CopyWith$Fragment$ListEntryMedia<TRes> {
+  _CopyWithImpl$Fragment$ListEntryMedia(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ListEntryMedia _instance;
+
+  final TRes Function(Fragment$ListEntryMedia) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? title = _undefined,
+    Object? type = _undefined,
+    Object? episodes = _undefined,
+    Object? chapters = _undefined,
+    Object? volumes = _undefined,
+    Object? status = _undefined,
+    Object? coverImage = _undefined,
+    Object? format = _undefined,
+    Object? startDate = _undefined,
+    Object? endDate = _undefined,
+    Object? genres = _undefined,
+    Object? countryOfOrigin = _undefined,
+    Object? averageScore = _undefined,
+    Object? popularity = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ListEntryMedia(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        title: title == _undefined
+            ? _instance.title
+            : (title as Fragment$ListEntryMedia$title?),
+        type: type == _undefined ? _instance.type : (type as Enum$MediaType?),
+        episodes:
+            episodes == _undefined ? _instance.episodes : (episodes as int?),
+        chapters:
+            chapters == _undefined ? _instance.chapters : (chapters as int?),
+        volumes: volumes == _undefined ? _instance.volumes : (volumes as int?),
+        status: status == _undefined
+            ? _instance.status
+            : (status as Enum$MediaStatus?),
+        coverImage: coverImage == _undefined
+            ? _instance.coverImage
+            : (coverImage as Fragment$ListEntryMedia$coverImage?),
+        format: format == _undefined
+            ? _instance.format
+            : (format as Enum$MediaFormat?),
+        startDate: startDate == _undefined
+            ? _instance.startDate
+            : (startDate as Fragment$ListEntryMedia$startDate?),
+        endDate: endDate == _undefined
+            ? _instance.endDate
+            : (endDate as Fragment$ListEntryMedia$endDate?),
+        genres: genres == _undefined
+            ? _instance.genres
+            : (genres as List<String?>?),
+        countryOfOrigin: countryOfOrigin == _undefined
+            ? _instance.countryOfOrigin
+            : (countryOfOrigin as String?),
+        averageScore: averageScore == _undefined
+            ? _instance.averageScore
+            : (averageScore as int?),
+        popularity: popularity == _undefined
+            ? _instance.popularity
+            : (popularity as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Fragment$ListEntryMedia$title<TRes> get title {
+    final local$title = _instance.title;
+    return local$title == null
+        ? CopyWith$Fragment$ListEntryMedia$title.stub(_then(_instance))
+        : CopyWith$Fragment$ListEntryMedia$title(
+            local$title, (e) => call(title: e));
+  }
+
+  CopyWith$Fragment$ListEntryMedia$coverImage<TRes> get coverImage {
+    final local$coverImage = _instance.coverImage;
+    return local$coverImage == null
+        ? CopyWith$Fragment$ListEntryMedia$coverImage.stub(_then(_instance))
+        : CopyWith$Fragment$ListEntryMedia$coverImage(
+            local$coverImage, (e) => call(coverImage: e));
+  }
+
+  CopyWith$Fragment$ListEntryMedia$startDate<TRes> get startDate {
+    final local$startDate = _instance.startDate;
+    return local$startDate == null
+        ? CopyWith$Fragment$ListEntryMedia$startDate.stub(_then(_instance))
+        : CopyWith$Fragment$ListEntryMedia$startDate(
+            local$startDate, (e) => call(startDate: e));
+  }
+
+  CopyWith$Fragment$ListEntryMedia$endDate<TRes> get endDate {
+    final local$endDate = _instance.endDate;
+    return local$endDate == null
+        ? CopyWith$Fragment$ListEntryMedia$endDate.stub(_then(_instance))
+        : CopyWith$Fragment$ListEntryMedia$endDate(
+            local$endDate, (e) => call(endDate: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ListEntryMedia<TRes>
+    implements CopyWith$Fragment$ListEntryMedia<TRes> {
+  _CopyWithStubImpl$Fragment$ListEntryMedia(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Fragment$ListEntryMedia$title? title,
+    Enum$MediaType? type,
+    int? episodes,
+    int? chapters,
+    int? volumes,
+    Enum$MediaStatus? status,
+    Fragment$ListEntryMedia$coverImage? coverImage,
+    Enum$MediaFormat? format,
+    Fragment$ListEntryMedia$startDate? startDate,
+    Fragment$ListEntryMedia$endDate? endDate,
+    List<String?>? genres,
+    String? countryOfOrigin,
+    int? averageScore,
+    int? popularity,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Fragment$ListEntryMedia$title<TRes> get title =>
+      CopyWith$Fragment$ListEntryMedia$title.stub(_res);
+
+  CopyWith$Fragment$ListEntryMedia$coverImage<TRes> get coverImage =>
+      CopyWith$Fragment$ListEntryMedia$coverImage.stub(_res);
+
+  CopyWith$Fragment$ListEntryMedia$startDate<TRes> get startDate =>
+      CopyWith$Fragment$ListEntryMedia$startDate.stub(_res);
+
+  CopyWith$Fragment$ListEntryMedia$endDate<TRes> get endDate =>
+      CopyWith$Fragment$ListEntryMedia$endDate.stub(_res);
+}
+
+const fragmentDefinitionListEntryMedia = FragmentDefinitionNode(
+  name: NameNode(value: 'ListEntryMedia'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'Media'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'title'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'userPreferred'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'english'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'native'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'romaji'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'type'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'episodes'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'chapters'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'volumes'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'status'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'coverImage'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'large'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'medium'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'extraLarge'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'format'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'startDate'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'day'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'month'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'year'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'endDate'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'day'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'month'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'year'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'genres'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'countryOfOrigin'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'averageScore'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'popularity'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentListEntryMedia = DocumentNode(definitions: [
+  fragmentDefinitionListEntryMedia,
+]);
+
+extension ClientExtension$Fragment$ListEntryMedia on graphql.GraphQLClient {
+  void writeFragment$ListEntryMedia({
+    required Fragment$ListEntryMedia data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'ListEntryMedia',
+            document: documentNodeFragmentListEntryMedia,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$ListEntryMedia? readFragment$ListEntryMedia({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'ListEntryMedia',
+          document: documentNodeFragmentListEntryMedia,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Fragment$ListEntryMedia.fromJson(result);
+  }
+}
+
+class Fragment$ListEntryMedia$title {
+  Fragment$ListEntryMedia$title({
+    this.userPreferred,
+    this.english,
+    this.native,
+    this.romaji,
+    this.$__typename = 'MediaTitle',
+  });
+
+  factory Fragment$ListEntryMedia$title.fromJson(Map<String, dynamic> json) {
+    final l$userPreferred = json['userPreferred'];
+    final l$english = json['english'];
+    final l$native = json['native'];
+    final l$romaji = json['romaji'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ListEntryMedia$title(
+      userPreferred: (l$userPreferred as String?),
+      english: (l$english as String?),
+      native: (l$native as String?),
+      romaji: (l$romaji as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? userPreferred;
+
+  final String? english;
+
+  final String? native;
+
+  final String? romaji;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$userPreferred = userPreferred;
+    _resultData['userPreferred'] = l$userPreferred;
+    final l$english = english;
+    _resultData['english'] = l$english;
+    final l$native = native;
+    _resultData['native'] = l$native;
+    final l$romaji = romaji;
+    _resultData['romaji'] = l$romaji;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$userPreferred = userPreferred;
+    final l$english = english;
+    final l$native = native;
+    final l$romaji = romaji;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$userPreferred,
+      l$english,
+      l$native,
+      l$romaji,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$ListEntryMedia$title ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$userPreferred = userPreferred;
+    final lOther$userPreferred = other.userPreferred;
+    if (l$userPreferred != lOther$userPreferred) {
+      return false;
+    }
+    final l$english = english;
+    final lOther$english = other.english;
+    if (l$english != lOther$english) {
+      return false;
+    }
+    final l$native = native;
+    final lOther$native = other.native;
+    if (l$native != lOther$native) {
+      return false;
+    }
+    final l$romaji = romaji;
+    final lOther$romaji = other.romaji;
+    if (l$romaji != lOther$romaji) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ListEntryMedia$title
+    on Fragment$ListEntryMedia$title {
+  CopyWith$Fragment$ListEntryMedia$title<Fragment$ListEntryMedia$title>
+      get copyWith => CopyWith$Fragment$ListEntryMedia$title(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ListEntryMedia$title<TRes> {
+  factory CopyWith$Fragment$ListEntryMedia$title(
+    Fragment$ListEntryMedia$title instance,
+    TRes Function(Fragment$ListEntryMedia$title) then,
+  ) = _CopyWithImpl$Fragment$ListEntryMedia$title;
+
+  factory CopyWith$Fragment$ListEntryMedia$title.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ListEntryMedia$title;
+
+  TRes call({
+    String? userPreferred,
+    String? english,
+    String? native,
+    String? romaji,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ListEntryMedia$title<TRes>
+    implements CopyWith$Fragment$ListEntryMedia$title<TRes> {
+  _CopyWithImpl$Fragment$ListEntryMedia$title(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ListEntryMedia$title _instance;
+
+  final TRes Function(Fragment$ListEntryMedia$title) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? userPreferred = _undefined,
+    Object? english = _undefined,
+    Object? native = _undefined,
+    Object? romaji = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ListEntryMedia$title(
+        userPreferred: userPreferred == _undefined
+            ? _instance.userPreferred
+            : (userPreferred as String?),
+        english:
+            english == _undefined ? _instance.english : (english as String?),
+        native: native == _undefined ? _instance.native : (native as String?),
+        romaji: romaji == _undefined ? _instance.romaji : (romaji as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ListEntryMedia$title<TRes>
+    implements CopyWith$Fragment$ListEntryMedia$title<TRes> {
+  _CopyWithStubImpl$Fragment$ListEntryMedia$title(this._res);
+
+  TRes _res;
+
+  call({
+    String? userPreferred,
+    String? english,
+    String? native,
+    String? romaji,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$ListEntryMedia$coverImage {
+  Fragment$ListEntryMedia$coverImage({
+    this.large,
+    this.medium,
+    this.extraLarge,
+    this.$__typename = 'MediaCoverImage',
+  });
+
+  factory Fragment$ListEntryMedia$coverImage.fromJson(
+      Map<String, dynamic> json) {
+    final l$large = json['large'];
+    final l$medium = json['medium'];
+    final l$extraLarge = json['extraLarge'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ListEntryMedia$coverImage(
+      large: (l$large as String?),
+      medium: (l$medium as String?),
+      extraLarge: (l$extraLarge as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? large;
+
+  final String? medium;
+
+  final String? extraLarge;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$large = large;
+    _resultData['large'] = l$large;
+    final l$medium = medium;
+    _resultData['medium'] = l$medium;
+    final l$extraLarge = extraLarge;
+    _resultData['extraLarge'] = l$extraLarge;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$large = large;
+    final l$medium = medium;
+    final l$extraLarge = extraLarge;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$large,
+      l$medium,
+      l$extraLarge,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$ListEntryMedia$coverImage ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$large = large;
+    final lOther$large = other.large;
+    if (l$large != lOther$large) {
+      return false;
+    }
+    final l$medium = medium;
+    final lOther$medium = other.medium;
+    if (l$medium != lOther$medium) {
+      return false;
+    }
+    final l$extraLarge = extraLarge;
+    final lOther$extraLarge = other.extraLarge;
+    if (l$extraLarge != lOther$extraLarge) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ListEntryMedia$coverImage
+    on Fragment$ListEntryMedia$coverImage {
+  CopyWith$Fragment$ListEntryMedia$coverImage<
+          Fragment$ListEntryMedia$coverImage>
+      get copyWith => CopyWith$Fragment$ListEntryMedia$coverImage(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ListEntryMedia$coverImage<TRes> {
+  factory CopyWith$Fragment$ListEntryMedia$coverImage(
+    Fragment$ListEntryMedia$coverImage instance,
+    TRes Function(Fragment$ListEntryMedia$coverImage) then,
+  ) = _CopyWithImpl$Fragment$ListEntryMedia$coverImage;
+
+  factory CopyWith$Fragment$ListEntryMedia$coverImage.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ListEntryMedia$coverImage;
+
+  TRes call({
+    String? large,
+    String? medium,
+    String? extraLarge,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ListEntryMedia$coverImage<TRes>
+    implements CopyWith$Fragment$ListEntryMedia$coverImage<TRes> {
+  _CopyWithImpl$Fragment$ListEntryMedia$coverImage(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ListEntryMedia$coverImage _instance;
+
+  final TRes Function(Fragment$ListEntryMedia$coverImage) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? large = _undefined,
+    Object? medium = _undefined,
+    Object? extraLarge = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ListEntryMedia$coverImage(
+        large: large == _undefined ? _instance.large : (large as String?),
+        medium: medium == _undefined ? _instance.medium : (medium as String?),
+        extraLarge: extraLarge == _undefined
+            ? _instance.extraLarge
+            : (extraLarge as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ListEntryMedia$coverImage<TRes>
+    implements CopyWith$Fragment$ListEntryMedia$coverImage<TRes> {
+  _CopyWithStubImpl$Fragment$ListEntryMedia$coverImage(this._res);
+
+  TRes _res;
+
+  call({
+    String? large,
+    String? medium,
+    String? extraLarge,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$ListEntryMedia$startDate {
+  Fragment$ListEntryMedia$startDate({
+    this.day,
+    this.month,
+    this.year,
+    this.$__typename = 'FuzzyDate',
+  });
+
+  factory Fragment$ListEntryMedia$startDate.fromJson(
+      Map<String, dynamic> json) {
+    final l$day = json['day'];
+    final l$month = json['month'];
+    final l$year = json['year'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ListEntryMedia$startDate(
+      day: (l$day as int?),
+      month: (l$month as int?),
+      year: (l$year as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int? day;
+
+  final int? month;
+
+  final int? year;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$day = day;
+    _resultData['day'] = l$day;
+    final l$month = month;
+    _resultData['month'] = l$month;
+    final l$year = year;
+    _resultData['year'] = l$year;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$day = day;
+    final l$month = month;
+    final l$year = year;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$day,
+      l$month,
+      l$year,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$ListEntryMedia$startDate ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (l$day != lOther$day) {
+      return false;
+    }
+    final l$month = month;
+    final lOther$month = other.month;
+    if (l$month != lOther$month) {
+      return false;
+    }
+    final l$year = year;
+    final lOther$year = other.year;
+    if (l$year != lOther$year) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ListEntryMedia$startDate
+    on Fragment$ListEntryMedia$startDate {
+  CopyWith$Fragment$ListEntryMedia$startDate<Fragment$ListEntryMedia$startDate>
+      get copyWith => CopyWith$Fragment$ListEntryMedia$startDate(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ListEntryMedia$startDate<TRes> {
+  factory CopyWith$Fragment$ListEntryMedia$startDate(
+    Fragment$ListEntryMedia$startDate instance,
+    TRes Function(Fragment$ListEntryMedia$startDate) then,
+  ) = _CopyWithImpl$Fragment$ListEntryMedia$startDate;
+
+  factory CopyWith$Fragment$ListEntryMedia$startDate.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ListEntryMedia$startDate;
+
+  TRes call({
+    int? day,
+    int? month,
+    int? year,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ListEntryMedia$startDate<TRes>
+    implements CopyWith$Fragment$ListEntryMedia$startDate<TRes> {
+  _CopyWithImpl$Fragment$ListEntryMedia$startDate(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ListEntryMedia$startDate _instance;
+
+  final TRes Function(Fragment$ListEntryMedia$startDate) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? day = _undefined,
+    Object? month = _undefined,
+    Object? year = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ListEntryMedia$startDate(
+        day: day == _undefined ? _instance.day : (day as int?),
+        month: month == _undefined ? _instance.month : (month as int?),
+        year: year == _undefined ? _instance.year : (year as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ListEntryMedia$startDate<TRes>
+    implements CopyWith$Fragment$ListEntryMedia$startDate<TRes> {
+  _CopyWithStubImpl$Fragment$ListEntryMedia$startDate(this._res);
+
+  TRes _res;
+
+  call({
+    int? day,
+    int? month,
+    int? year,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$ListEntryMedia$endDate {
+  Fragment$ListEntryMedia$endDate({
+    this.day,
+    this.month,
+    this.year,
+    this.$__typename = 'FuzzyDate',
+  });
+
+  factory Fragment$ListEntryMedia$endDate.fromJson(Map<String, dynamic> json) {
+    final l$day = json['day'];
+    final l$month = json['month'];
+    final l$year = json['year'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ListEntryMedia$endDate(
+      day: (l$day as int?),
+      month: (l$month as int?),
+      year: (l$year as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int? day;
+
+  final int? month;
+
+  final int? year;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$day = day;
+    _resultData['day'] = l$day;
+    final l$month = month;
+    _resultData['month'] = l$month;
+    final l$year = year;
+    _resultData['year'] = l$year;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$day = day;
+    final l$month = month;
+    final l$year = year;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$day,
+      l$month,
+      l$year,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$ListEntryMedia$endDate ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (l$day != lOther$day) {
+      return false;
+    }
+    final l$month = month;
+    final lOther$month = other.month;
+    if (l$month != lOther$month) {
+      return false;
+    }
+    final l$year = year;
+    final lOther$year = other.year;
+    if (l$year != lOther$year) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ListEntryMedia$endDate
+    on Fragment$ListEntryMedia$endDate {
+  CopyWith$Fragment$ListEntryMedia$endDate<Fragment$ListEntryMedia$endDate>
+      get copyWith => CopyWith$Fragment$ListEntryMedia$endDate(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ListEntryMedia$endDate<TRes> {
+  factory CopyWith$Fragment$ListEntryMedia$endDate(
+    Fragment$ListEntryMedia$endDate instance,
+    TRes Function(Fragment$ListEntryMedia$endDate) then,
+  ) = _CopyWithImpl$Fragment$ListEntryMedia$endDate;
+
+  factory CopyWith$Fragment$ListEntryMedia$endDate.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ListEntryMedia$endDate;
+
+  TRes call({
+    int? day,
+    int? month,
+    int? year,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ListEntryMedia$endDate<TRes>
+    implements CopyWith$Fragment$ListEntryMedia$endDate<TRes> {
+  _CopyWithImpl$Fragment$ListEntryMedia$endDate(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ListEntryMedia$endDate _instance;
+
+  final TRes Function(Fragment$ListEntryMedia$endDate) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? day = _undefined,
+    Object? month = _undefined,
+    Object? year = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ListEntryMedia$endDate(
+        day: day == _undefined ? _instance.day : (day as int?),
+        month: month == _undefined ? _instance.month : (month as int?),
+        year: year == _undefined ? _instance.year : (year as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ListEntryMedia$endDate<TRes>
+    implements CopyWith$Fragment$ListEntryMedia$endDate<TRes> {
+  _CopyWithStubImpl$Fragment$ListEntryMedia$endDate(this._res);
+
+  TRes _res;
+
+  call({
+    int? day,
+    int? month,
+    int? year,
     String? $__typename,
   }) =>
       _res;

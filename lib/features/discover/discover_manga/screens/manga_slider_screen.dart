@@ -83,6 +83,17 @@ class MangaSliderScreen extends StatelessWidget {
                     screenWidth: size.width,
                     color: cardColors[index % cardColors.length],
                     media: media,
+                    mediaListEntry: media?.mediaListEntry,
+                    onListEntryUpdated: (entry) {
+                      context
+                          .read<FilterMangaBloc>()
+                          .add(UpdateListEntryForManga(entry: entry));
+                    },
+                    onListEntryDeleted: (id) {
+                      context
+                          .read<FilterMangaBloc>()
+                          .add(RemoveListEntryFromManga(id: id));
+                    },
                   );
                 }).toList(),
               ),

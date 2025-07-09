@@ -12,8 +12,10 @@ import 'package:otaku_world/graphql/__generated/graphql/discover/filter_media.gr
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
+import 'package:otaku_world/utils/model_utils.dart';
 
 part 'filter_anime_event.dart';
+
 part 'filter_anime_state.dart';
 
 class FilterAnimeBloc extends Bloc<FilterAnimeEvent, FilterAnimeState> {
@@ -47,6 +49,8 @@ class FilterAnimeBloc extends Bloc<FilterAnimeEvent, FilterAnimeState> {
     on<SelectAnimeTag>(_onSelectAnimeTag);
     on<UnselectAnimeTag>(_onUnselectAnimeTag);
     on<SetTagRank>(_onSetTagRank);
+    on<UpdateListEntryForAnime>(_onUpdateListEntryForAnime);
+    on<RemoveListEntryFromAnime>(_onRemoveListEntryFromAnime);
   }
 
   AnimeFilter appliedFilter = const AnimeFilter(
@@ -506,6 +510,45 @@ class FilterAnimeBloc extends Bloc<FilterAnimeEvent, FilterAnimeState> {
       minTagRank: event.tagRank,
     );
     dev.log('Tag rank: ${filter.minTagRank}', name: 'AnimeFilter');
+  }
+
+  void _onUpdateListEntryForAnime(
+    UpdateListEntryForAnime event,
+    Emitter<FilterAnimeState> emit,
+  ) {
+    dev.log('Updating list entry: ${event.entry.id} | ${event.entry.progress}');
+    final index = list.indexWhere(
+      (e) => e?.id == event.entry.mediaId,
+    );
+    dev.log('Update list entry index: $index');
+    if (index != -1) {
+      list[index] = list[index]?.copyWith(mediaListEntry: event.entry);
+      emit(
+        ResultsLoaded(
+          list: List<Fragment$MediaShort?>.from(list),
+          hasNextPage: hasNextPage,
+        ),
+      );
+      dev.log('Updated list entry');
+    }
+  }
+
+  void _onRemoveListEntryFromAnime(
+    RemoveListEntryFromAnime event,
+    Emitter<FilterAnimeState> emit,
+  ) {
+    dev.log('Removing list entry: ${event.id}');
+    final index = list.indexWhere(
+      (e) => e?.mediaListEntry?.id == event.id,
+    );
+    dev.log('Remove list entry index: $index');
+    list[index] = ModelUtils.getMediaShort(list[index], removeListEntry: true);
+    emit(
+      ResultsLoaded(
+        list: List<Fragment$MediaShort?>.from(list),
+        hasNextPage: hasNextPage,
+      ),
+    );
   }
 
   @override

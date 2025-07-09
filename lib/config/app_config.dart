@@ -3,12 +3,12 @@ class AppConfig {
   static bool enableForceUpdateFeature = true;
 
   static String gitHubLink =
-      'https://github.com/ternaryminds1970/otaku-world-rebase';
+      'https://github.com/ariscore/otaku-world-rebase';
   static String gmailLink =
-      'mailto:ariscore.team@gmail.com?subject=Support Request - Otaku World&body=Hello ArisCore Team,\n\nI need assistance with Otaku World regarding';
-  static String anilistLink = '';
-  static String playStoreLink = '';
-  static String privacyPolicyLink = '';
+      'mailto:otakuworld.ac@gmail.com?subject=Support Request - Otaku World&body=Hello Otaku World Team,\n\nI need assistance regarding ';
+  static String aniListLink = 'https://anilist.co/user/otakuworldapp/';
+  static String playStoreLink = 'https://play.google.com/store/apps/details?id=com.ternaryminds.otaku_world';
+  static String privacyPolicyLink = 'https://otakuworldapp-pp.netlify.app/';
 
   static String copyRightYear = '2025';
   static String parentCompanyName = 'ArisCore';

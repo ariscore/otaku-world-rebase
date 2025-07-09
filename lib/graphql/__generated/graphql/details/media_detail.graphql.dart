@@ -371,6 +371,7 @@ const documentNodeQueryGetMediaDetail = DocumentNode(definitions: [
   fragmentDefinitionMediaShort,
   fragmentDefinitionFuzzyDate,
   fragmentDefinitionMediaListEntry,
+  fragmentDefinitionListEntryMedia,
   fragmentDefinitionMediaListOptions,
 ]);
 Query$GetMediaDetail _parserFn$Query$GetMediaDetail(

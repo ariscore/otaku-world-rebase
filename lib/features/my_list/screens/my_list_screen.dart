@@ -173,6 +173,16 @@ class _MyListScreenState extends State<MyListScreen> {
             if (state is MediaListInitial || state is MediaListLoading) {
               return const MyListShimmer(showFilters: false, isSliver: true);
             } else if (state is MediaListLoaded) {
+              if (state.listCollection.lists?.isEmpty ?? true) {
+                return const SliverToBoxAdapter(
+                  child: AnimeCharacterPlaceholder(
+                    asset: Assets.charactersSchoolGirl,
+                    height: 300,
+                    heading: MyListConstants.emptyListHeading,
+                    subheading: MyListConstants.emptyListSubheading,
+                  ),
+                );
+              }
               return SliverPadding(
                 padding: const EdgeInsets.only(bottom: 48),
                 sliver: ListSections(

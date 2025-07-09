@@ -537,6 +537,8 @@ const documentNodeQuerygetStudioMedia = DocumentNode(definitions: [
   ),
   fragmentDefinitionMediaShort,
   fragmentDefinitionFuzzyDate,
+  fragmentDefinitionMediaListEntry,
+  fragmentDefinitionListEntryMedia,
   fragmentDefinitionPageInfo,
 ]);
 Query$getStudioMedia _parserFn$Query$getStudioMedia(
