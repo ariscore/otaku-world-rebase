@@ -130,7 +130,7 @@ class MediaCards<B extends PaginatedDataBloc> extends HookWidget {
                 message: StringConstants.somethingWentWrongError,
                 onTryAgain: () {
                   final client = (context.read<GraphqlClientCubit>().state
-                  as GraphqlClientInitialized)
+                          as GraphqlClientInitialized)
                       .client;
                   context.read<B>().add(LoadData(client));
                 },

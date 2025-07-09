@@ -50,13 +50,12 @@ class IdentityCard extends StatelessWidget {
           children: [
             _buildCharacterImage(imageUrl, size),
             const SizedBox(width: 5),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: size.width - 45 - 90,
-                  child: Text(
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
                     name,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           fontFamily: 'Poppins',
@@ -64,25 +63,25 @@ class IdentityCard extends StatelessWidget {
                     maxLines: 5,
                     overflow: TextOverflow.ellipsis,
                   ),
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(
-                      Assets.iconsFavourite,
-                      width: 16,
-                      height: 16,
-                    ),
-                    const SizedBox(width: 2),
-                    Text(
-                      favorites,
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontFamily: 'Poppins',
-                          ),
-                    ),
-                  ],
-                ),
-              ],
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        Assets.iconsFavourite,
+                        width: 16,
+                        height: 16,
+                      ),
+                      const SizedBox(width: 2),
+                      Text(
+                        favorites,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              fontFamily: 'Poppins',
+                            ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),

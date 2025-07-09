@@ -13,7 +13,6 @@ import '../../../services/caching/image_cache_manager.dart';
 import '../../../theme/colors.dart';
 import '../../../utils/formatting_utils.dart';
 import '../../../utils/navigation_helper.dart';
-import '../../../utils/ui_utils.dart';
 import '../buttons/primary_button.dart';
 import '../placeholders/poster_placeholder.dart';
 
@@ -49,84 +48,73 @@ class MediaCarouselCard extends StatelessWidget {
           colors: [color, AppColors.japaneseIndigo],
         ),
       ),
+      padding: const EdgeInsets.symmetric(
+        vertical: 15,
+        horizontal: 20,
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 15,
-                  horizontal: 20,
-                ),
-                child: _buildMediaPoster(
-                  media?.coverImage?.extraLarge,
-                  media!.type!,
-                ),
+              _buildMediaPoster(
+                media?.coverImage?.extraLarge,
+                media!.type!,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      media!.title!.userPreferred!,
-                      style:
-                          Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w500,
-                              ),
-                      textAlign: TextAlign.left,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 3,
-                    ),
-                    const SizedBox(height: 15),
-                    InfoData(
-                      iconName: Assets.iconsFavourite,
-                      separateWidth: 3,
-                      info: media!.favourites.toString(),
-                      mainAxisAlignment: MainAxisAlignment.center,
-                    ),
-                    const SizedBox(height: 15),
-                    StatusRow(
-                      airingSchedule: media!.airingSchedule,
-                      status: media!.status,
-                      fontSize: 12,
-                      alignment: MainAxisAlignment.center,
-                    ),
-                    const SizedBox(height: 15),
-                    GenreText(
-                      genres: media!.genres,
-                      genreStyle:
-                          Theme.of(context).textTheme.titleLarge?.copyWith(
-                                color: AppColors.white.withValues(alpha: 0.7),
-                                fontWeight: FontWeight.w500,
-                                fontFamily: 'Poppins',
-                              ),
-                      indicatorStyle:
-                          Theme.of(context).textTheme.titleLarge?.copyWith(
-                                color: AppColors.sunsetOrange,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Poppins',
-                              ),
-                    ),
-                    const SizedBox(height: 20),
-                    _buildMediaDetails(context, media!),
-                  ],
-                ),
+              const SizedBox(height: 10),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    media!.title!.userPreferred!,
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                        ),
+                    textAlign: TextAlign.left,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                  ),
+                  const SizedBox(height: 15),
+                  InfoData(
+                    iconName: Assets.iconsFavourite,
+                    separateWidth: 3,
+                    info: media!.favourites.toString(),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                  ),
+                  const SizedBox(height: 15),
+                  StatusRow(
+                    airingSchedule: media!.airingSchedule,
+                    status: media!.status,
+                    fontSize: 12,
+                    alignment: MainAxisAlignment.center,
+                  ),
+                  const SizedBox(height: 15),
+                  GenreText(
+                    genres: media!.genres,
+                    genreStyle:
+                        Theme.of(context).textTheme.titleLarge?.copyWith(
+                              color: AppColors.white.withValues(alpha: 0.7),
+                              fontWeight: FontWeight.w500,
+                              fontFamily: 'Poppins',
+                            ),
+                    indicatorStyle:
+                        Theme.of(context).textTheme.titleLarge?.copyWith(
+                              color: AppColors.sunsetOrange,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Poppins',
+                            ),
+                  ),
+                  const SizedBox(height: 20),
+                  _buildMediaDetails(context, media!),
+                ],
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
-            child: _buildButtonOptions(
-              screenWidth,
-              context,
-              media!.id,
-            ),
+          _buildButtonOptions(
+            screenWidth,
+            context,
+            media!.id,
           ),
         ],
       ),
@@ -135,37 +123,36 @@ class MediaCarouselCard extends StatelessWidget {
 
   Widget _buildButtonOptions(double screenWidth, BuildContext context, int id) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        PrimaryButton(
-          onTap: () {},
-          label: 'Add to List',
-          color: AppColors.darkCharcoal,
-          width: UIUtils.getWidgetWidth(
-            targetWidgetWidth: 100,
-            screenWidth: screenWidth,
+        Flexible(
+          child: PrimaryButton(
+            onTap: () {},
+            label: 'Add to List',
+            color: AppColors.darkCharcoal,
+            fontSize: 14,
+            horizontalPadding: 0,
+            verticalPadding: 7,
+            radius: 8,
+            isSmall: true,
           ),
-          fontSize: 14,
-          horizontalPadding: 0,
-          verticalPadding: 7,
-          radius: 8,
-          isSmall: true,
         ),
-        PrimaryButton(
-          onTap: () => NavigationHelper.goToMediaDetailScreen(
-            context: context,
-            mediaId: id,
+        const SizedBox(
+          width: 10,
+        ),
+        Flexible(
+          child: PrimaryButton(
+            onTap: () => NavigationHelper.goToMediaDetailScreen(
+              context: context,
+              mediaId: id,
+            ),
+            label: 'View more',
+            fontSize: 14,
+            horizontalPadding: 0,
+            verticalPadding: 7,
+            radius: 8,
+            isSmall: true,
           ),
-          label: 'View more',
-          width: UIUtils.getWidgetWidth(
-            targetWidgetWidth: 100,
-            screenWidth: screenWidth,
-          ),
-          fontSize: 14,
-          horizontalPadding: 0,
-          verticalPadding: 7,
-          radius: 8,
-          isSmall: true,
         ),
       ],
     );
@@ -243,27 +230,50 @@ class MediaCarouselCard extends StatelessWidget {
 
   Widget _buildMediaPoster(String? imageUrl, Enum$MediaType type) {
     return (imageUrl != null)
-        ? AspectRatio(
-            aspectRatio: 21 / 30,
-            child: CachedNetworkImage(
-              cacheManager: ImageCacheManager.instance,
-              imageUrl: imageUrl,
-              fit: BoxFit.fill,
-              imageBuilder: (context, imageProvider) {
-                return ClipRRect(
-                  borderRadius: (type == Enum$MediaType.ANIME)
-                      ? BorderRadius.circular(12)
-                      : BorderRadius.circular(5),
-                  child: Image(
-                    image: imageProvider,
-                    fit: BoxFit.fill,
-                  ),
-                );
-              },
-              placeholder: (context, url) {
-                return _buildPlaceholderImage210x310(type);
-              },
-            ),
+        ? Builder(
+            builder: (context) {
+              final size = MediaQuery.sizeOf(context);
+              const designWidth = 210.0;
+              const designHeight = 310.0;
+              const designAspectRatio = designWidth / designHeight;
+
+              // Assume we want max 60% of width
+              final maxWidth = size.width * 0.55;
+
+              // Try expected height using original aspect ratio
+              final expectedHeight = maxWidth / designAspectRatio;
+
+              // If expected height is too tall for the screen (e.g., causes overflow),
+              // scale the aspect ratio so the height fits
+              final maxAllowedHeight = size.height * 0.35; // adjust if needed
+              final adjustedHeight = expectedHeight > maxAllowedHeight
+                  ? maxAllowedHeight
+                  : expectedHeight;
+
+              final adjustedAspectRatio = maxWidth / adjustedHeight;
+              return AspectRatio(
+                aspectRatio: adjustedAspectRatio,
+                child: CachedNetworkImage(
+                  cacheManager: ImageCacheManager.instance,
+                  imageUrl: imageUrl,
+                  fit: BoxFit.fill,
+                  imageBuilder: (context, imageProvider) {
+                    return ClipRRect(
+                      borderRadius: (type == Enum$MediaType.ANIME)
+                          ? BorderRadius.circular(12)
+                          : BorderRadius.circular(5),
+                      child: Image(
+                        image: imageProvider,
+                        fit: BoxFit.fill,
+                      ),
+                    );
+                  },
+                  placeholder: (context, url) {
+                    return _buildPlaceholderImage210x310(type);
+                  },
+                ),
+              );
+            },
           )
         : _buildPlaceholderImage210x310(type);
   }
