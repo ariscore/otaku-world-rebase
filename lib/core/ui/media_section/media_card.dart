@@ -36,6 +36,7 @@ class MediaCard extends StatelessWidget {
         mediaId: media!.id,
       ),
       child: Container(
+        padding: const EdgeInsets.all(10),
         height: UIUtils.getWidgetHeight(
             targetWidgetHeight: 192,
             screenHeight: rotate ? screenHeight : screenWidth),
@@ -53,73 +54,68 @@ class MediaCard extends StatelessWidget {
             ],
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Row(
-            children: [
-              MediaPoster(
-                imageUrl: media!.coverImage?.large,
-                type: media!.type!,
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Flexible(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            media?.title?.userPreferred ?? 'No title',
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium
-                                ?.copyWith(
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w700,
-                                ),
-                          ),
-                        ),
-                        Text(
-                          "#$index",
+        child: Row(
+          children: [
+            MediaPoster(
+              imageUrl: media!.coverImage?.large,
+              type: media!.type!,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          media?.title?.userPreferred ?? 'No title',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                           style: Theme.of(context)
                               .textTheme
-                              .displayMedium!
-                              .copyWith(
-                                fontFamily: 'Roboto-Condensed',
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.japaneseIndigo,
+                              .headlineMedium
+                              ?.copyWith(
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w700,
                               ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    MeanScore(
-                      meanScore: media!.meanScore,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Genres(
-                      media: media!,
-                    ),
-                    const Spacer(),
-                    SummaryText(
-                      media: media!,
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
+                      ),
+                      Text(
+                        "#$index",
+                        style:
+                            Theme.of(context).textTheme.displayMedium!.copyWith(
+                                  fontFamily: 'Roboto-Condensed',
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.japaneseIndigo,
+                                ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  MeanScore(
+                    meanScore: media!.meanScore,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Genres(
+                    media: media!,
+                  ),
+                  const Spacer(),
+                  SummaryText(
+                    media: media!,
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );
@@ -192,8 +188,6 @@ class Genres extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-
     if (media.genres == null) return const Text('No genre');
 
     List<String?> genres = media.genres!;
@@ -282,6 +276,14 @@ class SummaryText extends StatelessWidget {
     }
     if (media.seasonYear != null) {
       text += ' ${media.seasonYear}';
+    }
+    if (isManga) {
+      if (media.startDate?.year != null) {
+        text += ', ${media.startDate!.year}';
+      }
+      if (media.endDate?.year != null) {
+        text += ' - ${media.endDate!.year}';
+      }
     }
     if (text.isNotEmpty) {
       textSpans.add(
