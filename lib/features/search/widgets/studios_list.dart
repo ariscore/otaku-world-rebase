@@ -11,6 +11,7 @@ import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/search/search_base/search_base_bloc.dart';
+import '../../../constants/string_constants.dart';
 import '../../../core/ui/placeholders/anime_character_placeholder.dart';
 import '../../../generated/assets.dart';
 
@@ -58,6 +59,7 @@ class ResultStudiosList extends HookWidget {
               heading: 'Find what interests you!',
               subheading:
                   'Browse through our extensive library and find your next favorite.',
+              isScrollable: true,
             );
           } else if (state is SearchResultLoading) {
             return const Center(
@@ -75,6 +77,7 @@ class ResultStudiosList extends HookWidget {
                     asset: Assets.charactersErenYeager,
                     heading: 'Oops! No matches found!',
                     subheading: 'Try searching something else.',
+                    isScrollable: true,
                   )
                 : CustomScrollView(
                     scrollDirection: Axis.vertical,
@@ -101,7 +104,11 @@ class ResultStudiosList extends HookWidget {
                     ],
                   );
           } else {
-            return const Text('Unknown State');
+            return const AnimeCharacterPlaceholder(
+              height: 300,
+              asset: Assets.charactersErenYeager,
+              subheading: StringConstants.somethingWentWrongError,
+            );
           }
         },
       ),

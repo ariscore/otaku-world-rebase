@@ -22,16 +22,10 @@ class MediaGrid extends StatelessWidget {
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 0),
           sliver: SliverGrid(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 150,
               childAspectRatio: 0.5556,
             ),
-            // const SliverGridDelegateWithMaxCrossAxisExtent(
-            //   maxCrossAxisExtent: 150,
-            //   crossAxisSpacing: 10,
-            //   mainAxisSpacing: 0.001,
-            //   childAspectRatio: 0.5556,
-            // ),
             delegate: SliverChildBuilderDelegate(
               childCount: list.length,
               (context, index) {
@@ -119,7 +113,7 @@ class MediaGrid extends StatelessWidget {
         vertical: 3,
       ),
       decoration: ShapeDecoration(
-        color: AppColors.raisinBlack.withValues(alpha:0.6),
+        color: AppColors.raisinBlack.withValues(alpha: 0.6),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(5),

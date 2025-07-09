@@ -1,19 +1,19 @@
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
+import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/ui/media_section/scroll_to_top_button.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/shimmer_details.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 
 import '../../../core/ui/appbars/simple_app_bar.dart';
 import '../../../core/ui/appbars/simple_sliver_app_bar.dart';
-import '../../../core/ui/error_text.dart';
+import '../../../core/ui/placeholders/anime_character_placeholder.dart';
 import '../../../core/ui/shimmers/grid_shimmer.dart';
 import '../../../graphql/__generated/graphql/fragments.graphql.dart';
-import '../../../utils/navigation_helper.dart';
 import '../widgets/entity_card.dart';
 
 class EntityScreen<B extends PaginatedDataBloc> extends HookWidget {
@@ -69,7 +69,6 @@ class EntityScreen<B extends PaginatedDataBloc> extends HookWidget {
           } else if (state is PaginatedDataLoaded) {
             log('State is data loaded');
             final list = state.list;
-
             return CustomScrollView(
               controller: scrollController,
               slivers: [
@@ -80,13 +79,7 @@ class EntityScreen<B extends PaginatedDataBloc> extends HookWidget {
                 SliverPadding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   sliver: SliverGrid(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      childAspectRatio: 100 / 182,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                    ),
+                    gridDelegate: UIUtils.getResponsiveDelegate(context),
                     delegate: SliverChildBuilderDelegate(
                       childCount: list.length,
                       (context, index) {
@@ -161,16 +154,46 @@ class EntityScreen<B extends PaginatedDataBloc> extends HookWidget {
               ],
             );
           } else if (state is PaginatedDataError) {
-            return ErrorText(
+            return _buildErrorScaffold(
               message: state.message,
+              context: context,
+              appbarTitle: title,
               onTryAgain: () {
                 bloc.add(LoadData(client));
               },
             );
           } else {
-            return const Text('Unknown State');
+            return _buildErrorScaffold(
+              message: StringConstants.somethingWentWrongError,
+              context: context,
+              appbarTitle: title,
+              onTryAgain: () {
+                bloc.add(LoadData(client));
+              },
+            );
           }
         },
+      ),
+    );
+  }
+
+  Widget _buildErrorScaffold({
+    required String message,
+    required BuildContext context,
+    required String appbarTitle,
+    required VoidCallback onTryAgain,
+  }) {
+    return Scaffold(
+      appBar: SimpleAppBar(title: appbarTitle),
+      body: Center(
+        child: AnimeCharacterPlaceholder(
+          height: 300,
+          asset: Assets.charactersChillBoy,
+          subheading: message,
+          isScrollable: true,
+          isError: true,
+          onTryAgain: onTryAgain,
+        ),
       ),
     );
   }

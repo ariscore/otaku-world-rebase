@@ -8,6 +8,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/paginated_data/paginated_data_bloc.dart';
 import '../../../bloc/upcoming_episodes/upcoming_episodes_bloc.dart';
+import '../../../constants/string_constants.dart';
 import '../../../core/ui/error_text.dart';
 import '../../../core/ui/media_section/scroll_to_left_button.dart';
 import '../../../core/ui/placeholders/poster_placeholder.dart';
@@ -95,15 +96,24 @@ class UpcomingEpisodesSection extends HookWidget {
             );
           } else if (state is PaginatedDataError) {
             return ErrorText(
-                message: state.message,
-                onTryAgain: () {
-                  final client = (context.read<GraphqlClientCubit>().state
-                          as GraphqlClientInitialized)
-                      .client;
+              message: state.message,
+              onTryAgain: () {
+                final client = context.read<GraphqlClientCubit>().getClient();
+                if (client != null) {
                   context.read<UpcomingEpisodesBloc>().add(LoadData(client));
-                });
+                }
+              },
+            );
           } else {
-            return const Text('Unknown State');
+            return ErrorText(
+              message: StringConstants.somethingWentWrongError,
+              onTryAgain: () {
+                final client = context.read<GraphqlClientCubit>().getClient();
+                if (client != null) {
+                  context.read<UpcomingEpisodesBloc>().add(LoadData(client));
+                }
+              },
+            );
           }
         },
       ),
@@ -171,6 +181,8 @@ class UpcomingEpisodesSection extends HookWidget {
     required Query$GetUpcomingEpisodes$Page$media? media,
     required Color color,
   }) {
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final double targetWidgetWidth = screenWidth > 600 ? 150 : 220;
     if (media == null) return const SizedBox();
 
     try {
@@ -180,7 +192,10 @@ class UpcomingEpisodesSection extends HookWidget {
           mediaId: media.id,
         ),
         child: Container(
-          width: 215,
+          width: UIUtils.getWidgetWidth(
+            targetWidgetWidth: targetWidgetWidth,
+            screenWidth: screenWidth,
+          ),
           margin: const EdgeInsets.only(right: 15),
           padding: const EdgeInsets.only(
             left: 8,
@@ -197,7 +212,7 @@ class UpcomingEpisodesSection extends HookWidget {
             ),
             shadows: [
               BoxShadow(
-                color: AppColors.black.withValues(alpha:0.25),
+                color: AppColors.black.withValues(alpha: 0.25),
                 blurRadius: 4,
                 offset: const Offset(0, 4),
               ),
@@ -242,24 +257,27 @@ class UpcomingEpisodesSection extends HookWidget {
                 padding: const EdgeInsets.only(top: 7, right: 7),
                 child: media.coverImage?.large == null
                     ? _buildPlaceholderImage85x120()
-                    : CachedNetworkImage(
-                        cacheManager: ImageCacheManager.instance,
-                        imageUrl: media.coverImage!.large!,
-                        width: 85,
-                        height: 120,
-                        imageBuilder: (context, imageProvider) {
-                          return ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Image(
-                              image: imageProvider,
-                              fit: BoxFit.cover,
-                            ),
-                          );
-                        },
-                        placeholder: (context, url) =>
-                            _buildPlaceholderImage85x120(),
-                        errorWidget: (context, url, error) =>
-                            _buildPlaceholderImage85x120(),
+                    : AspectRatio(
+                        aspectRatio: 85 / 120,
+                        child: CachedNetworkImage(
+                          cacheManager: ImageCacheManager.instance,
+                          imageUrl: media.coverImage!.large!,
+                          // width: 85,
+                          // height: 120,
+                          imageBuilder: (context, imageProvider) {
+                            return ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                              ),
+                            );
+                          },
+                          placeholder: (context, url) =>
+                              _buildPlaceholderImage85x120(),
+                          errorWidget: (context, url, error) =>
+                              _buildPlaceholderImage85x120(),
+                        ),
                       ),
               ),
             ],
