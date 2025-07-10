@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/paginated_data/paginated_data_bloc.dart';
@@ -28,12 +29,26 @@ class UpcomingEpisodesSection extends HookWidget {
     late final double screenWidth;
     late final double screenHeight;
 
-    if (MediaQuery.of(context).orientation == Orientation.portrait) {
-      screenWidth = MediaQuery.of(context).size.width;
-      screenHeight = MediaQuery.of(context).size.height;
+    if (MediaQuery
+        .of(context)
+        .orientation == Orientation.portrait) {
+      screenWidth = MediaQuery
+          .of(context)
+          .size
+          .width;
+      screenHeight = MediaQuery
+          .of(context)
+          .size
+          .height;
     } else {
-      screenWidth = MediaQuery.of(context).size.height;
-      screenHeight = MediaQuery.of(context).size.width;
+      screenWidth = MediaQuery
+          .of(context)
+          .size
+          .height;
+      screenHeight = MediaQuery
+          .of(context)
+          .size
+          .width;
     }
 
     dev.log('Screen width: $screenWidth | Screen height: $screenHeight',
@@ -51,8 +66,10 @@ class UpcomingEpisodesSection extends HookWidget {
           final hasNextPage =
               (upcomingEpisodesBloc.state as PaginatedDataLoaded).hasNextPage;
           if (hasNextPage) {
-            final client = (context.read<GraphqlClientCubit>().state
-                    as GraphqlClientInitialized)
+            final client = (context
+                .read<GraphqlClientCubit>()
+                .state
+            as GraphqlClientInitialized)
                 .client;
             upcomingEpisodesBloc.add(LoadData(client));
           }
@@ -66,8 +83,10 @@ class UpcomingEpisodesSection extends HookWidget {
       child: BlocBuilder<UpcomingEpisodesBloc, PaginatedDataState>(
         builder: (context, state) {
           if (state is PaginatedDataInitial) {
-            final client = (context.read<GraphqlClientCubit>().state
-                    as GraphqlClientInitialized)
+            final client = (context
+                .read<GraphqlClientCubit>()
+                .state
+            as GraphqlClientInitialized)
                 .client;
             context.read<UpcomingEpisodesBloc>().add(LoadData(client));
             return _buildShimmer(context, screenWidth, screenHeight);
@@ -80,10 +99,14 @@ class UpcomingEpisodesSection extends HookWidget {
               children: [
                 Text(
                   'Upcoming Episodes',
-                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                        fontFamily: 'Roboto-Condensed',
-                        fontWeight: FontWeight.w500,
-                      ),
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .displayMedium
+                      ?.copyWith(
+                    fontFamily: 'Roboto-Condensed',
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
                 const SizedBox(height: 10),
                 _buildUpcomingEpisodesList(
@@ -121,11 +144,10 @@ class UpcomingEpisodesSection extends HookWidget {
   }
 
   Widget _buildUpcomingEpisodesList(
-    List<Query$GetUpcomingEpisodes$Page$media?> episodes,
-    bool hasNextPage,
-    double screenHeight,
-    ScrollController controller,
-  ) {
+      List<Query$GetUpcomingEpisodes$Page$media?> episodes,
+      bool hasNextPage,
+      double screenHeight,
+      ScrollController controller,) {
     final List<Color> cardColors = [
       AppColors.sunsetOrange,
       AppColors.crayola,
@@ -146,7 +168,7 @@ class UpcomingEpisodesSection extends HookWidget {
             slivers: [
               SliverList(
                 delegate: SliverChildBuilderDelegate(
-                  (context, index) {
+                      (context, index) {
                     return _buildUpcomingEpisodeCard(
                       context: context,
                       media: episodes[index],
@@ -181,112 +203,111 @@ class UpcomingEpisodesSection extends HookWidget {
     required Query$GetUpcomingEpisodes$Page$media? media,
     required Color color,
   }) {
-    final screenWidth = MediaQuery.sizeOf(context).width;
+    final screenWidth = MediaQuery
+        .sizeOf(context)
+        .width;
     final double targetWidgetWidth = screenWidth > 600 ? 150 : 220;
     if (media == null) return const SizedBox();
 
-    try {
-      return GestureDetector(
-        onTap: () => NavigationHelper.goToMediaDetailScreen(
-          context: context,
-          mediaId: media.id,
+    return GestureDetector(
+      onTap: () =>
+          NavigationHelper.goToMediaDetailScreen(
+            context: context,
+            mediaId: media.id,
+          ),
+      child: Container(
+        width: UIUtils.getWidgetWidth(
+          targetWidgetWidth: targetWidgetWidth,
+          screenWidth: screenWidth,
         ),
-        child: Container(
-          width: UIUtils.getWidgetWidth(
-            targetWidgetWidth: targetWidgetWidth,
-            screenWidth: screenWidth,
-          ),
-          margin: const EdgeInsets.only(right: 15),
-          padding: const EdgeInsets.only(
-            left: 8,
-            bottom: 8,
-          ),
-          decoration: ShapeDecoration(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [color, AppColors.japaneseIndigo],
-            ),
-            shadows: [
-              BoxShadow(
-                color: AppColors.black.withValues(alpha: 0.25),
-                blurRadius: 4,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Row(
-            children: [
-              SizedBox(
-                width: 106,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 7),
-                      child: Text(
-                        media.title!.english ??
-                            media.title!.romaji ??
-                            media.title!.native!,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              fontFamily: 'Roboto-Medium',
-                            ),
-                        maxLines: 6,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Text(
-                      'Ep. ${media.airingSchedule!.nodes![0]!.episode} in'
-                      '\n${FormattingUtils.formatDurationFromSeconds(media.airingSchedule!.nodes![0]!.timeUntilAiring)}',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.lightSilver,
-                          ),
-                    ),
-                  ],
-                ),
-              ),
-              const Spacer(),
-              // Anime Poster
-              Padding(
-                padding: const EdgeInsets.only(top: 7, right: 7),
-                child: media.coverImage?.large == null
-                    ? _buildPlaceholderImage85x120()
-                    : AspectRatio(
-                        aspectRatio: 85 / 120,
-                        child: CachedNetworkImage(
-                          cacheManager: ImageCacheManager.instance,
-                          imageUrl: media.coverImage!.large!,
-                          // width: 85,
-                          // height: 120,
-                          imageBuilder: (context, imageProvider) {
-                            return ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: Image(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
-                              ),
-                            );
-                          },
-                          placeholder: (context, url) =>
-                              _buildPlaceholderImage85x120(),
-                          errorWidget: (context, url, error) =>
-                              _buildPlaceholderImage85x120(),
-                        ),
-                      ),
-              ),
-            ],
-          ),
+        margin: const EdgeInsets.only(right: 15),
+        padding: const EdgeInsets.all(
+          8,
         ),
-      );
-    } catch (_) {
-      return const SizedBox();
-    }
+        decoration: ShapeDecoration(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [color, AppColors.japaneseIndigo],
+          ),
+          shadows: [
+            BoxShadow(
+              color: AppColors.black.withValues(alpha: 0.25),
+              blurRadius: 4,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                     'Unknown Title',
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .titleLarge
+                        ?.copyWith(
+                      fontFamily: 'Roboto-Medium',
+                    ),
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    'Ep. ${media.airingSchedule!.nodes![0]!.episode} in'
+                        '\n${FormattingUtils.formatDurationFromSeconds(
+                        media.airingSchedule!.nodes![0]!.timeUntilAiring)}',
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .titleLarge
+                        ?.copyWith(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.lightSilver,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+            8.width,
+            media.coverImage?.large == null
+                ? _buildPlaceholderImage85x120()
+                : AspectRatio(
+              aspectRatio: 85 / 120,
+              child: CachedNetworkImage(
+                cacheManager: ImageCacheManager.instance,
+                imageUrl: media.coverImage!.large!,
+                // width: 85,
+                // height: 120,
+                imageBuilder: (context, imageProvider) {
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  );
+                },
+                placeholder: (context, url) =>
+                    _buildPlaceholderImage85x120(),
+                errorWidget: (context, url, error) =>
+                    _buildPlaceholderImage85x120(),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _buildPlaceholderImage85x120() {
@@ -296,20 +317,22 @@ class UpcomingEpisodesSection extends HookWidget {
     );
   }
 
-  Widget _buildShimmer(
-    BuildContext context,
-    double screenWidth,
-    double screenHeight,
-  ) {
+  Widget _buildShimmer(BuildContext context,
+      double screenWidth,
+      double screenHeight,) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Upcoming Episodes',
-          style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                fontFamily: 'Roboto-Condensed',
-                fontWeight: FontWeight.w500,
-              ),
+          style: Theme
+              .of(context)
+              .textTheme
+              .displayMedium
+              ?.copyWith(
+            fontFamily: 'Roboto-Condensed',
+            fontWeight: FontWeight.w500,
+          ),
         ),
         const SizedBox(height: 10),
         ShimmerLoaderList(

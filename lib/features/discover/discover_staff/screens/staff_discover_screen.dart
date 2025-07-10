@@ -37,7 +37,7 @@ class StaffDiscoverScreen extends HookWidget {
 
         if (currentScroll == maxScroll) {
           log('Max scrolled', name: 'StaffSearch');
-          final hasNextPage =
+          final hasNextPage = (searchStaffBloc.state is SearchResultLoaded) &&
               (searchStaffBloc.state as SearchResultLoaded).hasNextPage;
           if (hasNextPage) {
             final client = (context.read<GraphqlClientCubit>().state
