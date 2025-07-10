@@ -19,7 +19,8 @@ class CustomLineBreakSyntax extends InlineSyntax {
   @override
   bool onMatch(InlineParser parser, Match match) {
     log('Line break match: ${match.group(0)}');
-    parser.addNode(Element.empty('br'));
+    // parser.addNode(Element.empty('br'));
+    parser.addNode(Element.text('p', '\n'));
     return true;
   }
 }
@@ -29,7 +30,7 @@ class BrSyntax extends InlineSyntax {
 
   @override
   bool onMatch(InlineParser parser, Match match) {
-    log('Line break match: ${match.group(0)}');
+    log('Line break br match: ${match.group(0)}');
     // parser.addNode(Element.empty('br'));
     parser.addNode(Element.text('p', '\n'));
     return true;

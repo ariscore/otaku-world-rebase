@@ -134,6 +134,11 @@ class AboutUsConstants {
   static const String contactUs = '\n\nFound a bug or want a new feature? ';
 }
 
+class MyListConstants {
+  static const emptyListHeading = 'Your list is empty!';
+  static const emptyListSubheading = 'Looks like you haven’t added anything yet.';
+}
+
 class UiConstants {
   static const noImageUrl = '';
   static const noName = '';

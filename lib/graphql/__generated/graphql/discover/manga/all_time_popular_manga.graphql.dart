@@ -358,6 +358,8 @@ const documentNodeQueryGetAllTimePopularManga = DocumentNode(definitions: [
   ),
   fragmentDefinitionMediaShort,
   fragmentDefinitionFuzzyDate,
+  fragmentDefinitionMediaListEntry,
+  fragmentDefinitionListEntryMedia,
 ]);
 Query$GetAllTimePopularManga _parserFn$Query$GetAllTimePopularManga(
         Map<String, dynamic> data) =>

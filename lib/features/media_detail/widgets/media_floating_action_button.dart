@@ -30,7 +30,7 @@ class MediaFloatingActionButton extends HookWidget {
   final int reviewIndex;
   final int userId;
   final int mediaId;
-  final Fragment$MediaShort media;
+  final Fragment$ListEntryMedia media;
   final Fragment$MediaListOptions? options;
   final Fragment$MediaListEntry? entry;
 

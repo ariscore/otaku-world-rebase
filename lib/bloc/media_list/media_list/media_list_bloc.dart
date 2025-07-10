@@ -16,6 +16,7 @@ import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
 
 part 'media_list_event.dart';
+
 part 'media_list_state.dart';
 
 class AnimeListBloc extends MediaListBloc {
@@ -27,7 +28,8 @@ class MangaListBloc extends MediaListBloc {
 }
 
 class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
-  MediaListBloc({required this.type}) : super(MediaListInitial()) {
+  MediaListBloc({required this.type})
+      : super(MediaListInitial()) {
     filter = type == Enum$MediaType.ANIME
         ? const AnimeFilter(sort: [Enum$MediaSort.UPDATED_AT_DESC])
         : const MangaFilter(sort: [Enum$MediaSort.UPDATED_AT_DESC]);

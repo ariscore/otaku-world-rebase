@@ -43,6 +43,8 @@ class FilteredMediaSection extends StatelessWidget {
                 onPressed: () {
                   if (type == Enum$MediaType.ANIME) {
                     context.push(RouteConstants.filterAnimeSlider);
+                  } else {
+                    context.push(RouteConstants.filterMangaSlider);
                   }
                 },
                 icon: Padding(

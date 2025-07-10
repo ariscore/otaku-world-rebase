@@ -67,6 +67,7 @@ import 'package:otaku_world/features/discover/discover_anime/screens/filter_anim
 import 'package:otaku_world/features/discover/discover_characters/screens/characters_discover_screen.dart';
 import 'package:otaku_world/features/discover/discover_manga/screens/filter_manga_screen.dart';
 import 'package:otaku_world/features/discover/discover_manga/screens/manga_discover_screen.dart';
+import 'package:otaku_world/features/discover/discover_manga/screens/manga_slider_screen.dart';
 import 'package:otaku_world/features/discover/discover_staff/screens/staff_discover_screen.dart';
 import 'package:otaku_world/features/discover/discover_studios/screens/studios_discover_screen.dart';
 import 'package:otaku_world/features/discover/screens/discover_staff_wrapper.dart';

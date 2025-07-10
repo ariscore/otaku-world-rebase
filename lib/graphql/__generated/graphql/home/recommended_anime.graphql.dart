@@ -358,6 +358,8 @@ const documentNodeQueryGetRecommendedAnime = DocumentNode(definitions: [
   ),
   fragmentDefinitionMediaShort,
   fragmentDefinitionFuzzyDate,
+  fragmentDefinitionMediaListEntry,
+  fragmentDefinitionListEntryMedia,
 ]);
 Query$GetRecommendedAnime _parserFn$Query$GetRecommendedAnime(
         Map<String, dynamic> data) =>

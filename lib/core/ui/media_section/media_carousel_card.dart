@@ -1,11 +1,18 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:otaku_world/constants/string_constants.dart';
+import 'package:go_router/go_router.dart';
+import 'package:otaku_world/bloc/media_list/media_list/media_list_bloc.dart';
+import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
 import 'package:otaku_world/core/ui/texts/genre_text.dart';
 import 'package:otaku_world/features/media_detail/widgets/status_row.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 
+import '../../../config/router/router_constants.dart';
 import '../../../features/media_detail/widgets/info_data.dart';
 import '../../../generated/assets.dart';
 import '../../../graphql/__generated/graphql/schema.graphql.dart';
@@ -23,12 +30,18 @@ class MediaCarouselCard extends StatelessWidget {
     required this.screenWidth,
     required this.color,
     required this.media,
+    required this.mediaListEntry,
+    required this.onListEntryUpdated,
+    required this.onListEntryDeleted,
   });
 
   final double width;
   final double screenWidth;
   final Color color;
   final Fragment$MediaShort? media;
+  final Fragment$MediaListEntry? mediaListEntry;
+  final void Function(Fragment$MediaListEntry entry) onListEntryUpdated;
+  final void Function(int id) onListEntryDeleted;
 
   @override
   Widget build(BuildContext context) {
@@ -122,14 +135,56 @@ class MediaCarouselCard extends StatelessWidget {
   }
 
   Widget _buildButtonOptions(double screenWidth, BuildContext context, int id) {
+    final label = mediaListEntry == null ? 'Add to List' : 'Edit List';
+    final options = context.read<ViewerBloc>().getUser().mediaListOptions;
+    final listBloc = media?.type == Enum$MediaType.MANGA
+        ? context.read<MangaListBloc>()
+        : context.read<AnimeListBloc>();
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Flexible(
           child: PrimaryButton(
-            onTap: () {},
-            label: 'Add to List',
+            onTap: () {
+              context.push(RouteConstants.editMediaList, extra: {
+                'media': Fragment$ListEntryMedia(
+                  id: media?.id ?? 0,
+                  title: Fragment$ListEntryMedia$title(
+                    userPreferred: media?.title?.userPreferred ?? '',
+                    english: media?.title?.english ?? '',
+                    romaji: media?.title?.romaji ?? '',
+                    native: media?.title?.native ?? '',
+                  ),
+                  format: media?.format,
+                  type: media?.type,
+                  episodes: media?.episodes ?? 0,
+                  chapters: media?.chapters ?? 0,
+                  volumes: media?.volumes ?? 0,
+                ),
+                'options': options,
+                'mediaListEntry': media?.mediaListEntry,
+                // 'mediaListEntry': bloc.isDeletedEntry ? null : entry,
+                'onEdited': (entry) {
+                  log('edited: $entry');
+                  // bloc.add(UpdateDetailListEntry(entry: entry));
+                  onListEntryUpdated(entry);
+                  listBloc.add(UpdateListEntry(entry: entry));
+                },
+                'onDeleted': (id) {
+                  log('Deleted: $id');
+                  // bloc.add(RemoveListEntryFromMedia(id: id));
+                  onListEntryDeleted(id);
+                  listBloc.add(RemoveListEntry(id: id));
+                },
+              });
+            },
+            label: label,
             color: AppColors.darkCharcoal,
+            width: UIUtils.getWidgetWidth(
+              targetWidgetWidth: 100,
+              screenWidth: screenWidth,
+            ),
             fontSize: 14,
             horizontalPadding: 0,
             verticalPadding: 7,

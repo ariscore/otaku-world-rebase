@@ -468,8 +468,7 @@ const documentNodeQueryMediaList = DocumentNode(definitions: [
     ]),
   ),
   fragmentDefinitionMediaListEntry,
-  fragmentDefinitionMediaShort,
-  fragmentDefinitionFuzzyDate,
+  fragmentDefinitionListEntryMedia,
   fragmentDefinitionMediaListOptions,
 ]);
 Query$MediaList _parserFn$Query$MediaList(Map<String, dynamic> data) =>

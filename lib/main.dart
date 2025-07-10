@@ -77,7 +77,6 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => RedirectRouteCubit(),
         ),
-
         // Filter screens.
         BlocProvider(
           create: (context) => GenreCubit(),
@@ -97,7 +96,6 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => FilterMangaBloc(),
         ),
-
         BlocProvider(
           create: (context) => ViewerBloc(),
         ),

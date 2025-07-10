@@ -103,9 +103,9 @@ class MediaDetailScreen extends HookWidget {
                   if (state is MediaDetailLoaded && user != null) {
                     return MediaFloatingActionButton(
                       tabController: tabController,
-                      media: Fragment$MediaShort(
+                      media: Fragment$ListEntryMedia(
                         id: mediaId,
-                        title: Fragment$MediaShort$title(
+                        title: Fragment$ListEntryMedia$title(
                           userPreferred: state.media.title?.userPreferred ?? '',
                           english: state.media.title?.english ?? '',
                           romaji: state.media.title?.romaji ?? '',

@@ -24,7 +24,7 @@ final listRoutes = [
     builder: (state) {
       final data = state.extra! as Map<String, dynamic>;
       return EditListEntryScreen(
-        media: data['media'] as Fragment$MediaShort?,
+        media: data['media'] as Fragment$ListEntryMedia?,
         listOptions: data['options']
             as Fragment$MediaListOptions,
         mediaListEntry: data['mediaListEntry'] as Fragment$MediaListEntry?,

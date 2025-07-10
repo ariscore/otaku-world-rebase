@@ -37,7 +37,7 @@ class EditListEntryScreen extends StatefulWidget {
     required this.onDeleted,
   });
 
-  final Fragment$MediaShort? media;
+  final Fragment$ListEntryMedia? media;
   final Fragment$MediaListOptions listOptions;
   final Fragment$MediaListEntry? mediaListEntry;
   final void Function(Fragment$MediaListEntry entry) onEdited;

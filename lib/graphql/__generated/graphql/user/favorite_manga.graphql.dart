@@ -422,6 +422,8 @@ const documentNodeQueryFavoriteManga = DocumentNode(definitions: [
   ),
   fragmentDefinitionMediaShort,
   fragmentDefinitionFuzzyDate,
+  fragmentDefinitionMediaListEntry,
+  fragmentDefinitionListEntryMedia,
 ]);
 Query$FavoriteManga _parserFn$Query$FavoriteManga(Map<String, dynamic> data) =>
     Query$FavoriteManga.fromJson(data);

@@ -354,6 +354,8 @@ const documentNodeQueryGetTrendingManga = DocumentNode(definitions: [
   ),
   fragmentDefinitionMediaShort,
   fragmentDefinitionFuzzyDate,
+  fragmentDefinitionMediaListEntry,
+  fragmentDefinitionListEntryMedia,
 ]);
 Query$GetTrendingManga _parserFn$Query$GetTrendingManga(
         Map<String, dynamic> data) =>
