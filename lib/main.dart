@@ -13,8 +13,6 @@ import 'package:otaku_world/bloc/filter/collections/external_links/anime/anime_p
 import 'package:otaku_world/bloc/filter/collections/external_links/manga/manga_platforms_cubit.dart';
 import 'package:otaku_world/bloc/filter/collections/genres/genre_cubit.dart';
 import 'package:otaku_world/bloc/filter/collections/tags/media_tags_cubit.dart';
-import 'package:otaku_world/bloc/filter/filter_anime/filter_anime_bloc.dart';
-import 'package:otaku_world/bloc/filter/filter_manga/filter_manga_bloc.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/media_list/media_list/media_list_bloc.dart';
 import 'package:otaku_world/bloc/routes/redirect_route_cubit.dart';
@@ -96,12 +94,6 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => MangaPlatformsCubit(),
-        ),
-        BlocProvider(
-          create: (context) => FilterAnimeBloc(),
-        ),
-        BlocProvider(
-          create: (context) => FilterMangaBloc(),
         ),
         BlocProvider(
           create: (context) => ViewerBloc(),
