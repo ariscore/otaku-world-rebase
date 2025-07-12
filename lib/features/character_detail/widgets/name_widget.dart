@@ -34,12 +34,12 @@ class NameWidget extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           decoration: UIUtils.getContainerDecoration(),
           child: Column(
+            spacing: 10,
             children: [
               InfoTile(
                 title: "Native",
                 data: name.native,
               ),
-              tenHeightSizedBox,
               if (name.alternative?.isNotEmpty == true ||
                   name.alternativeSpoiler?.isNotEmpty == true) ...[
                 InfoTile(
@@ -70,7 +70,6 @@ class NameWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                tenHeightSizedBox,
               ],
             ],
           ),
