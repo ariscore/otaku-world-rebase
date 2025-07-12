@@ -28,7 +28,7 @@ class StaffVoiceBloc extends PaginatedDataBloc<Query$staffVoice,
         fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$staffVoice(
           staffId: staffId,
-          onList: isOnMyList.value,
+          onList: isOnMyList.value ? isOnMyList.value : null,
           sort: [mediaSortNotifier.value],
           page: page,
         ),

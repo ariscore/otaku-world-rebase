@@ -34,7 +34,7 @@ class StudioMediaBloc
         fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$getStudioMedia(
           id: studioId,
-          onList: isOnMyList.value,
+          onList: isOnMyList.value ? isOnMyList.value : null,
           page: page,
           sort: [mediaSortNotifier.value],
         ),
