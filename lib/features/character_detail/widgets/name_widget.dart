@@ -40,35 +40,38 @@ class NameWidget extends StatelessWidget {
                 data: name.native,
               ),
               tenHeightSizedBox,
-              InfoTile(
-                title: 'Alternatives',
-                dataWidget: RichText(
-                  text: TextSpan(
-                    style: AppTextStyles.infoDataStyle,
-                    children: [
-                      if (name.alternative != null)
-                        ..._buildAlternativeSpans(name.alternative!),
-                      if (name.alternativeSpoiler != null &&
-                          name.alternativeSpoiler!.isNotEmpty)
-                        TextSpan(
-                          text: "[Spoiler names]",
-                          style: AppTextStyles.infoDataStyle.copyWith(
-                            color: AppColors.sunsetOrange,
+              if (name.alternative?.isNotEmpty == true ||
+                  name.alternativeSpoiler?.isNotEmpty == true) ...[
+                InfoTile(
+                  title: 'Alternatives',
+                  dataWidget: RichText(
+                    text: TextSpan(
+                      style: AppTextStyles.infoDataStyle,
+                      children: [
+                        if (name.alternative != null)
+                          ..._buildAlternativeSpans(name.alternative!),
+                        if (name.alternativeSpoiler != null &&
+                            name.alternativeSpoiler!.isNotEmpty)
+                          TextSpan(
+                            text: "[Spoiler names]",
+                            style: AppTextStyles.infoDataStyle.copyWith(
+                              color: AppColors.sunsetOrange,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                UIUtils.showInfoDialog(
+                                  context,
+                                  'Spoiler Names',
+                                  name.alternativeSpoiler!.join(',\n'),
+                                );
+                              },
                           ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              UIUtils.showInfoDialog(
-                                context,
-                                'Spoiler Names',
-                                name.alternativeSpoiler!.join(',\n'),
-                              );
-                            },
-                        ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              tenHeightSizedBox,
+                tenHeightSizedBox,
+              ],
             ],
           ),
         ),

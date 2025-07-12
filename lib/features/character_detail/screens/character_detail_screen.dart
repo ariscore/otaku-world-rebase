@@ -61,8 +61,7 @@ class CharacterDetailScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (character.name != null) ...[
-                          // twentySpacing,
+                        if (character.name != null ) ...[
                           NameWidget(
                             name: character.name!,
                           ),
