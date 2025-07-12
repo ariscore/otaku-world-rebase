@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:otaku_world/bloc/auth/auth_cubit.dart';
 import 'package:otaku_world/bloc/filter/collections/external_links/anime/anime_platforms_cubit.dart';
@@ -44,12 +46,19 @@ Future<void> main() async {
       return true;
     };
   }
-  SystemChrome.setPreferredOrientations(
+  await SystemChrome.setPreferredOrientations(
     [
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ],
-  ).then((value) => runApp(const MyApp()));
+  );
+
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: HydratedStorageDirectory(
+      (await getTemporaryDirectory()).path,
+    ),
+  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

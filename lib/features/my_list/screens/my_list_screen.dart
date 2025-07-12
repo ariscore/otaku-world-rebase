@@ -89,7 +89,9 @@ class _MyListScreenState extends State<MyListScreen> {
                 builder: (context, state) {
                   if (state is ViewerInitial || state is ViewerLoading) {
                     return const MyListShimmer(
-                        showFilters: true, isSliver: false);
+                      showFilters: false,
+                      isSliver: false,
+                    );
                   } else if (state is ViewerLoaded) {
                     animeListBloc ??= context.read<AnimeListBloc>()
                       ..setUserId(
@@ -140,73 +142,70 @@ class _MyListScreenState extends State<MyListScreen> {
     required MediaListBloc bloc,
     required Enum$MediaType type,
   }) {
-    log('Rebuilding media section');
-    return CustomScrollView(
-      controller: controller,
-      physics: const AlwaysScrollableScrollPhysics(),
-      slivers: [
-        SliverToBoxAdapter(
-          child: ListSearchAppBar(
-            listBloc: bloc,
-            searchCubit: type == Enum$MediaType.ANIME
-                ? searchAnimeCubit
-                : searchMangaCubit,
-            type: type,
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: SwitchMediaDropdown(
-            initialValue: isAnime ? Enum$MediaType.ANIME : Enum$MediaType.MANGA,
-            onChanged: (value) {
-              setState(() {
-                isAnime = value == Enum$MediaType.ANIME.displayTitle();
-              });
-            },
-          ),
-        ),
-        BlocBuilder<MediaListBloc, MediaListState>(
-          bloc: bloc,
-          builder: (context, state) {
-            if (state is MediaListInitial) {
-              bloc.add(LoadMediaList(client: client));
-            }
-            if (state is MediaListInitial || state is MediaListLoading) {
-              return const MyListShimmer(showFilters: false, isSliver: true);
-            } else if (state is MediaListLoaded) {
-              if (state.listCollection.lists?.isEmpty ?? true) {
-                return const SliverToBoxAdapter(
-                  child: AnimeCharacterPlaceholder(
-                    asset: Assets.charactersSchoolGirl,
-                    height: 300,
-                    heading: MyListConstants.emptyListHeading,
-                    subheading: MyListConstants.emptyListSubheading,
-                  ),
-                );
-              }
-              return SliverPadding(
-                padding: const EdgeInsets.only(bottom: 48),
-                sliver: ListSections(
-                  sections: state.listCollection.lists,
+    return BlocBuilder<MediaListBloc, MediaListState>(
+      bloc: bloc,
+      builder: (context, state) {
+        if (state is MediaListInitial) {
+          bloc.add(LoadMediaList(client: client));
+        }
+        if (state is MediaListInitial || state is MediaListLoading) {
+          return const MyListShimmer(showFilters: true, isSliver: false);
+        } else if (state is MediaListLoaded) {
+          return CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: ListSearchAppBar(
+                  listBloc: bloc,
+                  searchCubit: type == Enum$MediaType.ANIME
+                      ? searchAnimeCubit
+                      : searchMangaCubit,
                   type: type,
-                  scoreFormat:
-                      bloc.options?.scoreFormat ?? Enum$ScoreFormat.POINT_10,
                 ),
-              );
-            } else if (state is MediaListError) {
-              return _buildErrorWidget(
-                type: state.type,
-                onTryAgain: () {
-                  bloc.add(LoadMediaList(client: client));
-                },
-                message: state.message,
-                isSliver: true,
-              );
-            } else {
-              return const SizedBox();
-            }
-          },
-        ),
-      ],
+              ),
+              SliverToBoxAdapter(
+                child: SwitchMediaDropdown(
+                  initialValue:
+                      isAnime ? Enum$MediaType.ANIME : Enum$MediaType.MANGA,
+                  onChanged: (value) {
+                    setState(() {
+                      isAnime = value == Enum$MediaType.ANIME.displayTitle();
+                    });
+                  },
+                ),
+              ),
+              (state.listCollection.lists?.isEmpty ?? true)
+                  ? const SliverToBoxAdapter(
+                      child: AnimeCharacterPlaceholder(
+                        asset: Assets.charactersSchoolGirl,
+                        height: 300,
+                        heading: MyListConstants.emptyListHeading,
+                        subheading: MyListConstants.emptyListSubheading,
+                      ),
+                    )
+                  : SliverPadding(
+                      padding: const EdgeInsets.only(bottom: 48),
+                      sliver: ListSections(
+                        sections: state.listCollection.lists,
+                        type: type,
+                        scoreFormat: bloc.options?.scoreFormat ??
+                            Enum$ScoreFormat.POINT_10,
+                      ),
+                    ),
+            ],
+          );
+        } else if (state is MediaListError) {
+          return _buildErrorWidget(
+            type: state.type,
+            onTryAgain: () {
+              bloc.add(LoadMediaList(client: client));
+            },
+            message: state.message,
+            isSliver: false,
+          );
+        } else {
+          return const SizedBox();
+        }
+      },
     );
   }
 
