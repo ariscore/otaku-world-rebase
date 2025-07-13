@@ -31,7 +31,7 @@ class StudioMediaBloc
     );
     return client.query$getStudioMedia(
       Options$Query$getStudioMedia(
-        fetchPolicy: FetchPolicy.networkOnly,
+        fetchPolicy: FetchPolicy.noCache,
         variables: Variables$Query$getStudioMedia(
           id: studioId,
           onList: isOnMyList.value ? isOnMyList.value : null,

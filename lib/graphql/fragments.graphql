@@ -138,6 +138,7 @@ fragment MediaShort on Media {
     mediaListEntry {
         ...MediaListEntry
     }
+    isAdult
 }
 
 fragment SearchResultMedia on Media {
