@@ -57,7 +57,7 @@ class StudioMediaBloc
     return data;
   }
 
-  @override
+  /* @override
   void processData(QueryResult<Query$getStudioMedia> response) {
     final data = response.parsedData!;
     hasNextPage = data.Studio?.media?.pageInfo?.hasNextPage ?? false;
@@ -81,5 +81,14 @@ class StudioMediaBloc
       // If displayAdultContent is true or null, include all content
       list.addAll(mediaList);
     }
+  }*/
+  @override
+  void processData(QueryResult<Query$getStudioMedia> response) {
+    final data = response.parsedData!;
+    hasNextPage = data.Studio?.media?.pageInfo?.hasNextPage ?? false;
+    page++;
+
+    final mediaList = data.Studio!.media!.edges!.map((e) => e?.node).toList();
+    list.addAll(mediaList);
   }
 }
