@@ -24,7 +24,7 @@ class ReviewCard extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha:0.25),
+              color: Colors.black.withValues(alpha: 0.25),
               blurRadius: 4,
               offset: const Offset(0, 4),
             )
@@ -66,32 +66,33 @@ class ReviewCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width - 100,
+                        Flexible(
                           child: ReviewByUser(
-                            mediaTitle:
-                                review.media!.title!.userPreferred.toString(),
-                            userName: review.user!.name.toString(),
+                            mediaTitle: review.media?.title?.userPreferred,
+                            userName: review.user?.name,
                           ),
                         ),
-                        ReviewProfilePhoto(
-                          profilePicUrl: review.user!.avatar!.medium.toString(),
-                          radius: 20,
-                        ),
+                        if (review.user?.avatar?.medium != null)
+                          ReviewProfilePhoto(
+                            profilePicUrl:
+                                review.user!.avatar!.medium.toString(),
+                            radius: 20,
+                          ),
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 5.0,
-                      right: 5.0,
-                      bottom: 5.0,
+                  if (review.summary != null && review.summary!.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 5.0,
+                        right: 5.0,
+                        bottom: 5.0,
+                      ),
+                      child: buildSummaryText(
+                        summary: review.summary.toString(),
+                        context: context,
+                      ),
                     ),
-                    child: buildSummaryText(
-                      summary: review.summary.toString(),
-                      context: context,
-                    ),
-                  ),
                   Padding(
                     padding: const EdgeInsets.only(
                       left: 5.0,
@@ -107,21 +108,23 @@ class ReviewCard extends StatelessWidget {
                           .toString(),
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontFamily: 'Roboto',
-                            color: AppColors.white.withValues(alpha:0.8),
+                            color: AppColors.white.withValues(alpha: 0.8),
                           ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5, bottom: 10),
-                    child: Text(
-                      "(Last Updated on "
-                      "${FormattingUtils.formatUnixTimestamp(review.createdAt)})",
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontFamily: 'Roboto',
-                            color: AppColors.white.withValues(alpha:0.8),
-                          ),
+                  if (review.updatedAt != review.createdAt)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5, bottom: 10),
+                      child: Text(
+                        "(Last Updated on "
+                        "${FormattingUtils.formatUnixTimestamp(review.updatedAt)})",
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontFamily: 'Roboto',
+                                  color: AppColors.white.withValues(alpha: 0.8),
+                                ),
+                      ),
                     ),
-                  ),
                 ],
               ),
             ),
