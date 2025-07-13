@@ -26,6 +26,7 @@ class MangaDiscoverScreen extends HookWidget {
         (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
             .client;
     final scrollController = useScrollController();
+    final bloc = context.read<FilterMangaBloc>();
 
     useEffect(() {
       scrollController.addListener(() {
@@ -46,7 +47,6 @@ class MangaDiscoverScreen extends HookWidget {
       return null;
     }, const []);
 
-    final bloc = context.read<FilterMangaBloc>();
     return Scaffold(
       appBar: const SimpleAppBar(title: 'Manga'),
       floatingActionButton: ScrollToTopFAB(
@@ -76,11 +76,12 @@ class MangaDiscoverScreen extends HookWidget {
                 builder: (context, state) {
                   return SearchOption(
                     onPressedFilters: () {
-                      context.push(RouteConstants.mangaFilters);
+                      context.push(RouteConstants.mangaFilters, extra: bloc);
                     },
                     clearSearch: () {
                       bloc.add(
-                          ClearSearch(client: client, clearFilter: false));
+                        ClearSearch(client: client, clearFilter: false),
+                      );
                     },
                     onSubmitted: (value) {
                       bloc.add(ApplySearch(client: client, search: value));

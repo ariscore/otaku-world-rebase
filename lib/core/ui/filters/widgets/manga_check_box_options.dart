@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/filter/filter_manga/filter_manga_bloc.dart';
 import 'package:otaku_world/core/ui/filters/custom_check_box.dart';
 
+import '../../../../bloc/viewer/viewer_bloc.dart';
+
 class MangaCheckBoxOptions extends StatelessWidget {
   const MangaCheckBoxOptions({super.key});
 
@@ -28,6 +30,12 @@ class MangaCheckBoxOptions extends StatelessWidget {
             bloc.add(ToggleDoujin());
           },
         ),
+        if (context
+            .read<ViewerBloc>()
+            .getNullableUser()
+            ?.options
+            ?.displayAdultContent ??
+            false)
         CustomCheckBox(
           label: 'Adult',
           value: 'adult',

@@ -12,6 +12,8 @@ import 'package:otaku_world/bloc/discover/characters/most_favorite_characters_bl
 import 'package:otaku_world/bloc/discover/staff/birthday_staff_bloc.dart';
 import 'package:otaku_world/bloc/discover/staff/most_favorite_staff_bloc.dart';
 import 'package:otaku_world/bloc/discover/studios/most_favorite_studios_bloc.dart';
+import 'package:otaku_world/bloc/filter/filter_anime/filter_anime_bloc.dart';
+import 'package:otaku_world/bloc/filter/filter_manga/filter_manga_bloc.dart';
 import 'package:otaku_world/bloc/media_list/media_list/media_list_bloc.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/bloc/profile/favorite_anime/favorite_anime_bloc.dart';

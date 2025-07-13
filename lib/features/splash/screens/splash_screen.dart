@@ -20,9 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // navigateToNextScreen();
       context.read<AuthCubit>().authenticate();
-      print('Authenticating from splash screen');
     });
     super.initState();
   }
@@ -35,12 +33,10 @@ class _SplashScreenState extends State<SplashScreen> {
           listener: (context, state) {
             // navigateToNextScreen();
             if (state is Authenticated) {
-              print('Splash screen authenticated');
               context
                   .read<GraphqlClientCubit>()
                   .initializeGraphqlClient(state.token);
             } else if (state is UnAuthenticated) {
-              print('Splash screen unauthenticated');
               context.go(RouteConstants.login);
             }
           },
@@ -50,10 +46,8 @@ class _SplashScreenState extends State<SplashScreen> {
             if (state is GraphqlClientInitialized) {
               final routerCubit = context.read<RedirectRouteCubit>();
               if (routerCubit.isDesiredRouteSet()) {
-                print('Going to desired route: ${routerCubit.getDesiredRoute()}');
                 context.go(routerCubit.getDesiredRoute());
               } else {
-                print('Going to home screen');
                 context.go(RouteConstants.home);
               }
             }
@@ -70,13 +64,4 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
-
-// void navigateToNextScreen() {
-//   final authState = context.read<AuthCubit>().state;
-//   if (authState is Authenticated) {
-//     context.go('/home');
-//   } else if (authState is UnAuthenticated) {
-//     context.go('/login');
-//   }
-// }
 }

@@ -36,10 +36,11 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   # Bloc
-  bloc: ^8.1.4
-  flutter_bloc: ^8.1.6
-  bloc_concurrency: ^0.2.5
+  bloc: ^9.0.0
+  flutter_bloc: ^9.1.1
+  bloc_concurrency: ^0.3.0
   equatable: ^2.0.5
+  hydrated_bloc: ^10.0.0
 
   # UI
   flutter_svg: ^2.0.10+1
@@ -78,6 +79,7 @@ dependencies:
   #  uni_links3: ^0.5.3
   uni_links5: ^0.5.4
   share_plus: ^10.0.0
+  path_provider: ^2.1.5
 
   # Persistence
   shared_preferences: ^2.3.1

@@ -5,14 +5,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:otaku_world/bloc/auth/auth_cubit.dart';
 import 'package:otaku_world/bloc/filter/collections/external_links/anime/anime_platforms_cubit.dart';
 import 'package:otaku_world/bloc/filter/collections/external_links/manga/manga_platforms_cubit.dart';
 import 'package:otaku_world/bloc/filter/collections/genres/genre_cubit.dart';
 import 'package:otaku_world/bloc/filter/collections/tags/media_tags_cubit.dart';
-import 'package:otaku_world/bloc/filter/filter_anime/filter_anime_bloc.dart';
-import 'package:otaku_world/bloc/filter/filter_manga/filter_manga_bloc.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/media_list/media_list/media_list_bloc.dart';
 import 'package:otaku_world/bloc/routes/redirect_route_cubit.dart';
@@ -44,14 +44,21 @@ Future<void> main() async {
       return true;
     };
   }
-  SystemChrome.setPreferredOrientations(
+  await SystemChrome.setPreferredOrientations(
     [
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ],
-  ).then((value) => runApp(const MyApp()));
+  );
+
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: HydratedStorageDirectory(
+      (await getTemporaryDirectory()).path,
+    ),
+  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -89,12 +96,6 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => MangaPlatformsCubit(),
-        ),
-        BlocProvider(
-          create: (context) => FilterAnimeBloc(),
-        ),
-        BlocProvider(
-          create: (context) => FilterMangaBloc(),
         ),
         BlocProvider(
           create: (context) => ViewerBloc(),

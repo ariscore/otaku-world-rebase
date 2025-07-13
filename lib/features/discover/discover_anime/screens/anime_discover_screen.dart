@@ -26,6 +26,7 @@ class AnimeDiscoverScreen extends HookWidget {
         (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
             .client;
     final scrollController = useScrollController();
+    final bloc = context.read<FilterAnimeBloc>();
 
     useEffect(() {
       scrollController.addListener(() {
@@ -33,7 +34,6 @@ class AnimeDiscoverScreen extends HookWidget {
         final currentScroll = scrollController.position.pixels;
 
         if (currentScroll >= maxScroll) {
-          final bloc = context.read<FilterAnimeBloc>();
           if (bloc.state is ResultsLoaded) {
             final hasNextPage = (bloc.state as ResultsLoaded).hasNextPage;
             if (hasNextPage) {
@@ -46,7 +46,6 @@ class AnimeDiscoverScreen extends HookWidget {
       return null;
     }, const []);
 
-    final bloc = context.read<FilterAnimeBloc>();
     return Scaffold(
       appBar: const SimpleAppBar(title: 'Anime'),
       floatingActionButton: ScrollToTopFAB(
@@ -76,7 +75,7 @@ class AnimeDiscoverScreen extends HookWidget {
                 builder: (context, state) {
                   return SearchOption(
                     onPressedFilters: () {
-                      context.push(RouteConstants.animeFilters);
+                      context.push(RouteConstants.animeFilters, extra: bloc);
                     },
                     clearSearch: () {
                       bloc.add(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/filter/filter_anime/filter_anime_bloc.dart';
+import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
 import 'package:otaku_world/core/ui/filters/custom_check_box.dart';
 
 class AnimeCheckBoxOptions extends StatelessWidget {
@@ -28,14 +29,20 @@ class AnimeCheckBoxOptions extends StatelessWidget {
             bloc.add(ToggleDoujin());
           },
         ),
-        CustomCheckBox(
-          label: 'Adult',
-          value: 'adult',
-          initialValue: bloc.appliedFilter.isAdult,
-          onChanged: () {
-            bloc.add(ToggleAdult());
-          },
-        ),
+        if (context
+            .read<ViewerBloc>()
+            .getNullableUser()
+            ?.options
+            ?.displayAdultContent ??
+            false)
+          CustomCheckBox(
+            label: 'Adult',
+            value: 'adult',
+            initialValue: bloc.appliedFilter.isAdult,
+            onChanged: () {
+              bloc.add(ToggleAdult());
+            },
+          ),
       ],
     );
   }
