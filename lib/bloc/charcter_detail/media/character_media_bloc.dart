@@ -29,7 +29,7 @@ class CharacterMediaBloc extends PaginatedDataBloc<Query$getCharacterMedia,
         fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$getCharacterMedia(
           characterId: characterId,
-          onList: isOnMyList.value,
+          onList: isOnMyList.value ? isOnMyList.value : null,
           page: page,
           sort: [mediaSortNotifier.value],
         ),

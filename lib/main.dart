@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:otaku_world/bloc/auth/auth_cubit.dart';
 import 'package:otaku_world/bloc/filter/collections/external_links/anime/anime_platforms_cubit.dart';
@@ -22,6 +21,7 @@ import 'package:otaku_world/features/app_version_management/services/app_version
 import 'package:otaku_world/firebase_options.dart';
 import 'package:otaku_world/theme/app_theme.dart';
 import 'package:otaku_world/utils/shared_preference_utils.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'bloc/app_version/app_version_bloc.dart';
 import 'config/router/router.dart';

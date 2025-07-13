@@ -46,6 +46,7 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
     this.startDate,
     this.endDate,
     this.mediaListEntry,
+    this.isAdult,
     this.$__typename = 'Media',
     this.siteUrl,
   });
@@ -88,6 +89,7 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
     final l$startDate = json['startDate'];
     final l$endDate = json['endDate'];
     final l$mediaListEntry = json['mediaListEntry'];
+    final l$isAdult = json['isAdult'];
     final l$$__typename = json['__typename'];
     final l$siteUrl = json['siteUrl'];
     return Fragment$MediaDetailed(
@@ -186,6 +188,7 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
           ? null
           : Fragment$MediaListEntry.fromJson(
               (l$mediaListEntry as Map<String, dynamic>)),
+      isAdult: (l$isAdult as bool?),
       $__typename: (l$$__typename as String),
       siteUrl: (l$siteUrl as String?),
     );
@@ -264,6 +267,8 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
   final Fragment$FuzzyDate? endDate;
 
   final Fragment$MediaListEntry? mediaListEntry;
+
+  final bool? isAdult;
 
   final String $__typename;
 
@@ -350,6 +355,8 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
     _resultData['endDate'] = l$endDate?.toJson();
     final l$mediaListEntry = mediaListEntry;
     _resultData['mediaListEntry'] = l$mediaListEntry?.toJson();
+    final l$isAdult = isAdult;
+    _resultData['isAdult'] = l$isAdult;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$siteUrl = siteUrl;
@@ -396,6 +403,7 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
     final l$startDate = startDate;
     final l$endDate = endDate;
     final l$mediaListEntry = mediaListEntry;
+    final l$isAdult = isAdult;
     final l$$__typename = $__typename;
     final l$siteUrl = siteUrl;
     return Object.hashAll([
@@ -438,6 +446,7 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
       l$startDate,
       l$endDate,
       l$mediaListEntry,
+      l$isAdult,
       l$$__typename,
       l$siteUrl,
     ]);
@@ -691,6 +700,11 @@ class Fragment$MediaDetailed implements Fragment$MediaShort {
     if (l$mediaListEntry != lOther$mediaListEntry) {
       return false;
     }
+    final l$isAdult = isAdult;
+    final lOther$isAdult = other.isAdult;
+    if (l$isAdult != lOther$isAdult) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -760,6 +774,7 @@ abstract class CopyWith$Fragment$MediaDetailed<TRes> {
     Fragment$FuzzyDate? startDate,
     Fragment$FuzzyDate? endDate,
     Fragment$MediaListEntry? mediaListEntry,
+    bool? isAdult,
     String? $__typename,
     String? siteUrl,
   });
@@ -846,6 +861,7 @@ class _CopyWithImpl$Fragment$MediaDetailed<TRes>
     Object? startDate = _undefined,
     Object? endDate = _undefined,
     Object? mediaListEntry = _undefined,
+    Object? isAdult = _undefined,
     Object? $__typename = _undefined,
     Object? siteUrl = _undefined,
   }) =>
@@ -950,6 +966,7 @@ class _CopyWithImpl$Fragment$MediaDetailed<TRes>
         mediaListEntry: mediaListEntry == _undefined
             ? _instance.mediaListEntry
             : (mediaListEntry as Fragment$MediaListEntry?),
+        isAdult: isAdult == _undefined ? _instance.isAdult : (isAdult as bool?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -1141,6 +1158,7 @@ class _CopyWithStubImpl$Fragment$MediaDetailed<TRes>
     Fragment$FuzzyDate? startDate,
     Fragment$FuzzyDate? endDate,
     Fragment$MediaListEntry? mediaListEntry,
+    bool? isAdult,
     String? $__typename,
     String? siteUrl,
   }) =>
@@ -5754,6 +5772,7 @@ class Fragment$MediaShort {
     this.startDate,
     this.endDate,
     this.mediaListEntry,
+    this.isAdult,
     this.$__typename = 'Media',
   });
 
@@ -5779,6 +5798,7 @@ class Fragment$MediaShort {
     final l$startDate = json['startDate'];
     final l$endDate = json['endDate'];
     final l$mediaListEntry = json['mediaListEntry'];
+    final l$isAdult = json['isAdult'];
     final l$$__typename = json['__typename'];
     return Fragment$MediaShort(
       id: (l$id as int),
@@ -5824,6 +5844,7 @@ class Fragment$MediaShort {
           ? null
           : Fragment$MediaListEntry.fromJson(
               (l$mediaListEntry as Map<String, dynamic>)),
+      isAdult: (l$isAdult as bool?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -5869,6 +5890,8 @@ class Fragment$MediaShort {
   final Fragment$FuzzyDate? endDate;
 
   final Fragment$MediaListEntry? mediaListEntry;
+
+  final bool? isAdult;
 
   final String $__typename;
 
@@ -5919,6 +5942,8 @@ class Fragment$MediaShort {
     _resultData['endDate'] = l$endDate?.toJson();
     final l$mediaListEntry = mediaListEntry;
     _resultData['mediaListEntry'] = l$mediaListEntry?.toJson();
+    final l$isAdult = isAdult;
+    _resultData['isAdult'] = l$isAdult;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -5947,6 +5972,7 @@ class Fragment$MediaShort {
     final l$startDate = startDate;
     final l$endDate = endDate;
     final l$mediaListEntry = mediaListEntry;
+    final l$isAdult = isAdult;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
@@ -5970,6 +5996,7 @@ class Fragment$MediaShort {
       l$startDate,
       l$endDate,
       l$mediaListEntry,
+      l$isAdult,
       l$$__typename,
     ]);
   }
@@ -6098,6 +6125,11 @@ class Fragment$MediaShort {
     if (l$mediaListEntry != lOther$mediaListEntry) {
       return false;
     }
+    final l$isAdult = isAdult;
+    final lOther$isAdult = other.isAdult;
+    if (l$isAdult != lOther$isAdult) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -6146,6 +6178,7 @@ abstract class CopyWith$Fragment$MediaShort<TRes> {
     Fragment$FuzzyDate? startDate,
     Fragment$FuzzyDate? endDate,
     Fragment$MediaListEntry? mediaListEntry,
+    bool? isAdult,
     String? $__typename,
   });
   CopyWith$Fragment$MediaShort$title<TRes> get title;
@@ -6191,6 +6224,7 @@ class _CopyWithImpl$Fragment$MediaShort<TRes>
     Object? startDate = _undefined,
     Object? endDate = _undefined,
     Object? mediaListEntry = _undefined,
+    Object? isAdult = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$MediaShort(
@@ -6248,6 +6282,7 @@ class _CopyWithImpl$Fragment$MediaShort<TRes>
         mediaListEntry: mediaListEntry == _undefined
             ? _instance.mediaListEntry
             : (mediaListEntry as Fragment$MediaListEntry?),
+        isAdult: isAdult == _undefined ? _instance.isAdult : (isAdult as bool?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -6329,6 +6364,7 @@ class _CopyWithStubImpl$Fragment$MediaShort<TRes>
     Fragment$FuzzyDate? startDate,
     Fragment$FuzzyDate? endDate,
     Fragment$MediaListEntry? mediaListEntry,
+    bool? isAdult,
     String? $__typename,
   }) =>
       _res;
@@ -6654,6 +6690,13 @@ const fragmentDefinitionMediaShort = FragmentDefinitionNode(
           selectionSet: null,
         ),
       ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'isAdult'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
     ),
     FieldNode(
       name: NameNode(value: '__typename'),

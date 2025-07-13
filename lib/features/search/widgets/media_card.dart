@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
-import 'package:otaku_world/utils/ui_utils.dart';
 
 import '../../../core/ui/placeholders/poster_placeholder.dart';
 import '../../../generated/assets.dart';
@@ -29,10 +28,7 @@ class ResultMediaCard extends StatelessWidget {
         mediaId: media!.id,
       ),
       child: Container(
-        height: UIUtils.getWidgetHeight(
-          targetWidgetHeight: 150,
-          screenHeight: size.height,
-        ),
+        height: 150,
         margin: const EdgeInsets.symmetric(
           vertical: 5,
         ),
@@ -54,52 +50,50 @@ class ResultMediaCard extends StatelessWidget {
           children: [
             _buildMediaPoster(media?.coverImage?.large, size),
             const SizedBox(width: 5),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: size.width - 45 - 90,
-                      child: Text(
-                        media!.title!.userPreferred!,
-                        style:
-                            Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                  fontFamily: 'Poppins',
-                                ),
-                        maxLines: 5,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Text(
-                      // '2020, TV',
-                      '${media!.startDate?.year == null ? '?' : media!.startDate!.year},'
-                      ' ${media!.format == null ? 'Unknown' : FormattingUtils.getMediaFormatString(media!.format!)}',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            color: AppColors.white.withValues(alpha: 0.8),
-                            fontFamily: 'Poppins',
-                          ),
-                    ),
-                  ],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(
-                      Assets.iconsStar,
-                    ),
-                    const SizedBox(width: 1),
-                    Text(
-                      '${media!.meanScore ?? '?'}',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontFamily: 'Poppins',
-                          ),
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    media!.title!.userPreferred!,
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          fontFamily: 'Poppins',
+                        ),
+                    maxLines: 5,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(
+                    height: 2,
+                  ),
+                  Text(
+                    '${media!.startDate?.year == null ? '?' : media!.startDate!.year},'
+                    ' ${media!.format == null ? 'Unknown' : FormattingUtils.getMediaFormatString(media!.format!)}',
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          color: AppColors.white.withValues(alpha: 0.8),
+                          fontFamily: 'Poppins',
+                        ),
+                  ),
+                  if (media?.meanScore != null) ...[
+                    const Spacer(),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          Assets.iconsStar,
+                        ),
+                        const SizedBox(width: 1),
+                        Text(
+                          '${media!.meanScore}',
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    fontFamily: 'Poppins',
+                                  ),
+                        ),
+                      ],
                     ),
                   ],
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),

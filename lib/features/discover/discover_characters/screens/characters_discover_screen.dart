@@ -37,7 +37,8 @@ class CharactersDiscoverScreen extends HookWidget {
 
         if (currentScroll == maxScroll) {
           log('Max scrolled', name: 'CharacterSearch');
-          final hasNextPage =
+          final hasNextPage = (searchCharactersBloc.state
+                  is SearchResultLoaded) &&
               (searchCharactersBloc.state as SearchResultLoaded).hasNextPage;
           if (hasNextPage) {
             final client = (context.read<GraphqlClientCubit>().state

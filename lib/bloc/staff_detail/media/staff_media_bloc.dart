@@ -33,7 +33,7 @@ class StaffMediaBloc extends PaginatedDataBloc<Query$staffMedia,
         fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$staffMedia(
           staffId: staffId,
-          onList: isOnMyList.value,
+          onList: isOnMyList.value ? isOnMyList.value : null,
           sort: [mediaSortNotifier.value],
           type: mediaType,
           page: page,
