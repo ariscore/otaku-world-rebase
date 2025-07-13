@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:otaku_world/bloc/filter/filter_anime/filter_anime_bloc.dart';
+import 'package:otaku_world/bloc/filter/filter_manga/filter_manga_bloc.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
@@ -42,9 +45,15 @@ class FilteredMediaSection extends StatelessWidget {
               IconButton(
                 onPressed: () {
                   if (type == Enum$MediaType.ANIME) {
-                    context.push(RouteConstants.filterAnimeSlider);
+                    context.push(
+                      RouteConstants.filterAnimeSlider,
+                      extra: context.read<FilterAnimeBloc>(),
+                    );
                   } else {
-                    context.push(RouteConstants.filterMangaSlider);
+                    context.push(
+                      RouteConstants.filterMangaSlider,
+                      extra: context.read<FilterMangaBloc>(),
+                    );
                   }
                 },
                 icon: Padding(

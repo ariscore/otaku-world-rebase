@@ -1,74 +1,87 @@
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/types/enums.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/update_user.graphql.dart';
-import 'package:otaku_world/graphql/__generated/graphql/user/viewer.graphql.dart';
 
 import '../../graphql/__generated/graphql/fragments.graphql.dart';
+import '../../repositories/user_repository.dart';
 
 part 'viewer_event.dart';
+
 part 'viewer_state.dart';
 
-class ViewerBloc extends Bloc<ViewerEvent, ViewerState> {
+class ViewerBloc extends HydratedBloc<ViewerEvent, ViewerState> {
   ViewerBloc() : super(ViewerInitial()) {
     on<LoadViewer>(_onLoadViewer);
     on<UpdateUser>(_onUpdateUser);
   }
 
-  bool showProcess = false;
-  Query$Viewer$Viewer? user;
+  final UserRepository _userRepository = UserRepository();
 
   Future<void> _onLoadViewer(
     LoadViewer event,
     Emitter<ViewerState> emit,
   ) async {
-    log('Fetching user data');
     emit(ViewerLoading());
-    final response = await event.client.query$Viewer(
-      Options$Query$Viewer(
-        fetchPolicy: FetchPolicy.networkOnly,
-      ),
-    );
-    log('Response: $response');
+    try {
+      final user = await _userRepository.fetchAndCacheUserData(event.client);
 
-    if (response.hasException) {
-      if (state is ViewerLoaded) {
-        return;
-      }
+      log('Loaded user data: ${user.toJson()}');
+      emit(ViewerLoaded(user: user));
+    } on OperationException catch (e) {
+      final user = _userRepository.lastCachedUser;
 
-      if (response.exception!.linkException != null) {
-        emit(
-          const ViewerError(
+      if (user == null) {
+        if (e.linkException != null) {
+          emit(const ViewerError(
             type: ErrorType.noInternet,
             message: StringConstants.noInternetError,
-          ),
-        );
+          ));
+        } else {
+          emit(const ViewerError(
+            type: ErrorType.unknown,
+            message: StringConstants.unexpectedError,
+          ));
+        }
       } else {
-        emit(
-          const ViewerError(
-            type: ErrorType.noInternet,
-            message: StringConstants.unexpectedError,
-          ),
-        );
+        emit(ViewerLoaded(user: user));
       }
-    } else {
-      final user = response.parsedData?.Viewer;
+    } on Exception {
+      final user = _userRepository.lastCachedUser;
+
       if (user == null) {
-        emit(
-          const ViewerError(
-            type: ErrorType.noInternet,
-            message: StringConstants.unexpectedError,
-          ),
-        );
+        emit(const ViewerError(
+          type: ErrorType.unknown,
+          message: StringConstants.unexpectedError,
+        ));
       } else {
         emit(ViewerLoaded(user: user));
       }
     }
+  }
+
+  @override
+  ViewerState? fromJson(Map<String, dynamic> json) {
+    log('Hydrated user data: $json');
+    final user = json['user'] as Map<String, dynamic>?;
+    if (user != null) {
+      return ViewerLoaded(user: Fragment$Settings.fromJson(json));
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  Map<String, dynamic>? toJson(ViewerState state) {
+    if (state is ViewerLoaded) {
+      return state.user.toJson();
+    }
+    return null;
   }
 
   Future<void> _onUpdateUser(
@@ -156,6 +169,7 @@ class ViewerBloc extends Bloc<ViewerEvent, ViewerState> {
         );
       }
     } else {
+      _userRepository.updateUserData(response.parsedData!.UpdateUser!);
       emit(ViewerLoaded(user: response.parsedData!.UpdateUser!));
     }
 

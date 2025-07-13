@@ -12,6 +12,7 @@ final discoverRoutes = [
         BlocProvider(create: (context) => TopAiringAnimeBloc()),
         BlocProvider(create: (context) => TopUpcomingAnimeBloc()),
         BlocProvider(create: (context) => Top100AnimeBloc()),
+        BlocProvider(create: (context) => FilterAnimeBloc()),
       ],
       child: const AnimeDiscoverScreen(),
     ),
@@ -20,19 +21,28 @@ final discoverRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.animeFilters,
-    builder: (context) => const AnimeFilters(),
+    builder: (state) => BlocProvider.value(
+      value: state.extra as FilterAnimeBloc,
+      child: const AnimeFilters(),
+    ),
     directionTween: SlideTransitionRoute.bottomToTopTween,
   ),
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.filterAnimeSlider,
-    builder: (context) => const AnimeSliderScreen(),
+    builder: (state) => BlocProvider.value(
+      value: state.extra as FilterAnimeBloc,
+      child: const AnimeSliderScreen(),
+    ),
     directionTween: SlideTransitionRoute.bottomToTopTween,
   ),
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.filterMangaSlider,
-    builder: (context) => const MangaSliderScreen(),
+    builder: (state) => BlocProvider.value(
+      value: state.extra as FilterMangaBloc,
+      child: const MangaSliderScreen(),
+    ),
     directionTween: SlideTransitionRoute.bottomToTopTween,
   ),
   SlideTransitionRoute(
@@ -129,6 +139,7 @@ final discoverRoutes = [
         BlocProvider(create: (context) => AllTimePopularMangaBloc()),
         BlocProvider(create: (context) => PopularManhwaBloc()),
         BlocProvider(create: (context) => Top100MangaBloc()),
+        BlocProvider(create: (context) => FilterMangaBloc()),
       ],
       child: const MangaDiscoverScreen(),
     ),
@@ -137,7 +148,10 @@ final discoverRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.mangaFilters,
-    builder: (context) => const MangaFilters(),
+    builder: (state) => BlocProvider.value(
+      value: state.extra as FilterMangaBloc,
+      child: const MangaFilters(),
+    ),
     directionTween: SlideTransitionRoute.bottomToTopTween,
   ),
   SlideTransitionRoute(
