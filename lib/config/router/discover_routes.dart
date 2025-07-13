@@ -224,19 +224,18 @@ final discoverRoutes = [
   //
   //   ],
   // ),
-  GoRoute(
+  SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.discoverCharacters,
-    pageBuilder: (context, state) {
-      return NoTransitionPage(
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (context) => BirthdayCharactersBloc()),
-            BlocProvider(create: (context) => MostFavoriteCharactersBloc()),
-            BlocProvider(create: (context) => SearchCharactersBloc()),
-          ],
-          child: const CharactersDiscoverScreen(),
-        ),
+    directionTween: SlideTransitionRoute.leftToRightTween,
+    builder: (state) {
+      return MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => BirthdayCharactersBloc()),
+          BlocProvider(create: (context) => MostFavoriteCharactersBloc()),
+          BlocProvider(create: (context) => SearchCharactersBloc()),
+        ],
+        child: const CharactersDiscoverScreen(),
       );
     },
     // directionTween: SlideTransitionRoute.leftToRightTween,

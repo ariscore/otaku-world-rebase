@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/buttons/primary_button.dart';
 import 'package:otaku_world/core/ui/buttons/primary_outlined_button.dart';
@@ -26,6 +27,9 @@ class PostReviewScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userId = context.read<ViewerBloc>().getNullableUser()?.id ?? 0;
+    final client = context.read<GraphqlClientCubit>().getClient()!;
+
     final reviewSummaryTextField = useTextEditingController();
     final scoreTextField = useTextEditingController();
     final commentTextField = useTextEditingController();
@@ -51,6 +55,15 @@ class PostReviewScreen extends HookWidget {
             }
           },
           builder: (context, state) {
+            if (state is PostReviewInitial) {
+              context.read<PostReviewBloc>().add(
+                    FetchReview(
+                      userId,
+                      mediaId,
+                      client,
+                    ),
+                  );
+            }
             if (state is PostReviewInitial || state is ReviewLoading) {
               return const SimpleLoading();
             } else {

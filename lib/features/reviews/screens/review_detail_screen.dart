@@ -8,7 +8,6 @@ import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/bloc/reviews/review_detail/review_detail_bloc.dart';
 import 'package:otaku_world/bloc/reviews/reviews/reviews_bloc.dart';
-import 'package:otaku_world/core/ui/error_text.dart';
 import 'package:otaku_world/core/ui/markdown_v2/markdown.dart';
 import 'package:otaku_world/core/ui/shimmers/review_detail_shimmer.dart';
 import 'package:otaku_world/features/media_detail/widgets/banner_image.dart';
@@ -398,7 +397,7 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                     onTap: () {
                       context.pop();
                       final result = context.push(
-                        '${RouteConstants.postReview}?userId=$userId&mediaId=$mediaId',
+                        '${RouteConstants.postReview}?mediaId=$mediaId',
                       );
                       if (result is bool) {
                         _updateReview(id: reviewId, isDeleted: result as bool);
