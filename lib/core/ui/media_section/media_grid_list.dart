@@ -19,12 +19,14 @@ import '../shimmers/detail_screens/widgets/media_grid_shimmer.dart';
 class MediaGridList<B extends PaginatedDataBloc> extends StatelessWidget {
   const MediaGridList({
     required this.mediaType,
+    required this.onLastItemReached,
     this.isNeedToShowFormatAndYear = false,
     super.key,
   });
 
   final Enum$MediaType mediaType;
   final bool isNeedToShowFormatAndYear;
+  final VoidCallback onLastItemReached;
 
   @override
   Widget build(BuildContext context) {
@@ -43,34 +45,37 @@ class MediaGridList<B extends PaginatedDataBloc> extends StatelessWidget {
               ),
             );
           }
-          return Column(
-            children: [
-              GridView.builder(
-                padding: const EdgeInsets.all(10),
-                shrinkWrap: true,
-                physics: const BouncingScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 150,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: isNeedToShowFormatAndYear ? 0.5 : 0.5556,
-                ),
-                itemCount: state.list.length,
-                itemBuilder: (context, index) {
-                  final media = state.list[index];
-                  return _buildMediaCard(
-                    context,
-                    media,
-                    MediaQuery.sizeOf(context),
-                  );
-                },
-              ),
-              if (state.hasNextPage)
-                const Padding(
-                  padding: EdgeInsets.all(10),
-                  child: CircularProgressIndicator(),
-                ),
-            ],
+          return GridView.builder(
+            padding: const EdgeInsets.all(10),
+            physics: const BouncingScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 150,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              childAspectRatio: isNeedToShowFormatAndYear ? 0.5 : 0.5556,
+            ),
+            itemCount: state.list.length + (state.hasNextPage ? 3 : 0),
+            itemBuilder: (context, index) {
+              if (index == state.list.length - 1) {
+                // Last item reached, trigger the callback
+                onLastItemReached();
+              }
+              if (index >= state.list.length) {
+                if (state.hasNextPage) {
+                  return const ShimmerGridCard();
+                } else {
+                  // No more items to load
+                  return const SizedBox.shrink();
+                }
+              }
+
+              final media = state.list[index];
+              return _buildMediaCard(
+                context,
+                media,
+                MediaQuery.sizeOf(context),
+              );
+            },
           );
         }
         return AnimeCharacterPlaceholder(

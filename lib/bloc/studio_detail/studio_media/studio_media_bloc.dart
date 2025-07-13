@@ -11,6 +11,7 @@ import '../../../graphql/__generated/graphql/studio_detail/studio_media.graphql.
 class StudioMediaBloc
     extends PaginatedDataBloc<Query$getStudioMedia, Fragment$MediaShort> {
   bool? displayAdultContent;
+  GraphQLClient? _client;
   final int studioId;
   final ValueNotifier<Enum$MediaSort> mediaSortNotifier =
       ValueNotifier<Enum$MediaSort>(Enum$MediaSort.POPULARITY_DESC);
@@ -22,6 +23,7 @@ class StudioMediaBloc
     required GraphQLClient client,
     bool? displayAdultContent,
   }) {
+    _client = client;
     this.displayAdultContent = displayAdultContent;
     add(LoadData(client));
   }
@@ -34,11 +36,13 @@ class StudioMediaBloc
   }
 
   @override
-  Future<QueryResult<Query$getStudioMedia>> loadData(GraphQLClient client) {
+  Future<QueryResult<Query$getStudioMedia>> loadData(
+    GraphQLClient client,
+  ) async {
     log(
       'StudioMediaBloc loadData called with studioId: $studioId AND page: $page AND sort: ${mediaSortNotifier.value} AND onList: ${isOnMyList.value}',
     );
-    return client.query$getStudioMedia(
+    final data = await client.query$getStudioMedia(
       Options$Query$getStudioMedia(
         fetchPolicy: FetchPolicy.noCache,
         variables: Variables$Query$getStudioMedia(
@@ -50,6 +54,7 @@ class StudioMediaBloc
         cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
       ),
     );
+    return data;
   }
 
   @override
@@ -68,6 +73,9 @@ class StudioMediaBloc
         return media?.isAdult != true;
       }).toList();
 
+      if (filteredMedia.isEmpty && hasNextPage && _client != null) {
+        add(LoadData(_client!));
+      }
       list.addAll(filteredMedia);
     } else {
       // If displayAdultContent is true or null, include all content

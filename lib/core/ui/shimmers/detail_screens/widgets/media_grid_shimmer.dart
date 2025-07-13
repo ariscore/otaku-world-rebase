@@ -22,7 +22,7 @@ class MediaGridShimmer extends StatelessWidget {
         ),
         delegate: SliverChildBuilderDelegate(
           (context, index) {
-            return _buildShimmerCard(context);
+            return const ShimmerGridCard();
           },
           childCount: 30,
         ),
@@ -40,13 +40,20 @@ class MediaGridShimmer extends StatelessWidget {
         ),
         itemCount: 30,
         itemBuilder: (context, index) {
-          return _buildShimmerCard(context);
+          return const ShimmerGridCard();
         },
       );
     }
   }
+}
 
-  Widget _buildShimmerCard(BuildContext context) {
+class ShimmerGridCard extends StatelessWidget {
+  const ShimmerGridCard({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
     return Column(
       mainAxisSize: MainAxisSize.max,
