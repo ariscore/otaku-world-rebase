@@ -33,6 +33,16 @@ class MediaGridList<B extends PaginatedDataBloc> extends StatelessWidget {
         if (state is PaginatedDataInitial || state is PaginatedDataLoading) {
           return const MediaGridShimmer();
         } else if (state is PaginatedDataLoaded) {
+          if (state.list.isEmpty) {
+            return const Center(
+              child: AnimeCharacterPlaceholder(
+                asset: Assets.charactersErenYeager,
+                heading: 'No Anime/Manga found',
+                subheading: 'There is no Anime/Manga to display!',
+                isScrollable: true,
+              ),
+            );
+          }
           return Column(
             children: [
               GridView.builder(

@@ -15,7 +15,7 @@ import '../../../core/ui/media_section/scroll_to_top_button.dart';
 import '../../../core/ui/placeholders/anime_character_placeholder.dart';
 import '../../../generated/assets.dart';
 
-class StudioDetailScreen extends HookWidget {
+class StudioDetailScreen extends StatelessWidget {
   const StudioDetailScreen({
     super.key,
     required this.studioId,
@@ -36,24 +36,6 @@ class StudioDetailScreen extends HookWidget {
 
     final bloc = context.read<StudioMediaBloc>();
 
-    useEffect(() {
-      scrollController.addListener(() {
-        final maxScroll = scrollController.position.maxScrollExtent;
-        final currentScroll = scrollController.position.pixels;
-
-        if (currentScroll == maxScroll) {
-          final hasNextPage = (bloc.state as PaginatedDataLoaded).hasNextPage;
-          if (hasNextPage) {
-            final client = (context.read<GraphqlClientCubit>().state
-                    as GraphqlClientInitialized)
-                .client;
-            bloc.add(LoadData(client));
-          }
-        }
-      });
-      return null;
-    }, const []);
-
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) {
@@ -72,24 +54,43 @@ class StudioDetailScreen extends HookWidget {
                 controller: scrollController,
                 tag: 'studio_fab',
               ),
-              body: CustomScrollView(
-                controller: scrollController,
-                slivers: [
-                  StudioAppBar(
-                    studio: studio,
-                    bloc: bloc,
-                  ),
-                  SliverToBoxAdapter(
-                    child: MediaQuery.removePadding(
-                      context: context,
-                      removeTop: true,
-                      child: const MediaGridList<StudioMediaBloc>(
-                        mediaType: Enum$MediaType.ANIME,
-                        isNeedToShowFormatAndYear: true,
+              body: NotificationListener<ScrollNotification>(
+                onNotification: (scrollInfo) {
+                  if (scrollInfo.metrics.pixels ==
+                      scrollInfo.metrics.maxScrollExtent) {
+                    if (bloc.state is PaginatedDataLoaded) {
+                      final hasNextPage =
+                          (bloc.state as PaginatedDataLoaded).hasNextPage;
+                      if (hasNextPage) {
+                        final client = (context.read<GraphqlClientCubit>().state
+                                as GraphqlClientInitialized)
+                            .client;
+                        bloc.add(LoadData(client));
+                      }
+                    }
+                  }
+                  return false;
+                },
+                child: CustomScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  controller: scrollController,
+                  slivers: [
+                    StudioAppBar(
+                      studio: studio,
+                      bloc: bloc,
+                    ),
+                    SliverToBoxAdapter(
+                      child: MediaQuery.removePadding(
+                        context: context,
+                        removeTop: true,
+                        child: const MediaGridList<StudioMediaBloc>(
+                          mediaType: Enum$MediaType.ANIME,
+                          isNeedToShowFormatAndYear: true,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           }

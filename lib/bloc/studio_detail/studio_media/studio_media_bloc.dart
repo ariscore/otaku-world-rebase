@@ -10,12 +10,21 @@ import '../../../graphql/__generated/graphql/studio_detail/studio_media.graphql.
 
 class StudioMediaBloc
     extends PaginatedDataBloc<Query$getStudioMedia, Fragment$MediaShort> {
+  bool? displayAdultContent;
   final int studioId;
   final ValueNotifier<Enum$MediaSort> mediaSortNotifier =
       ValueNotifier<Enum$MediaSort>(Enum$MediaSort.POPULARITY_DESC);
   final ValueNotifier<bool> isOnMyList = ValueNotifier(false);
 
   StudioMediaBloc({required this.studioId});
+
+  void initializeBloc({
+    required GraphQLClient client,
+    bool? displayAdultContent,
+  }) {
+    this.displayAdultContent = displayAdultContent;
+    add(LoadData(client));
+  }
 
   void applyFilter({
     required GraphQLClient client,
@@ -48,10 +57,21 @@ class StudioMediaBloc
     final data = response.parsedData!;
     hasNextPage = data.Studio?.media?.pageInfo?.hasNextPage ?? false;
     page++;
-    list.addAll(
-      data.Studio!.media!.edges!.map(
-        (e) => e?.node,
-      ),
-    );
+
+    final mediaList = data.Studio!.media!.edges!.map((e) => e?.node).toList();
+
+    // Apply content filtering based on displayAdultContent setting
+    if (displayAdultContent == false) {
+      // If displayAdultContent is false, exclude adult content
+      final filteredMedia = mediaList.where((media) {
+        // If isAdult is null, we assume it's not adult content
+        return media?.isAdult != true;
+      }).toList();
+
+      list.addAll(filteredMedia);
+    } else {
+      // If displayAdultContent is true or null, include all content
+      list.addAll(mediaList);
+    }
   }
 }
