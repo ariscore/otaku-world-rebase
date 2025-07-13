@@ -58,6 +58,7 @@ class _ActivitiesListState extends State<ActivitiesList>
                       asset: Assets.charactersCigaretteGirl,
                       heading: 'Nothing to Show',
                       subheading: 'Looks like there are no activities yet!',
+                      isScrollable: true,
                     ),
                   )
                 : CustomScrollView(
@@ -113,6 +114,7 @@ class _ActivitiesListState extends State<ActivitiesList>
               subheading: 'Looks like there are no activities yet!',
               isError: true,
               onTryAgain: () => activitiesBloc.add(LoadActivities(client)),
+              isScrollable: true,
             ),
           );
         } else {
@@ -123,6 +125,7 @@ class _ActivitiesListState extends State<ActivitiesList>
               subheading: StringConstants.somethingWentWrongError,
               isError: true,
               onTryAgain: () => activitiesBloc.add(LoadActivities(client)),
+              isScrollable: true,
             ),
           );
         }

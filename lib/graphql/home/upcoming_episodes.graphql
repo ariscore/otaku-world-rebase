@@ -6,9 +6,7 @@
         media(status: RELEASING, sort: [POPULARITY_DESC], type: ANIME) {
             id
             title {
-                romaji
-                english
-                native
+              userPreferred
             }
             coverImage {
                 large

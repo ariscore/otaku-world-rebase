@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ReviewByUser extends StatelessWidget {
-  const ReviewByUser(
-      {super.key, required this.mediaTitle, required this.userName});
+  const ReviewByUser({
+    super.key,
+    required this.mediaTitle,
+    required this.userName,
+  });
 
-  final String mediaTitle;
-  final String userName;
+  final String? mediaTitle;
+  final String? userName;
 
   @override
   Widget build(BuildContext context) {
@@ -13,33 +16,34 @@ class ReviewByUser extends StatelessWidget {
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       text: TextSpan(
-        text: 'Review of ',
-        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w100,
-            ),
+        style: Theme.of(context)
+            .textTheme
+            .headlineSmall
+            ?.copyWith(fontFamily: 'Poppins'),
         children: [
-          TextSpan(
-            text: mediaTitle,
-            style: Theme.of(context)
-                .textTheme
-                .headlineSmall
-                ?.copyWith(fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+          const TextSpan(
+            text: 'Review',
+            style: TextStyle(fontWeight: FontWeight.w100),
           ),
-          TextSpan(
-            text: ' by ',
-            style: Theme.of(context)
-                .textTheme
-                .headlineSmall
-                ?.copyWith(fontFamily: 'Poppins'),
-          ),
-          TextSpan(
-            text: userName,
-            style: Theme.of(context)
-                .textTheme
-                .headlineSmall
-                ?.copyWith(fontFamily: 'Poppins', fontWeight: FontWeight.w600),
-          ),
+          if (mediaTitle != null && mediaTitle!.isNotEmpty) ...[
+            const TextSpan(
+              text: ' of ',
+              style: TextStyle(fontWeight: FontWeight.w100),
+            ),
+            TextSpan(
+              text: mediaTitle,
+              style: const TextStyle(fontWeight: FontWeight.w600),
+            ),
+          ],
+          if (userName != null && userName!.isNotEmpty) ...[
+            const TextSpan(
+              text: ' by ',
+            ),
+            TextSpan(
+              text: userName,
+              style: const TextStyle(fontWeight: FontWeight.w600),
+            ),
+          ],
         ],
       ),
     );

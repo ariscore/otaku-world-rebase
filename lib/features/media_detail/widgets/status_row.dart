@@ -35,8 +35,7 @@ class StatusRow extends StatelessWidget {
           const SizedBox(
             width: 20,
           ),
-          SizedBox(
-            width: 99,
+          Flexible(
             child: Text(
               "Ep. ${airingSchedule!.nodes![0]!.episode}: ${FormattingUtils.formatDurationFromSeconds(airingSchedule!.nodes![0]!.timeUntilAiring)}",
               style: Theme.of(context).textTheme.titleLarge?.copyWith(

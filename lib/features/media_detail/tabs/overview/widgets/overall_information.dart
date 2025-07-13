@@ -11,80 +11,48 @@ import 'package:otaku_world/utils/formatting_utils.dart';
 class OverallInfo extends StatelessWidget {
   const OverallInfo({super.key});
 
-  static const Widget tenHeightSizedBox = SizedBox(
-    height: 10,
-  );
-
   @override
   Widget build(BuildContext context) {
     final media =
         (BlocProvider.of<MediaDetailBloc>(context).state as MediaDetailLoaded)
             .media;
     return Container(
-      padding: const EdgeInsets.only(
-        top: 14,
-        bottom: 7,
-        left: 11,
-        right: 13,
-      ),
-      decoration: ShapeDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment(0.00, -1.00),
-          end: Alignment(0, 1),
-          colors: [Color(0xFF263749), Color(0xFF404040)],
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        shadows: const [
-          BoxShadow(
-            color: Color(0x3F000000),
-            blurRadius: 4,
-            offset: Offset(0, 4),
-            spreadRadius: 0,
-          )
-        ],
-      ),
+      padding: const EdgeInsets.all(10),
+      decoration: UIUtils.getContainerDecoration(),
       child: Column(
+        spacing: 10,
         children: [
           InfoTile(
             title: "Romaji",
             data: media.title!.romaji.toString().checkIfNull(),
           ),
-          tenHeightSizedBox,
           InfoTile(
             title: "English",
             data: media.title!.english.toString().checkIfNull(),
           ),
-          tenHeightSizedBox,
           InfoTile(
             title: "Native",
             data: media.title!.native.toString().checkIfNull(),
           ),
-          tenHeightSizedBox,
           InfoTile(
             title: 'Synonyms',
             data: media.synonyms!.isEmpty
                 ? StringConstants.nullStringConstant
                 : media.synonyms!.join("\n"),
           ),
-          tenHeightSizedBox,
           Container(
             color: AppColors.white.withValues(alpha: 0.5),
             height: 1,
           ),
-          tenHeightSizedBox,
           InfoTile(
               title: 'Format',
               data: FormattingUtils.getMediaFormatString(
                   media.format ?? Enum$MediaFormat.$unknown)),
           if (media.type == Enum$MediaType.ANIME) ...[
-            tenHeightSizedBox,
             InfoTile(
               title: 'Episodes',
               data: media.episodes.toString().checkIfNull(),
             ),
-            tenHeightSizedBox,
             InfoTile(
               title: 'Episodes Duration',
               data: media.duration.toString() == "null"
@@ -93,39 +61,33 @@ class OverallInfo extends StatelessWidget {
             ),
           ],
           if (media.type == Enum$MediaType.MANGA) ...[
-            tenHeightSizedBox,
             InfoTile(
               title: 'Chapters',
               data: media.chapters.toString().checkIfNull(),
             ),
-            tenHeightSizedBox,
             InfoTile(
               title: 'Volumes',
               data: media.volumes.toString().checkIfNull(),
             ),
           ],
-          tenHeightSizedBox,
           InfoTile(
             title: 'Source',
             data: FormattingUtils.getMediaSourceString(
               media.source ?? Enum$MediaSource.$unknown,
             ),
           ),
-          tenHeightSizedBox,
           InfoTile(
             title: 'Status',
             data: FormattingUtils.getMediaStatusString(
               media.status ?? Enum$MediaStatus.$unknown,
             ),
           ),
-          tenHeightSizedBox,
           InfoTile(
             title: 'Start Date',
             data: media.startDate == null
                 ? StringConstants.nullStringConstant
                 : media.startDate!.toDateString(),
           ),
-          tenHeightSizedBox,
           InfoTile(
             title: 'End Date',
             data: media.endDate != null
@@ -133,27 +95,23 @@ class OverallInfo extends StatelessWidget {
                 : StringConstants.nullStringConstant,
           ),
           if (media.type == Enum$MediaType.ANIME) ...[
-            tenHeightSizedBox,
             InfoTile(
               title: 'Season',
               data: "${FormattingUtils.getSeasonString(
                 media.season ?? Enum$MediaSeason.$unknown,
               )} ${media.seasonYear.toString() == 'null' ? '' : media.seasonYear.toString()}",
             ),
-            tenHeightSizedBox,
             if (media.studios?.edges != null) ...[
               Container(
                 color: AppColors.white.withValues(alpha: 0.5),
                 height: 1,
               ),
-              tenHeightSizedBox,
               InfoTile(
                 title: "Studios",
                 data: getStudios(media.studios!.edges!).isEmpty
                     ? StringConstants.nullStringConstant
                     : getStudios(media.studios!.edges!),
               ),
-              tenHeightSizedBox,
               InfoTile(
                 title: 'Producers',
                 data: getProducers(media.studios!.edges!).isEmpty

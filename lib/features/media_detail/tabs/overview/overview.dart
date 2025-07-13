@@ -327,7 +327,7 @@ class Overview extends StatelessWidget {
         children: textSpans,
       ),
       maxLines: 2,
-      overflow: TextOverflow.clip,
+      overflow: TextOverflow.ellipsis,
       textAlign: TextAlign.center,
     );
   }

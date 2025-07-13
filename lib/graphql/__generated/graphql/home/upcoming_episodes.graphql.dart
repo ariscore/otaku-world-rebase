@@ -342,21 +342,7 @@ const documentNodeQueryGetUpcomingEpisodes = DocumentNode(definitions: [
                 directives: [],
                 selectionSet: SelectionSetNode(selections: [
                   FieldNode(
-                    name: NameNode(value: 'romaji'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'english'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'native'),
+                    name: NameNode(value: 'userPreferred'),
                     alias: null,
                     arguments: [],
                     directives: [],
@@ -1205,42 +1191,28 @@ class _CopyWithStubImpl$Query$GetUpcomingEpisodes$Page$media<TRes>
 
 class Query$GetUpcomingEpisodes$Page$media$title {
   Query$GetUpcomingEpisodes$Page$media$title({
-    this.romaji,
-    this.english,
-    this.native,
+    this.userPreferred,
     this.$__typename = 'MediaTitle',
   });
 
   factory Query$GetUpcomingEpisodes$Page$media$title.fromJson(
       Map<String, dynamic> json) {
-    final l$romaji = json['romaji'];
-    final l$english = json['english'];
-    final l$native = json['native'];
+    final l$userPreferred = json['userPreferred'];
     final l$$__typename = json['__typename'];
     return Query$GetUpcomingEpisodes$Page$media$title(
-      romaji: (l$romaji as String?),
-      english: (l$english as String?),
-      native: (l$native as String?),
+      userPreferred: (l$userPreferred as String?),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final String? romaji;
-
-  final String? english;
-
-  final String? native;
+  final String? userPreferred;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$romaji = romaji;
-    _resultData['romaji'] = l$romaji;
-    final l$english = english;
-    _resultData['english'] = l$english;
-    final l$native = native;
-    _resultData['native'] = l$native;
+    final l$userPreferred = userPreferred;
+    _resultData['userPreferred'] = l$userPreferred;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1248,14 +1220,10 @@ class Query$GetUpcomingEpisodes$Page$media$title {
 
   @override
   int get hashCode {
-    final l$romaji = romaji;
-    final l$english = english;
-    final l$native = native;
+    final l$userPreferred = userPreferred;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$romaji,
-      l$english,
-      l$native,
+      l$userPreferred,
       l$$__typename,
     ]);
   }
@@ -1269,19 +1237,9 @@ class Query$GetUpcomingEpisodes$Page$media$title {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$romaji = romaji;
-    final lOther$romaji = other.romaji;
-    if (l$romaji != lOther$romaji) {
-      return false;
-    }
-    final l$english = english;
-    final lOther$english = other.english;
-    if (l$english != lOther$english) {
-      return false;
-    }
-    final l$native = native;
-    final lOther$native = other.native;
-    if (l$native != lOther$native) {
+    final l$userPreferred = userPreferred;
+    final lOther$userPreferred = other.userPreferred;
+    if (l$userPreferred != lOther$userPreferred) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -1313,9 +1271,7 @@ abstract class CopyWith$Query$GetUpcomingEpisodes$Page$media$title<TRes> {
       _CopyWithStubImpl$Query$GetUpcomingEpisodes$Page$media$title;
 
   TRes call({
-    String? romaji,
-    String? english,
-    String? native,
+    String? userPreferred,
     String? $__typename,
   });
 }
@@ -1334,16 +1290,13 @@ class _CopyWithImpl$Query$GetUpcomingEpisodes$Page$media$title<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? romaji = _undefined,
-    Object? english = _undefined,
-    Object? native = _undefined,
+    Object? userPreferred = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$GetUpcomingEpisodes$Page$media$title(
-        romaji: romaji == _undefined ? _instance.romaji : (romaji as String?),
-        english:
-            english == _undefined ? _instance.english : (english as String?),
-        native: native == _undefined ? _instance.native : (native as String?),
+        userPreferred: userPreferred == _undefined
+            ? _instance.userPreferred
+            : (userPreferred as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -1357,9 +1310,7 @@ class _CopyWithStubImpl$Query$GetUpcomingEpisodes$Page$media$title<TRes>
   TRes _res;
 
   call({
-    String? romaji,
-    String? english,
-    String? native,
+    String? userPreferred,
     String? $__typename,
   }) =>
       _res;

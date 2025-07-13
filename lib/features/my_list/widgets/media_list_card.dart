@@ -42,7 +42,6 @@ class MediaListCard extends StatelessWidget {
       },
       child: Container(
         padding: const EdgeInsets.all(10),
-        // width: MediaQuery.of(context).size.width - 20,
         height: 165,
         margin: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(

@@ -29,9 +29,6 @@ class CommonOverViewWidget extends StatelessWidget {
 
   // "[startYear, endYear] (If the 2nd value is not present staff is still active)"
   final List<int?>? yearActive;
-  static const Widget tenHeightSizedBox = SizedBox(
-    height: 10,
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -49,78 +46,64 @@ class CommonOverViewWidget extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           decoration: UIUtils.getContainerDecoration(),
           child: Column(
+            spacing: 10,
             children: [
               // Birth Date
-              if (birthDate != null) ...[
+              if (birthDate != null)
                 InfoTile(
                   title: 'Birth',
                   data: (birthDate)!.toDateString(),
                 ),
-                tenHeightSizedBox,
-              ],
+
               // Age
-              if (age != null) ...[
+              if (age != null)
                 InfoTile(
                   title: age!.endsWith('-') ? 'Initial Age' : 'Age',
                   data: age!.endsWith('-') ? age!.replaceAll('-', '') : age,
                 ),
-                tenHeightSizedBox,
-              ],
 
               // Gender
-              if (gender != null) ...[
+              if (gender != null)
                 InfoTile(
                   title: 'Gender',
                   data: gender,
                 ),
-                tenHeightSizedBox,
-              ],
 
-              if (yearActive != null && yearActive!.isNotEmpty) ...[
+              if (yearActive != null && yearActive!.isNotEmpty)
                 InfoTile(
                   title: 'Years Active',
                   data: yearActive!.length == 1
                       ? '${yearActive!.first}-Present'
                       : '${yearActive!.first}-${yearActive!.last}',
                 ),
-                tenHeightSizedBox,
-              ],
+
               // Blood Type
-              if (bloodType != null) ...[
+              if (bloodType != null)
                 InfoTile(
                   title: 'Blood Type',
                   data: bloodType,
                 ),
-                tenHeightSizedBox,
-              ],
 
               // Home Town
-              if (homeTown != null) ...[
+              if (homeTown != null)
                 InfoTile(
                   title: 'Home Town',
                   data: homeTown,
                 ),
-                tenHeightSizedBox,
-              ],
 
               // Death Date
-              if (deathDate != null) ...[
+              if (deathDate != null)
                 InfoTile(
                   title: 'Death',
                   data: (deathDate)!.toDateString(),
                 ),
-                tenHeightSizedBox,
-              ],
 
               // Primary Occupations
-              if (primaryOccupations != null &&
-                  primaryOccupations!.isNotEmpty) ...[
+              if (primaryOccupations != null && primaryOccupations!.isNotEmpty)
                 InfoTile(
                   title: 'Primary Occupations',
                   data: primaryOccupations?.join(', '),
                 ),
-                tenHeightSizedBox,
-              ],
             ],
           ),
         ),

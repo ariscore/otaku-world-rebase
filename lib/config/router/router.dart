@@ -143,6 +143,7 @@ import '../../bloc/reviews/reviews/reviews_bloc.dart';
 import '../../bloc/search/search_bloc/search_bloc.dart';
 import '../../bloc/trending_anime/trending_anime_bloc.dart';
 import '../../bloc/trending_manga/trending_manga_bloc.dart';
+import '../../bloc/viewer/viewer_bloc.dart';
 import '../../core/ui/app_scaffold.dart';
 import '../../features/anime_lists/slider_lists/recommended_manga_slider.dart';
 import '../../features/anime_lists/slider_lists/trending_manga_slider.dart';
@@ -159,17 +160,11 @@ import '../../features/social/screens/activity_replies_screen.dart';
 import '../../features/social/screens/social_screen.dart';
 
 part 'bottom_nav_routes.dart';
-
 part 'discover_routes.dart';
-
 part 'home_routes.dart';
-
 part 'list_routes.dart';
-
 part 'profile_routes.dart';
-
 part 'settings_routes.dart';
-
 part 'social_routes.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -326,9 +321,15 @@ final router = GoRouter(
               final client = (context.read<GraphqlClientCubit>().state
                       as GraphqlClientInitialized)
                   .client;
+              final displayAdultContent = context
+                  .read<ViewerBloc>()
+                  .getNullableUser()
+                  ?.options
+                  ?.displayAdultContent;
               return StudioMediaBloc(studioId: studioId)
-                ..add(
-                  LoadData(client),
+                ..initializeBloc(
+                  client: client,
+                  displayAdultContent: displayAdultContent,
                 );
             },
             child: StudioDetailScreen(

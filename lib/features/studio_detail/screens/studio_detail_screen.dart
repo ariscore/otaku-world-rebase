@@ -36,24 +36,6 @@ class StudioDetailScreen extends HookWidget {
 
     final bloc = context.read<StudioMediaBloc>();
 
-    useEffect(() {
-      scrollController.addListener(() {
-        final maxScroll = scrollController.position.maxScrollExtent;
-        final currentScroll = scrollController.position.pixels;
-
-        if (currentScroll == maxScroll) {
-          final hasNextPage = (bloc.state as PaginatedDataLoaded).hasNextPage;
-          if (hasNextPage) {
-            final client = (context.read<GraphqlClientCubit>().state
-                    as GraphqlClientInitialized)
-                .client;
-            bloc.add(LoadData(client));
-          }
-        }
-      });
-      return null;
-    }, const []);
-
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) {
@@ -73,19 +55,33 @@ class StudioDetailScreen extends HookWidget {
                 tag: 'studio_fab',
               ),
               body: CustomScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
                 controller: scrollController,
                 slivers: [
                   StudioAppBar(
                     studio: studio,
                     bloc: bloc,
                   ),
-                  SliverToBoxAdapter(
+                  SliverFillRemaining(
                     child: MediaQuery.removePadding(
                       context: context,
                       removeTop: true,
-                      child: const MediaGridList<StudioMediaBloc>(
+                      child: MediaGridList<StudioMediaBloc>(
                         mediaType: Enum$MediaType.ANIME,
                         isNeedToShowFormatAndYear: true,
+                        onLastItemReached: () {
+                          if (bloc.state is PaginatedDataLoaded) {
+                            final hasNextPage =
+                                (bloc.state as PaginatedDataLoaded).hasNextPage;
+                            if (hasNextPage) {
+                              final client = (context
+                                      .read<GraphqlClientCubit>()
+                                      .state as GraphqlClientInitialized)
+                                  .client;
+                              bloc.add(LoadData(client));
+                            }
+                          }
+                        },
                       ),
                     ),
                   ),

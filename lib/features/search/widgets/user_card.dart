@@ -47,11 +47,7 @@ class ResultUserCard extends StatelessWidget {
           children: [
             _buildUserImage(user!.avatar?.large, size),
             const SizedBox(width: 5),
-            SizedBox(
-              width: UIUtils.getWidgetWidth(
-                targetWidgetWidth: 225,
-                screenWidth: size.width,
-              ),
+            Flexible(
               child: Text(
                 user!.name,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(

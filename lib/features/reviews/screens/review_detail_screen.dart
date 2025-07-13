@@ -8,6 +8,7 @@ import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/bloc/reviews/review_detail/review_detail_bloc.dart';
 import 'package:otaku_world/bloc/reviews/reviews/reviews_bloc.dart';
+import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/ui/markdown_v2/markdown.dart';
 import 'package:otaku_world/core/ui/shimmers/review_detail_shimmer.dart';
 import 'package:otaku_world/features/media_detail/widgets/banner_image.dart';
@@ -64,7 +65,6 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: const SimpleAppBar(
-
           bgColor: AppColors.transparent,
         ),
         body: BlocBuilder<ReviewDetailBloc, ReviewDetailState>(
@@ -96,7 +96,7 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                           width: width,
                           child: BannerImage(
                             url:
-                            review.media!.coverImage!.extraLarge.toString(),
+                                review.media!.coverImage!.extraLarge.toString(),
                             // placeHolderName: Assets.placeholders340x72,
                           ),
                         ),
@@ -127,9 +127,9 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                       child: Text(
                         '${_getMediaType(review.mediaType!)} Review',
                         style:
-                        Theme.of(context).textTheme.titleMedium!.copyWith(
-                          fontFamily: 'Roboto',
-                        ),
+                            Theme.of(context).textTheme.titleMedium!.copyWith(
+                                  fontFamily: 'Roboto',
+                                ),
                       ),
                     ),
                     _buildTitleSection(
@@ -145,13 +145,15 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                         context: context,
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15.0),
-                      child: _buildProfileSection(context, review),
-                    ),
+                    if (review.user != null) ...[
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15.0),
+                        child: _buildProfileSection(context, review),
+                      ),
+                    ],
                     const SizedBox(
                       height: 10,
                     ),
@@ -161,10 +163,10 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                         FormattingUtils.formatUnixTimestamp(review.createdAt)
                             .toString(),
                         style:
-                        Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontFamily: 'Roboto',
-                          color: AppColors.white.withValues(alpha: 0.8),
-                        ),
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontFamily: 'Roboto',
+                                  color: AppColors.white.withValues(alpha: 0.8),
+                                ),
                       ),
                     ),
                     Padding(
@@ -172,10 +174,10 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                       child: Text(
                         "(Last Updated on ${FormattingUtils.formatUnixTimestamp(review.createdAt).toString()})",
                         style:
-                        Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontFamily: 'Roboto',
-                          color: AppColors.white.withValues(alpha: 0.8),
-                        ),
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontFamily: 'Roboto',
+                                  color: AppColors.white.withValues(alpha: 0.8),
+                                ),
                       ),
                     ),
                     Padding(
@@ -225,7 +227,7 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                 height: 300,
                 heading: 'Something went wrong!',
                 subheading:
-                'Please check your internet connection or try again later.',
+                    'Please check your internet connection or try again later.',
                 onTryAgain: () {
                   context
                       .read<ReviewDetailBloc>()
@@ -303,8 +305,8 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
             screenWidth: screenWidth,
           ),
           child: ReviewByUser(
-            mediaTitle: review.media!.title!.userPreferred.toString(),
-            userName: review.user!.name.toString(),
+            mediaTitle: review.media?.title?.userPreferred.toString(),
+            userName: review.user?.name.toString(),
           ),
         ),
         Padding(
@@ -332,19 +334,22 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
       child: Row(
         children: [
           ReviewProfilePhoto(
-            profilePicUrl: review.user!.avatar!.medium.toString(),
+            profilePicUrl:
+                review.user?.avatar?.medium ?? UiConstants.noImageUrl,
             radius: 25,
           ),
-          const SizedBox(
-            width: 10,
-          ),
-          Text(
-            review.user!.name.toString(),
-            style: Theme.of(context)
-                .textTheme
-                .headlineSmall!
-                .copyWith(fontWeight: FontWeight.bold),
-          )
+          if (review.user?.name != null && review.user!.name.isNotEmpty) ...[
+            const SizedBox(
+              width: 10,
+            ),
+            Text(
+              review.user!.name,
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineSmall!
+                  .copyWith(fontWeight: FontWeight.bold),
+            )
+          ],
         ],
       ),
     );
