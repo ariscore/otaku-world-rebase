@@ -362,6 +362,7 @@ class MediaDetailScreen extends HookWidget {
             fontSize: 14,
             alignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.max,
+            type: media.type ?? Enum$MediaType.ANIME,
           ),
         ),
       ],

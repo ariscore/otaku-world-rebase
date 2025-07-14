@@ -13,6 +13,7 @@ class StatusRow extends StatelessWidget {
     required this.fontSize,
     required this.alignment,
     this.mainAxisSize = MainAxisSize.min,
+    required this.type,
   });
 
   final MainAxisAlignment alignment;
@@ -20,6 +21,7 @@ class StatusRow extends StatelessWidget {
   final Fragment$MediaShort$airingSchedule? airingSchedule;
   final Enum$MediaStatus? status;
   final MainAxisSize mainAxisSize;
+  final Enum$MediaType type;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class StatusRow extends StatelessWidget {
           StatusText(
             status: status,
             fontSize: fontSize,
+            type: type,
           ),
           const SizedBox(
             width: 20,
@@ -53,6 +56,7 @@ class StatusRow extends StatelessWidget {
       return StatusText(
         status: status,
         fontSize: fontSize,
+        type: type,
       );
     }
   }

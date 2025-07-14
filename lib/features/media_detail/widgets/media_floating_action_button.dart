@@ -64,7 +64,7 @@ class MediaFloatingActionButton extends HookWidget {
             heroTag: 'postReview',
             onPressed: () {
               context.push(
-                '${RouteConstants.postReview}?userId=$userId&mediaId=$mediaId',
+                '${RouteConstants.postReview}?mediaId=$mediaId',
               );
             },
             backgroundColor: AppColors.sunsetOrange,

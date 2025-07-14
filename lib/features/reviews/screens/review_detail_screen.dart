@@ -186,7 +186,6 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                         right: 15,
                         bottom: 10,
                       ),
-                      // child: MarkdownWidget(data: review.body.toString()),
                       child: MyMarkdownWidgetV2(data: review.body.toString()),
                     ),
                     // Padding(
@@ -402,7 +401,7 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                     onTap: () {
                       context.pop();
                       final result = context.push(
-                        '${RouteConstants.postReview}?userId=$userId&mediaId=$mediaId',
+                        '${RouteConstants.postReview}?mediaId=$mediaId',
                       );
                       if (result is bool) {
                         _updateReview(id: reviewId, isDeleted: result as bool);
