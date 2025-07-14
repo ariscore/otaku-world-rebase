@@ -16,13 +16,11 @@ class AppScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: DoubleBackPopWidget(
-        child: Scaffold(
-          appBar: navigationShell.currentIndex != 3 ? const MainAppBar() : null,
-          body: navigationShell,
-          bottomNavigationBar: _BottomNavBar(navigationShell),
-        ),
+    return DoubleBackPopWidget(
+      child: Scaffold(
+        appBar: navigationShell.currentIndex != 3 ? const MainAppBar() : null,
+        body: navigationShell,
+        bottomNavigationBar: SafeArea(child: _BottomNavBar(navigationShell)),
       ),
     );
   }

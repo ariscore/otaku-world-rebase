@@ -102,6 +102,7 @@ class MediaCarouselCard extends StatelessWidget {
                     status: media!.status,
                     fontSize: 12,
                     alignment: MainAxisAlignment.center,
+                    type: media?.type ?? Enum$MediaType.ANIME,
                   ),
                   const SizedBox(height: 15),
                   GenreText(

@@ -99,20 +99,22 @@ class UIUtils {
               borderRadius: BorderRadius.circular(15),
               gradient: AppColors.secondaryGradient,
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              spacing: 10,
-              children: [
-                // MarkdownWidget(data: data),
-                MyMarkdownWidgetV2(data: data),
-                PrimaryOutlinedButton(
-                  onTap: context.pop,
-                  label: 'Ok',
-                  horizontalPadding: 5,
-                  verticalPadding: 10,
-                  fontSize: 14,
-                ),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                spacing: 10,
+                children: [
+                  // MarkdownWidget(data: data),
+                  MyMarkdownWidgetV2(data: data),
+                  PrimaryOutlinedButton(
+                    onTap: context.pop,
+                    label: 'Ok',
+                    horizontalPadding: 5,
+                    verticalPadding: 10,
+                    fontSize: 14,
+                  ),
+                ],
+              ),
             ),
           ),
         );
