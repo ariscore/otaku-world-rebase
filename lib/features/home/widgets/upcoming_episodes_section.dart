@@ -225,7 +225,7 @@ class UpcomingEpisodesSection extends HookWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    media.title?.userPreferred ?? 'Unknown Title',
+                    media.title?.userPreferred ?? StringConstants.noTitle,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontFamily: 'Roboto-Medium',
                         ),

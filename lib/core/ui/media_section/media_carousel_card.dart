@@ -80,7 +80,8 @@ class MediaCarouselCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    media!.title!.userPreferred!,
+                    media?.title?.userPreferred ??
+                        StringConstants.noTitle,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w500,

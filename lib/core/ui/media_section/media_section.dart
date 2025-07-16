@@ -308,7 +308,7 @@ class MediaSection<B extends PaginatedDataBloc> extends HookWidget {
             SizedBox(
               width: 115,
               child: Text(
-                getTitle(media.title) ?? 'No Title',
+                media.title?.userPreferred ?? StringConstants.noTitle,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -320,10 +320,6 @@ class MediaSection<B extends PaginatedDataBloc> extends HookWidget {
         ),
       ),
     );
-  }
-
-  String? getTitle(Fragment$MediaShort$title? title) {
-    return title?.english ?? title?.romaji ?? title?.native;
   }
 
   Widget _buildMeanScore(BuildContext context, int? meanScore) {

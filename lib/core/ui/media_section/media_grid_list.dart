@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:otaku_world/bloc/staff_detail/media/staff_media_bloc.dart';
+import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
@@ -141,15 +142,13 @@ class MediaGridList<B extends PaginatedDataBloc> extends StatelessWidget {
           height: 5,
         ),
         // Manga title
-        SizedBox(
-          child: Text(
-            media.title!.userPreferred!,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontFamily: 'Roboto-Condensed',
-                ),
-          ),
+        Text(
+          media.title?.userPreferred ?? StringConstants.noTitle,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontFamily: 'Roboto-Condensed',
+              ),
         ),
 
         if (isNeedToShowFormatAndYear) ...[

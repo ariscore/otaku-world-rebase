@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/ui/placeholders/poster_placeholder.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
@@ -35,7 +36,7 @@ class CalendarCard extends StatelessWidget {
             ),
             shadows: [
               BoxShadow(
-                color: Colors.black.withValues(alpha:0.25),
+                color: Colors.black.withValues(alpha: 0.25),
                 blurRadius: 4,
                 offset: const Offset(0, 4),
               )
@@ -97,8 +98,8 @@ class CalendarCard extends StatelessWidget {
                           width: UIUtils.getWidgetWidth(
                               targetWidgetWidth: 250, screenWidth: size.width),
                           child: Text(
-                            airingSchedule.media!.title?.english ??
-                                airingSchedule.media!.title!.userPreferred!,
+                            airingSchedule.media?.title?.userPreferred ??
+                                StringConstants.noTitle,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context)
@@ -110,7 +111,9 @@ class CalendarCard extends StatelessWidget {
                                 ),
                           ),
                         ),
-                        if (airingSchedule.media?.mediaListEntry != null)
+                        if (airingSchedule.media?.mediaListEntry?.status !=
+                                null &&
+                            airingSchedule.media?.type != null)
                           Column(
                             children: [
                               const SizedBox(
@@ -132,12 +135,14 @@ class CalendarCard extends StatelessWidget {
                                       1000))
                               ? 'Ep. ${airingSchedule.episode}, ${FormattingUtils.formatDurationFromSecondsBefore(airingSchedule.timeUntilAiring)} since aired'
                               : 'Ep. ${airingSchedule.episode} in ${FormattingUtils.formatDurationFromSeconds(airingSchedule.timeUntilAiring)}',
-                          style:
-                              Theme.of(context).textTheme.titleLarge?.copyWith(
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: 'Poppins',
-                                    color: AppColors.white.withValues(alpha:0.8),
-                                  ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge
+                              ?.copyWith(
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Poppins',
+                                color: AppColors.white.withValues(alpha: 0.8),
+                              ),
                         ),
                       ],
                     ),
@@ -152,7 +157,10 @@ class CalendarCard extends StatelessWidget {
   }
 
   Widget _buildStatus(
-      BuildContext context, Enum$MediaListStatus status, Enum$MediaType type) {
+    BuildContext context,
+    Enum$MediaListStatus status,
+    Enum$MediaType type,
+  ) {
     return Row(
       children: [
         Container(
