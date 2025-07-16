@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
@@ -13,7 +14,6 @@ import 'package:otaku_world/graphql/__generated/graphql/social/delete_activity.g
 import '../../../constants/string_constants.dart';
 
 part 'activities_event.dart';
-
 part 'activities_state.dart';
 
 class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
@@ -76,6 +76,7 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
       true,
       followingPage,
     );
+    await Future.delayed(const Duration(milliseconds: 500));
     final globalResponse = await _loadData(
       event.client,
       false,
@@ -86,9 +87,15 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
       final exception =
           followingResponse.exception ?? globalResponse.exception!;
 
+      debugPrint(
+        'Error fetching activities: ${exception.toString()}',
+      );
       if (exception.linkException != null) {
+        // emit(
+        //   const ActivitiesError('Please check your internet connection!'),
+        // );
         emit(
-          const ActivitiesError('Please check your internet connection!'),
+          ActivitiesError(exception.toString()),
         );
       } else {
         emit(const ActivitiesError('Something went wrong!'));
