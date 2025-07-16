@@ -62,28 +62,22 @@ class StudioDetailScreen extends HookWidget {
                     studio: studio,
                     bloc: bloc,
                   ),
-                  SliverFillRemaining(
-                    child: MediaQuery.removePadding(
-                      context: context,
-                      removeTop: true,
-                      child: MediaGridList<StudioMediaBloc>(
-                        mediaType: Enum$MediaType.ANIME,
-                        isNeedToShowFormatAndYear: true,
-                        onLastItemReached: () {
-                          if (bloc.state is PaginatedDataLoaded) {
-                            final hasNextPage =
-                                (bloc.state as PaginatedDataLoaded).hasNextPage;
-                            if (hasNextPage) {
-                              final client = (context
-                                      .read<GraphqlClientCubit>()
-                                      .state as GraphqlClientInitialized)
-                                  .client;
-                              bloc.add(LoadData(client));
-                            }
-                          }
-                        },
-                      ),
-                    ),
+                  MediaGridList<StudioMediaBloc>(
+                    mediaType: Enum$MediaType.ANIME,
+                    isNeedToShowFormatAndYear: true,
+                    onLastItemReached: () {
+                      if (bloc.state is PaginatedDataLoaded) {
+                        final hasNextPage =
+                            (bloc.state as PaginatedDataLoaded).hasNextPage;
+                        if (hasNextPage) {
+                          final client = (context
+                                  .read<GraphqlClientCubit>()
+                                  .state as GraphqlClientInitialized)
+                              .client;
+                          bloc.add(LoadData(client));
+                        }
+                      }
+                    },
                   ),
                 ],
               ),

@@ -34,65 +34,72 @@ class MediaGridList<B extends PaginatedDataBloc> extends StatelessWidget {
     return BlocBuilder<B, PaginatedDataState>(
       builder: (context, state) {
         if (state is PaginatedDataInitial || state is PaginatedDataLoading) {
-          return const MediaGridShimmer();
+          return const MediaGridShimmer(
+            isSliver: true,
+          );
         } else if (state is PaginatedDataLoaded) {
           if (state.list.isEmpty) {
-            return const Center(
-              child: AnimeCharacterPlaceholder(
-                asset: Assets.charactersErenYeager,
-                heading: 'No Anime/Manga found',
-                subheading: 'There is no Anime/Manga to display!',
-                isScrollable: true,
+            return const SliverToBoxAdapter(
+              child: Center(
+                child: AnimeCharacterPlaceholder(
+                  asset: Assets.charactersErenYeager,
+                  heading: 'No Anime/Manga found',
+                  subheading: 'There is no Anime/Manga to display!',
+                  isScrollable: true,
+                ),
               ),
             );
           }
-          return GridView.builder(
+          return SliverPadding(
             padding: const EdgeInsets.all(10),
-            physics: const BouncingScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 150,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: isNeedToShowFormatAndYear ? 0.5 : 0.5556,
-            ),
-            itemCount: state.list.length + (state.hasNextPage ? 3 : 0),
-            itemBuilder: (context, index) {
-              if (index == state.list.length - 1) {
-                // Last item reached, trigger the callback
-                onLastItemReached();
-              }
-              if (index >= state.list.length) {
-                if (state.hasNextPage) {
-                  return const ShimmerGridCard();
-                } else {
-                  // No more items to load
-                  return const SizedBox.shrink();
+            sliver: SliverGrid.builder(
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 150,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: isNeedToShowFormatAndYear ? 0.5 : 0.5556,
+              ),
+              itemCount: state.list.length + (state.hasNextPage ? 3 : 0),
+              itemBuilder: (context, index) {
+                if (index == state.list.length - 1) {
+                  // Last item reached, trigger the callback
+                  onLastItemReached();
                 }
-              }
+                if (index >= state.list.length) {
+                  if (state.hasNextPage) {
+                    return const ShimmerGridCard();
+                  } else {
+                    // No more items to load
+                    return const SliverToBoxAdapter(child: SizedBox.shrink());
+                  }
+                }
 
-              final media = state.list[index];
-              return _buildMediaCard(
-                context,
-                media,
-                MediaQuery.sizeOf(context),
-              );
-            },
+                final media = state.list[index];
+                return _buildMediaCard(
+                  context,
+                  media,
+                  MediaQuery.sizeOf(context),
+                );
+              },
+            ),
           );
         }
-        return AnimeCharacterPlaceholder(
-          asset: Assets.charactersNoInternet,
-          heading: 'Something went wrong!',
-          subheading:
-              'Please check your internet connection or try again later.',
-          onTryAgain: () {
-            context.read<StaffMediaBloc>().add(
-                  LoadData((context.read<GraphqlClientCubit>().state
-                          as GraphqlClientInitialized)
-                      .client),
-                );
-          },
-          isError: true,
-          isScrollable: true,
+        return SliverToBoxAdapter(
+          child: AnimeCharacterPlaceholder(
+            asset: Assets.charactersNoInternet,
+            heading: 'Something went wrong!',
+            subheading:
+                'Please check your internet connection or try again later.',
+            onTryAgain: () {
+              context.read<StaffMediaBloc>().add(
+                    LoadData((context.read<GraphqlClientCubit>().state
+                            as GraphqlClientInitialized)
+                        .client),
+                  );
+            },
+            isError: true,
+            isScrollable: true,
+          ),
         );
       },
     );
