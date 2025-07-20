@@ -8,7 +8,6 @@ import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/staff/staff_bloc.dart';
-import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/shimmers/detail_screens/screens/media_detail_shimmer.dart';
 import 'package:otaku_world/features/media_detail/widgets/media_app_bar.dart';
 import 'package:otaku_world/features/media_detail/widgets/media_floating_action_button.dart';
@@ -20,6 +19,7 @@ import '../../../bloc/media_detail/characters/characters_bloc.dart';
 import '../../../bloc/media_detail/media_detail_bloc.dart';
 import '../../../bloc/viewer/viewer_bloc.dart';
 import '../../../core/ui/placeholders/anime_character_placeholder.dart';
+import '../../../core/ui/widgets/scaffold_wrapper_placeholder.dart';
 import '../../../generated/assets.dart';
 import '../tabs/characters/characters.dart' as ch;
 import '../tabs/overview/overview.dart';
@@ -130,10 +130,27 @@ class MediaDetailScreen extends HookWidget {
                 },
               ),
             );
+          } else if (state is MediaDetailError) {
+            return ScaffoldWrapperPlaceholder(
+              child: AnimeCharacterPlaceholder(
+                asset: Assets.charactersNoInternet,
+                height: 300,
+                error: state.error,
+                onTryAgain: () {
+                  context.read<MediaDetailBloc>().add(
+                        LoadMediaDetail(
+                          id: mediaId,
+                          client: client,
+                        ),
+                      );
+                },
+                isError: true,
+              ),
+            );
           }
-          return Scaffold(
-            appBar: const SimpleAppBar(),
-            body: AnimeCharacterPlaceholder(
+
+          return ScaffoldWrapperPlaceholder(
+            child: AnimeCharacterPlaceholder(
               asset: Assets.charactersCigaretteGirl,
               height: 300,
               heading: 'Something went wrong!',
@@ -200,7 +217,6 @@ class MediaDetailScreen extends HookWidget {
         return const SizedBox();
     }
   }
-
 
   void _onPopInvoked(BuildContext context) {
     if (context.canPop()) {

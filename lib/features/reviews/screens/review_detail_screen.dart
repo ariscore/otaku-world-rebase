@@ -27,6 +27,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../bloc/profile/reviews/user_reviews_bloc.dart';
 import '../../../bloc/viewer/viewer_bloc.dart';
 import '../../../config/router/router_constants.dart';
+import '../../../core/model/custom_error.dart';
 import '../../../core/ui/appbars/simple_app_bar.dart';
 import '../../../core/ui/placeholders/anime_character_placeholder.dart';
 import '../../../graphql/__generated/graphql/reviews/post_review.graphql.dart';
@@ -218,15 +219,27 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                   ],
                 ),
               );
+            } else if (state is ReviewDetailError) {
+              return Center(
+                child: AnimeCharacterPlaceholder(
+                  asset: Assets.charactersErenYeager,
+                  height: 300,
+                  error: state.error,
+                  onTryAgain: () {
+                    context
+                        .read<ReviewDetailBloc>()
+                        .add(LoadReviewDetail(client: client));
+                  },
+                  isError: true,
+                ),
+              );
             }
 
             return Center(
               child: AnimeCharacterPlaceholder(
                 asset: Assets.charactersErenYeager,
                 height: 300,
-                heading: 'Something went wrong!',
-                subheading:
-                    'Please check your internet connection or try again later.',
+                error: CustomError.unexpectedError(),
                 onTryAgain: () {
                   context
                       .read<ReviewDetailBloc>()
