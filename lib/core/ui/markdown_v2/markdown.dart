@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:markdown/markdown.dart';
 import 'package:markdown_widget/markdown_widget.dart';
@@ -106,8 +104,7 @@ class MyMarkdownWidgetV2 extends StatelessWidget {
     // output = output.replaceAll('\n<br>', '<br>');
     // output = output.replaceAll('<br>\n<br>', '<br>');
     // output = output.replaceAll('<br>\n', '<br>');
-    // output = output.replaceAll('\n', '<br>');
-
+    output = output.replaceAll('\n', '<br>');
     return output;
   }
 
@@ -149,10 +146,10 @@ class MyMarkdownWidgetV2 extends StatelessWidget {
 class CustomH1Config extends H1Config {
   @override
   TextStyle get style => const TextStyle(
-    fontFamily: 'Poppins',
-    fontWeight: FontWeight.w600,
-    fontSize: 22,
-  );
+        fontFamily: 'Poppins',
+        fontWeight: FontWeight.w600,
+        fontSize: 22,
+      );
 
   @override
   EdgeInsets get padding => EdgeInsets.zero;
@@ -164,10 +161,10 @@ class CustomH1Config extends H1Config {
 class CustomH2Config extends H2Config {
   @override
   TextStyle get style => const TextStyle(
-    fontFamily: 'Poppins',
-    fontWeight: FontWeight.w500,
-    fontSize: 20,
-  );
+        fontFamily: 'Poppins',
+        fontWeight: FontWeight.w500,
+        fontSize: 20,
+      );
 
   @override
   EdgeInsets get padding => EdgeInsets.zero;
@@ -179,10 +176,10 @@ class CustomH2Config extends H2Config {
 class CustomH3Config extends H3Config {
   @override
   TextStyle get style => const TextStyle(
-    fontFamily: 'Roboto',
-    fontWeight: FontWeight.w500,
-    fontSize: 18,
-  );
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.w500,
+        fontSize: 18,
+      );
 
   @override
   EdgeInsets get padding => EdgeInsets.zero;
@@ -194,10 +191,10 @@ class CustomH3Config extends H3Config {
 class CustomH4Config extends H4Config {
   @override
   TextStyle get style => const TextStyle(
-    fontFamily: 'Roboto',
-    fontWeight: FontWeight.w500,
-    fontSize: 16,
-  );
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.w500,
+        fontSize: 16,
+      );
 
   @override
   EdgeInsets get padding => EdgeInsets.zero;
@@ -209,10 +206,10 @@ class CustomH4Config extends H4Config {
 class CustomH5Config extends H5Config {
   @override
   TextStyle get style => const TextStyle(
-    fontFamily: 'Roboto',
-    fontWeight: FontWeight.w500,
-    fontSize: 14,
-  );
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.w500,
+        fontSize: 14,
+      );
 
   @override
   EdgeInsets get padding => EdgeInsets.zero;
@@ -224,10 +221,10 @@ class CustomH5Config extends H5Config {
 class CustomH6Config extends H6Config {
   @override
   TextStyle get style => const TextStyle(
-    fontFamily: 'Roboto',
-    fontWeight: FontWeight.w500,
-    fontSize: 12,
-  );
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.w500,
+        fontSize: 12,
+      );
 
   @override
   EdgeInsets get padding => EdgeInsets.zero;

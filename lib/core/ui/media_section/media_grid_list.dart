@@ -162,11 +162,12 @@ class MediaGridList<B extends PaginatedDataBloc> extends StatelessWidget {
               '${FormattingUtils.getMediaFormatString(
                 media.format,
                 forList: true,
-              )},${media.startDate?.year ?? ''}',
+              )}, ${media.startDate?.year ?? ''}',
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontFamily: 'Roboto-Condensed',
+                    color: AppColors.white.withValues(alpha: 0.8),
                   ),
             ),
           ),

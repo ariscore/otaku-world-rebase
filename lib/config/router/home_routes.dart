@@ -56,42 +56,35 @@ final homeRoutes = [
     ),
   ),
   // Post Review
-  GoRoute(
+  SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.postReview,
-    builder: (context, state) {
-      final int userId =
-          int.parse(state.uri.queryParameters['userId'] as String);
+    directionTween: SlideTransitionRoute.bottomToTopTween,
+    builder: (state) {
       final int mediaId =
           int.parse(state.uri.queryParameters['mediaId'] as String);
-      final client =
-          (context.read<GraphqlClientCubit>().state as GraphqlClientInitialized)
-              .client;
       return BlocProvider(
-        create: (context) => PostReviewBloc()
-          ..add(FetchReview(
-            userId,
-            mediaId,
-            client,
-          )),
+        create: (context) => PostReviewBloc(),
         child: PostReviewScreen(
           mediaId: mediaId,
         ),
       );
     },
   ),
-  GoRoute(
+  SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.writeReview,
-    builder: (context, state) {
+    directionTween: SlideTransitionRoute.bottomToTopTween,
+    builder: (state) {
       final commentController = state.extra as TextEditingController;
       return WriteReviewScreen(controller: commentController);
     },
   ),
-  GoRoute(
+  SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.previewReview,
-    builder: (context, state) {
+    directionTween: SlideTransitionRoute.leftToRightTween,
+    builder: (state) {
       final String data = state.extra != null ? state.extra as String : '';
       return PreviewReviewScreen(data: data);
     },
