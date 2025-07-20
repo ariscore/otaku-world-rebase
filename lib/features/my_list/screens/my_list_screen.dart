@@ -249,7 +249,7 @@ class _MyListScreenState extends State<MyListScreen> {
       UIUtils.hideProgressDialog(context);
       UIUtils.showSnackBar(
         context,
-        state.error.title ?? StringConstants.somethingWentWrongError,
+        state.error.message,
       );
     } else if (state is IncrementedEpisode) {
       log('Success: ${state.entry}');

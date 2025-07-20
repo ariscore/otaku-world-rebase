@@ -111,8 +111,7 @@ class EntitySection<B extends PaginatedDataBloc, E> extends HookWidget {
           );
         } else if (state is PaginatedDataError) {
           return ErrorText(
-            message:
-                state.error.title ?? StringConstants.somethingWentWrongError,
+            message: state.error.message,
             onTryAgain: () {
               final client = context.read<GraphqlClientCubit>().getClient()!;
               context.read<B>().add(LoadData(client));

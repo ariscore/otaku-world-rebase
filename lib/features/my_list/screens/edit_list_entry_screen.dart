@@ -308,7 +308,7 @@ class _EditListEntryScreenState extends State<EditListEntryScreen> {
       UIUtils.hideProgressDialog(context);
       UIUtils.showSnackBar(
         context,
-        state.error.title ?? StringConstants.somethingWentWrongError,
+        state.error.message,
       );
     } else if (state is DeletingListEntry || state is SavingMediaListEntry) {
       UIUtils.showProgressDialog(context);
@@ -316,7 +316,7 @@ class _EditListEntryScreenState extends State<EditListEntryScreen> {
       UIUtils.hideProgressDialog(context);
       UIUtils.showSnackBar(
         context,
-        state.error.title ?? StringConstants.somethingWentWrongError,
+        state.error.message,
       );
     } else if (state is SavedMediaListEntry) {
       UIUtils.hideProgressDialog(context);
