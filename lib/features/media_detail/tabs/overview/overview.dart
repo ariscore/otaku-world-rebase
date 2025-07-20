@@ -152,7 +152,7 @@ class Overview extends StatelessWidget {
                   ),
                   5.height,
                   Wrap(
-                    runSpacing: 5,
+                    runSpacing: 10,
                     spacing: 5,
                     children: [
                       for (var link in media.externalLinks!)
