@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
-import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/ui/media_section/scroll_to_top_button.dart';
 import 'package:otaku_world/core/ui/shimmers/detail_screens/shimmer_details.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 
+import '../../../core/model/custom_error.dart';
 import '../../../core/ui/appbars/simple_app_bar.dart';
 import '../../../core/ui/appbars/simple_sliver_app_bar.dart';
 import '../../../core/ui/placeholders/anime_character_placeholder.dart';
@@ -155,7 +155,7 @@ class EntityScreen<B extends PaginatedDataBloc> extends HookWidget {
             );
           } else if (state is PaginatedDataError) {
             return _buildErrorScaffold(
-              message: state.message,
+              error: state.error,
               context: context,
               appbarTitle: title,
               onTryAgain: () {
@@ -164,7 +164,7 @@ class EntityScreen<B extends PaginatedDataBloc> extends HookWidget {
             );
           } else {
             return _buildErrorScaffold(
-              message: StringConstants.somethingWentWrongError,
+              error: CustomError.unexpectedError(),
               context: context,
               appbarTitle: title,
               onTryAgain: () {
@@ -178,7 +178,7 @@ class EntityScreen<B extends PaginatedDataBloc> extends HookWidget {
   }
 
   Widget _buildErrorScaffold({
-    required String message,
+    required CustomError error,
     required BuildContext context,
     required String appbarTitle,
     required VoidCallback onTryAgain,
@@ -189,7 +189,7 @@ class EntityScreen<B extends PaginatedDataBloc> extends HookWidget {
         child: AnimeCharacterPlaceholder(
           height: 300,
           asset: Assets.charactersChillBoy,
-          subheading: message,
+          error: error,
           isScrollable: true,
           isError: true,
           onTryAgain: onTryAgain,

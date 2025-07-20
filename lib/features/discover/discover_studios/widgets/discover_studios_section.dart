@@ -62,7 +62,7 @@ class DiscoverStudiosSection extends HookWidget {
           );
         } else if (state is PaginatedDataError) {
           return ErrorText(
-            message: state.message,
+            message: state.error.title ?? StringConstants.somethingWentWrongError,
             onTryAgain: () {
               final client = context.read<GraphqlClientCubit>().getClient();
               if (client != null) {

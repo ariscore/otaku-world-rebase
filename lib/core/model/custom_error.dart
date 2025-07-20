@@ -38,6 +38,10 @@ class CustomError {
     );
   }
 
+  String get message {
+    return subtitle ?? title ?? StringConstants.somethingWentWrongError;
+  }
+
   @override
   String toString() {
     return 'CustomError{message: $subtitle, title: $title, type: $type}';

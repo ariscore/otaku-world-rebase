@@ -117,7 +117,7 @@ class MediaCards<B extends PaginatedDataBloc> extends HookWidget {
               );
             } else if (state is PaginatedDataError) {
               return ErrorText(
-                message: state.message,
+                message: state.error.title ?? StringConstants.somethingWentWrongError,
                 onTryAgain: () {
                   final client = (context.read<GraphqlClientCubit>().state
                           as GraphqlClientInitialized)

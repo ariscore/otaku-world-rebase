@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:otaku_world/constants/string_constants.dart';
+import 'package:otaku_world/core/model/custom_error.dart';
 import 'package:otaku_world/core/ui/activities/message_activity_card.dart';
 import 'package:otaku_world/core/ui/placeholders/anime_character_placeholder.dart';
 import 'package:otaku_world/features/social/widgets/activity_shimmer_list.dart';
@@ -110,8 +110,7 @@ class _ActivitiesListState extends State<ActivitiesList>
           return Center(
             child: AnimeCharacterPlaceholder(
               asset: Assets.charactersCigaretteGirl,
-              heading: 'Nothing to Show',
-              subheading: 'Looks like there are no activities yet!',
+              error: state.error,
               isError: true,
               onTryAgain: () => activitiesBloc.add(LoadActivities(client)),
               isScrollable: true,
@@ -121,8 +120,7 @@ class _ActivitiesListState extends State<ActivitiesList>
           return Center(
             child: AnimeCharacterPlaceholder(
               asset: Assets.charactersCigaretteGirl,
-              heading: 'Nothing to Show',
-              subheading: StringConstants.somethingWentWrongError,
+              error: CustomError.unexpectedError(),
               isError: true,
               onTryAgain: () => activitiesBloc.add(LoadActivities(client)),
               isScrollable: true,

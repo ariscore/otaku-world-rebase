@@ -11,6 +11,7 @@ import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/search/search_base/search_base_bloc.dart';
 import '../../../constants/string_constants.dart';
+import '../../../core/model/custom_error.dart';
 import '../../../core/ui/placeholders/anime_character_placeholder.dart';
 import '../../../generated/assets.dart';
 
@@ -103,15 +104,15 @@ class ResultMangaList extends HookWidget {
               asset: Assets.charactersSchoolGirl,
               height: 300,
               heading: StringConstants.somethingWentWrong,
-              subheading: state.message,
+              error: state.error,
               isScrollable: true,
             );
           } else {
-            return const Center(
+            return Center(
               child: AnimeCharacterPlaceholder(
                 height: 300,
                 asset: Assets.charactersCigaretteGirl,
-                subheading: StringConstants.somethingWentWrongError,
+                error: CustomError.unexpectedError(),
                 isScrollable: true,
               ),
             );

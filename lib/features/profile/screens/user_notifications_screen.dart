@@ -5,13 +5,13 @@ import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/bloc/profile/user_notifications/user_notifications_bloc.dart';
-import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/ui/placeholders/anime_character_placeholder.dart';
 import 'package:otaku_world/features/profile/widgets/notifications/notification_card.dart';
 import 'package:otaku_world/features/profile/widgets/shimmers/notifications_shimmer.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../constants/filter_constants.dart';
+import '../../../core/model/custom_error.dart';
 import '../../../core/ui/appbars/simple_app_bar.dart';
 import '../../../core/ui/appbars/simple_sliver_app_bar.dart';
 import '../../../core/ui/error_text.dart';
@@ -54,9 +54,9 @@ class _UserNotificationsScreenState extends State<UserNotificationsScreen> {
               barrierDismissible: false,
               useRootNavigator: true,
               builder: (context) {
-                return WillPopScope(
-                  onWillPop: () async => false,
-                  child: const Center(
+                return const PopScope(
+                  canPop: false,
+                  child: Center(
                     child: CircularProgressIndicator(),
                   ),
                 );
@@ -82,6 +82,7 @@ class _UserNotificationsScreenState extends State<UserNotificationsScreen> {
                   backgroundColor: AppColors.raisinBlack,
                   onRefresh: () {
                     return Future.delayed(const Duration(seconds: 2), () {
+                      if (!context.mounted) return;
                       context.read<UserNotificationsBloc>().add(
                             RefreshData(client),
                           );
@@ -148,14 +149,14 @@ class _UserNotificationsScreenState extends State<UserNotificationsScreen> {
               );
             } else if (state is PaginatedDataError) {
               return _buildErrorScaffold(
-                message: state.message,
+                error: state.error,
                 onPressed: () {
                   context.read<UserNotificationsBloc>().add(LoadData(client));
                 },
               );
             } else {
               return _buildErrorScaffold(
-                message: StringConstants.somethingWentWrongError,
+                error: CustomError.unexpectedError(),
                 onPressed: () {
                   context.read<UserNotificationsBloc>().add(LoadData(client));
                 },
@@ -175,14 +176,14 @@ class _UserNotificationsScreenState extends State<UserNotificationsScreen> {
   }
 
   Widget _buildErrorScaffold({
-    required String message,
+    required CustomError error,
     required VoidCallback onPressed,
   }) {
     return Scaffold(
       appBar: const SimpleAppBar(title: 'Notifications'),
       body: Center(
         child: ErrorText(
-          message: message,
+          message: error.message,
           onTryAgain: onPressed,
         ),
       ),

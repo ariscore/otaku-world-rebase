@@ -104,7 +104,7 @@ class MediaSliderScreen<B extends PaginatedDataBloc> extends StatelessWidget {
               child: AnimeCharacterPlaceholder(
                 asset: Assets.charactersChillBoy,
                 height: 300,
-                subheading: state.message,
+                error: state.error,
                 onTryAgain: () {
                   final client = context.read<GraphqlClientCubit>().getClient();
                   if (client != null) {

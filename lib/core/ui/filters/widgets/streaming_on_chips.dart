@@ -48,7 +48,7 @@ class AnimePlatformsChips extends StatelessWidget {
           );
         } else if (state is AnimePlatformsError) {
           return ErrorText(
-            message: state.message,
+            message: state.error.title ?? StringConstants.somethingWentWrongError,
             onTryAgain: () {
               context.read<AnimePlatformsCubit>().loadAnimePlatforms(client);
             },
