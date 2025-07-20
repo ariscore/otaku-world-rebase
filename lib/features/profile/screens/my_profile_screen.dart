@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/profile/my_profile/my_profile_bloc.dart';
-import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/features/profile/widgets/keep_alive_tab.dart';
 import 'package:otaku_world/features/profile/widgets/my_profile_app_bar.dart';
@@ -17,6 +16,7 @@ import 'package:otaku_world/features/profile/widgets/user_reviews.dart';
 import 'package:otaku_world/features/profile/widgets/user_social.dart';
 import 'package:otaku_world/theme/colors.dart';
 
+import '../../../core/model/custom_error.dart';
 import '../../../core/ui/placeholders/anime_character_placeholder.dart';
 import '../../../generated/assets.dart';
 
@@ -40,7 +40,7 @@ class MyProfileScreen extends HookWidget {
           if (state is MyProfileInitial) {
             if (client == null) {
               return _buildErrorScaffold(
-                message: ActivityConstants.clientError,
+                error: CustomError.unexpectedError(),
                 context: context,
               );
             }
@@ -118,12 +118,12 @@ class MyProfileScreen extends HookWidget {
             );
           } else if (state is MyProfileError) {
             return _buildErrorScaffold(
-              message: state.message,
+              error: state.error,
               context: context,
             );
           } else {
             return _buildErrorScaffold(
-              message: StringConstants.somethingWentWrongError,
+              error: CustomError.unexpectedError(),
               context: context,
             );
           }
@@ -140,7 +140,7 @@ class MyProfileScreen extends HookWidget {
   }
 
   Widget _buildErrorScaffold({
-    required String message,
+    required CustomError error,
     required BuildContext context,
   }) {
     return Scaffold(
@@ -149,7 +149,7 @@ class MyProfileScreen extends HookWidget {
         child: AnimeCharacterPlaceholder(
           asset: Assets.charactersErenYeager,
           height: 300,
-          subheading: message,
+          error: error,
           onTryAgain: () {
             final profileBloc = context.read<MyProfileBloc>();
             final client = context.read<GraphqlClientCubit>().getClient();

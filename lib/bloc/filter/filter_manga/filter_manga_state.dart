@@ -24,7 +24,7 @@ class ResultsLoaded extends FilterMangaState {
 class ResultsLoading extends FilterMangaState {}
 
 class FilterError extends FilterMangaState {
-  const FilterError(this.message);
+  const FilterError(this.error);
 
-  final String message;
+  final CustomError error;
 }

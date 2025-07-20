@@ -13,7 +13,6 @@ import 'package:otaku_world/bloc/social/activities/activities_bloc.dart';
 import 'package:otaku_world/bloc/social/activity/activity_bloc.dart';
 import 'package:otaku_world/bloc/social/activity_replies/activity_replies_bloc.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
-import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/ui/activities/activity_reply_card.dart';
 import 'package:otaku_world/core/ui/buttons/primary_fab.dart';
 import 'package:otaku_world/core/ui/placeholders/anime_character_placeholder.dart';
@@ -22,6 +21,7 @@ import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 
+import '../../../core/model/custom_error.dart';
 import '../../../core/ui/appbars/simple_app_bar.dart';
 import '../../../core/ui/appbars/simple_sliver_app_bar.dart';
 
@@ -205,13 +205,13 @@ class ActivityRepliesScreen extends HookWidget {
           );
         } else if (state is PaginatedDataError) {
           return _buildErrorScaffold(
-            state.message,
-            context,
+            error: state.error,
+            context: context,
           );
         } else {
           return _buildErrorScaffold(
-            StringConstants.somethingWentWrongError,
-            context,
+            error: CustomError.unexpectedError(),
+            context: context,
           );
         }
       },
@@ -226,7 +226,10 @@ class ActivityRepliesScreen extends HookWidget {
     bloc.add(RefreshData(client));
   }
 
-  Widget _buildErrorScaffold(String message, BuildContext context) {
+  Widget _buildErrorScaffold({
+    required CustomError error,
+    required BuildContext context,
+  }) {
     return Scaffold(
       appBar: const SimpleAppBar(
         title: 'Replies',
@@ -235,7 +238,7 @@ class ActivityRepliesScreen extends HookWidget {
         child: AnimeCharacterPlaceholder(
           asset: Assets.charactersCigaretteGirl,
           height: 300,
-          subheading: message,
+          error: error,
           onTryAgain: () {
             final bloc = context.read<ActivityRepliesBloc>();
             final client = context.read<GraphqlClientCubit>().getClient();

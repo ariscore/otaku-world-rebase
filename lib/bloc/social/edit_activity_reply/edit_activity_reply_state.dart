@@ -13,7 +13,7 @@ final class EditedActivityReply extends EditActivityReplyState {
 }
 
 final class EditActivityReplyError extends EditActivityReplyState {
-  EditActivityReplyError(this.message);
+  EditActivityReplyError(this.error);
 
-  final String message;
+  final CustomError error;
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:otaku_world/bloc/staff_detail/media/staff_media_bloc.dart';
+import 'package:otaku_world/constants/string_constants.dart';
+import 'package:otaku_world/core/model/custom_error.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
@@ -33,65 +34,86 @@ class MediaGridList<B extends PaginatedDataBloc> extends StatelessWidget {
     return BlocBuilder<B, PaginatedDataState>(
       builder: (context, state) {
         if (state is PaginatedDataInitial || state is PaginatedDataLoading) {
-          return const MediaGridShimmer();
+          return const MediaGridShimmer(
+            isSliver: true,
+          );
         } else if (state is PaginatedDataLoaded) {
           if (state.list.isEmpty) {
-            return const Center(
-              child: AnimeCharacterPlaceholder(
-                asset: Assets.charactersErenYeager,
-                heading: 'No Anime/Manga found',
-                subheading: 'There is no Anime/Manga to display!',
-                isScrollable: true,
+            return const SliverToBoxAdapter(
+              child: Center(
+                child: AnimeCharacterPlaceholder(
+                  asset: Assets.charactersErenYeager,
+                  heading: 'No Anime/Manga found',
+                  subheading: 'There is no Anime/Manga to display!',
+                  isScrollable: true,
+                ),
               ),
             );
           }
-          return GridView.builder(
+          return SliverPadding(
             padding: const EdgeInsets.all(10),
-            physics: const BouncingScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 150,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: isNeedToShowFormatAndYear ? 0.5 : 0.5556,
-            ),
-            itemCount: state.list.length + (state.hasNextPage ? 3 : 0),
-            itemBuilder: (context, index) {
-              if (index == state.list.length - 1) {
-                // Last item reached, trigger the callback
-                onLastItemReached();
-              }
-              if (index >= state.list.length) {
-                if (state.hasNextPage) {
-                  return const ShimmerGridCard();
-                } else {
-                  // No more items to load
-                  return const SizedBox.shrink();
+            sliver: SliverGrid.builder(
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 150,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: isNeedToShowFormatAndYear ? 0.5 : 0.5556,
+              ),
+              itemCount: state.list.length + (state.hasNextPage ? 3 : 0),
+              itemBuilder: (context, index) {
+                if (index == state.list.length - 1) {
+                  // Last item reached, trigger the callback
+                  onLastItemReached();
                 }
-              }
+                if (index >= state.list.length) {
+                  if (state.hasNextPage) {
+                    return const ShimmerGridCard();
+                  } else {
+                    // No more items to load
+                    return const SliverToBoxAdapter(child: SizedBox.shrink());
+                  }
+                }
 
-              final media = state.list[index];
-              return _buildMediaCard(
-                context,
-                media,
-                MediaQuery.sizeOf(context),
-              );
-            },
+                final media = state.list[index];
+                return _buildMediaCard(
+                  context,
+                  media,
+                  MediaQuery.sizeOf(context),
+                );
+              },
+            ),
+          );
+        } else if (state is PaginatedDataError) {
+          return SliverToBoxAdapter(
+            child: AnimeCharacterPlaceholder(
+              asset: Assets.charactersCigaretteGirl,
+              error: state.error,
+              onTryAgain: () {
+                context.read<B>().add(
+                      LoadData((context.read<GraphqlClientCubit>().state
+                              as GraphqlClientInitialized)
+                          .client),
+                    );
+              },
+              isError: true,
+              isScrollable: true,
+            ),
           );
         }
-        return AnimeCharacterPlaceholder(
-          asset: Assets.charactersNoInternet,
-          heading: 'Something went wrong!',
-          subheading:
-              'Please check your internet connection or try again later.',
-          onTryAgain: () {
-            context.read<StaffMediaBloc>().add(
-                  LoadData((context.read<GraphqlClientCubit>().state
-                          as GraphqlClientInitialized)
-                      .client),
-                );
-          },
-          isError: true,
-          isScrollable: true,
+        return SliverToBoxAdapter(
+          child: AnimeCharacterPlaceholder(
+            asset: Assets.charactersCigaretteGirl,
+            error: CustomError.unexpectedError(),
+            onTryAgain: () {
+              context.read<B>().add(
+                    LoadData((context.read<GraphqlClientCubit>().state
+                            as GraphqlClientInitialized)
+                        .client),
+                  );
+            },
+            isError: true,
+            isScrollable: true,
+          ),
         );
       },
     );
@@ -141,15 +163,13 @@ class MediaGridList<B extends PaginatedDataBloc> extends StatelessWidget {
           height: 5,
         ),
         // Manga title
-        SizedBox(
-          child: Text(
-            media.title!.userPreferred!,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontFamily: 'Roboto-Condensed',
-                ),
-          ),
+        Text(
+          media.title?.userPreferred ?? StringConstants.noTitle,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontFamily: 'Roboto-Condensed',
+              ),
         ),
 
         if (isNeedToShowFormatAndYear) ...[

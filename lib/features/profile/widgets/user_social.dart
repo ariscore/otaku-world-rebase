@@ -175,14 +175,14 @@ class UserSocial extends StatelessWidget {
                   } else if (state is UserSocialError) {
                     return SliverToBoxAdapter(
                       child: ErrorText(
-                        message: state.message,
+                        message: state.error.message,
                         onTryAgain: () {},
                       ),
                     );
                   } else if (state is UserSocialError) {
                     return SliverToBoxAdapter(
                       child: ErrorText(
-                        message: state.message,
+                        message: state.error.message,
                         onTryAgain: () {
                           if (client != null) {
                             context.read<UserSocialBloc>().add(

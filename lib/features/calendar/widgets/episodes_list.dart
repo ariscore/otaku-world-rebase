@@ -69,7 +69,7 @@ class EpisodesList extends HookWidget {
             child: AnimeCharacterPlaceholder(
               asset: Assets.charactersErenYeager,
               heading: 'Nothing to Show',
-              subheading: state.message,
+              error: state.error,
               isError: true,
               onTryAgain: () => dayBloc.add(LoadDay(client)),
             ),

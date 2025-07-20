@@ -35,7 +35,7 @@ class PaginatedDataLoaded<E> extends PaginatedDataState {
 }
 
 class PaginatedDataError extends PaginatedDataState {
-  const PaginatedDataError(this.message);
+  const PaginatedDataError(this.error);
 
-  final String message;
+  final CustomError error;
 }

@@ -5,19 +5,22 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/social/save_message_activity.graphql.dart';
 
-import '../../../constants/string_constants.dart';
+import '../../../core/model/custom_error.dart';
+import '../../../utils/graphql_error_handler.dart';
 
 part 'edit_message_activity_state.dart';
 
 class EditMessageActivityCubit extends Cubit<EditMessageActivityState> {
-  EditMessageActivityCubit({required this.activityId,}) : super(EditMessageActivityInitial());
+  EditMessageActivityCubit({
+    required this.activityId,
+  }) : super(EditMessageActivityInitial());
 
   final int activityId;
 
   Future<void> editActivity(
-      GraphQLClient client, {
-        required String text,
-      }) async {
+    GraphQLClient client, {
+    required String text,
+  }) async {
     emit(EditingActivity());
     final response = await client.mutate$SaveMessageActivity(
       Options$Mutation$SaveMessageActivity(
@@ -31,36 +34,17 @@ class EditMessageActivityCubit extends Cubit<EditMessageActivityState> {
 
     if (response.hasException) {
       final exception = response.exception!;
-      log(exception.toString());
-      if (exception.linkException != null) {
-        if (exception.linkException is ServerException) {
-          log('It is server exception');
-          final response =
-              (exception.linkException! as ServerException).parsedResponse;
-          final error = response?.errors?.firstOrNull;
-          log('Response errors: ');
-
-          if (error?.message == null) {
-            emit(EditActivityError(StringConstants.noInternetError));
-          } else {
-            if (error!.message.contains('validation')) {
-              emit(EditActivityError(StringConstants.validationError));
-            } else {
-              emit(EditActivityError(error.message));
-            }
-          }
-        } else {
-          emit(EditActivityError(StringConstants.noInternetError));
-        }
-      } else {
-        emit(EditActivityError(StringConstants.noInternetError));
-      }
+      emit(
+        EditActivityError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       final data = response.parsedData?.SaveMessageActivity;
       log('Edit activity data: ${data?.isLiked}');
 
       if (data == null) {
-        emit(EditActivityError(StringConstants.somethingWentWrongError));
+        emit(EditActivityError(CustomError.unexpectedError()));
       } else {
         emit(EditedActivity(activity: data));
       }

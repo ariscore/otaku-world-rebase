@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:otaku_world/constants/string_constants.dart';
+import 'package:otaku_world/core/model/custom_error.dart';
 import 'package:otaku_world/theme/colors.dart';
 
 class AnimeCharacterPlaceholder extends StatelessWidget {
@@ -6,24 +8,26 @@ class AnimeCharacterPlaceholder extends StatelessWidget {
     super.key,
     required this.asset,
     this.heading,
-    required this.subheading,
+    this.subheading,
     this.width,
     this.height = 200,
     this.isError = false,
     this.onTryAgain,
     this.actionLabel = 'Try Again',
     this.isScrollable = false,
+    this.error,
   });
 
   final String asset;
   final String? heading;
-  final String subheading;
+  final String? subheading;
   final double? width;
   final double height;
   final bool isError;
   final String actionLabel;
   final VoidCallback? onTryAgain;
   final bool isScrollable;
+  final CustomError? error;
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +53,11 @@ class AnimeCharacterPlaceholder extends StatelessWidget {
                 asset,
               ),
             ),
-            if (heading != null)
+            if (errorHeading != null)
               Padding(
                 padding: const EdgeInsets.only(top: 5),
                 child: Text(
-                  heading!,
+                  errorHeading!,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.displayMedium,
                 ),
@@ -64,7 +68,7 @@ class AnimeCharacterPlaceholder extends StatelessWidget {
                 horizontal: 10,
               ),
               child: Text(
-                subheading,
+                errorMessage,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontFamily: 'Poppins',
@@ -87,5 +91,15 @@ class AnimeCharacterPlaceholder extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String? get errorHeading {
+    return error?.title ?? heading;
+  }
+
+  String get errorMessage {
+    return error?.subtitle ??
+        subheading ??
+        StringConstants.somethingWentWrongError;
   }
 }

@@ -38,7 +38,7 @@ final class MyProfileLoaded extends MyProfileState {
 }
 
 final class MyProfileError extends MyProfileState {
-  const MyProfileError(this.message);
+  const MyProfileError(this.error);
 
-  final String message;
+  final CustomError error;
 }

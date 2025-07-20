@@ -8,7 +8,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/profile/user_activities_bloc/user_activities_bloc.dart';
 import 'package:otaku_world/constants/filter_constants.dart';
-import 'package:otaku_world/constants/string_constants.dart';
+import 'package:otaku_world/core/model/custom_error.dart';
 import 'package:otaku_world/core/ui/activities/list_activity_card.dart';
 import 'package:otaku_world/core/ui/activities/message_activity_card.dart';
 import 'package:otaku_world/core/ui/activities/text_activity_card.dart';
@@ -188,11 +188,11 @@ class _UserActivitiesScreenState extends State<UserActivitiesScreen> {
             );
           } else if (state is PaginatedDataError) {
             return _buildErrorScaffold(
-              message: state.message,
+              error: state.error,
             );
           } else {
             return _buildErrorScaffold(
-              message: StringConstants.somethingWentWrongError,
+              error: CustomError.unexpectedError(),
             );
           }
         },
@@ -226,7 +226,7 @@ class _UserActivitiesScreenState extends State<UserActivitiesScreen> {
   }
 
   Widget _buildErrorScaffold({
-    required String message,
+    required CustomError error,
   }) {
     return Scaffold(
       appBar: const SimpleAppBar(title: 'Activity'),
@@ -234,7 +234,7 @@ class _UserActivitiesScreenState extends State<UserActivitiesScreen> {
         child: AnimeCharacterPlaceholder(
           asset: Assets.charactersErenYeager,
           height: 300,
-          subheading: message,
+          error: error,
           onTryAgain: () {
             final bloc = context.read<UserActivitiesBloc>();
             final client = context.read<GraphqlClientCubit>().getClient();

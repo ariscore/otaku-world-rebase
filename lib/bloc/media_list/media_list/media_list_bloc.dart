@@ -5,18 +5,18 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/constants/filter_constants.dart';
-import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/model/anime_filter.dart';
 import 'package:otaku_world/core/model/filter_model.dart';
 import 'package:otaku_world/core/model/manga_filter.dart';
-import 'package:otaku_world/core/types/enums.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/list/media_list.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
 
-part 'media_list_event.dart';
+import '../../../core/model/custom_error.dart';
+import '../../../utils/graphql_error_handler.dart';
 
+part 'media_list_event.dart';
 part 'media_list_state.dart';
 
 class AnimeListBloc extends MediaListBloc {
@@ -28,8 +28,7 @@ class MangaListBloc extends MediaListBloc {
 }
 
 class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
-  MediaListBloc({required this.type})
-      : super(MediaListInitial()) {
+  MediaListBloc({required this.type}) : super(MediaListInitial()) {
     filter = type == Enum$MediaType.ANIME
         ? const AnimeFilter(sort: [Enum$MediaSort.UPDATED_AT_DESC])
         : const MangaFilter(sort: [Enum$MediaSort.UPDATED_AT_DESC]);
@@ -103,18 +102,12 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
 
     if (response.hasException ||
         response.parsedData?.MediaListCollection == null) {
-      final linkEx = response.exception?.linkException;
-      if (linkEx != null && linkEx is ServerException) {
-        emit(const MediaListError(
-          type: ErrorType.noInternet,
-          message: StringConstants.noInternetError,
-        ));
-      } else {
-        emit(const MediaListError(
-          type: ErrorType.unknown,
-          message: StringConstants.somethingWentWrongError,
-        ));
-      }
+      final exception = response.exception!;
+      emit(
+        MediaListError(
+          error: (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
       return;
     }
 
@@ -352,12 +345,12 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
     // Include any custom lists the entry belongs to
     Set<String> targetBuckets = {statusBucket};
 
-    if (event.entry.customLists != null && event.entry.customLists!.isNotEmpty) {
+    if (event.entry.customLists != null &&
+        event.entry.customLists!.isNotEmpty) {
       final decoded = jsonDecode(event.entry.customLists!);
       if (decoded != null && decoded is Map<String, dynamic>) {
-        final customBuckets = decoded.entries
-            .where((e) => e.value)
-            .map((e) => e.key);
+        final customBuckets =
+            decoded.entries.where((e) => e.value).map((e) => e.key);
         targetBuckets.addAll(customBuckets);
       }
     }

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:otaku_world/bloc/search/search_anime/search_anime_bloc.dart';
 import 'package:otaku_world/bloc/search/search_bloc/search_bloc.dart';
+import 'package:otaku_world/core/model/custom_error.dart';
 import 'package:otaku_world/core/ui/placeholders/anime_character_placeholder.dart';
 import 'package:otaku_world/features/search/widgets/media_card.dart';
 import 'package:otaku_world/generated/assets.dart';
@@ -103,15 +104,15 @@ class ResultAnimeList extends HookWidget {
               asset: Assets.charactersSchoolGirl,
               height: 300,
               heading: StringConstants.somethingWentWrong,
-              subheading: state.message,
+              error: state.error,
               isScrollable: true,
             );
           } else {
-            return const Center(
+            return Center(
               child: AnimeCharacterPlaceholder(
                 height: 300,
                 asset: Assets.charactersCigaretteGirl,
-                subheading: StringConstants.somethingWentWrongError,
+                error: CustomError.unexpectedError(),
                 isScrollable: true,
               ),
             );

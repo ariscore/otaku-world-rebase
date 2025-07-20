@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:otaku_world/constants/string_constants.dart';
+import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/placeholders/anime_character_placeholder.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -16,6 +17,27 @@ class YouTubePlayer extends StatefulWidget {
 
   @override
   State<YouTubePlayer> createState() => _YouTubePlayerState();
+
+  static void showFullScreenYoutubePlayer({
+    required BuildContext context,
+    required String youtubeId,
+  }) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => Scaffold(
+          appBar: const SimpleAppBar(),
+          body: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: YouTubePlayer(
+                youtubeId: youtubeId,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class _YouTubePlayerState extends State<YouTubePlayer> {
@@ -68,6 +90,7 @@ class _YouTubePlayerState extends State<YouTubePlayer> {
                     color: AppColors.chineseWhite,
                   ),
                 ],
+
               ),
             ),
           )
@@ -99,6 +122,51 @@ class YoutubePlayerDialog {
           ),
         );
       },
+    );
+  }
+}
+
+// Alternative lightweight dialog implementation
+class OptimizedYoutubeDialog extends StatelessWidget {
+  final String youtubeId;
+
+  const OptimizedYoutubeDialog({
+    super.key,
+    required this.youtubeId,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.black54,
+      child: Center(
+        child: Container(
+          margin: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Colors.black87,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              gradient: AppColors.secondaryGradient,
+            ),
+            padding: const EdgeInsets.all(10),
+            child: YouTubePlayer(youtubeId: youtubeId),
+          ),
+        ),
+      ),
+    );
+  }
+
+  static void show({
+    required BuildContext context,
+    required String youtubeId,
+  }) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) => OptimizedYoutubeDialog(youtubeId: youtubeId),
     );
   }
 }

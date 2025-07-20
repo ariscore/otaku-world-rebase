@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:otaku_world/constants/string_constants.dart';
 
 import '../../../core/ui/images/cover_image.dart';
 import '../../../generated/assets.dart';
@@ -88,7 +89,7 @@ class MediaGrid extends StatelessWidget {
             SizedBox(
               width: 115,
               child: Text(
-                getTitle(media.title) ?? 'No Title',
+                media.title?.userPreferred ?? StringConstants.noTitle,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -100,10 +101,6 @@ class MediaGrid extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String? getTitle(Fragment$MediaShort$title? title) {
-    return title?.english ?? title?.romaji ?? title?.native;
   }
 
   Widget _buildMeanScore(BuildContext context, int? meanScore) {

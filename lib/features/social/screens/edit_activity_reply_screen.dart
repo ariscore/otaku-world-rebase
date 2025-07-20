@@ -6,7 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/social/edit_activity_reply/edit_activity_reply_cubit.dart';
-
 // import 'package:otaku_world/bloc/social/reply_activity/reply_activity_cubit.dart';
 import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/types/types.dart';
@@ -60,9 +59,9 @@ class _EditActivityReplyScreenState extends State<EditActivityReplyScreen> {
             barrierDismissible: false,
             useRootNavigator: true,
             builder: (context) {
-              return WillPopScope(
-                onWillPop: () async => false,
-                child: const Center(
+              return const PopScope(
+                canPop: false,
+                child: Center(
                   child: CircularProgressIndicator(),
                 ),
               );
@@ -74,7 +73,10 @@ class _EditActivityReplyScreenState extends State<EditActivityReplyScreen> {
           context.pop();
         } else if (state is EditActivityReplyError) {
           context.pop();
-          UIUtils.showSnackBar(context, state.message);
+          UIUtils.showSnackBar(
+            context,
+            state.error.message,
+          );
         }
       },
       child: Scaffold(
@@ -99,7 +101,8 @@ class _EditActivityReplyScreenState extends State<EditActivityReplyScreen> {
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 10),
-              child: BlocBuilder<EditActivityReplyCubit, EditActivityReplyState>(
+              child:
+                  BlocBuilder<EditActivityReplyCubit, EditActivityReplyState>(
                 builder: (context, state) {
                   if (state is EditingActivityReply) {
                     return const CircularProgressIndicator();
@@ -132,7 +135,10 @@ class _EditActivityReplyScreenState extends State<EditActivityReplyScreen> {
         //     ],
         //   ),
         // ),
-        body: MarkdownEditor(onShowPreview: _showPreview, textController: textController,),
+        body: MarkdownEditor(
+          onShowPreview: _showPreview,
+          textController: textController,
+        ),
       ),
     );
   }

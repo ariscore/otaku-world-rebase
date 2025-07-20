@@ -11,8 +11,10 @@ import 'package:otaku_world/utils/navigation_helper.dart';
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/paginated_data/paginated_data_bloc.dart';
 import '../../../bloc/studio_detail/studio_media/studio_media_bloc.dart';
+import '../../../core/model/custom_error.dart';
 import '../../../core/ui/media_section/scroll_to_top_button.dart';
 import '../../../core/ui/placeholders/anime_character_placeholder.dart';
+import '../../../core/ui/widgets/scaffold_wrapper_placeholder.dart';
 import '../../../generated/assets.dart';
 
 class StudioDetailScreen extends HookWidget {
@@ -62,50 +64,63 @@ class StudioDetailScreen extends HookWidget {
                     studio: studio,
                     bloc: bloc,
                   ),
-                  SliverFillRemaining(
-                    child: MediaQuery.removePadding(
-                      context: context,
-                      removeTop: true,
-                      child: MediaGridList<StudioMediaBloc>(
-                        mediaType: Enum$MediaType.ANIME,
-                        isNeedToShowFormatAndYear: true,
-                        onLastItemReached: () {
-                          if (bloc.state is PaginatedDataLoaded) {
-                            final hasNextPage =
-                                (bloc.state as PaginatedDataLoaded).hasNextPage;
-                            if (hasNextPage) {
-                              final client = (context
-                                      .read<GraphqlClientCubit>()
-                                      .state as GraphqlClientInitialized)
-                                  .client;
-                              bloc.add(LoadData(client));
-                            }
-                          }
-                        },
-                      ),
-                    ),
+                  MediaGridList<StudioMediaBloc>(
+                    mediaType: Enum$MediaType.ANIME,
+                    isNeedToShowFormatAndYear: true,
+                    onLastItemReached: () {
+                      if (bloc.state is PaginatedDataLoaded) {
+                        final hasNextPage =
+                            (bloc.state as PaginatedDataLoaded).hasNextPage;
+                        if (hasNextPage) {
+                          final client = (context
+                                  .read<GraphqlClientCubit>()
+                                  .state as GraphqlClientInitialized)
+                              .client;
+                          bloc.add(LoadData(client));
+                        }
+                      }
+                    },
                   ),
                 ],
               ),
             );
+          } else if (state is StudioDetailError) {
+            return ScaffoldWrapperPlaceholder(
+                child: AnimeCharacterPlaceholder(
+                  asset: Assets.charactersCigaretteGirl,
+                  error: state.error,
+                  onTryAgain: () {
+                    context.read<StudioDetailBloc>().add(
+                          LoadStudioDetail(
+                            id: studioId,
+                            client: (context.read<GraphqlClientCubit>().state
+                                    as GraphqlClientInitialized)
+                                .client,
+                          ),
+                        );
+                  },
+                  isError: true,
+                  isScrollable: true,
+                ),
+            );
           }
-          return AnimeCharacterPlaceholder(
-            asset: Assets.charactersNoInternet,
-            heading: 'Something went wrong!',
-            subheading:
-                'Please check your internet connection or try again later.',
-            onTryAgain: () {
-              context.read<StudioDetailBloc>().add(
-                    LoadStudioDetail(
-                      id: studioId,
-                      client: (context.read<GraphqlClientCubit>().state
-                              as GraphqlClientInitialized)
-                          .client,
-                    ),
-                  );
-            },
-            isError: true,
-            isScrollable: true,
+          return ScaffoldWrapperPlaceholder(
+              child: AnimeCharacterPlaceholder(
+                asset: Assets.charactersCigaretteGirl,
+                error: CustomError.unexpectedError(),
+                onTryAgain: () {
+                  context.read<StudioDetailBloc>().add(
+                        LoadStudioDetail(
+                          id: studioId,
+                          client: (context.read<GraphqlClientCubit>().state
+                                  as GraphqlClientInitialized)
+                              .client,
+                        ),
+                      );
+                },
+                isError: true,
+                isScrollable: true,
+              ),
           );
         },
       ),

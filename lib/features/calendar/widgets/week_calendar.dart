@@ -56,7 +56,7 @@ class WeekCalendar extends StatelessWidget {
             child: AnimeCharacterPlaceholder(
               asset: Assets.charactersErenYeager,
               heading: 'Nothing to Show',
-              subheading: state.message,
+              error: state.error,
               isError: true,
               onTryAgain: () =>
                   context.read<WeekCalendarBloc>().add(RefreshCalendar()),

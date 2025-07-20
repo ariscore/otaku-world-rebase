@@ -1,7 +1,8 @@
 class StringConstants {
   static const String nullStringConstant = ' - - ';
-  static const String nullStringPlaceHolder = ' - ';
+  static const String nullStringPlaceHolder = ' ? ';
   static const String emptyStringPlaceHolder = '';
+  static const String noTitle = 'No Title';
 
   static const socialHeading = 'Connect, Share, and \nDiscover';
   static const socialSubheading =
@@ -136,7 +137,8 @@ class AboutUsConstants {
 
 class MyListConstants {
   static const emptyListHeading = 'Your list is empty!';
-  static const emptyListSubheading = 'Looks like you haven’t added anything yet.';
+  static const emptyListSubheading =
+      'Looks like you haven’t added anything yet.';
 }
 
 class UiConstants {

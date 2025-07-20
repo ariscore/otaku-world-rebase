@@ -29,7 +29,7 @@ final class ActivityLoaded extends ActivityState {
 }
 
 final class ActivityError extends ActivityState {
-  const ActivityError(this.message);
+  const ActivityError(this.error);
 
-  final String message;
+  final CustomError error;
 }

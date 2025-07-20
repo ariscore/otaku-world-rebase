@@ -1,11 +1,12 @@
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'dart:developer' as dev;
 
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+
+import '../../../core/model/custom_error.dart';
 import 'day/day_bloc.dart';
 
 part 'week_calendar_event.dart';
-
 part 'week_calendar_state.dart';
 
 class WeekCalendarBloc extends Bloc<WeekCalendarEvent, WeekCalendarState> {

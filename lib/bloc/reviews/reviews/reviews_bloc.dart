@@ -7,6 +7,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 
+import '../../../core/model/custom_error.dart';
 import '../../../graphql/__generated/graphql/reviews/post_review.graphql.dart';
 import '../../../graphql/__generated/graphql/reviews/reviews.graphql.dart';
 import '../../../graphql/__generated/graphql/schema.graphql.dart';

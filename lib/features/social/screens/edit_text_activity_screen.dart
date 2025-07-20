@@ -56,9 +56,9 @@ class _EditTextActivityScreenState extends State<EditTextActivityScreen> {
             barrierDismissible: false,
             useRootNavigator: true,
             builder: (context) {
-              return WillPopScope(
-                onWillPop: () async => false,
-                child: const Center(
+              return const PopScope(
+                canPop: false,
+                child: Center(
                   child: CircularProgressIndicator(),
                 ),
               );
@@ -70,7 +70,10 @@ class _EditTextActivityScreenState extends State<EditTextActivityScreen> {
           context.pop();
         } else if (state is EditActivityError) {
           context.pop();
-          UIUtils.showSnackBar(context, state.message);
+          UIUtils.showSnackBar(
+            context,
+            state.error.message,
+          );
         }
       },
       child: Scaffold(
@@ -128,7 +131,10 @@ class _EditTextActivityScreenState extends State<EditTextActivityScreen> {
         //     ],
         //   ),
         // ),
-        body: MarkdownEditor(onShowPreview: _showPreview, textController: textController,),
+        body: MarkdownEditor(
+          onShowPreview: _showPreview,
+          textController: textController,
+        ),
       ),
     );
   }

@@ -18,7 +18,7 @@ final class MediaTagsLoaded extends MediaTagsState {
 }
 
 final class MediaTagsError extends MediaTagsState {
-  const MediaTagsError(this.message);
+  const MediaTagsError(this.error);
 
-  final String message;
+  final CustomError error;
 }

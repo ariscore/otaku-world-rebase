@@ -13,7 +13,7 @@ final class EditedActivity extends EditMessageActivityState {
 }
 
 final class EditActivityError extends EditMessageActivityState {
-  EditActivityError(this.message);
+  EditActivityError(this.error);
 
-  final String message;
+  final CustomError error;
 }

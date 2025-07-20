@@ -12,10 +12,12 @@ import 'package:otaku_world/graphql/__generated/graphql/discover/filter_media.gr
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
+import 'package:otaku_world/utils/graphql_error_handler.dart';
 import 'package:otaku_world/utils/model_utils.dart';
 
-part 'filter_anime_event.dart';
+import '../../../core/model/custom_error.dart';
 
+part 'filter_anime_event.dart';
 part 'filter_anime_state.dart';
 
 class FilterAnimeBloc extends Bloc<FilterAnimeEvent, FilterAnimeState> {
@@ -81,16 +83,9 @@ class FilterAnimeBloc extends Bloc<FilterAnimeEvent, FilterAnimeState> {
     final response = await _loadData(event.client);
 
     if (response.hasException) {
-      final exception = response.exception!;
-
-      if (exception.linkException != null) {
-        dev.log(exception.toString());
-        emit(
-          const FilterError('Please check your internet connection!'),
-        );
-      } else {
-        emit(const FilterError('Some Unexpected error occurred!'));
-      }
+      final customError =
+          GraphQLErrorHandler.handleException(response.exception!);
+      emit(FilterError(customError));
     } else {
       _processData(response);
 
@@ -147,16 +142,9 @@ class FilterAnimeBloc extends Bloc<FilterAnimeEvent, FilterAnimeState> {
     final response = await _loadData(event.client);
 
     if (response.hasException) {
-      final exception = response.exception!;
-
-      if (exception.linkException != null) {
-        dev.log(exception.toString());
-        emit(
-          const FilterError('Please check your internet connection!'),
-        );
-      } else {
-        emit(const FilterError('Some Unexpected error occurred!'));
-      }
+      final customError =
+          GraphQLErrorHandler.handleException(response.exception!);
+      emit(FilterError(customError));
     } else {
       _processData(response);
 

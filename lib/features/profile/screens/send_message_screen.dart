@@ -51,9 +51,9 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
             barrierDismissible: false,
             useRootNavigator: true,
             builder: (context) {
-              return WillPopScope(
-                onWillPop: () async => false,
-                child: const Center(
+              return const PopScope(
+                canPop: false,
+                child: Center(
                   child: CircularProgressIndicator(),
                 ),
               );
@@ -65,7 +65,7 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
           context.pop();
         } else if (state is SendMessageError) {
           context.pop();
-          UIUtils.showSnackBar(context, state.message);
+          UIUtils.showSnackBar(context, state.error.message);
         }
       },
       child: Scaffold(

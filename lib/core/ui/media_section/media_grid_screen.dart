@@ -10,7 +10,6 @@ import 'package:otaku_world/core/ui/images/cover_image.dart';
 import 'package:otaku_world/core/ui/media_section/scroll_to_top_button.dart';
 import 'package:otaku_world/core/ui/placeholders/poster_placeholder.dart';
 import 'package:otaku_world/core/ui/shimmers/grid_shimmer.dart';
-import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
 import 'package:otaku_world/utils/formatting_utils.dart';
 
@@ -122,7 +121,7 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
             );
           } else if (state is PaginatedDataError) {
             return _buildErrorScaffold(
-              message: state.message,
+               message: state.error.message,
               context: context,
             );
           } else {
@@ -250,7 +249,7 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
         // Manga title
         SizedBox(
           child: Text(
-            getTitle(media.title) ?? '',
+            media.title?.userPreferred ?? StringConstants.noTitle,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -260,10 +259,6 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
         ),
       ],
     );
-  }
-
-  String? getTitle(Fragment$MediaShort$title? title) {
-    return title?.english ?? title?.romaji ?? title?.native;
   }
 
   Widget _buildMeanScore(BuildContext context, int? meanScore) {

@@ -1,16 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/features/my_list/model/save_entry_model.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/list/delete_list_entry.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/list/save_list_entry.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 
-import '../../../core/types/enums.dart';
+import '../../../core/model/custom_error.dart';
+import '../../../utils/graphql_error_handler.dart';
 
 part 'save_list_entry_event.dart';
-
 part 'save_list_entry_state.dart';
 
 class SaveListEntryBloc extends Bloc<SaveListEntryEvent, SaveListEntryState> {
@@ -40,31 +39,20 @@ class SaveListEntryBloc extends Bloc<SaveListEntryEvent, SaveListEntryState> {
     );
 
     if (response.hasException) {
-      if (response.exception!.linkException != null &&
-          response.exception!.linkException is ServerException) {
-        emit(
-          const IncrementEpisodeError(
-            type: ErrorType.noInternet,
-            message: StringConstants.noInternetError,
-          ),
-        );
-      } else {
-        emit(
-          const IncrementEpisodeError(
-            type: ErrorType.unknown,
-            message: StringConstants.somethingWentWrongError,
-          ),
-        );
-      }
+      final exception = response.exception!;
+      emit(
+        IncrementEpisodeError(
+          error: (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       final data = response.parsedData?.SaveMediaListEntry;
       if (data != null) {
         emit(IncrementedEpisode(entry: data));
       } else {
         emit(
-          const IncrementEpisodeError(
-            type: ErrorType.unknown,
-            message: StringConstants.somethingWentWrongError,
+          IncrementEpisodeError(
+            error: CustomError.unexpectedError(),
           ),
         );
       }
@@ -84,30 +72,19 @@ class SaveListEntryBloc extends Bloc<SaveListEntryEvent, SaveListEntryState> {
       ),
     );
     if (response.hasException) {
-      if (response.exception!.linkException != null &&
-          response.exception!.linkException is ServerException) {
-        emit(
-          const DeleteListEntryError(
-            type: ErrorType.noInternet,
-            message: StringConstants.noInternetError,
-          ),
-        );
-      } else {
-        emit(
-          const DeleteListEntryError(
-            type: ErrorType.unknown,
-            message: StringConstants.somethingWentWrongError,
-          ),
-        );
-      }
+      final exception = response.exception!;
+      emit(
+        DeleteListEntryError(
+          error: (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       final deleted =
           response.parsedData?.DeleteMediaListEntry?.deleted ?? true;
       if (!deleted) {
         emit(
-          const DeleteListEntryError(
-            type: ErrorType.unknown,
-            message: StringConstants.somethingWentWrongError,
+          DeleteListEntryError(
+            error: CustomError.unexpectedError(),
           ),
         );
       } else {
@@ -151,29 +128,18 @@ class SaveListEntryBloc extends Bloc<SaveListEntryEvent, SaveListEntryState> {
     );
 
     if (response.hasException) {
-      if (response.exception!.linkException != null &&
-          response.exception!.linkException is ServerException) {
-        emit(
-          const SaveMediaListEntryError(
-            type: ErrorType.noInternet,
-            message: StringConstants.noInternetError,
-          ),
-        );
-      } else {
-        emit(
-          const SaveMediaListEntryError(
-            type: ErrorType.unknown,
-            message: StringConstants.somethingWentWrongError,
-          ),
-        );
-      }
+      final exception = response.exception!;
+      emit(
+        SaveMediaListEntryError(
+          error: (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       final listEntry = response.parsedData?.SaveMediaListEntry;
       if (listEntry == null) {
         emit(
-          const SaveMediaListEntryError(
-            type: ErrorType.unknown,
-            message: StringConstants.somethingWentWrongError,
+          SaveMediaListEntryError(
+            error: CustomError.unexpectedError(),
           ),
         );
       } else {

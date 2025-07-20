@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:otaku_world/bloc/search/search_staff/search_staff_bloc.dart';
-import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/ui/error_text.dart';
 import 'package:otaku_world/features/search/widgets/staff_card.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
@@ -12,6 +11,7 @@ import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/search/search_base/search_base_bloc.dart';
 import '../../../bloc/search/search_bloc/search_bloc.dart';
+import '../../../core/model/custom_error.dart';
 import '../../../core/ui/placeholders/anime_character_placeholder.dart';
 import '../../../generated/assets.dart';
 
@@ -66,7 +66,7 @@ class ResultStaffList extends HookWidget {
               child: CircularProgressIndicator(),
             );
           } else if (state is SearchError) {
-            return ErrorText(message: state.message, onTryAgain: () {});
+            return ErrorText(message: state.error.message, onTryAgain: () {});
           } else if (state is SearchResultLoaded<Fragment$SearchResultStaff?>) {
             final list = state.list;
             final hasNextPage = state.hasNextPage;
@@ -103,10 +103,10 @@ class ResultStaffList extends HookWidget {
                     ],
                   );
           } else {
-            return const AnimeCharacterPlaceholder(
+            return  AnimeCharacterPlaceholder(
               height: 300,
               asset: Assets.charactersErenYeager,
-              subheading: StringConstants.somethingWentWrongError,
+              error: CustomError.unexpectedError(),
             );
           }
         },

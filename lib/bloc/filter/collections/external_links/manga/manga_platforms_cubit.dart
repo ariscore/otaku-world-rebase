@@ -3,6 +3,9 @@ import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/graphql/__generated/graphql/filter/publishing_platforms.graphql.dart';
 
+import '../../../../../core/model/custom_error.dart';
+import '../../../../../utils/graphql_error_handler.dart';
+
 part 'manga_platforms_state.dart';
 
 class MangaPlatformsCubit extends Cubit<MangaPlatformsState> {
@@ -15,13 +18,11 @@ class MangaPlatformsCubit extends Cubit<MangaPlatformsState> {
     if (response.hasException) {
       final exception = response.exception!;
 
-      if (exception.linkException != null) {
-        emit(
-          const MangaPlatformsError('Please check your internet connection!'),
-        );
-      } else {
-        emit(const MangaPlatformsError('Some Unexpected error occurred!'));
-      }
+      emit(
+        MangaPlatformsError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       emit(
         MangaPlatformsLoaded(

@@ -120,9 +120,9 @@ class _SocialScreenState extends State<SocialScreen>
               barrierDismissible: false,
               useRootNavigator: true,
               builder: (context) {
-                return WillPopScope(
-                  onWillPop: () async => false,
-                  child: const Center(
+                return const PopScope(
+                  canPop: false,
+                  child: Center(
                     child: CircularProgressIndicator(),
                   ),
                 );
@@ -237,11 +237,9 @@ class _SocialScreenState extends State<SocialScreen>
               controller: tabController,
               children: const [
                 ActivitiesList(
-                  // key: PageStorageKey<String>('following'),
                   isFollowing: true,
                 ),
                 ActivitiesList(
-                  // key: PageStorageKey<String>('global'),
                   isFollowing: false,
                 ),
               ],

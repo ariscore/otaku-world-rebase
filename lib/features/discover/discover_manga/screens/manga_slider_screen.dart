@@ -103,7 +103,7 @@ class MangaSliderScreen extends StatelessWidget {
               child: AnimeCharacterPlaceholder(
                 asset: Assets.charactersCigaretteGirl,
                 height: 300,
-                subheading: state.message,
+                error: state.error,
                 onTryAgain: () {
                   final client = context.read<GraphqlClientCubit>().getClient();
                   if (client != null) {

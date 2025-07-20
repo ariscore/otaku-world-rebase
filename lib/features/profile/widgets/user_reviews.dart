@@ -92,7 +92,8 @@ class UserReviews extends StatelessWidget {
               child: AnimeCharacterPlaceholder(
                 asset: Assets.charactersCigaretteGirl,
                 height: 150,
-                subheading: state.message,
+                error: state.error,
+                isError: true,
                 onTryAgain: () {
                   context.read<UserReviewsBloc>().add(LoadData(client));
                 },

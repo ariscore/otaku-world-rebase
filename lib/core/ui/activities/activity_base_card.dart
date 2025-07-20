@@ -26,6 +26,7 @@ class ActivityBaseCard extends StatefulWidget {
     required this.child,
     required this.avatarUrl,
     required this.userId,
+    this.receiverUserId,
     required this.userName,
     this.receiverAvatarUrl,
     this.receiverUserName,
@@ -46,6 +47,7 @@ class ActivityBaseCard extends StatefulWidget {
   final int id;
   final String? avatarUrl;
   final int userId;
+  final int? receiverUserId;
   final String? userName;
   final String? receiverAvatarUrl;
   final String? receiverUserName;
@@ -114,7 +116,7 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
                         if (widget.receiverAvatarUrl != null)
                           _buildUser(
                             context,
-                            id: widget.userId,
+                            id: widget.receiverUserId ?? 0,
                             avatarUrl: widget.receiverAvatarUrl,
                             userName: widget.receiverUserName,
                           ),
@@ -186,7 +188,7 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
             Text(
               FormattingUtils.formatUnixTimestamp(widget.timestamp),
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: AppColors.white.withValues(alpha:0.8),
+                    color: AppColors.white.withValues(alpha: 0.8),
                   ),
             ),
           ],
@@ -323,7 +325,7 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
 
   Widget _buildUser(
     BuildContext context, {
-      required int id,
+    required int id,
     required String? avatarUrl,
     required String? userName,
   }) {
