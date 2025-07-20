@@ -49,7 +49,7 @@ class ListGenreChips extends StatelessWidget {
           );
         } else if (state is GenreError) {
           return ErrorText(
-            message: state.error.title ?? StringConstants.somethingWentWrongError,
+             message: state.error.message,
             onTryAgain: () {
               context.read<GenreCubit>().loadAnimeGenre(client);
             },

@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/staff/staff_bloc.dart';
+import 'package:otaku_world/core/model/custom_error.dart';
 import 'package:otaku_world/core/ui/shimmers/detail_screens/screens/media_detail_shimmer.dart';
 import 'package:otaku_world/features/media_detail/widgets/media_app_bar.dart';
 import 'package:otaku_world/features/media_detail/widgets/media_floating_action_button.dart';
@@ -133,7 +134,7 @@ class MediaDetailScreen extends HookWidget {
           } else if (state is MediaDetailError) {
             return ScaffoldWrapperPlaceholder(
               child: AnimeCharacterPlaceholder(
-                asset: Assets.charactersNoInternet,
+                asset: Assets.charactersCigaretteGirl,
                 height: 300,
                 error: state.error,
                 onTryAgain: () {
@@ -153,9 +154,7 @@ class MediaDetailScreen extends HookWidget {
             child: AnimeCharacterPlaceholder(
               asset: Assets.charactersCigaretteGirl,
               height: 300,
-              heading: 'Something went wrong!',
-              subheading:
-                  'Please check your internet connection or try again later.',
+              error: CustomError.unexpectedError(),
               onTryAgain: () {
                 context.read<MediaDetailBloc>().add(
                       LoadMediaDetail(

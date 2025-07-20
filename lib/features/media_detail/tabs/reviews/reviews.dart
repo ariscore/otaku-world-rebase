@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
+import 'package:otaku_world/core/model/custom_error.dart';
 import 'package:otaku_world/core/ui/shimmers/detail_screens/list/media_reviews_shimmer_list.dart';
 import 'package:otaku_world/features/media_detail/tabs/reviews/review_card.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
@@ -98,13 +99,28 @@ class Reviews extends StatelessWidget {
                     ],
                   ),
                 );
+              } else if (state is PaginatedDataError) {
+                return AnimeCharacterPlaceholder(
+                  asset: Assets.charactersChillBoy,
+                  height: 300,
+                  error: state.error,
+                  onTryAgain: () {
+                    context.read<MediaReviewBloc>().add(
+                          LoadData(
+                            (context.read<GraphqlClientCubit>().state
+                                    as GraphqlClientInitialized)
+                                .client,
+                          ),
+                        );
+                  },
+                  isError: true,
+                  isScrollable: true,
+                );
               }
               return AnimeCharacterPlaceholder(
-                asset: Assets.charactersNoInternet,
+                asset: Assets.charactersChillBoy,
                 height: 300,
-                heading: 'Something went wrong!',
-                subheading:
-                    'Please check your internet connection or try again later.',
+                error: CustomError.unexpectedError(),
                 onTryAgain: () {
                   context.read<MediaReviewBloc>().add(
                         LoadData(

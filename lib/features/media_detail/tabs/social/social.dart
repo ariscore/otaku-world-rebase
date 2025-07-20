@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
+import 'package:otaku_world/core/model/custom_error.dart';
 import 'package:otaku_world/features/media_detail/tabs/social/widgets/social_card.dart';
 
 import '../../../../bloc/graphql_client/graphql_client_cubit.dart';
@@ -79,13 +80,28 @@ class Social extends StatelessWidget {
                     ],
                   ),
                 );
+              } else if (state is PaginatedDataError) {
+                return AnimeCharacterPlaceholder(
+                  asset: Assets.charactersChillBoy,
+                  height: 300,
+                  error: state.error,
+                  onTryAgain: () {
+                    context.read<SocialBloc>().add(
+                          LoadData(
+                            (context.read<GraphqlClientCubit>().state
+                                    as GraphqlClientInitialized)
+                                .client,
+                          ),
+                        );
+                  },
+                  isError: true,
+                  isScrollable: true,
+                );
               }
               return AnimeCharacterPlaceholder(
                 asset: Assets.charactersNoInternet,
                 height: 300,
-                heading: 'Something went wrong!',
-                subheading:
-                    'Please check your internet connection or try again later.',
+                error: CustomError.unexpectedError(),
                 onTryAgain: () {
                   context.read<SocialBloc>().add(
                         LoadData(

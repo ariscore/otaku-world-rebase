@@ -121,7 +121,7 @@ class MediaGridScreen<B extends PaginatedDataBloc> extends HookWidget {
             );
           } else if (state is PaginatedDataError) {
             return _buildErrorScaffold(
-              message: state.error.title ?? StringConstants.somethingWentWrongError,
+               message: state.error.message,
               context: context,
             );
           } else {

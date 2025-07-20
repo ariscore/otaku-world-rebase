@@ -8,8 +8,6 @@ import 'package:otaku_world/core/ui/error_text.dart';
 import 'package:otaku_world/core/ui/filters/custom_chips.dart';
 import 'package:otaku_world/core/ui/filters/custom_choice_chip.dart';
 
-import '../../../../constants/string_constants.dart';
-
 class MangaPlatformsChips extends StatelessWidget {
   const MangaPlatformsChips({super.key, required this.selectedPlatforms});
 
@@ -52,7 +50,7 @@ class MangaPlatformsChips extends StatelessWidget {
           );
         } else if (state is MangaPlatformsError) {
           return ErrorText(
-            message: state.error.title ?? StringConstants.somethingWentWrongError,
+             message: state.error.message,
             onTryAgain: () {
               loadPublishingOnChips(
                 context,

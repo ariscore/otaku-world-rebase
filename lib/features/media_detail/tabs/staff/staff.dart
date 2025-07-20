@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/staff/staff_bloc.dart';
+import 'package:otaku_world/core/model/custom_error.dart';
 import 'package:otaku_world/core/ui/shimmers/detail_screens/list/staff_list_shimmer.dart';
 import 'package:otaku_world/features/media_detail/tabs/staff/staff_card.dart';
 import 'package:otaku_world/graphql/__generated/graphql/details/staff.graphql.dart';
@@ -73,13 +74,28 @@ class Staff extends StatelessWidget {
               ],
             ),
           );
+        } else if (state is PaginatedDataError) {
+          return AnimeCharacterPlaceholder(
+            asset: Assets.charactersSchoolGirl,
+            height: 300,
+            error: state.error,
+            onTryAgain: () {
+              context.read<StaffBloc>().add(
+                    LoadData(
+                      (context.read<GraphqlClientCubit>().state
+                              as GraphqlClientInitialized)
+                          .client,
+                    ),
+                  );
+            },
+            isError: true,
+            isScrollable: true,
+          );
         }
         return AnimeCharacterPlaceholder(
           asset: Assets.charactersNoInternet,
           height: 300,
-          heading: 'Something went wrong!',
-          subheading:
-              'Please check your internet connection or try again later.',
+          error: CustomError.unexpectedError(),
           onTryAgain: () {
             context.read<StaffBloc>().add(
                   LoadData(

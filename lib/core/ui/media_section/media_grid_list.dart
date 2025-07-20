@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:otaku_world/bloc/staff_detail/media/staff_media_bloc.dart';
 import 'package:otaku_world/constants/string_constants.dart';
+import 'package:otaku_world/core/model/custom_error.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
@@ -83,15 +83,29 @@ class MediaGridList<B extends PaginatedDataBloc> extends StatelessWidget {
               },
             ),
           );
+        } else if (state is PaginatedDataError) {
+          return SliverToBoxAdapter(
+            child: AnimeCharacterPlaceholder(
+              asset: Assets.charactersCigaretteGirl,
+              error: state.error,
+              onTryAgain: () {
+                context.read<B>().add(
+                      LoadData((context.read<GraphqlClientCubit>().state
+                              as GraphqlClientInitialized)
+                          .client),
+                    );
+              },
+              isError: true,
+              isScrollable: true,
+            ),
+          );
         }
         return SliverToBoxAdapter(
           child: AnimeCharacterPlaceholder(
-            asset: Assets.charactersNoInternet,
-            heading: 'Something went wrong!',
-            subheading:
-                'Please check your internet connection or try again later.',
+            asset: Assets.charactersCigaretteGirl,
+            error: CustomError.unexpectedError(),
             onTryAgain: () {
-              context.read<StaffMediaBloc>().add(
+              context.read<B>().add(
                     LoadData((context.read<GraphqlClientCubit>().state
                             as GraphqlClientInitialized)
                         .client),

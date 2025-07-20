@@ -17,7 +17,7 @@ class CustomError {
       title: "Too Many Requests",
       subtitle: resetTime != null
           ? "You've hit the request limit. Please wait until $resetTime to try again."
-          : "You've made too many requests in a short time. Please wait a few minutes.",
+          : "You've made too many requests in a short time. Please wait few minutes.",
       type: ErrorType.rateLimit,
     );
   }
