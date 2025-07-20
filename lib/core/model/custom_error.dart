@@ -14,10 +14,10 @@ class CustomError {
 
   factory CustomError.rateLimitExceeded({String? resetTime}) {
     return CustomError(
-      title: "Rate Limit Exceeded",
+      title: "Too Many Requests",
       subtitle: resetTime != null
-          ? "Please try again after $resetTime"
-          : "Please try again in a few minutes",
+          ? "You've hit the request limit. Please wait until $resetTime to try again."
+          : "You've made too many requests in a short time. Please wait a few minutes.",
       type: ErrorType.rateLimit,
     );
   }
@@ -35,6 +35,25 @@ class CustomError {
       title: StringConstants.somethingWentWrong,
       subtitle: StringConstants.somethingWentWrongError,
       type: ErrorType.unknown,
+    );
+  }
+
+  /// Server error factory constructor
+  factory CustomError.serverError({String? message}) {
+    return CustomError(
+      title: "Server Error",
+      subtitle:
+          message ?? "Something went wrong on the server. Please try again.",
+      type: ErrorType.server,
+    );
+  }
+
+  /// Validation error factory constructor
+  factory CustomError.validationError({String? message}) {
+    return CustomError(
+      title: "Validation Error",
+      subtitle: message ?? StringConstants.validationError,
+      type: ErrorType.validation,
     );
   }
 
