@@ -91,11 +91,8 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
         'Error fetching activities: ${exception.toString()}',
       );
       if (exception.linkException != null) {
-        // emit(
-        //   const ActivitiesError('Please check your internet connection!'),
-        // );
         emit(
-          ActivitiesError(exception.toString()),
+          const ActivitiesError('Please check your internet connection!'),
         );
       } else {
         emit(const ActivitiesError('Something went wrong!'));
