@@ -195,10 +195,11 @@ final router = GoRouter(
     ...profileRoutes,
     ...settingsRoutes,
     ...listRoutes,
-    GoRoute(
+    SlideTransitionRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: RouteConstants.mediaDetail,
-      builder: (context, state) {
+      directionTween: SlideTransitionRoute.leftToRightTween,
+      builder: (state) {
         final mediaId = int.parse(
           state.uri.queryParameters['id']!,
         );
@@ -218,20 +219,22 @@ final router = GoRouter(
         );
       },
     ),
-    GoRoute(
+    SlideTransitionRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: RouteConstants.recommendationsSlider,
-      builder: (context, state) {
+      directionTween: SlideTransitionRoute.bottomToTopTween,
+      builder: (state) {
         final recommendationBloc = state.extra as RecommendationAnimeBloc;
         return RecommendationsSliderScreen(
           bloc: recommendationBloc,
         );
       },
     ),
-    GoRoute(
+    SlideTransitionRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: RouteConstants.recommendationsGrid,
-      builder: (context, state) {
+      directionTween: SlideTransitionRoute.bottomToTopTween,
+      builder: (state) {
         final recommendationParameters =
             state.extra! as RecommendationsParameters;
         return RecommendationsGridScreen(
@@ -385,13 +388,11 @@ final router = GoRouter(
     final routeCubit = context.read<RedirectRouteCubit>();
 
     if (authState is AuthInitial) {
-      print('Auth state is auth initial');
       if ((!routeCubit.isDesiredRouteSet() &&
               state.matchedLocation != RouteConstants.login) ||
           (state.matchedLocation != RouteConstants.home &&
               state.matchedLocation != RouteConstants.login &&
               state.matchedLocation != RouteConstants.onBoarding)) {
-        print('Setting desired route: ${state.matchedLocation}');
         routeCubit.setDesiredRoute(
           state.matchedLocation,
           state.uri.queryParameters,
