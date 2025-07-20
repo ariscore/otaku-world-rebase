@@ -6,29 +6,30 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:like_button/like_button.dart';
 import 'package:otaku_world/bloc/charcter_detail/toggle_favorite_character/toggle_favorite_character_cubit.dart';
+import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../../core/ui/bottomsheet/helpers/share_helpers.dart';
 import '../../../../core/ui/bottomsheet/helpers/url_helpers.dart';
 import '../../../../core/ui/bottomsheet/option_bottom_sheet.dart';
 import '../../../../core/ui/buttons/back_button.dart';
+import '../../../../core/ui/image_viewer.dart';
+import '../../../../core/ui/images/cover_image.dart';
 import '../../../../generated/assets.dart';
 import '../../../../graphql/__generated/graphql/character-detail/character_detail.graphql.dart';
+import '../../../../graphql/__generated/graphql/schema.graphql.dart';
 import '../../../../theme/colors.dart';
 import '../../../../utils/navigation_helper.dart';
 import '../../../../utils/ui_utils.dart';
+import '../../media_detail/widgets/info_data.dart';
 
 class CharacterAppBar extends StatefulWidget {
   const CharacterAppBar({
     super.key,
     required this.character,
-    required this.expandedHeight,
-    required this.backgroundWidget,
   });
 
   final Query$getCharacterDetails$Character character;
-  final double expandedHeight;
-  final Widget backgroundWidget;
 
   @override
   State<CharacterAppBar> createState() => _CharacterAppBarState();
@@ -98,9 +99,13 @@ class _CharacterAppBarState extends State<CharacterAppBar> {
       backgroundColor: AppColors.raisinBlack,
       surfaceTintColor: AppColors.raisinBlack,
       pinned: true,
-      expandedHeight: widget.expandedHeight,
+      expandedHeight: 455,
       flexibleSpace: FlexibleSpaceBar(
-        background: widget.backgroundWidget,
+        collapseMode: CollapseMode.parallax,
+        background: _buildPosterContent(
+          widget.character,
+          context,
+        ),
       ),
     );
   }
@@ -108,6 +113,73 @@ class _CharacterAppBarState extends State<CharacterAppBar> {
   static const Widget fifteenSpacing = SizedBox(
     height: 15,
   );
+
+  Widget _buildPosterContent(
+    Query$getCharacterDetails$Character character,
+    BuildContext context,
+  ) {
+    final height = MediaQuery.sizeOf(context).height;
+    final width = MediaQuery.sizeOf(context).width;
+    return Container(
+      decoration: UIUtils.getDetailScreenDecoration(),
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: AppBar().preferredSize.height +
+                MediaQuery.of(context).padding.top,
+          ),
+          SizedBox(
+            height: UIUtils.getWidgetHeight(
+              targetWidgetHeight: 256,
+              screenHeight: height,
+            ),
+            width: UIUtils.getWidgetWidth(
+              targetWidgetWidth: 170,
+              screenWidth: width,
+            ),
+            child: GestureDetector(
+              onTap: () => character.image?.large != null
+                  ? showImage(
+                      context,
+                      character.image!.large!.toString(),
+                      tag: character.image!.large!.toString(),
+                    )
+                  : null,
+              child: Hero(
+                tag: character.image!.large!,
+                child: CoverImage(
+                  imageUrl: character.image!.large!,
+                  type: Enum$MediaType.ANIME,
+                ),
+              ),
+            ),
+          ),
+          fifteenSpacing,
+          Text(
+            character.name!.userPreferred!.checkIfNull(),
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w600,
+            ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          fifteenSpacing,
+          InfoData(
+            iconName: Assets.iconsFavourite,
+            separateWidth: 3,
+            info: character.favourites.toString(),
+            mainAxisAlignment: MainAxisAlignment.center,
+          ),
+        ],
+      ),
+    );
+  }
 
   Future<bool?> toggleFavorite(
     BuildContext context,

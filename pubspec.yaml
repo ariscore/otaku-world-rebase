@@ -101,7 +101,6 @@ dependencies:
   package_info_plus: ^8.3.0
   in_app_update: ^4.2.3
   device_info_plus: 11.2.0
-  intrinsic_size_builder: ^2.0.2
 
 dev_dependencies:
   flutter_test:
