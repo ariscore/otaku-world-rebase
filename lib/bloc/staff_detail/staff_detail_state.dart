@@ -19,10 +19,10 @@ class StaffDetailLoaded extends StaffDetailState {
 }
 
 class StaffDetailError extends StaffDetailState {
-  final String message;
+  final CustomError error;
 
-  StaffDetailError(this.message);
+  StaffDetailError(this.error);
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [error];
 }

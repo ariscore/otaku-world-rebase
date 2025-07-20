@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
@@ -12,17 +11,21 @@ import 'package:otaku_world/graphql/__generated/graphql/social/activity_subscrip
 import 'package:otaku_world/graphql/__generated/graphql/social/delete_activity.graphql.dart';
 
 import '../../../constants/string_constants.dart';
+import '../../../core/model/custom_error.dart';
+import '../../../utils/graphql_error_handler.dart';
 
 part 'global_activities_event.dart';
 part 'global_activities_state.dart';
 
-class GlobalActivitiesBloc extends Bloc<GlobalActivitiesEvent, GlobalActivitiesState> {
+class GlobalActivitiesBloc
+    extends Bloc<GlobalActivitiesEvent, GlobalActivitiesState> {
   GlobalActivitiesBloc() : super(GlobalActivitiesInitial()) {
     on<LoadGlobalActivities>(_onLoadGlobalActivities, transformer: droppable());
     on<SelectGlobalActivityType>(_onSelectGlobalActivityType);
     on<ResetGlobalActivities>(_onResetGlobalActivities);
     on<RefreshGlobalActivities>(_onRefreshGlobalActivities);
-    on<LoadMoreGlobalActivities>(_onLoadMoreGlobalActivities, transformer: droppable());
+    on<LoadMoreGlobalActivities>(_onLoadMoreGlobalActivities,
+        transformer: droppable());
     on<UpdateGlobalActivities>(_onUpdateGlobalActivities);
     on<UpdateGlobalLoading>(_onUpdateGlobalLoading);
   }
@@ -34,9 +37,9 @@ class GlobalActivitiesBloc extends Bloc<GlobalActivitiesEvent, GlobalActivitiesS
   bool showProgress = false;
 
   void _onResetGlobalActivities(
-      ResetGlobalActivities event,
-      Emitter<GlobalActivitiesState> emit,
-      ) {
+    ResetGlobalActivities event,
+    Emitter<GlobalActivitiesState> emit,
+  ) {
     globalPage = 1;
     hasNextPageGlobal = true;
     globalList.clear();
@@ -45,9 +48,9 @@ class GlobalActivitiesBloc extends Bloc<GlobalActivitiesEvent, GlobalActivitiesS
   }
 
   void _onRefreshGlobalActivities(
-      RefreshGlobalActivities event,
-      Emitter<GlobalActivitiesState> emit,
-      ) {
+    RefreshGlobalActivities event,
+    Emitter<GlobalActivitiesState> emit,
+  ) {
     globalPage = 1;
     hasNextPageGlobal = true;
     globalList.clear();
@@ -55,26 +58,23 @@ class GlobalActivitiesBloc extends Bloc<GlobalActivitiesEvent, GlobalActivitiesS
   }
 
   Future<void> _onLoadGlobalActivities(
-      LoadGlobalActivities event,
-      Emitter<GlobalActivitiesState> emit,
-      ) async {
+    LoadGlobalActivities event,
+    Emitter<GlobalActivitiesState> emit,
+  ) async {
     if (globalPage == 1) emit(GlobalActivitiesLoading());
 
-    log('Fetching global activities for types: $types', name: 'GlobalActivitiesBloc');
+    log('Fetching global activities for types: $types',
+        name: 'GlobalActivitiesBloc');
 
     final globalResponse = await _loadData(event.client, globalPage);
 
     if (globalResponse.hasException) {
       final exception = globalResponse.exception!;
-
-      debugPrint(
-        'Error fetching global activities: ${exception.toString()}',
+      emit(
+        GlobalActivitiesError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
       );
-      if (exception.linkException != null) {
-        emit(GlobalActivitiesError(exception.toString()));
-      } else {
-        emit(const GlobalActivitiesError('Something went wrong!'));
-      }
     } else {
       _processData(response: globalResponse);
       emit(
@@ -87,20 +87,21 @@ class GlobalActivitiesBloc extends Bloc<GlobalActivitiesEvent, GlobalActivitiesS
   }
 
   Future<void> _onLoadMoreGlobalActivities(
-      LoadMoreGlobalActivities event,
-      Emitter<GlobalActivitiesState> emit,
-      ) async {
+    LoadMoreGlobalActivities event,
+    Emitter<GlobalActivitiesState> emit,
+  ) async {
     if (!hasNextPageGlobal) return;
 
     log('Loading more global activities', name: 'GlobalActivitiesBloc');
     final response = await _loadData(event.client, globalPage);
 
     if (response.hasException) {
-      if (response.exception!.linkException != null) {
-        emit(const GlobalActivitiesError('Please check your internet connection!'));
-      } else {
-        emit(const GlobalActivitiesError('Something went wrong!'));
-      }
+      final exception = response.exception!;
+      emit(
+        GlobalActivitiesError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       _processData(response: response);
       emit(
@@ -113,9 +114,9 @@ class GlobalActivitiesBloc extends Bloc<GlobalActivitiesEvent, GlobalActivitiesS
   }
 
   Future<QueryResult<Query$GetActivities>> _loadData(
-      GraphQLClient client,
-      int page,
-      ) async {
+    GraphQLClient client,
+    int page,
+  ) async {
     return await client.query$GetActivities(
       Options$Query$GetActivities(
         cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
@@ -140,9 +141,9 @@ class GlobalActivitiesBloc extends Bloc<GlobalActivitiesEvent, GlobalActivitiesS
   }
 
   void _onSelectGlobalActivityType(
-      SelectGlobalActivityType event,
-      Emitter<GlobalActivitiesState> emit,
-      ) {
+    SelectGlobalActivityType event,
+    Emitter<GlobalActivitiesState> emit,
+  ) {
     switch (event.type) {
       case 'All':
         types = Enum$ActivityType.values;
@@ -159,9 +160,9 @@ class GlobalActivitiesBloc extends Bloc<GlobalActivitiesEvent, GlobalActivitiesS
   }
 
   void _onUpdateGlobalActivities(
-      UpdateGlobalActivities event,
-      Emitter<GlobalActivitiesState> emit,
-      ) {
+    UpdateGlobalActivities event,
+    Emitter<GlobalActivitiesState> emit,
+  ) {
     emit(GlobalActivitiesLoading());
     emit(GlobalActivitiesLoaded(
       globalActivities: event.globalActivities,
@@ -170,9 +171,9 @@ class GlobalActivitiesBloc extends Bloc<GlobalActivitiesEvent, GlobalActivitiesS
   }
 
   void _onUpdateGlobalLoading(
-      UpdateGlobalLoading event,
-      Emitter<GlobalActivitiesState> emit,
-      ) {
+    UpdateGlobalLoading event,
+    Emitter<GlobalActivitiesState> emit,
+  ) {
     emit((state as GlobalActivitiesLoaded).copyWith(
       showProgress: event.showProgress,
     ));
@@ -234,10 +235,10 @@ class GlobalActivitiesBloc extends Bloc<GlobalActivitiesEvent, GlobalActivitiesS
   }
 
   Future<String?> toggleActivitySubscription(
-      GraphQLClient client, {
-        required int activityId,
-        required bool subscribe,
-      }) async {
+    GraphQLClient client, {
+    required int activityId,
+    required bool subscribe,
+  }) async {
     if (showProgress) {
       return ActivityConstants.alreadyInProgress;
     } else {
@@ -267,9 +268,9 @@ class GlobalActivitiesBloc extends Bloc<GlobalActivitiesEvent, GlobalActivitiesS
   }
 
   Future<String?> deleteActivity(
-      GraphQLClient client, {
-        required int activityId,
-      }) async {
+    GraphQLClient client, {
+    required int activityId,
+  }) async {
     if (showProgress) {
       return ActivityConstants.alreadyInProgress;
     } else {
@@ -316,11 +317,13 @@ class GlobalActivitiesBloc extends Bloc<GlobalActivitiesEvent, GlobalActivitiesS
         globalList[index] = activity.copyWith(
           replyCount: activity.replyCount + inc,
         );
-      } else if (activity is Query$GetActivities$Page$activities$$ListActivity) {
+      } else if (activity
+          is Query$GetActivities$Page$activities$$ListActivity) {
         globalList[index] = activity.copyWith(
           replyCount: activity.replyCount + inc,
         );
-      } else if (activity is Query$GetActivities$Page$activities$$MessageActivity) {
+      } else if (activity
+          is Query$GetActivities$Page$activities$$MessageActivity) {
         globalList[index] = activity.copyWith(
           replyCount: activity.replyCount + inc,
         );
@@ -368,7 +371,8 @@ class GlobalActivitiesBloc extends Bloc<GlobalActivitiesEvent, GlobalActivitiesS
   }
 
   @override
-  void onTransition(Transition<GlobalActivitiesEvent, GlobalActivitiesState> transition) {
+  void onTransition(
+      Transition<GlobalActivitiesEvent, GlobalActivitiesState> transition) {
     log(transition.toString(), name: 'GlobalActivitiesBloc');
     super.onTransition(transition);
   }

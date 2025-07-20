@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
@@ -12,6 +11,8 @@ import 'package:otaku_world/graphql/__generated/graphql/social/activity_subscrip
 import 'package:otaku_world/graphql/__generated/graphql/social/delete_activity.graphql.dart';
 
 import '../../../constants/string_constants.dart';
+import '../../../core/model/custom_error.dart';
+import '../../../utils/graphql_error_handler.dart';
 
 part 'activities_event.dart';
 part 'activities_state.dart';
@@ -87,16 +88,11 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
       final exception =
           followingResponse.exception ?? globalResponse.exception!;
 
-      debugPrint(
-        'Error fetching activities: ${exception.toString()}',
+      emit(
+        ActivitiesError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
       );
-      if (exception.linkException != null) {
-        emit(
-          const ActivitiesError('Please check your internet connection!'),
-        );
-      } else {
-        emit(const ActivitiesError('Something went wrong!'));
-      }
     } else {
       _processData(response: followingResponse, isFollowing: true);
       _processData(response: globalResponse, isFollowing: false);
@@ -128,13 +124,13 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
     );
 
     if (response.hasException) {
-      if (response.exception!.linkException != null) {
-        emit(
-          const ActivitiesError('Please check your internet connection!'),
-        );
-      } else {
-        emit(const ActivitiesError('Something went wrong!'));
-      }
+      final exception = response.exception!;
+
+      emit(
+        ActivitiesError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       _processData(response: response, isFollowing: event.isFollowing);
       emit(

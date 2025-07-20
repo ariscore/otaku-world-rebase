@@ -8,10 +8,11 @@ import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/bloc/recommendations/recommendation_anime_bloc.dart';
 import 'package:otaku_world/graphql/__generated/graphql/details/media_detail.graphql.dart';
 
+import '../../core/model/custom_error.dart';
 import '../../graphql/__generated/graphql/fragments.graphql.dart';
+import '../../utils/graphql_error_handler.dart';
 
 part 'media_detail_event.dart';
-
 part 'media_detail_state.dart';
 
 class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
@@ -44,7 +45,12 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
     // dev.log('Response: $response', name: 'MediaDetail');
 
     if (response.hasException) {
-      emit(MediaDetailError(response.exception.toString()));
+      final exception = response.exception!;
+      emit(
+        MediaDetailError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       emit(
         MediaDetailLoaded(

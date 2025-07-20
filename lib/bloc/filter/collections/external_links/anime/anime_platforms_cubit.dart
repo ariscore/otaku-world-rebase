@@ -3,6 +3,9 @@ import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/graphql/__generated/graphql/filter/streaming_platforms.graphql.dart';
 
+import '../../../../../core/model/custom_error.dart';
+import '../../../../../utils/graphql_error_handler.dart';
+
 part 'anime_platforms_state.dart';
 
 class AnimePlatformsCubit extends Cubit<AnimePlatformsState> {
@@ -14,14 +17,11 @@ class AnimePlatformsCubit extends Cubit<AnimePlatformsState> {
 
     if (response.hasException) {
       final exception = response.exception!;
-
-      if (exception.linkException != null) {
-        emit(
-          const AnimePlatformsError('Please check your internet connection!'),
-        );
-      } else {
-        emit(const AnimePlatformsError('Some Unexpected error occurred!'));
-      }
+      emit(
+        AnimePlatformsError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       emit(
         AnimePlatformsLoaded(

@@ -18,7 +18,7 @@ final class UserStatsLoaded extends UserStatsState {
 }
 
 final class UserStatsError extends UserStatsState {
-  const UserStatsError(this.message);
+  const UserStatsError(this.error);
 
-  final String message;
+  final CustomError error;
 }

@@ -5,8 +5,10 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-part 'search_base_event.dart';
+import '../../../core/model/custom_error.dart';
+import '../../../utils/graphql_error_handler.dart';
 
+part 'search_base_event.dart';
 part 'search_base_state.dart';
 
 abstract class SearchBaseBloc<Q, E>
@@ -56,13 +58,11 @@ abstract class SearchBaseBloc<Q, E>
       if (response.hasException) {
         final exception = response.exception!;
 
-        if (exception.linkException != null) {
-          emit(
-            const SearchError('Please check your internet connection!'),
-          );
-        } else {
-          emit(const SearchError('Some Unexpected error occurred!'));
-        }
+        emit(
+          SearchError(
+            (GraphQLErrorHandler.handleException(exception)),
+          ),
+        );
       } else {
         processData(response);
 

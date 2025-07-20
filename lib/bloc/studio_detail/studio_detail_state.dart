@@ -21,10 +21,10 @@ class StudioDetailLoaded extends StudioDetailState {
 }
 
 class StudioDetailError extends StudioDetailState {
-  final String message;
+  final CustomError error;
 
-  const StudioDetailError(this.message);
+  const StudioDetailError(this.error);
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [error];
 }

@@ -16,7 +16,7 @@ class WeekCalendarInitialized extends WeekCalendarState {
 }
 
 class WeekCalendarError extends WeekCalendarState {
-  const WeekCalendarError(this.message);
+  const WeekCalendarError(this.error);
 
-  final String message;
+  final CustomError error;
 }

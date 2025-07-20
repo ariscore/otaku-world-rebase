@@ -13,7 +13,7 @@ final class ToggleComplete extends FollowState {
 }
 
 final class UserFollowError extends FollowState {
-  UserFollowError(this.message);
+  UserFollowError(this.error);
 
-  final String message;
+  final CustomError error;
 }

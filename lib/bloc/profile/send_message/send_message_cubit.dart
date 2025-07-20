@@ -1,11 +1,10 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/social/save_message_activity.graphql.dart';
 
-import '../../../constants/string_constants.dart';
+import '../../../core/model/custom_error.dart';
+import '../../../utils/graphql_error_handler.dart';
 
 part 'send_message_state.dart';
 
@@ -32,34 +31,16 @@ class SendMessageCubit extends Cubit<SendMessageState> {
 
     if (response.hasException) {
       final exception = response.exception!;
-      log(exception.toString());
-      if (exception.linkException != null) {
-        if (exception.linkException is ServerException) {
-          log('It is server exception');
-          final response =
-              (exception.linkException! as ServerException).parsedResponse;
-          final error = response?.errors?.firstOrNull;
-
-          if (error?.message == null) {
-            emit(SendMessageError(StringConstants.noInternetError));
-          } else {
-            if (error!.message.contains('validation')) {
-              emit(SendMessageError(StringConstants.validationError));
-            } else {
-              emit(SendMessageError(error.message));
-            }
-          }
-        } else {
-          emit(SendMessageError(StringConstants.noInternetError));
-        }
-      } else {
-        emit(SendMessageError(StringConstants.noInternetError));
-      }
+      emit(
+        SendMessageError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       final data = response.parsedData?.SaveMessageActivity;
 
       if (data == null) {
-        emit(SendMessageError(StringConstants.somethingWentWrongError));
+        emit(SendMessageError(CustomError.unexpectedError()));
       } else {
         emit(SentMessage(message: data));
       }

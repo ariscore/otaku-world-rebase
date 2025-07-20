@@ -5,6 +5,9 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
+import '../../../core/model/custom_error.dart';
+import '../../../utils/graphql_error_handler.dart';
+
 part 'search_event.dart';
 part 'search_state.dart';
 
@@ -34,7 +37,8 @@ abstract class SearchBloc<Q, E> extends Bloc<SearchEvent, SearchState> {
     emit(SearchInitial());
   }
 
-  Future<void> _onSearchMedia(SearchMedia event, Emitter<SearchState> emit) async {
+  Future<void> _onSearchMedia(
+      SearchMedia event, Emitter<SearchState> emit) async {
     emit(SearchResultLoading());
     page = 1;
     hasNextPage = true;
@@ -47,14 +51,11 @@ abstract class SearchBloc<Q, E> extends Bloc<SearchEvent, SearchState> {
 
     if (response.hasException) {
       final exception = response.exception!;
-
-      if (exception.linkException != null) {
-        emit(
-          const SearchError('Please check your internet connection!'),
-        );
-      } else {
-        emit(const SearchError('Some Unexpected error occurred!'));
-      }
+      emit(
+        SearchError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       processData(response);
 

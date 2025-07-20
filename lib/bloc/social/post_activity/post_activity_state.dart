@@ -13,7 +13,7 @@ final class PostedActivity extends PostActivityState {
 }
 
 final class PostActivityError extends PostActivityState {
-  PostActivityError(this.message);
+  PostActivityError(this.error);
 
-  final String message;
+  final CustomError error;
 }

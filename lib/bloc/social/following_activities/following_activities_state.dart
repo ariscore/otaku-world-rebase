@@ -39,19 +39,19 @@ final class FollowingActivitiesLoaded extends FollowingActivitiesState {
 
   @override
   List<Object> get props => [
-    activities,
-    hasNextPage,
-    showProgress,
-  ];
+        activities,
+        hasNextPage,
+        showProgress,
+      ];
 }
 
 final class FollowingActivitiesError extends FollowingActivitiesState {
-  const FollowingActivitiesError(this.message);
+  const FollowingActivitiesError(this.error);
 
-  final String message;
+  final CustomError error;
 
   @override
   String toString() {
-    return 'FollowingActivitiesError{ message: $message }';
+    return 'FollowingActivitiesError{ message: $error }';
   }
 }

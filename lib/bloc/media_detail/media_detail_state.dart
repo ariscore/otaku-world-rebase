@@ -25,10 +25,10 @@ class MediaDetailLoaded extends MediaDetailState {
 }
 
 class MediaDetailError extends MediaDetailState {
-  final String message;
+  final CustomError error;
 
-  const MediaDetailError(this.message);
+  const MediaDetailError(this.error);
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [error];
 }

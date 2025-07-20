@@ -1,1 +1,5 @@
-enum ErrorType { noInternet, unknown }
+enum ErrorType {
+  noInternet,
+  rateLimit,
+  unknown,
+}

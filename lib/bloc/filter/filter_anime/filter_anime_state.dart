@@ -22,7 +22,7 @@ class ResultsLoaded extends FilterAnimeState {
 class ResultsLoading extends FilterAnimeState {}
 
 class FilterError extends FilterAnimeState {
-  const FilterError(this.message);
+  const FilterError(this.error);
 
-  final String message;
+  final CustomError error;
 }

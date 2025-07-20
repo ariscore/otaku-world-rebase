@@ -3,6 +3,9 @@ import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/graphql/__generated/graphql/filter/genres.graphql.dart';
 
+import '../../../../core/model/custom_error.dart';
+import '../../../../utils/graphql_error_handler.dart';
+
 part 'genre_state.dart';
 
 class GenreCubit extends Cubit<GenreState> {
@@ -14,14 +17,11 @@ class GenreCubit extends Cubit<GenreState> {
 
     if (response.hasException) {
       final exception = response.exception!;
-
-      if (exception.linkException != null) {
-        emit(
-          const GenreError('Please check your internet connection!'),
-        );
-      } else {
-        emit(const GenreError('Some Unexpected error occurred!'));
-      }
+      emit(
+        GenreError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       emit(GenreLoaded(response.parsedData!.GenreCollection!));
     }

@@ -40,19 +40,19 @@ final class GlobalActivitiesLoaded extends GlobalActivitiesState {
 
   @override
   List<Object> get props => [
-    globalActivities,
-    hasNextPageGlobal,
-    showProgress,
-  ];
+        globalActivities,
+        hasNextPageGlobal,
+        showProgress,
+      ];
 }
 
 final class GlobalActivitiesError extends GlobalActivitiesState {
-  const GlobalActivitiesError(this.message);
+  const GlobalActivitiesError(this.error);
 
-  final String message;
+  final CustomError error;
 
   @override
   String toString() {
-    return 'GlobalActivitiesError{ message: $message }';
+    return 'GlobalActivitiesError{ message: $error }';
   }
 }

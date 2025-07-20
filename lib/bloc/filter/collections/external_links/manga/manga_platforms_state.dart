@@ -18,7 +18,7 @@ class MangaPlatformsLoaded extends MangaPlatformsState {
 }
 
 class MangaPlatformsError extends MangaPlatformsState {
-  const MangaPlatformsError(this.message);
+  const MangaPlatformsError(this.error);
 
-  final String message;
+  final CustomError error;
 }

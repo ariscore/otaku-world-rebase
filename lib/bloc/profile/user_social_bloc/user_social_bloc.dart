@@ -10,8 +10,10 @@ import 'package:otaku_world/graphql/__generated/graphql/user/followers.graphql.d
 import 'package:otaku_world/graphql/__generated/graphql/user/following.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/toggle_follow.graphql.dart';
 
-part 'user_social_event.dart';
+import '../../../core/model/custom_error.dart';
+import '../../../utils/graphql_error_handler.dart';
 
+part 'user_social_event.dart';
 part 'user_social_state.dart';
 
 class UserSocialBloc extends Bloc<UserSocialEvent, UserSocialState> {
@@ -77,13 +79,11 @@ class UserSocialBloc extends Bloc<UserSocialEvent, UserSocialState> {
       final exception =
           followingResponse.exception ?? followerResponse.exception!;
 
-      if (exception.linkException != null) {
-        emit(
-          const UserSocialError(StringConstants.noInternetError),
-        );
-      } else {
-        emit(const UserSocialError(StringConstants.somethingWentWrongError));
-      }
+      emit(
+        UserSocialError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       final followingData = followingResponse.parsedData!.Page!;
       hasNextPageFollowing = followingData.pageInfo?.hasNextPage ?? false;

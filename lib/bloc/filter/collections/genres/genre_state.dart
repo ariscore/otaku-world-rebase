@@ -18,7 +18,7 @@ class GenreLoaded extends GenreState {
 }
 
 class GenreError extends GenreState {
-  const GenreError(this.message);
+  const GenreError(this.error);
 
-  final String message;
+  final CustomError error;
 }

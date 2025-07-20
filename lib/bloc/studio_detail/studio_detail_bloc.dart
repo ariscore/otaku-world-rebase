@@ -7,6 +7,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/graphql/__generated/graphql/studio_detail/studio_detail.graphql.dart';
 
+import '../../core/model/custom_error.dart';
+import '../../utils/graphql_error_handler.dart';
+
 part 'studio_detail_event.dart';
 part 'studio_detail_state.dart';
 
@@ -32,7 +35,12 @@ class StudioDetailBloc extends Bloc<StudioDetailEvent, StudioDetailState> {
     );
 
     if (response.hasException) {
-      emit(StudioDetailError(response.exception.toString()));
+      final exception = response.exception!;
+      emit(
+        StudioDetailError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       if (response.parsedData?.Studio != null) {
         debugPrint(

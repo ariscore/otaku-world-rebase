@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
@@ -12,17 +11,21 @@ import 'package:otaku_world/graphql/__generated/graphql/social/activity_subscrip
 import 'package:otaku_world/graphql/__generated/graphql/social/delete_activity.graphql.dart';
 
 import '../../../constants/string_constants.dart';
+import '../../../core/model/custom_error.dart';
+import '../../../utils/graphql_error_handler.dart';
 
 part 'following_activities_event.dart';
 part 'following_activities_state.dart';
 
-class FollowingActivitiesBloc extends Bloc<FollowingActivitiesEvent, FollowingActivitiesState> {
+class FollowingActivitiesBloc
+    extends Bloc<FollowingActivitiesEvent, FollowingActivitiesState> {
   FollowingActivitiesBloc() : super(FollowingActivitiesInitial()) {
     on<LoadFollowingActivities>(_onLoadActivities, transformer: droppable());
     on<SelectFollowingActivityType>(_onSelectActivityType);
     on<ResetFollowingActivities>(_onResetActivities);
     on<RefreshFollowingActivities>(_onRefreshActivities);
-    on<LoadMoreFollowingActivities>(_onLoadMoreActivities, transformer: droppable());
+    on<LoadMoreFollowingActivities>(_onLoadMoreActivities,
+        transformer: droppable());
     on<UpdateFollowingActivities>(_onUpdateActivities);
     on<UpdateFollowingLoading>(_onUpdateLoading);
   }
@@ -34,9 +37,9 @@ class FollowingActivitiesBloc extends Bloc<FollowingActivitiesEvent, FollowingAc
   bool showProgress = false;
 
   void _onResetActivities(
-      ResetFollowingActivities event,
-      Emitter<FollowingActivitiesState> emit,
-      ) {
+    ResetFollowingActivities event,
+    Emitter<FollowingActivitiesState> emit,
+  ) {
     page = 1;
     hasNextPage = true;
     activitiesList.clear();
@@ -45,9 +48,9 @@ class FollowingActivitiesBloc extends Bloc<FollowingActivitiesEvent, FollowingAc
   }
 
   void _onRefreshActivities(
-      RefreshFollowingActivities event,
-      Emitter<FollowingActivitiesState> emit,
-      ) {
+    RefreshFollowingActivities event,
+    Emitter<FollowingActivitiesState> emit,
+  ) {
     page = 1;
     hasNextPage = true;
     activitiesList.clear();
@@ -55,23 +58,22 @@ class FollowingActivitiesBloc extends Bloc<FollowingActivitiesEvent, FollowingAc
   }
 
   Future<void> _onLoadActivities(
-      LoadFollowingActivities event,
-      Emitter<FollowingActivitiesState> emit,
-      ) async {
+    LoadFollowingActivities event,
+    Emitter<FollowingActivitiesState> emit,
+  ) async {
     if (page == 1) emit(FollowingActivitiesLoading());
 
-    log('Fetching following activities for types: $types', name: 'FollowingActivitiesBloc');
+    log('Fetching following activities for types: $types',
+        name: 'FollowingActivitiesBloc');
     final response = await _loadData(event.client, page);
 
     if (response.hasException) {
       final exception = response.exception!;
-      debugPrint('Error fetching following activities: ${exception.toString()}');
-
-      if (exception.linkException != null) {
-        emit(FollowingActivitiesError(exception.toString()));
-      } else {
-        emit(const FollowingActivitiesError('Something went wrong!'));
-      }
+      emit(
+        FollowingActivitiesError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       _processData(response: response);
       emit(
@@ -84,20 +86,21 @@ class FollowingActivitiesBloc extends Bloc<FollowingActivitiesEvent, FollowingAc
   }
 
   Future<void> _onLoadMoreActivities(
-      LoadMoreFollowingActivities event,
-      Emitter<FollowingActivitiesState> emit,
-      ) async {
+    LoadMoreFollowingActivities event,
+    Emitter<FollowingActivitiesState> emit,
+  ) async {
     if (!hasNextPage) return;
 
     log('Loading more following activities', name: 'FollowingActivitiesBloc');
     final response = await _loadData(event.client, page);
 
     if (response.hasException) {
-      if (response.exception!.linkException != null) {
-        emit(const FollowingActivitiesError('Please check your internet connection!'));
-      } else {
-        emit(const FollowingActivitiesError('Something went wrong!'));
-      }
+      final exception = response.exception!;
+      emit(
+        FollowingActivitiesError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       _processData(response: response);
       emit(
@@ -110,9 +113,9 @@ class FollowingActivitiesBloc extends Bloc<FollowingActivitiesEvent, FollowingAc
   }
 
   Future<QueryResult<Query$GetActivities>> _loadData(
-      GraphQLClient client,
-      int page,
-      ) async {
+    GraphQLClient client,
+    int page,
+  ) async {
     return await client.query$GetActivities(
       Options$Query$GetActivities(
         cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
@@ -137,9 +140,9 @@ class FollowingActivitiesBloc extends Bloc<FollowingActivitiesEvent, FollowingAc
   }
 
   void _onSelectActivityType(
-      SelectFollowingActivityType event,
-      Emitter<FollowingActivitiesState> emit,
-      ) {
+    SelectFollowingActivityType event,
+    Emitter<FollowingActivitiesState> emit,
+  ) {
     switch (event.type) {
       case 'All':
         types = Enum$ActivityType.values;
@@ -156,9 +159,9 @@ class FollowingActivitiesBloc extends Bloc<FollowingActivitiesEvent, FollowingAc
   }
 
   void _onUpdateActivities(
-      UpdateFollowingActivities event,
-      Emitter<FollowingActivitiesState> emit,
-      ) {
+    UpdateFollowingActivities event,
+    Emitter<FollowingActivitiesState> emit,
+  ) {
     emit(FollowingActivitiesLoading());
     emit(FollowingActivitiesLoaded(
       activities: event.activities,
@@ -166,7 +169,8 @@ class FollowingActivitiesBloc extends Bloc<FollowingActivitiesEvent, FollowingAc
     ));
   }
 
-  void _onUpdateLoading(UpdateFollowingLoading event, Emitter<FollowingActivitiesState> emit) {
+  void _onUpdateLoading(
+      UpdateFollowingLoading event, Emitter<FollowingActivitiesState> emit) {
     emit((state as FollowingActivitiesLoaded).copyWith(
       showProgress: event.showProgress,
     ));
@@ -190,7 +194,8 @@ class FollowingActivitiesBloc extends Bloc<FollowingActivitiesEvent, FollowingAc
             likeCount: activity.likeCount + 1,
           );
         }
-      } else if (activity is Fragment$MessageActivity && activity.isLiked != null) {
+      } else if (activity is Fragment$MessageActivity &&
+          activity.isLiked != null) {
         if (activity.isLiked!) {
           activitiesList[index] = activity.copyWith(
             isLiked: false,
@@ -202,7 +207,8 @@ class FollowingActivitiesBloc extends Bloc<FollowingActivitiesEvent, FollowingAc
             likeCount: activity.likeCount + 1,
           );
         }
-      } else if (activity is Fragment$ListActivity && activity.isLiked != null) {
+      } else if (activity is Fragment$ListActivity &&
+          activity.isLiked != null) {
         if (activity.isLiked!) {
           activitiesList[index] = activity.copyWith(
             isLiked: false,
@@ -226,10 +232,10 @@ class FollowingActivitiesBloc extends Bloc<FollowingActivitiesEvent, FollowingAc
   }
 
   Future<String?> toggleActivitySubscription(
-      GraphQLClient client, {
-        required int activityId,
-        required bool subscribe,
-      }) async {
+    GraphQLClient client, {
+    required int activityId,
+    required bool subscribe,
+  }) async {
     if (showProgress) {
       return ActivityConstants.alreadyInProgress;
     } else {
@@ -259,9 +265,9 @@ class FollowingActivitiesBloc extends Bloc<FollowingActivitiesEvent, FollowingAc
   }
 
   Future<String?> deleteActivity(
-      GraphQLClient client, {
-        required int activityId,
-      }) async {
+    GraphQLClient client, {
+    required int activityId,
+  }) async {
     if (showProgress) {
       return ActivityConstants.alreadyInProgress;
     } else {
@@ -360,7 +366,9 @@ class FollowingActivitiesBloc extends Bloc<FollowingActivitiesEvent, FollowingAc
   }
 
   @override
-  void onTransition(Transition<FollowingActivitiesEvent, FollowingActivitiesState> transition) {
+  void onTransition(
+      Transition<FollowingActivitiesEvent, FollowingActivitiesState>
+          transition) {
     log(transition.toString(), name: 'FollowingActivitiesBloc');
     super.onTransition(transition);
   }
