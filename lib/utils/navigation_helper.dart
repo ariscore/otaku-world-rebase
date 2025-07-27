@@ -6,14 +6,12 @@ import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
 
 import '../config/router/router_constants.dart';
-import '../features/app_review_management/app_positive_action_tracker.dart';
 
 class NavigationHelper {
   static void goToMediaDetailScreen({
     required BuildContext context,
     required mediaId,
   }) {
-    PositiveActionTracker.trackPositiveAction();
     context.push('${RouteConstants.mediaDetail}?id=$mediaId');
   }
 

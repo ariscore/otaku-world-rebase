@@ -45,7 +45,8 @@ class AppReviewManager {
     // All conditions met, request review
     await _requestReview();
     await SharedPreferenceUtils.setLastReviewPrompt(
-        DateTime.now().millisecondsSinceEpoch);
+      DateTime.now().millisecondsSinceEpoch,
+    );
     await SharedPreferenceUtils.setReviewPromptCount(promptCount + 1);
     await SharedPreferenceUtils.setReviewRequested(true);
   }
@@ -74,13 +75,11 @@ class AppReviewManager {
   }
 
   static Future<void> markReviewAsDeclined() async {
-    await SharedPreferenceUtils.setReviewDeclined(
-        true); // User said "No Thanks"
+    await SharedPreferenceUtils.setReviewDeclined(true);
   }
 
   static Future<void> markReviewAsDismissed() async {
     await SharedPreferenceUtils.setReviewRequested(true);
-    // Don't set declined - user just dismissed, might ask again later
   }
 
   static Future<void> resetReviewState() async {
