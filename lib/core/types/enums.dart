@@ -3,5 +3,6 @@ enum ErrorType {
   rateLimit,
   server,
   validation,
+  analyticLog,
   unknown,
 }

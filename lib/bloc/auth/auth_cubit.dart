@@ -7,6 +7,9 @@ import 'package:otaku_world/utils/shared_preference_utils.dart';
 import 'package:uni_links5/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../features/app_events_management/const/analytics_events.dart';
+import '../../features/app_events_management/utils/analytics_logger.dart';
+
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -60,6 +63,7 @@ class AuthCubit extends Cubit<AuthState> {
 
           dev.log('Storing access token', name: 'Auth');
           await SharedPreferenceUtils.setAccessToken(accessToken);
+          await AnalyticsLogger.log(AnalyticsEvents.login);
           emit(Authenticated(accessToken));
         }
       });
@@ -72,6 +76,8 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> logOut() async {
     emit(LoggingOut());
     SharedPreferenceUtils.clearData();
+    await AnalyticsLogger.log(AnalyticsEvents.logout);
+    await AnalyticsLogger.clearUser();
     emit(UnAuthenticated());
   }
 

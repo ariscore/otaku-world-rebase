@@ -13,6 +13,7 @@ final bottomNavRoutes = StatefulShellRoute.indexedStack(
       routes: [
         GoRoute(
           path: RouteConstants.home,
+          name: RouteConstants.home,
           pageBuilder: (context, state) {
             return NoTransitionPage(
               child: MultiBlocProvider(
@@ -45,6 +46,7 @@ final bottomNavRoutes = StatefulShellRoute.indexedStack(
       routes: [
         GoRoute(
           path: RouteConstants.discover,
+          name: RouteConstants.discover,
           pageBuilder: (context, state) {
             return const NoTransitionPage(
               child: DiscoverScreen(),
@@ -58,6 +60,7 @@ final bottomNavRoutes = StatefulShellRoute.indexedStack(
       routes: [
         GoRoute(
           path: RouteConstants.social,
+          name: RouteConstants.social,
           pageBuilder: (context, state) {
             return NoTransitionPage(
               child: BlocProvider(
@@ -74,6 +77,7 @@ final bottomNavRoutes = StatefulShellRoute.indexedStack(
       routes: [
         GoRoute(
           path: RouteConstants.myList,
+          name: RouteConstants.myList,
           pageBuilder: (context, state) {
             return const NoTransitionPage(
               child: MyListScreen(),

@@ -5,9 +5,11 @@ import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/dialogs/alert_dialog.dart';
 import 'package:otaku_world/core/ui/shimmers/detail_screens/shimmer_details.dart';
+import 'package:otaku_world/features/app_events_management/utils/analytics_logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../bloc/auth/auth_cubit.dart';
+import '../../app_events_management/const/analytics_events.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key, required this.userName});
@@ -131,6 +133,7 @@ class SettingsScreen extends StatelessWidget {
                 label: 'About',
                 desc: 'Get to know more about Otaku World',
                 onTap: () {
+                  AnalyticsLogger.log(AnalyticsEvents.aboutUs);
                   context.push(RouteConstants.aboutUs);
                 },
               ),
