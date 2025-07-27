@@ -28,6 +28,7 @@ class TextActivityCard extends StatelessWidget {
     return ActivityBaseCard(
       id: activity.id,
       avatarUrl: activity.user?.avatar?.medium,
+      activitySiteUrl: activity.siteUrl,
       userId: activity.user?.id ?? 0,
       userName: activity.user?.name,
       likeCount: activity.likeCount,

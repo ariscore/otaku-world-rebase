@@ -142,6 +142,22 @@ class MyListConstants {
 }
 
 class UiConstants {
-  static const noImageUrl = '';
-  static const noName = '';
+  static const String noImageUrl = '';
+  static const String noName = '';
+}
+
+class UrlConstants {
+  static const String unableToOpenLink =
+      'Sorry, this link can’t be opened right now.';
+}
+
+class ShareConstants {
+  static const String mediaMessage = "Have you seen this yet?";
+  static const String characterMessage = "Here’s a character you’ll love:";
+  static const String staffMessage = "Discover the talent behind the scenes:";
+  static const String studioMessage =
+      "Here’s an amazing studio worth checking out:";
+  static const String profileMessage = 'Check out this awesome profile!';
+  static const String reviewMessage = "Read this insightful review:";
+  static const String activityMessage = "Catch up on this activity:";
 }

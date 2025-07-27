@@ -107,6 +107,7 @@ class _SocialCardState extends State<SocialCard> {
           ActivityActions(
             activityId: widget.activity.id,
             userId: widget.activity.user?.id ?? 0,
+            activitySiteUrl: widget.activity.siteUrl,
             isLiked: widget.activity.isLiked ?? false,
             likeCount: widget.activity.likeCount,
             replyCount: widget.activity.replyCount,
@@ -132,7 +133,7 @@ class _SocialCardState extends State<SocialCard> {
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontSize: 12,
                   fontFamily: 'Roboto',
-                  color: AppColors.white.withValues(alpha:0.8),
+                  color: AppColors.white.withValues(alpha: 0.8),
                 ),
           ),
         ],

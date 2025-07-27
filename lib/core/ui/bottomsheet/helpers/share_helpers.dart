@@ -1,24 +1,47 @@
+import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/core/ui/bottomsheet/helpers/url_helpers.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ShareHelpers {
   static void mediaShareOptions(int mediaId) {
     Share.share(
-        "Check out this New MEDIA ${UrlHelpers.getMediaLocalUrl(mediaId)}");
+      "${ShareConstants.mediaMessage} ${UrlHelpers.getMediaLocalUrl(mediaId)}",
+    );
   }
 
   static void characterShareOptions(int characterId) {
     Share.share(
-        "Check out this New Character ${UrlHelpers.getCharacterLocalUrl(characterId)}");
+      "${ShareConstants.characterMessage} ${UrlHelpers.getCharacterLocalUrl(characterId)}",
+    );
   }
 
   static void staffShareOptions(int staffId) {
     Share.share(
-        "Check out this New Staff ${UrlHelpers.getStaffLocalUrl(staffId)}");
+      "${ShareConstants.staffMessage} ${UrlHelpers.getStaffLocalUrl(staffId)}",
+    );
   }
 
   static void studioShareOptions(int studioId) {
     Share.share(
-        "Check out this New Studio ${UrlHelpers.getStudioLocalUrl(studioId)}");
+      "${ShareConstants.studioMessage} ${UrlHelpers.getStudioLocalUrl(studioId)}",
+    );
+  }
+
+  static void profileShareOptions(int profileId) {
+    Share.share(
+      "${ShareConstants.profileMessage} ${UrlHelpers.getProfileLocalUrl(profileId)}",
+    );
+  }
+
+  static void reviewShareOptions(int reviewId) {
+    Share.share(
+      "${ShareConstants.reviewMessage} ${UrlHelpers.getReviewLocalUrl(reviewId)}",
+    );
+  }
+
+  static void activityShareOptions(int activityId) {
+    Share.share(
+      "${ShareConstants.activityMessage} ${UrlHelpers.getActivityLocalUrl(activityId)}",
+    );
   }
 }

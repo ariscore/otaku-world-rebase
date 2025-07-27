@@ -6,17 +6,16 @@ import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/profile/my_profile/my_profile_bloc.dart';
 import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
+import 'package:otaku_world/core/ui/bottomsheet/helpers/share_helpers.dart';
+import 'package:otaku_world/core/ui/bottomsheet/helpers/url_helpers.dart';
 import 'package:otaku_world/core/ui/buttons/back_button.dart';
 import 'package:otaku_world/core/ui/image.dart';
 import 'package:otaku_world/features/profile/widgets/user_avatar.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/ui/tabs/custom_tab_bar.dart';
 import '../../../generated/assets.dart';
-import '../../../utils/ui_utils.dart';
 import '../../reviews/widgets/bottom_sheet_component.dart';
 
 class MyProfileAppBar extends StatelessWidget {
@@ -41,7 +40,10 @@ class MyProfileAppBar extends StatelessWidget {
       ),
       title: Text(
         'My Profile',
-        style: Theme.of(context).textTheme.displayMedium,
+        style: Theme
+            .of(context)
+            .textTheme
+            .displayMedium,
       ),
       centerTitle: false,
       actions: [
@@ -49,7 +51,8 @@ class MyProfileAppBar extends StatelessWidget {
           asset: Assets.iconsMessage,
           onPressed: () {
             context.push(
-              '${RouteConstants.userActivities}?is_current_user=1&user_id=${user.id}',
+              '${RouteConstants.userActivities}?is_current_user=1&user_id=${user
+                  .id}',
             );
           },
         ),
@@ -100,7 +103,7 @@ class MyProfileAppBar extends StatelessWidget {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        AppColors.raisinBlack.withValues(alpha:0.3),
+                        AppColors.raisinBlack.withValues(alpha: 0.3),
                         AppColors.raisinBlack,
                       ],
                     ),
@@ -118,9 +121,13 @@ class MyProfileAppBar extends StatelessWidget {
                   const SizedBox(height: 10),
                   Text(
                     user.name,
-                    style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                          fontFamily: 'Poppins-Medium',
-                        ),
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .displayMedium
+                        ?.copyWith(
+                      fontFamily: 'Poppins-Medium',
+                    ),
                   ),
                 ],
               ),
@@ -170,8 +177,8 @@ class MyProfileAppBar extends StatelessWidget {
         onTap: () {
           context.pop();
           context.read<ViewerBloc>().add(
-                LoadViewer(context.read<GraphqlClientCubit>().getClient()!),
-              );
+            LoadViewer(context.read<GraphqlClientCubit>().getClient()!),
+          );
           context.push('${RouteConstants.settings}?name=${user.name}');
         },
       ),
@@ -186,7 +193,7 @@ class MyProfileAppBar extends StatelessWidget {
         iconName: Assets.iconsShare,
         text: 'Share Profile',
         onTap: () {
-          _shareProfile(context, user.name);
+          _shareProfile(context, user.id);
         },
       ),
     ];
@@ -234,28 +241,20 @@ class MyProfileAppBar extends StatelessWidget {
 
   void _viewOnAniList(BuildContext context, String userName) {
     context.pop();
-    final Uri reviewUri = Uri(
+    final Uri otherUserProfileUri = Uri(
       scheme: 'https',
       host: 'anilist.co',
       path: 'user/$userName',
     );
-    launchUrl(
-      reviewUri,
-      mode: LaunchMode.externalApplication,
-    ).then(
-      (isSuccess) {
-        if (!isSuccess) {
-          UIUtils.showSnackBar(context, 'Can\'t open the link!');
-        }
-      },
-      onError: (e) {
-        UIUtils.showSnackBar(context, 'Can\'t open the link!');
-      },
+
+    UrlHelpers.launchUri(
+      context,
+      otherUserProfileUri,
     );
   }
 
-  void _shareProfile(BuildContext context, String userName) {
+  void _shareProfile(BuildContext context, int userId) {
     context.pop();
-    Share.share('Bhai ni profile check karo: $userName');
+    ShareHelpers.profileShareOptions(userId);
   }
 }

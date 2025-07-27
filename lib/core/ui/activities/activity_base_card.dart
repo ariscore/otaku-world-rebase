@@ -26,6 +26,7 @@ class ActivityBaseCard extends StatefulWidget {
     required this.child,
     required this.avatarUrl,
     required this.userId,
+    required this.activitySiteUrl,
     this.receiverUserId,
     required this.userName,
     this.receiverAvatarUrl,
@@ -45,6 +46,7 @@ class ActivityBaseCard extends StatefulWidget {
 
   final Widget child;
   final int id;
+  final String? activitySiteUrl;
   final String? avatarUrl;
   final int userId;
   final int? receiverUserId;
@@ -157,6 +159,7 @@ class _ActivityBaseCardState extends State<ActivityBaseCard> {
               likeCount: widget.likeCount,
               replyCount: widget.replyCount,
               activityId: widget.id,
+              activitySiteUrl: widget.activitySiteUrl,
               isLiked: widget.isLiked,
               type: widget.type,
               isCurrentUserMessage: widget.isCurrentUserMessage,

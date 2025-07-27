@@ -9,6 +9,7 @@ import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/bloc/reviews/review_detail/review_detail_bloc.dart';
 import 'package:otaku_world/bloc/reviews/reviews/reviews_bloc.dart';
 import 'package:otaku_world/constants/string_constants.dart';
+import 'package:otaku_world/core/ui/bottomsheet/helpers/share_helpers.dart';
 import 'package:otaku_world/core/ui/markdown_v2/markdown.dart';
 import 'package:otaku_world/core/ui/shimmers/review_detail_shimmer.dart';
 import 'package:otaku_world/features/media_detail/widgets/banner_image.dart';
@@ -21,7 +22,6 @@ import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../bloc/profile/reviews/user_reviews_bloc.dart';
@@ -458,11 +458,7 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                 ),
                 BottomSheetComponent(
                   onTap: () {
-                    // TODO: Repair this
-                    Share.share(
-                      "Check out this anime review: https://otaku-world-8a7f4.firebaseapp.com/"
-                      "review-detail?id=$reviewId",
-                    );
+                    ShareHelpers.reviewShareOptions(reviewId);
                     context.pop();
                   },
                   iconName: Assets.iconsShare,
