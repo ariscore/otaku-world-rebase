@@ -9,6 +9,8 @@ class AppConfig {
   static String aniListLink = 'https://anilist.co/user/otakuworldapp/';
   static String playStoreLink = 'https://play.google.com/store/apps/details?id=com.ternaryminds.otaku_world';
   static String privacyPolicyLink = 'https://otakuworldapp-pp.netlify.app/';
+  static String officialWebLink = 'https://otakuworld-site.netlify.app/';
+  static String linkedinLink = 'https://otakuworldapp-pp.netlify.app/';
 
   static String copyRightYear = '2025';
   static String parentCompanyName = 'ArisCore';

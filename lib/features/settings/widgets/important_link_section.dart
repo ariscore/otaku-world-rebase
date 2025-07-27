@@ -15,6 +15,8 @@ class ImportantLinksSection extends StatelessWidget {
     LinkModel(url: AppConfig.gmailLink, icon: Assets.aboutUsGmail),
     LinkModel(url: AppConfig.aniListLink, icon: Assets.aboutUsAnilist),
     LinkModel(url: AppConfig.playStoreLink, icon: Assets.aboutUsPlaystore),
+    LinkModel(url: AppConfig.officialWebLink, icon: Assets.aboutUsPlaystore),
+    LinkModel(url: AppConfig.linkedinLink, icon: Assets.aboutUsPlaystore),
   ];
 
   @override
