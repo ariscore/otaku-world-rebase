@@ -57,6 +57,15 @@ class CustomError {
     );
   }
 
+  /// Firebase analytic log error
+  factory CustomError.analyticLogError({String? message}) {
+    return CustomError(
+      title: "Analytic Log Error",
+      subtitle: message ?? StringConstants.analyticError,
+      type: ErrorType.analyticLog,
+    );
+  }
+
   String get message {
     return subtitle ?? title ?? StringConstants.somethingWentWrongError;
   }

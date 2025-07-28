@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
-
 import 'dart:developer' as dev;
+
+import 'package:flutter/material.dart';
+import 'package:otaku_world/features/app_events_management/utils/analytics_logger.dart';
 
 class CustomRouteObserver extends NavigatorObserver {
   @override
@@ -13,6 +14,29 @@ class CustomRouteObserver extends NavigatorObserver {
         name: 'GoRouter',
       );
     }
+    _logScreenView(route);
     super.didPush(route, previousRoute);
+  }
+
+  @override
+  void didReplace({Route? newRoute, Route? oldRoute}) {
+    _logScreenView(newRoute);
+    super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
+  }
+
+  @override
+  void didPop(Route route, Route? previousRoute) {
+    _logScreenView(previousRoute);
+    super.didPop(route, previousRoute);
+  }
+
+  Future<void> _logScreenView(Route<dynamic>? route) async {
+    final screenName = route?.settings.name ??
+        route?.settings.arguments?.toString() ??
+        route.toString();
+    await AnalyticsLogger.logScreenView(
+      screenName: screenName,
+      screenClass: route?.runtimeType.toString(),
+    );
   }
 }

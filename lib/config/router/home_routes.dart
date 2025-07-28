@@ -5,6 +5,7 @@ final homeRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.reviews,
+    name: RouteConstants.reviews,
     builder: (state) {
       return BlocProvider(
         create: (context) => ReviewsBloc(),
@@ -17,6 +18,7 @@ final homeRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.reviewDetail,
+    name: RouteConstants.reviewDetail,
     builder: (state) {
       return BlocProvider(
         create: (context) => ReviewDetailBloc(
@@ -33,6 +35,7 @@ final homeRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.calendar,
+    name: RouteConstants.calendar,
     builder: (state) => MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -50,6 +53,7 @@ final homeRoutes = [
   GoRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.search,
+    name: RouteConstants.search,
     builder: (context, state) => BlocProvider(
       create: (context) => SearchBloc(),
       child: const SearchScreen(),
@@ -59,6 +63,7 @@ final homeRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.postReview,
+    name: RouteConstants.postReview,
     directionTween: SlideTransitionRoute.bottomToTopTween,
     builder: (state) {
       final int mediaId =
@@ -74,6 +79,7 @@ final homeRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.writeReview,
+    name: RouteConstants.writeReview,
     directionTween: SlideTransitionRoute.bottomToTopTween,
     builder: (state) {
       final commentController = state.extra as TextEditingController;
@@ -83,6 +89,7 @@ final homeRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.previewReview,
+    name: RouteConstants.previewReview,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       final String data = state.extra != null ? state.extra as String : '';
@@ -93,6 +100,7 @@ final homeRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.trendingAnime,
+    name: RouteConstants.trendingAnime,
     builder: (state) {
       final bloc = state.extra as TrendingAnimeBloc;
       return BlocProvider.value(
@@ -106,6 +114,7 @@ final homeRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.trendingAnimeSlider,
+    name: RouteConstants.trendingAnimeSlider,
     builder: (state) {
       final bloc = state.extra as TrendingAnimeBloc;
       return BlocProvider.value(
@@ -119,6 +128,7 @@ final homeRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.recommendedAnime,
+    name: RouteConstants.recommendedAnime,
     builder: (state) {
       final bloc = state.extra as RecommendedAnimeBloc;
       return BlocProvider.value(
@@ -132,6 +142,7 @@ final homeRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.recommendedAnimeSlider,
+    name: RouteConstants.recommendedAnimeSlider,
     builder: (state) {
       final bloc = state.extra as RecommendedAnimeBloc;
       return BlocProvider.value(
@@ -145,6 +156,7 @@ final homeRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.trendingManga,
+    name: RouteConstants.trendingManga,
     builder: (state) {
       final bloc = state.extra as TrendingMangaBloc;
       return BlocProvider.value(
@@ -158,6 +170,7 @@ final homeRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.trendingMangaSlider,
+    name: RouteConstants.trendingMangaSlider,
     builder: (state) {
       final bloc = state.extra as TrendingMangaBloc;
       return BlocProvider.value(
@@ -171,6 +184,7 @@ final homeRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.recommendedManga,
+    name: RouteConstants.recommendedManga,
     builder: (state) {
       final bloc = state.extra as RecommendedMangaBloc;
       return BlocProvider.value(
@@ -184,6 +198,7 @@ final homeRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.recommendedMangaSlider,
+    name: RouteConstants.recommendedMangaSlider,
     builder: (state) {
       final bloc = state.extra as RecommendedMangaBloc;
       return BlocProvider.value(

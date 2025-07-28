@@ -4,6 +4,7 @@ final profileRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.myProfile,
+    name: RouteConstants.myProfile,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       return BlocProvider(
@@ -15,6 +16,7 @@ final profileRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.profile,
+    name: RouteConstants.profile,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       final id = int.parse(state.uri.queryParameters['id']!);
@@ -27,6 +29,7 @@ final profileRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.sendMessage,
+    name: RouteConstants.sendMessage,
     directionTween: SlideTransitionRoute.bottomToTopTween,
     builder: (state) {
       final id = int.parse(state.uri.queryParameters['receiver_id']!);
@@ -42,6 +45,7 @@ final profileRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.favoriteAnime,
+    name: RouteConstants.favoriteAnime,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       return BlocProvider<FavoriteAnimeBloc>.value(
@@ -53,6 +57,7 @@ final profileRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.favoriteAnimeSlider,
+    name: RouteConstants.favoriteAnimeSlider,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       return BlocProvider<FavoriteAnimeBloc>.value(
@@ -64,6 +69,7 @@ final profileRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.favoriteManga,
+    name: RouteConstants.favoriteManga,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       return BlocProvider<FavoriteMangaBloc>.value(
@@ -75,6 +81,7 @@ final profileRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.favoriteMangaSlider,
+    name: RouteConstants.favoriteMangaSlider,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       return BlocProvider<FavoriteMangaBloc>.value(
@@ -86,6 +93,7 @@ final profileRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.favoriteCharacters,
+    name: RouteConstants.favoriteCharacters,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       return BlocProvider<FavoriteCharactersBloc>.value(
@@ -97,6 +105,7 @@ final profileRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.favoriteStaff,
+    name: RouteConstants.favoriteStaff,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       return BlocProvider<FavoriteStaffBloc>.value(
@@ -108,6 +117,7 @@ final profileRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.favoriteStudios,
+    name: RouteConstants.favoriteStudios,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       return BlocProvider<FavoriteStudiosBloc>.value(
@@ -119,6 +129,7 @@ final profileRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.userActivities,
+    name: RouteConstants.userActivities,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       final isCurrentUser =
@@ -130,6 +141,7 @@ final profileRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.userNotifications,
+    name: RouteConstants.userNotifications,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       return UserNotificationsScreen(resetCount: state.extra! as VoidCallback);
@@ -138,6 +150,7 @@ final profileRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.statusDistribution,
+    name: RouteConstants.statusDistribution,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       final type = state.uri.queryParameters['type'] == 'anime'
@@ -152,6 +165,7 @@ final profileRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.formatDistribution,
+    name: RouteConstants.formatDistribution,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       final type = state.uri.queryParameters['type'] == 'anime'
@@ -166,6 +180,7 @@ final profileRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.countryDistribution,
+    name: RouteConstants.countryDistribution,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       final type = state.uri.queryParameters['type'] == 'anime'
@@ -180,6 +195,7 @@ final profileRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.releaseYearDistribution,
+    name: RouteConstants.releaseYearDistribution,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       final type = state.uri.queryParameters['type'] == 'anime'
@@ -195,6 +211,7 @@ final profileRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.startYearDistribution,
+    name: RouteConstants.startYearDistribution,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       final type = state.uri.queryParameters['type'] == 'anime'
@@ -209,6 +226,7 @@ final profileRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.scoreDistribution,
+    name: RouteConstants.scoreDistribution,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       final type = state.uri.queryParameters['type'] == 'anime'
@@ -223,6 +241,7 @@ final profileRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.lengthDistribution,
+    name: RouteConstants.lengthDistribution,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       final type = state.uri.queryParameters['type'] == 'anime'

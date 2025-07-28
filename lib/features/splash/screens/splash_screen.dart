@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/routes/redirect_route_cubit.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
+import 'package:otaku_world/features/app_review_management/app_review_manager.dart';
 import 'package:otaku_world/generated/assets.dart';
 
 import '../../../bloc/auth/auth_cubit.dart';
@@ -48,6 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
               if (routerCubit.isDesiredRouteSet()) {
                 context.go(routerCubit.getDesiredRoute());
               } else {
+                AppReviewManager.requestReviewIfAppropriate();
                 context.go(RouteConstants.home);
               }
             }

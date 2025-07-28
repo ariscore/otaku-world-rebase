@@ -11,10 +11,30 @@ class ImportantLinksSection extends StatelessWidget {
   ImportantLinksSection({super.key});
 
   final List<LinkModel> links = [
-    LinkModel(url: AppConfig.gitHubLink, icon: Assets.aboutUsGithub),
-    LinkModel(url: AppConfig.gmailLink, icon: Assets.aboutUsGmail),
-    LinkModel(url: AppConfig.aniListLink, icon: Assets.aboutUsAnilist),
-    LinkModel(url: AppConfig.playStoreLink, icon: Assets.aboutUsPlaystore),
+    LinkModel(
+      url: AppConfig.gitHubLink,
+      icon: Assets.aboutUsGithub,
+    ),
+    LinkModel(
+      url: AppConfig.gmailLink,
+      icon: Assets.aboutUsGmail,
+    ),
+    LinkModel(
+      url: AppConfig.linkedinLink,
+      icon: Assets.aboutUsLinkedin,
+    ),
+    LinkModel(
+      url: AppConfig.aniListLink,
+      icon: Assets.aboutUsAnilist,
+    ),
+    LinkModel(
+      url: AppConfig.playStoreLink,
+      icon: Assets.aboutUsPlaystore,
+    ),
+    LinkModel(
+      url: AppConfig.officialWebLink,
+      icon: Assets.assetsAppLogo,
+    ),
   ];
 
   @override
@@ -54,6 +74,8 @@ class LinkItem extends StatelessWidget {
         UrlHelpers.launchUrlLink(context, link.url);
       },
       child: SvgPicture.asset(
+        height: 40,
+        width: 40,
         link.icon,
       ),
     );

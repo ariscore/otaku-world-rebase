@@ -25,6 +25,7 @@ import 'package:path_provider/path_provider.dart';
 
 import 'bloc/app_version/app_version_bloc.dart';
 import 'config/router/router.dart';
+import 'features/app_events_management/utils/analytics_logger.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +34,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await SharedPreferenceUtils.init();
+  await AnalyticsLogger.init();
   if (kReleaseMode) {
     // Enable Crashlytics in release mode
     FlutterError.onError = (errorDetails) {

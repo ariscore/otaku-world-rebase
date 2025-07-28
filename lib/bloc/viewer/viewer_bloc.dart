@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:otaku_world/constants/string_constants.dart';
+import 'package:otaku_world/features/app_events_management/utils/analytics_logger.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/update_user.graphql.dart';
 
@@ -32,6 +33,11 @@ class ViewerBloc extends HydratedBloc<ViewerEvent, ViewerState> {
       final user = await _userRepository.fetchAndCacheUserData(event.client);
 
       log('Loaded user data: ${user.toJson()}');
+
+      AnalyticsLogger.setUser(
+        userId: user.id.toString(),
+        username: user.name,
+      );
       emit(ViewerLoaded(user: user));
     } on OperationException catch (e) {
       final user = _userRepository.lastCachedUser;

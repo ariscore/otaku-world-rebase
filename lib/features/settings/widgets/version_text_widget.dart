@@ -8,7 +8,7 @@ class VersionTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: AppVersionService.getVersionName(),
+      future: AppVersionService.getVersionNameAndBuildNumber(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const SizedBox.shrink();
