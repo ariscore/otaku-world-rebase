@@ -18,6 +18,8 @@ import 'package:otaku_world/features/profile/widgets/user_reviews.dart';
 import 'package:otaku_world/features/profile/widgets/user_social.dart';
 import 'package:otaku_world/theme/colors.dart';
 
+import '../../../utils/navigation_helper.dart';
+
 class ProfileScreen extends HookWidget {
   const ProfileScreen({super.key});
 
@@ -29,104 +31,110 @@ class ProfileScreen extends HookWidget {
     final client = context.read<GraphqlClientCubit>().getClient();
     final scrollViewKey = GlobalKey<ExtendedNestedScrollViewState>();
 
-    return Scaffold(
-      body: BlocBuilder<ProfileBloc, ProfileState>(
-        buildWhen: (previous, current) {
-          return previous.runtimeType != current.runtimeType;
-        },
-        builder: (context, state) {
-          if (state is ProfileInitial) {
-            if (client == null) {
+    return PopScope(
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) return;
+        NavigationHelper.onPopInvoked(context);
+      },
+      child: Scaffold(
+        body: BlocBuilder<ProfileBloc, ProfileState>(
+          buildWhen: (previous, current) {
+            return previous.runtimeType != current.runtimeType;
+          },
+          builder: (context, state) {
+            if (state is ProfileInitial) {
+              if (client == null) {
+                return _buildErrorScaffold(
+                  message: ActivityConstants.clientError,
+                  onPressed: () {
+                    profileBloc.add(LoadProfile(client!));
+                  },
+                );
+              }
+              profileBloc.add(LoadProfile(client));
+              return _buildLoadingScaffold();
+            } else if (state is ProfileLoading) {
+              return _buildLoadingScaffold();
+            } else if (state is ProfileLoaded) {
+              return RefreshIndicator(
+                backgroundColor: AppColors.raisinBlack,
+                displacement: 60,
+                onRefresh: () {
+                  return Future.delayed(const Duration(seconds: 1), () {
+                    if (context.mounted) {
+                      context.read<ProfileBloc>().add(LoadProfile(client!));
+                    }
+                  });
+                },
+                notificationPredicate: (notification) {
+                  return notification.depth == 2;
+                },
+                child: ExtendedNestedScrollView(
+                  key: scrollViewKey,
+                  onlyOneScrollInBody: true,
+                  headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                    ProfileAppBar(
+                      user: state.user,
+                      tabController: tabController,
+                    ),
+                  ],
+                  pinnedHeaderSliverHeightBuilder: () {
+                    return 130;
+                  },
+                  body: TabBarView(
+                    controller: tabController,
+                    children: [
+                      KeepAliveTab(
+                        child: UserOverview(
+                          user: state.user,
+                          followingCount: state.followingCount,
+                          followerCount: state.followerCount,
+                        ),
+                      ),
+                      KeepAliveTab(
+                        child: UserFavorites(
+                          userId: state.user.id,
+                        ),
+                      ),
+                      KeepAliveTab(
+                        child: UserStats(
+                          userId: state.user.id,
+                          scrollKey: scrollViewKey,
+                        ),
+                      ),
+                      KeepAliveTab(
+                        child: UserSocial(
+                          userId: state.user.id,
+                          scrollKey: scrollViewKey,
+                          isMyProfile: false,
+                        ),
+                      ),
+                      KeepAliveTab(
+                        child: UserReviews(
+                          userId: state.user.id,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            } else if (state is ProfileError) {
               return _buildErrorScaffold(
-                message: ActivityConstants.clientError,
+                message: state.error.message,
+                onPressed: () {
+                  profileBloc.add(LoadProfile(client!));
+                },
+              );
+            } else {
+              return _buildErrorScaffold(
+                message: StringConstants.somethingWentWrongError,
                 onPressed: () {
                   profileBloc.add(LoadProfile(client!));
                 },
               );
             }
-            profileBloc.add(LoadProfile(client));
-            return _buildLoadingScaffold();
-          } else if (state is ProfileLoading) {
-            return _buildLoadingScaffold();
-          } else if (state is ProfileLoaded) {
-            return RefreshIndicator(
-              backgroundColor: AppColors.raisinBlack,
-              displacement: 60,
-              onRefresh: () {
-                return Future.delayed(const Duration(seconds: 1), () {
-                  if (context.mounted) {
-                    context.read<ProfileBloc>().add(LoadProfile(client!));
-                  }
-                });
-              },
-              notificationPredicate: (notification) {
-                return notification.depth == 2;
-              },
-              child: ExtendedNestedScrollView(
-                key: scrollViewKey,
-                onlyOneScrollInBody: true,
-                headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                  ProfileAppBar(
-                    user: state.user,
-                    tabController: tabController,
-                  ),
-                ],
-                pinnedHeaderSliverHeightBuilder: () {
-                  return 130;
-                },
-                body: TabBarView(
-                  controller: tabController,
-                  children: [
-                    KeepAliveTab(
-                      child: UserOverview(
-                        user: state.user,
-                        followingCount: state.followingCount,
-                        followerCount: state.followerCount,
-                      ),
-                    ),
-                    KeepAliveTab(
-                      child: UserFavorites(
-                        userId: state.user.id,
-                      ),
-                    ),
-                    KeepAliveTab(
-                      child: UserStats(
-                        userId: state.user.id,
-                        scrollKey: scrollViewKey,
-                      ),
-                    ),
-                    KeepAliveTab(
-                      child: UserSocial(
-                        userId: state.user.id,
-                        scrollKey: scrollViewKey,
-                        isMyProfile: false,
-                      ),
-                    ),
-                    KeepAliveTab(
-                      child: UserReviews(
-                        userId: state.user.id,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          } else if (state is ProfileError) {
-            return _buildErrorScaffold(
-              message: state.error.message,
-              onPressed: () {
-                profileBloc.add(LoadProfile(client!));
-              },
-            );
-          } else {
-            return _buildErrorScaffold(
-              message: StringConstants.somethingWentWrongError,
-              onPressed: () {
-                profileBloc.add(LoadProfile(client!));
-              },
-            );
-          }
-        },
+          },
+        ),
       ),
     );
   }
