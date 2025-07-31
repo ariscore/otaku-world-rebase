@@ -1,5 +1,5 @@
 class AppConfig {
-  static String baseUrl = 'https://otakuworld-site.netlify.app';
+  static String baseUrl = 'https://otakuworld-links.netlify.app';
   static bool enableForceUpdateFeature = true;
   static String appStoreId = '';
   static String gitHubLink = 'https://github.com/ariscore/otaku-world-rebase';
