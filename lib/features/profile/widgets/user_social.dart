@@ -16,9 +16,9 @@ import 'package:otaku_world/features/profile/widgets/shimmers/social_shimmer.dar
 import 'package:otaku_world/features/profile/widgets/user_card.dart';
 import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
-import 'package:share_plus/share_plus.dart';
 
 import '../../../constants/string_constants.dart';
+import '../../../core/ui/bottomsheet/helpers/share_helpers.dart';
 import '../../../core/ui/dialogs/alert_dialog.dart';
 import '../../../theme/colors.dart';
 import '../../../utils/ui_utils.dart';
@@ -175,14 +175,14 @@ class UserSocial extends StatelessWidget {
                   } else if (state is UserSocialError) {
                     return SliverToBoxAdapter(
                       child: ErrorText(
-                        message: state.message,
+                        message: state.error.message,
                         onTryAgain: () {},
                       ),
                     );
                   } else if (state is UserSocialError) {
                     return SliverToBoxAdapter(
                       child: ErrorText(
-                        message: state.message,
+                        message: state.error.message,
                         onTryAgain: () {
                           if (client != null) {
                             context.read<UserSocialBloc>().add(
@@ -358,15 +358,7 @@ class UserSocial extends StatelessWidget {
 
   void _shareProfile(BuildContext context, int userId) {
     context.pop();
-    final uri = Uri(
-      scheme: 'https',
-      host: 'otaku-world-8a7f4.firebaseapp.com',
-      path: '/profile',
-      queryParameters: {
-        'id': userId.toString(),
-      },
-    );
-    Share.share('Bhai ni profile check karo: ${uri.toString()}');
+    ShareHelpers.profileShareOptions(userId);
   }
 
   void _viewOnAniList(BuildContext context, String userName) {

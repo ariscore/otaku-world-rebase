@@ -5,6 +5,7 @@ import 'package:otaku_world/features/character_detail/widgets/character_media_ca
 
 import '../../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/paginated_data/paginated_data_bloc.dart';
+import '../../../core/model/custom_error.dart';
 import '../../../core/ui/placeholders/anime_character_placeholder.dart';
 import '../../../core/ui/shimmers/detail_screens/list/character_list_shimmer.dart';
 import '../../../core/ui/widgets/language_selection_mixin.dart';
@@ -123,11 +124,9 @@ class _CharacterMediaListState extends State<CharacterMediaList>
               return SliverToBoxAdapter(
                 child: Center(
                   child: AnimeCharacterPlaceholder(
-                    asset: Assets.charactersNoInternet,
+                    asset: Assets.charactersErenYeager,
                     height: 300,
-                    heading: 'Something went wrong!',
-                    subheading:
-                        'Please check your internet connection or try again later.',
+                    error: CustomError.unexpectedError(),
                     onTryAgain: () {
                       final client = (context.read<GraphqlClientCubit>().state
                               as GraphqlClientInitialized)

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
+import 'package:otaku_world/constants/string_constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../config/app_config.dart';
@@ -23,6 +24,18 @@ class UrlHelpers {
     return '${AppConfig.baseUrl}${RouteConstants.studioDetail}?id=$studioId';
   }
 
+  static String getProfileLocalUrl(int profileId) {
+    return '${AppConfig.baseUrl}${RouteConstants.profile}?id=$profileId';
+  }
+
+  static String getReviewLocalUrl(int reviewId) {
+    return '${AppConfig.baseUrl}${RouteConstants.reviewDetail}?id=$reviewId';
+  }
+
+  static String getActivityLocalUrl(int activityId) {
+    return '${AppConfig.baseUrl}${RouteConstants.activity}?id=$activityId';
+  }
+
   static Future<void> launchUri(BuildContext context, Uri uri) async {
     try {
       await launchUrl(
@@ -31,7 +44,10 @@ class UrlHelpers {
       );
     } catch (e) {
       if (context.mounted) {
-        UIUtils.showSnackBar(context, 'Unable to launch url');
+        UIUtils.showSnackBar(
+          context,
+          UrlConstants.unableToOpenLink,
+        );
       }
     }
   }

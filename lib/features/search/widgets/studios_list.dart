@@ -11,7 +11,7 @@ import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/search/search_base/search_base_bloc.dart';
-import '../../../constants/string_constants.dart';
+import '../../../core/model/custom_error.dart';
 import '../../../core/ui/placeholders/anime_character_placeholder.dart';
 import '../../../generated/assets.dart';
 
@@ -66,7 +66,7 @@ class ResultStudiosList extends HookWidget {
               child: CircularProgressIndicator(),
             );
           } else if (state is SearchError) {
-            return ErrorText(message: state.message, onTryAgain: () {});
+            return ErrorText(message: state.error.message,onTryAgain: () {});
           } else if (state
               is SearchResultLoaded<Fragment$SearchResultStudio?>) {
             final list = state.list;
@@ -104,10 +104,10 @@ class ResultStudiosList extends HookWidget {
                     ],
                   );
           } else {
-            return const AnimeCharacterPlaceholder(
+            return  AnimeCharacterPlaceholder(
               height: 300,
               asset: Assets.charactersErenYeager,
-              subheading: StringConstants.somethingWentWrongError,
+              error: CustomError.unexpectedError(),
             );
           }
         },

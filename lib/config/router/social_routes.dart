@@ -4,6 +4,7 @@ final socialRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.activityReplies,
+    name: RouteConstants.activityReplies,
     directionTween: SlideTransitionRoute.bottomToTopTween,
     builder: (state) {
       return BlocProvider(
@@ -17,6 +18,7 @@ final socialRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.replyActivity,
+    name: RouteConstants.replyActivity,
     directionTween: SlideTransitionRoute.bottomToTopTween,
     builder: (state) {
       return BlocProvider(
@@ -30,6 +32,7 @@ final socialRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.editActivityReply,
+    name: RouteConstants.editActivityReply,
     directionTween: SlideTransitionRoute.bottomToTopTween,
     builder: (state) {
       final map = state.extra as Map<String, dynamic>;
@@ -51,6 +54,7 @@ final socialRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.postNewActivity,
+    name: RouteConstants.postNewActivity,
     directionTween: SlideTransitionRoute.bottomToTopTween,
     builder: (state) {
       return BlocProvider(
@@ -64,6 +68,7 @@ final socialRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.editTextActivity,
+    name: RouteConstants.editTextActivity,
     directionTween: SlideTransitionRoute.bottomToTopTween,
     builder: (state) {
       final map = state.extra as Map<String, dynamic>;
@@ -84,6 +89,7 @@ final socialRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.editMessageActivity,
+    name: RouteConstants.editMessageActivity,
     directionTween: SlideTransitionRoute.bottomToTopTween,
     builder: (state) {
       final map = state.extra as Map<String, dynamic>;
@@ -104,6 +110,7 @@ final socialRoutes = [
   SlideTransitionRoute(
     parentNavigatorKey: _rootNavigatorKey,
     path: RouteConstants.activity,
+    name: RouteConstants.activity,
     directionTween: SlideTransitionRoute.leftToRightTween,
     builder: (state) {
       final id = int.parse(state.uri.queryParameters['id']!);

@@ -308,7 +308,7 @@ class _EditListEntryScreenState extends State<EditListEntryScreen> {
       UIUtils.hideProgressDialog(context);
       UIUtils.showSnackBar(
         context,
-        state.message,
+        state.error.message,
       );
     } else if (state is DeletingListEntry || state is SavingMediaListEntry) {
       UIUtils.showProgressDialog(context);
@@ -316,7 +316,7 @@ class _EditListEntryScreenState extends State<EditListEntryScreen> {
       UIUtils.hideProgressDialog(context);
       UIUtils.showSnackBar(
         context,
-        state.message,
+        state.error.message,
       );
     } else if (state is SavedMediaListEntry) {
       UIUtils.hideProgressDialog(context);
@@ -829,7 +829,7 @@ class _EditListEntryScreenState extends State<EditListEntryScreen> {
             anime: isAnime,
           ),
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: AppColors.white.withValues(alpha:0.8),
+                color: AppColors.white.withValues(alpha: 0.8),
               ),
         ),
       ],

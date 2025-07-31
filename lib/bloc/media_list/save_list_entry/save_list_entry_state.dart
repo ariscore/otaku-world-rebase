@@ -15,10 +15,9 @@ final class IncrementedEpisode extends SaveListEntryState {
 }
 
 final class IncrementEpisodeError extends SaveListEntryState {
-  const IncrementEpisodeError({required this.type, required this.message});
+  const IncrementEpisodeError({required this.error});
 
-  final ErrorType type;
-  final String message;
+  final CustomError error;
 }
 
 final class DeletingListEntry extends SaveListEntryState {}
@@ -26,10 +25,9 @@ final class DeletingListEntry extends SaveListEntryState {}
 final class DeletedEntry extends SaveListEntryState {}
 
 final class DeleteListEntryError extends SaveListEntryState {
-  const DeleteListEntryError({required this.type, required this.message});
+  const DeleteListEntryError({required this.error});
 
-  final ErrorType type;
-  final String message;
+  final CustomError error;
 }
 
 final class SavingMediaListEntry extends SaveListEntryState {}
@@ -41,8 +39,7 @@ final class SavedMediaListEntry extends SaveListEntryState {
 }
 
 final class SaveMediaListEntryError extends SaveListEntryState {
-  const SaveMediaListEntryError({required this.type, required this.message});
+  const SaveMediaListEntryError({required this.error});
 
-  final ErrorType type;
-  final String message;
+  final CustomError error;
 }

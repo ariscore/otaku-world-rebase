@@ -8,12 +8,12 @@ import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:like_button/like_button.dart';
 import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
+import 'package:otaku_world/core/ui/bottomsheet/helpers/share_helpers.dart';
+import 'package:otaku_world/core/ui/bottomsheet/helpers/url_helpers.dart';
 import 'package:otaku_world/core/ui/dialogs/alert_dialog.dart';
 import 'package:otaku_world/features/reviews/widgets/bottom_sheet_component.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/social/like_activity/like_activity_cubit.dart';
@@ -27,6 +27,7 @@ class ActivityActions extends StatelessWidget {
     required this.likeCount,
     required this.replyCount,
     required this.activityId,
+    required this.activitySiteUrl,
     required this.isLiked,
     required this.type,
     required this.isSubscribed,
@@ -40,6 +41,7 @@ class ActivityActions extends StatelessWidget {
 
   final int userId;
   final int activityId;
+  final String? activitySiteUrl;
   final bool isLiked;
   final int likeCount;
   final int replyCount;
@@ -275,7 +277,7 @@ class ActivityActions extends StatelessWidget {
                   },
                 ),
                 Container(
-                  color: AppColors.white.withValues(alpha:0.5),
+                  color: AppColors.white.withValues(alpha: 0.5),
                   height: 1,
                 ),
                 const SizedBox(height: 20),
@@ -307,40 +309,27 @@ class ActivityActions extends StatelessWidget {
   }
 
   void _copyLink(BuildContext context) {
-    final url = 'https://anilist.co/activity/$activityId';
-    Clipboard.setData(ClipboardData(text: url)).then((v) {
-      context.pop();
-      UIUtils.showSnackBar(context, 'Link copied!');
-    });
+    if (activitySiteUrl != null && activitySiteUrl!.isNotEmpty) {
+      Clipboard.setData(ClipboardData(text: activitySiteUrl!)).then((v) {
+        if (context.mounted) {
+          context.pop();
+          UIUtils.showSnackBar(context, 'Link copied!');
+        }
+      });
+    }
   }
 
   void _viewOnAniList(BuildContext context) {
-    final Uri reviewUri = Uri(
-      scheme: 'https',
-      host: 'anilist.co',
-      path: 'activity/$activityId',
-    );
-    context.pop();
-    launchUrl(
-      reviewUri,
-      mode: LaunchMode.externalApplication,
-    ).then(
-      (isSuccess) {
-        if (!isSuccess) {
-          UIUtils.showSnackBar(context, "Can't open the link!");
-        }
-      },
-      onError: (e) {
-        UIUtils.showSnackBar(context, "Can't open the link!");
-      },
-    );
+    if (activitySiteUrl != null && activitySiteUrl!.isNotEmpty) {
+      UrlHelpers.launchUrlLink(
+        context,
+        activitySiteUrl!,
+      );
+    }
   }
 
   void _share(BuildContext context) {
     context.pop();
-    Share.share(
-      'Checkout this activity: https://otaku-world-8a7f4.firebaseapp.com/'
-      'activity?id=$activityId',
-    );
+    ShareHelpers.activityShareOptions(activityId);
   }
 }

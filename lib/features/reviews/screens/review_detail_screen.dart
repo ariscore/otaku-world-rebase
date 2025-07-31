@@ -9,6 +9,7 @@ import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/bloc/reviews/review_detail/review_detail_bloc.dart';
 import 'package:otaku_world/bloc/reviews/reviews/reviews_bloc.dart';
 import 'package:otaku_world/constants/string_constants.dart';
+import 'package:otaku_world/core/ui/bottomsheet/helpers/share_helpers.dart';
 import 'package:otaku_world/core/ui/markdown_v2/markdown.dart';
 import 'package:otaku_world/core/ui/shimmers/review_detail_shimmer.dart';
 import 'package:otaku_world/features/media_detail/widgets/banner_image.dart';
@@ -21,12 +22,12 @@ import 'package:otaku_world/generated/assets.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/utils/ui_utils.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../bloc/profile/reviews/user_reviews_bloc.dart';
 import '../../../bloc/viewer/viewer_bloc.dart';
 import '../../../config/router/router_constants.dart';
+import '../../../core/model/custom_error.dart';
 import '../../../core/ui/appbars/simple_app_bar.dart';
 import '../../../core/ui/placeholders/anime_character_placeholder.dart';
 import '../../../graphql/__generated/graphql/reviews/post_review.graphql.dart';
@@ -218,15 +219,27 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                   ],
                 ),
               );
+            } else if (state is ReviewDetailError) {
+              return Center(
+                child: AnimeCharacterPlaceholder(
+                  asset: Assets.charactersErenYeager,
+                  height: 300,
+                  error: state.error,
+                  onTryAgain: () {
+                    context
+                        .read<ReviewDetailBloc>()
+                        .add(LoadReviewDetail(client: client));
+                  },
+                  isError: true,
+                ),
+              );
             }
 
             return Center(
               child: AnimeCharacterPlaceholder(
                 asset: Assets.charactersErenYeager,
                 height: 300,
-                heading: 'Something went wrong!',
-                subheading:
-                    'Please check your internet connection or try again later.',
+                error: CustomError.unexpectedError(),
                 onTryAgain: () {
                   context
                       .read<ReviewDetailBloc>()
@@ -445,11 +458,7 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
                 ),
                 BottomSheetComponent(
                   onTap: () {
-                    // TODO: Repair this
-                    Share.share(
-                      "Check out this anime review: https://otaku-world-8a7f4.firebaseapp.com/"
-                      "review-detail?id=$reviewId",
-                    );
+                    ShareHelpers.reviewShareOptions(reviewId);
                     context.pop();
                   },
                   iconName: Assets.iconsShare,

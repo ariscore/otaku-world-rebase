@@ -9,8 +9,10 @@ import 'package:otaku_world/graphql/__generated/graphql/social/activity_subscrip
 import 'package:otaku_world/graphql/__generated/graphql/social/delete_activity.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/social/get_activity.graphql.dart';
 
-part 'activity_event.dart';
+import '../../../core/model/custom_error.dart';
+import '../../../utils/graphql_error_handler.dart';
 
+part 'activity_event.dart';
 part 'activity_state.dart';
 
 class ActivityBloc extends Bloc<ActivityEvent, ActivityState> {
@@ -36,29 +38,16 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState> {
     );
 
     if (response.hasException) {
-      final linkException = response.exception!.linkException;
-      if (linkException != null) {
-        if (linkException is ServerException) {
-          final error = linkException.parsedResponse?.errors?.firstOrNull;
-          if (error != null) {
-            if (error.message.contains('Not Found')) {
-              emit(const ActivityError(ActivityConstants.notFound));
-            } else {
-              emit(ActivityError(error.message));
-            }
-          } else {
-            emit(const ActivityError(StringConstants.noInternetError));
-          }
-        } else {
-          emit(const ActivityError(StringConstants.somethingWentWrongError));
-        }
-      } else {
-        emit(const ActivityError(StringConstants.somethingWentWrongError));
-      }
+      final exception = response.exception!;
+      emit(
+        ActivityError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       final data = response.parsedData?.Activity;
       if (data == null) {
-        emit(const ActivityError(StringConstants.somethingWentWrongError));
+        emit(ActivityError(CustomError.unexpectedError()));
       } else {
         emit(ActivityLoaded(activity: data));
       }

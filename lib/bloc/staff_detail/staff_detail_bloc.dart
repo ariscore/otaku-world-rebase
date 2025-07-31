@@ -2,10 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
+import '../../core/model/custom_error.dart';
 import '../../graphql/__generated/graphql/staff_detail/staff_detail.graphql.dart';
+import '../../utils/graphql_error_handler.dart';
 
 part 'staff_detail_event.dart';
-
 part 'staff_detail_state.dart';
 
 class StaffDetailBloc extends Bloc<StaffDetailEvent, StaffDetailState> {
@@ -29,13 +30,21 @@ class StaffDetailBloc extends Bloc<StaffDetailEvent, StaffDetailState> {
         ),
       );
 
-      if (result.parsedData?.Staff != null) {
-        emit(StaffDetailLoaded(result.parsedData!.Staff!));
+      if (result.hasException) {
+        final exception = result.exception!;
+        emit(
+          StaffDetailError(
+            (GraphQLErrorHandler.handleException(exception)),
+          ),
+        );
       } else {
-        emit(StaffDetailError('Staff not found'));
+        emit(StaffDetailLoaded(result.parsedData!.Staff!));
       }
     } catch (e) {
-      emit(StaffDetailError(e.toString()));
+      final error = e is OperationException
+          ? GraphQLErrorHandler.handleException(e)
+          : CustomError.unexpectedError();
+      emit(StaffDetailError(error));
     }
   }
 }

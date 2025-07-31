@@ -7,6 +7,7 @@ import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
 import 'package:otaku_world/bloc/staff_detail/media/staff_media_bloc.dart';
 import 'package:otaku_world/bloc/staff_detail/staff_detail_bloc.dart';
 import 'package:otaku_world/bloc/staff_detail/voice/staff_voice_bloc.dart';
+import 'package:otaku_world/core/model/custom_error.dart';
 import 'package:otaku_world/core/ui/shimmers/detail_screens/screens/staff_detail_shimmer.dart';
 import 'package:otaku_world/core/ui/shimmers/detail_screens/shimmer_details.dart';
 import 'package:otaku_world/features/profile/widgets/keep_alive_tab.dart';
@@ -18,6 +19,7 @@ import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 
 import '../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../core/ui/placeholders/anime_character_placeholder.dart';
+import '../../core/ui/widgets/scaffold_wrapper_placeholder.dart';
 import 'widgets/staff_app_bar.dart';
 
 class StaffDetailScreen extends StatelessWidget {
@@ -50,18 +52,33 @@ class StaffDetailScreen extends StatelessWidget {
               staffId: staffId,
               client: client,
             );
+          } else if (state is StaffDetailError) {
+            // Handle error state
+            return ScaffoldWrapperPlaceholder(
+              child: AnimeCharacterPlaceholder(
+                asset: Assets.charactersChillBoy,
+                error: state.error,
+                onTryAgain: () {
+                  context
+                      .read<StaffDetailBloc>()
+                      .add(FetchStaffDetail(staffId));
+                },
+                isError: true,
+                isScrollable: true,
+              ),
+            );
           }
 
-          return AnimeCharacterPlaceholder(
-            asset: Assets.charactersNoInternet,
-            heading: 'Something went wrong!',
-            subheading:
-                'Please check your internet connection or try again later.',
-            onTryAgain: () {
-              context.read<StaffDetailBloc>().add(FetchStaffDetail(staffId));
-            },
-            isError: true,
-            isScrollable: true,
+          return ScaffoldWrapperPlaceholder(
+            child: AnimeCharacterPlaceholder(
+              asset: Assets.charactersChillBoy,
+              error: CustomError.unexpectedError(),
+              onTryAgain: () {
+                context.read<StaffDetailBloc>().add(FetchStaffDetail(staffId));
+              },
+              isError: true,
+              isScrollable: true,
+            ),
           );
         },
       ),

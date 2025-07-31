@@ -4,15 +4,16 @@ import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:otaku_world/constants/string_constants.dart';
-import 'package:otaku_world/core/types/enums.dart';
+import 'package:otaku_world/features/app_events_management/utils/analytics_logger.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/update_user.graphql.dart';
 
+import '../../core/model/custom_error.dart';
 import '../../graphql/__generated/graphql/fragments.graphql.dart';
 import '../../repositories/user_repository.dart';
+import '../../utils/graphql_error_handler.dart';
 
 part 'viewer_event.dart';
-
 part 'viewer_state.dart';
 
 class ViewerBloc extends HydratedBloc<ViewerEvent, ViewerState> {
@@ -32,22 +33,21 @@ class ViewerBloc extends HydratedBloc<ViewerEvent, ViewerState> {
       final user = await _userRepository.fetchAndCacheUserData(event.client);
 
       log('Loaded user data: ${user.toJson()}');
+
+      AnalyticsLogger.setUser(
+        userId: user.id.toString(),
+        username: user.name,
+      );
       emit(ViewerLoaded(user: user));
     } on OperationException catch (e) {
       final user = _userRepository.lastCachedUser;
 
       if (user == null) {
-        if (e.linkException != null) {
-          emit(const ViewerError(
-            type: ErrorType.noInternet,
-            message: StringConstants.noInternetError,
-          ));
-        } else {
-          emit(const ViewerError(
-            type: ErrorType.unknown,
-            message: StringConstants.unexpectedError,
-          ));
-        }
+        emit(
+          ViewerError(
+            error: (GraphQLErrorHandler.handleException(e)),
+          ),
+        );
       } else {
         emit(ViewerLoaded(user: user));
       }
@@ -55,9 +55,8 @@ class ViewerBloc extends HydratedBloc<ViewerEvent, ViewerState> {
       final user = _userRepository.lastCachedUser;
 
       if (user == null) {
-        emit(const ViewerError(
-          type: ErrorType.unknown,
-          message: StringConstants.unexpectedError,
+        emit(ViewerError(
+          error: CustomError.unexpectedError(),
         ));
       } else {
         emit(ViewerLoaded(user: user));

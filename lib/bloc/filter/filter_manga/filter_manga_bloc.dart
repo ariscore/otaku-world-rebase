@@ -9,9 +9,11 @@ import 'package:otaku_world/core/model/manga_filter.dart';
 import 'package:otaku_world/graphql/__generated/graphql/schema.graphql.dart';
 
 import '../../../constants/filter_constants.dart';
+import '../../../core/model/custom_error.dart';
 import '../../../graphql/__generated/graphql/discover/filter_media.graphql.dart';
 import '../../../graphql/__generated/graphql/fragments.graphql.dart';
 import '../../../utils/formatting_utils.dart';
+import '../../../utils/graphql_error_handler.dart';
 import '../../../utils/model_utils.dart';
 
 part 'filter_manga_event.dart';
@@ -80,15 +82,11 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
 
     if (response.hasException) {
       final exception = response.exception!;
-
-      if (exception.linkException != null) {
-        log(exception.toString());
-        emit(
-          const FilterError('Please check your internet connection!'),
-        );
-      } else {
-        emit(const FilterError('Some Unexpected error occurred!'));
-      }
+      emit(
+        FilterError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       _processData(response);
 
@@ -145,15 +143,11 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
 
     if (response.hasException) {
       final exception = response.exception!;
-
-      if (exception.linkException != null) {
-        log(exception.toString());
-        emit(
-          const FilterError('Please check your internet connection!'),
-        );
-      } else {
-        emit(const FilterError('Some Unexpected error occurred!'));
-      }
+      emit(
+        FilterError(
+        (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       _processData(response);
 
@@ -233,9 +227,9 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
   }
 
   void _onRemoveAllFilters(
-      RemoveAllFilters event,
-      Emitter<FilterMangaState> emit,
-      ) {
+    RemoveAllFilters event,
+    Emitter<FilterMangaState> emit,
+  ) {
     filter = const MangaFilter(
       sort: [Enum$MediaSort.POPULARITY_DESC],
     );
@@ -271,9 +265,9 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
   }
 
   void _onSelectMangaSort(
-      SelectMangaSort event,
-      Emitter<FilterMangaState> emit,
-      ) {
+    SelectMangaSort event,
+    Emitter<FilterMangaState> emit,
+  ) {
     filter = filter.copyWith(
       sort: [FormattingUtils.getMediaSortOption(event.sort)],
     );
@@ -281,9 +275,9 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
   }
 
   void _onSelectMangaGenre(
-      SelectMangaGenre event,
-      Emitter<FilterMangaState> emit,
-      ) {
+    SelectMangaGenre event,
+    Emitter<FilterMangaState> emit,
+  ) {
     filter = filter.copyWith(
       genres: (filter.genres ?? [])..add(event.genre),
     );
@@ -291,9 +285,9 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
   }
 
   void _onUnselectMangaGenre(
-      UnselectMangaGenre event,
-      Emitter<FilterMangaState> emit,
-      ) {
+    UnselectMangaGenre event,
+    Emitter<FilterMangaState> emit,
+  ) {
     filter = filter.copyWith(
       genres: filter.genres!..remove(event.genre),
     );
@@ -301,9 +295,9 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
   }
 
   void _onSelectMangaYear(
-      SelectMangaYear event,
-      Emitter<FilterMangaState> emit,
-      ) {
+    SelectMangaYear event,
+    Emitter<FilterMangaState> emit,
+  ) {
     filter = filter.copyWith(
       year: (event.year == 'All') ? 0 : int.parse(event.year),
     );
@@ -311,9 +305,9 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
   }
 
   void _onSelectMangaFormat(
-      SelectMangaFormat event,
-      Emitter<FilterMangaState> emit,
-      ) {
+    SelectMangaFormat event,
+    Emitter<FilterMangaState> emit,
+  ) {
     filter = filter.copyWith(
       formatIn: (filter.formatIn ?? [])
         ..add(
@@ -324,9 +318,9 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
   }
 
   void _onUnselectMangaFormat(
-      UnselectMangaFormat event,
-      Emitter<FilterMangaState> emit,
-      ) {
+    UnselectMangaFormat event,
+    Emitter<FilterMangaState> emit,
+  ) {
     filter = filter.copyWith(
       formatIn: filter.formatIn!
         ..remove(
@@ -337,9 +331,9 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
   }
 
   void _onSelectPublishingStatus(
-      SelectPublishingStatus event,
-      Emitter<FilterMangaState> emit,
-      ) {
+    SelectPublishingStatus event,
+    Emitter<FilterMangaState> emit,
+  ) {
     filter = filter.copyWith(
       statusIn: (filter.statusIn ?? [])
         ..add(
@@ -350,9 +344,9 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
   }
 
   void _onUnselectPublishingStatus(
-      UnselectPublishingStatus event,
-      Emitter<FilterMangaState> emit,
-      ) {
+    UnselectPublishingStatus event,
+    Emitter<FilterMangaState> emit,
+  ) {
     filter = filter.copyWith(
       statusIn: filter.statusIn!
         ..remove(
@@ -390,9 +384,9 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
   }
 
   void _onSelectPlatform(
-      SelectPlatform event,
-      Emitter<FilterMangaState> emit,
-      ) {
+    SelectPlatform event,
+    Emitter<FilterMangaState> emit,
+  ) {
     filter = filter.copyWith(
       licensedByIn: (filter.licensedByIn ?? [])..add(event.platform),
     );
@@ -403,9 +397,9 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
   }
 
   void _onUnselectPlatform(
-      UnselectPlatform event,
-      Emitter<FilterMangaState> emit,
-      ) {
+    UnselectPlatform event,
+    Emitter<FilterMangaState> emit,
+  ) {
     filter = filter.copyWith(
       licensedByIn: filter.licensedByIn!..remove(event.platform),
     );
@@ -416,9 +410,9 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
   }
 
   void _onToggleHideMangaOnList(
-      ToggleHideMangaOnList event,
-      Emitter<FilterMangaState> emit,
-      ) {
+    ToggleHideMangaOnList event,
+    Emitter<FilterMangaState> emit,
+  ) {
     filter = filter.copyWith(hideMyManga: !filter.hideMyManga);
     log('Hide my manga: ${filter.hideMyManga}', name: 'FilterManga');
   }
@@ -445,9 +439,9 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
   }
 
   void _onSetChaptersRange(
-      SetChaptersRange event,
-      Emitter<FilterMangaState> emit,
-      ) {
+    SetChaptersRange event,
+    Emitter<FilterMangaState> emit,
+  ) {
     filter = filter.copyWith(
       chaptersGreater: event.start.toInt(),
       chaptersLesser: event.end.toInt(),
@@ -459,9 +453,9 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
   }
 
   void _onSetVolumesRange(
-      SetVolumesRange event,
-      Emitter<FilterMangaState> emit,
-      ) {
+    SetVolumesRange event,
+    Emitter<FilterMangaState> emit,
+  ) {
     filter = filter.copyWith(
       volumesGreater: event.start.toInt(),
       volumesLesser: event.end.toInt(),
@@ -473,9 +467,9 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
   }
 
   void _onSelectMangaTag(
-      SelectMangaTag event,
-      Emitter<FilterMangaState> emit,
-      ) {
+    SelectMangaTag event,
+    Emitter<FilterMangaState> emit,
+  ) {
     filter = filter.copyWith(
       tagIn: (filter.tagIn ?? [])..add(event.tag),
     );
@@ -483,9 +477,9 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
   }
 
   void _onUnselectMangaTag(
-      UnselectMangaTag event,
-      Emitter<FilterMangaState> emit,
-      ) {
+    UnselectMangaTag event,
+    Emitter<FilterMangaState> emit,
+  ) {
     filter = filter.copyWith(
       tagIn: (filter.tagIn ?? [])..remove(event.tag),
     );
@@ -500,12 +494,12 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
   }
 
   void _onUpdateListEntryForManga(
-      UpdateListEntryForManga event,
-      Emitter<FilterMangaState> emit,
-      ) {
+    UpdateListEntryForManga event,
+    Emitter<FilterMangaState> emit,
+  ) {
     log('Updating list entry: ${event.entry.id} | ${event.entry.progress}');
     final index = list.indexWhere(
-          (e) => e?.id == event.entry.mediaId,
+      (e) => e?.id == event.entry.mediaId,
     );
     log('Update list entry index: $index');
     if (index != -1) {
@@ -521,12 +515,12 @@ class FilterMangaBloc extends Bloc<FilterMangaEvent, FilterMangaState> {
   }
 
   void _onRemoveListEntryFromManga(
-      RemoveListEntryFromManga event,
-      Emitter<FilterMangaState> emit,
-      ) {
+    RemoveListEntryFromManga event,
+    Emitter<FilterMangaState> emit,
+  ) {
     log('Removing list entry: ${event.id}');
     final index = list.indexWhere(
-          (e) => e?.mediaListEntry?.id == event.id,
+      (e) => e?.mediaListEntry?.id == event.id,
     );
     log('Remove list entry index: $index');
     list[index] = ModelUtils.getMediaShort(list[index], removeListEntry: true);

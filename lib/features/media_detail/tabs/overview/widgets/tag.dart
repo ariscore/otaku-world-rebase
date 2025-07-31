@@ -25,12 +25,7 @@ class Tag extends StatelessWidget {
           tag.description ?? "No Description",
         ),
         child: Container(
-          padding: const EdgeInsets.only(
-            left: 10,
-            right: 8,
-            top: 5,
-            bottom: 5,
-          ),
+          padding: const EdgeInsets.all(5),
           height: 30,
           decoration: ShapeDecoration(
             gradient: const LinearGradient(

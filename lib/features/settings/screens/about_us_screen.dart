@@ -37,10 +37,13 @@ class AboutUsScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: SafeArea(
-        child: CopyrightText(
-          year: AppConfig.copyRightYear,
-          parentCompany: AppConfig.parentCompanyName,
-          productName: AppConfig.productName,
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: CopyrightText(
+            year: AppConfig.copyRightYear,
+            parentCompany: AppConfig.parentCompanyName,
+            productName: AppConfig.productName,
+          ),
         ),
       ),
     );

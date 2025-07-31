@@ -61,7 +61,15 @@ class Overview extends StatelessWidget {
                   5.height,
                   GestureDetector(
                     onTap: () {
-                      YoutubePlayerDialog.showYoutubePlayerDialog(
+                      // YoutubePlayerDialog.showYoutubePlayerDialog(
+                      //   context: context,
+                      //   youtubeId: media.trailer!.id!,
+                      // );
+                      // OptimizedYoutubeDialog.show(
+                      //   context: context,
+                      //   youtubeId: media.trailer!.id!,
+                      // );
+                      YouTubePlayer.showFullScreenYoutubePlayer(
                         context: context,
                         youtubeId: media.trailer!.id!,
                       );
@@ -144,7 +152,7 @@ class Overview extends StatelessWidget {
                   ),
                   5.height,
                   Wrap(
-                    runSpacing: 5,
+                    runSpacing: 10,
                     spacing: 5,
                     children: [
                       for (var link in media.externalLinks!)

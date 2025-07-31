@@ -13,7 +13,7 @@ final class RepliedActivity extends ReplyActivityState {
 }
 
 final class ReplyError extends ReplyActivityState {
-  ReplyError(this.message);
+  ReplyError(this.error);
 
-  final String message;
+  final CustomError error;
 }

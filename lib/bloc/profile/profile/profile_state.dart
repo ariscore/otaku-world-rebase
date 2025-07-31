@@ -23,7 +23,7 @@ final class ProfileLoaded extends ProfileState {
 }
 
 final class ProfileError extends ProfileState {
-  const ProfileError(this.message);
+  const ProfileError(this.error);
 
-  final String message;
+  final CustomError error;
 }

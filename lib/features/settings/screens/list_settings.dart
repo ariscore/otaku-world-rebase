@@ -373,7 +373,7 @@ class _ListSettingsState extends State<ListSettings> {
                 );
               } else if (state is ViewerError) {
                 return ErrorText(
-                  message: state.message,
+                  message: state.error.message,
                   onTryAgain: () {
                     context.read<ViewerBloc>().add(LoadViewer(client));
                   },

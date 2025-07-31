@@ -13,7 +13,7 @@ final class SentMessage extends SendMessageState {
 }
 
 final class SendMessageError extends SendMessageState {
-  SendMessageError(this.message);
+  SendMessageError(this.error);
 
-  final String message;
+  final CustomError error;
 }

@@ -71,12 +71,12 @@ final class UserSocialLoaded extends UserSocialState {
 }
 
 final class UserSocialError extends UserSocialState {
-  const UserSocialError(this.message);
+  const UserSocialError(this.error);
 
-  final String message;
+  final CustomError error;
 
   @override
   String toString() {
-    return 'UserSocialError { message: $message }';
+    return 'UserSocialError { message: $error }';
   }
 }

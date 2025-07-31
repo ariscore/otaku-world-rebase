@@ -1,14 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/core/ui/appbars/simple_app_bar.dart';
 import 'package:otaku_world/core/ui/dialogs/alert_dialog.dart';
-import 'package:otaku_world/generated/assets.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/shimmer_details.dart';
+import 'package:otaku_world/features/app_events_management/utils/analytics_logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../bloc/auth/auth_cubit.dart';
+import '../../app_events_management/const/analytics_events.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key, required this.userName});
@@ -28,117 +29,115 @@ class SettingsScreen extends StatelessWidget {
           title: 'Settings',
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: GestureDetector(
+        floatingActionButton: SafeArea(
+          child: InkWell(
             onTap: () => _showLogOutConfirmationDialog(context),
-            child: Row(
-              children: [
-                SvgPicture.asset(
-                  Assets.iconsLogout,
-                  width: 20,
-                ),
-                const SizedBox(width: 10),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width - 130,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Log out ',
-                        style:
-                            Theme.of(context).textTheme.displaySmall?.copyWith(
-                                  fontFamily: 'Poppins',
-                                ),
-                      ),
-                      const SizedBox(height: 5),
-                      Expanded(
-                        child: Text(
-                          userName,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context)
-                              .textTheme
-                              .displaySmall
-                              ?.copyWith(
-                                fontFamily: 'Poppins-Medium',
-                              ),
-                        ),
-                      ),
-                    ],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Row(
+                children: [
+                  SvgPicture.asset(
+                    Assets.iconsLogout,
+                    width: 20,
                   ),
-                ),
-                const Spacer(),
-                IconButton(
-                  onPressed: () => _showLogOutConfirmationDialog(context),
-                  icon: SvgPicture.asset(
-                    Assets.iconsArrowRight,
-                    colorFilter: const ColorFilter.mode(
-                      Colors.white,
-                      BlendMode.srcIn,
+                  const SizedBox(width: 10),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width - 130,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Log out ',
+                          style:
+                              Theme.of(context).textTheme.displaySmall?.copyWith(
+                                    fontFamily: 'Poppins',
+                                  ),
+                        ),
+                        const SizedBox(height: 5),
+                        Expanded(
+                          child: Text(
+                            userName,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context)
+                                .textTheme
+                                .displaySmall
+                                ?.copyWith(
+                                  fontFamily: 'Poppins-Medium',
+                                ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              ],
+                  const Spacer(),
+                  IconButton(
+                    onPressed: () => _showLogOutConfirmationDialog(context),
+                    icon: SvgPicture.asset(
+                      Assets.iconsArrowRight,
+                      colorFilter: const ColorFilter.mode(
+                        Colors.white,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
         body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-            ),
-            child: Column(
-              children: [
-                _buildOption(
-                  context,
-                  asset: Assets.iconsUser,
-                  label: 'Account',
-                  desc: 'Username, email, password, etc.',
-                  actionAsset: Assets.iconsLinkSquare,
-                  onTap: () {
-                    launchUrl(Uri.parse('https://anilist.co/settings/account'));
-                  },
-                ),
-                _buildOption(
-                  context,
-                  asset: Assets.iconsLightning,
-                  label: 'Anime & Manga',
-                  desc:
-                      'Title, staff & character language, activity merge time, etc.',
-                  onTap: () {
-                    context.push(RouteConstants.mediaSettings);
-                  },
-                ),
-                _buildOption(
-                  context,
-                  asset: Assets.iconsNotification2,
-                  label: 'Notifications',
-                  desc:
-                      'Manage your notification preferences for timely updates.',
-                  onTap: () {
-                    context.push(RouteConstants.notificationsSettings);
-                  },
-                ),
-                _buildOption(
-                  context,
-                  asset: Assets.iconsList2,
-                  label: 'List',
-                  desc: 'Customize your anime and manga list preferences.',
-                  onTap: () {
-                    context.push(RouteConstants.listSettings);
-                  },
-                ),
-                _buildOption(
-                  context,
-                  asset: Assets.iconsAbout,
-                  label: 'About',
-                  desc: 'Get to know more about Otaku World',
-                  onTap: () {
-                    context.push(RouteConstants.aboutUs);
-                  },
-                ),
-              ],
-            ),
+          child: Column(
+            children: [
+              _buildOption(
+                context,
+                asset: Assets.iconsUser,
+                label: 'Account',
+                desc: 'Username, email, password, etc.',
+                actionAsset: Assets.iconsLinkSquare,
+                onTap: () {
+                  launchUrl(Uri.parse('https://anilist.co/settings/account'));
+                },
+              ),
+              _buildOption(
+                context,
+                asset: Assets.iconsLightning,
+                label: 'Anime & Manga',
+                desc:
+                    'Title, staff & character language, activity merge time, etc.',
+                onTap: () {
+                  context.push(RouteConstants.mediaSettings);
+                },
+              ),
+              _buildOption(
+                context,
+                asset: Assets.iconsNotification2,
+                label: 'Notifications',
+                desc:
+                    'Manage your notification preferences for timely updates.',
+                onTap: () {
+                  context.push(RouteConstants.notificationsSettings);
+                },
+              ),
+              _buildOption(
+                context,
+                asset: Assets.iconsList2,
+                label: 'List',
+                desc: 'Customize your anime and manga list preferences.',
+                onTap: () {
+                  context.push(RouteConstants.listSettings);
+                },
+              ),
+              _buildOption(
+                context,
+                asset: Assets.iconsAbout,
+                label: 'About',
+                desc: 'Get to know more about Otaku World',
+                onTap: () {
+                  AnalyticsLogger.log(AnalyticsEvents.aboutUs);
+                  context.push(RouteConstants.aboutUs);
+                },
+              ),
+            ],
           ),
         ),
       ),
@@ -170,10 +169,13 @@ class SettingsScreen extends StatelessWidget {
     required VoidCallback onTap,
     String actionAsset = Assets.iconsArrowRight,
   }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: GestureDetector(
-        onTap: onTap,
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 20,
+        ),
         child: Row(
           children: [
             SvgPicture.asset(

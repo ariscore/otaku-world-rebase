@@ -22,7 +22,7 @@ class SearchResultLoaded<E> extends SearchState {
 }
 
 class SearchError extends SearchState {
-  const SearchError(this.message);
+  const SearchError(this.error);
 
-  final String message;
+  final CustomError error;
 }

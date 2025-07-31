@@ -41,10 +41,12 @@ class MessageActivityCard extends StatelessWidget {
     return ActivityBaseCard(
       id: activity.id,
       avatarUrl: activity.messenger?.avatar?.medium,
+      activitySiteUrl: activity.siteUrl,
       userId: activity.messenger?.id ?? 0,
       userName: activity.messenger?.name,
       receiverAvatarUrl: activity.recipient?.avatar?.medium,
       receiverUserName: activity.recipient?.name,
+      receiverUserId: activity.recipient?.id,
       likeCount: activity.likeCount,
       isLiked: activity.isLiked ?? false,
       replyCount: activity.replyCount,

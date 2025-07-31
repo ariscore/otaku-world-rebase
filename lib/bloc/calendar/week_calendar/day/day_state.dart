@@ -22,7 +22,7 @@ class EpisodesLoaded extends DayState {
 }
 
 class DayError extends DayState {
-  const DayError(this.message);
+  const DayError(this.error);
 
-  final String message;
+  final CustomError error;
 }

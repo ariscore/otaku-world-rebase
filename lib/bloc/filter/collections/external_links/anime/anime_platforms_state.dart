@@ -18,7 +18,7 @@ class AnimePlatformsLoaded extends AnimePlatformsState {
 }
 
 class AnimePlatformsError extends AnimePlatformsState {
-  const AnimePlatformsError(this.message);
+  const AnimePlatformsError(this.error);
 
-  final String message;
+  final CustomError error;
 }

@@ -54,7 +54,9 @@ class ProfileScreen extends HookWidget {
               displacement: 60,
               onRefresh: () {
                 return Future.delayed(const Duration(seconds: 1), () {
-                  context.read<ProfileBloc>().add(LoadProfile(client!));
+                  if (context.mounted) {
+                    context.read<ProfileBloc>().add(LoadProfile(client!));
+                  }
                 });
               },
               notificationPredicate: (notification) {
@@ -111,7 +113,7 @@ class ProfileScreen extends HookWidget {
             );
           } else if (state is ProfileError) {
             return _buildErrorScaffold(
-              message: state.message,
+              message: state.error.message,
               onPressed: () {
                 profileBloc.add(LoadProfile(client!));
               },

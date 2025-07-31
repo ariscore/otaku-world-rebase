@@ -21,7 +21,7 @@ class ReviewDetailLoaded extends ReviewDetailState {
 }
 
 class ReviewDetailError extends ReviewDetailState {
-  const ReviewDetailError(this.message);
+  const ReviewDetailError(this.error);
 
-  final String message;
+  final CustomError error;
 }

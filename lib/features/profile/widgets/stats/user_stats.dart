@@ -134,7 +134,7 @@ class _UserStatsState extends State<UserStats> {
             );
           } else if (state is UserStatsError) {
             return ErrorText(
-              message: state.message,
+              message: state.error.message,
               onTryAgain: () {},
             );
           } else {

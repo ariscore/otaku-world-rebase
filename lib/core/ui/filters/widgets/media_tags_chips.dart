@@ -119,7 +119,7 @@ class MediaTagsChips extends StatelessWidget {
               );
             } else if (state is MediaTagsError) {
               return ErrorText(
-                message: state.message,
+                 message: state.error.message,
                 onTryAgain: () {
                   context.read<MediaTagsCubit>().loadMediaTags(client);
                 },

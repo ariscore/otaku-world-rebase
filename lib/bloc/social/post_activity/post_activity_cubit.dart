@@ -1,10 +1,10 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/social/post_activity.graphql.dart';
+
+import '../../../core/model/custom_error.dart';
+import '../../../utils/graphql_error_handler.dart';
 
 part 'post_activity_state.dart';
 
@@ -26,37 +26,16 @@ class PostActivityCubit extends Cubit<PostActivityState> {
 
     if (response.hasException) {
       final exception = response.exception!;
-      log(exception.toString());
-      if (exception.linkException != null) {
-        if (exception.linkException is ServerException) {
-          log('It is server exception');
-          final response =
-              (exception.linkException! as ServerException).parsedResponse;
-          final error = response?.errors?.firstOrNull;
-          log('Response errors: ');
-
-          if (error?.message == null) {
-            emit(PostActivityError(
-              StringConstants.noInternetError
-            ));
-          } else {
-            if (error!.message.contains('validation')) {
-              emit(PostActivityError(StringConstants.validationError));
-            } else {
-              emit(PostActivityError(error.message));
-            }
-          }
-        } else {
-          emit(PostActivityError(StringConstants.noInternetError));
-        }
-      } else {
-        emit(PostActivityError(StringConstants.noInternetError));
-      }
+      emit(
+        PostActivityError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       final data = response.parsedData?.SaveTextActivity;
 
       if (data == null) {
-        emit(PostActivityError(StringConstants.somethingWentWrongError));
+        emit(PostActivityError(CustomError.unexpectedError()));
       } else {
         emit(PostedActivity(activity: data));
       }

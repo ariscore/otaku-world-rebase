@@ -11,7 +11,7 @@ import 'package:otaku_world/bloc/media_list/media_list/media_list_bloc.dart';
 import 'package:otaku_world/bloc/media_list/save_list_entry/save_list_entry_bloc.dart';
 import 'package:otaku_world/bloc/viewer/viewer_bloc.dart';
 import 'package:otaku_world/constants/string_constants.dart';
-import 'package:otaku_world/core/types/enums.dart';
+import 'package:otaku_world/core/model/custom_error.dart';
 import 'package:otaku_world/core/ui/media_section/scroll_to_top_button.dart';
 import 'package:otaku_world/core/ui/placeholders/anime_character_placeholder.dart';
 import 'package:otaku_world/features/my_list/widgets/list_search_app_bar.dart';
@@ -118,11 +118,10 @@ class _MyListScreenState extends State<MyListScreen> {
                             );
                     } else if (state is ViewerError) {
                       return _buildErrorWidget(
-                        type: state.type,
                         onTryAgain: () {
                           viewerBloc.add(LoadViewer(client));
                         },
-                        message: state.message,
+                        error: state.error,
                         isSliver: false,
                       );
                     } else {
@@ -197,11 +196,10 @@ class _MyListScreenState extends State<MyListScreen> {
           );
         } else if (state is MediaListError) {
           return _buildErrorWidget(
-            type: state.type,
             onTryAgain: () {
               bloc.add(LoadMediaList(client: client));
             },
-            message: state.message,
+            error: state.error,
             isSliver: false,
           );
         } else {
@@ -212,20 +210,15 @@ class _MyListScreenState extends State<MyListScreen> {
   }
 
   Widget _buildErrorWidget({
-    required ErrorType type,
     required VoidCallback onTryAgain,
-    required String message,
+    required CustomError error,
     required bool isSliver,
   }) {
     final widget = Padding(
       padding: EdgeInsets.only(top: isSliver ? 100 : 0),
       child: AnimeCharacterPlaceholder(
-        asset: type == ErrorType.noInternet
-            ? Assets.charactersNoInternet
-            : Assets.charactersChillBoy,
-        heading:
-            type == ErrorType.noInternet ? StringConstants.noInternet : null,
-        subheading: message,
+        asset: Assets.charactersChillBoy,
+        error: error,
         width: 230,
         height: 230,
         isError: true,
@@ -254,7 +247,10 @@ class _MyListScreenState extends State<MyListScreen> {
       UIUtils.showProgressDialog(context);
     } else if (state is IncrementEpisodeError) {
       UIUtils.hideProgressDialog(context);
-      UIUtils.showSnackBar(context, state.message);
+      UIUtils.showSnackBar(
+        context,
+        state.error.message,
+      );
     } else if (state is IncrementedEpisode) {
       log('Success: ${state.entry}');
       UIUtils.hideProgressDialog(context);

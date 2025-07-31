@@ -6,11 +6,11 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/following_followers.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/user_info.graphql.dart';
 
-import '../../../constants/string_constants.dart';
+import '../../../core/model/custom_error.dart';
 import '../../../graphql/__generated/graphql/fragments.graphql.dart';
+import '../../../utils/graphql_error_handler.dart';
 
 part 'profile_event.dart';
-
 part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
@@ -39,15 +39,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
     if (userResponse.hasException) {
       final exception = userResponse.exception!;
-      if (exception.linkException != null) {
-        emit(const ProfileError(StringConstants.noInternetError));
-      } else {
-        emit(const ProfileError(StringConstants.somethingWentWrongError));
-      }
+      emit(
+        ProfileError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       final data = userResponse.parsedData?.User;
       if (data == null) {
-        emit(const ProfileError(StringConstants.somethingWentWrongError));
+        emit(ProfileError(CustomError.unexpectedError()));
       } else {
         final socialCountResponse =
             await event.client.query$FollowingAndFollowersCount(
@@ -62,7 +62,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
         if (socialCountResponse.hasException ||
             socialCountResponse.parsedData == null) {
-          emit(const ProfileError(StringConstants.somethingWentWrongError));
+          emit(ProfileError(CustomError.unexpectedError()));
         } else {
           emit(
             ProfileLoaded(

@@ -11,9 +11,10 @@ import 'package:otaku_world/graphql/__generated/graphql/social/activity_subscrip
 import 'package:otaku_world/graphql/__generated/graphql/social/delete_activity.graphql.dart';
 
 import '../../../constants/string_constants.dart';
+import '../../../core/model/custom_error.dart';
+import '../../../utils/graphql_error_handler.dart';
 
 part 'activities_event.dart';
-
 part 'activities_state.dart';
 
 class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
@@ -76,6 +77,7 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
       true,
       followingPage,
     );
+    await Future.delayed(const Duration(milliseconds: 500));
     final globalResponse = await _loadData(
       event.client,
       false,
@@ -86,13 +88,11 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
       final exception =
           followingResponse.exception ?? globalResponse.exception!;
 
-      if (exception.linkException != null) {
-        emit(
-          const ActivitiesError('Please check your internet connection!'),
-        );
-      } else {
-        emit(const ActivitiesError('Something went wrong!'));
-      }
+      emit(
+        ActivitiesError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       _processData(response: followingResponse, isFollowing: true);
       _processData(response: globalResponse, isFollowing: false);
@@ -124,13 +124,13 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
     );
 
     if (response.hasException) {
-      if (response.exception!.linkException != null) {
-        emit(
-          const ActivitiesError('Please check your internet connection!'),
-        );
-      } else {
-        emit(const ActivitiesError('Something went wrong!'));
-      }
+      final exception = response.exception!;
+
+      emit(
+        ActivitiesError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       _processData(response: response, isFollowing: event.isFollowing);
       emit(

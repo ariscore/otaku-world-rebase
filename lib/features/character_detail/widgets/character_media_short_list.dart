@@ -8,6 +8,7 @@ import 'package:otaku_world/utils/extensions.dart';
 
 import '../../../bloc/graphql_client/graphql_client_cubit.dart';
 import '../../../bloc/paginated_data/paginated_data_bloc.dart';
+import '../../../core/model/custom_error.dart';
 import '../../../core/ui/placeholders/anime_character_placeholder.dart';
 import '../../../core/ui/shimmers/detail_screens/list/character_list_shimmer.dart';
 import '../../../generated/assets.dart';
@@ -98,11 +99,8 @@ class _CharacterMediaShortListState extends State<CharacterMediaShortList>
 
             return SliverToBoxAdapter(
               child: AnimeCharacterPlaceholder(
-                asset: Assets.charactersNoInternet,
-                height: 300,
-                heading: 'Something went wrong!',
-                subheading:
-                    'Please check your internet connection or try again later.',
+                asset: Assets.charactersErenYeager,
+                error: CustomError.unexpectedError(),
                 onTryAgain: () {
                   context.read<CharacterMediaBloc>().add(
                         LoadData(

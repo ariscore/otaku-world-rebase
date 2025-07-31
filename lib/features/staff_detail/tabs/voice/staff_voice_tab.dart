@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/staff_detail/voice/staff_voice_bloc.dart';
+import 'package:otaku_world/core/model/custom_error.dart';
 import 'package:otaku_world/core/ui/shimmers/detail_screens/list/character_list_shimmer.dart';
 import 'package:otaku_world/features/staff_detail/tabs/voice/widgets/staff_voice_card.dart';
 import 'package:otaku_world/graphql/__generated/graphql/staff_detail/staff_voice.graphql.dart';
@@ -96,9 +97,7 @@ class StaffVoiceTab extends StatelessWidget {
                 return SliverFillRemaining(
                   child: AnimeCharacterPlaceholder(
                     asset: Assets.charactersNoInternet,
-                    heading: 'Something went wrong!',
-                    subheading:
-                        'Please check your internet connection or try again later.',
+                    error: CustomError.unexpectedError(),
                     onTryAgain: () {
                       context.read<StaffVoiceBloc>().add(
                             LoadData(

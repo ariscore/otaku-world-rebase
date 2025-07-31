@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/characters/characters_bloc.dart';
 import 'package:otaku_world/bloc/paginated_data/paginated_data_bloc.dart';
+import 'package:otaku_world/core/model/custom_error.dart';
 import 'package:otaku_world/core/ui/placeholders/anime_character_placeholder.dart';
 import 'package:otaku_world/core/ui/widgets/language_selection_mixin.dart';
 import 'package:otaku_world/graphql/__generated/graphql/details/characters.graphql.dart';
@@ -109,12 +110,26 @@ class _CharactersState extends State<Characters> with LanguageSelectionMixin {
               ],
             ),
           );
+        } else if (state is PaginatedDataError) {
+          return AnimeCharacterPlaceholder(
+            asset: Assets.charactersSchoolGirl,
+            error: state.error,
+            onTryAgain: () {
+              context.read<CharactersBloc>().add(
+                    LoadData(
+                      (context.read<GraphqlClientCubit>().state
+                              as GraphqlClientInitialized)
+                          .client,
+                    ),
+                  );
+            },
+            isError: true,
+            isScrollable: true,
+          );
         }
         return AnimeCharacterPlaceholder(
-          asset: Assets.charactersNoInternet,
-          heading: 'Something went wrong!',
-          subheading:
-              'Please check your internet connection or try again later.',
+          asset: Assets.charactersSchoolGirl,
+          error: CustomError.unexpectedError(),
           onTryAgain: () {
             context.read<CharactersBloc>().add(
                   LoadData(

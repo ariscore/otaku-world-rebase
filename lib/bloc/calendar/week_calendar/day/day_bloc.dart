@@ -7,8 +7,10 @@ import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/graphql/__generated/graphql/calendar/calendar.graphql.dart';
 
+import '../../../../core/model/custom_error.dart';
 import '../../../../graphql/__generated/graphql/fragments.graphql.dart';
 import '../../../../utils/formatting_utils.dart';
+import '../../../../utils/graphql_error_handler.dart';
 
 part 'day_event.dart';
 part 'day_state.dart';
@@ -81,14 +83,7 @@ class DayBloc extends Bloc<DayEvent, DayState> {
 
     if (response.hasException) {
       final exception = response.exception!;
-
-      if (exception.linkException != null) {
-        emit(
-          const DayError('Please check your internet connection!'),
-        );
-      } else {
-        emit(const DayError('Some Unexpected error occurred!'));
-      }
+      emit(DayError((GraphQLErrorHandler.handleException(exception))));
     } else {
       final data = response.parsedData!;
       hasNextPage = data.Page!.pageInfo!.hasNextPage!;

@@ -19,22 +19,24 @@ class SlideTransitionRoute extends GoRoute {
     required Tween<Offset> directionTween,
     super.redirect,
     super.routes,
+    super.name,
   }) : super(
-    pageBuilder: (context, state) {
-      return CustomTransitionPage(
-        child: builder(state),
-        transitionsBuilder: (
-            context,
-            animation,
-            secondaryAnimation,
-            child,
-            ) {
-          return SlideTransition(
-            position: directionTween.animate(animation),
-            child: child,
-          );
-        },
-      );
-    },
-  );
+          pageBuilder: (context, state) {
+            return CustomTransitionPage(
+              name: state.name,
+              child: builder(state),
+              transitionsBuilder: (
+                context,
+                animation,
+                secondaryAnimation,
+                child,
+              ) {
+                return SlideTransition(
+                  position: directionTween.animate(animation),
+                  child: child,
+                );
+              },
+            );
+          },
+        );
 }

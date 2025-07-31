@@ -12,9 +12,10 @@ import '../../images/cover_image.dart';
 class YoutubeSyntax extends md.InlineSyntax {
   // Note: we escape the dot in youtube.com, and allow any query after v=
   YoutubeSyntax()
-    : super(
-        r'youtube\((https?:\/\/(?:www\.)?youtube\.com\/watch\?v=[\w\-]+)\)', caseSensitive: false,
-      );
+      : super(
+          r'youtube\((https?:\/\/(?:www\.)?youtube\.com\/watch\?v=[\w\-]+)\)',
+          caseSensitive: false,
+        );
 
   @override
   bool onMatch(md.InlineParser parser, Match match) {
@@ -48,7 +49,18 @@ class YoutubeNode extends ElementNode {
     return WidgetSpan(
       child: GestureDetector(
         onTap: () {
-          YoutubePlayerDialog.showYoutubePlayerDialog(
+          // YoutubePlayerDialog.showYoutubePlayerDialog(
+          //   context: router.configuration.navigatorKey.currentContext!,
+          //   youtubeId: videoId ?? '',
+          // );
+          // if (videoId != null) {
+          //   OptimizedYoutubeDialog.show(
+          //     context: router.configuration.navigatorKey.currentContext!,
+          //     youtubeId: videoId,
+          //   );
+          // }
+
+          YouTubePlayer.showFullScreenYoutubePlayer(
             context: router.configuration.navigatorKey.currentContext!,
             youtubeId: videoId ?? '',
           );
@@ -76,19 +88,23 @@ class YoutubeNode extends ElementNode {
 
   String? extractYoutubeId(String url) {
     final uri = Uri.tryParse(url.trim());
-    if (uri == null || (uri.scheme != 'http' && uri.scheme != 'https')) return null;
+    if (uri == null || (uri.scheme != 'http' && uri.scheme != 'https'))
+      return null;
 
     // Helper to check valid ID: 11 URL-safe chars (_-A-Za-z0-9)
     bool isValidId(String id) => RegExp(r'^[_\-A-Za-z0-9]{11}$').hasMatch(id);
 
     String? id;
 
-    if ((uri.host.contains('youtube.com') || uri.host.contains('youtube-nocookie.com')) &&
+    if ((uri.host.contains('youtube.com') ||
+            uri.host.contains('youtube-nocookie.com')) &&
         uri.pathSegments.isNotEmpty) {
       final path = uri.pathSegments;
       if (path.first == 'watch' && uri.queryParameters['v'] != null) {
         id = uri.queryParameters['v'];
-      } else if (path.first == 'embed' || path.first == 'v' || path.first == 'live') {
+      } else if (path.first == 'embed' ||
+          path.first == 'v' ||
+          path.first == 'live') {
         id = path.length >= 2 ? path[1] : null;
       } else if (path.first == 'shorts' && path.length >= 2) {
         id = path[1];
@@ -104,5 +120,4 @@ class YoutubeNode extends ElementNode {
   String youtubeThumbnailUrl(String videoId, {String quality = 'hqdefault'}) {
     return 'https://img.youtube.com/vi/$videoId/$quality.jpg';
   }
-
 }

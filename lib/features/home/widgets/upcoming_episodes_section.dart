@@ -97,7 +97,7 @@ class UpcomingEpisodesSection extends HookWidget {
             );
           } else if (state is PaginatedDataError) {
             return ErrorText(
-              message: state.message,
+               message: state.error.message,
               onTryAgain: () {
                 final client = context.read<GraphqlClientCubit>().getClient();
                 if (client != null) {
@@ -225,7 +225,7 @@ class UpcomingEpisodesSection extends HookWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    media.title?.userPreferred ?? 'Unknown Title',
+                    media.title?.userPreferred ?? StringConstants.noTitle,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontFamily: 'Roboto-Medium',
                         ),

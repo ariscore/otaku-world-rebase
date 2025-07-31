@@ -3,13 +3,14 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:otaku_world/constants/string_constants.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/following_followers.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/user/viewer_info.graphql.dart';
 
-part 'my_profile_event.dart';
+import '../../../core/model/custom_error.dart';
+import '../../../utils/graphql_error_handler.dart';
 
+part 'my_profile_event.dart';
 part 'my_profile_state.dart';
 
 class MyProfileBloc extends Bloc<MyProfileEvent, MyProfileState> {
@@ -35,15 +36,15 @@ class MyProfileBloc extends Bloc<MyProfileEvent, MyProfileState> {
 
     if (viewerResponse.hasException) {
       final exception = viewerResponse.exception!;
-      if (exception.linkException != null) {
-        emit(const MyProfileError(StringConstants.noInternetError));
-      } else {
-        emit(const MyProfileError(StringConstants.somethingWentWrongError));
-      }
+      emit(
+        MyProfileError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       final data = viewerResponse.parsedData?.Viewer;
       if (data == null) {
-        emit(const MyProfileError(StringConstants.somethingWentWrongError));
+        emit(MyProfileError(CustomError.unexpectedError()));
       } else {
         _unReadNotificationCount = data.unreadNotificationCount ?? 0;
         final socialCountResponse =
@@ -59,7 +60,7 @@ class MyProfileBloc extends Bloc<MyProfileEvent, MyProfileState> {
 
         if (socialCountResponse.hasException ||
             socialCountResponse.parsedData == null) {
-          emit(const MyProfileError(StringConstants.somethingWentWrongError));
+          emit(MyProfileError(CustomError.unexpectedError()));
         } else {
           emit(
             MyProfileLoaded(
@@ -90,7 +91,7 @@ class MyProfileBloc extends Bloc<MyProfileEvent, MyProfileState> {
       ),
     );
   }
-  
+
   @override
   void onTransition(Transition<MyProfileEvent, MyProfileState> transition) {
     log(transition.toString(), name: 'MyProfileBloc');

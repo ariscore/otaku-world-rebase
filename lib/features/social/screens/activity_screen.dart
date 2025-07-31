@@ -89,7 +89,7 @@ class ActivityScreen extends StatelessWidget {
               );
             } else if (state is ActivityError) {
               return ErrorText(
-                message: state.message,
+                message: state.error.message,
                 onTryAgain: () {
                   final client = context.read<GraphqlClientCubit>().getClient();
                   if (client != null) {

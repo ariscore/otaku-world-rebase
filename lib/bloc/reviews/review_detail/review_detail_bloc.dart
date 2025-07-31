@@ -6,8 +6,10 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/reviews/review_detail.graphql.dart';
 
-part 'review_detail_event.dart';
+import '../../../core/model/custom_error.dart';
+import '../../../utils/graphql_error_handler.dart';
 
+part 'review_detail_event.dart';
 part 'review_detail_state.dart';
 
 class ReviewDetailBloc extends Bloc<ReviewDetailEvent, ReviewDetailState> {
@@ -32,8 +34,13 @@ class ReviewDetailBloc extends Bloc<ReviewDetailEvent, ReviewDetailState> {
     );
 
     if (response.hasException) {
-      emit(const ReviewDetailError('Failed to load review!'));
-    }else {
+      final exception = response.exception!;
+      emit(
+        ReviewDetailError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
+    } else {
       emit(ReviewDetailLoaded(response.parsedData!.Review!));
     }
   }

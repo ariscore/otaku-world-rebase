@@ -1,6 +1,5 @@
 import 'dart:developer' as dev;
 
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -178,13 +177,13 @@ final router = GoRouter(
   navigatorKey: _rootNavigatorKey,
   observers: [
     CustomRouteObserver(),
-    FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
   ],
   routes: [
     // Splash Screen
     GoRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: RouteConstants.splash,
+      name: RouteConstants.splash,
       builder: (context, state) => const SplashScreen(),
     ),
     // Bottom navigation pages
@@ -198,6 +197,7 @@ final router = GoRouter(
     SlideTransitionRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: RouteConstants.mediaDetail,
+      name: RouteConstants.mediaDetail,
       directionTween: SlideTransitionRoute.leftToRightTween,
       builder: (state) {
         final mediaId = int.parse(
@@ -222,6 +222,7 @@ final router = GoRouter(
     SlideTransitionRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: RouteConstants.recommendationsSlider,
+      name: RouteConstants.recommendationsSlider,
       directionTween: SlideTransitionRoute.bottomToTopTween,
       builder: (state) {
         final recommendationBloc = state.extra as RecommendationAnimeBloc;
@@ -233,6 +234,7 @@ final router = GoRouter(
     SlideTransitionRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: RouteConstants.recommendationsGrid,
+      name: RouteConstants.recommendationsGrid,
       directionTween: SlideTransitionRoute.bottomToTopTween,
       builder: (state) {
         final recommendationParameters =
@@ -246,11 +248,13 @@ final router = GoRouter(
     GoRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: RouteConstants.onBoarding,
+      name: RouteConstants.onBoarding,
       builder: (context, state) => OnBoardingScreen(),
     ),
     SlideTransitionRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: RouteConstants.login,
+      name: RouteConstants.login,
       builder: (_) => const LoginScreen(),
       directionTween: SlideTransitionRoute.leftToRightTween,
       redirect: (context, state) async {
@@ -265,6 +269,7 @@ final router = GoRouter(
     SlideTransitionRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: RouteConstants.characterDetail,
+      name: RouteConstants.characterDetail,
       builder: (state) {
         final int characterId = int.parse(state.uri.queryParameters['id']!);
         return BlocProvider(
@@ -301,6 +306,7 @@ final router = GoRouter(
     SlideTransitionRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: RouteConstants.studioDetail,
+      name: RouteConstants.studioDetail,
       builder: (state) {
         final int studioId = int.parse(state.uri.queryParameters['id']!);
         return BlocProvider(
@@ -343,6 +349,7 @@ final router = GoRouter(
     SlideTransitionRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: RouteConstants.staffDetail,
+      name: RouteConstants.staffDetail,
       builder: (state) {
         final int staffId = int.parse(state.uri.queryParameters['id']!);
         return BlocProvider(
@@ -365,6 +372,7 @@ final router = GoRouter(
     SlideTransitionRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: RouteConstants.characterMediaViewList,
+      name: RouteConstants.characterMediaViewList,
       builder: (state) {
         final characterMediaBloc = state.extra as CharacterMediaBloc;
         return BlocProvider.value(

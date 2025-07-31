@@ -6,8 +6,10 @@ import 'package:equatable/equatable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/graphql/__generated/graphql/character-detail/character_detail.graphql.dart';
 
-part 'character_detail_event.dart';
+import '../../core/model/custom_error.dart';
+import '../../utils/graphql_error_handler.dart';
 
+part 'character_detail_event.dart';
 part 'character_detail_state.dart';
 
 class CharacterDetailBloc
@@ -34,7 +36,9 @@ class CharacterDetailBloc
     );
 
     if (response.hasException) {
-      emit(CharacterDetailError(response.exception.toString()));
+      final exception = response.exception!;
+      emit(CharacterDetailError(
+          (GraphQLErrorHandler.handleException(exception))));
     } else {
       if (response.parsedData?.Character != null) {
         emit(CharacterDetailLoaded(character: response.parsedData!.Character!));

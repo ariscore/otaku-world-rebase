@@ -50,7 +50,7 @@ class MangaPlatformsChips extends StatelessWidget {
           );
         } else if (state is MangaPlatformsError) {
           return ErrorText(
-            message: state.message,
+             message: state.error.message,
             onTryAgain: () {
               loadPublishingOnChips(
                 context,

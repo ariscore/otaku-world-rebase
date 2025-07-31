@@ -57,7 +57,8 @@ class StudioMediaBloc
     return data;
   }
 
-  /* @override
+/*
+  @override
   void processData(QueryResult<Query$getStudioMedia> response) {
     final data = response.parsedData!;
     hasNextPage = data.Studio?.media?.pageInfo?.hasNextPage ?? false;
@@ -82,6 +83,7 @@ class StudioMediaBloc
       list.addAll(mediaList);
     }
   }*/
+
   @override
   void processData(QueryResult<Query$getStudioMedia> response) {
     final data = response.parsedData!;

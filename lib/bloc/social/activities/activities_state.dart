@@ -53,12 +53,12 @@ final class ActivitiesLoaded extends ActivitiesState {
 }
 
 final class ActivitiesError extends ActivitiesState {
-  const ActivitiesError(this.message);
+  const ActivitiesError(this.error);
 
-  final String message;
+  final CustomError error;
 
   @override
   String toString() {
-    return 'ActivitiesError{ message: $message }';
+    return 'ActivitiesError{ message: $error }';
   }
 }

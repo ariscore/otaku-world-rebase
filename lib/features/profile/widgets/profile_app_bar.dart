@@ -6,19 +6,18 @@ import 'package:otaku_world/bloc/graphql_client/graphql_client_cubit.dart';
 import 'package:otaku_world/bloc/profile/follow/follow_cubit.dart';
 import 'package:otaku_world/config/router/router_constants.dart';
 import 'package:otaku_world/constants/string_constants.dart';
+import 'package:otaku_world/core/ui/bottomsheet/helpers/url_helpers.dart';
 import 'package:otaku_world/core/ui/buttons/back_button.dart';
 import 'package:otaku_world/core/ui/buttons/primary_button.dart';
 import 'package:otaku_world/core/ui/image.dart';
 import 'package:otaku_world/features/profile/widgets/user_avatar.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/theme/colors.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 
+import '../../../core/ui/bottomsheet/helpers/share_helpers.dart';
 import '../../../core/ui/dialogs/alert_dialog.dart';
 import '../../../core/ui/tabs/custom_tab_bar.dart';
 import '../../../generated/assets.dart';
-import '../../../utils/ui_utils.dart';
 import '../../reviews/widgets/bottom_sheet_component.dart';
 
 class ProfileAppBar extends StatelessWidget {
@@ -81,7 +80,7 @@ class ProfileAppBar extends StatelessWidget {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          AppColors.raisinBlack.withValues(alpha:0.3),
+                          AppColors.raisinBlack.withValues(alpha: 0.3),
                           AppColors.raisinBlack,
                         ],
                       ),
@@ -360,32 +359,14 @@ class ProfileAppBar extends StatelessWidget {
       host: 'anilist.co',
       path: 'user/${user.name}',
     );
-    launchUrl(
+    UrlHelpers.launchUri(
+      context,
       uri,
-      mode: LaunchMode.externalApplication,
-    ).then(
-      (isSuccess) {
-        if (!isSuccess) {
-          UIUtils.showSnackBar(context, 'Can\'t open the link!');
-        }
-      },
-      onError: (e) {
-        UIUtils.showSnackBar(context, 'Can\'t open the link!');
-      },
     );
   }
 
   void _shareProfile(BuildContext context, int userId) {
     context.pop();
-    final uri = Uri(
-      scheme: 'https',
-      host: 'otaku-world-8a7f4.firebaseapp.com',
-      path: '/profile',
-      queryParameters: {
-        'id': userId.toString(),
-      },
-    );
-    // TODO: Change all the share texts
-    Share.share('Bhai ni profile check karo: ${uri.toString()}');
+    ShareHelpers.profileShareOptions(userId);
   }
 }

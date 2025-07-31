@@ -4,6 +4,9 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/graphql/__generated/graphql/filter/media_tags.graphql.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 
+import '../../../../core/model/custom_error.dart';
+import '../../../../utils/graphql_error_handler.dart';
+
 part 'media_tags_state.dart';
 
 class MediaTagsCubit extends Cubit<MediaTagsState> {
@@ -15,14 +18,11 @@ class MediaTagsCubit extends Cubit<MediaTagsState> {
 
     if (response.hasException) {
       final exception = response.exception!;
-
-      if (exception.linkException != null) {
-        emit(
-          const MediaTagsError('Please check your internet connection!'),
-        );
-      } else {
-        emit(const MediaTagsError('Some Unexpected error occurred!'));
-      }
+      emit(
+        MediaTagsError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       final tags = response.parsedData!.MediaTagCollection!;
       final tagsMap = <String, List<Fragment$MediaTag>>{};

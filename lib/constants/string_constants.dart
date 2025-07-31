@@ -1,7 +1,8 @@
 class StringConstants {
   static const String nullStringConstant = ' - - ';
-  static const String nullStringPlaceHolder = ' - ';
+  static const String nullStringPlaceHolder = ' ? ';
   static const String emptyStringPlaceHolder = '';
+  static const String noTitle = 'No Title';
 
   static const socialHeading = 'Connect, Share, and \nDiscover';
   static const socialSubheading =
@@ -16,6 +17,7 @@ class StringConstants {
       'Something went wrong, Please try again!';
   static const unexpectedError = 'Some Unexpected error occurred!';
   static const validationError = 'Please enter valid text!';
+  static const analyticError = 'Analytic log error occurred!';
   static const statsNotAvailable = 'Statistics not available!';
   static const messageConfirmation =
       'Are you sure you want to send this message?';
@@ -136,10 +138,27 @@ class AboutUsConstants {
 
 class MyListConstants {
   static const emptyListHeading = 'Your list is empty!';
-  static const emptyListSubheading = 'Looks like you haven’t added anything yet.';
+  static const emptyListSubheading =
+      'Looks like you haven’t added anything yet.';
 }
 
 class UiConstants {
-  static const noImageUrl = '';
-  static const noName = '';
+  static const String noImageUrl = '';
+  static const String noName = '';
+}
+
+class UrlConstants {
+  static const String unableToOpenLink =
+      'Sorry, this link can’t be opened right now.';
+}
+
+class ShareConstants {
+  static const String mediaMessage = "Have you seen this yet?";
+  static const String characterMessage = "Here’s a character you’ll love:";
+  static const String staffMessage = "Discover the talent behind the scenes:";
+  static const String studioMessage =
+      "Here’s an amazing studio worth checking out:";
+  static const String profileMessage = 'Check out this awesome profile!';
+  static const String reviewMessage = "Read this insightful review:";
+  static const String activityMessage = "Catch up on this activity:";
 }

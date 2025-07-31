@@ -8,8 +8,10 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:otaku_world/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:otaku_world/utils/model_utils.dart';
 
-part 'paginated_data_event.dart';
+import '../../core/model/custom_error.dart';
+import '../../utils/graphql_error_handler.dart';
 
+part 'paginated_data_event.dart';
 part 'paginated_data_state.dart';
 
 abstract class PaginatedDataBloc<Q, E>
@@ -119,15 +121,11 @@ abstract class PaginatedDataBloc<Q, E>
 
     if (response.hasException) {
       final exception = response.exception!;
-
-      if (exception.linkException != null) {
-        dev.log(exception.toString());
-        emit(
-          const PaginatedDataError('Please check your internet connection!'),
-        );
-      } else {
-        emit(const PaginatedDataError('Some Unexpected error occurred!'));
-      }
+      emit(
+        PaginatedDataError(
+          (GraphQLErrorHandler.handleException(exception)),
+        ),
+      );
     } else {
       processData(response);
 
