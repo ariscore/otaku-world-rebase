@@ -32,6 +32,7 @@ class ProfileScreen extends HookWidget {
     final scrollViewKey = GlobalKey<ExtendedNestedScrollViewState>();
 
     return PopScope(
+      canPop: false,
       onPopInvokedWithResult: (didPop, _) {
         if (didPop) return;
         NavigationHelper.onPopInvoked(context);

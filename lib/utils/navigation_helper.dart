@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -76,6 +78,7 @@ class NavigationHelper {
   }
 
   static void onPopInvoked(BuildContext context) {
+    log('On pop invoked is called');
     if (context.canPop()) {
       context.pop();
     } else {
