@@ -57,11 +57,9 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
 
     return PopScope(
       canPop: false,
-      onPopInvokedWithResult: (didPop, result) {
-        if (didPop) {
-          return;
-        }
-        _onPopInvoked(context);
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) return;
+        NavigationHelper.onPopInvoked(context);
       },
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -287,14 +285,6 @@ class _ReviewDetailScreenState extends State<ReviewDetailScreen> {
     }
   }
 
-  void _onPopInvoked(BuildContext context) {
-    dev.log('Pop called!', name: 'ReviewDetail');
-    if (context.canPop()) {
-      context.pop();
-    } else {
-      context.go('/home');
-    }
-  }
 
   String _getMediaType(Enum$MediaType type) {
     return type == Enum$MediaType.ANIME ? 'Anime' : 'Manga';

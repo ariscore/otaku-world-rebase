@@ -1,15 +1,14 @@
 import 'dart:developer' as dev;
 
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:otaku_world/bloc/media_detail/reviews/media_review_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/social/social_bloc.dart';
 import 'package:otaku_world/bloc/media_detail/staff/staff_bloc.dart';
 import 'package:otaku_world/core/model/custom_error.dart';
 import 'package:otaku_world/core/ui/shimmers/detail_screens/screens/media_detail_shimmer.dart';
+import 'package:otaku_world/core/ui/shimmers/detail_screens/shimmer_details.dart';
 import 'package:otaku_world/features/media_detail/widgets/media_app_bar.dart';
 import 'package:otaku_world/features/media_detail/widgets/media_floating_action_button.dart';
 import 'package:otaku_world/features/profile/widgets/keep_alive_tab.dart';
@@ -21,7 +20,6 @@ import '../../../bloc/media_detail/media_detail_bloc.dart';
 import '../../../bloc/viewer/viewer_bloc.dart';
 import '../../../core/ui/placeholders/anime_character_placeholder.dart';
 import '../../../core/ui/widgets/scaffold_wrapper_placeholder.dart';
-import '../../../generated/assets.dart';
 import '../tabs/characters/characters.dart' as ch;
 import '../tabs/overview/overview.dart';
 import '../tabs/reviews/reviews.dart';
@@ -54,7 +52,7 @@ class MediaDetailScreen extends HookWidget {
       canPop: false,
       onPopInvokedWithResult: (didPop, _) {
         if (didPop) return;
-        _onPopInvoked(context);
+        NavigationHelper.onPopInvoked(context);
       },
       child: BlocBuilder<MediaDetailBloc, MediaDetailState>(
         builder: (context, state) {
@@ -214,14 +212,6 @@ class MediaDetailScreen extends HookWidget {
         );
       default:
         return const SizedBox();
-    }
-  }
-
-  void _onPopInvoked(BuildContext context) {
-    if (context.canPop()) {
-      context.pop();
-    } else {
-      context.go('/home');
     }
   }
 }

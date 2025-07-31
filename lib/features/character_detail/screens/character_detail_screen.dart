@@ -39,10 +39,9 @@ class CharacterDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopScope(
+      canPop: false,
       onPopInvokedWithResult: (didPop, result) {
-        if (didPop) {
-          return;
-        }
+        if (didPop) return;
         NavigationHelper.onPopInvoked(context);
       },
       child: BlocBuilder<CharacterDetailBloc, CharacterDetailState>(

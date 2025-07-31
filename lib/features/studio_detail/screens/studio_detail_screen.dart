@@ -39,10 +39,9 @@ class StudioDetailScreen extends HookWidget {
     final bloc = context.read<StudioMediaBloc>();
 
     return PopScope(
-      onPopInvokedWithResult: (didPop, result) {
-        if (didPop) {
-          return;
-        }
+      canPop: false,
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) return;
         NavigationHelper.onPopInvoked(context);
       },
       child: BlocBuilder<StudioDetailBloc, StudioDetailState>(
@@ -86,28 +85,9 @@ class StudioDetailScreen extends HookWidget {
             );
           } else if (state is StudioDetailError) {
             return ScaffoldWrapperPlaceholder(
-                child: AnimeCharacterPlaceholder(
-                  asset: Assets.charactersCigaretteGirl,
-                  error: state.error,
-                  onTryAgain: () {
-                    context.read<StudioDetailBloc>().add(
-                          LoadStudioDetail(
-                            id: studioId,
-                            client: (context.read<GraphqlClientCubit>().state
-                                    as GraphqlClientInitialized)
-                                .client,
-                          ),
-                        );
-                  },
-                  isError: true,
-                  isScrollable: true,
-                ),
-            );
-          }
-          return ScaffoldWrapperPlaceholder(
               child: AnimeCharacterPlaceholder(
                 asset: Assets.charactersCigaretteGirl,
-                error: CustomError.unexpectedError(),
+                error: state.error,
                 onTryAgain: () {
                   context.read<StudioDetailBloc>().add(
                         LoadStudioDetail(
@@ -121,6 +101,25 @@ class StudioDetailScreen extends HookWidget {
                 isError: true,
                 isScrollable: true,
               ),
+            );
+          }
+          return ScaffoldWrapperPlaceholder(
+            child: AnimeCharacterPlaceholder(
+              asset: Assets.charactersCigaretteGirl,
+              error: CustomError.unexpectedError(),
+              onTryAgain: () {
+                context.read<StudioDetailBloc>().add(
+                      LoadStudioDetail(
+                        id: studioId,
+                        client: (context.read<GraphqlClientCubit>().state
+                                as GraphqlClientInitialized)
+                            .client,
+                      ),
+                    );
+              },
+              isError: true,
+              isScrollable: true,
+            ),
           );
         },
       ),
