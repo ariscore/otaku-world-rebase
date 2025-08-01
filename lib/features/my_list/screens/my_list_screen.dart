@@ -153,6 +153,7 @@ class _MyListScreenState extends State<MyListScreen> {
           return const MyListShimmer(showFilters: true, isSliver: false);
         } else if (state is MediaListLoaded) {
           return CustomScrollView(
+            controller: controller,
             slivers: [
               SliverToBoxAdapter(
                 child: ListSearchAppBar(
