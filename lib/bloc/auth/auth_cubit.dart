@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:developer' as dev;
 
+import 'package:app_links/app_links.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:otaku_world/utils/shared_preference_utils.dart';
-import 'package:uni_links5/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../features/app_events_management/const/analytics_events.dart';
@@ -28,6 +28,7 @@ class AuthCubit extends Cubit<AuthState> {
     path: '/signup',
   );
 
+  final _appLinks = AppLinks();
   StreamSubscription? _sub;
 
   Future<void> authenticate() async {
@@ -51,10 +52,10 @@ class AuthCubit extends Cubit<AuthState> {
       await _launchUrl(_authUri);
 
       _sub?.cancel();
-      _sub = uriLinkStream.listen((uri) async {
+      _sub = _appLinks.uriLinkStream.listen((uri) async {
         dev.log('Uri: $uri', name: 'Auth');
-        if (uri?.scheme == 'otakuworld') {
-          var fragment = uri!.toString();
+        if (uri.scheme == 'otakuworld') {
+          var fragment = uri.toString();
           dev.log('Fragment: $fragment', name: 'Auth');
           var start = fragment.indexOf('=');
           var middle = fragment.indexOf('&');
@@ -92,6 +93,12 @@ class AuthCubit extends Cubit<AuthState> {
     )) {
       throw Exception('Could not launch $url');
     }
+  }
+
+  @override
+  Future<void> close() {
+    _sub?.cancel();
+    return super.close();
   }
 
   @override

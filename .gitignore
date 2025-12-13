@@ -87,3 +87,5 @@ upload-keystore.jks
 /macos/Flutter/ephemeral/flutter_export_environment.sh
 /macos/Flutter/GeneratedPluginRegistrant.swift
 
+# FVM Version Cache
+.fvm/
